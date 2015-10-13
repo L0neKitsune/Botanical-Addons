@@ -1,0 +1,16 @@
+[
+    {
+        "modid": "botanical_addons",
+        "name": "Botanical Addons",
+        "description": "A few small addons to Botania.",
+        "version": "${version}",
+        "mcversion": "${mcversion}",
+        "url": "",
+        "updateUrl": "",
+        "authorList": ["L0neKitsune"],
+        "credits": "Azanor, Vazkii, ChickenBones, PowerCrystals, cpw",
+        "logoFile": "",
+        "screenshots": [],
+        "dependencies": []
+    }
+]
