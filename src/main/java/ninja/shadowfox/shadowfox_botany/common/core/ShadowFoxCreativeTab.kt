@@ -1,11 +1,11 @@
-package ninja.shadowfox.botania_addon.common.core
+package ninja.shadowfox.shadowfox_botany.common.core
 
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import ninja.shadowfox.botania_addon.common.blocks.ShadowFoxBlocks
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 
-object ShadowFoxCreativeTab : CreativeTabs("Botanical Add-ons") {
+object ShadowFoxCreativeTab : CreativeTabs("shadowfox_botany") {
 
     override fun getIconItemStack(): ItemStack {
         return ItemStack(ShadowFoxBlocks.coloredDirtBlock)

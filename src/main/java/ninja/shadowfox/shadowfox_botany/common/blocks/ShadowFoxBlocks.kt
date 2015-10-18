@@ -1,4 +1,4 @@
-package ninja.shadowfox.botania_addon.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks
 
 import net.minecraft.block.Block
 

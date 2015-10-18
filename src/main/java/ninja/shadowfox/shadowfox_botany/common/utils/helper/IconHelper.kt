@@ -1,21 +1,19 @@
-package ninja.shadowfox.botania_addon.common.utils.helper
+package ninja.shadowfox.shadowfox_botany.common.utils.helper
 
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.item.Item
 import net.minecraft.util.IIcon
 
-/**
- * Created by l0nekitsune on 10/17/15.
- */
+
 object IconHelper {
 
     fun forName(ir: IIconRegister, name: String): IIcon {
-        return ir.registerIcon("botania_addon:" + name)
+        return ir.registerIcon("shadowfox_botany:" + name)
     }
 
     fun forName(ir: IIconRegister, name: String, dir: String): IIcon {
-        return ir.registerIcon("botania_addon:$dir/$name")
+        return ir.registerIcon("shadowfox_botany:$dir/$name")
     }
 
     fun forBlock(ir: IIconRegister, block: Block): IIcon {

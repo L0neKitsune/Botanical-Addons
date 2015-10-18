@@ -34,24 +34,49 @@ ext.configFile = file('build.properties')
 ext.config = parseConfig(configFile)
 
 version = "${config.version}-${config.build_number}"
-group= "ninja.shadowfox.botanical_addons" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group= "ninja.shadowfox.shadowfox_botany" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = config.mod_name
+
+
+configurations {
+
+    required
+    compile.extendsFrom(required)
+}
 
 minecraft {
     version = "1.7.10-10.13.4.1448-1.7.10"
     runDir = "eclipse"
 
     version = "${config.mc_version}-${config.forge_version}"
-
-    replace 'GRADLE:BUILD', config.build_number
-    replace 'GRADLE:VERSION', config.version
-    replaceIn 'LibMisc.java'
 }
 
 dependencies {
-    compile files('Baubles-deobf-1.7.10-1.0.1.10.jar')
-    compile files('Botania r1.7-224-deobf.jar')
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile files('libs/Baubles-1.0.1.10-deobf.jar')
+    compile files('libs/Botania-226-deobf.jar')
+
+    // Make sure kotlin files are marked as required so we don't miss them.
+    required "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    required "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+}
+
+jar {
+
+    // We need to make sure we package kotlin runtimes.
+
+    archiveName "BotanicalAddons-${version}.jar"
+    dependsOn configurations.compile
+    from {
+        configurations.required.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+}
+
+task dependencies << {
+        configurations.jarInclude.each {
+            dep -> println(dep.name)
+    }
 }
 
 processResources {
@@ -78,6 +103,3 @@ def parseConfig(File config) {
 }
 
 idea { module { inheritOutputDirs = true } }
-sourceSets {
-    main.java.srcDirs += 'src/main/kotlin'
-}

@@ -1,4 +1,4 @@
-package ninja.shadowfox.botania_addon.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks
 
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
@@ -15,8 +15,8 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.common.IPlantable
 import net.minecraftforge.common.util.ForgeDirection
-import ninja.shadowfox.botania_addon.common.item.blocks.ItemBlockWithMetadataAndName
-import ninja.shadowfox.botania_addon.common.utils.helper.IconHelper
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockWithMetadataAndName
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 
 /**
  * Created by l0nekitsune on 10/16/15.

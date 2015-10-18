@@ -1,4 +1,4 @@
-package ninja.shadowfox.botania_addon.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks
 
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
@@ -6,9 +6,9 @@ import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
-import ninja.shadowfox.botania_addon.common.utils.helper.IconHelper
-import ninja.shadowfox.botania_addon.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.botania_addon.common.item.blocks.ItemBlockMod
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
 
 
 open class ShadowFoxBlockMod(par2Material: Material) : Block(par2Material) {

@@ -1,11 +1,12 @@
-package ninja.shadowfox.botania_addon.crafting
+package ninja.shadowfox.shadowfox_botany.crafting
 
 import net.minecraft.init.Blocks
+import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
 import net.minecraft.item.crafting.IRecipe
 import net.minecraftforge.oredict.ShapedOreRecipe
-import ninja.shadowfox.botania_addon.common.blocks.ShadowFoxBlocks
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
 
