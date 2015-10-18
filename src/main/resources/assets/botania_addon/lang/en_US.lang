@@ -1,2 +1,19 @@
-tile.botania_addon_orangeBlock.name=Orange Block
-item.botania_addon_itemorange.name=Orange Block
+tile.botania_addon:orangeBlock.name=Orange Block
+item.botania_addon:itemorange.name=Orange Block
+
+tile.botania_addon:coloredDirt0.name=White Colored Dirt
+tile.botania_addon:coloredDirt1.name=Orange Colored Dirt
+tile.botania_addon:coloredDirt2.name=Magenta Colored Dirt
+tile.botania_addon:coloredDirt3.name=Light Colored Dirt
+tile.botania_addon:coloredDirt4.name=Yellow Colored Dirt
+tile.botania_addon:coloredDirt5.name=Lime Colored Dirt
+tile.botania_addon:coloredDirt6.name=Pink Colored Dirt
+tile.botania_addon:coloredDirt7.name=Gray Colored Dirt
+tile.botania_addon:coloredDirt8.name=Light Gray Colored Dirt
+tile.botania_addon:coloredDirt9.name=Cyan Colored Dirt
+tile.botania_addon:coloredDirt10.name=Purple Colored Dirt
+tile.botania_addon:coloredDirt11.name=Blue Colored Dirt
+tile.botania_addon:coloredDirt12.name=Brown Colored Dirt
+tile.botania_addon:coloredDirt13.name=Green Colored Dirt
+tile.botania_addon:coloredDirt14.name=Red Colored Dirt
+tile.botania_addon:coloredDirt15.name=Black Colored Dirt
