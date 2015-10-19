@@ -52,7 +52,7 @@ minecraft {
 }
 
 dependencies {
-    compile files('libs/Baubles-1.0.1.10-deobf.jar')
+//    compile files('libs/Baubles-1.0.1.10-deobf.jar')
     compile files('libs/Botania-226-deobf.jar')
 
     // Make sure kotlin files are marked as required so we don't miss them.

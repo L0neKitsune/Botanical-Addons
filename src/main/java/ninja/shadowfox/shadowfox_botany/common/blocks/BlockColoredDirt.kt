@@ -7,6 +7,7 @@ import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.util.IIcon
 import net.minecraft.item.ItemStack
@@ -16,12 +17,15 @@ import net.minecraft.world.World
 import net.minecraftforge.common.IPlantable
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockWithMetadataAndName
+import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import vazkii.botania.api.lexicon.ILexiconable
+import vazkii.botania.api.lexicon.LexiconEntry
 
 /**
  * Created by l0nekitsune on 10/16/15.
  */
-class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground) {
+class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), ILexiconable {
 
     private val name = "coloredDirt"
     private val TYPES = 16
@@ -77,6 +81,10 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground) {
 
     override fun canSustainPlant(world: IBlockAccess?, x: Int, y: Int, z: Int, direction: ForgeDirection?, plantable: IPlantable?): Boolean {
         return true
+    }
+
+    override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
+        return LexiconRegistry.coloredDirt
     }
 }
 

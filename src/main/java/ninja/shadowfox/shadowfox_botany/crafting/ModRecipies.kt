@@ -10,7 +10,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
 
-public object ModCraftingRecipes {
+public object ModRecipes {
     var recipesColoredDirt: List<IRecipe>
 
     init {

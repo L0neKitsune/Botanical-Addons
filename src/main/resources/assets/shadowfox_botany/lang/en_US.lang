@@ -16,3 +16,7 @@ tile.shadowfox_botany:coloredDirt12.name=Brown Colored Dirt
 tile.shadowfox_botany:coloredDirt13.name=Green Colored Dirt
 tile.shadowfox_botany:coloredDirt14.name=Red Colored Dirt
 tile.shadowfox_botany:coloredDirt15.name=Black Colored Dirt
+
+shadowfox_botany.entry.coloredDirt=Mystical Colored Dirt
+shadowfox_botany.page.coloredDirt0=Using blocks of Mystical Petals you can dye dirt various colors.  This mystical dirt is capable of growing trees and plants without water or a hoe.
+shadowfox_botany.page.coloredDirt1=A Rainbow of Dirt
