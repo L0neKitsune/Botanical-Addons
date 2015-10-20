@@ -5,6 +5,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.event.FMLInitializationEvent
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.crafting.ModRecipes
 import ninja.shadowfox.shadowfox_botany.lib.Constants
@@ -18,6 +19,7 @@ class ShadowfoxBotany {
     @Mod.EventHandler
     fun init(event: FMLInitializationEvent) {
         ShadowFoxBlocks
+        ShadowFoxItems
         ModRecipes
         LexiconRegistry
     }
