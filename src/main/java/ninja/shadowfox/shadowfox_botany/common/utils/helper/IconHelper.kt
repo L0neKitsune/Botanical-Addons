@@ -29,15 +29,15 @@ object IconHelper {
     }
 
     fun forBlock(ir: IIconRegister, block: Block, s: String): IIcon {
-        return forName(ir, block.unlocalizedName.replaceAll("tile\\.", "") + s)
+        return forName(ir, block.unlocalizedName.replace("tile\\.".toRegex(), "") + s)
     }
 
     fun forBlock(ir: IIconRegister, block: Block, s: String, dir: String): IIcon {
-        return forName(ir, block.unlocalizedName.replaceAll("tile\\.", "") + s, dir)
+        return forName(ir, block.unlocalizedName.replace("tile\\.".toRegex(), "") + s, dir)
     }
 
     fun forItem(ir: IIconRegister, item: Item): IIcon {
-        return forName(ir, item.unlocalizedName.replaceAll("item\\.", ""))
+        return forName(ir, item.unlocalizedName.replace("item\\.".toRegex(), ""))
     }
 
     fun forItem(ir: IIconRegister, item: Item, i: Int): IIcon {
@@ -45,6 +45,6 @@ object IconHelper {
     }
 
     fun forItem(ir: IIconRegister, item: Item, s: String): IIcon {
-        return forName(ir, item.unlocalizedName.replaceAll("item\\.", "") + s)
+        return forName(ir, item.unlocalizedName.replace("item\\.".toRegex(), "") + s)
     }
 }

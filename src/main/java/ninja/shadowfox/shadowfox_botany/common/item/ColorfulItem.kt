@@ -31,12 +31,12 @@ open class ColorfulItem(name: String) : Item() {
     }
 
 
-    override fun getSubItems(item : Item?, par2CreativeTabs: CreativeTabs?, par3List : MutableList<Any?>?) {
-        if (par3List != null && item != null)
-            for (i in 0..15) {
-                par3List.add(ItemStack(item, 1, i));
-            }
-    }
+//    override fun getSubItems(item : Item?, par2CreativeTabs: CreativeTabs?, par3List : MutableList<Any?>?) {
+//        if (par3List != null && item != null)
+//            for (i in 0..15) {
+//                par3List.add(ItemStack(item, 1, i));
+//            }
+//    }
 
     override fun getUnlocalizedName(par1ItemStack: ItemStack) : String {
         return getUnlocalizedNameLazy(par1ItemStack) + par1ItemStack.itemDamage;

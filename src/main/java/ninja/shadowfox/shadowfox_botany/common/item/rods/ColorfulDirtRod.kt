@@ -14,7 +14,8 @@ import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
 import vazkii.botania.common.Botania
 
-public class ColorfulDirtRod(val name: String = "colorfulDirtRod") : ColorfulItem(name), IManaUsingItem, IBlockProvider {
+public open class ColorfulDirtRod(name : String = "colorfulDirtRod") : ColorfulItem(name), IManaUsingItem, IBlockProvider {
+
     val COST : Int = 150;
 
     init {
@@ -28,7 +29,6 @@ public class ColorfulDirtRod(val name: String = "colorfulDirtRod") : ColorfulIte
     }
 
     companion object {
-
         public fun place(par1ItemStack: ItemStack, par2EntityPlayer: EntityPlayer, par3World: World,
                          par4: Int, par5: Int, par6: Int, par7: Int, par8: Float, par9: Float,
                          par10: Float, block: Block, cost: Int, r: Float, g: Float, b: Float): Boolean {

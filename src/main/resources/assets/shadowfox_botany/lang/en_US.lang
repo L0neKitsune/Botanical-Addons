@@ -3,7 +3,7 @@ itemGroup.shadowfox_botany=Botanical Add-ons
 tile.shadowfox_botany:coloredDirt0.name=White Colored Dirt
 tile.shadowfox_botany:coloredDirt1.name=Orange Colored Dirt
 tile.shadowfox_botany:coloredDirt2.name=Magenta Colored Dirt
-tile.shadowfox_botany:coloredDirt3.name=Light Colored Dirt
+tile.shadowfox_botany:coloredDirt3.name=Light Blue Colored Dirt
 tile.shadowfox_botany:coloredDirt4.name=Yellow Colored Dirt
 tile.shadowfox_botany:coloredDirt5.name=Lime Colored Dirt
 tile.shadowfox_botany:coloredDirt6.name=Pink Colored Dirt
@@ -17,6 +17,45 @@ tile.shadowfox_botany:coloredDirt13.name=Green Colored Dirt
 tile.shadowfox_botany:coloredDirt14.name=Red Colored Dirt
 tile.shadowfox_botany:coloredDirt15.name=Black Colored Dirt
 
+item.shadowfox_botany:colorfulDirtRod0.name=Rod of the Lands: White
+item.shadowfox_botany:colorfulDirtRod1.name=Rod of the Lands: Orange
+item.shadowfox_botany:colorfulDirtRod2.name=Rod of the Lands: Magenta
+item.shadowfox_botany:colorfulDirtRod3.name=Rod of the Lands: Light Blue
+item.shadowfox_botany:colorfulDirtRod4.name=Rod of the Lands: Yellow
+item.shadowfox_botany:colorfulDirtRod5.name=Rod of the Lands: Lime
+item.shadowfox_botany:colorfulDirtRod6.name=Rod of the Lands: Pink
+item.shadowfox_botany:colorfulDirtRod7.name=Rod of the Lands: Gray
+item.shadowfox_botany:colorfulDirtRod8.name=Rod of the Lands: Light Gray
+item.shadowfox_botany:colorfulDirtRod9.name=Rod of the Lands: Cyan
+item.shadowfox_botany:colorfulDirtRod10.name=Rod of the Lands: Purple
+item.shadowfox_botany:colorfulDirtRod11.name=Rod of the Lands: Blue
+item.shadowfox_botany:colorfulDirtRod12.name=Rod of the Lands: Brown
+item.shadowfox_botany:colorfulDirtRod13.name=Rod of the Lands: Green
+item.shadowfox_botany:colorfulDirtRod14.name=Rod of the Lands: Red
+item.shadowfox_botany:colorfulDirtRod15.name=Rod of the Lands: Black
+
+item.shadowfox_botany:colorfulSkyDirtRod0.name=Rod of Iris: White
+item.shadowfox_botany:colorfulSkyDirtRod1.name=Rod of Iris: Orange
+item.shadowfox_botany:colorfulSkyDirtRod2.name=Rod of Iris: Magenta
+item.shadowfox_botany:colorfulSkyDirtRod3.name=Rod of Iris: Light Blue
+item.shadowfox_botany:colorfulSkyDirtRod4.name=Rod of Iris: Yellow
+item.shadowfox_botany:colorfulSkyDirtRod5.name=Rod of Iris: Lime
+item.shadowfox_botany:colorfulSkyDirtRod6.name=Rod of Iris: Pink
+item.shadowfox_botany:colorfulSkyDirtRod7.name=Rod of Iris: Gray
+item.shadowfox_botany:colorfulSkyDirtRod8.name=Rod of Iris: Light Gray
+item.shadowfox_botany:colorfulSkyDirtRod9.name=Rod of Iris: Cyan
+item.shadowfox_botany:colorfulSkyDirtRod10.name=Rod of Iris: Purple
+item.shadowfox_botany:colorfulSkyDirtRod11.name=Rod of Iris: Blue
+item.shadowfox_botany:colorfulSkyDirtRod12.name=Rod of Iris: Brown
+item.shadowfox_botany:colorfulSkyDirtRod13.name=Rod of Iris: Green
+item.shadowfox_botany:colorfulSkyDirtRod14.name=Rod of Iris: Red
+item.shadowfox_botany:colorfulSkyDirtRod15.name=Rod of Iris: Black
+
 shadowfox_botany.entry.coloredDirt=Mystical Colored Dirt
+shadowfox_botany.entry.techicolorRod=Rod of Iris
+
 shadowfox_botany.page.coloredDirt0=Using blocks of Mystical Petals you can dye dirt various colors.  This mystical dirt is capable of growing trees and plants without water or a hoe.
 shadowfox_botany.page.coloredDirt1=A Rainbow of Dirt
+
+shadowfox_botany.page.techicolorRod0=The Rod of Iris, much like the Rod of the Highlands can place Mystical colored dirt at the cost of some mana.  Sneaking and clicking in the air will shift the rod between the various colors.
+shadowfox_botany.page.techicolorRod1=All the colors
