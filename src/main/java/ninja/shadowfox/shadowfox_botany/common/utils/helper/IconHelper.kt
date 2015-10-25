@@ -17,7 +17,7 @@ object IconHelper {
     }
 
     fun forBlock(ir: IIconRegister, block: Block): IIcon {
-        return forName(ir, block.unlocalizedName.replaceAll("tile\\.", ""))
+        return forName(ir, block.unlocalizedName.replace("tile\\.".toRegex(), ""))
     }
 
     fun forBlock(ir: IIconRegister, block: Block, i: Int): IIcon {

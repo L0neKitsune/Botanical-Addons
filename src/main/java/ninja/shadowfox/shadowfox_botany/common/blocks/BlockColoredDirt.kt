@@ -16,9 +16,10 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.common.IPlantable
 import net.minecraftforge.common.util.ForgeDirection
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockWithMetadataAndName
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 
@@ -59,7 +60,7 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), ILexiconable {
     }
 
     internal fun register(name: String) {
-        GameRegistry.registerBlock(this, ItemBlockWithMetadataAndName::class.java, name)
+        GameRegistry.registerBlock(this, ShadowFoxMetaItemBlock::class.java, name)
     }
 
 

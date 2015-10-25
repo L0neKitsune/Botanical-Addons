@@ -23,7 +23,7 @@ open class ColorfulItem(name: String) : Item() {
     }
 
     override fun getColorFromItemStack(par1ItemStack : ItemStack, par2 : Int) : Int {
-        if(par1ItemStack.itemDamage >= EntitySheep.fleeceColorTable.size())
+        if(par1ItemStack.itemDamage >= EntitySheep.fleeceColorTable.size)
             return 0xFFFFFF;
 
         var color = EntitySheep.fleeceColorTable[par1ItemStack.itemDamage];
@@ -52,7 +52,7 @@ open class ColorfulItem(name: String) : Item() {
     }
 
     override fun getUnlocalizedNameInefficiently(par1ItemStack : ItemStack) : String {
-        return super.getUnlocalizedNameInefficiently(par1ItemStack).replaceAll("item\\.", "item.shadowfox_botany:");
+        return super.getUnlocalizedNameInefficiently(par1ItemStack).replace("item\\.", "item.shadowfox_botany:");
     }
 
     @SideOnly(Side.CLIENT)
