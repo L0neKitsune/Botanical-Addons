@@ -7,6 +7,7 @@ import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.entity.passive.EntitySheep
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
@@ -15,14 +16,16 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import java.awt.Color
 import java.util.*
+import kotlin.properties.Delegates
 
 
 class BlockColoredPlanks() : ShadowFoxBlockMod(Material.wood) {
 
     private val name = "irisPlanks"
     private val TYPES = 16
-    protected var icons : Array<IIcon> = emptyArray()
+    protected var icons : IIcon by Delegates.notNull()
 
     init {
         blockHardness = 2F
@@ -31,6 +34,35 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(Material.wood) {
 
         setBlockName(this.name)
     }
+
+    @SideOnly(Side.CLIENT)
+    override fun getBlockColor(): Int {
+        return 0xFFFFFF
+    }
+
+    /**
+     * Returns the color this block should be rendered. Used by leaves.
+     */
+    @SideOnly(Side.CLIENT)
+    override fun getRenderColor(p_149741_1_: Int): Int {
+        if (p_149741_1_ >= EntitySheep.fleeceColorTable.size)
+            return 0xFFFFFF;
+
+        var color = EntitySheep.fleeceColorTable[p_149741_1_];
+        return Color(color[0], color[1], color[2]).rgb;
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun colorMultiplier(p_149720_1_: IBlockAccess?, p_149720_2_: Int, p_149720_3_: Int, p_149720_4_: Int): Int {
+        val meta = p_149720_1_!!.getBlockMetadata(p_149720_2_, p_149720_3_, p_149720_4_)
+
+        if (meta >= EntitySheep.fleeceColorTable.size)
+            return 0xFFFFFF;
+
+        var color = EntitySheep.fleeceColorTable[meta];
+        return Color(color[0], color[1], color[2]).rgb;
+    }
+
 
     override fun shouldRegisterInNameSet(): Boolean {
         return false
@@ -56,7 +88,7 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(Material.wood) {
     @SideOnly(Side.CLIENT)
     override fun getIcon(side: Int, meta: Int): IIcon
     {
-        return icons[meta]
+        return icons
     }
 
     override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean { return true }
@@ -72,7 +104,7 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(Material.wood) {
     }
 
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-            icons = Array(TYPES, {j -> IconHelper.forBlock(par1IconRegister, this, j)})
+            icons = IconHelper.forBlock(par1IconRegister, this)
 
     }
 

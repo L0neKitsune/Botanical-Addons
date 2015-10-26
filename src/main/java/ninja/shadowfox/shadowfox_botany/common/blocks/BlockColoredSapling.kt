@@ -124,7 +124,7 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
             if(plantedOn == ShadowFoxBlocks.coloredDirtBlock) {
                 val l = world.getBlockMetadata(x, y, z)
 
-                val obj: WorldGenerator = ColoredTreeGen(5, world.getBlockMetadata(x, y - 1, z), false)
+                val obj: WorldGenerator = ColoredTreeGen(5)
 
                 world.setBlock(x, y, z, Blocks.air, 0, 4);
 

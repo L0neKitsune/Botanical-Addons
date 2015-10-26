@@ -7,6 +7,7 @@ import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.entity.passive.EntitySheep
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.util.IIcon
@@ -19,18 +20,16 @@ import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
-import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
+import java.awt.Color
+import kotlin.properties.Delegates
 
-/**
- * Created by l0nekitsune on 10/16/15.
- */
 class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), ILexiconable {
 
     private val name = "coloredDirt"
     private val TYPES = 16
-    internal var icons: Array<IIcon> = emptyArray()
+    internal var icons: IIcon by Delegates.notNull()
 
     init {
         blockHardness = 0.5F
@@ -39,6 +38,34 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), ILexiconable {
         stepSound = Block.soundTypeGravel
 
         setBlockName(this.name)
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun getBlockColor(): Int {
+        return 0xFFFFFF
+    }
+
+    /**
+     * Returns the color this block should be rendered. Used by leaves.
+     */
+    @SideOnly(Side.CLIENT)
+    override fun getRenderColor(p_149741_1_: Int): Int {
+        if (p_149741_1_ >= EntitySheep.fleeceColorTable.size)
+            return 0xFFFFFF;
+
+        var color = EntitySheep.fleeceColorTable[p_149741_1_];
+        return Color(color[0], color[1], color[2]).rgb;
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun colorMultiplier(p_149720_1_: IBlockAccess?, p_149720_2_: Int, p_149720_3_: Int, p_149720_4_: Int): Int {
+        val meta = p_149720_1_!!.getBlockMetadata(p_149720_2_, p_149720_3_, p_149720_4_)
+
+        if (meta >= EntitySheep.fleeceColorTable.size)
+            return 0xFFFFFF;
+
+        var color = EntitySheep.fleeceColorTable[meta];
+        return Color(color[0], color[1], color[2]).rgb;
     }
 
     override fun shouldRegisterInNameSet(): Boolean {
@@ -56,7 +83,7 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), ILexiconable {
 
     @SideOnly(Side.CLIENT)
     override fun getIcon(side : Int, meta : Int) : IIcon {
-        return icons[Math.min(TYPES - 1, meta)]
+        return icons
     }
 
     internal fun register(name: String) {
@@ -70,7 +97,7 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), ILexiconable {
     }
 
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        icons = Array(TYPES, {i -> IconHelper.forBlock(par1IconRegister, this, i)})
+        icons = IconHelper.forBlock(par1IconRegister, this)
     }
 
     override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {

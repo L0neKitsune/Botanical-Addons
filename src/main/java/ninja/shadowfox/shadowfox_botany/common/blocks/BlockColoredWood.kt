@@ -4,24 +4,18 @@ import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
-import net.minecraft.block.BlockRotatedPillar
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.passive.EntitySheep
-import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
-import net.minecraft.world.ColorizerFoliage
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
-import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
-import vazkii.botania.api.lexicon.ILexiconable
-import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
 import java.util.*
 
@@ -30,7 +24,7 @@ class BlockColoredWood() : ShadowFoxBlockMod(Material.wood)  {
 
     private val name = "irisWood"
     private val TYPES = 16
-    protected var icons : Array<Array<IIcon>> = Array(2, {i -> emptyArray<IIcon>()})
+    protected var icons : Array<IIcon> = emptyArray()
 
     init {
         blockHardness = 2F
@@ -64,16 +58,14 @@ class BlockColoredWood() : ShadowFoxBlockMod(Material.wood)  {
         if (p_149749_1_.checkChunksExist(p_149749_2_ - i1, p_149749_3_ - i1, p_149749_4_ - i1, p_149749_2_ + i1, p_149749_3_ + i1, p_149749_4_ + i1))
         {
             for (j1 in -b0..b0) for (k1 in -b0..b0)
-                    for (l1 in -b0..b0)
+                for (l1 in -b0..b0)
+                {
+                    var block: Block = p_149749_1_.getBlock(p_149749_2_ + j1, p_149749_3_ + k1, p_149749_4_ + l1);
+                    if (block.isLeaves(p_149749_1_, p_149749_2_ + j1, p_149749_3_ + k1, p_149749_4_ + l1))
                     {
-                        var block: Block = p_149749_1_.getBlock(p_149749_2_ + j1, p_149749_3_ + k1, p_149749_4_ + l1);
-                        if (block.isLeaves(p_149749_1_, p_149749_2_ + j1, p_149749_3_ + k1, p_149749_4_ + l1))
-                        {
-                            block.beginLeavesDecay(p_149749_1_, p_149749_2_ + j1, p_149749_3_ + k1, p_149749_4_ + l1);
-                        }
+                        block.beginLeavesDecay(p_149749_1_, p_149749_2_ + j1, p_149749_3_ + k1, p_149749_4_ + l1);
                     }
-
-
+                }
         }
     }
 
@@ -94,14 +86,36 @@ class BlockColoredWood() : ShadowFoxBlockMod(Material.wood)  {
         return 39
     }
 
-    companion object {
-        fun func_150165_c(p_150165_0_: Int): Int {
-            return p_150165_0_ and 0x00000F
-        }
-    }
-
     override fun createStackedBlock(p_149644_1_: Int): ItemStack {
         return ItemStack(Item.getItemFromBlock(this), 1, p_149644_1_ and 0x00000F)
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun getBlockColor(): Int {
+        return 0xFFFFFF
+    }
+
+    /**
+     * Returns the color this block should be rendered. Used by leaves.
+     */
+    @SideOnly(Side.CLIENT)
+    override fun getRenderColor(p_149741_1_: Int): Int {
+        if (p_149741_1_ >= EntitySheep.fleeceColorTable.size)
+            return 0xFFFFFF;
+
+        var color = EntitySheep.fleeceColorTable[p_149741_1_];
+        return Color(color[0], color[1], color[2]).rgb;
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun colorMultiplier(p_149720_1_: IBlockAccess?, p_149720_2_: Int, p_149720_3_: Int, p_149720_4_: Int): Int {
+        val meta = p_149720_1_!!.getBlockMetadata(p_149720_2_, p_149720_3_, p_149720_4_)
+
+        if (meta >= EntitySheep.fleeceColorTable.size)
+            return 0xFFFFFF;
+
+        var color = EntitySheep.fleeceColorTable[meta];
+        return Color(color[0], color[1], color[2]).rgb;
     }
 
     override fun onBlockPlaced(world: World, x: Int, y: Int, z: Int, side: Int, hitX: Float, hitY: Float, hitZ: Float, meta: Int): Int
@@ -121,13 +135,13 @@ class BlockColoredWood() : ShadowFoxBlockMod(Material.wood)  {
     @SideOnly(Side.CLIENT)
     fun getSideIcon(color: Int): IIcon
     {
-        return icons[1][color]
+        return icons[1]
     }
 
     @SideOnly(Side.CLIENT)
     fun getTopIcon(color: Int): IIcon
     {
-        return icons[0][color]
+        return icons[0]
     }
 
     override fun canSustainLeaves(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean { return true }
@@ -143,10 +157,8 @@ class BlockColoredWood() : ShadowFoxBlockMod(Material.wood)  {
     }
 
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        for (i in 0..1)
-        {
-            icons[i] = Array(TYPES, {j -> IconHelper.forBlock(par1IconRegister, this, "$j${if(i == 0)"_top" else ""}")})
-        }
+        icons = arrayOf(IconHelper.forBlock(par1IconRegister, this), IconHelper.forBlock(par1IconRegister, this, "_top"))
+
     }
 
     override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {

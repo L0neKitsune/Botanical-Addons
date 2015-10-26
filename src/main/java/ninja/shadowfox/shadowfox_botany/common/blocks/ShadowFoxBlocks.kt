@@ -37,10 +37,15 @@ public object ShadowFoxBlocks {
             OreDictionary.registerOre("treeLeaves", t)
             OreDictionary.registerOre("irisLeaves", t)
 
+            t = ItemStack(coloredPlanks, 1, i)
+            OreDictionary.registerOre("plankWood", t)
+            OreDictionary.registerOre("irisPlanks", t)
+
         }
 
         coloredSlabs = Array(16, {i -> SlabColoredWood(false, coloredPlanks, i)})
         coloredSlabsFull = Array(16, {i -> SlabColoredWood(true, coloredPlanks, i)})
+
         coloredStairs = Array(16, {i -> ShadowFoxStairs(coloredPlanks, i,
                 coloredPlanks.getUnlocalizedName().replace("tile.".toRegex(), "") + i + "Stairs")})
 
@@ -48,6 +53,9 @@ public object ShadowFoxBlocks {
         for (i in 0..15){
             (coloredSlabs[i] as ShadowFoxSlabs).register()
             (coloredSlabsFull[i] as ShadowFoxSlabs).register()
+
+            OreDictionary.registerOre("slabWood", coloredSlabs[i])
+            OreDictionary.registerOre("stairWood", coloredStairs[i])
         }
 
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
