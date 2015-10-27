@@ -11,7 +11,7 @@ import vazkii.botania.common.lexicon.page.PageText
 public object LexiconRegistry {
 
     val coloredDirt : LexiconEntry
-    val irisSapling : LexiconEntry
+//    val irisSapling : LexiconEntry
     val techicolor : LexiconEntry
 
     init {
@@ -21,12 +21,12 @@ public object LexiconRegistry {
         techicolor = ShadowfoxLexiconEntry("techicolorRod", BotaniaAPI.categoryTools).setKnowledgeType(BotaniaAPI.elvenKnowledge)
         techicolor.setLexiconPages(PageText("0"), PageCraftingRecipe("1", ModRecipes.recipesColoredSkyDirtRod))
 
-        irisSapling = ShadowfoxLexiconEntry("irisSapling", BotaniaAPI.categoryMisc, block = ShadowFoxBlocks.irisSapling)
-        irisSapling.setLexiconPages(PageText("0"),
-                PageCraftingRecipe("1", ModRecipes.recipesWoodPanel),
-                PageCraftingRecipe("2", ModRecipes.recipesSlabs),
-                PageCraftingRecipe("3", ModRecipes.recipesStairsR + ModRecipes.recipesStairsL),
-                PageCraftingRecipe("4", ModRecipes.recipesSlabsFull))
+//        irisSapling = ShadowfoxLexiconEntry("irisSapling", BotaniaAPI.categoryMisc, block = ShadowFoxBlocks.irisSapling)
+//        irisSapling.setLexiconPages(PageText("0"),
+//                PageCraftingRecipe("1", ModRecipes.recipesWoodPanel),
+//                PageCraftingRecipe("2", ModRecipes.recipesSlabs),
+//                PageCraftingRecipe("3", ModRecipes.recipesStairsR + ModRecipes.recipesStairsL),
+//                PageCraftingRecipe("4", ModRecipes.recipesSlabsFull))
 
     }
 }

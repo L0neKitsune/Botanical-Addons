@@ -72,18 +72,18 @@ class BlockColoredWood() : ShadowFoxBlockMod(Material.wood)  {
     @SideOnly(Side.CLIENT)
     override fun getIcon(side: Int, meta: Int): IIcon
     {
-        val k = meta and 0x0000f0
-        val l = meta and 0x00000f
-        return if (k == 0 && (side == 1 || side == 0)) this.getTopIcon(l) else (if (k == 32 && (side == 5 || side == 4)) this.getTopIcon(l) else (if (k == 16 && (side == 2 || side == 3)) this.getTopIcon(l) else this.getSideIcon(l)))
+//        val k = meta and 0x0000f0
+//        val l = meta //and 0x00000f
+        return if (side == 1 || side == 0) this.getSideIcon() else this.getTopIcon()
 
     }
 
     override fun damageDropped(p_149692_1_: Int): Int {
-        return p_149692_1_ and 0x00000F
+        return p_149692_1_ //and 0x00000F
     }
 
     override fun getRenderType(): Int {
-        return 39
+        return 31
     }
 
     override fun createStackedBlock(p_149644_1_: Int): ItemStack {
@@ -118,28 +118,28 @@ class BlockColoredWood() : ShadowFoxBlockMod(Material.wood)  {
         return Color(color[0], color[1], color[2]).rgb;
     }
 
-    override fun onBlockPlaced(world: World, x: Int, y: Int, z: Int, side: Int, hitX: Float, hitY: Float, hitZ: Float, meta: Int): Int
-    {
-        val j1 = meta and 0x00000F
-        var b0: Int = 0x0000f0
-
-        when (side) {
-            0, 1 -> b0 = 0x000000
-            2, 3 -> b0 = 0x000020
-            4, 5 -> b0 = 0x000010
-        }
-
-        return j1 or b0
-    }
+//    override fun onBlockPlaced(world: World, x: Int, y: Int, z: Int, side: Int, hitX: Float, hitY: Float, hitZ: Float, meta: Int): Int
+//    {
+//        val j1 = meta and 0x00000F
+//        var b0: Int = 0x0000f0
+//
+//        when (side) {
+//            0, 1 -> b0 = 0x000010
+//            2, 3 -> b0 = 0x000030
+//            4, 5 -> b0 = 0x000020
+//        }
+//
+//        return j1 or b0
+//    }
 
     @SideOnly(Side.CLIENT)
-    fun getSideIcon(color: Int): IIcon
+    fun getSideIcon(): IIcon
     {
         return icons[1]
     }
 
     @SideOnly(Side.CLIENT)
-    fun getTopIcon(color: Int): IIcon
+    fun getTopIcon(): IIcon
     {
         return icons[0]
     }

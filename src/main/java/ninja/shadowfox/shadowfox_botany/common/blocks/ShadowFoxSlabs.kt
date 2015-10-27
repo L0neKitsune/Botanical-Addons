@@ -3,6 +3,7 @@ package ninja.shadowfox.shadowfox_botany.common.blocks
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
+import net.minecraft.block.Block
 import net.minecraft.block.BlockSlab
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
@@ -14,52 +15,31 @@ import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxItemBlockMod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxItemBlockSlab
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
 import java.awt.Color
 import java.util.*
 
 /**
  * Created by l0nekitsune on 10/24/15.
  */
-abstract class ShadowFoxSlabs(full: Boolean, mat: Material, internal var name: String) : BlockSlab(full, mat) {
+abstract class ShadowFoxSlabs(full: Boolean, mat: Material) : BlockSlab(full, mat) {
 
     init {
-        setBlockName(name)
         if (!full) {
             setCreativeTab(ShadowFoxCreativeTab)
             useNeighborBrightness = true
         }
     }
 
+    override fun setBlockName(par1Str: String): Block {
+        GameRegistry.registerBlock(this, ShadowFoxMetaItemBlock::class.java, par1Str)
+        return super.setBlockName(par1Str)
+    }
+
     abstract val fullBlock: BlockSlab
     abstract val singleBlock: BlockSlab
-
-    @SideOnly(Side.CLIENT)
-    override fun getBlockColor(): Int {
-        return 0xFFFFFF
-    }
-
-
-    @SideOnly(Side.CLIENT)
-    override fun getRenderColor(p_149741_1_: Int): Int {
-        if (p_149741_1_ >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
-
-        var color = EntitySheep.fleeceColorTable[p_149741_1_];
-        return Color(color[0], color[1], color[2]).rgb;
-    }
-
-    @SideOnly(Side.CLIENT)
-    override fun colorMultiplier(p_149720_1_: IBlockAccess?, p_149720_2_: Int, p_149720_3_: Int, p_149720_4_: Int): Int {
-        val meta = p_149720_1_!!.getBlockMetadata(p_149720_2_, p_149720_3_, p_149720_4_)
-
-        if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
-
-        var color = EntitySheep.fleeceColorTable[meta];
-        return Color(color[0], color[1], color[2]).rgb;
-    }
-
 
     override fun getPickBlock(target: MovingObjectPosition?, world: World, x: Int, y: Int, z: Int): ItemStack {
         return ItemStack(singleBlock)
@@ -82,12 +62,8 @@ abstract class ShadowFoxSlabs(full: Boolean, mat: Material, internal var name: S
         // NO-OP
     }
 
-    fun register() {
-        GameRegistry.registerBlock(this, ShadowFoxItemBlockSlab::class.java, name)
-    }
-
     override fun func_150002_b(i: Int): String {
-        return name
+        return unlocalizedName
     }
 
 //    override fun getEntry(world: World, x: Int, y: Int, z: Int, player: EntityPlayer, lexicon: ItemStack): LexiconEntry {

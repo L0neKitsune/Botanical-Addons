@@ -41,21 +41,21 @@ public object ModRecipes {
         recipesWoodPanel = BotaniaAPI.getLatestAddedRecipes(16)
         
         for (i in 0..15)
-            GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.coloredSlabs[i], 6, i),
+            GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.coloredSlabs, 6, i),
                 "QQQ",
                 'Q', ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i))
 
         recipesSlabs = BotaniaAPI.getLatestAddedRecipes(16)
 
         for (i in 0..15)
-            GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.coloredStairs[i], 4, i),
+            GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.coloredStairs, 4, i),
                 "  Q", " QQ", "QQQ",
                 'Q', ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i))
         
         recipesStairsR = BotaniaAPI.getLatestAddedRecipes(16)
 
         for (i in 0..15)
-        GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.coloredStairs[i], 4, i),
+        GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.coloredStairs, 4, i),
                 "Q  ", "QQ ", "QQQ",
                 'Q', ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i))
         
@@ -64,7 +64,7 @@ public object ModRecipes {
         for (i in 0..15)
         GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i),
                 "Q", "Q",
-                'Q', ItemStack(ShadowFoxBlocks.coloredSlabs[i], 1, i))
+                'Q', ItemStack(ShadowFoxBlocks.coloredSlabs, 1, i))
 
         recipesSlabsFull = BotaniaAPI.getLatestAddedRecipes(16)
         

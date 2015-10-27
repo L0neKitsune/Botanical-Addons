@@ -1,33 +1,28 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks
 
-import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
-import net.minecraft.block.BlockStairs
+import net.minecraft.block.BlockSlab
+import net.minecraft.block.material.MapColor
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.passive.EntitySheep
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
-import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxItemBlockMod
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
 import java.awt.Color
 
-open class ShadowFoxStairs(val mainBlock: Block) : BlockStairs(mainBlock, 0) {
-
-    private val TYPES = 16
+/**
+ * Created by l0nekitsune on 10/26/15.
+ */
+class StairsColoredWood(val source: Block) : ShadowFoxStairs(source)
+{
+    val TYPES: Int = 16
 
     init {
-        setCreativeTab(ShadowFoxCreativeTab)
-        useNeighborBrightness = true
-    }
-
-    override fun setBlockName(par1Str: String): Block {
-        GameRegistry.registerBlock(this, ShadowFoxMetaItemBlock::class.java, par1Str)
-        return super.setBlockName(par1Str)
+        setStepSound(source.stepSound)
+        setBlockName(source.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs")
     }
 
     /**
@@ -53,20 +48,10 @@ open class ShadowFoxStairs(val mainBlock: Block) : BlockStairs(mainBlock, 0) {
         return Color(color[0], color[1], color[2]).rgb;
     }
 
-    @SideOnly(Side.CLIENT)
-    override fun getIcon(side: Int, meta: Int): IIcon
-    {
-        return mainBlock.getIcon(side, meta)
-    }
-
     override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {
         if (list != null && item != null)
             for (i in 0..(TYPES - 1)) {
                 list.add(ItemStack(item, 1, i));
             }
     }
-//    override fun getEntry(world: World, x: Int, y: Int, z: Int, player: EntityPlayer, lexicon: ItemStack): LexiconEntry {
-//        return LexiconData.decorativeBlocks
-//    }
-
 }

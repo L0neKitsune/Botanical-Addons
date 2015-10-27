@@ -14,9 +14,9 @@ public object ShadowFoxBlocks {
     public var irisLeaves: Block
     public var irisWood: Block
     public var coloredPlanks: Block
-    public var coloredSlabs: Array<Block> = emptyArray()
-    public var coloredSlabsFull: Array<Block> = emptyArray()
-    public var coloredStairs: Array<Block> = emptyArray()
+    public var coloredSlabs: Block
+    public var coloredSlabsFull: Block
+    public var coloredStairs: Block
 
     init {
 //        orangeBlock = OrangeBlock()
@@ -25,6 +25,9 @@ public object ShadowFoxBlocks {
         irisLeaves = BlockColoredLeaves()
         irisWood = BlockColoredWood()
         coloredPlanks = BlockColoredPlanks()
+        coloredSlabs = SlabColoredWood(false, coloredPlanks)
+        coloredSlabsFull = SlabColoredWood(true, coloredPlanks)
+        coloredStairs = StairsColoredWood(coloredPlanks)
 
         OreDictionary.registerOre("treeSapling", irisSapling)
 
@@ -41,22 +44,15 @@ public object ShadowFoxBlocks {
             OreDictionary.registerOre("plankWood", t)
             OreDictionary.registerOre("irisPlanks", t)
 
+            t = ItemStack(coloredSlabs, 1, i)
+            OreDictionary.registerOre("slabWood", t)
+            OreDictionary.registerOre("irisSlabs", t)
+
+            t = ItemStack(coloredStairs, 1, i)
+            OreDictionary.registerOre("stairWood", t)
+            OreDictionary.registerOre("irisStairs", t)
         }
 
-        coloredSlabs = Array(16, {i -> SlabColoredWood(false, coloredPlanks, i)})
-        coloredSlabsFull = Array(16, {i -> SlabColoredWood(true, coloredPlanks, i)})
-
-        coloredStairs = Array(16, {i -> ShadowFoxStairs(coloredPlanks, i,
-                coloredPlanks.getUnlocalizedName().replace("tile.".toRegex(), "") + i + "Stairs")})
-
-
-        for (i in 0..15){
-            (coloredSlabs[i] as ShadowFoxSlabs).register()
-            (coloredSlabsFull[i] as ShadowFoxSlabs).register()
-
-            OreDictionary.registerOre("slabWood", coloredSlabs[i])
-            OreDictionary.registerOre("stairWood", coloredStairs[i])
-        }
 
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
     }
