@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
+import net.minecraft.block.BlockRotatedPillar
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
@@ -20,10 +21,10 @@ import java.awt.Color
 import java.util.*
 
 
-class BlockColoredWood() : ShadowFoxBlockMod(Material.wood)  {
+class BlockColoredWood(val colorSet: Int) : ShadowFoxBlockMod(Material.wood)  {
 
-    private val name = "irisWood"
-    private val TYPES = 16
+    private val name = "irisWood_${colorSet}_"
+    private val TYPES = 4
     protected var icons : Array<IIcon> = emptyArray()
 
     init {
@@ -31,7 +32,7 @@ class BlockColoredWood() : ShadowFoxBlockMod(Material.wood)  {
         setLightLevel(0f)
         stepSound = Block.soundTypeWood
 
-        setBlockName(this.name)
+        setBlockName(name)
     }
 
     override fun shouldRegisterInNameSet(): Boolean {
@@ -72,14 +73,13 @@ class BlockColoredWood() : ShadowFoxBlockMod(Material.wood)  {
     @SideOnly(Side.CLIENT)
     override fun getIcon(side: Int, meta: Int): IIcon
     {
-//        val k = meta and 0x0000f0
-//        val l = meta //and 0x00000f
-        return if (side == 1 || side == 0) this.getSideIcon() else this.getTopIcon()
-
+        val k = meta and 12
+        val l = meta and 3
+        return if (k == 0 && (side == 1 || side == 0)) this.getTopIcon() else (if (k == 4 && (side == 5 || side == 4)) this.getTopIcon() else (if (k == 8 && (side == 2 || side == 3)) this.getTopIcon() else this.getSideIcon()))
     }
 
     override fun damageDropped(p_149692_1_: Int): Int {
-        return p_149692_1_ //and 0x00000F
+        return p_149692_1_ and 3
     }
 
     override fun getRenderType(): Int {
@@ -87,7 +87,7 @@ class BlockColoredWood() : ShadowFoxBlockMod(Material.wood)  {
     }
 
     override fun createStackedBlock(p_149644_1_: Int): ItemStack {
-        return ItemStack(Item.getItemFromBlock(this), 1, p_149644_1_ and 0x00000F)
+        return ItemStack(Item.getItemFromBlock(this), 1, p_149644_1_ and 3)
     }
 
     @SideOnly(Side.CLIENT)
@@ -95,15 +95,20 @@ class BlockColoredWood() : ShadowFoxBlockMod(Material.wood)  {
         return 0xFFFFFF
     }
 
+    @SideOnly(Side.CLIENT)
+    fun colorMeta(meta: Int): Int {
+        return meta + (colorSet * 4)
+    }
+
     /**
      * Returns the color this block should be rendered. Used by leaves.
      */
     @SideOnly(Side.CLIENT)
-    override fun getRenderColor(p_149741_1_: Int): Int {
-        if (p_149741_1_ >= EntitySheep.fleeceColorTable.size)
+    override fun getRenderColor(meta: Int): Int {
+        if (colorMeta(meta and 3) >= EntitySheep.fleeceColorTable.size)
             return 0xFFFFFF;
 
-        var color = EntitySheep.fleeceColorTable[p_149741_1_];
+        var color = EntitySheep.fleeceColorTable[colorMeta(meta and 3)];
         return Color(color[0], color[1], color[2]).rgb;
     }
 
@@ -111,37 +116,37 @@ class BlockColoredWood() : ShadowFoxBlockMod(Material.wood)  {
     override fun colorMultiplier(p_149720_1_: IBlockAccess?, p_149720_2_: Int, p_149720_3_: Int, p_149720_4_: Int): Int {
         val meta = p_149720_1_!!.getBlockMetadata(p_149720_2_, p_149720_3_, p_149720_4_)
 
-        if (meta >= EntitySheep.fleeceColorTable.size)
+        if (colorMeta(meta and 3) >= EntitySheep.fleeceColorTable.size)
             return 0xFFFFFF;
 
-        var color = EntitySheep.fleeceColorTable[meta];
+        var color = EntitySheep.fleeceColorTable[colorMeta(meta and 3)];
         return Color(color[0], color[1], color[2]).rgb;
     }
 
-//    override fun onBlockPlaced(world: World, x: Int, y: Int, z: Int, side: Int, hitX: Float, hitY: Float, hitZ: Float, meta: Int): Int
-//    {
-//        val j1 = meta and 0x00000F
-//        var b0: Int = 0x0000f0
-//
-//        when (side) {
-//            0, 1 -> b0 = 0x000010
-//            2, 3 -> b0 = 0x000030
-//            4, 5 -> b0 = 0x000020
-//        }
-//
-//        return j1 or b0
-//    }
+    override fun onBlockPlaced(world: World, x: Int, y: Int, z: Int, side: Int, hitX: Float, hitY: Float, hitZ: Float, meta: Int): Int
+    {
+        val j1 = meta and 3
+        var b0: Int = 0
+
+        when (side) {
+            0, 1 -> b0 = 0
+            2, 3 -> b0 = 8
+            4, 5 -> b0 = 4
+        }
+
+        return j1 or b0
+    }
 
     @SideOnly(Side.CLIENT)
     fun getSideIcon(): IIcon
     {
-        return icons[1]
+        return icons[0]
     }
 
     @SideOnly(Side.CLIENT)
     fun getTopIcon(): IIcon
     {
-        return icons[0]
+        return icons[1]
     }
 
     override fun canSustainLeaves(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean { return true }
@@ -153,18 +158,20 @@ class BlockColoredWood() : ShadowFoxBlockMod(Material.wood)  {
 
     override fun getPickBlock(target: MovingObjectPosition?, world: World, x: Int, y: Int, z: Int): ItemStack {
         val meta = world.getBlockMetadata(x, y, z)
-        return ItemStack(this, 1, meta)
+        return ItemStack(this, 1, meta and 3)
     }
 
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        icons = arrayOf(IconHelper.forBlock(par1IconRegister, this), IconHelper.forBlock(par1IconRegister, this, "_top"))
+        icons = arrayOf(IconHelper.forName(par1IconRegister, "irisWood"), IconHelper.forName(par1IconRegister, "irisWood_top"))
 
     }
 
     override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {
-        if (list != null && item != null)
-            for (i in 0..(TYPES - 1)) {
-                list.add(ItemStack(item, 1, i));
-            }
+        if(list != null && item != null) {
+            list.add(ItemStack(this, 1, 0))
+            list.add(ItemStack(this, 1, 1))
+            list.add(ItemStack(this, 1, 2))
+            list.add(ItemStack(this, 1, 3))
+        }
     }
 }

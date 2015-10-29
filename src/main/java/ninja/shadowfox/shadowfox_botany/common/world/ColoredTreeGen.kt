@@ -4,6 +4,7 @@ import net.minecraft.block.Block
 import net.minecraft.init.Blocks
 import net.minecraft.world.World
 import net.minecraft.world.gen.feature.WorldGenAbstractTree
+import ninja.shadowfox.shadowfox_botany.common.blocks.BlockColoredWood
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import java.util.*
 
@@ -103,7 +104,18 @@ class ColoredTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true)
 
                         if (block.isAir(world, x, y + k1, z) || block.isLeaves(world, x, y + k1, z))
                         {
-                            setBlockAndNotifyAdequately(world, x, y + k1, z, ShadowFoxBlocks.irisWood, soilMeta)
+                            var woodType : Block
+                            when ((soilMeta / 4).toInt())
+                            {
+                                1 -> woodType = ShadowFoxBlocks.irisWood1
+                                2 -> woodType = ShadowFoxBlocks.irisWood2
+                                3 -> woodType = ShadowFoxBlocks.irisWood3
+                                else -> {
+                                    woodType = ShadowFoxBlocks.irisWood0
+                                }
+                            }
+
+                            setBlockAndNotifyAdequately(world, x, y + k1, z, woodType, soilMeta and 3)
                         }
                     }
                     return true

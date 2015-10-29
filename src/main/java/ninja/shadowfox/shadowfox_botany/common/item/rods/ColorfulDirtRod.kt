@@ -20,7 +20,6 @@ public open class ColorfulDirtRod(name : String = "colorfulDirtRod") : ColorfulI
 
     init {
         setMaxStackSize(1);
-        setUnlocalizedName(name);
     }
 
     override fun onItemUse(par1ItemStack : ItemStack, par2EntityPlayer : EntityPlayer, par3World : World,

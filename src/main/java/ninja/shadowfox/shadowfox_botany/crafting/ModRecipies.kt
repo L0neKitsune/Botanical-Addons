@@ -3,7 +3,6 @@ package ninja.shadowfox.shadowfox_botany.crafting
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.block.Block
 import net.minecraft.init.Blocks
-import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
 import net.minecraft.item.crafting.IRecipe
@@ -24,6 +23,7 @@ public object ModRecipes {
     var recipesStairsR: List<IRecipe>
     var recipesSlabsFull: List<IRecipe>
     var recipesColoredSkyDirtRod: IRecipe
+    var recipesLeafDyes: List<IRecipe>
 
     init {
 
@@ -35,8 +35,14 @@ public object ModRecipes {
 
         recipesColoredDirt = BotaniaAPI.getLatestAddedRecipes(16)
 
-        for (i in 0..15)
-            GameRegistry.addShapelessRecipe(ItemStack(ShadowFoxBlocks.coloredPlanks, 4, i), ItemStack(ShadowFoxBlocks.irisWood, 1, i))
+        for (i in 0..15) {
+            addShapelessOreDictRecipe(ItemStack(vazkii.botania.common.item.ModItems.dye, 1, i), ShadowFoxBlocks.LEAVES[i], "pestleAndMortar")
+        }
+
+        recipesLeafDyes = BotaniaAPI.getLatestAddedRecipes(16)
+        for (i in 0..15) {
+            addShapelessOreDictRecipe(ItemStack(ShadowFoxBlocks.coloredPlanks, 4, i), ShadowFoxBlocks.WOOD[i])
+        }
 
         recipesWoodPanel = BotaniaAPI.getLatestAddedRecipes(16)
         
@@ -48,23 +54,39 @@ public object ModRecipes {
         recipesSlabs = BotaniaAPI.getLatestAddedRecipes(16)
 
         for (i in 0..15)
-            GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.coloredStairs, 4, i),
-                "  Q", " QQ", "QQQ",
-                'Q', ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i))
-        
+        {
+            var wood: Block
+            when (i) {
+                0,1,2,3 -> wood = ShadowFoxBlocks.coloredStairs0
+                4,5,6,7 -> wood = ShadowFoxBlocks.coloredStairs1
+                8,9,10,11 -> wood = ShadowFoxBlocks.coloredStairs2
+                else -> {wood = ShadowFoxBlocks.coloredStairs3}
+            }
+            GameRegistry.addRecipe(ItemStack(wood, 4, (i % 4) * 4),
+                    "  Q", " QQ", "QQQ",
+                    'Q', ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i))
+        }
         recipesStairsR = BotaniaAPI.getLatestAddedRecipes(16)
 
         for (i in 0..15)
-        GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.coloredStairs, 4, i),
-                "Q  ", "QQ ", "QQQ",
-                'Q', ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i))
+        {
+            var wood: Block
+            when (i) {
+                0,1,2,3 -> wood = ShadowFoxBlocks.coloredStairs0
+                4,5,6,7 -> wood = ShadowFoxBlocks.coloredStairs1
+                8,9,10,11 -> wood = ShadowFoxBlocks.coloredStairs2
+                else -> {wood = ShadowFoxBlocks.coloredStairs3}
+            }
+            GameRegistry.addRecipe(ItemStack(wood, 4, (i % 4) * 4),
+                    "Q  ", "QQ ", "QQQ",
+                    'Q', ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i))
+        }
         
         recipesStairsL = BotaniaAPI.getLatestAddedRecipes(16)
 
         for (i in 0..15)
-        GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i),
-                "Q", "Q",
-                'Q', ItemStack(ShadowFoxBlocks.coloredSlabs, 1, i))
+            GameRegistry.addShapelessRecipe(ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i),
+                ItemStack(ShadowFoxBlocks.coloredSlabs, 1, i), ItemStack(ShadowFoxBlocks.coloredSlabs, 1, i))
 
         recipesSlabsFull = BotaniaAPI.getLatestAddedRecipes(16)
         
@@ -81,34 +103,19 @@ public object ModRecipes {
 
         
         for (i in 0..15)
-            GameRegistry.addShapelessRecipe(ItemStack(ShadowFoxBlocks.coloredPlanks, 4, i),
-                ItemStack(ShadowFoxBlocks.irisWood, 1, i))
+            addShapelessOreDictRecipe(ItemStack(ShadowFoxBlocks.coloredPlanks, 4, i), ShadowFoxBlocks.WOOD[i])
+
         recipesWoodPanel = BotaniaAPI.getLatestAddedRecipes(16)
 
         BotaniaAPI.registerPureDaisyRecipe(Blocks.sapling, ShadowFoxBlocks.irisSapling, 0)
     
     }
 
-    private fun addStairsAndSlabs(block: Block, meta: Int, stairs: Block, slab: Block) {
-        GameRegistry.addRecipe(ItemStack(slab, 6, meta),
-                "QQQ",
-                'Q', ItemStack(block, 1, meta))
-        GameRegistry.addRecipe(ItemStack(stairs, 4, meta),
-                "  Q", " QQ", "QQQ",
-                'Q', ItemStack(block, 1, meta))
-        GameRegistry.addRecipe(ItemStack(stairs, 4, meta),
-                "Q  ", "QQ ", "QQQ",
-                'Q', ItemStack(block, 1, meta))
-        GameRegistry.addRecipe(ItemStack(block, 1, meta),
-                "Q", "Q",
-                'Q', ItemStack(slab, meta))
-    }
-
     private fun addOreDictRecipe(output: ItemStack, vararg recipe: Any) {
         CraftingManager.getInstance().recipeList.add(ShapedOreRecipe(output, *recipe))
     }
 
-    private fun addShapelessOreDictRecipe(output: ItemStack, vararg recipe: Any) {
-        CraftingManager.getInstance().recipeList.add(ShapelessOreRecipe(output, *recipe))
+    private fun  addShapelessOreDictRecipe(output: ItemStack, vararg recipe: Any) {
+        CraftingManager.getInstance().recipeList.add(ShapelessOreRecipe(output, *recipe));
     }
 }

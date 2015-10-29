@@ -54,6 +54,9 @@ public class BlockColoredLeaves() : BlockLeaves(), IShearable {
         return 0xFFFFFF
     }
 
+    override fun isReplaceable(world: IBlockAccess?, x: Int, y: Int, z: Int): Boolean {
+        return true
+    }
     /**
      * Returns the color this block should be rendered. Used by leaves.
      */
