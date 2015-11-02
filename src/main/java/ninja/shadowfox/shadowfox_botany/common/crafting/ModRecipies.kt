@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.crafting
+package ninja.shadowfox.shadowfox_botany.common.crafting
 
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.block.Block
@@ -23,6 +23,7 @@ public object ModRecipes {
     var recipesStairsR: List<IRecipe>
     var recipesSlabsFull: List<IRecipe>
     var recipesColoredSkyDirtRod: IRecipe
+    var recipesLightningRod: IRecipe
     var recipesLeafDyes: List<IRecipe>
 
     init {
@@ -100,6 +101,17 @@ public object ModRecipes {
                 'A', LibOreDict.RUNE[3], 'N', LibOreDict.RUNE[14])
         
         recipesColoredSkyDirtRod = BotaniaAPI.getLatestAddedRecipe()
+
+        addOreDictRecipe(ItemStack(ShadowFoxItems.lightningRod, 1),
+                " DW",
+                " SD",
+                "E  ",
+                'E', LibOreDict.ENDER_AIR_BOTTLE,
+                'D', LibOreDict.DRAGONSTONE,
+                'S', LibOreDict.DREAMWOOD_TWIG,
+                'W', LibOreDict.RUNE[13])
+
+        recipesLightningRod = BotaniaAPI.getLatestAddedRecipe()
 
         
         for (i in 0..15)

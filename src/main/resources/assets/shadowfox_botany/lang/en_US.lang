@@ -51,6 +51,8 @@ item.shadowfox_botany:colorfulSkyDirtRod13.name=Rod of Iris: Green
 item.shadowfox_botany:colorfulSkyDirtRod14.name=Rod of Iris: Red
 item.shadowfox_botany:colorfulSkyDirtRod15.name=Rod of Iris: Black
 
+item.shadowfox_botany:lightningRod.name=Thundercaller Rod
+
 tile.shadowfox_botany:irisLeaves0.name=White Iris Leaves
 tile.shadowfox_botany:irisLeaves1.name=Orange Iris Leaves
 tile.shadowfox_botany:irisLeaves2.name=Magenta Iris Leaves
@@ -140,6 +142,7 @@ tile.shadowfox_botany:irisPlanks-3_Stairs12.name=Black Iris Stairs
 
 shadowfox_botany.entry.coloredDirt=Mystical Colored Dirt
 shadowfox_botany.entry.techicolorRod=Rod of Iris
+shadowfox_botany.entry.lightningRod=Thundercaller Rod
 shadowfox_botany.entry.irisSapling=Iris Oak Tree
 
 shadowfox_botany.page.coloredDirt0=Using blocks of Mystical Petals you can dye dirt various colors.  This mystical dirt is capable of growing trees and plants without water or a hoe.
@@ -147,6 +150,9 @@ shadowfox_botany.page.coloredDirt1=A Rainbow of Dirt
 
 shadowfox_botany.page.techicolorRod0=The Rod of Iris, much like the &1Rod of the Highlands&0 can place &1Mystical Colored Dirt&0 at the cost of some mana(around double the cost of normal dirt).  Sneaking and clicking in the air will shift the rod between the various colors.
 shadowfox_botany.page.techicolorRod1=All the colors
+
+shadowfox_botany.page.lightningRod0=The Thundercaller Rod, much like it's sword cousin can summon lightning at the cost of a decent chunk of mana.  Wearing a full set of &1Manaweave Cloth&0 armor will speed up the summoning process.  A &1Livingwood Avatar&0 can also wield this rod.  Someday you may find a way of getting more power out of it.
+shadowfox_botany.page.lightningRod1=WE NEED MORE POWER
 
 shadowfox_botany.page.irisSapling0=These lovely little sapling are made by purifying a sapling next to a &1Pure Daisy&0.  These saplings will only grow on &1Mystical Colored Dirt&0 and wood from this tree will take on the hue of the dirt its grown on.
 shadowfox_botany.page.irisSapling1=Planks

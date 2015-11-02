@@ -38,7 +38,7 @@ public open class ColorfulDirtRod(name : String = "colorfulDirtRod") : ColorfulI
                 val aabb =  AxisAlignedBB.getBoundingBox((par4 + dir.offsetX).toDouble(),
                         (par5+dir.offsetY).toDouble(), (par6+dir.offsetZ).toDouble(),
                         (par4+dir.offsetX+1).toDouble(), (par5+dir.offsetY+1).toDouble(), (par6+dir.offsetZ+1).toDouble())
-                val entities = par3World.getEntitiesWithinAABB(EntityLivingBase::class.java, aabb).size()
+                val entities = par3World.getEntitiesWithinAABB(EntityLivingBase::class.java, aabb).size
 
                 if (entities == 0) {
                     val stackToPlace : ItemStack = ItemStack(block, 1, par1ItemStack.itemDamage);
@@ -57,7 +57,7 @@ public open class ColorfulDirtRod(name : String = "colorfulDirtRod") : ColorfulI
     }
 
     override fun onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer) : ItemStack {
-        if(!world.isRemote && player.isSneaking()) {
+        if(!world.isRemote && player.isSneaking) {
             if (stack.itemDamage >= 15) stack.itemDamage = 0 else stack.itemDamage++
             world.playSoundAtEntity(player, "botania:ding", 0.1F, 1F);
         }

@@ -1,5 +1,4 @@
 buildscript {
-    ext.kotlin_version = '0.14.451'
     ext.kotlin_version = '1.0.0-beta-1038'
     repositories {
         mavenCentral()
@@ -54,6 +53,7 @@ minecraft {
 
 dependencies {
     compile files('libs/Botania-227-deobf.jar')
+    compile files('libs/Baubles-deobf.jar')
 
     // Make sure kotlin files are marked as required so we don't miss them.
     required "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

@@ -8,13 +8,12 @@ import vazkii.botania.common.entity.EntityManaStorm
 /**
  * Created by l0nekitsune on 10/29/15.
  */
-class GrieferCreeper(p_i1701_1_: World): EntityCreeper(p_i1701_1_) {
+class EntityGrieferCreeper(p_i1701_1_: World): EntityCreeper(p_i1701_1_) {
     private var lastActiveTime: Int = 0
     /** The amount of time since the creeper was close enough to the player to ignite  */
     private var timeSinceIgnited: Int = 0
+    private var explosionRadius = 6
     private var fuseTime = 30
-    /** Explosion radius for this creeper.  */
-    private var explosionRadius = 3
 
     override fun writeEntityToNBT(p_70014_1_: NBTTagCompound) {
         super.writeEntityToNBT(p_70014_1_)
@@ -24,9 +23,9 @@ class GrieferCreeper(p_i1701_1_: World): EntityCreeper(p_i1701_1_) {
         }
 
         p_70014_1_.setShort("Fuse", this.fuseTime.toShort())
-        p_70014_1_.setByte("ExplosionRadius", this.explosionRadius.toByte())
         p_70014_1_.setBoolean("ignited", this.func_146078_ca())
     }
+
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
@@ -37,10 +36,6 @@ class GrieferCreeper(p_i1701_1_: World): EntityCreeper(p_i1701_1_) {
 
         if (p_70037_1_.hasKey("Fuse", 99)) {
             this.fuseTime = p_70037_1_.getShort("Fuse").toInt()
-        }
-
-        if (p_70037_1_.hasKey("ExplosionRadius", 99)) {
-            this.explosionRadius = p_70037_1_.getByte("ExplosionRadius").toInt()
         }
 
         if (p_70037_1_.getBoolean("ignited")) {
@@ -80,9 +75,13 @@ class GrieferCreeper(p_i1701_1_: World): EntityCreeper(p_i1701_1_) {
         if (!this.worldObj.isRemote) {
             val flag = this.worldObj.gameRules.getGameRuleBooleanValue("mobGriefing")
 
-
-
-            this.worldObj.spawnEntityInWorld(EntityManaStorm(this.worldObj))
+            if (this.powered) {
+                val storm = EntityManaStorm(worldObj)
+                storm.setPosition(posX.toDouble() + 0.5, posY.toDouble() + 0.5, posZ.toDouble() + 0.5)
+                this.worldObj.spawnEntityInWorld(storm)
+            } else {
+                this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, (this.explosionRadius).toFloat(), flag)
+            }
 
             this.setDead()
         }
