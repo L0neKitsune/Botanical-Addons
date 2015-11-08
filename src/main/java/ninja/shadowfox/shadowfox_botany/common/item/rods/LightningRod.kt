@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityCreature
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.effect.EntityLightningBolt
+import net.minecraft.entity.monster.IMob
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.EnumAction
 import net.minecraft.item.ItemStack
@@ -88,7 +89,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
 
     fun getTarget(world: World, player: EntityPlayer, trial_target: Int, range: Float = 12.0f): EntityCreature? {
 
-        var potential = world.getEntitiesWithinAABB(EntityCreature::class.java, AxisAlignedBB.getBoundingBox(player.posX - range, player.posY - range, player.posZ - range, player.posX + range, player.posY + range, player.posZ + range))
+        var potential = world.getEntitiesWithinAABB(EntityLivingBase::class.java, AxisAlignedBB.getBoundingBox(player.posX - range, player.posY - range, player.posZ - range, player.posX + range, player.posY + range, player.posZ + range))
 
         if (trial_target >= 0) {
             var target = world.getEntityByID(trial_target)
@@ -103,7 +104,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
             while (potential.size > 0) {
                 var i = world.rand.nextInt(potential.size)
 
-                if (potential[i] is EntityCreature) {
+                if (potential[i] is EntityLivingBase && if(true) true else potential[i] is IMob && potential[i] !is EntityPlayer) {
                     var entity: EntityCreature = potential[i] as EntityCreature
                     if (entity is EntityCreature && !entity.isDead && (entity.entityId != player.entityId)) {
                         return potential[i] as EntityCreature
@@ -124,7 +125,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
             val lightningSeed = ItemNBTHelper.getLong(stack, "lightningSeed", 0L)
             val selector = object : IEntitySelector {
                 override fun isEntityApplicable(e: Entity): Boolean {
-                    return e is EntityLivingBase && e !is EntityPlayer && !alreadyTargetedEntities.contains(e)
+                    return e is EntityLivingBase && (if(true) e is EntityLivingBase else e is IMob) && e !is EntityPlayer && !alreadyTargetedEntities.contains(e)
                 }
             }
             val rand = Random(lightningSeed)
@@ -178,7 +179,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
         if (tile.getCurrentMana() >= COST_AVATAR && tile.isEnabled() && tile.getElapsedFunctionalTicks() % 10 == 0) {
             val selector = object : IEntitySelector {
                 override fun isEntityApplicable(e: Entity): Boolean {
-                    return e is EntityLivingBase && e !is EntityPlayer && e !is EntityDoppleganger
+                    return (if(true) e is EntityLivingBase else e is IMob) && e !is EntityPlayer && e !is EntityDoppleganger
                 }
             }
 
@@ -204,7 +205,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                     while (entities.size > 0) {
                         var i = world.rand.nextInt(entities.size)
 
-                        if (entities[i] is EntityLivingBase) {
+                        if (entities[i] is EntityLivingBase && entities[i] is IMob && entities[i] !is EntityPlayer) {
                             var entity: EntityLivingBase = entities[i] as EntityLivingBase
                             if (entity is EntityLivingBase && !entity.isDead) {
                                 target = entity

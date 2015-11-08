@@ -1,5 +1,6 @@
 package ninja.shadowfox.shadowfox_botany
 
+import cpw.mods.fml.common.Loader
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import cpw.mods.fml.common.Mod
@@ -12,6 +13,8 @@ import ninja.shadowfox.shadowfox_botany.lib.Constants
 public class ShadowfoxBotany {
 
     companion object {
+        var thaumcraftLoaded = false
+
         @field:Mod.Instance("ShadowfoxBotany") lateinit var instance: ShadowfoxBotany
 
         @field:SidedProxy(serverSide = "ninja.shadowfox.shadowfox_botany.common.core.proxy.CommonProxy",
@@ -20,6 +23,9 @@ public class ShadowfoxBotany {
 
     @Mod.EventHandler
     fun preInit(event: FMLPreInitializationEvent) {
+
+        thaumcraftLoaded = Loader.isModLoaded("Thaumcraft")
+
         proxy.preInit(event)
     }
 
