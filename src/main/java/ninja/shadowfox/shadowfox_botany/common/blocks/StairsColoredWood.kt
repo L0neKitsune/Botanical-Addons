@@ -34,7 +34,7 @@ class StairsColoredWood(val source: Block, val colorSet: Int) : BlockStairs(sour
         setCreativeTab(ShadowFoxCreativeTab)
         useNeighborBrightness = true
         setStepSound(source.stepSound)
-        setBlockName(source.unlocalizedName.replace("tile.".toRegex(), "") + "_${colorSet}_Stairs")
+        setBlockName(source.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs${colorSet}")
     }
 
     override fun setBlockName(par1Str: String): Block {

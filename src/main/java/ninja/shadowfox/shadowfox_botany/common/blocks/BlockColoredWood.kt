@@ -30,7 +30,7 @@ import java.util.*
 
 class BlockColoredWood(val colorSet: Int) : ShadowFoxBlockMod(Material.wood), ILexiconable  {
 
-    private val name = "iris_${colorSet}_Wood"
+    private val name = "irisWood${colorSet}"
     private val TYPES = 4
     protected var icons : Array<IIcon> = emptyArray()
 

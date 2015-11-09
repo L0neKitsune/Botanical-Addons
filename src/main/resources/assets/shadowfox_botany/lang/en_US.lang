@@ -25,20 +25,14 @@ entity.shadowfox_botany:voidCreeper.name=Manaseal Creeper
 
 tile.shadowfox_botany:coloredDirt.name=Iridescent Dirt
 tile.shadowfox_botany:irisLeaves.name=Iridescent Leaves
-tile.shadowfox_botany:iris_0_Wood.name=Iridescent Log
-tile.shadowfox_botany:iris_1_Wood.name=Iridescent Log
-tile.shadowfox_botany:iris_2_Wood.name=Iridescent Log
-tile.shadowfox_botany:iris_3_Wood.name=Iridescent Log
+tile.shadowfox_botany:irisWood.name=Iridescent Log
 tile.shadowfox_botany:irisSapling.name=Iridescent Sapling
 tile.shadowfox_botany:irisPlanks.name=Iridescent Planks
 
 tile.shadowfox_botany:irisPlanksSlab.name=Iridescent Slab
 tile.shadowfox_botany:irisPlanksSlabFull.name=Iridescent Slab
 
-tile.shadowfox_botany:irisPlanks_0_Stairs.name=Iridescent Stairs
-tile.shadowfox_botany:irisPlanks_1_Stairs.name=Iridescent Stairs
-tile.shadowfox_botany:irisPlanks_2_Stairs.name=Iridescent Stairs
-tile.shadowfox_botany:irisPlanks_3_Stairs.name=Iridescent Stairs
+tile.shadowfox_botany:irisPlanksStairs.name=Iridescent Stairs
 
 shadowfox_botany.potion.manaVoid=Manatide Seal
 
