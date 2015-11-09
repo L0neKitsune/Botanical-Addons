@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.effect.EntityLightningBolt
 import net.minecraft.entity.monster.IMob
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.EnumAction
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
@@ -51,7 +52,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
     }
 
     override fun onUsingTick(stack: ItemStack?, player: EntityPlayer?, count: Int) {
-        if (count != this.getMaxItemUseDuration(stack)  && !player!!.worldObj.isRemote && ManaItemHandler.requestManaExactForTool(stack, player, COST, false)) {
+        if (count != this.getMaxItemUseDuration(stack) && !player!!.worldObj.isRemote && ManaItemHandler.requestManaExactForTool(stack, player, COST, false)) {
 
             var target = getTarget(player!!.worldObj, player, ItemNBTHelper.getInt(stack, "target", -1))
             if (target != null) {
@@ -67,10 +68,10 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                     if (ConfigHandler.realLightning && thor) {
                         if (spawnLightning(player.worldObj, target.posX.toDouble(), target.posY.toDouble(), target.posZ.toDouble())) {
                             ManaItemHandler.requestManaExactForTool(stack, player, COST, true)
-                            target.attackEntityFrom(DamageSource.causePlayerDamage(player), if(thor) 10f else 8f)
+                            target.attackEntityFrom(DamageSource.causePlayerDamage(player), if (thor) 10f else 8f)
                         }
                     } else {
-                        target.attackEntityFrom(DamageSource.causePlayerDamage(player), if(thor) 10f else 8f)
+                        target.attackEntityFrom(DamageSource.causePlayerDamage(player), if (thor) 10f else 8f)
                         ManaItemHandler.requestManaExactForTool(stack, player, COST, true)
                         Botania.proxy.lightningFX(player.worldObj, Vector3.fromEntityCenter(player), Vector3.fromEntityCenter(target), 1.0f, 96708, 11198463)
                         player.worldObj.playSoundEffect(target.posX.toDouble(), target.posY.toDouble(), target.posZ.toDouble(), "ambient.weather.thunder", 100.0f, 0.8f + player.worldObj.rand.nextFloat() * 0.2f)
@@ -88,8 +89,13 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
     }
 
     fun getTarget(world: World, player: EntityPlayer, trial_target: Int, range: Float = 12.0f): EntityCreature? {
+        val selector = object : IEntitySelector {
+            override fun isEntityApplicable(e: Entity): Boolean {
+                return e is IMob && e !is EntityPlayer
+            }
+        }
 
-        var potential = world.getEntitiesWithinAABB(EntityLivingBase::class.java, AxisAlignedBB.getBoundingBox(player.posX - range, player.posY - range, player.posZ - range, player.posX + range, player.posY + range, player.posZ + range))
+        val potential = world.selectEntitiesWithinAABB(EntityLivingBase::class.java, AxisAlignedBB.getBoundingBox(player.posX - range, player.posY - range, player.posZ - range, player.posX + range, player.posY + range, player.posZ + range), selector)
 
         if (trial_target >= 0) {
             var target = world.getEntityByID(trial_target)
@@ -103,12 +109,8 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
         if (potential.size > 0)
             while (potential.size > 0) {
                 var i = world.rand.nextInt(potential.size)
-
-                if (potential[i] is EntityLivingBase && if(true) true else potential[i] is IMob && potential[i] !is EntityPlayer) {
-                    var entity: EntityCreature = potential[i] as EntityCreature
-                    if (entity is EntityCreature && !entity.isDead && (entity.entityId != player.entityId)) {
-                        return potential[i] as EntityCreature
-                    }
+                if (!(potential[i] as EntityLivingBase).isDead) {
+                    return potential[i] as EntityCreature
                 }
 
                 potential.remove(i)
@@ -125,7 +127,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
             val lightningSeed = ItemNBTHelper.getLong(stack, "lightningSeed", 0L)
             val selector = object : IEntitySelector {
                 override fun isEntityApplicable(e: Entity): Boolean {
-                    return e is EntityLivingBase && (if(true) e is EntityLivingBase else e is IMob) && e !is EntityPlayer && !alreadyTargetedEntities.contains(e)
+                    return e is IMob && e !is EntityPlayer && !alreadyTargetedEntities.contains(e)
                 }
             }
             val rand = Random(lightningSeed)
@@ -179,7 +181,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
         if (tile.getCurrentMana() >= COST_AVATAR && tile.isEnabled() && tile.getElapsedFunctionalTicks() % 10 == 0) {
             val selector = object : IEntitySelector {
                 override fun isEntityApplicable(e: Entity): Boolean {
-                    return (if(true) e is EntityLivingBase else e is IMob) && e !is EntityPlayer && e !is EntityDoppleganger
+                    return (if (true) e is EntityLivingBase else e is IMob) && e !is EntityPlayer && e !is EntityDoppleganger
                 }
             }
 
@@ -230,9 +232,9 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
 
                     target.attackEntityFrom(DamageSource.causeMobDamage(null), 10.toFloat())
 
-                    if(!world.isRemote) tile.recieveMana(-COST_AVATAR)
+                    if (!world.isRemote) tile.recieveMana(-COST_AVATAR)
 
-                    var vect =  Vector3()
+                    var vect = Vector3()
                     vect.set(te.xCoord.toDouble() + 0.5, te.yCoord.toDouble() + 2.5, te.zCoord.toDouble() + 0.5)
 
                     Botania.proxy.lightningFX(world, vect, Vector3.fromEntityCenter(target), 1.0f, 96708, 11198463)
