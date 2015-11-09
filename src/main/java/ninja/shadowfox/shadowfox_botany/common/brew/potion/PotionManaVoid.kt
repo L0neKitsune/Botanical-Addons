@@ -13,7 +13,7 @@ import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.mana.IManaItem
 
 
-class PotionManaVoid : PotionMod(ConfigHandler.potionIDManaVoid, "manaVoid", true, 16777215, 0) {
+class PotionManaVoid : PotionMod(ConfigHandler.potionIDManaVoid, "manaVoid", true, 192, 0) {
 
     init {
         MinecraftForge.EVENT_BUS.register(this)

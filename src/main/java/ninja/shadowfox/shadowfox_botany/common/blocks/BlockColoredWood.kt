@@ -9,21 +9,28 @@ import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.passive.EntitySheep
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxLogItemBlock0
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxLogItemBlock1
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxLogItemBlock2
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxLogItemBlock3
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import vazkii.botania.api.lexicon.ILexiconable
+import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
 import java.util.*
 
 
-class BlockColoredWood(val colorSet: Int) : ShadowFoxBlockMod(Material.wood)  {
+class BlockColoredWood(val colorSet: Int) : ShadowFoxBlockMod(Material.wood), ILexiconable  {
 
-    private val name = "irisWood_${colorSet}_"
+    private val name = "iris_${colorSet}_Wood"
     private val TYPES = 4
     protected var icons : Array<IIcon> = emptyArray()
 
@@ -40,7 +47,15 @@ class BlockColoredWood(val colorSet: Int) : ShadowFoxBlockMod(Material.wood)  {
     }
 
     override fun setBlockName(par1Str: String): Block {
-        register(par1Str)
+        if (colorSet == 0) {
+            GameRegistry.registerBlock(this, ShadowFoxLogItemBlock0::class.java, par1Str)
+        } else if (colorSet == 1) {
+            GameRegistry.registerBlock(this, ShadowFoxLogItemBlock1::class.java, par1Str)
+        } else if (colorSet == 2) {
+            GameRegistry.registerBlock(this, ShadowFoxLogItemBlock2::class.java, par1Str)
+        } else if (colorSet == 3) {
+            GameRegistry.registerBlock(this, ShadowFoxLogItemBlock3::class.java, par1Str)
+        }
         return super.setBlockName(par1Str)
     }
 
@@ -74,7 +89,6 @@ class BlockColoredWood(val colorSet: Int) : ShadowFoxBlockMod(Material.wood)  {
     override fun getIcon(side: Int, meta: Int): IIcon
     {
         val k = meta and 12
-        val l = meta and 3
         return if (k == 0 && (side == 1 || side == 0)) this.getTopIcon() else (if (k == 4 && (side == 5 || side == 4)) this.getTopIcon() else (if (k == 8 && (side == 2 || side == 3)) this.getTopIcon() else this.getSideIcon()))
     }
 
@@ -152,10 +166,6 @@ class BlockColoredWood(val colorSet: Int) : ShadowFoxBlockMod(Material.wood)  {
     override fun canSustainLeaves(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean { return true }
     override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean { return true }
 
-    internal fun register(name: String) {
-        GameRegistry.registerBlock(this, ShadowFoxMetaItemBlock::class.java, name)
-    }
-
     override fun getPickBlock(target: MovingObjectPosition?, world: World, x: Int, y: Int, z: Int): ItemStack {
         val meta = world.getBlockMetadata(x, y, z)
         return ItemStack(this, 1, meta and 3)
@@ -173,5 +183,9 @@ class BlockColoredWood(val colorSet: Int) : ShadowFoxBlockMod(Material.wood)  {
             list.add(ItemStack(this, 1, 2))
             list.add(ItemStack(this, 1, 3))
         }
+    }
+
+    override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
+        return LexiconRegistry.irisSapling
     }
 }

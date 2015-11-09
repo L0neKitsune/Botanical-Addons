@@ -6,7 +6,9 @@ import net.minecraft.block.Block
 import net.minecraft.block.IGrowable
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
+import net.minecraft.item.ItemStack
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
@@ -18,10 +20,13 @@ import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.world.ColoredTreeGen
+import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import vazkii.botania.api.lexicon.ILexiconable
+import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 import kotlin.properties.Delegates
 
-public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowable, IPlantable {
+public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowable, IPlantable, ILexiconable {
 
     internal var icon: IIcon by Delegates.notNull()
 
@@ -156,6 +161,10 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
      */
     override fun func_149851_a(p_149851_1_: World?, p_149851_2_: Int, p_149851_3_: Int, p_149851_4_: Int, p_149851_5_: Boolean): Boolean {
         return true
+    }
+
+    override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
+        return LexiconRegistry.irisSapling
     }
 }
 
