@@ -1,11 +1,8 @@
 package ninja.shadowfox.shadowfox_botany.common.brew.potion
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
-import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init.Items
 import net.minecraft.inventory.IInventory
-import net.minecraft.item.ItemStack
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.living.LivingEvent
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
@@ -49,12 +46,16 @@ class PotionManaVoid : PotionMod(ConfigHandler.potionIDManaVoid, "manaVoid", tru
                             }
 
                             break
+                        } else {
+                            manaItemSlot.addMana(stackInSlot, -manaItemSlot.getMana(stackInSlot))
+                            if (useBaubles) {
+                                BotaniaAPI.internalHandler.sendBaubleUpdatePacket(e, slot)
+                            }
+                            break
                         }
                     }
                 }
             }
         }
-
     }
-
 }
