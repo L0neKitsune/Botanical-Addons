@@ -119,7 +119,7 @@ public object ModRecipes {
 
         recipesWoodPanel = BotaniaAPI.getLatestAddedRecipes(16)
 
-        BotaniaAPI.registerPureDaisyRecipe(Blocks.sapling, ShadowFoxBlocks.irisSapling, 0)
+        BotaniaAPI.registerPureDaisyRecipe("treeSapling", ShadowFoxBlocks.irisSapling, 0)
     
     }
 
