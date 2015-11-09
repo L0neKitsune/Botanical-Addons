@@ -46,7 +46,7 @@ class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulDirtRod(
 
                 val entities = world.getEntitiesWithinAABB(EntityLivingBase::class.java,
                         AxisAlignedBB.getBoundingBox(x.toDouble(), y.toDouble(), z.toDouble(), (x + 1).toDouble(),
-                                (y + 1).toDouble(), (z + 1).toDouble())).size();
+                                (y + 1).toDouble(), (z + 1).toDouble())).size;
 
                 if (entities == 0) {
                     val stackToPlace: ItemStack = ItemStack(ShadowFoxBlocks.coloredDirtBlock, 1, stack.itemDamage)

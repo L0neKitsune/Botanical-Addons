@@ -22,7 +22,7 @@ public object ModRecipes {
     var recipesStairsL: List<IRecipe>
     var recipesStairsR: List<IRecipe>
     var recipesSlabsFull: List<IRecipe>
-    var recipesColoredSkyDirtRod: IRecipe
+    var recipesColoredSkyDirtRod: List<IRecipe>
     var recipesLightningRod: IRecipe
     var recipesLeafDyes: List<IRecipe>
 
@@ -91,16 +91,16 @@ public object ModRecipes {
 
         recipesSlabsFull = BotaniaAPI.getLatestAddedRecipes(16)
         
-    
-        addOreDictRecipe(ItemStack(ShadowFoxItems.colorfulSkyDirtRod, 1),
-                " PN",
-                " RP",
-                "A  ",
-                'P', ItemStack(ShadowFoxBlocks.coloredDirtBlock, 1),
-                'R', ItemStack(BotaniaItems.skyDirtRod, 1),
-                'A', LibOreDict.RUNE[3], 'N', LibOreDict.RUNE[14])
+        for (i in 0..15)
+            addOreDictRecipe(ItemStack(ShadowFoxItems.colorfulSkyDirtRod, 1, i),
+                    " PN",
+                    " RP",
+                    "A  ",
+                    'P', ItemStack(ShadowFoxBlocks.coloredDirtBlock, 1, i),
+                    'R', ItemStack(BotaniaItems.skyDirtRod, 1),
+                    'A', LibOreDict.RUNE[3], 'N', LibOreDict.RUNE[14])
         
-        recipesColoredSkyDirtRod = BotaniaAPI.getLatestAddedRecipe()
+        recipesColoredSkyDirtRod = BotaniaAPI.getLatestAddedRecipes(16)
 
         addOreDictRecipe(ItemStack(ShadowFoxItems.lightningRod, 1),
                 " DW",
@@ -119,7 +119,7 @@ public object ModRecipes {
 
         recipesWoodPanel = BotaniaAPI.getLatestAddedRecipes(16)
 
-        BotaniaAPI.registerPureDaisyRecipe(Blocks.sapling, ShadowFoxBlocks.irisSapling, 0)
+        BotaniaAPI.registerPureDaisyRecipe("treeSapling", ShadowFoxBlocks.irisSapling, 0)
     
     }
 

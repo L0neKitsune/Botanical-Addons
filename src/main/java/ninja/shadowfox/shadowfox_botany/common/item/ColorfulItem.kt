@@ -26,8 +26,7 @@ open class ColorfulItem(name: String) : StandardItem(name) {
     }
 
     override fun addInformation(par1ItemStack: ItemStack, par2EntityPlayer: EntityPlayer, par3List: MutableList<Any?>?, par4: Boolean) {
-        if(par1ItemStack != null)
-            addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + par1ItemStack.itemDamage)+"&r", par3List);
+        addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + par1ItemStack.itemDamage)+"&r", par3List);
     } 
 
     override fun getUnlocalizedName(par1ItemStack: ItemStack?): String {
