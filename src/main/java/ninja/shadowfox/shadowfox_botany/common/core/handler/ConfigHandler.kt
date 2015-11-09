@@ -87,7 +87,7 @@ public class ConfigHandler {
 
         private fun verifyPotionArray() {
             if (Loader.isModLoaded("DragonAPI")) {
-                potionArrayLimit = Potion.potionTypes.size()
+                potionArrayLimit = Potion.potionTypes.size
             } else {
                 potionArrayLimit = 127
             }

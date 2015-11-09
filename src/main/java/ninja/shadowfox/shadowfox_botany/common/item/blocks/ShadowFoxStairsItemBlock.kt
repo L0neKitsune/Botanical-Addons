@@ -20,8 +20,7 @@ open class ShadowFoxStairsItemBlock0(par2Block: Block) : ItemBlockWithMetadata(p
     }
 
     override fun addInformation(par1ItemStack: ItemStack, par2EntityPlayer: EntityPlayer, par3List: MutableList<Any?>?, par4: Boolean) {
-        if(par1ItemStack != null)
-            addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + ((par1ItemStack.itemDamage/4)+(4*colorSet)))+"&r", par3List);
+        addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + ((par1ItemStack.itemDamage/4)+(4*colorSet)))+"&r", par3List);
     } 
 
     override fun getUnlocalizedName(par1ItemStack: ItemStack?): String {
