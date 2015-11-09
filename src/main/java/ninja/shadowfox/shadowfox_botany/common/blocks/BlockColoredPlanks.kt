@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.passive.EntitySheep
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
@@ -16,12 +17,15 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import vazkii.botania.api.lexicon.ILexiconable
+import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
 import java.util.*
 import kotlin.properties.Delegates
 
 
-class BlockColoredPlanks() : ShadowFoxBlockMod(Material.wood) {
+class BlockColoredPlanks() : ShadowFoxBlockMod(Material.wood), ILexiconable {
 
     private val name = "irisPlanks"
     private val TYPES = 16
@@ -113,5 +117,9 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(Material.wood) {
             for (i in 0..(TYPES - 1)) {
                 list.add(ItemStack(item, 1, i));
             }
+    }
+
+    override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
+        return LexiconRegistry.irisSapling
     }
 }

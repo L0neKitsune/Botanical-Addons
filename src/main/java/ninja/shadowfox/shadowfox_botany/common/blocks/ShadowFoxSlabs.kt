@@ -65,9 +65,4 @@ abstract class ShadowFoxSlabs(full: Boolean, mat: Material) : BlockSlab(full, ma
     override fun func_150002_b(i: Int): String {
         return unlocalizedName
     }
-
-//    override fun getEntry(world: World, x: Int, y: Int, z: Int, player: EntityPlayer, lexicon: ItemStack): LexiconEntry {
-//        return LexiconData.decorativeBlocks
-//    }
-
 }

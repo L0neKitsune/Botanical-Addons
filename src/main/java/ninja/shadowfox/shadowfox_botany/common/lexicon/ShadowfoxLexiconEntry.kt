@@ -27,8 +27,12 @@ public class ShadowfoxLexiconEntry(unlocalizedName: String, category: LexiconCat
         return "shadowfox_botany.entry." + super.getUnlocalizedName()
     }
 
+    override fun getTagline(): String {
+        return "shadowfox_botany.tagline." + super.getUnlocalizedName();
+    }
+
     override fun getSubtitle(): String? {
-        return "[Botanical Add-ons]"
+        return "[Botanical Addons]"
     }
 
     fun getLazyUnlocalizedName(): String {

@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.passive.EntitySheep
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
@@ -18,10 +19,13 @@ import net.minecraftforge.common.IShearable
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import vazkii.botania.api.lexicon.ILexiconable
+import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
 import java.util.*
 
-public class BlockColoredLeaves() : BlockLeaves(), IShearable {
+public class BlockColoredLeaves() : BlockLeaves(), IShearable, ILexiconable {
 
     val TYPES: Int = 16
     internal var field_150128_a: IntArray? = null
@@ -252,5 +256,9 @@ public class BlockColoredLeaves() : BlockLeaves(), IShearable {
         this.func_150124_c(world, x, y, z, metadata, chance); // Dammet mojang
         ret.addAll(this.captureDrops(false));
         return ret;
+    }
+
+    override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
+        return LexiconRegistry.irisSapling
     }
 }
