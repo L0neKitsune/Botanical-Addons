@@ -18,7 +18,7 @@ misc.shadowfox_botany.color.14=Red
 misc.shadowfox_botany.color.15=Black
 misc.shadowfox_botany.color.16=Rainbow
 
-item.shadowfox_botany:colorfulSkyDirtRod.name=Rod of Iridescence
+item.shadowfox_botany:colorfulSkyDirtRod.name=Rod of the Iridescence
 item.shadowfox_botany:lightningRod.name=Rod of the Thundercaller
 
 entity.shadowfox_botany:voidCreeper.name=Manaseal Creeper
@@ -44,7 +44,7 @@ shadowfox_botany.potion.manaVoid=Manatide Seal
 
 shadowfox_botany.entry.coloredDirt=Iridescent Dirt
 shadowfox_botany.tagline.coloredDirt=Beauty from the dross
-shadowfox_botany.entry.techicolorRod=Rod of Iridescence
+shadowfox_botany.entry.techicolorRod=Rod of the Iridescence
 shadowfox_botany.tagline.techicolorRod=Beauty conjured from thin air
 shadowfox_botany.entry.lightningRod=Rod of the Thundercaller
 shadowfox_botany.tagline.lightningRod=Stike fear and thunder into your foes
@@ -54,7 +54,7 @@ shadowfox_botany.tagline.irisSapling=Farm with all the colors of the wind
 shadowfox_botany.page.coloredDirt0=Using the latent power in &1Mystical Flowers&0, you can make dirt that shimmers every color of the rainbow. This mystical dirt is capable of growing trees and plants without water or a hoe.
 shadowfox_botany.page.coloredDirt1=Beauty from the dross
 
-shadowfox_botany.page.techicolorRod0=The &1Rod of Iridescense&0, like the &1Rod of the Highlands&0, can place &1Mystical Colored Dirt&0 in the air at the cost of mana. Unlike its less colorful counterpart, sneaking and clicking in the air will shift the rod between the various colors of &4Iridescense&0.
+shadowfox_botany.page.techicolorRod0=The &1Rod of the Iridescense&0, like the &1Rod of the Highlands&0, can place &1Mystical Colored Dirt&0 in the air at the cost of mana. Unlike its less colorful counterpart, sneaking and clicking in the air will shift the rod between the various colors of &4Iridescense&0.
 shadowfox_botany.page.techicolorRod1=Simply drowning in colors
 
 shadowfox_botany.page.lightningRod0=The &1Rod of Lightning&0, much like its sword cousin, the &1Thundercaller&0, can summon lightning to strike your enemies. Wielding &1Manatide Prowess&0 will speed up the summoning process. A &1Livingwood Avatar&0 can also wield this rod.<br>There seems to be power you cannot comprehend lying trapped within this rod, but you have no idea how to get it out.
