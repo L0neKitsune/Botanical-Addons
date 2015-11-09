@@ -109,7 +109,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
         if (potential.size > 0)
             while (potential.size > 0) {
                 var i = world.rand.nextInt(potential.size)
-                if (potential[i] is EntityLivingBase && !(potential[i] as EntityLivingBase).isDead) {
+                if (!(potential[i] as EntityLivingBase).isDead) {
                     return potential[i] as EntityCreature
                 }
 
