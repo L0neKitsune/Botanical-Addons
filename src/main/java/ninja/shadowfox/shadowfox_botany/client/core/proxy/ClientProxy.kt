@@ -7,6 +7,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import ninja.shadowfox.shadowfox_botany.client.render.entity.RenderGrieferCreeper
 import ninja.shadowfox.shadowfox_botany.common.core.proxy.CommonProxy
 import ninja.shadowfox.shadowfox_botany.common.entity.EntityGrieferCreeper
+import ninja.shadowfox.shadowfox_botany.common.entity.EntityVoidCreeper
 
 public class ClientProxy : CommonProxy() {
     override fun preInit(event: FMLPreInitializationEvent) {
@@ -26,5 +27,6 @@ public class ClientProxy : CommonProxy() {
     private fun initRenderers() {
 
         RenderingRegistry.registerEntityRenderingHandler(EntityGrieferCreeper::class.java, RenderGrieferCreeper())
+        RenderingRegistry.registerEntityRenderingHandler(EntityVoidCreeper::class.java, RenderGrieferCreeper())
     }
 }

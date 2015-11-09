@@ -6,9 +6,10 @@ import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 public object ShadowFoxEntity {
 
     init {
-
         if (ConfigHandler.uberCreepers) {
-            EntityRegistry.registerGlobalEntityID(EntityGrieferCreeper::class.java, "botania_addon:grieferCreeper", EntityRegistry.findGlobalUniqueEntityId(), 0xFFFFFF, 0x000000)
+            EntityRegistry.registerGlobalEntityID(EntityGrieferCreeper::class.java, "shadowfox_botany:grieferCreeper", EntityRegistry.findGlobalUniqueEntityId(), 0xFFFFFF, 0x000000)
         }
+
+        EntityRegistry.registerGlobalEntityID(EntityVoidCreeper::class.java, "shadowfox_botany:voidCreeper", EntityRegistry.findGlobalUniqueEntityId(), 0xcc11d3, 0xfb9bff)
     }
 }

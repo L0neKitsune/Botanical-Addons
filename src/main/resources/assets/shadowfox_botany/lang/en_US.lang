@@ -140,7 +140,9 @@ tile.shadowfox_botany:irisPlanks-3_Stairs4.name=Green Iris Stairs
 tile.shadowfox_botany:irisPlanks-3_Stairs8.name=Red Iris Stairs
 tile.shadowfox_botany:irisPlanks-3_Stairs12.name=Black Iris Stairs
 
-shadowfox_botany.potion.manaVoid=Mana Void
+shadowfox_botany.potion.manaVoid=Manatide Drought
+
+entity.shadowfox_botany:voidCreeper.name=Manatide Drought Creeper
 
 shadowfox_botany.entry.coloredDirt=Mystical Colored Dirt
 shadowfox_botany.entry.techicolorRod=Rod of Iris
