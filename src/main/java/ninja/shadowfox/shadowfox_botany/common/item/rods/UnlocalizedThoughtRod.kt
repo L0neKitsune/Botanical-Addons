@@ -1,28 +1,17 @@
 package ninja.shadowfox.shadowfox_botany.common.item.rods
 
-import net.minecraft.block.Block
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.potion.PotionEffect
-import net.minecraft.util.AxisAlignedBB
-import net.minecraft.util.ChatComponentTranslation
 import net.minecraft.util.ChatComponentText
 import net.minecraft.util.ChatStyle
 import net.minecraft.util.EnumChatFormatting
 import net.minecraft.world.World
-import net.minecraftforge.common.util.ForgeDirection
-import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.brew.ShadowFoxPotions
-import ninja.shadowfox.shadowfox_botany.common.brew.potion.PotionManaVoid
 import ninja.shadowfox.shadowfox_botany.common.item.StandardItem
-import vazkii.botania.api.item.IAvatarWieldable
-import vazkii.botania.api.mana.IManaUsingItem
-import vazkii.botania.api.mana.ManaItemHandler
-import vazkii.botania.common.Botania
-
 /**
- * Created by l0nekitsune on 11/4/15.
+ * Basically to test shit
  */
 public open class UnlocalizedThoughtRod(name: String = "unlocalizedThoughtRod") : StandardItem(name) {
 

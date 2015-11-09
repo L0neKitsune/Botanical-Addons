@@ -2,7 +2,6 @@ package ninja.shadowfox.shadowfox_botany.common.entity
 
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.monster.EntityCreeper
-import net.minecraft.entity.monster.EntitySkeleton
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Items
 import net.minecraft.item.Item
@@ -13,11 +12,10 @@ import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.brew.ShadowFoxPotions
 
 /**
- * Created by l0nekitsune on 11/8/15.
+ * All the mana is mine mahhhaahahha
  */
 class EntityVoidCreeper(p_i1701_1_: World): EntityCreeper(p_i1701_1_) {
     private var lastActiveTime: Int = 0
-    /** The amount of time since the creeper was close enough to the player to ignite  */
     private var timeSinceIgnited: Int = 0
     private var range: Int = 3
     private var fuseTime = 30
@@ -33,10 +31,6 @@ class EntityVoidCreeper(p_i1701_1_: World): EntityCreeper(p_i1701_1_) {
         p_70014_1_.setBoolean("ignited", this.func_146078_ca())
     }
 
-
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     override fun readEntityFromNBT(p_70037_1_: NBTTagCompound) {
         super.readEntityFromNBT(p_70037_1_)
         this.dataWatcher.updateObject(17, java.lang.Byte.valueOf((if (p_70037_1_.getBoolean("powered")) 1 else 0).toByte()))
