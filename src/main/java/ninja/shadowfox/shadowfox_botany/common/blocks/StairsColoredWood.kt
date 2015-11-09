@@ -9,16 +9,24 @@ import net.minecraft.block.BlockStairs
 import net.minecraft.block.material.MapColor
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.passive.EntitySheep
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
+import net.minecraft.world.World
 import net.minecraft.world.IBlockAccess
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxStairsItemBlock0
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxStairsItemBlock1
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxStairsItemBlock2
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxStairsItemBlock3
+import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import vazkii.botania.api.lexicon.ILexiconable
+import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
 
 
-class StairsColoredWood(val source: Block, val colorSet: Int) : BlockStairs(source, 0)
+class StairsColoredWood(val source: Block, val colorSet: Int) : BlockStairs(source, 0), ILexiconable
 {
     val TYPES: Int = 4
 
@@ -26,11 +34,19 @@ class StairsColoredWood(val source: Block, val colorSet: Int) : BlockStairs(sour
         setCreativeTab(ShadowFoxCreativeTab)
         useNeighborBrightness = true
         setStepSound(source.stepSound)
-        setBlockName(source.unlocalizedName.replace("tile.".toRegex(), "") + "-${colorSet}_Stairs")
+        setBlockName(source.unlocalizedName.replace("tile.".toRegex(), "") + "_${colorSet}_Stairs")
     }
 
     override fun setBlockName(par1Str: String): Block {
-        GameRegistry.registerBlock(this, ShadowFoxMetaItemBlock::class.java, par1Str)
+        if (colorSet == 0) {
+            GameRegistry.registerBlock(this, ShadowFoxStairsItemBlock0::class.java, par1Str)
+        } else if (colorSet == 1) {
+            GameRegistry.registerBlock(this, ShadowFoxStairsItemBlock1::class.java, par1Str)
+        } else if (colorSet == 2) {
+            GameRegistry.registerBlock(this, ShadowFoxStairsItemBlock2::class.java, par1Str)
+        } else if (colorSet == 3) {
+            GameRegistry.registerBlock(this, ShadowFoxStairsItemBlock3::class.java, par1Str)
+        }
         return super.setBlockName(par1Str)
     }
 
@@ -70,5 +86,9 @@ class StairsColoredWood(val source: Block, val colorSet: Int) : BlockStairs(sour
             list.add(ItemStack(this, 1, 8))
             list.add(ItemStack(this, 1, 12))
         }
+    }
+
+    override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
+        return LexiconRegistry.irisSapling
     }
 }

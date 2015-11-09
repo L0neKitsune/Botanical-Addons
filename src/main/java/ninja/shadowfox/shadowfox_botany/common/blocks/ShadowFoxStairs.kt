@@ -22,11 +22,6 @@ open class ShadowFoxStairs(val mainBlock: Block) : BlockStairs(mainBlock, 0) {
         useNeighborBrightness = true
     }
 
-    override fun setBlockName(par1Str: String): Block {
-        GameRegistry.registerBlock(this, ShadowFoxMetaItemBlock::class.java, par1Str)
-        return super.setBlockName(par1Str)
-    }
-
     @SideOnly(Side.CLIENT)
     override fun getIcon(side: Int, meta: Int): IIcon
     {

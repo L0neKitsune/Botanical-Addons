@@ -1,13 +1,16 @@
 package ninja.shadowfox.shadowfox_botany.common.item.rods
 
+import java.awt.Color
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
+import net.minecraft.util.StatCollector
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.MathHelper
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import vazkii.botania.client.core.handler.ItemsRemainingRenderHandler
 import vazkii.botania.api.mana.ManaItemHandler
 import vazkii.botania.common.Botania
 import vazkii.botania.common.core.helper.Vector3
@@ -22,9 +25,17 @@ class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulDirtRod(
             if (player.isSneaking) {
                 if (stack.itemDamage >= 15) stack.itemDamage = 0 else stack.itemDamage++
                 world.playSoundAtEntity(player, "botania:ding", 0.1F, 1F);
+                val dirtStack = ItemStack(ShadowFoxBlocks.coloredDirtBlock, 1, stack.itemDamage)
+                dirtStack.setStackDisplayName(StatCollector.translateToLocal("misc.shadowfox_botany.color." + stack.itemDamage))
+                ItemsRemainingRenderHandler.set(dirtStack, -2);
             }
 
             else if (ManaItemHandler.requestManaExactForTool(stack, player, COST * 2, false)) {
+                val color = Color(getColorFromItemStack(stack, 0));
+                val r = color.getRed() / 255F;
+                val g = color.getGreen() / 255F;
+                val b = color.getBlue() / 255F;
+
                 val playerVec = Vector3.fromEntityCenter(player);
                 val lookVec = Vector3(player.lookVec).multiply(3.toDouble());
                 val placeVec = playerVec.copy().add(lookVec);
@@ -45,7 +56,7 @@ class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulDirtRod(
                         ManaItemHandler.requestManaExactForTool(stack, player, COST * 2, true);
                         for (i in 0..6)
                             Botania.proxy.sparkleFX(world, x + Math.random(), y + Math.random(), z + Math.random(),
-                                    0.35F, 0.2F, 0.05F, 1F, 5);
+                                    r, g, b, 1F, 5);
                     }
                 }
             }
