@@ -25,7 +25,7 @@ import vazkii.botania.common.core.helper.Vector3
  */
 class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulDirtRod(name), IAvatarWieldable {
 
-    private val avatarOverlay = ResourceLocation("botania:textures/model/avatarRainbow.png")
+    private val avatarOverlay = ResourceLocation("shadowfox_botany:textures/model/avatarDirtRainbow.png")
 
     override fun onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer) : ItemStack {
         if(!world.isRemote) {
