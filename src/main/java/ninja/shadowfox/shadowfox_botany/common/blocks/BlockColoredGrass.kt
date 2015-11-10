@@ -49,10 +49,6 @@ public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
         return super.setBlockName(par1Str)
     }
 
-    override fun quantityDropped(random: Random): Int {
-        return if (random.nextInt(20) == 0) 1 else 0
-    }
-
     @SideOnly(Side.CLIENT)
     override fun getBlockColor(): Int {
         return 0xFFFFFF
