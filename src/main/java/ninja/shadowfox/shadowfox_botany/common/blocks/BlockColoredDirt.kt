@@ -44,6 +44,10 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), ILexiconable {
         return (type != null && type.equals("shovel", true))
     }
 
+    override fun getHarvestTool(metadata : Int): String {
+        return "shovel";
+    }
+
     @SideOnly(Side.CLIENT)
     override fun getBlockColor(): Int {
         return 0xFFFFFF
