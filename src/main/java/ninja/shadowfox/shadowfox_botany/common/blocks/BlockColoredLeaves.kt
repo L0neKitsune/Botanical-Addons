@@ -224,6 +224,9 @@ public class BlockColoredLeaves() : BlockLeaves(), IShearable, ILexiconable {
         }
     }
 
+    override fun getDamageValue(p_149643_1_: World, p_149643_2_: Int, p_149643_3_: Int, p_149643_4_: Int): Int {
+       return p_149643_1_.getBlockMetadata(p_149643_2_, p_149643_3_, p_149643_4_)
+    }
 
     override fun dropBlockAsItemWithChance(p_149690_1_: World, p_149690_2_: Int, p_149690_3_: Int, p_149690_4_: Int, p_149690_5_: Int,
                                            p_149690_6_: Float, p_149690_7_: Int) {

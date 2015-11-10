@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
+import net.minecraft.block.BlockDirt
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
@@ -34,10 +35,13 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), ILexiconable {
     init {
         blockHardness = 0.5F
         setLightLevel(0f)
-        blockResistance = 1.0f
         stepSound = Block.soundTypeGravel
 
         setBlockName(this.name)
+    }
+
+    override fun isToolEffective(type: String?, metadata: Int): Boolean {
+        return (type != null && type.equals("shovel", true))
     }
 
     @SideOnly(Side.CLIENT)
