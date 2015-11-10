@@ -6,7 +6,6 @@ import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
-import net.minecraft.item.crafting.FurnaceRecipes
 import net.minecraft.item.crafting.IRecipe
 import net.minecraftforge.oredict.ShapedOreRecipe
 import net.minecraftforge.oredict.ShapelessOreRecipe
@@ -129,10 +128,10 @@ public object ModRecipes {
         recipesIrisSapling = RecipePureDaisyExclusion("treeSapling", ShadowFoxBlocks.irisSapling, 0);
         BotaniaAPI.pureDaisyRecipes.add(recipesIrisSapling as RecipePureDaisy);
 
-        FurnaceRecipes.smelting().func_151393_a(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F);
-        FurnaceRecipes.smelting().func_151393_a(ShadowFoxBlocks.irisWood1, ItemStack(Items.coal, 1, 1), 0.15F);
-        FurnaceRecipes.smelting().func_151393_a(ShadowFoxBlocks.irisWood2, ItemStack(Items.coal, 1, 1), 0.15F);
-        FurnaceRecipes.smelting().func_151393_a(ShadowFoxBlocks.irisWood3, ItemStack(Items.coal, 1, 1), 0.15F);
+        GameRegistry.addSmelting(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F);
+        GameRegistry.addSmelting(ShadowFoxBlocks.irisWood1, ItemStack(Items.coal, 1, 1), 0.15F);
+        GameRegistry.addSmelting(ShadowFoxBlocks.irisWood2, ItemStack(Items.coal, 1, 1), 0.15F);
+        GameRegistry.addSmelting(ShadowFoxBlocks.irisWood3, ItemStack(Items.coal, 1, 1), 0.15F);
     
     }
 
@@ -140,7 +139,7 @@ public object ModRecipes {
         CraftingManager.getInstance().recipeList.add(ShapedOreRecipe(output, *recipe))
     }
 
-    private fun  addShapelessOreDictRecipe(output: ItemStack, vararg recipe: Any) {
+    private fun addShapelessOreDictRecipe(output: ItemStack, vararg recipe: Any) {
         CraftingManager.getInstance().recipeList.add(ShapelessOreRecipe(output, *recipe));
     }
 }
