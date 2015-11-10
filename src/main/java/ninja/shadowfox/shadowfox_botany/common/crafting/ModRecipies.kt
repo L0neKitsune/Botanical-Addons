@@ -42,7 +42,7 @@ public object ModRecipes {
         recipesColoredDirt = BotaniaAPI.getLatestAddedRecipes(16)
 
         for (i in 0..15) {
-            addShapelessOreDictRecipe(ItemStack(vazkii.botania.common.item.ModItems.dye, 1, i), ShadowFoxBlocks.LEAVES[i], "pestleAndMortar")
+            addShapelessOreDictRecipe(ItemStack(BotaniaItems.dye, 1, i), ShadowFoxBlocks.LEAVES[i], "pestleAndMortar")
         }
 
         recipesLeafDyes = BotaniaAPI.getLatestAddedRecipes(16)
@@ -98,12 +98,12 @@ public object ModRecipes {
         
         for (i in 0..15)
             addOreDictRecipe(ItemStack(ShadowFoxItems.colorfulSkyDirtRod, 1, i),
-                    " PN",
+                    " PS",
                     " RP",
-                    "A  ",
-                    'P', ItemStack(ShadowFoxBlocks.coloredDirtBlock, 1, i),
+                    "D  ",
+                    'D', ItemStack(ShadowFoxBlocks.coloredDirtBlock, 1, i),
                     'R', ItemStack(BotaniaItems.skyDirtRod, 1),
-                    'A', LibOreDict.RUNE[3], 'N', LibOreDict.RUNE[14])
+                    'P', LibOreDict.PIXIE_DUST, 'S', LibOreDict.DRAGONSTONE)
         
         recipesColoredSkyDirtRod = BotaniaAPI.getLatestAddedRecipes(16)
 
