@@ -4,13 +4,18 @@ import java.awt.Color
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
+import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
+import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.StatCollector
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.MathHelper
+import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import vazkii.botania.client.core.handler.ItemsRemainingRenderHandler
+import vazkii.botania.api.item.IAvatarTile
+import vazkii.botania.api.item.IAvatarWieldable
 import vazkii.botania.api.mana.ManaItemHandler
 import vazkii.botania.common.Botania
 import vazkii.botania.common.core.helper.Vector3
@@ -18,7 +23,9 @@ import vazkii.botania.common.core.helper.Vector3
 /**
  * Created by l0nekitsune on 10/19/15.
  */
-class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulDirtRod(name) {
+class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulDirtRod(name), IAvatarWieldable {
+
+    private val avatarOverlay = ResourceLocation("shadowfox_botany:textures/model/avatarDirtRainbow.png")
 
     override fun onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer) : ItemStack {
         if(!world.isRemote) {
@@ -65,5 +72,44 @@ class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulDirtRod(
             player.swingItem();
 
         return stack;
+    }
+
+    override fun onAvatarUpdate(tile: IAvatarTile, stack: ItemStack) {
+        var te = tile as TileEntity;
+        var world = te.getWorldObj();
+        val x = te.xCoord;
+        val y = te.yCoord;
+        val z = te.zCoord;
+
+        var xl = 0
+        var zl = 0
+
+        when (te.getBlockMetadata() - 2) {
+            0 -> zl = -2
+            1 -> zl = 2
+            2 -> xl = -2
+            3 -> xl = 2
+        }
+
+        val block = world.getBlock(x+xl, y, z+zl);
+
+        val color = Color(getColorFromItemStack(stack, 0));
+        val r = color.getRed() / 255F;
+        val g = color.getGreen() / 255F;
+        val b = color.getBlue() / 255F;
+
+        if (tile.getCurrentMana() >= COST && block.isAir(world, x+xl, y, z+zl) && tile.getElapsedFunctionalTicks() % 50 == 0 && tile.isEnabled()) {
+            world.setBlock(x+xl, y, z+zl, ShadowFoxBlocks.coloredDirtBlock, stack.itemDamage, 1 or 2);
+            tile.recieveMana(-COST);
+            for (i in 0..6)
+                Botania.proxy.sparkleFX(world, x+xl + Math.random(), y + Math.random(), z+zl + Math.random(),
+                        r, g, b, 1F, 5);
+            world.playAuxSFX(2001, x+xl, y, z+zl, Block.getIdFromBlock(ShadowFoxBlocks.coloredDirtBlock) + (stack.itemDamage shl 12));
+
+        }
+    }
+
+    override fun getOverlayResource(tile: IAvatarTile, stack: ItemStack): ResourceLocation {
+        return avatarOverlay
     }
 }
