@@ -98,9 +98,9 @@ public object ModRecipes {
         
         for (i in 0..15)
             addOreDictRecipe(ItemStack(ShadowFoxItems.colorfulSkyDirtRod, 1, i),
-                    " PS",
+                    " PD",
                     " RP",
-                    "D  ",
+                    "S  ",
                     'D', ItemStack(ShadowFoxBlocks.coloredDirtBlock, 1, i),
                     'R', ItemStack(BotaniaItems.skyDirtRod, 1),
                     'P', LibOreDict.PIXIE_DUST, 'S', LibOreDict.DRAGONSTONE)
