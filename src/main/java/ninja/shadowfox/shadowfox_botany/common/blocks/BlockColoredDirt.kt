@@ -1,29 +1,32 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
-import net.minecraft.block.BlockDirt
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.passive.EntitySheep
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
-import net.minecraft.util.IIcon
 import net.minecraft.item.ItemStack
-import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.common.IPlantable
+import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.util.ForgeDirection
+import net.minecraftforge.event.entity.player.BonemealEvent
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
+import cpw.mods.fml.common.eventhandler.Event
+import cpw.mods.fml.common.eventhandler.EventPriority
+import net.minecraft.util.*
 import kotlin.properties.Delegates
 
 class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), ILexiconable {
@@ -37,7 +40,21 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), ILexiconable {
         setLightLevel(0f)
         stepSound = Block.soundTypeGravel
 
+        MinecraftForge.EVENT_BUS.register(this)
         setBlockName(this.name)
+    }
+
+    @SubscribeEvent
+    fun onBonemealEvent(event: BonemealEvent) {
+
+        if(event.block is BlockColoredDirt) {
+            event.result = Event.Result.ALLOW
+            event.phase = EventPriority.HIGHEST
+
+            event.entityPlayer.addChatMessage((ChatComponentText("You used Bonemeal on a ${event.block.localizedName}")).setChatStyle((ChatStyle()).setColor(EnumChatFormatting.DARK_AQUA)))
+            event.entityPlayer.addChatMessage((ChatComponentText("I'm working on making it do something here...")).setChatStyle((ChatStyle()).setColor(EnumChatFormatting.DARK_AQUA)))
+
+        }
     }
 
     override fun isToolEffective(type: String?, metadata: Int): Boolean {
@@ -52,6 +69,8 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), ILexiconable {
     override fun getBlockColor(): Int {
         return 0xFFFFFF
     }
+
+
 
     /**
      * Returns the color this block should be rendered. Used by leaves.
