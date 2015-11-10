@@ -17,7 +17,8 @@ open class ShadowFoxMetaItemBlock(par2Block: Block) : ItemBlockWithMetadata(par2
         tooltip!!.add(s.replace("&".toRegex(), "\u00a7"));
     }
 
-    override fun addInformation(par1ItemStack: ItemStack, par2EntityPlayer: EntityPlayer, par3List: MutableList<Any?>?, par4: Boolean) {
+    override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>?, par4: Boolean) {
+        if(par1ItemStack == null) return
         addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + par1ItemStack.itemDamage)+"&r", par3List);
     } 
 
