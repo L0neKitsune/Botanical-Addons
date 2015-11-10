@@ -11,6 +11,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import vazkii.botania.api.BotaniaAPI
+import vazkii.botania.api.recipe.RecipePureDaisy
 import vazkii.botania.common.lib.LibOreDict
 import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
 import vazkii.botania.common.item.ModItems as BotaniaItems
@@ -25,6 +26,8 @@ public object ModRecipes {
     var recipesColoredSkyDirtRod: List<IRecipe>
     var recipesLightningRod: IRecipe
     var recipesLeafDyes: List<IRecipe>
+    var recipesPlainDirt: RecipePureDaisy
+    var recipesIrisSapling: RecipePureDaisyExclusion
 
     init {
 
@@ -119,7 +122,10 @@ public object ModRecipes {
 
         recipesWoodPanel = BotaniaAPI.getLatestAddedRecipes(16)
 
-        BotaniaAPI.registerPureDaisyRecipe("treeSapling", ShadowFoxBlocks.irisSapling, 0)
+        recipesPlainDirt = BotaniaAPI.registerPureDaisyRecipe("irisDirt", Blocks.dirt, 0)
+
+        recipesIrisSapling = RecipePureDaisyExclusion("treeSapling", ShadowFoxBlocks.irisSapling, 0);
+        BotaniaAPI.pureDaisyRecipes.add(recipesIrisSapling as RecipePureDaisy);
     
     }
 

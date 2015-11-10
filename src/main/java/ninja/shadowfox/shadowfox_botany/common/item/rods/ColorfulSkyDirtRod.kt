@@ -85,10 +85,10 @@ class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulDirtRod(
         var zl = 0
 
         when (te.getBlockMetadata() - 2) {
-            0 -> zl = -1
-            1 -> zl = 1
-            2 -> xl = -1
-            3 -> xl = 1
+            0 -> zl = -2
+            1 -> zl = 2
+            2 -> xl = -2
+            3 -> xl = 2
         }
 
         val block = world.getBlock(x+xl, y, z+zl);
@@ -98,7 +98,7 @@ class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulDirtRod(
         val g = color.getGreen() / 255F;
         val b = color.getBlue() / 255F;
 
-        if (tile.getCurrentMana() >= COST && block.isAir(world, x+xl, y, z+zl) && tile.getElapsedFunctionalTicks() % 200 == 0 && tile.isEnabled()) {
+        if (tile.getCurrentMana() >= COST && block.isAir(world, x+xl, y, z+zl) && tile.getElapsedFunctionalTicks() % 50 == 0 && tile.isEnabled()) {
             world.setBlock(x+xl, y, z+zl, ShadowFoxBlocks.coloredDirtBlock, stack.itemDamage, 1 or 2);
             tile.recieveMana(-COST);
             for (i in 0..6)

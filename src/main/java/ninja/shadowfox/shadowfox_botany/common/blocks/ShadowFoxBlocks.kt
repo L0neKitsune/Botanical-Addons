@@ -94,6 +94,8 @@ public object ShadowFoxBlocks {
 
 
         for (i in 0..15) {
+            OreDictionary.registerOre("irisDirt", ItemStack(coloredDirtBlock, 1, i))
+            
             var t = ItemStack(irisLeaves, 1, i)
             OreDictionary.registerOre("treeLeaves", t)
             OreDictionary.registerOre("irisLeaves", t)
