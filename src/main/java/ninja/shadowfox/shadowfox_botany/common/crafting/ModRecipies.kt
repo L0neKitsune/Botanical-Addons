@@ -3,8 +3,10 @@ package ninja.shadowfox.shadowfox_botany.common.crafting
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.block.Block
 import net.minecraft.init.Blocks
+import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
+import net.minecraft.item.crafting.FurnaceRecipes
 import net.minecraft.item.crafting.IRecipe
 import net.minecraftforge.oredict.ShapedOreRecipe
 import net.minecraftforge.oredict.ShapelessOreRecipe
@@ -126,6 +128,11 @@ public object ModRecipes {
 
         recipesIrisSapling = RecipePureDaisyExclusion("treeSapling", ShadowFoxBlocks.irisSapling, 0);
         BotaniaAPI.pureDaisyRecipes.add(recipesIrisSapling as RecipePureDaisy);
+
+        FurnaceRecipes.smelting().func_151393_a(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F);
+        FurnaceRecipes.smelting().func_151393_a(ShadowFoxBlocks.irisWood1, ItemStack(Items.coal, 1, 1), 0.15F);
+        FurnaceRecipes.smelting().func_151393_a(ShadowFoxBlocks.irisWood2, ItemStack(Items.coal, 1, 1), 0.15F);
+        FurnaceRecipes.smelting().func_151393_a(ShadowFoxBlocks.irisWood3, ItemStack(Items.coal, 1, 1), 0.15F);
     
     }
 
