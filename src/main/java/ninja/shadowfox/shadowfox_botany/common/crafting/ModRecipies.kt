@@ -27,6 +27,7 @@ public object ModRecipes {
     var recipesColoredSkyDirtRod: List<IRecipe>
     var recipesLightningRod: IRecipe
     var recipesLeafDyes: List<IRecipe>
+    var recipesRedstoneRoot: List<IRecipe>
     var recipesPlainDirt: RecipePureDaisy
     var recipesIrisSapling: RecipePureDaisyExclusion
 
@@ -116,6 +117,10 @@ public object ModRecipes {
                 'W', LibOreDict.RUNE[13])
 
         recipesLightningRod = BotaniaAPI.getLatestAddedRecipe()
+
+        for (i in 0..15)
+            addShapelessOreDictRecipe(ItemStack(BotaniaItems.manaResource, 1, 6), "dustRedstone", ItemStack(ShadowFoxBlocks.irisGrass, 1, i))
+        recipesRedstoneRoot = BotaniaAPI.getLatestAddedRecipes(16)
 
         
         for (i in 0..15)

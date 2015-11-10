@@ -5,6 +5,7 @@ import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
+import net.minecraft.block.IGrowable
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
@@ -24,12 +25,11 @@ import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
-import cpw.mods.fml.common.eventhandler.Event
-import cpw.mods.fml.common.eventhandler.EventPriority
+import java.util.Random
 import net.minecraft.util.*
 import kotlin.properties.Delegates
 
-class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), ILexiconable {
+class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable {
 
     private val name = "coloredDirt"
     private val TYPES = 16
@@ -44,16 +44,54 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), ILexiconable {
         setBlockName(this.name)
     }
 
-    @SubscribeEvent
-    fun onBonemealEvent(event: BonemealEvent) {
+    override fun func_149851_a(world: World, x: Int, y: Int, z: Int, p_149851_5_: Boolean): Boolean {
+        return true
+    }
+    override fun func_149852_a(world: World, random: Random, x: Int, y: Int, z: Int): Boolean {
+        return true
+    }
 
-        if(event.block is BlockColoredDirt) {
-            event.result = Event.Result.ALLOW
-            event.phase = EventPriority.HIGHEST
+    override fun func_149853_b(world: World, random: Random, x: Int, y: Int, z: Int) {
+        var l = 0;
 
-            event.entityPlayer.addChatMessage((ChatComponentText("You used Bonemeal on a ${event.block.localizedName}")).setChatStyle((ChatStyle()).setColor(EnumChatFormatting.DARK_AQUA)))
-            event.entityPlayer.addChatMessage((ChatComponentText("I'm working on making it do something here...")).setChatStyle((ChatStyle()).setColor(EnumChatFormatting.DARK_AQUA)))
+        var meta = 0;
 
+        while (l < 128)
+        {
+            var i1 = x;
+            var j1 = y + 1;
+            var k1 = z;
+            var l1 = 0;
+
+            while (true)
+            {
+                if (l1 < l / 16) {
+                    i1 += random.nextInt(3) - 1;
+                    j1 += (random.nextInt(3) - 1) * random.nextInt(3) / 2;
+                    k1 += random.nextInt(3) - 1;
+
+                    if (world.getBlock(i1, j1 - 1, k1) == this && !world.getBlock(i1, j1, k1).isNormalCube())
+                    {
+                        ++l1;
+                        continue;
+                    }
+                }
+                else if (world.getBlock(i1, j1, k1).isAir(world, i1, j1, k1)) {
+                    if (random.nextInt(8) != 0) {
+                        if (ShadowFoxBlocks.irisGrass.canBlockStay(world, i1, j1, k1)) {
+                            meta = world.getBlockMetadata(i1, j1-1, k1)
+                            world.setBlock(i1, j1, k1, ShadowFoxBlocks.irisGrass, meta, 3);
+                        }
+                    }
+                    else
+                    {
+                        world.getBiomeGenForCoords(i1, k1).plantFlower(world, random, i1, j1, k1);
+                    }
+                }
+
+                ++l;
+                break;
+            }
         }
     }
 
