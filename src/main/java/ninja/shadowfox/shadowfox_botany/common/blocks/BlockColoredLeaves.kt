@@ -244,7 +244,7 @@ public class BlockColoredLeaves() : BlockLeaves(), IShearable, ILexiconable {
         }
 
         if (world.rand.nextInt(chance) == 0)
-            ret.add(ItemStack(this.getItemDropped(metadata, world.rand, fortune), 1, this.damageDropped(metadata)));
+            ret.add(ItemStack(this.getItemDropped(metadata, world.rand, fortune), 1, 0));
 
         chance = 200;
         if (fortune > 0) {

@@ -3,6 +3,7 @@ package ninja.shadowfox.shadowfox_botany.common.crafting
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.block.Block
 import net.minecraft.init.Blocks
+import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
 import net.minecraft.item.crafting.IRecipe
@@ -40,7 +41,7 @@ public object ModRecipes {
         recipesColoredDirt = BotaniaAPI.getLatestAddedRecipes(16)
 
         for (i in 0..15) {
-            addShapelessOreDictRecipe(ItemStack(vazkii.botania.common.item.ModItems.dye, 1, i), ShadowFoxBlocks.LEAVES[i], "pestleAndMortar")
+            addShapelessOreDictRecipe(ItemStack(BotaniaItems.dye, 1, i), ShadowFoxBlocks.LEAVES[i], "pestleAndMortar")
         }
 
         recipesLeafDyes = BotaniaAPI.getLatestAddedRecipes(16)
@@ -96,12 +97,12 @@ public object ModRecipes {
         
         for (i in 0..15)
             addOreDictRecipe(ItemStack(ShadowFoxItems.colorfulSkyDirtRod, 1, i),
-                    " PN",
+                    " PD",
                     " RP",
-                    "A  ",
-                    'P', ItemStack(ShadowFoxBlocks.coloredDirtBlock, 1, i),
+                    "S  ",
+                    'D', ItemStack(ShadowFoxBlocks.coloredDirtBlock, 1, i),
                     'R', ItemStack(BotaniaItems.skyDirtRod, 1),
-                    'A', LibOreDict.RUNE[3], 'N', LibOreDict.RUNE[14])
+                    'P', LibOreDict.PIXIE_DUST, 'S', LibOreDict.DRAGONSTONE)
         
         recipesColoredSkyDirtRod = BotaniaAPI.getLatestAddedRecipes(16)
 
@@ -126,14 +127,19 @@ public object ModRecipes {
 
         recipesIrisSapling = RecipePureDaisyExclusion("treeSapling", ShadowFoxBlocks.irisSapling, 0);
         BotaniaAPI.pureDaisyRecipes.add(recipesIrisSapling as RecipePureDaisy);
+
+        GameRegistry.addSmelting(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F);
+        GameRegistry.addSmelting(ShadowFoxBlocks.irisWood1, ItemStack(Items.coal, 1, 1), 0.15F);
+        GameRegistry.addSmelting(ShadowFoxBlocks.irisWood2, ItemStack(Items.coal, 1, 1), 0.15F);
+        GameRegistry.addSmelting(ShadowFoxBlocks.irisWood3, ItemStack(Items.coal, 1, 1), 0.15F);
     
     }
 
     private fun addOreDictRecipe(output: ItemStack, vararg recipe: Any) {
-        CraftingManager.getInstance().recipeList.add(ShapedOreRecipe(output, *recipe))
+        GameRegistry.addRecipe(ShapedOreRecipe(output, *recipe))
     }
 
-    private fun  addShapelessOreDictRecipe(output: ItemStack, vararg recipe: Any) {
-        CraftingManager.getInstance().recipeList.add(ShapelessOreRecipe(output, *recipe));
+    private fun addShapelessOreDictRecipe(output: ItemStack, vararg recipe: Any) {
+        GameRegistry.addRecipe(ShapelessOreRecipe(output, *recipe));
     }
 }
