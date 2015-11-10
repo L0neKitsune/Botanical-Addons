@@ -136,10 +136,10 @@ public object ModRecipes {
     }
 
     private fun addOreDictRecipe(output: ItemStack, vararg recipe: Any) {
-        CraftingManager.getInstance().recipeList.add(ShapedOreRecipe(output, *recipe))
+        GameRegistry.addRecipe(ShapedOreRecipe(output, *recipe))
     }
 
     private fun addShapelessOreDictRecipe(output: ItemStack, vararg recipe: Any) {
-        CraftingManager.getInstance().recipeList.add(ShapelessOreRecipe(output, *recipe));
+        GameRegistry.addRecipe(ShapelessOreRecipe(output, *recipe));
     }
 }
