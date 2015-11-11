@@ -68,8 +68,8 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
                 z = (Math.random() - 0.5) * 3
                 Botania.proxy.wispFX(par3World, par4 + 0.5 + x, par5 + 0.5 + y, par6 + 0.5 + z, r, g, b, Math.random().toFloat() * 0.15f + 0.15f, (-x).toFloat() * velMul, (-y).toFloat() * velMul, (-z).toFloat() * velMul)
             }
+            par1ItemStack.stackSize--
         }
-        par1ItemStack.stackSize--
         return true
     }
 
