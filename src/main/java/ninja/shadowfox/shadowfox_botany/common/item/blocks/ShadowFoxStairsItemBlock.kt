@@ -9,19 +9,19 @@ import net.minecraft.util.StatCollector
 
 open class ShadowFoxStairsItemBlock0(par2Block: Block) : ItemBlockWithMetadata(par2Block, par2Block) {
 
-    open val colorSet = 0;
+    open val colorSet = 0
 
     override fun getUnlocalizedNameInefficiently(par1ItemStack: ItemStack): String {
         return (super.getUnlocalizedNameInefficiently(par1ItemStack)).replace("tile.", "tile.shadowfox_botany:").replace("\\d+$".toRegex(), "")
     }
 
     fun addStringToTooltip(s : String, tooltip : MutableList<Any?>?) {
-        tooltip!!.add(s.replace("&".toRegex(), "\u00a7"));
+        tooltip!!.add(s.replace("&".toRegex(), "\u00a7"))
     }
 
     override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>?, par4: Boolean) {
         if(par1ItemStack == null) return
-        addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + ((par1ItemStack.itemDamage/4)+(4*colorSet)))+"&r", par3List);
+        addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + ((par1ItemStack.itemDamage/4)+(4*colorSet)))+"&r", par3List)
     } 
 
     override fun getUnlocalizedName(par1ItemStack: ItemStack?): String {
@@ -30,13 +30,13 @@ open class ShadowFoxStairsItemBlock0(par2Block: Block) : ItemBlockWithMetadata(p
 }
 
 open class ShadowFoxStairsItemBlock1(par2Block: Block) : ShadowFoxStairsItemBlock0(par2Block) {
-    override val colorSet = 1;
+    override val colorSet = 1
 }
 
 open class ShadowFoxStairsItemBlock2(par2Block: Block) : ShadowFoxStairsItemBlock0(par2Block) {
-    override val colorSet = 2;
+    override val colorSet = 2
 }
 
 open class ShadowFoxStairsItemBlock3(par2Block: Block) : ShadowFoxStairsItemBlock0(par2Block) {
-    override val colorSet = 3;
+    override val colorSet = 3
 }

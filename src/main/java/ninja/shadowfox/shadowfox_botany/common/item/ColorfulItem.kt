@@ -27,7 +27,7 @@ open class ColorfulItem(name: String) : Item() {
     var overlayIcon: IIcon by Delegates.notNull()
 
     override fun requiresMultipleRenderPasses() : Boolean {
-        return true;
+        return true
     }
 
     override fun setUnlocalizedName(par1Str: String): Item {
@@ -47,26 +47,26 @@ open class ColorfulItem(name: String) : Item() {
     @SideOnly(Side.CLIENT)
     override fun registerIcons(iconRegister : IIconRegister) {
         this.itemIcon = IconHelper.forItem(iconRegister, this)
-        this.overlayIcon = IconHelper.forItem(iconRegister, this, "Overlay");
+        this.overlayIcon = IconHelper.forItem(iconRegister, this, "Overlay")
     }
 
     override fun getColorFromItemStack(par1ItemStack : ItemStack, pass : Int) : Int {
         if (pass > 0)
-            return 0xFFFFFF;
+            return 0xFFFFFF
         if(par1ItemStack.itemDamage >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[par1ItemStack.itemDamage];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[par1ItemStack.itemDamage]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     fun addStringToTooltip(s : String, tooltip : MutableList<Any?>?) {
-        tooltip!!.add(s.replace("&".toRegex(), "\u00a7"));
+        tooltip!!.add(s.replace("&".toRegex(), "\u00a7"))
     }
 
     override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>?, par4: Boolean) {
         if(par1ItemStack == null) return
-        addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + par1ItemStack.itemDamage)+"&r", par3List);
+        addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + par1ItemStack.itemDamage)+"&r", par3List)
     } 
 
     override fun getUnlocalizedName(par1ItemStack: ItemStack?): String {

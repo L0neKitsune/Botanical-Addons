@@ -11,8 +11,7 @@ import net.minecraft.util.ResourceLocation
  * Created by l0nekitsune on 11/6/15.
  */
 open class PotionMod(id: Int, name: String, badEffect: Boolean, color: Int, iconIndex: Int) :
-        Potion(id, badEffect, color)
-{
+        Potion(id, badEffect, color) {
 
     init {
         this.setPotionName("shadowfox_botany.potion." + name)

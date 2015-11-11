@@ -26,8 +26,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
 
 
-class StairsColoredWood(val source: Block, val colorSet: Int) : BlockStairs(source, 0), ILexiconable
-{
+class StairsColoredWood(val source: Block, val colorSet: Int) : BlockStairs(source, 0), ILexiconable {
     val TYPES: Int = 4
 
     init {
@@ -38,20 +37,17 @@ class StairsColoredWood(val source: Block, val colorSet: Int) : BlockStairs(sour
     }
 
     override fun setBlockName(par1Str: String): Block {
-        if (colorSet == 0) {
-            GameRegistry.registerBlock(this, ShadowFoxStairsItemBlock0::class.java, par1Str)
-        } else if (colorSet == 1) {
-            GameRegistry.registerBlock(this, ShadowFoxStairsItemBlock1::class.java, par1Str)
-        } else if (colorSet == 2) {
-            GameRegistry.registerBlock(this, ShadowFoxStairsItemBlock2::class.java, par1Str)
-        } else if (colorSet == 3) {
-            GameRegistry.registerBlock(this, ShadowFoxStairsItemBlock3::class.java, par1Str)
+        when (colorSet) {
+            1 -> GameRegistry.registerBlock(this, ShadowFoxStairsItemBlock1::class.java, par1Str)
+            2 -> GameRegistry.registerBlock(this, ShadowFoxStairsItemBlock2::class.java, par1Str)
+            3 -> GameRegistry.registerBlock(this, ShadowFoxStairsItemBlock3::class.java, par1Str)
+            else -> GameRegistry.registerBlock(this, ShadowFoxStairsItemBlock0::class.java, par1Str)
         }
         return super.setBlockName(par1Str)
     }
 
-    override fun damageDropped(p_149692_1_: Int): Int {
-        return p_149692_1_ and 3
+    override fun damageDropped(meta: Int): Int {
+        return meta and 3
     }
 
     @SideOnly(Side.CLIENT)
@@ -62,21 +58,21 @@ class StairsColoredWood(val source: Block, val colorSet: Int) : BlockStairs(sour
     @SideOnly(Side.CLIENT)
     override fun getRenderColor(meta: Int): Int {
         if (colorMeta(meta / 4) >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[colorMeta(meta / 4)];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[colorMeta(meta / 4)]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     @SideOnly(Side.CLIENT)
-    override fun colorMultiplier(p_149720_1_: IBlockAccess?, p_149720_2_: Int, p_149720_3_: Int, p_149720_4_: Int): Int {
-        val meta = p_149720_1_!!.getBlockMetadata(p_149720_2_, p_149720_3_, p_149720_4_)
+    override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int {
+        val meta = world!!.getBlockMetadata(x, y, z)
 
         if (colorMeta(meta / 4) >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[colorMeta(meta / 4)];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[colorMeta(meta / 4)]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {

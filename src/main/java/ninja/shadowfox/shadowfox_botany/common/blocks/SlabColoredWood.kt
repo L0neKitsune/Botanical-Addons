@@ -17,8 +17,7 @@ import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 
-class SlabColoredWood(val full: Boolean, val source: Block) : ShadowFoxSlabs(full, source.material), ILexiconable
-{
+class SlabColoredWood(val full: Boolean, val source: Block) : ShadowFoxSlabs(full, source.material), ILexiconable {
     private val TYPES = 16
 
     init {
@@ -32,29 +31,29 @@ class SlabColoredWood(val full: Boolean, val source: Block) : ShadowFoxSlabs(ful
     }
 
     @SideOnly(Side.CLIENT)
-    override fun getRenderColor(p_149741_1_: Int): Int {
-        if (p_149741_1_ >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+    override fun getRenderColor(meta: Int): Int {
+        if (meta >= EntitySheep.fleeceColorTable.size)
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[p_149741_1_];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[meta]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     @SideOnly(Side.CLIENT)
-    override fun colorMultiplier(p_149720_1_: IBlockAccess?, p_149720_2_: Int, p_149720_3_: Int, p_149720_4_: Int): Int {
-        val meta = p_149720_1_!!.getBlockMetadata(p_149720_2_, p_149720_3_, p_149720_4_)
+    override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int {
+        val meta = world!!.getBlockMetadata(x, y, z)
 
         if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[meta];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[meta]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {
         if (list != null && item != null)
             for (i in 0..(TYPES - 1)) {
-                list.add(ItemStack(item, 1, i));
+                list.add(ItemStack(item, 1, i))
             }
     }
 

@@ -45,7 +45,7 @@ abstract class ShadowFoxSlabs(full: Boolean, mat: Material) : BlockSlab(full, ma
         return ItemStack(singleBlock)
     }
 
-    override fun getItemDropped(p_149650_1_: Int, p_149650_2_: Random?, p_149650_3_: Int): Item {
+    override fun getItemDropped(meta: Int, random: Random?, fortune: Int): Item {
         return Item.getItemFromBlock(singleBlock)
     }
 

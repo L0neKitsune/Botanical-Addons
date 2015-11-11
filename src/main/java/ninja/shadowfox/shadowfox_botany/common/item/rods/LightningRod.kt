@@ -30,12 +30,12 @@ import java.util.*
 
 public open class LightningRod(name: String = "lightningRod") : StandardItem(name), IManaUsingItem, IAvatarWieldable {
     private val avatarOverlay = ResourceLocation("shadowfox_botany:textures/model/avatarLightning.png")
-    val COST: Int = 300;
+    val COST: Int = 300
     private val COST_AVATAR = 100
 
 
     init {
-        setMaxStackSize(1);
+        setMaxStackSize(1)
     }
 
     override fun getItemUseAction(par1ItemStack: ItemStack?): EnumAction {
@@ -46,8 +46,8 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
         return 72000
     }
 
-    override fun onPlayerStoppedUsing(stack: ItemStack?, p_77615_2_: World?, p_77615_3_: EntityPlayer?, p_77615_4_: Int) {
-        super.onPlayerStoppedUsing(stack, p_77615_2_, p_77615_3_, p_77615_4_)
+    override fun onPlayerStoppedUsing(stack: ItemStack?, world: World?, player: EntityPlayer?, count: Int) {
+        super.onPlayerStoppedUsing(stack, world, player, count)
         ItemNBTHelper.setInt(stack, "target", -1)
     }
 
@@ -166,11 +166,11 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
     }
 
     override fun isFull3D(): Boolean {
-        return true;
+        return true
     }
 
     override fun usesMana(stack: ItemStack): Boolean {
-        return true;
+        return true
     }
 
     override fun onAvatarUpdate(tile: IAvatarTile, stack: ItemStack) {

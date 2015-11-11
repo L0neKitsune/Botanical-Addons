@@ -23,8 +23,7 @@ open class ShadowFoxStairs(val mainBlock: Block) : BlockStairs(mainBlock, 0) {
     }
 
     @SideOnly(Side.CLIENT)
-    override fun getIcon(side: Int, meta: Int): IIcon
-    {
+    override fun getIcon(side: Int, meta: Int): IIcon {
         return mainBlock.getIcon(side, meta)
     }
 }

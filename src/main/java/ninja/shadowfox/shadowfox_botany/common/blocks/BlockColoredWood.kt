@@ -59,49 +59,43 @@ class BlockColoredWood(val colorSet: Int) : ShadowFoxBlockMod(Material.wood), IL
         return super.setBlockName(par1Str)
     }
 
-    override fun quantityDropped(p_149745_1_: Random): Int { return 1 }
+    override fun quantityDropped(random: Random): Int { return 1 }
 
-    override fun getItemDropped(p_149650_1_: Int, p_149650_2_: Random, p_149650_3_: Int): Item
-    {
-        return Item.getItemFromBlock(this);
+    override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item {
+        return Item.getItemFromBlock(this)
     }
 
-    override fun breakBlock(p_149749_1_: World, p_149749_2_: Int, p_149749_3_: Int, p_149749_4_: Int, p_149749_5_: Block, p_149749_6_: Int)
-    {
-        var b0: Byte = 4;
-        var i1: Int = b0 + 1;
+    override fun breakBlock(world: World, x: Int, y: Int, z: Int, block: Block, fortune: Int) {
+        var b0: Byte = 4
+        var i1: Int = b0 + 1
 
-        if (p_149749_1_.checkChunksExist(p_149749_2_ - i1, p_149749_3_ - i1, p_149749_4_ - i1, p_149749_2_ + i1, p_149749_3_ + i1, p_149749_4_ + i1))
-        {
+        if (world.checkChunksExist(x - i1, y - i1, z - i1, x + i1, y + i1, z + i1)) {
             for (j1 in -b0..b0) for (k1 in -b0..b0)
-                for (l1 in -b0..b0)
-                {
-                    var block: Block = p_149749_1_.getBlock(p_149749_2_ + j1, p_149749_3_ + k1, p_149749_4_ + l1);
-                    if (block.isLeaves(p_149749_1_, p_149749_2_ + j1, p_149749_3_ + k1, p_149749_4_ + l1))
-                    {
-                        block.beginLeavesDecay(p_149749_1_, p_149749_2_ + j1, p_149749_3_ + k1, p_149749_4_ + l1);
+                for (l1 in -b0..b0) {
+                    var block: Block = world.getBlock(x + j1, y + k1, z + l1)
+                    if (block.isLeaves(world, x + j1, y + k1, z + l1)) {
+                        block.beginLeavesDecay(world, x + j1, y + k1, z + l1)
                     }
                 }
         }
     }
 
     @SideOnly(Side.CLIENT)
-    override fun getIcon(side: Int, meta: Int): IIcon
-    {
+    override fun getIcon(side: Int, meta: Int): IIcon {
         val k = meta and 12
         return if (k == 0 && (side == 1 || side == 0)) this.getTopIcon() else (if (k == 4 && (side == 5 || side == 4)) this.getTopIcon() else (if (k == 8 && (side == 2 || side == 3)) this.getTopIcon() else this.getSideIcon()))
     }
 
-    override fun damageDropped(p_149692_1_: Int): Int {
-        return p_149692_1_ and 3
+    override fun damageDropped(meta: Int): Int {
+        return meta and 3
     }
 
     override fun getRenderType(): Int {
         return 31
     }
 
-    override fun createStackedBlock(p_149644_1_: Int): ItemStack {
-        return ItemStack(Item.getItemFromBlock(this), 1, p_149644_1_ and 3)
+    override fun createStackedBlock(meta: Int): ItemStack {
+        return ItemStack(Item.getItemFromBlock(this), 1, meta and 3)
     }
 
     @SideOnly(Side.CLIENT)
@@ -120,25 +114,24 @@ class BlockColoredWood(val colorSet: Int) : ShadowFoxBlockMod(Material.wood), IL
     @SideOnly(Side.CLIENT)
     override fun getRenderColor(meta: Int): Int {
         if (colorMeta(meta and 3) >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[colorMeta(meta and 3)];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[colorMeta(meta and 3)]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     @SideOnly(Side.CLIENT)
-    override fun colorMultiplier(p_149720_1_: IBlockAccess?, p_149720_2_: Int, p_149720_3_: Int, p_149720_4_: Int): Int {
-        val meta = p_149720_1_!!.getBlockMetadata(p_149720_2_, p_149720_3_, p_149720_4_)
+    override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int {
+        val meta = world!!.getBlockMetadata(x, y, z)
 
         if (colorMeta(meta and 3) >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[colorMeta(meta and 3)];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[colorMeta(meta and 3)]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
-    override fun onBlockPlaced(world: World, x: Int, y: Int, z: Int, side: Int, hitX: Float, hitY: Float, hitZ: Float, meta: Int): Int
-    {
+    override fun onBlockPlaced(world: World, x: Int, y: Int, z: Int, side: Int, hitX: Float, hitY: Float, hitZ: Float, meta: Int): Int {
         val j1 = meta and 3
         var b0: Int = 0
 
@@ -152,14 +145,12 @@ class BlockColoredWood(val colorSet: Int) : ShadowFoxBlockMod(Material.wood), IL
     }
 
     @SideOnly(Side.CLIENT)
-    fun getSideIcon(): IIcon
-    {
+    fun getSideIcon(): IIcon {
         return icons[0]
     }
 
     @SideOnly(Side.CLIENT)
-    fun getTopIcon(): IIcon
-    {
+    fun getTopIcon(): IIcon {
         return icons[1]
     }
 
