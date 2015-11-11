@@ -53,22 +53,19 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     override fun func_149853_b(world: World, random: Random, x: Int, y: Int, z: Int) {
         var l = 0;
 
-        while (l < 128)
-        {
+        while (l < 128) {
             var i1 = x;
             var j1 = y + 1;
             var k1 = z;
             var l1 = 0;
 
-            while (true)
-            {
+            while (true) {
                 if (l1 < l / 16) {
                     i1 += random.nextInt(3) - 1;
                     j1 += (random.nextInt(3) - 1) * random.nextInt(3) / 2;
                     k1 += random.nextInt(3) - 1;
 
-                    if (world.getBlock(i1, j1 - 1, k1) == this && !world.getBlock(i1, j1, k1).isNormalCube())
-                    {
+                    if (world.getBlock(i1, j1 - 1, k1) == this && !world.getBlock(i1, j1, k1).isNormalCube()) {
                         ++l1;
                         continue;
                     }
@@ -80,8 +77,7 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
                             world.setBlock(i1, j1, k1, ShadowFoxBlocks.irisGrass, meta, 3);
                         }
                     }
-                    else
-                    {
+                    else {
                         world.getBiomeGenForCoords(i1, k1).plantFlower(world, random, i1, j1, k1);
                     }
                 }

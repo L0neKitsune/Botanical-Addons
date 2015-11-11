@@ -48,8 +48,7 @@ public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
         var l = world.getBlockMetadata(x, y, z);
         var b0 = l % 8
 
-        if (ShadowFoxBlocks.irisTallGrass0.canPlaceBlockAt(world, x, y, z))
-        {
+        if (ShadowFoxBlocks.irisTallGrass0.canPlaceBlockAt(world, x, y, z)) {
             if (l < 8) {
                 world.setBlock(x, y, z, ShadowFoxBlocks.irisTallGrass0, b0, 2);
                 world.setBlock(x, y + 1, z, ShadowFoxBlocks.irisTallGrass0, 8, 2);
@@ -112,8 +111,7 @@ public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(iconRegister: IIconRegister)
-    {
+    override fun registerBlockIcons(iconRegister: IIconRegister) {
         icons = IconHelper.forBlock(iconRegister, this)
     }
 

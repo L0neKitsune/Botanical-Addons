@@ -26,8 +26,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
 
 
-class StairsColoredWood(val source: Block, val colorSet: Int) : BlockStairs(source, 0), ILexiconable
-{
+class StairsColoredWood(val source: Block, val colorSet: Int) : BlockStairs(source, 0), ILexiconable {
     val TYPES: Int = 4
 
     init {

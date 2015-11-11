@@ -17,8 +17,7 @@ import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 
-class SlabColoredWood(val full: Boolean, val source: Block) : ShadowFoxSlabs(full, source.material), ILexiconable
-{
+class SlabColoredWood(val full: Boolean, val source: Block) : ShadowFoxSlabs(full, source.material), ILexiconable {
     private val TYPES = 16
 
     init {

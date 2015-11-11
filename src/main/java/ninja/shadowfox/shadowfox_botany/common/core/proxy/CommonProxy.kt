@@ -14,8 +14,7 @@ import ninja.shadowfox.shadowfox_botany.common.entity.ShadowFoxEntity
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 
-public open class CommonProxy
-{
+public open class CommonProxy {
     open fun preInit(event: FMLPreInitializationEvent){
 
         ConfigHandler.loadConfig(event.suggestedConfigurationFile)

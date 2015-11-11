@@ -6,8 +6,7 @@ import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.*
 
 
-public class ShadowfoxLexiconEntry(unlocalizedName: String, category: LexiconCategory, var block: Block? = null) : LexiconEntry(unlocalizedName, category), IAddonEntry
-{
+public class ShadowfoxLexiconEntry(unlocalizedName: String, category: LexiconCategory, var block: Block? = null) : LexiconEntry(unlocalizedName, category), IAddonEntry {
     init {
         if (block != null) icon = ItemStack(block,1)
         BotaniaAPI.addEntry(this, category)

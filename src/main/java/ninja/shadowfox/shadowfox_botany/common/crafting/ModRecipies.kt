@@ -62,8 +62,7 @@ public object ModRecipes {
 
         recipesSlabs = BotaniaAPI.getLatestAddedRecipes(16)
 
-        for (i in 0..15)
-        {
+        for (i in 0..15) {
             var wood: Block
             when (i) {
                 0,1,2,3 -> wood = ShadowFoxBlocks.coloredStairs0
@@ -77,8 +76,7 @@ public object ModRecipes {
         }
         recipesStairsR = BotaniaAPI.getLatestAddedRecipes(16)
 
-        for (i in 0..15)
-        {
+        for (i in 0..15) {
             var wood: Block
             when (i) {
                 0,1,2,3 -> wood = ShadowFoxBlocks.coloredStairs0

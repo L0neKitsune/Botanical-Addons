@@ -103,8 +103,7 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(iconRegister: IIconRegister)
-    {
+    override fun registerBlockIcons(iconRegister: IIconRegister) {
         topIcon = IconHelper.forName(iconRegister, "irisDoubleGrassTop")
         bottomIcon = IconHelper.forName(iconRegister, "irisDoubleGrass")
     }
@@ -115,8 +114,7 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
     }
 
     @SideOnly(Side.CLIENT)
-    override fun func_149888_a(top: Boolean, index: Int): IIcon
-    {
+    override fun func_149888_a(top: Boolean, index: Int): IIcon {
         return if (top) this.topIcon else this.bottomIcon
     }
 
@@ -136,8 +134,7 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
         }
     }
 
-    override fun onSheared(item: ItemStack, world: IBlockAccess, x: Int, y: Int, z: Int, fortune: Int): ArrayList<ItemStack>
-    {
+    override fun onSheared(item: ItemStack, world: IBlockAccess, x: Int, y: Int, z: Int, fortune: Int): ArrayList<ItemStack> {
         var ret = ArrayList<ItemStack>();
         var meta = world.getBlockMetadata(x, y, z)
         if (!isTop(meta)) {
@@ -151,8 +148,7 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
         return Constants.doubleFlowerRenderID
     }
 
-    override fun isShearable(item: ItemStack, world: IBlockAccess, x: Int, y: Int, z: Int): Boolean
-    {
+    override fun isShearable(item: ItemStack, world: IBlockAccess, x: Int, y: Int, z: Int): Boolean {
         var meta = world.getBlockMetadata(x, y, z);
         return !isTop(meta)
     }
@@ -178,8 +174,7 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
             var f = (l shr 16 and 255).toFloat() / 255.0f
             var f1 = (l shr 8 and 255).toFloat() / 255.0f
             var f2 = (l and 255).toFloat() / 255.0f
-            if (EntityRenderer.anaglyphEnable)
-            {
+            if (EntityRenderer.anaglyphEnable) {
                 var f3 = (f * 30.0f + f1 * 59.0f + f2 * 11.0f) / 100.0f
                 var f4 = (f * 30.0f + f1 * 70.0f) / 100.0f
                 var f5 = (f * 30.0f + f2 * 70.0f) / 100.0f

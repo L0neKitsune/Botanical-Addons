@@ -83,15 +83,13 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(Material.wood), ILexiconable {
 
     override fun quantityDropped(p_149745_1_: Random): Int { return 1 }
 
-    override fun getItemDropped(p_149650_1_: Int, p_149650_2_: Random, p_149650_3_: Int): Item
-    {
+    override fun getItemDropped(p_149650_1_: Int, p_149650_2_: Random, p_149650_3_: Int): Item {
         return Item.getItemFromBlock(this);
     }
 
 
     @SideOnly(Side.CLIENT)
-    override fun getIcon(side: Int, meta: Int): IIcon
-    {
+    override fun getIcon(side: Int, meta: Int): IIcon {
         return icons
     }
 

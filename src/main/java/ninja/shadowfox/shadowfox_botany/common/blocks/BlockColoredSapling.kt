@@ -38,13 +38,11 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
     }
 
     @SideOnly(Side.CLIENT)
-    override fun getIcon(p_149691_1_: Int, meta: Int): IIcon
-    {
+    override fun getIcon(p_149691_1_: Int, meta: Int): IIcon {
         return icon
     }
 
-    override fun getCollisionBoundingBoxFromPool(p_149668_1_: World?, p_149668_2_: Int, p_149668_3_: Int, p_149668_4_: Int): AxisAlignedBB?
-    {
+    override fun getCollisionBoundingBoxFromPool(p_149668_1_: World?, p_149668_2_: Int, p_149668_3_: Int, p_149668_4_: Int): AxisAlignedBB? {
         return null
     }
 
@@ -68,29 +66,24 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
         return if (world != null) world.getBlockMetadata(x, y, z) else 0
     }
 
-    override fun canPlaceBlockAt(p_149742_1_: World, p_149742_2_: Int, p_149742_3_: Int, p_149742_4_: Int): Boolean
-    {
+    override fun canPlaceBlockAt(p_149742_1_: World, p_149742_2_: Int, p_149742_3_: Int, p_149742_4_: Int): Boolean {
         return super.canPlaceBlockAt(p_149742_1_, p_149742_2_, p_149742_3_, p_149742_4_) && this.canBlockStay(p_149742_1_, p_149742_2_, p_149742_3_, p_149742_4_);
     }
 
     /**
      * Ticks the block if it's been scheduled
      */
-    override fun updateTick(p_149674_1_: World, p_149674_2_: Int, p_149674_3_: Int, p_149674_4_: Int, p_149674_5_: Random)
-    {
-        if (!p_149674_1_.isRemote)
-        {
+    override fun updateTick(p_149674_1_: World, p_149674_2_: Int, p_149674_3_: Int, p_149674_4_: Int, p_149674_5_: Random) {
+        if (!p_149674_1_.isRemote) {
             checkAndDropBlock(p_149674_1_, p_149674_2_, p_149674_3_, p_149674_4_);
 
-            if (p_149674_1_.getBlockLightValue(p_149674_2_, p_149674_3_ + 1, p_149674_4_) >= 9 && p_149674_5_.nextInt(7) == 0)
-            {
+            if (p_149674_1_.getBlockLightValue(p_149674_2_, p_149674_3_ + 1, p_149674_4_) >= 9 && p_149674_5_.nextInt(7) == 0) {
                 this.markOrGrowMarked(p_149674_1_, p_149674_2_, p_149674_3_, p_149674_4_, p_149674_5_);
             }
         }
     }
 
-    override fun onNeighborBlockChange(p_149695_1_: World?, p_149695_2_: Int, p_149695_3_: Int, p_149695_4_: Int, p_149695_5_: Block)
-    {
+    override fun onNeighborBlockChange(p_149695_1_: World?, p_149695_2_: Int, p_149695_3_: Int, p_149695_4_: Int, p_149695_5_: Block) {
         super.onNeighborBlockChange(p_149695_1_, p_149695_2_, p_149695_3_, p_149695_4_, p_149695_5_);
         checkAndDropBlock(p_149695_1_, p_149695_2_, p_149695_3_, p_149695_4_);
     }
@@ -102,13 +95,11 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
         }
     }
 
-    override fun canBlockStay(p_149718_1_: World, p_149718_2_: Int, p_149718_3_: Int, p_149718_4_: Int): Boolean
-    {
+    override fun canBlockStay(p_149718_1_: World, p_149718_2_: Int, p_149718_3_: Int, p_149718_4_: Int): Boolean {
         return p_149718_1_.getBlock(p_149718_2_, p_149718_3_ - 1, p_149718_4_).canSustainPlant(p_149718_1_, p_149718_2_, p_149718_3_ - 1, p_149718_4_, ForgeDirection.UP, this);
     }
 
-    public fun markOrGrowMarked(p_149879_1_: World?, p_149879_2_: Int, p_149879_3_: Int, p_149879_4_: Int, p_149879_5_: Random?)
-    {
+    public fun markOrGrowMarked(p_149879_1_: World?, p_149879_2_: Int, p_149879_3_: Int, p_149879_4_: Int, p_149879_5_: Random?) {
         if (p_149879_1_ != null) {
             val l = p_149879_1_.getBlockMetadata(p_149879_2_, p_149879_3_, p_149879_4_);
 
@@ -120,8 +111,7 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
         }
     }
 
-    public fun growTree(world: World?, x: Int, y: Int, z: Int, random: Random?)
-    {
+    public fun growTree(world: World?, x: Int, y: Int, z: Int, random: Random?) {
         if(world != null) {
             if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(world, random, x, y, z)) return
 
