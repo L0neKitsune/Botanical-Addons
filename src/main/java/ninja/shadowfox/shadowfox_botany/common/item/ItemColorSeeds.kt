@@ -54,12 +54,12 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
                 par3World.setBlock(par4, par5+1, par6, ShadowFoxBlocks.irisGrass, swapper.metaToSet, 1 or 2)
             else if (par3World.getBlock(par4, par5+1, par6) == Blocks.double_plant && par3World.getBlockMetadata(par4, par5+1, par6) == 2) {
                 if (swapper.metaToSet < 8) {
-                    par3World.setBlock(par4, par5+1, par6, ShadowFoxBlocks.irisTallGrass0, swapper.metaToSet, 2);
-                    par3World.setBlock(par4, par5+2, par6, ShadowFoxBlocks.irisTallGrass0, 8, 2);
+                    par3World.setBlock(par4, par5+1, par6, ShadowFoxBlocks.irisTallGrass0, swapper.metaToSet, 2)
+                    par3World.setBlock(par4, par5+2, par6, ShadowFoxBlocks.irisTallGrass0, 8, 2)
                 }
                 else {
-                    par3World.setBlock(par4, par5+1, par6, ShadowFoxBlocks.irisTallGrass1, swapper.metaToSet-8, 2);
-                    par3World.setBlock(par4, par5+2, par6, ShadowFoxBlocks.irisTallGrass1, 8, 2);
+                    par3World.setBlock(par4, par5+1, par6, ShadowFoxBlocks.irisTallGrass1, swapper.metaToSet-8, 2)
+                    par3World.setBlock(par4, par5+2, par6, ShadowFoxBlocks.irisTallGrass1, 8, 2)
                 }
             }
             for (i in 0..49) {

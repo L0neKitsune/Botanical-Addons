@@ -30,12 +30,12 @@ import java.util.*
 
 public open class LightningRod(name: String = "lightningRod") : StandardItem(name), IManaUsingItem, IAvatarWieldable {
     private val avatarOverlay = ResourceLocation("shadowfox_botany:textures/model/avatarLightning.png")
-    val COST: Int = 300;
+    val COST: Int = 300
     private val COST_AVATAR = 100
 
 
     init {
-        setMaxStackSize(1);
+        setMaxStackSize(1)
     }
 
     override fun getItemUseAction(par1ItemStack: ItemStack?): EnumAction {
@@ -166,11 +166,11 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
     }
 
     override fun isFull3D(): Boolean {
-        return true;
+        return true
     }
 
     override fun usesMana(stack: ItemStack): Boolean {
-        return true;
+        return true
     }
 
     override fun onAvatarUpdate(tile: IAvatarTile, stack: ItemStack) {

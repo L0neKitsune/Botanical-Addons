@@ -64,10 +64,10 @@ public class BlockColoredLeaves() : BlockLeaves(), IShearable, ILexiconable {
     @SideOnly(Side.CLIENT)
     override fun getRenderColor(meta: Int): Int {
         if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[meta];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[meta]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     @SideOnly(Side.CLIENT)
@@ -75,22 +75,22 @@ public class BlockColoredLeaves() : BlockLeaves(), IShearable, ILexiconable {
         val meta = world!!.getBlockMetadata(x, y, z)
 
         if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[meta];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[meta]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     @SideOnly(Side.CLIENT)
     override fun getIcon(side: Int, meta: Int): IIcon {
-        this.setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics);
+        this.setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics)
         return icons[if (this.field_150121_P) 0 else 1]
     }
 
     override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {
         if (list != null && item != null)
             for (i in 0..(TYPES - 1)) {
-                list.add(ItemStack(item, 1, i));
+                list.add(ItemStack(item, 1, i))
             }
     }
 
@@ -104,7 +104,7 @@ public class BlockColoredLeaves() : BlockLeaves(), IShearable, ILexiconable {
     }
 
     override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item {
-        return Item.getItemFromBlock(ShadowFoxBlocks.irisSapling);
+        return Item.getItemFromBlock(ShadowFoxBlocks.irisSapling)
     }
 
     override fun isLeaves(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean {
@@ -230,7 +230,7 @@ public class BlockColoredLeaves() : BlockLeaves(), IShearable, ILexiconable {
 
     override fun dropBlockAsItemWithChance(world: World, x: Int, y: Int, z: Int, metadata: Int,
                                            chance: Float, fortune: Int) {
-        super.dropBlockAsItemWithChance(world, x, y, z, metadata, 1.0f, fortune);
+        super.dropBlockAsItemWithChance(world, x, y, z, metadata, 1.0f, fortune)
     }
 
     override fun getDrops(world: World, x: Int, y: Int, z: Int, metadata: Int, fortune: Int): ArrayList<ItemStack> {
@@ -239,23 +239,23 @@ public class BlockColoredLeaves() : BlockLeaves(), IShearable, ILexiconable {
         var chance: Int = 20
 
         if (fortune > 0) {
-            chance -= 2 shl fortune;
-            if (chance < 10) chance = 10;
+            chance -= 2 shl fortune
+            if (chance < 10) chance = 10
         }
 
         if (world.rand.nextInt(chance) == 0)
-            ret.add(ItemStack(this.getItemDropped(metadata, world.rand, fortune), 1, 0));
+            ret.add(ItemStack(this.getItemDropped(metadata, world.rand, fortune), 1, 0))
 
-        chance = 200;
+        chance = 200
         if (fortune > 0) {
-            chance -= 10 shl fortune;
-            if (chance < 40) chance = 40;
+            chance -= 10 shl fortune
+            if (chance < 40) chance = 40
         }
 
-        this.captureDrops(true);
+        this.captureDrops(true)
         this.func_150124_c(world, x, y, z, metadata, chance); // Dammet mojang
-        ret.addAll(this.captureDrops(false));
-        return ret;
+        ret.addAll(this.captureDrops(false))
+        return ret
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {

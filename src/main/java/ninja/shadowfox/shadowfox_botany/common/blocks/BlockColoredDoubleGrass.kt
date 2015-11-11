@@ -79,26 +79,26 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
     @SideOnly(Side.CLIENT)
     override fun getRenderColor(meta: Int): Int {
         if (meta >= TYPES)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[meta+TYPES*colorSet];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[meta+TYPES*colorSet]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     @SideOnly(Side.CLIENT)
     override fun colorMultiplier(access: IBlockAccess?, x: Int, y: Int, z: Int): Int {
         val meta = access!!.getBlockMetadata(x, y, z)
         if (meta >= TYPES)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[meta+TYPES*colorSet];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[meta+TYPES*colorSet]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {
         if (list != null && item != null)
             for (i in 0..(TYPES - 1)) {
-                list.add(ItemStack(item, 1, i));
+                list.add(ItemStack(item, 1, i))
             }
     }
 
@@ -124,24 +124,24 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
 
     fun func_149886_b(world: World, x: Int, y: Int, z: Int, meta: Int, player: EntityPlayer): Boolean {
         if (isTop(meta)) {
-            return false;
+            return false
         }
         else {
-            player.addStat(StatList.mineBlockStatArray[Block.getIdFromBlock(this)], 1);
+            player.addStat(StatList.mineBlockStatArray[Block.getIdFromBlock(this)], 1)
             var b0 = TYPES * colorSet + meta
-            this.dropBlockAsItem(world, x, y, z, ItemStack(ShadowFoxBlocks.irisGrass, 2, b0));
-            return true;
+            this.dropBlockAsItem(world, x, y, z, ItemStack(ShadowFoxBlocks.irisGrass, 2, b0))
+            return true
         }
     }
 
     override fun onSheared(item: ItemStack, world: IBlockAccess, x: Int, y: Int, z: Int, fortune: Int): ArrayList<ItemStack> {
-        var ret = ArrayList<ItemStack>();
+        var ret = ArrayList<ItemStack>()
         var meta = world.getBlockMetadata(x, y, z)
         if (!isTop(meta)) {
             var b0 = TYPES * colorSet + meta
-            ret.add(ItemStack(ShadowFoxBlocks.irisGrass, 2, b0));
+            ret.add(ItemStack(ShadowFoxBlocks.irisGrass, 2, b0))
         }
-        return ret;
+        return ret
     }
 
     override fun getRenderType(): Int {
@@ -149,7 +149,7 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
     }
 
     override fun isShearable(item: ItemStack, world: IBlockAccess, x: Int, y: Int, z: Int): Boolean {
-        var meta = world.getBlockMetadata(x, y, z);
+        var meta = world.getBlockMetadata(x, y, z)
         return !isTop(meta)
     }
 

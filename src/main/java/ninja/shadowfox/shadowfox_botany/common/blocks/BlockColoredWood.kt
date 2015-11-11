@@ -62,19 +62,19 @@ class BlockColoredWood(val colorSet: Int) : ShadowFoxBlockMod(Material.wood), IL
     override fun quantityDropped(random: Random): Int { return 1 }
 
     override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item {
-        return Item.getItemFromBlock(this);
+        return Item.getItemFromBlock(this)
     }
 
     override fun breakBlock(world: World, x: Int, y: Int, z: Int, block: Block, fortune: Int) {
-        var b0: Byte = 4;
-        var i1: Int = b0 + 1;
+        var b0: Byte = 4
+        var i1: Int = b0 + 1
 
         if (world.checkChunksExist(x - i1, y - i1, z - i1, x + i1, y + i1, z + i1)) {
             for (j1 in -b0..b0) for (k1 in -b0..b0)
                 for (l1 in -b0..b0) {
-                    var block: Block = world.getBlock(x + j1, y + k1, z + l1);
+                    var block: Block = world.getBlock(x + j1, y + k1, z + l1)
                     if (block.isLeaves(world, x + j1, y + k1, z + l1)) {
-                        block.beginLeavesDecay(world, x + j1, y + k1, z + l1);
+                        block.beginLeavesDecay(world, x + j1, y + k1, z + l1)
                     }
                 }
         }
@@ -114,10 +114,10 @@ class BlockColoredWood(val colorSet: Int) : ShadowFoxBlockMod(Material.wood), IL
     @SideOnly(Side.CLIENT)
     override fun getRenderColor(meta: Int): Int {
         if (colorMeta(meta and 3) >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[colorMeta(meta and 3)];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[colorMeta(meta and 3)]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     @SideOnly(Side.CLIENT)
@@ -125,10 +125,10 @@ class BlockColoredWood(val colorSet: Int) : ShadowFoxBlockMod(Material.wood), IL
         val meta = world!!.getBlockMetadata(x, y, z)
 
         if (colorMeta(meta and 3) >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[colorMeta(meta and 3)];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[colorMeta(meta and 3)]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     override fun onBlockPlaced(world: World, x: Int, y: Int, z: Int, side: Int, hitX: Float, hitY: Float, hitZ: Float, meta: Int): Int {

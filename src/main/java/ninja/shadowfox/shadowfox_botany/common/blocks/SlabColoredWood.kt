@@ -33,10 +33,10 @@ class SlabColoredWood(val full: Boolean, val source: Block) : ShadowFoxSlabs(ful
     @SideOnly(Side.CLIENT)
     override fun getRenderColor(meta: Int): Int {
         if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[meta];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[meta]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     @SideOnly(Side.CLIENT)
@@ -44,16 +44,16 @@ class SlabColoredWood(val full: Boolean, val source: Block) : ShadowFoxSlabs(ful
         val meta = world!!.getBlockMetadata(x, y, z)
 
         if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[meta];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[meta]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {
         if (list != null && item != null)
             for (i in 0..(TYPES - 1)) {
-                list.add(ItemStack(item, 1, i));
+                list.add(ItemStack(item, 1, i))
             }
     }
 

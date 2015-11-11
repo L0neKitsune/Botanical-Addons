@@ -31,7 +31,7 @@ class ColoredTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
                 for (j1 in (x - b0)..(x + b0)) {
                     for (i2 in (z - b0)..(z + b0)) {
                         if (i1 >= 0 && i1 < 256) {
-                            block = world!!.getBlock(j1, i1, i2);
+                            block = world!!.getBlock(j1, i1, i2)
 
                             if (!block.isReplaceable(world, j1, i1, i2)) {
                                 flag = false
@@ -55,16 +55,16 @@ class ColoredTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
                 var isSoil: Boolean = block2 == ShadowFoxBlocks.coloredDirtBlock
 
                 if (isSoil && y < 256 - l - 1) {
-                    block2.onPlantGrow(world, x, y - 1, z, x, y, z);
-                    b0 = 3;
+                    block2.onPlantGrow(world, x, y - 1, z, x, y, z)
+                    b0 = 3
                     var b1: Byte = 0
                     var l1: Int
                     var j2: Int
                     var i3: Int
 
                     for (k1 in y - b0 + l..(y + l)) {
-                        i3 = k1 - (y + l);
-                        l1 = b1 + 1 - i3 / 2;
+                        i3 = k1 - (y + l)
+                        l1 = b1 + 1 - i3 / 2
 
                         for (i2 in (x - l1)..(x + l1)) {
                             j2 = i2 - x

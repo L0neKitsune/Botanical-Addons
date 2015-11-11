@@ -129,13 +129,13 @@ public object ModRecipes {
 
         recipesPlainDirt = BotaniaAPI.registerPureDaisyRecipe("irisDirt", Blocks.dirt, 0)
 
-        recipesIrisSapling = RecipePureDaisyExclusion("treeSapling", ShadowFoxBlocks.irisSapling, 0);
-        BotaniaAPI.pureDaisyRecipes.add(recipesIrisSapling as RecipePureDaisy);
+        recipesIrisSapling = RecipePureDaisyExclusion("treeSapling", ShadowFoxBlocks.irisSapling, 0)
+        BotaniaAPI.pureDaisyRecipes.add(recipesIrisSapling as RecipePureDaisy)
 
-        GameRegistry.addSmelting(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F);
-        GameRegistry.addSmelting(ShadowFoxBlocks.irisWood1, ItemStack(Items.coal, 1, 1), 0.15F);
-        GameRegistry.addSmelting(ShadowFoxBlocks.irisWood2, ItemStack(Items.coal, 1, 1), 0.15F);
-        GameRegistry.addSmelting(ShadowFoxBlocks.irisWood3, ItemStack(Items.coal, 1, 1), 0.15F);
+        GameRegistry.addSmelting(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F)
+        GameRegistry.addSmelting(ShadowFoxBlocks.irisWood1, ItemStack(Items.coal, 1, 1), 0.15F)
+        GameRegistry.addSmelting(ShadowFoxBlocks.irisWood2, ItemStack(Items.coal, 1, 1), 0.15F)
+        GameRegistry.addSmelting(ShadowFoxBlocks.irisWood3, ItemStack(Items.coal, 1, 1), 0.15F)
     
     }
 
@@ -144,6 +144,6 @@ public object ModRecipes {
     }
 
     private fun addShapelessOreDictRecipe(output: ItemStack, vararg recipe: Any) {
-        GameRegistry.addRecipe(ShapelessOreRecipe(output, *recipe));
+        GameRegistry.addRecipe(ShapelessOreRecipe(output, *recipe))
     }
 }

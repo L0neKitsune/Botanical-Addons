@@ -58,10 +58,10 @@ class StairsColoredWood(val source: Block, val colorSet: Int) : BlockStairs(sour
     @SideOnly(Side.CLIENT)
     override fun getRenderColor(meta: Int): Int {
         if (colorMeta(meta / 4) >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[colorMeta(meta / 4)];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[colorMeta(meta / 4)]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     @SideOnly(Side.CLIENT)
@@ -69,10 +69,10 @@ class StairsColoredWood(val source: Block, val colorSet: Int) : BlockStairs(sour
         val meta = world!!.getBlockMetadata(x, y, z)
 
         if (colorMeta(meta / 4) >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[colorMeta(meta / 4)];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[colorMeta(meta / 4)]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {

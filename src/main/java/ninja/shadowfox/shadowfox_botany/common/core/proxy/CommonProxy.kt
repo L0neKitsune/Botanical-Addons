@@ -19,7 +19,7 @@ public open class CommonProxy {
 
         ConfigHandler.loadConfig(event.suggestedConfigurationFile)
 
-        Constants.doubleFlowerRenderID = RenderingRegistry.getNextAvailableRenderId();
+        Constants.doubleFlowerRenderID = RenderingRegistry.getNextAvailableRenderId()
         RenderingRegistry.registerBlockHandler(BlockColoredDoubleGrass.ColoredDoublePlantRenderer())
 
         ShadowFoxBlocks

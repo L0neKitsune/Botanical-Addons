@@ -32,7 +32,7 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
 
     init {
         this.setTickRandomly(true)
-        this.setBlockBounds(0.5F - 0.4F, 0.0F, 0.5F - 0.4F, 0.5F + 0.4F, 0.4F * 2.0F, 0.5F + 0.4F);
+        this.setBlockBounds(0.5F - 0.4F, 0.0F, 0.5F - 0.4F, 0.5F + 0.4F, 0.4F * 2.0F, 0.5F + 0.4F)
         stepSound = Block.soundTypeGrass
         this.setBlockName("irisSapling")
     }
@@ -67,7 +67,7 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
     }
 
     override fun canPlaceBlockAt(world: World, x: Int, y: Int, z: Int): Boolean {
-        return super.canPlaceBlockAt(world, x, y, z) && this.canBlockStay(world, x, y, z);
+        return super.canPlaceBlockAt(world, x, y, z) && this.canBlockStay(world, x, y, z)
     }
 
     /**
@@ -75,17 +75,17 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
      */
     override fun updateTick(world: World, x: Int, y: Int, z: Int, random: Random) {
         if (!world.isRemote) {
-            checkAndDropBlock(world, x, y, z);
+            checkAndDropBlock(world, x, y, z)
 
             if (world.getBlockLightValue(x, y + 1, z) >= 9 && random.nextInt(7) == 0) {
-                this.markOrGrowMarked(world, x, y, z, random);
+                this.markOrGrowMarked(world, x, y, z, random)
             }
         }
     }
 
     override fun onNeighborBlockChange(world: World?, x: Int, y: Int, z: Int, block: Block) {
-        super.onNeighborBlockChange(world, x, y, z, block);
-        checkAndDropBlock(world, x, y, z);
+        super.onNeighborBlockChange(world, x, y, z, block)
+        checkAndDropBlock(world, x, y, z)
     }
 
     fun checkAndDropBlock(world: World?, x: Int, y: Int, z: Int){
@@ -96,17 +96,17 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
     }
 
     override fun canBlockStay(world: World, x: Int, y: Int, z: Int): Boolean {
-        return world.getBlock(x, y - 1, z).canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
+        return world.getBlock(x, y - 1, z).canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this)
     }
 
     public fun markOrGrowMarked(world: World?, x: Int, y: Int, z: Int, random: Random?) {
         if (world != null) {
-            val l = world.getBlockMetadata(x, y, z);
+            val l = world.getBlockMetadata(x, y, z)
 
             if ((l and 8) == 0) {
-                world.setBlockMetadataWithNotify(x, y, z, l or 8, 4);
+                world.setBlockMetadataWithNotify(x, y, z, l or 8, 4)
             } else {
-                growTree(world, x, y, z, random);
+                growTree(world, x, y, z, random)
             }
         }
     }
@@ -122,10 +122,10 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
 
                 val obj: WorldGenerator = ColoredTreeGen(5)
 
-                world.setBlock(x, y, z, Blocks.air, 0, 4);
+                world.setBlock(x, y, z, Blocks.air, 0, 4)
 
                 if (!obj.generate(world, random, x, y, z)) {
-                    world.setBlock(x, y, z, this, l, 4);
+                    world.setBlock(x, y, z, this, l, 4)
                 }
             }
         }

@@ -11,11 +11,11 @@ class RecipePureDaisyExclusion(input: Any, output: Block, outputMeta: Int) : Rec
 
 	override fun matches(world: World, x: Int, y: Int, z: Int, pureDaisy: SubTileEntity, block: Block, meta: Int): Boolean {
 		if(input is Block)
-			return block == input;
+			return block == input
 
-		val stack = ItemStack(block, 1, meta);
-		var oredict = input as String;
-		return isOreDict(stack, oredict) && block != output;
+		val stack = ItemStack(block, 1, meta)
+		var oredict = input as String
+		return isOreDict(stack, oredict) && block != output
 	}
 
 }

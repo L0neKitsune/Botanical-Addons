@@ -51,39 +51,39 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     }
 
     override fun func_149853_b(world: World, random: Random, x: Int, y: Int, z: Int) {
-        var l = 0;
+        var l = 0
 
         while (l < 128) {
-            var i1 = x;
-            var j1 = y + 1;
-            var k1 = z;
-            var l1 = 0;
+            var i1 = x
+            var j1 = y + 1
+            var k1 = z
+            var l1 = 0
 
             while (true) {
                 if (l1 < l / 16) {
-                    i1 += random.nextInt(3) - 1;
-                    j1 += (random.nextInt(3) - 1) * random.nextInt(3) / 2;
-                    k1 += random.nextInt(3) - 1;
+                    i1 += random.nextInt(3) - 1
+                    j1 += (random.nextInt(3) - 1) * random.nextInt(3) / 2
+                    k1 += random.nextInt(3) - 1
 
                     if (world.getBlock(i1, j1 - 1, k1) == this && !world.getBlock(i1, j1, k1).isNormalCube()) {
-                        ++l1;
-                        continue;
+                        ++l1
+                        continue
                     }
                 }
                 else if (world.getBlock(i1, j1, k1).isAir(world, i1, j1, k1)) {
                     if (random.nextInt(8) != 0) {
                         if (ShadowFoxBlocks.irisGrass.canBlockStay(world, i1, j1, k1)) {
                             var meta = world.getBlockMetadata(i1, j1-1, k1)
-                            world.setBlock(i1, j1, k1, ShadowFoxBlocks.irisGrass, meta, 3);
+                            world.setBlock(i1, j1, k1, ShadowFoxBlocks.irisGrass, meta, 3)
                         }
                     }
                     else {
-                        world.getBiomeGenForCoords(i1, k1).plantFlower(world, random, i1, j1, k1);
+                        world.getBiomeGenForCoords(i1, k1).plantFlower(world, random, i1, j1, k1)
                     }
                 }
 
-                ++l;
-                break;
+                ++l
+                break
             }
         }
     }
@@ -93,7 +93,7 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     }
 
     override fun getHarvestTool(metadata : Int): String {
-        return "shovel";
+        return "shovel"
     }
 
     @SideOnly(Side.CLIENT)
@@ -109,10 +109,10 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     @SideOnly(Side.CLIENT)
     override fun getRenderColor(meta: Int): Int {
         if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[meta];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[meta]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     @SideOnly(Side.CLIENT)
@@ -120,10 +120,10 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
         val meta = world!!.getBlockMetadata(x, y, z)
 
         if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[meta];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[meta]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     override fun shouldRegisterInNameSet(): Boolean {
@@ -161,7 +161,7 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {
         if (list != null && item != null)
             for (i in 0..(TYPES - 1)) {
-                list.add(ItemStack(item, 1, i));
+                list.add(ItemStack(item, 1, i))
             }
     }
 
