@@ -50,6 +50,12 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
         setBlockNameSafe(name)
     }
 
+    override fun func_149851_a(world: World, x: Int, y: Int, z: Int, isRemote: Boolean): Boolean {
+        return false
+    }
+
+    override fun func_149853_b(world: World, random: Random, x: Int, y: Int, z: Int) {}
+
     fun isTop(meta: Int): Boolean {
         return (meta and 8) != 0
     }
@@ -132,6 +138,10 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
             this.dropBlockAsItem(world, x, y, z, ItemStack(ShadowFoxBlocks.irisGrass, 2, b0))
             return true
         }
+    }
+
+    override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item? {
+        return null
     }
 
     override fun onSheared(item: ItemStack, world: IBlockAccess, x: Int, y: Int, z: Int, fortune: Int): ArrayList<ItemStack> {
