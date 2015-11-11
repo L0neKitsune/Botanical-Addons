@@ -57,6 +57,8 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
             var meta = par1ItemStack.getItemDamage()
             var swapper = addBlockSwapper(par3World, par4, par5, par6, meta)
             par3World.setBlock(par4, par5, par6, ShadowFoxBlocks.coloredDirtBlock, swapper.metaToSet, 1 or 2)
+            if (par3World.getBlock(par4, par5+1, par6) == Blocks.tallgrass && par3World.getBlockMetadata(par4, par5+1, par6) == 1)
+                par3World.setBlock(par4, par5+1, par6, ShadowFoxBlocks.irisGrass, swapper.metaToSet, 1 or 2)
             for (i in 0..49) {
                 x = (Math.random() - 0.5) * 3
                 y = Math.random() - 0.5 + 1
