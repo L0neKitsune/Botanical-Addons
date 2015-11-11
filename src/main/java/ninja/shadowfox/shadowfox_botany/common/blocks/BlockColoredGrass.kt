@@ -40,6 +40,12 @@ public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
 
     }
 
+    override fun func_149851_a(world:World, x:Int, y:Int, z:Int, remote: Boolean): Boolean {
+        return false
+    }
+
+    override fun func_149853_b(world:World, random:Random, x:Int, y:Int, z:Int) {}
+
     internal fun register(name: String) {
         GameRegistry.registerBlock(this, ShadowFoxGrassItemBlock::class.java, name)
     }
