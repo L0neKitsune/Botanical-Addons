@@ -130,28 +130,21 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
                         if(block === ShadowFoxBlocks.coloredDirtBlock && meta === metaToSet) {
                             if(ticksExisted % 20 == 0) {
                                 var validCoords = ArrayList<ChunkCoordinates>();
-                                var validGrassCoords = ArrayList<ChunkCoordinates>();
                                 for(k in -1..1)
                                     for(l in -1..1) {
                                         var x1 = x + k;
                                         var z1 = z + l;
                                         var block1 = world.getBlock(x1, y, z1);
-                                        var block2 = world.getBlock(x1, y+1, z1);
                                         var meta1 = world.getBlockMetadata(x1, y, z1);
-                                        var meta2 = world.getBlockMetadata(x1, y+1, z1);
                                         if((block1 == Blocks.dirt || block1 == Blocks.grass) && meta1 == 0) {
                                             validCoords.add(ChunkCoordinates(x1, y, z1));
-                                            if (block2 == Blocks.tallgrass && meta2 == 1)
-                                                validGrassCoords.add(ChunkCoordinates(x1, y+1, z1))
                                         }
                                     }
                                 if(!validCoords.isEmpty() && !world.isRemote) {
                                     var coords = validCoords.get(rand.nextInt(validCoords.size));
                                     world.setBlock(coords.posX, coords.posY, coords.posZ, ShadowFoxBlocks.coloredDirtBlock, metaToSet, 1 or 2);
-                                }
-                                if(!validGrassCoords.isEmpty() && !world.isRemote) {
-                                    var grassCoords = validGrassCoords.get(rand.nextInt(validGrassCoords.size));
-                                    world.setBlock(grassCoords.posX, grassCoords.posY, grassCoords.posZ, ShadowFoxBlocks.irisGrass, metaToSet, 1 or 2);
+                                    if (world.getBlock(coords.posX, coords.posY+1, coords.posZ) == Blocks.tallgrass && world.getBlockMetadata(coords.posX, coords.posY+1, coords.posZ) == 1)
+                                        world.setBlock(coords.posX, coords.posY+1, coords.posZ, ShadowFoxBlocks.irisGrass, metaToSet, 1 or 2);
                                 }
                             }
                         }
