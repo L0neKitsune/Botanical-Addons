@@ -6,7 +6,6 @@ import net.minecraftforge.oredict.OreDictionary
 import vazkii.botania.api.BotaniaAPI
 
 public object ShadowFoxBlocks {
-//    public var orangeBlock: Block
 
     public var coloredDirtBlock: Block
     public var irisSapling: Block
@@ -22,6 +21,9 @@ public object ShadowFoxBlocks {
     public var coloredStairs1: Block
     public var coloredStairs2: Block
     public var coloredStairs3: Block
+
+    public var irisTallGrass0: Block
+    public var irisTallGrass1: Block
 
 
     public var coloredPlanks: Block
@@ -44,7 +46,6 @@ public object ShadowFoxBlocks {
         irisWood2 = BlockColoredWood(2)
         irisWood3 = BlockColoredWood(3)
 
-
         coloredPlanks = BlockColoredPlanks()
         coloredSlabs = SlabColoredWood(false, coloredPlanks)
         coloredSlabsFull = SlabColoredWood(true, coloredPlanks)
@@ -53,6 +54,9 @@ public object ShadowFoxBlocks {
         coloredStairs1 = StairsColoredWood(coloredPlanks, 1)
         coloredStairs2 = StairsColoredWood(coloredPlanks, 2)
         coloredStairs3 = StairsColoredWood(coloredPlanks, 3)
+
+        irisTallGrass0 = BlockColoredDoubleGrass(0)
+        irisTallGrass1 = BlockColoredDoubleGrass(1)
 
         OreDictionary.registerOre("treeSapling", irisSapling)
 

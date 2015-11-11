@@ -41,10 +41,25 @@ public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
     }
 
     override fun func_149851_a(world:World, x:Int, y:Int, z:Int, remote: Boolean): Boolean {
-        return false
+        return true
     }
 
-    override fun func_149853_b(world:World, random:Random, x:Int, y:Int, z:Int) {}
+    override fun func_149853_b(world:World, random:Random, x:Int, y:Int, z:Int) {
+        var l = world.getBlockMetadata(x, y, z);
+        var b0 = l % 8
+
+        if (ShadowFoxBlocks.irisTallGrass0.canPlaceBlockAt(world, x, y, z))
+        {
+            if (l < 8) {
+                world.setBlock(x, y, z, ShadowFoxBlocks.irisTallGrass0, b0, 2);
+                world.setBlock(x, y + 1, z, ShadowFoxBlocks.irisTallGrass0, 8, 2);
+            }
+            else {
+                world.setBlock(x, y, z, ShadowFoxBlocks.irisTallGrass1, b0, 2);
+                world.setBlock(x, y + 1, z, ShadowFoxBlocks.irisTallGrass1, 8, 2);
+            }
+        }
+    }
 
     internal fun register(name: String) {
         GameRegistry.registerBlock(this, ShadowFoxGrassItemBlock::class.java, name)
