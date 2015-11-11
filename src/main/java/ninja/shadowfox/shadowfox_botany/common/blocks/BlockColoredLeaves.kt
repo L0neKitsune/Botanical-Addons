@@ -123,9 +123,9 @@ public class BlockColoredLeaves() : BlockLeaves(), IShearable, ILexiconable {
         return true
     }
 
-    override fun onSheared(item: ItemStack?, world: IBlockAccess?, x: Int, y: Int, z: Int, fortune: Int): ArrayList<ItemStack>? {
+    override fun onSheared(item: ItemStack, world: IBlockAccess, x: Int, y: Int, z: Int, fortune: Int): ArrayList<ItemStack> {
         val ret = ArrayList<ItemStack>()
-        ret.add(ItemStack(this, 1, world!!.getBlockMetadata(x, y, z)))
+        ret.add(ItemStack(this, 1, world.getBlockMetadata(x, y, z)))
         return ret
     }
 
