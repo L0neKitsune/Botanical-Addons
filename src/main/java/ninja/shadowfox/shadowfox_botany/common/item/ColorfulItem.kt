@@ -17,10 +17,7 @@ import kotlin.properties.Delegates
 
 open class ColorfulItem(name: String) : Item() {
 
-    var overlayName: String;
-
     init {
-        overlayName = name + "Overlay"
         setHasSubtypes(true)
         setCreativeTab(ShadowFoxCreativeTab)
         setUnlocalizedName(name)
@@ -50,7 +47,7 @@ open class ColorfulItem(name: String) : Item() {
     @SideOnly(Side.CLIENT)
     override fun registerIcons(iconRegister : IIconRegister) {
         this.itemIcon = IconHelper.forItem(iconRegister, this)
-        this.overlayIcon = IconHelper.forName(iconRegister, this.overlayName);
+        this.overlayIcon = IconHelper.forItem(iconRegister, this, "Overlay");
     }
 
     override fun getColorFromItemStack(par1ItemStack : ItemStack, pass : Int) : Int {
