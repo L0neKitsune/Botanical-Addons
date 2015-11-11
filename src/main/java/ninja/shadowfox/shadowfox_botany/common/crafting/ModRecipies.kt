@@ -1,5 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.crafting
 
+import java.util.ArrayList
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.block.Block
 import net.minecraft.init.Blocks
@@ -13,23 +14,25 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.recipe.RecipePureDaisy
+import vazkii.botania.api.recipe.RecipeManaInfusion
 import vazkii.botania.common.lib.LibOreDict
 import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
 import vazkii.botania.common.item.ModItems as BotaniaItems
 
 public object ModRecipes {
-    var recipesColoredDirt: List<IRecipe>
-    var recipesWoodPanel: List<IRecipe>
-    var recipesSlabs: List<IRecipe>
-    var recipesStairsL: List<IRecipe>
-    var recipesStairsR: List<IRecipe>
-    var recipesSlabsFull: List<IRecipe>
-    var recipesColoredSkyDirtRod: List<IRecipe>
-    var recipesLightningRod: IRecipe
-    var recipesLeafDyes: List<IRecipe>
-    var recipesRedstoneRoot: List<IRecipe>
-    var recipesPlainDirt: RecipePureDaisy
-    var recipesIrisSapling: RecipePureDaisyExclusion
+    val recipesColoredDirt: List<IRecipe>
+    val recipesWoodPanel: List<IRecipe>
+    val recipesSlabs: List<IRecipe>
+    val recipesStairsL: List<IRecipe>
+    val recipesStairsR: List<IRecipe>
+    val recipesSlabsFull: List<IRecipe>
+    val recipesColoredSkyDirtRod: List<IRecipe>
+    val recipesLightningRod: IRecipe
+    val recipesLeafDyes: List<IRecipe>
+    val recipesRedstoneRoot: List<IRecipe>
+    val recipesPastoralSeeds: List<RecipeManaInfusion>
+    val recipesPlainDirt: RecipePureDaisy
+    val recipesIrisSapling: RecipePureDaisyExclusion
 
     init {
 
@@ -122,11 +125,9 @@ public object ModRecipes {
             addShapelessOreDictRecipe(ItemStack(BotaniaItems.manaResource, 1, 6), "dustRedstone", ItemStack(ShadowFoxBlocks.irisGrass, 1, i))
         recipesRedstoneRoot = BotaniaAPI.getLatestAddedRecipes(16)
 
-        
+        recipesPastoralSeeds = ArrayList<RecipeManaInfusion>()
         for (i in 0..15)
-            addShapelessOreDictRecipe(ItemStack(ShadowFoxBlocks.coloredPlanks, 4, i), ShadowFoxBlocks.WOOD[i])
-
-        recipesWoodPanel = BotaniaAPI.getLatestAddedRecipes(16)
+            recipesPastoralSeeds.add(BotaniaAPI.registerManaInfusionRecipe(ItemStack(ShadowFoxItems.irisSeeds, 1, i), ItemStack(ShadowFoxBlocks.irisGrass, 1, i), 2500))
 
         recipesPlainDirt = BotaniaAPI.registerPureDaisyRecipe("irisDirt", Blocks.dirt, 0)
 

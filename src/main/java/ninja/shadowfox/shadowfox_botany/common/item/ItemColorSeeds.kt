@@ -27,7 +27,11 @@ import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 
 class ItemColorSeeds() : ColorfulItem("irisSeeds") {
-    private val blockSwappers = HashMap<Int, ArrayList<BlockSwapper?>>()
+    private val blockSwappers = HashMap<Int, MutableList<BlockSwapper?>>()
+
+    init {
+        FMLCommonHandler.instance().bus().register(this)
+    }
 
     val TYPES = 16;
     override fun getSubItems(par1: Item, par2: CreativeTabs?, par3: MutableList<Any?>) {
@@ -69,10 +73,10 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
         if(event.phase == Phase.END) {
             var dim = event.world.provider.dimensionId;
             if(blockSwappers.containsKey(dim)) {
-                var swappers = blockSwappers.get(dim) as ArrayList<BlockSwapper?>;
-                for (s in swappers)
-                    if (s!!.tick())
-                        swappers.remove(s)
+                var swappers = blockSwappers.get(dim) as ArrayList<BlockSwapper?>
+                var swappersSafe = ArrayList<BlockSwapper?>(swappers)
+                for (s in swappersSafe)
+                    s!!.tick(swappers)
             }
         }
     }
@@ -83,7 +87,6 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
         var dim = world.provider.dimensionId;
         if(!blockSwappers.containsKey(dim))
             blockSwappers.put(dim, ArrayList<BlockSwapper?>());
-        println(blockSwappers.get(dim)!!.toString())
         blockSwappers.get(dim)!!.add(swapper);
 
         return swapper;
@@ -112,7 +115,7 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
             startCoords = coords;
         }
 
-        fun tick() : Boolean {
+        fun tick(list: MutableList<BlockSwapper?>) {
             ticksExisted++
             if (ticksExisted % 20 === 0) {
                 var range = 3;
@@ -147,8 +150,7 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
             }
             
             if(ticksExisted >= 80)
-                return false
-            return true
+                list.remove(this)
         }
     }
 }
