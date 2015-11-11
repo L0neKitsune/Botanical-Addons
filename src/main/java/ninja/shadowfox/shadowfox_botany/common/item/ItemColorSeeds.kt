@@ -5,26 +5,19 @@ import java.util.ArrayList
 import java.util.HashMap
 import java.util.Random
 import net.minecraft.block.Block
-import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ChunkCoordinates
-import net.minecraft.util.IIcon
 import net.minecraft.world.World
-import vazkii.botania.client.core.helper.IconHelper
 import vazkii.botania.common.Botania
-import vazkii.botania.common.block.decor.IFloatingFlower.IslandType
-import vazkii.botania.common.lib.LibItemNames
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import cpw.mods.fml.common.FMLCommonHandler
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.common.gameevent.TickEvent
 import cpw.mods.fml.common.gameevent.TickEvent.Phase
-import cpw.mods.fml.relauncher.Side
-import cpw.mods.fml.relauncher.SideOnly
 
 class ItemColorSeeds() : ColorfulItem("irisSeeds") {
     private val blockSwappers = HashMap<Int, MutableList<BlockSwapper?>>()
@@ -33,10 +26,10 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
         FMLCommonHandler.instance().bus().register(this)
     }
 
-    val TYPES = 16;
+    val TYPES = 16
     override fun getSubItems(par1: Item, par2: CreativeTabs?, par3: MutableList<Any?>) {
         for(i in 0..(TYPES-1))
-            par3.add(ItemStack(par1, 1, i));
+            par3.add(ItemStack(par1, 1, i))
     }
 
     override fun onItemUse(par1ItemStack: ItemStack, par2EntityPlayer: EntityPlayer, par3World: World, par4: Int, par5: Int, par6: Int, par7: Int, par8: Float, par9: Float, par10: Float): Boolean {
@@ -44,9 +37,9 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
         val bmeta = par3World.getBlockMetadata(par4, par5, par6)
 
         val color = Color(getColorFromItemStack(par1ItemStack, 0))
-        val r = color.getRed() / 255F
-        val g = color.getGreen() / 255F
-        val b = color.getBlue() / 255F
+        val r = color.red / 255F
+        val g = color.green / 255F
+        val b = color.blue / 255F
 
         var x: Double
         var y: Double
@@ -54,7 +47,7 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
         val velMul = 0.025f
 
         if ((block === Blocks.dirt || block == Blocks.grass) && bmeta == 0) {
-            var meta = par1ItemStack.getItemDamage()
+            var meta = par1ItemStack.itemDamage
             var swapper = addBlockSwapper(par3World, par4, par5, par6, meta)
             par3World.setBlock(par4, par5, par6, ShadowFoxBlocks.coloredDirtBlock, swapper.metaToSet, 1 or 2)
             if (par3World.getBlock(par4, par5+1, par6) == Blocks.tallgrass && par3World.getBlockMetadata(par4, par5+1, par6) == 1)
@@ -73,78 +66,78 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
     @SubscribeEvent
     public fun onTickEnd(event: TickEvent.WorldTickEvent) {
         if(event.phase == Phase.END) {
-            var dim = event.world.provider.dimensionId;
+            var dim = event.world.provider.dimensionId
             if(blockSwappers.containsKey(dim)) {
-                var swappers = blockSwappers.get(dim) as ArrayList<BlockSwapper?>
-                var swappersSafe = ArrayList<BlockSwapper?>(swappers)
+                var swappers = blockSwappers[dim] as ArrayList<BlockSwapper?>
+                var swappersSafe = swappers
                 for (s in swappersSafe)
-                    s!!.tick(swappers)
+                    s?.tick(swappers)
             }
         }
     }
 
     private fun addBlockSwapper(world: World, x: Int, y: Int, z: Int, meta: Int): BlockSwapper {
-        var swapper = swapperFromMeta(world, x, y, z, meta);
+        var swapper = swapperFromMeta(world, x, y, z, meta)
 
-        var dim = world.provider.dimensionId;
+        var dim = world.provider.dimensionId
         if(!blockSwappers.containsKey(dim))
-            blockSwappers.put(dim, ArrayList<BlockSwapper?>());
-        blockSwappers.get(dim)!!.add(swapper);
+            blockSwappers.put(dim, ArrayList<BlockSwapper?>())
+        blockSwappers[dim]?.add(swapper)
 
-        return swapper;
+        return swapper
     }
 
     private fun swapperFromMeta(world: World, x: Int, y: Int, z: Int, meta: Int): BlockSwapper {
-        return BlockSwapper(world, ChunkCoordinates(x, y, z), meta);
+        return BlockSwapper(world, ChunkCoordinates(x, y, z), meta)
     }
 
     private class BlockSwapper(world: World, coords: ChunkCoordinates, meta: Int) {
 
-        var world: World;
-        var rand: Random;
-        var metaToSet: Int;
+        var world: World
+        var rand: Random
+        var metaToSet: Int
 
-        var startCoords: ChunkCoordinates;
-        var ticksExisted = 0;
+        var startCoords: ChunkCoordinates
+        var ticksExisted = 0
 
         init {
-            this.world = world;
-            metaToSet = meta;
+            this.world = world
+            metaToSet = meta
             var seed = coords.posX xor coords.posY xor coords.posZ
             rand = Random(seed.toLong())
-            startCoords = coords;
+            startCoords = coords
         }
 
         fun tick(list: MutableList<BlockSwapper?>) {
             ticksExisted++
             if (ticksExisted % 20 === 0) {
-                var range = 3;
+                var range = 3
                 for(i in -range..range) {
                     for(j in -range..range) {
-                        var x = startCoords.posX + i;
-                        var y = startCoords.posY;
-                        var z = startCoords.posZ + j;
-                        var block: Block = world.getBlock(x, y, z);
-                        var meta: Int = world.getBlockMetadata(x, y, z);
+                        var x = startCoords.posX + i
+                        var y = startCoords.posY
+                        var z = startCoords.posZ + j
+                        var block: Block = world.getBlock(x, y, z)
+                        var meta: Int = world.getBlockMetadata(x, y, z)
 
                         if(block === ShadowFoxBlocks.coloredDirtBlock && meta === metaToSet) {
                             if(ticksExisted % 20 == 0) {
-                                var validCoords = ArrayList<ChunkCoordinates>();
+                                var validCoords = ArrayList<ChunkCoordinates>()
                                 for(k in -1..1)
                                     for(l in -1..1) {
-                                        var x1 = x + k;
-                                        var z1 = z + l;
-                                        var block1 = world.getBlock(x1, y, z1);
-                                        var meta1 = world.getBlockMetadata(x1, y, z1);
+                                        var x1 = x + k
+                                        var z1 = z + l
+                                        var block1 = world.getBlock(x1, y, z1)
+                                        var meta1 = world.getBlockMetadata(x1, y, z1)
                                         if((block1 == Blocks.dirt || block1 == Blocks.grass) && meta1 == 0) {
-                                            validCoords.add(ChunkCoordinates(x1, y, z1));
+                                            validCoords.add(ChunkCoordinates(x1, y, z1))
                                         }
                                     }
                                 if(!validCoords.isEmpty() && !world.isRemote) {
-                                    var coords = validCoords.get(rand.nextInt(validCoords.size));
-                                    world.setBlock(coords.posX, coords.posY, coords.posZ, ShadowFoxBlocks.coloredDirtBlock, metaToSet, 1 or 2);
+                                    var coords = validCoords.get(rand.nextInt(validCoords.size))
+                                    world.setBlock(coords.posX, coords.posY, coords.posZ, ShadowFoxBlocks.coloredDirtBlock, metaToSet, 1 or 2)
                                     if (world.getBlock(coords.posX, coords.posY+1, coords.posZ) == Blocks.tallgrass && world.getBlockMetadata(coords.posX, coords.posY+1, coords.posZ) == 1)
-                                        world.setBlock(coords.posX, coords.posY+1, coords.posZ, ShadowFoxBlocks.irisGrass, metaToSet, 1 or 2);
+                                        world.setBlock(coords.posX, coords.posY+1, coords.posZ, ShadowFoxBlocks.irisGrass, metaToSet, 1 or 2)
                                 }
                             }
                         }
