@@ -40,6 +40,12 @@ public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
 
     }
 
+    override fun func_149851_a(world:World, x:Int, y:Int, z:Int, remote: Boolean): Boolean {
+        return false
+    }
+
+    override fun func_149853_b(world:World, random:Random, x:Int, y:Int, z:Int) {}
+
     internal fun register(name: String) {
         GameRegistry.registerBlock(this, ShadowFoxGrassItemBlock::class.java, name)
     }
@@ -47,10 +53,6 @@ public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
     override fun setBlockName(par1Str: String): Block {
         register(par1Str)
         return super.setBlockName(par1Str)
-    }
-
-    override fun quantityDropped(random: Random): Int {
-        return if (random.nextInt(20) == 0) 1 else 0
     }
 
     @SideOnly(Side.CLIENT)
@@ -100,6 +102,6 @@ public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
-        return LexiconRegistry.coloredDirt
+        return LexiconRegistry.pastoralSeeds
     }
 }

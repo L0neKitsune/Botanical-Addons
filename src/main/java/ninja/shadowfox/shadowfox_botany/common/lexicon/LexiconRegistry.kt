@@ -9,6 +9,7 @@ import vazkii.botania.api.lexicon.KnowledgeType
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.api.lexicon.LexiconRecipeMappings
 import vazkii.botania.common.lexicon.page.PageCraftingRecipe
+import vazkii.botania.common.lexicon.page.PageManaInfusionRecipe
 import vazkii.botania.common.lexicon.page.PageText
 
 public object LexiconRegistry {
@@ -17,6 +18,7 @@ public object LexiconRegistry {
     val irisSapling : LexiconEntry
     val techicolor : LexiconEntry
     val lightningRod : LexiconEntry
+    val pastoralSeeds : LexiconEntry
 
     init {
         coloredDirt = ShadowfoxLexiconEntry("coloredDirt", BotaniaAPI.categoryMisc)
@@ -36,6 +38,11 @@ public object LexiconRegistry {
                 PageCraftingRecipe("4", ModRecipes.recipesSlabsFull),
                 PageCraftingRecipe("5", ModRecipes.recipesLeafDyes))
 
+        pastoralSeeds = ShadowfoxLexiconEntry("irisSeeds", BotaniaAPI.categoryTools, block = ShadowFoxBlocks.irisGrass)
+        pastoralSeeds.setLexiconPages(PageText("0"),
+                PageCraftingRecipe("1", ModRecipes.recipesRedstoneRoot),
+                PageManaInfusionRecipe("2", ModRecipes.recipesPastoralSeeds))
+
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
         for (i in 0..3){
@@ -54,7 +61,8 @@ public object LexiconRegistry {
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i), irisSapling, 1)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.coloredSlabs, 1, i), irisSapling, 2)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.coloredDirtBlock, 1, i), coloredDirt, 1)
-            LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisGrass, 1, i), coloredDirt, 0)
+            LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisGrass, 1, i), pastoralSeeds, 0)
+            LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.irisSeeds, 1, i), pastoralSeeds, 2)
         }
 
     }
