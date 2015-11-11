@@ -72,9 +72,9 @@ class BlockColoredWood(val colorSet: Int) : ShadowFoxBlockMod(Material.wood), IL
         if (world.checkChunksExist(x - i1, y - i1, z - i1, x + i1, y + i1, z + i1)) {
             for (j1 in -b0..b0) for (k1 in -b0..b0)
                 for (l1 in -b0..b0) {
-                    var block: Block = world.getBlock(x + j1, y + k1, z + l1)
-                    if (block.isLeaves(world, x + j1, y + k1, z + l1)) {
-                        block.beginLeavesDecay(world, x + j1, y + k1, z + l1)
+                    var blockInWorld: Block = world.getBlock(x + j1, y + k1, z + l1)
+                    if (blockInWorld.isLeaves(world, x + j1, y + k1, z + l1)) {
+                        blockInWorld.beginLeavesDecay(world, x + j1, y + k1, z + l1)
                     }
                 }
         }
