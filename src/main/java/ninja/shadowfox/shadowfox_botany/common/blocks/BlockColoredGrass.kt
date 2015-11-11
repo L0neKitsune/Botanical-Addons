@@ -75,6 +75,12 @@ public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
         return 0xFFFFFF
     }
 
+    override fun onSheared(item: ItemStack, world: IBlockAccess, x: Int, y: Int, z: Int, fortune: Int): ArrayList<ItemStack> {
+        val ret = ArrayList<ItemStack>()
+        ret.add(ItemStack(this, 1, world.getBlockMetadata(x, y, z)))
+        return ret
+    }
+
     /**
      * Returns the color this block should be rendered. Used by leaves.
      */

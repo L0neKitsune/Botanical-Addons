@@ -76,6 +76,15 @@ class EntityVoidCreeper(p_i1701_1_: World): EntityCreeper(p_i1701_1_) {
         super.onUpdate()
     }
 
+    override fun fall(p_70069_1_: Float) {
+        super.fall(p_70069_1_)
+        this.timeSinceIgnited = (this.timeSinceIgnited.toFloat() + p_70069_1_ * 1.5f).toInt()
+
+        if (this.timeSinceIgnited > this.fuseTime - 5) {
+            this.timeSinceIgnited = this.fuseTime - 5
+        }
+    }
+
     private fun creeperGoBoom() {
         if (!this.worldObj.isRemote) {
             val r = range * if(powered) 2 else 1
