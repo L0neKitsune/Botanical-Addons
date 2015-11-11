@@ -45,8 +45,8 @@ public class BlockColoredLeaves() : BlockLeaves(), IShearable, ILexiconable {
         return super.setBlockName(par1Str)
     }
 
-    override fun quantityDropped(p_149745_1_: Random): Int {
-        return if (p_149745_1_.nextInt(20) == 0) 1 else 0
+    override fun quantityDropped(random: Random): Int {
+        return if (random.nextInt(20) == 0) 1 else 0
     }
 
     internal fun register(name: String) {
@@ -62,17 +62,17 @@ public class BlockColoredLeaves() : BlockLeaves(), IShearable, ILexiconable {
      * Returns the color this block should be rendered. Used by leaves.
      */
     @SideOnly(Side.CLIENT)
-    override fun getRenderColor(p_149741_1_: Int): Int {
-        if (p_149741_1_ >= EntitySheep.fleeceColorTable.size)
+    override fun getRenderColor(meta: Int): Int {
+        if (meta >= EntitySheep.fleeceColorTable.size)
             return 0xFFFFFF;
 
-        var color = EntitySheep.fleeceColorTable[p_149741_1_];
+        var color = EntitySheep.fleeceColorTable[meta];
         return Color(color[0], color[1], color[2]).rgb;
     }
 
     @SideOnly(Side.CLIENT)
-    override fun colorMultiplier(p_149720_1_: IBlockAccess?, p_149720_2_: Int, p_149720_3_: Int, p_149720_4_: Int): Int {
-        val meta = p_149720_1_!!.getBlockMetadata(p_149720_2_, p_149720_3_, p_149720_4_)
+    override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int {
+        val meta = world!!.getBlockMetadata(x, y, z)
 
         if (meta >= EntitySheep.fleeceColorTable.size)
             return 0xFFFFFF;
@@ -94,16 +94,16 @@ public class BlockColoredLeaves() : BlockLeaves(), IShearable, ILexiconable {
             }
     }
 
-    private fun removeLeaves(p_150126_1_: World, p_150126_2_: Int, p_150126_3_: Int, p_150126_4_: Int) {
-        this.dropBlockAsItem(p_150126_1_, p_150126_2_, p_150126_3_, p_150126_4_, p_150126_1_.getBlockMetadata(p_150126_2_, p_150126_3_, p_150126_4_), 0)
-        p_150126_1_.setBlockToAir(p_150126_2_, p_150126_3_, p_150126_4_)
+    private fun removeLeaves(world: World, x: Int, y: Int, z: Int) {
+        this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0)
+        world.setBlockToAir(x, y, z)
     }
 
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {
         icons = Array(2, { i -> IconHelper.forBlock(par1IconRegister, this, if (i == 0) "" else "_opaque") })
     }
 
-    override fun getItemDropped(p_149650_1_: Int, p_149650_2_: Random, p_149650_3_: Int): Item {
+    override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item {
         return Item.getItemFromBlock(ShadowFoxBlocks.irisSapling);
     }
 
@@ -133,8 +133,8 @@ public class BlockColoredLeaves() : BlockLeaves(), IShearable, ILexiconable {
 
     }
 
-    override fun updateTick(p_149674_1_: World?, p_149674_2_: Int, p_149674_3_: Int, p_149674_4_: Int, p_149674_5_: Random?) {
-        if (!p_149674_1_!!.isRemote) {
+    override fun updateTick(world: World?, x: Int, y: Int, z: Int, random: Random?) {
+        if (!world!!.isRemote) {
             val b0 = 4
             val i1 = b0 + 1
             val b1 = 32
@@ -147,7 +147,7 @@ public class BlockColoredLeaves() : BlockLeaves(), IShearable, ILexiconable {
 
             var l1: Int
 
-            if (p_149674_1_.checkChunksExist(p_149674_2_ - i1, p_149674_3_ - i1, p_149674_4_ - i1, p_149674_2_ + i1, p_149674_3_ + i1, p_149674_4_ + i1)) {
+            if (world.checkChunksExist(x - i1, y - i1, z - i1, x + i1, y + i1, z + i1)) {
                 var i2: Int
                 var j2: Int
 
@@ -157,10 +157,10 @@ public class BlockColoredLeaves() : BlockLeaves(), IShearable, ILexiconable {
                     while (i2 <= b0) {
                         j2 = -b0
                         while (j2 <= b0) {
-                            val block = p_149674_1_.getBlock(p_149674_2_ + l1, p_149674_3_ + i2, p_149674_4_ + j2)
+                            val block = world.getBlock(x + l1, y + i2, z + j2)
 
-                            if (!block.canSustainLeaves(p_149674_1_, p_149674_2_ + l1, p_149674_3_ + i2, p_149674_4_ + j2)) {
-                                if (block.isLeaves(p_149674_1_, p_149674_2_ + l1, p_149674_3_ + i2, p_149674_4_ + j2)) {
+                            if (!block.canSustainLeaves(world, x + l1, y + i2, z + j2)) {
+                                if (block.isLeaves(world, x + l1, y + i2, z + j2)) {
                                     field_150128_a!![(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = -2
                                 } else {
                                     field_150128_a!![(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = -1
@@ -219,18 +219,18 @@ public class BlockColoredLeaves() : BlockLeaves(), IShearable, ILexiconable {
             l1 = field_150128_a!![k1 * j1 + k1 * b1 + k1]
 
             if (l1 >= 0) { }
-            else removeLeaves(p_149674_1_, p_149674_2_, p_149674_3_, p_149674_4_)
+            else removeLeaves(world, x, y, z)
 
         }
     }
 
-    override fun getDamageValue(p_149643_1_: World, p_149643_2_: Int, p_149643_3_: Int, p_149643_4_: Int): Int {
-       return p_149643_1_.getBlockMetadata(p_149643_2_, p_149643_3_, p_149643_4_)
+    override fun getDamageValue(world: World, x: Int, y: Int, z: Int): Int {
+       return world.getBlockMetadata(x, y, z)
     }
 
-    override fun dropBlockAsItemWithChance(p_149690_1_: World, p_149690_2_: Int, p_149690_3_: Int, p_149690_4_: Int, p_149690_5_: Int,
-                                           p_149690_6_: Float, p_149690_7_: Int) {
-        super.dropBlockAsItemWithChance(p_149690_1_, p_149690_2_, p_149690_3_, p_149690_4_, p_149690_5_, 1.0f, p_149690_7_);
+    override fun dropBlockAsItemWithChance(world: World, x: Int, y: Int, z: Int, metadata: Int,
+                                           chance: Float, fortune: Int) {
+        super.dropBlockAsItemWithChance(world, x, y, z, metadata, 1.0f, fortune);
     }
 
     override fun getDrops(world: World, x: Int, y: Int, z: Int, metadata: Int, fortune: Int): ArrayList<ItemStack> {

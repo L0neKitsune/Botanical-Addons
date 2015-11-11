@@ -48,17 +48,17 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(Material.wood), ILexiconable {
      * Returns the color this block should be rendered. Used by leaves.
      */
     @SideOnly(Side.CLIENT)
-    override fun getRenderColor(p_149741_1_: Int): Int {
-        if (p_149741_1_ >= EntitySheep.fleeceColorTable.size)
+    override fun getRenderColor(meta: Int): Int {
+        if (meta >= EntitySheep.fleeceColorTable.size)
             return 0xFFFFFF;
 
-        var color = EntitySheep.fleeceColorTable[p_149741_1_];
+        var color = EntitySheep.fleeceColorTable[meta];
         return Color(color[0], color[1], color[2]).rgb;
     }
 
     @SideOnly(Side.CLIENT)
-    override fun colorMultiplier(p_149720_1_: IBlockAccess?, p_149720_2_: Int, p_149720_3_: Int, p_149720_4_: Int): Int {
-        val meta = p_149720_1_!!.getBlockMetadata(p_149720_2_, p_149720_3_, p_149720_4_)
+    override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int {
+        val meta = world!!.getBlockMetadata(x, y, z)
 
         if (meta >= EntitySheep.fleeceColorTable.size)
             return 0xFFFFFF;
@@ -81,9 +81,9 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(Material.wood), ILexiconable {
         return super.setBlockName(par1Str)
     }
 
-    override fun quantityDropped(p_149745_1_: Random): Int { return 1 }
+    override fun quantityDropped(random: Random): Int { return 1 }
 
-    override fun getItemDropped(p_149650_1_: Int, p_149650_2_: Random, p_149650_3_: Int): Item {
+    override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item {
         return Item.getItemFromBlock(this);
     }
 

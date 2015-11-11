@@ -38,11 +38,11 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
     }
 
     @SideOnly(Side.CLIENT)
-    override fun getIcon(p_149691_1_: Int, meta: Int): IIcon {
+    override fun getIcon(pass: Int, meta: Int): IIcon {
         return icon
     }
 
-    override fun getCollisionBoundingBoxFromPool(p_149668_1_: World?, p_149668_2_: Int, p_149668_3_: Int, p_149668_4_: Int): AxisAlignedBB? {
+    override fun getCollisionBoundingBoxFromPool(world: World?, x: Int, y: Int, z: Int): AxisAlignedBB? {
         return null
     }
 
@@ -66,47 +66,47 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
         return if (world != null) world.getBlockMetadata(x, y, z) else 0
     }
 
-    override fun canPlaceBlockAt(p_149742_1_: World, p_149742_2_: Int, p_149742_3_: Int, p_149742_4_: Int): Boolean {
-        return super.canPlaceBlockAt(p_149742_1_, p_149742_2_, p_149742_3_, p_149742_4_) && this.canBlockStay(p_149742_1_, p_149742_2_, p_149742_3_, p_149742_4_);
+    override fun canPlaceBlockAt(world: World, x: Int, y: Int, z: Int): Boolean {
+        return super.canPlaceBlockAt(world, x, y, z) && this.canBlockStay(world, x, y, z);
     }
 
     /**
      * Ticks the block if it's been scheduled
      */
-    override fun updateTick(p_149674_1_: World, p_149674_2_: Int, p_149674_3_: Int, p_149674_4_: Int, p_149674_5_: Random) {
-        if (!p_149674_1_.isRemote) {
-            checkAndDropBlock(p_149674_1_, p_149674_2_, p_149674_3_, p_149674_4_);
+    override fun updateTick(world: World, x: Int, y: Int, z: Int, random: Random) {
+        if (!world.isRemote) {
+            checkAndDropBlock(world, x, y, z);
 
-            if (p_149674_1_.getBlockLightValue(p_149674_2_, p_149674_3_ + 1, p_149674_4_) >= 9 && p_149674_5_.nextInt(7) == 0) {
-                this.markOrGrowMarked(p_149674_1_, p_149674_2_, p_149674_3_, p_149674_4_, p_149674_5_);
+            if (world.getBlockLightValue(x, y + 1, z) >= 9 && random.nextInt(7) == 0) {
+                this.markOrGrowMarked(world, x, y, z, random);
             }
         }
     }
 
-    override fun onNeighborBlockChange(p_149695_1_: World?, p_149695_2_: Int, p_149695_3_: Int, p_149695_4_: Int, p_149695_5_: Block) {
-        super.onNeighborBlockChange(p_149695_1_, p_149695_2_, p_149695_3_, p_149695_4_, p_149695_5_);
-        checkAndDropBlock(p_149695_1_, p_149695_2_, p_149695_3_, p_149695_4_);
+    override fun onNeighborBlockChange(world: World?, x: Int, y: Int, z: Int, block: Block) {
+        super.onNeighborBlockChange(world, x, y, z, block);
+        checkAndDropBlock(world, x, y, z);
     }
 
-    fun checkAndDropBlock(p_149695_1_: World?, p_149695_2_: Int, p_149695_3_: Int, p_149695_4_: Int){
-        if (p_149695_1_ != null && !this.canBlockStay(p_149695_1_, p_149695_2_, p_149695_3_, p_149695_4_)) {
-            this.dropBlockAsItem(p_149695_1_, p_149695_2_, p_149695_3_, p_149695_4_, p_149695_1_.getBlockMetadata(p_149695_2_, p_149695_3_, p_149695_4_), 0)
-            p_149695_1_.setBlock(p_149695_2_, p_149695_3_, p_149695_4_, Block.getBlockById(0), 0, 2)
+    fun checkAndDropBlock(world: World?, x: Int, y: Int, z: Int){
+        if (world != null && !this.canBlockStay(world, x, y, z)) {
+            this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0)
+            world.setBlock(x, y, z, Block.getBlockById(0), 0, 2)
         }
     }
 
-    override fun canBlockStay(p_149718_1_: World, p_149718_2_: Int, p_149718_3_: Int, p_149718_4_: Int): Boolean {
-        return p_149718_1_.getBlock(p_149718_2_, p_149718_3_ - 1, p_149718_4_).canSustainPlant(p_149718_1_, p_149718_2_, p_149718_3_ - 1, p_149718_4_, ForgeDirection.UP, this);
+    override fun canBlockStay(world: World, x: Int, y: Int, z: Int): Boolean {
+        return world.getBlock(x, y - 1, z).canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
     }
 
-    public fun markOrGrowMarked(p_149879_1_: World?, p_149879_2_: Int, p_149879_3_: Int, p_149879_4_: Int, p_149879_5_: Random?) {
-        if (p_149879_1_ != null) {
-            val l = p_149879_1_.getBlockMetadata(p_149879_2_, p_149879_3_, p_149879_4_);
+    public fun markOrGrowMarked(world: World?, x: Int, y: Int, z: Int, random: Random?) {
+        if (world != null) {
+            val l = world.getBlockMetadata(x, y, z);
 
             if ((l and 8) == 0) {
-                p_149879_1_.setBlockMetadataWithNotify(p_149879_2_, p_149879_3_, p_149879_4_, l or 8, 4);
+                world.setBlockMetadataWithNotify(x, y, z, l or 8, 4);
             } else {
-                growTree(p_149879_1_, p_149879_2_, p_149879_3_, p_149879_4_, p_149879_5_);
+                growTree(world, x, y, z, random);
             }
         }
     }
@@ -143,14 +143,14 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
     /**
      * fertilize
      */
-    override fun func_149853_b(world: World?, p_149853_2_: Random?, p_149853_3_: Int, p_149853_4_: Int, p_149853_5_: Int) {
-        this.markOrGrowMarked(world, p_149853_3_, p_149853_4_, p_149853_5_, p_149853_2_)
+    override fun func_149853_b(world: World?, random: Random?, x: Int, y: Int, z: Int) {
+        this.markOrGrowMarked(world, x, y, z, random)
     }
 
     /**
      * canFertilize
      */
-    override fun func_149851_a(p_149851_1_: World?, p_149851_2_: Int, p_149851_3_: Int, p_149851_4_: Int, p_149851_5_: Boolean): Boolean {
+    override fun func_149851_a(world: World?, x: Int, y: Int, z: Int, isRemote: Boolean): Boolean {
         return true
     }
 

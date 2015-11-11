@@ -46,8 +46,8 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
         return 72000
     }
 
-    override fun onPlayerStoppedUsing(stack: ItemStack?, p_77615_2_: World?, p_77615_3_: EntityPlayer?, p_77615_4_: Int) {
-        super.onPlayerStoppedUsing(stack, p_77615_2_, p_77615_3_, p_77615_4_)
+    override fun onPlayerStoppedUsing(stack: ItemStack?, world: World?, player: EntityPlayer?, count: Int) {
+        super.onPlayerStoppedUsing(stack, world, player, count)
         ItemNBTHelper.setInt(stack, "target", -1)
     }
 

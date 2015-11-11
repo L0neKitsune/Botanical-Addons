@@ -32,9 +32,9 @@ open class ShadowFoxBlockMod(par2Material: Material) : Block(par2Material) {
         return true
     }
 
-    override fun setLightLevel(p_149715_1_: Float): Block {
-        originalLight = (p_149715_1_ * 15).toInt()
-        return super.setLightLevel(p_149715_1_)
+    override fun setLightLevel(level: Float): Block {
+        originalLight = (level * 15).toInt()
+        return super.setLightLevel(level)
     }
 
     @SideOnly(Side.CLIENT)
