@@ -43,7 +43,7 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
         setBlockName(this.name)
     }
 
-    override fun func_149851_a(world: World, x: Int, y: Int, z: Int, p_149851_5_: Boolean): Boolean {
+    override fun func_149851_a(world: World, x: Int, y: Int, z: Int, remote: Boolean): Boolean {
         return true
     }
     override fun func_149852_a(world: World, random: Random, x: Int, y: Int, z: Int): Boolean {
@@ -52,8 +52,6 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
 
     override fun func_149853_b(world: World, random: Random, x: Int, y: Int, z: Int) {
         var l = 0;
-
-        var meta = 0;
 
         while (l < 128)
         {
@@ -78,7 +76,7 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
                 else if (world.getBlock(i1, j1, k1).isAir(world, i1, j1, k1)) {
                     if (random.nextInt(8) != 0) {
                         if (ShadowFoxBlocks.irisGrass.canBlockStay(world, i1, j1, k1)) {
-                            meta = world.getBlockMetadata(i1, j1-1, k1)
+                            var meta = world.getBlockMetadata(i1, j1-1, k1)
                             world.setBlock(i1, j1, k1, ShadowFoxBlocks.irisGrass, meta, 3);
                         }
                     }

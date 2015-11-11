@@ -29,6 +29,7 @@ tile.shadowfox_botany:irisWood.name=Iridescent Log
 tile.shadowfox_botany:irisSapling.name=Iridescent Sapling
 tile.shadowfox_botany:irisPlanks.name=Iridescent Planks
 tile.shadowfox_botany:irisGrass.name=Iridescent Grass
+item.shadowfox_botany:irisSeeds.name=Iridescent Seeds
 
 tile.shadowfox_botany:irisPlanksSlab.name=Iridescent Slab
 tile.shadowfox_botany:irisPlanksSlabFull.name=Iridescent Slab
@@ -38,18 +39,20 @@ tile.shadowfox_botany:irisPlanksStairs.name=Iridescent Stairs
 shadowfox_botany.potion.manaVoid=Manatide Seal
 
 shadowfox_botany.entry.coloredDirt=Iridescent Dirt
-shadowfox_botany.tagline.coloredDirt=Beauty from the dross
+shadowfox_botany.tagline.coloredDirt=Rainbow dirt for your decoration needs
 shadowfox_botany.entry.techicolorRod=Rod of the Iridescence
-shadowfox_botany.tagline.techicolorRod=Beauty conjured from thin air
+shadowfox_botany.tagline.techicolorRod=Rainbow dirt made from thin air
 shadowfox_botany.entry.lightningRod=Rod of the Thundercaller
 shadowfox_botany.tagline.lightningRod=Stike fear and thunder into your foes
 shadowfox_botany.entry.irisSapling=Iridescent Trees
-shadowfox_botany.tagline.irisSapling=Farm with all the colors of the wind
+shadowfox_botany.tagline.irisSapling=Grow trees with all the colors of the wind
+shadowfox_botany.entry.irisSeeds=Iridescent Grass
+shadowfox_botany.tagline.irisSeeds=Rainbow grass for your colorful landscapes
 
-shadowfox_botany.page.coloredDirt0=Using the latent power in &1Mystical Flowers&0, you can make dirt that shimmers every color of the rainbow. This mystical dirt is capable of growing trees and plants without water or a hoe. If put next to a &1Pure Daisy&0, it will revert to its uncolored state.<br>If &1Bone Meal&0 is used on &1Iridescent Dirt&0, it will grow &1Iridescent Grass&0 instead of &1Tall Grass&0.
+shadowfox_botany.page.coloredDirt0=Using the latent power in &1Mystical Flowers&0, you can make dirt that shimmers every color of the rainbow. This mystical dirt is capable of growing trees and plants without water or a hoe. If put next to a &1Pure Daisy&0, it will revert to its uncolored state.
 shadowfox_botany.page.coloredDirt1=Beauty from the dross
 
-shadowfox_botany.page.techicolorRod0=The &1Rod of the Iridescense&0, like the &1Rod of the Highlands&0, can place &Iridescent Dirt&0 in the air at the cost of mana. Unlike its less colorful counterpart, sneaking and clicking in the air will shift the rod between the various colors of &4Iridescense&0.<br>This rod can be given to a &1Livingwood Avatar&0.
+shadowfox_botany.page.techicolorRod0=The &1Rod of the Iridescense&0, like the &1Rod of the Highlands&0, can place &1Iridescent Dirt&0 in the air at the cost of mana. Unlike its less colorful counterpart, sneaking and clicking in the air will shift the rod between the various colors of &4Iridescense&0.<br>This rod can be given to a &1Livingwood Avatar&0.
 shadowfox_botany.page.techicolorRod1=Simply drowning in colors
 
 shadowfox_botany.page.lightningRod0=The &1Rod of Lightning&0, much like its sword cousin, the &1Thundercaller&0, can summon lightning to strike your enemies. Wielding &2Manatide Prowess&0 will speed up the summoning process. A &1Livingwood Avatar&0 can also wield this rod.<br>There seems to be power you cannot comprehend lying trapped within this rod, but you have no idea how to get it out.
@@ -61,3 +64,7 @@ shadowfox_botany.page.irisSapling2=Slabs
 shadowfox_botany.page.irisSapling3=Stairs
 shadowfox_botany.page.irisSapling4=And back again
 shadowfox_botany.page.irisSapling5=Grinding them down
+
+shadowfox_botany.page.irisSeeds0=If &1Bone Meal&0 is used on &1Iridescent Dirt&0, it will grow &1Iridescent Grass&0 instead of &1Tall Grass&0. When this &1Iridescent Grass&0 is thrown into a &4Mana Pool&0, you get out something quite like the &1Pasture Seed&0. It will transmute &1Grass&0 and &1Dirt&0 into Iridescent dirt, with a simple right click.
+shadowfox_botany.page.irisSeeds1=/etc/sudoers
+shadowfox_botany.page.irisSeeds2=Tiger Orchid monoculture
