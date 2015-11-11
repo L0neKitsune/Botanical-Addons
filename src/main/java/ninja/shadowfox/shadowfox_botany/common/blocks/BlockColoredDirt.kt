@@ -178,4 +178,3 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
         return LexiconRegistry.coloredDirt
     }
 }
-

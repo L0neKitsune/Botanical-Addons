@@ -168,4 +168,3 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
         return LexiconRegistry.irisSapling
     }
 }
-
