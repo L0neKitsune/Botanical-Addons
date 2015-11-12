@@ -5,13 +5,10 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemSlab
 import net.minecraft.item.ItemStack
 import net.minecraft.util.StatCollector
-import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxSlabs
+import ninja.shadowfox.shadowfox_botany.common.blocks.SlabColoredWood
 
-/**
- * Created by l0nekitsune on 10/24/15.
- */
 
-class ShadowFoxItemBlockSlab(par1: Block) : ItemSlab(par1, (par1 as ShadowFoxSlabs).singleBlock, par1.fullBlock, false) {
+open class ShadowFoxItemBlockSlab(val par1: Block) : ItemSlab(par1, (par1 as SlabColoredWood).getSingleBlock(), (par1 as SlabColoredWood).getFullBlock(), false) {
 
     override fun getUnlocalizedName(par1ItemStack: ItemStack): String {
         return field_150939_a.unlocalizedName.replace("tile.".toRegex(), "tile.shadowfox_botany:").replace("\\d+$".toRegex(), "")
@@ -23,7 +20,7 @@ class ShadowFoxItemBlockSlab(par1: Block) : ItemSlab(par1, (par1 as ShadowFoxSla
 
     override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>?, par4: Boolean) {
         if(par1ItemStack == null) return
-        addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + par1ItemStack.itemDamage)+"&r", par3List);
+        addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + "\\d+$".toRegex().find(field_150939_a.unlocalizedName)?.value) + "&r", par3List)
     } 
 
 }

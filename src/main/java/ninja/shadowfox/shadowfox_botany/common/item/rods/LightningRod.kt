@@ -7,7 +7,6 @@ import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.effect.EntityLightningBolt
 import net.minecraft.entity.monster.IMob
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.EnumAction
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
@@ -17,6 +16,9 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.item.StandardItem
+import ninja.shadowfox.shadowfox_botany.common.utils.boundingBox
+import ninja.shadowfox.shadowfox_botany.common.utils.centerVector
+import ninja.shadowfox.shadowfox_botany.common.utils.playSoundAtEntity
 import vazkii.botania.api.item.IAvatarTile
 import vazkii.botania.api.item.IAvatarWieldable
 import vazkii.botania.api.item.IManaProficiencyArmor
@@ -73,8 +75,8 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                     } else {
                         target.attackEntityFrom(DamageSource.causePlayerDamage(player), if (thor) 10f else 8f)
                         ManaItemHandler.requestManaExactForTool(stack, player, COST, true)
-                        Botania.proxy.lightningFX(player.worldObj, Vector3.fromEntityCenter(player), Vector3.fromEntityCenter(target), 1.0f, 96708, 11198463)
-                        player.worldObj.playSoundEffect(target.posX.toDouble(), target.posY.toDouble(), target.posZ.toDouble(), "ambient.weather.thunder", 100.0f, 0.8f + player.worldObj.rand.nextFloat() * 0.2f)
+                        Botania.proxy.lightningFX(player.worldObj, player.centerVector(), target.centerVector(), 1.0f, 96708, 11198463)
+                        player.playSoundAtEntity("ambient.weather.thunder", 100.0f, 0.8f + player.worldObj.rand.nextFloat() * 0.2f)
                     }
                     chainLightning(stack!!, target, player, thor)
                 }
@@ -134,7 +136,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
             var lightningSource: EntityLivingBase = entity
 
             for (i in 0..if (!supercharge) 4 else 6) {
-                val entities = entity.worldObj.getEntitiesWithinAABBExcludingEntity(lightningSource, AxisAlignedBB.getBoundingBox(lightningSource.posX - range, lightningSource.posY - range, lightningSource.posZ - range, lightningSource.posX + range, lightningSource.posY + range, lightningSource.posZ + range), selector)
+                val entities = entity.worldObj.getEntitiesWithinAABBExcludingEntity(lightningSource, lightningSource.boundingBox(range.toInt()), selector)
                 if (entities.isEmpty()) {
                     break
                 }
@@ -146,7 +148,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                     target.attackEntityFrom(DamageSource.causeMobDamage(attacker), dmg.toFloat())
                 }
 
-                Botania.proxy.lightningFX(entity.worldObj, Vector3.fromEntityCenter(lightningSource), Vector3.fromEntityCenter(target), 1.0f, 96708, 11198463)
+                Botania.proxy.lightningFX(entity.worldObj, lightningSource.centerVector(), target.centerVector(), 1.0f, 96708, 11198463)
                 alreadyTargetedEntities.add(target)
                 lightningSource = target
                 --dmg
@@ -178,15 +180,14 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
         val world = te.worldObj
         val range = 18
 
-        if (tile.getCurrentMana() >= COST_AVATAR && tile.isEnabled() && tile.getElapsedFunctionalTicks() % 10 == 0) {
+        if (tile.currentMana >= COST_AVATAR && tile.isEnabled && tile.elapsedFunctionalTicks % 10 == 0) {
             val selector = object : IEntitySelector {
                 override fun isEntityApplicable(e: Entity): Boolean {
                     return (if (true) e is EntityLivingBase else e is IMob) && e !is EntityPlayer && e !is EntityDoppleganger
                 }
             }
 
-            val entities = world.selectEntitiesWithinAABB(EntityLivingBase::class.java, AxisAlignedBB.getBoundingBox((te.xCoord - range).toDouble(), (te.yCoord - range).toDouble(),
-                    (te.zCoord - range).toDouble(), (te.xCoord + range).toDouble(), (te.yCoord + range).toDouble(), (te.zCoord + range).toDouble()), selector)
+            val entities = world.selectEntitiesWithinAABB(EntityLivingBase::class.java, te.boundingBox(range), selector)
 
             if (entities.size == 0) return
 
@@ -225,10 +226,11 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                 val var5 = Vector3.fromEntityCenter(target)
                 val var7 = var5.copy().add(0.0, 1.0, 0.0)
 
-                Botania.proxy.lightningFX(world, var5, var7, 2.0f, 96708, 11198463)
+                Botania.proxy.lightningFX(world, var5, var7, 1.0f, 96708, 11198463)
+
                 Botania.proxy.sparkleFX(world, te.xCoord.toDouble() + 0.5, te.yCoord.toDouble() + 2.5, te.zCoord.toDouble() + 0.5, 0.667f, 0.875f, 1f, 6.0f, 6)
 
-                if (tile.getElapsedFunctionalTicks() % 100 == 0) {
+                if (tile.elapsedFunctionalTicks % 100 == 0) {
 
                     target.attackEntityFrom(DamageSource.causeMobDamage(null), 10.toFloat())
 
@@ -237,9 +239,9 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                     var vect = Vector3()
                     vect.set(te.xCoord.toDouble() + 0.5, te.yCoord.toDouble() + 2.5, te.zCoord.toDouble() + 0.5)
 
-                    Botania.proxy.lightningFX(world, vect, Vector3.fromEntityCenter(target), 1.0f, 96708, 11198463)
+                    Botania.proxy.lightningFX(world, vect, target.centerVector(), 1.0f, 96708, 11198463)
 
-                    world.playSoundEffect(target.posX.toDouble(), target.posY.toDouble(), target.posZ.toDouble(), "ambient.weather.thunder", 100.0f, 0.8f + world.rand.nextFloat() * 0.2f)
+                    target.playSoundAtEntity("ambient.weather.thunder", 100.0f, 0.8f + world.rand.nextFloat() * 0.2f)
 
                     chainLightning(stack, target, null, false)
                 }

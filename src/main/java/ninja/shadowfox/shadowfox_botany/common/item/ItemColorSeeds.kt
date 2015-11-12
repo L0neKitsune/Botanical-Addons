@@ -134,7 +134,7 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
                                         }
                                     }
                                 if(!validCoords.isEmpty() && !world.isRemote) {
-                                    var coords = validCoords.get(rand.nextInt(validCoords.size))
+                                    var coords = validCoords[rand.nextInt(validCoords.size)]
                                     world.setBlock(coords.posX, coords.posY, coords.posZ, ShadowFoxBlocks.coloredDirtBlock, metaToSet, 1 or 2)
                                     if (world.getBlock(coords.posX, coords.posY+1, coords.posZ) == Blocks.tallgrass && world.getBlockMetadata(coords.posX, coords.posY+1, coords.posZ) == 1)
                                         world.setBlock(coords.posX, coords.posY+1, coords.posZ, ShadowFoxBlocks.irisGrass, metaToSet, 1 or 2)

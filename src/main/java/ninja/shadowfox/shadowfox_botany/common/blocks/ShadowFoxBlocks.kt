@@ -4,6 +4,8 @@ import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
 import vazkii.botania.api.BotaniaAPI
+import vazkii.botania.common.block.decor.slabs.BlockBiomeStoneSlab
+import vazkii.botania.common.block.decor.stairs.BlockBiomeStoneStairs
 
 public object ShadowFoxBlocks {
 //    public var orangeBlock: Block
@@ -18,15 +20,12 @@ public object ShadowFoxBlocks {
     public var irisWood2: Block
     public var irisWood3: Block
 
-    public var coloredStairs0: Block
-    public var coloredStairs1: Block
-    public var coloredStairs2: Block
-    public var coloredStairs3: Block
-
-
     public var coloredPlanks: Block
-    public var coloredSlabs: Block
-    public var coloredSlabsFull: Block
+
+
+    public var coloredSlabs: Array<Block>
+    public var coloredSlabsFull: Array<Block>
+    public var coloredStairs: Array<Block>
 
     val WOOD: Array<String> = arrayOf("irisWoodWhite", "irisWoodOrange", "irisWoodMagenta", "irisWoodLightBlue", "irisWoodYellow", "irisWoodLime", "irisWoodPink", "irisWoodGray", "irisWoodLightGray", "irisWoodCyan", "irisWoodPurple", "irisWoodBlue", "irisWoodBrown", "irisWoodGreen", "irisWoodRed", "irisWoodBlack")
     val LEAVES: Array<String> = arrayOf("irisLeavesWhite", "irisLeavesOrange", "irisLeavesMagenta", "irisLeavesLightBlue", "irisLeavesYellow", "irisLeavesLime", "irisLeavesPink", "irisLeavesGray", "irisLeavesLightGray", "irisLeavesCyan", "irisLeavesPurple", "irisLeavesBlue", "irisLeavesBrown", "irisLeavesGreen", "irisLeavesRed", "irisLeavesBlack")
@@ -46,13 +45,18 @@ public object ShadowFoxBlocks {
 
 
         coloredPlanks = BlockColoredPlanks()
-        coloredSlabs = SlabColoredWood(false, coloredPlanks)
-        coloredSlabsFull = SlabColoredWood(true, coloredPlanks)
 
-        coloredStairs0 = StairsColoredWood(coloredPlanks, 0)
-        coloredStairs1 = StairsColoredWood(coloredPlanks, 1)
-        coloredStairs2 = StairsColoredWood(coloredPlanks, 2)
-        coloredStairs3 = StairsColoredWood(coloredPlanks, 3)
+        coloredSlabs = Array<Block>(16 , {i -> SlabColoredWood(false, i)})
+        coloredSlabsFull = Array<Block>(16 , {i -> SlabColoredWood(true, i)})
+        coloredStairs = Array<Block>(16 , {i -> StairsColoredWood(i)})
+
+        for (i in coloredSlabs) {
+            (i as SlabColoredWood).register()
+        }
+
+        for (i in coloredSlabsFull) {
+            (i as SlabColoredWood).register()
+        }
 
         OreDictionary.registerOre("treeSapling", irisSapling)
 
@@ -76,22 +80,6 @@ public object ShadowFoxBlocks {
             OreDictionary.registerOre("logWood", t)
             OreDictionary.registerOre("irisWood", t)
             OreDictionary.registerOre(WOOD[i+12], t)
-
-            t = ItemStack(coloredStairs0, 1, i)
-            OreDictionary.registerOre("stairWood", t)
-            OreDictionary.registerOre("irisStairs", t)
-
-            t = ItemStack(coloredStairs1, 1, i)
-            OreDictionary.registerOre("stairWood", t)
-            OreDictionary.registerOre("irisStairs", t)
-
-            t = ItemStack(coloredStairs2, 1, i)
-            OreDictionary.registerOre("stairWood", t)
-            OreDictionary.registerOre("irisStairs", t)
-
-            t = ItemStack(coloredStairs3, 1, i)
-            OreDictionary.registerOre("stairWood", t)
-            OreDictionary.registerOre("irisStairs", t)
         }
 
 
@@ -107,11 +95,14 @@ public object ShadowFoxBlocks {
             OreDictionary.registerOre("plankWood", t)
             OreDictionary.registerOre("irisPlanks", t)
 
-            t = ItemStack(coloredSlabs, 1, i)
+            t = ItemStack(coloredStairs[i], 1)
+            OreDictionary.registerOre("stairWood", t)
+            OreDictionary.registerOre("irisStairs", t)
+
+            t = ItemStack(coloredSlabs[i], 1)
             OreDictionary.registerOre("slabWood", t)
             OreDictionary.registerOre("irisSlabs", t)
         }
-
 
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
     }
