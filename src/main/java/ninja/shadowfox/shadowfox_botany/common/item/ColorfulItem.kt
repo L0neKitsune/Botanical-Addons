@@ -17,6 +17,16 @@ import kotlin.properties.Delegates
 
 open class ColorfulItem(name: String) : Item() {
 
+    companion object {
+        fun colorFromItemStack(par1ItemStack : ItemStack) : Int {
+            if(par1ItemStack.itemDamage >= EntitySheep.fleeceColorTable.size)
+                return 0xFFFFFF
+
+            var color = EntitySheep.fleeceColorTable[par1ItemStack.itemDamage]
+            return Color(color[0], color[1], color[2]).rgb
+        }
+    }
+
     init {
         setHasSubtypes(true)
         setCreativeTab(ShadowFoxCreativeTab)

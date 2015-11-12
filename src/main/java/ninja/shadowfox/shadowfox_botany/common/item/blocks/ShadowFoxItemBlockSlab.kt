@@ -8,7 +8,7 @@ import net.minecraft.util.StatCollector
 import ninja.shadowfox.shadowfox_botany.common.blocks.SlabColoredWood
 
 
-open class ShadowFoxItemBlockSlab(val par1: Block) : ItemSlab(par1, (par1 as SlabColoredWood).getSingleBlock(), (par1 as SlabColoredWood).getFullBlock(), false) {
+open class ShadowFoxItemBlockSlab(val par1: Block) : ItemSlab(par1, (par1 as SlabColoredWood).getSingleBlock(), par1.getFullBlock(), false) {
 
     override fun getUnlocalizedName(par1ItemStack: ItemStack): String {
         return field_150939_a.unlocalizedName.replace("tile.".toRegex(), "tile.shadowfox_botany:").replace("\\d+$".toRegex(), "")

@@ -1,6 +1,7 @@
 package ninja.shadowfox.shadowfox_botany.common.item.baubles
 
 
+import ninja.shadowfox.shadowfox_botany.common.item.ColorfulItem
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
@@ -54,9 +55,10 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
         }
     }
 
-    val TYPES = 1
+    val TYPES = 2
     val COST = 2
     var icons: Array<IIcon?> = arrayOfNulls<IIcon>(TYPES)
+    var baubleIcons: Array<IIcon?> = arrayOfNulls<IIcon>(TYPES)
 
     init {
         setHasSubtypes(true)
@@ -70,6 +72,8 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
     override fun registerIcons(par1IconRegister: IIconRegister) {
         for(i in 0..(TYPES - 1))
             icons[i] = IconHelper.forItem(par1IconRegister, this, i)
+        for(i in 0..(TYPES - 1))
+            baubleIcons[i] = IconHelper.forItem(par1IconRegister, this, "Render"+i.toString())
     }
 
     override fun getSubItems(item: Item, tab: CreativeTabs?, list: MutableList<Any?>) {
@@ -79,6 +83,10 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
 
     override fun getIconFromDamage(dmg: Int): IIcon? {
         return icons[Math.min(TYPES - 1, dmg)]
+    }
+
+    fun getBaubleIconFromDamage(dmg: Int): IIcon? {
+        return baubleIcons[Math.min(TYPES - 1, dmg)]
     }
 
     override fun getBaubleType(stack: ItemStack) : BaubleType {
@@ -103,11 +111,31 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
             if(player is EntityPlayer) {
                 if (ManaItemHandler.requestManaExact(stack, player, COST, true)) {
                     ItemNBTHelper.setByte(stack, "active", 1.toByte())
-                    when (stack.getItemDamage()) {
-                        0 -> {
+                    if (!this.hasPhantomInk(stack)) {
+                        when (stack.getItemDamage()) {
+                            0 -> {
                                 var playerHead = Vector3.fromEntityCenter(player).add(0.0, 0.75, 0.0).add(Vector3(player.lookVec).multiply(-0.25))
                                 val playerShift = playerHead.copy().add(getHeadOrientation(player))
                                 Botania.proxy.lightningFX(player.worldObj, playerHead, playerShift, 2.0f, 96708, 11198463)
+                            }
+                            1 -> {
+                                for (i in 0..6) {
+                                    var xmotion = (Math.random()-0.5).toFloat() * 0.15f
+                                    var zmotion = (Math.random()-0.5).toFloat() * 0.15f
+                                    // Brown
+                                    var r = 0.6F
+                                    var g = 0.3F
+                                    var b = 0.0F
+                                    val held = player.inventory.getCurrentItem()
+                                    if (held != null && held.getItem() == ShadowFoxItems.colorfulSkyDirtRod) {
+                                        val color = Color(ColorfulItem.colorFromItemStack(held))
+                                        r = color.red.toFloat() / 255F
+                                        g = color.green.toFloat() / 255F
+                                        b = color.blue.toFloat() / 255F
+                                    }
+                                    Botania.proxy.wispFX(player.worldObj, player.posX, player.posY - player.yOffset, player.posZ, r, g, b, Math.random().toFloat() * 0.15f + 0.15f, xmotion, 0.0075f, zmotion)
+                                }
+                            }
                         }
                     }
                 }
@@ -131,7 +159,7 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
             GL11.glTranslatef(-0.26F, -0.4F, if (armor) 0.2F else 0.15F)
             GL11.glScalef(0.5F, 0.5F, 0.5F)
 
-            var icon = getIconFromDamage(stack.getItemDamage())
+            var icon = getBaubleIconFromDamage(stack.getItemDamage())
             var f = icon!!.getMinU()
             var f1 = icon!!.getMaxU()
             var f2 = icon!!.getMinV()
