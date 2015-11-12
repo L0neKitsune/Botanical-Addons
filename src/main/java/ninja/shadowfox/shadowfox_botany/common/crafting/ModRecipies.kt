@@ -108,9 +108,9 @@ public object ModRecipes {
         recipesLightningRod = BotaniaAPI.getLatestAddedRecipe()
 
         addOreDictRecipe(ItemStack(ShadowFoxItems.emblem, 1, 0),
-                "SES",
+                "SWS",
                 "TGT",
-                " W ",
+                " E ",
                 'E', LibOreDict.ENDER_AIR_BOTTLE,
                 'T', LibOreDict.TERRASTEEL_NUGGET,
                 'G', LibOreDict.LIFE_ESSENCE,
@@ -126,7 +126,7 @@ public object ModRecipes {
                 'D', LibOreDict.DRAGONSTONE,
                 'N', "nuggetGold",
                 'G', LibOreDict.LIFE_ESSENCE,
-                'P', LibOreDict.RUNE[15],
+                'P', LibOreDict.RUNE[2],
                 'S', LibOreDict.MANA_STRING)
 
         recipesPriestOfSif = BotaniaAPI.getLatestAddedRecipe()
