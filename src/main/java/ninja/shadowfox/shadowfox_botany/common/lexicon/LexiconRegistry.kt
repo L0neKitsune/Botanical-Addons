@@ -15,7 +15,7 @@ public object LexiconRegistry {
 
     val coloredDirt : LexiconEntry
     val irisSapling : LexiconEntry
-    val techicolor : LexiconEntry
+    val technicolor : LexiconEntry
     val lightningRod : LexiconEntry
     val pastoralSeeds : LexiconEntry
 
@@ -23,8 +23,11 @@ public object LexiconRegistry {
         coloredDirt = ShadowfoxLexiconEntry("coloredDirt", BotaniaAPI.categoryMisc)
         coloredDirt.setLexiconPages(PageText("0"), PageCraftingRecipe("1", ModRecipes.recipesColoredDirt))
 
-        techicolor = ShadowfoxLexiconEntry("techicolorRod", BotaniaAPI.categoryTools).setKnowledgeType(BotaniaAPI.elvenKnowledge)
-        techicolor.setLexiconPages(PageText("0"), PageCraftingRecipe("1", ModRecipes.recipesColoredSkyDirtRod))
+        technicolor = ShadowfoxLexiconEntry("technicolorRod", BotaniaAPI.categoryTools).setKnowledgeType(BotaniaAPI.elvenKnowledge)
+        technicolor.setLexiconPages(PageText("0"), 
+                PageCraftingRecipe("1", ModRecipes.recipesColoredSkyDirtRod),
+                PageText("2"),
+                PageCraftingRecipe("3", ModRecipes.recipesPriestOfSif))
 
         lightningRod = ShadowfoxLexiconEntry("lightningRod", BotaniaAPI.categoryTools).setKnowledgeType(BotaniaAPI.elvenKnowledge)
         lightningRod.setLexiconPages(PageText("0"), 
@@ -48,6 +51,7 @@ public object LexiconRegistry {
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.emblem, 1, 0), lightningRod, 3)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.emblem, 1, 1), technicolor, 3)
         for (i in 0..3){
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood0, 1, i), irisSapling, 1)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood1, 1, i), irisSapling, 1)
@@ -55,7 +59,7 @@ public object LexiconRegistry {
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood3, 1, i), irisSapling, 1)
         }
         for (i in 0..15) {
-            LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.colorfulSkyDirtRod, 1, i), techicolor, 1)
+            LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.colorfulSkyDirtRod, 1, i), technicolor, 1)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisLeaves, 1, i), irisSapling, 5)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i), irisSapling, 1)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.coloredSlabs[i], 1), irisSapling, 2)

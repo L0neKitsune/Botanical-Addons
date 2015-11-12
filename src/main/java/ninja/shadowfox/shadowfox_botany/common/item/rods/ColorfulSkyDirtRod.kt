@@ -3,6 +3,7 @@ package ninja.shadowfox.shadowfox_botany.common.item.rods
 import java.awt.Color
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.init.Blocks
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
@@ -13,6 +14,7 @@ import net.minecraft.util.MathHelper
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemPriestEmblem
 import vazkii.botania.client.core.handler.ItemsRemainingRenderHandler
 import vazkii.botania.api.item.IAvatarTile
 import vazkii.botania.api.item.IAvatarWieldable
@@ -43,8 +45,14 @@ class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulDirtRod(
                 val g = color.getGreen() / 255F
                 val b = color.getBlue() / 255F
 
+                val sif = (ItemPriestEmblem.getEmblem(1, player) != null)
+                var basePlayerRange = 5.0
+                if (player is EntityPlayerMP)
+                    basePlayerRange = player.theItemInWorldManager.getBlockReachDistance()
+                val distmultiplier = if (sif) basePlayerRange else 3.0
+
                 val playerVec = Vector3.fromEntityCenter(player)
-                val lookVec = Vector3(player.lookVec).multiply(3.toDouble())
+                val lookVec = Vector3(player.lookVec).multiply(distmultiplier)
                 val placeVec = playerVec.copy().add(lookVec)
 
                 val x = MathHelper.floor_double(placeVec.x)
