@@ -18,6 +18,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.item.StandardItem
+import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemPriestEmblem
 import vazkii.botania.api.item.IAvatarTile
 import vazkii.botania.api.item.IAvatarWieldable
 import vazkii.botania.api.item.IManaProficiencyArmor
@@ -31,24 +32,31 @@ import java.util.*
 
 public open class LightningRod(name: String = "lightningRod") : StandardItem(name), IManaUsingItem, IAvatarWieldable {
     private val avatarOverlay = ResourceLocation("shadowfox_botany:textures/model/avatarLightning.png")
-    private val COST_AVATAR = 100
+    private val COST_AVATAR = 150
 
     val COST = 300
+    val PRIEST_COST = 200
+    val THOR_COST = 200
+    val PROWESS_COST = 50
 
-    val SPEED = 80
-    val THOR_SPEEDUP = 30
-    val PROWESS_SPEEDUP = 20
+    val SPEED = 90
+    val PRIEST_SPEEDUP = 30
+    val THOR_SPEEDUP = -30
+    val PROWESS_SPEEDUP = 10
 
     val DAMAGE = 8f
-    val THOR_POWERUP = 3f
-    val PROWESS_POWERUP = 1f
+    val PRIEST_POWERUP = 3f
+    val THOR_POWERUP = 7f
+    val PROWESS_POWERUP = 2f
 
-    val CHAINRANGE = 8f
+    val CHAINRANGE = 7f
+    val PRIEST_RANGEUP = -1f
     val THOR_RANGEUP = 1f
     val PROWESS_RANGEUP = 1f
 
     val TARGETS = 4
-    val THOR_TARGETS = 3
+    val PRIEST_TARGETS = 0
+    val THOR_TARGETS = -2
     val PROWESS_TARGETS = 1
 
 
@@ -73,13 +81,17 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
         if (count != this.getMaxItemUseDuration(stack) && !player!!.worldObj.isRemote && ManaItemHandler.requestManaExactForTool(stack, player, COST, false)) {
 
             var target = getTarget(player!!.worldObj, player, ItemNBTHelper.getInt(stack, "target", -1))
+            var thor: Boolean
+            var priest: Boolean
+            var prowess: Boolean
             if (target != null) {
                 ItemNBTHelper.setInt(stack, "target", target.entityId)
-                val thor: Boolean = (vazkii.botania.common.item.relic.ItemThorRing.getThorRing(player) != null)
-                val prowess = IManaProficiencyArmor.Helper.hasProficiency(player)
+                thor = (vazkii.botania.common.item.relic.ItemThorRing.getThorRing(player) != null)
+                priest = (ItemPriestEmblem.getEmblem(0, player) != null)
+                prowess = IManaProficiencyArmor.Helper.hasProficiency(player)
 
-                val shockspeed = getSpeed(thor, prowess)
-                val damage = getDamage(thor, prowess)
+                val shockspeed = getSpeed(thor, prowess, priest)
+                val damage = getDamage(thor, prowess, priest)
 
                 val targetCenter = Vector3.fromEntityCenter(target).add(0.0, 0.75, 0.0).add(Vector3(target.lookVec).multiply(-0.25))
                 val targetShift = targetCenter.copy().add(getHeadOrientation(target))
@@ -96,33 +108,37 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                 if (count % shockspeed == 0) {
                     if (ConfigHandler.realLightning && thor) {
                         if (spawnLightning(player.worldObj, target.posX.toDouble(), target.posY.toDouble(), target.posZ.toDouble())) {
-                            ManaItemHandler.requestManaExactForTool(stack, player, COST, true)
-                            target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage)
+                            if (ManaItemHandler.requestManaExactForTool(stack, player, getCost(thor, prowess, priest), true))
+                                target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage)
                         }
                     } else {
-                        target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage)
-                        ManaItemHandler.requestManaExactForTool(stack, player, COST, true)
-                        Botania.proxy.lightningFX(player.worldObj, Vector3.fromEntityCenter(player), Vector3.fromEntityCenter(target), 1.0f, 96708, 11198463)
-                        player.worldObj.playSoundEffect(target.posX.toDouble(), target.posY.toDouble(), target.posZ.toDouble(), "ambient.weather.thunder", 100.0f, 0.8f + player.worldObj.rand.nextFloat() * 0.2f)
+                        if (ManaItemHandler.requestManaExactForTool(stack, player, getCost(thor, prowess, priest), true)) {
+                            target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage)
+                            Botania.proxy.lightningFX(player.worldObj, Vector3.fromEntityCenter(player), Vector3.fromEntityCenter(target), 1.0f, 96708, 11198463)
+                            player.worldObj.playSoundEffect(target.posX.toDouble(), target.posY.toDouble(), target.posZ.toDouble(), "ambient.weather.thunder", 100.0f, 0.8f + player.worldObj.rand.nextFloat() * 0.2f)
+                        }
+                        chainLightning(stack!!, target, player, thor, prowess, priest)
                     }
-                    chainLightning(stack!!, target, player, thor, prowess)
                 }
 
             }
         }
     }
 
-    fun getSpeed(thor: Boolean, prowess: Boolean): Int {
-        return SPEED - (if (thor) THOR_SPEEDUP else 0) - (if (prowess) PROWESS_SPEEDUP else 0)
+    fun getCost(thor: Boolean, prowess: Boolean, priest: Boolean): Int {
+        return COST + (if (thor) THOR_COST else 0) + (if (prowess) PROWESS_COST else 0) + (if (priest) PRIEST_COST else 0)
     }
-    fun getDamage(thor: Boolean, prowess: Boolean): Float {
-        return DAMAGE + (if (thor) THOR_POWERUP else 0f) + (if (prowess) PROWESS_POWERUP else 0f)
+    fun getSpeed(thor: Boolean, prowess: Boolean, priest: Boolean): Int {
+        return SPEED - (if (thor) THOR_SPEEDUP else 0) - (if (prowess) PROWESS_SPEEDUP else 0) - (if (priest) PRIEST_SPEEDUP else 0)
     }
-    fun getRange(thor: Boolean, prowess: Boolean): Float {
-        return CHAINRANGE + (if (thor) THOR_RANGEUP else 0f) + (if (prowess) PROWESS_RANGEUP else 0f)
+    fun getDamage(thor: Boolean, prowess: Boolean, priest: Boolean): Float {
+        return DAMAGE + (if (thor) THOR_POWERUP else 0f) + (if (prowess) PROWESS_POWERUP else 0f) + (if (priest) PRIEST_POWERUP else 0f)
     }
-    fun getTargetCap(thor: Boolean, prowess: Boolean): Int {
-        return TARGETS + (if (thor) THOR_TARGETS else 0) + (if (prowess) PROWESS_TARGETS else 0)
+    fun getRange(thor: Boolean, prowess: Boolean, priest: Boolean): Float {
+        return CHAINRANGE + (if (thor) THOR_RANGEUP else 0f) + (if (prowess) PROWESS_RANGEUP else 0f) + (if (priest) PRIEST_RANGEUP else 0f)
+    }
+    fun getTargetCap(thor: Boolean, prowess: Boolean, priest: Boolean): Int {
+        return TARGETS + (if (thor) THOR_TARGETS else 0) + (if (prowess) PROWESS_TARGETS else 0) + (if (priest) PRIEST_TARGETS else 0)
     }
 
     override fun onItemRightClick(par1ItemStack: ItemStack, par2World: World?, par3EntityPlayer: EntityPlayer?): ItemStack {
@@ -161,11 +177,11 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
         return null
     }
 
-    fun chainLightning(stack: ItemStack, entity: EntityLivingBase?, attacker: EntityLivingBase?, thor: Boolean, prowess: Boolean): Boolean {
+    fun chainLightning(stack: ItemStack, entity: EntityLivingBase?, attacker: EntityLivingBase?, thor: Boolean, prowess: Boolean, priest: Boolean): Boolean {
         if (entity !is EntityPlayer && entity != null) {
-            val range = getRange(thor, prowess)
-            val targets = getTargetCap(thor, prowess)
-            var dmg = getDamage(thor, prowess)
+            val range = getRange(thor, prowess, priest)
+            val targets = getTargetCap(thor, prowess, priest)
+            var dmg = getDamage(thor, prowess, priest)
 
             val alreadyTargetedEntities = ArrayList<Entity>()
             val lightningSeed = ItemNBTHelper.getLong(stack, "lightningSeed", 0L)
@@ -293,7 +309,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
 
                     world.playSoundEffect(target.posX.toDouble(), target.posY.toDouble(), target.posZ.toDouble(), "ambient.weather.thunder", 100.0f, 0.8f + world.rand.nextFloat() * 0.2f)
 
-                    chainLightning(stack, target, null, false, false)
+                    chainLightning(stack, target, null, false, false, false)
                 }
             }
 

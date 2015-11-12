@@ -1,6 +1,7 @@
 package ninja.shadowfox.shadowfox_botany.common.item.baubles
 
 
+import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 
@@ -41,8 +42,17 @@ import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 
 import baubles.api.BaubleType
+import baubles.common.lib.PlayerHandler
 
 class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsingItem {
+
+    companion object {
+        public fun getEmblem(meta: Int, player: EntityPlayer): ItemStack? {
+            var baubles = PlayerHandler.getPlayerBaubles(player);
+            var stack = baubles.getStackInSlot(0);
+            return if (stack != null && stack.getItem() == ShadowFoxItems.emblem && stack.getItemDamage() == meta) stack else null;
+        }
+    }
 
     val TYPES = 1
     val COST = 1
