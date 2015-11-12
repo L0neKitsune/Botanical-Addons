@@ -21,9 +21,6 @@ import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBloc
 import java.awt.Color
 import java.util.*
 
-/**
- * Created by l0nekitsune on 10/24/15.
- */
 abstract class ShadowFoxSlabs(full: Boolean, mat: Material) : BlockSlab(full, mat) {
 
     init {

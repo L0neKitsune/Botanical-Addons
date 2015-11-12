@@ -7,7 +7,6 @@ import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.effect.EntityLightningBolt
 import net.minecraft.entity.monster.IMob
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.EnumAction
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
@@ -246,7 +245,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
         val world = te.worldObj
         val range = 18
 
-        if (tile.getCurrentMana() >= COST_AVATAR && tile.isEnabled() && tile.getElapsedFunctionalTicks() % 10 == 0) {
+        if (tile.currentMana >= COST_AVATAR && tile.isEnabled && tile.elapsedFunctionalTicks % 10 == 0) {
             val selector = object : IEntitySelector {
                 override fun isEntityApplicable(e: Entity): Boolean {
                     return (if (true) e is EntityLivingBase else e is IMob) && e !is EntityPlayer && e !is EntityDoppleganger
@@ -292,11 +291,11 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                 val targetCenter = Vector3.fromEntityCenter(target).add(0.0, 0.75, 0.0).add(Vector3(target.lookVec).multiply(-0.25))
                 val targetShift = targetCenter.copy().add(getHeadOrientation(target))
 
-                if (tile.getElapsedFunctionalTicks() % 10 == 0)
+                if (tile.elapsedFunctionalTicks % 10 == 0)
                     Botania.proxy.lightningFX(world, targetCenter, targetShift, 2.0f, 96708, 11198463)
                 Botania.proxy.sparkleFX(world, te.xCoord.toDouble() + 0.5, te.yCoord.toDouble() + 2.5, te.zCoord.toDouble() + 0.5, 0.667f, 0.875f, 1f, 6.0f, 6)
 
-                if (tile.getElapsedFunctionalTicks() % 100 == 0) {
+                if (tile.elapsedFunctionalTicks % 100 == 0) {
 
                     target.attackEntityFrom(DamageSource.causeMobDamage(null), DAMAGE)
 
