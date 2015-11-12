@@ -27,7 +27,10 @@ public object LexiconRegistry {
         techicolor.setLexiconPages(PageText("0"), PageCraftingRecipe("1", ModRecipes.recipesColoredSkyDirtRod))
 
         lightningRod = ShadowfoxLexiconEntry("lightningRod", BotaniaAPI.categoryTools).setKnowledgeType(BotaniaAPI.elvenKnowledge)
-        lightningRod.setLexiconPages(PageText("0"), PageCraftingRecipe("1", ModRecipes.recipesLightningRod))
+        lightningRod.setLexiconPages(PageText("0"), 
+                PageCraftingRecipe("1", ModRecipes.recipesLightningRod),
+                PageText("2"),
+                PageCraftingRecipe("3", ModRecipes.recipesPriestOfThor))
 
         irisSapling = ShadowfoxLexiconEntry("irisSapling", BotaniaAPI.categoryMisc, block = ShadowFoxBlocks.irisSapling)
         irisSapling.setLexiconPages(PageText("0"),
@@ -44,6 +47,7 @@ public object LexiconRegistry {
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.emblem, 1, 0), lightningRod, 3)
         for (i in 0..3){
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood0, 1, i), irisSapling, 1)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood1, 1, i), irisSapling, 1)
