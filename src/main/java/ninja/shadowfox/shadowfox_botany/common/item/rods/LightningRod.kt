@@ -40,7 +40,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
 
     val SPEED = 90
     val PRIEST_SPEEDUP = 30
-    val THOR_SPEEDUP = -30
+    val THOR_SPEEDUP = 0
     val PROWESS_SPEEDUP = 10
 
     val DAMAGE = 8f
