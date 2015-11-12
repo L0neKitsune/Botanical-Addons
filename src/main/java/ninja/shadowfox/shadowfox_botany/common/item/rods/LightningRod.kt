@@ -80,10 +80,15 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                 val shockspeed = getSpeed(thor, prowess)
                 val damage = getDamage(thor, prowess)
 
-                val var5 = Vector3.fromEntityCenter(target)
-                val var7 = var5.copy().add(0.0, 1.0, 0.0)
-                if (count % (shockspeed / 10) == 0)
-                    Botania.proxy.lightningFX(player.worldObj, var5, var7, 2.0f, 96708, 11198463)
+                val targetCenter = Vector3.fromEntityCenter(target)
+                val targetShift = targetCenter.copy().add(0.0, 2.0, 0.0)
+
+                val playerCenter = Vector3.fromEntityCenter(player)
+                val playerShift = playerCenter.copy().add(0.0, 2.0, 0.0)
+                if (count % (shockspeed / 10) == 0) {
+                    Botania.proxy.lightningFX(player.worldObj, targetCenter, targetShift, 2.0f, 96708, 11198463)
+                    Botania.proxy.lightningFX(player.worldObj, playerCenter, playerShift, 2.0f, 96708, 11198463)
+                }
 
 
 
@@ -259,11 +264,11 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
             if (target != null) {
                 ItemNBTHelper.setInt(stack, "target", target.entityId)
 
-                val var5 = Vector3.fromEntityCenter(target)
-                val var7 = var5.copy().add(0.0, 1.0, 0.0)
+                val targetCenter = Vector3.fromEntityCenter(target)
+                val targetShift = targetCenter.copy().add(0.0, 1.0, 0.0)
 
                 if (tile.getElapsedFunctionalTicks() % 10 == 0)
-                    Botania.proxy.lightningFX(world, var5, var7, 2.0f, 96708, 11198463)
+                    Botania.proxy.lightningFX(world, targetCenter, targetShift, 2.0f, 96708, 11198463)
                 Botania.proxy.sparkleFX(world, te.xCoord.toDouble() + 0.5, te.yCoord.toDouble() + 2.5, te.zCoord.toDouble() + 0.5, 0.667f, 0.875f, 1f, 6.0f, 6)
 
                 if (tile.getElapsedFunctionalTicks() % 100 == 0) {
