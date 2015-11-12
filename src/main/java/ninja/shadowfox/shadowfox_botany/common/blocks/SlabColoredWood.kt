@@ -19,7 +19,6 @@ import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxItemBlockSla
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
-import vazkii.botania.common.core.BotaniaCreativeTab
 import java.awt.Color
 import java.util.*
 
@@ -87,11 +86,12 @@ class SlabColoredWood(val full: Boolean, val meta: Int, val source: Block = Shad
 
     @SideOnly(Side.CLIENT)
     override fun colorMultiplier(p_149720_1_: IBlockAccess?, p_149720_2_: Int, p_149720_3_: Int, p_149720_4_: Int): Int {
-        if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
 
-        var color = EntitySheep.fleeceColorTable[meta];
-        return Color(color[0], color[1], color[2]).rgb;
+        if (meta >= EntitySheep.fleeceColorTable.size)
+            return 0xFFFFFF
+
+        var color = EntitySheep.fleeceColorTable[meta]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     fun getFullBlock(): BlockSlab {

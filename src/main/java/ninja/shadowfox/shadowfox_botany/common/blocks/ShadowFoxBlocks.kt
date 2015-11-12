@@ -8,7 +8,6 @@ import vazkii.botania.common.block.decor.slabs.BlockBiomeStoneSlab
 import vazkii.botania.common.block.decor.stairs.BlockBiomeStoneStairs
 
 public object ShadowFoxBlocks {
-//    public var orangeBlock: Block
 
     public var coloredDirtBlock: Block
     public var irisSapling: Block
@@ -21,6 +20,9 @@ public object ShadowFoxBlocks {
     public var irisWood3: Block
 
     public var coloredPlanks: Block
+
+    public var irisTallGrass0: Block
+    public var irisTallGrass1: Block
 
 
     public var coloredSlabs: Array<Block>
@@ -43,7 +45,6 @@ public object ShadowFoxBlocks {
         irisWood2 = BlockColoredWood(2)
         irisWood3 = BlockColoredWood(3)
 
-
         coloredPlanks = BlockColoredPlanks()
 
         coloredSlabs = Array<Block>(16 , {i -> SlabColoredWood(false, i)})
@@ -57,6 +58,9 @@ public object ShadowFoxBlocks {
         for (i in coloredSlabsFull) {
             (i as SlabColoredWood).register()
         }
+
+        irisTallGrass0 = BlockColoredDoubleGrass(0)
+        irisTallGrass1 = BlockColoredDoubleGrass(1)
 
         OreDictionary.registerOre("treeSapling", irisSapling)
 

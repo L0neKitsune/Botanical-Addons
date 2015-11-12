@@ -14,32 +14,32 @@ import ninja.shadowfox.shadowfox_botany.common.brew.ShadowFoxPotions
 /**
  * All the mana is mine mahhhaahahha
  */
-class EntityVoidCreeper(p_i1701_1_: World): EntityCreeper(p_i1701_1_) {
+class EntityVoidCreeper(world: World): EntityCreeper(world) {
     private var lastActiveTime: Int = 0
     private var timeSinceIgnited: Int = 0
     private var range: Int = 3
     private var fuseTime = 30
 
-    override fun writeEntityToNBT(p_70014_1_: NBTTagCompound) {
-        super.writeEntityToNBT(p_70014_1_)
+    override fun writeEntityToNBT(tag: NBTTagCompound) {
+        super.writeEntityToNBT(tag)
 
         if (this.dataWatcher.getWatchableObjectByte(17).toInt() == 1) {
-            p_70014_1_.setBoolean("powered", true)
+            tag.setBoolean("powered", true)
         }
 
-        p_70014_1_.setShort("Fuse", this.fuseTime.toShort())
-        p_70014_1_.setBoolean("ignited", this.func_146078_ca())
+        tag.setShort("Fuse", this.fuseTime.toShort())
+        tag.setBoolean("ignited", this.func_146078_ca())
     }
 
-    override fun readEntityFromNBT(p_70037_1_: NBTTagCompound) {
-        super.readEntityFromNBT(p_70037_1_)
-        this.dataWatcher.updateObject(17, java.lang.Byte.valueOf((if (p_70037_1_.getBoolean("powered")) 1 else 0).toByte()))
+    override fun readEntityFromNBT(tag: NBTTagCompound) {
+        super.readEntityFromNBT(tag)
+        this.dataWatcher.updateObject(17, java.lang.Byte.valueOf((if (tag.getBoolean("powered")) 1 else 0).toByte()))
 
-        if (p_70037_1_.hasKey("Fuse", 99)) {
-            this.fuseTime = p_70037_1_.getShort("Fuse").toInt()
+        if (tag.hasKey("Fuse", 99)) {
+            this.fuseTime = tag.getShort("Fuse").toInt()
         }
 
-        if (p_70037_1_.getBoolean("ignited")) {
+        if (tag.getBoolean("ignited")) {
             this.func_146079_cb()
         }
     }
@@ -76,9 +76,9 @@ class EntityVoidCreeper(p_i1701_1_: World): EntityCreeper(p_i1701_1_) {
         super.onUpdate()
     }
 
-    override fun fall(p_70069_1_: Float) {
-        super.fall(p_70069_1_)
-        this.timeSinceIgnited = (this.timeSinceIgnited.toFloat() + p_70069_1_ * 1.5f).toInt()
+    override fun fall(distance: Float) {
+        super.fall(distance)
+        this.timeSinceIgnited = (this.timeSinceIgnited.toFloat() + distance * 1.5f).toInt()
 
         if (this.timeSinceIgnited > this.fuseTime - 5) {
             this.timeSinceIgnited = this.fuseTime - 5

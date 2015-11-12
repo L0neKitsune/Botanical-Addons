@@ -51,6 +51,7 @@ class StairsColoredWood(val meta: Int, val source: Block = ShadowFoxBlocks.color
 
         var color = EntitySheep.fleeceColorTable[meta];
         return Color(color[0], color[1], color[2]).rgb;
+
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {

@@ -16,9 +16,6 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.item.StandardItem
-import ninja.shadowfox.shadowfox_botany.common.utils.boundingBox
-import ninja.shadowfox.shadowfox_botany.common.utils.centerVector
-import ninja.shadowfox.shadowfox_botany.common.utils.playSoundAtEntity
 import vazkii.botania.api.item.IAvatarTile
 import vazkii.botania.api.item.IAvatarWieldable
 import vazkii.botania.api.item.IManaProficiencyArmor
@@ -32,12 +29,29 @@ import java.util.*
 
 public open class LightningRod(name: String = "lightningRod") : StandardItem(name), IManaUsingItem, IAvatarWieldable {
     private val avatarOverlay = ResourceLocation("shadowfox_botany:textures/model/avatarLightning.png")
-    val COST: Int = 300;
     private val COST_AVATAR = 100
+
+    val COST = 300
+
+    val SPEED = 80
+    val THOR_SPEEDUP = 30
+    val PROWESS_SPEEDUP = 20
+
+    val DAMAGE = 8f
+    val THOR_POWERUP = 3f
+    val PROWESS_POWERUP = 1f
+
+    val CHAINRANGE = 8f
+    val THOR_RANGEUP = 1f
+    val PROWESS_RANGEUP = 1f
+
+    val TARGETS = 4
+    val THOR_TARGETS = 3
+    val PROWESS_TARGETS = 1
 
 
     init {
-        setMaxStackSize(1);
+        setMaxStackSize(1)
     }
 
     override fun getItemUseAction(par1ItemStack: ItemStack?): EnumAction {
@@ -48,8 +62,8 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
         return 72000
     }
 
-    override fun onPlayerStoppedUsing(stack: ItemStack?, p_77615_2_: World?, p_77615_3_: EntityPlayer?, p_77615_4_: Int) {
-        super.onPlayerStoppedUsing(stack, p_77615_2_, p_77615_3_, p_77615_4_)
+    override fun onPlayerStoppedUsing(stack: ItemStack?, world: World?, player: EntityPlayer?, count: Int) {
+        super.onPlayerStoppedUsing(stack, world, player, count)
         ItemNBTHelper.setInt(stack, "target", -1)
     }
 
@@ -60,29 +74,53 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
             if (target != null) {
                 ItemNBTHelper.setInt(stack, "target", target.entityId)
                 val thor: Boolean = (vazkii.botania.common.item.relic.ItemThorRing.getThorRing(player) != null)
+                val prowess = IManaProficiencyArmor.Helper.hasProficiency(player)
+
+                val shockspeed = getSpeed(thor, prowess)
+                val damage = getDamage(thor, prowess)
+
+                val targetCenter = Vector3.fromEntityCenter(target)
+                val targetShift = targetCenter.copy().add(0.0, 2.0, 0.0)
+
+                val playerCenter = Vector3.fromEntityCenter(player)
+                val playerShift = playerCenter.copy().add(0.0, 2.0, 0.0)
+                if (count % (shockspeed / 10) == 0) {
+                    Botania.proxy.lightningFX(player.worldObj, targetCenter, targetShift, 2.0f, 96708, 11198463)
+                    Botania.proxy.lightningFX(player.worldObj, playerCenter, playerShift, 2.0f, 96708, 11198463)
+                }
 
 
-                val var5 = Vector3.fromEntityCenter(target)
-                val var7 = var5.copy().add(0.0, 1.0, 0.0)
-                Botania.proxy.lightningFX(player.worldObj, var5, var7, 2.0f, 96708, 11198463)
 
-                if (count % (if (IManaProficiencyArmor.Helper.hasProficiency(player)) 80 else 60) == 0) {
+                if (count % shockspeed == 0) {
                     if (ConfigHandler.realLightning && thor) {
                         if (spawnLightning(player.worldObj, target.posX.toDouble(), target.posY.toDouble(), target.posZ.toDouble())) {
                             ManaItemHandler.requestManaExactForTool(stack, player, COST, true)
-                            target.attackEntityFrom(DamageSource.causePlayerDamage(player), if (thor) 10f else 8f)
+                            target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage)
                         }
                     } else {
-                        target.attackEntityFrom(DamageSource.causePlayerDamage(player), if (thor) 10f else 8f)
+                        target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage)
                         ManaItemHandler.requestManaExactForTool(stack, player, COST, true)
-                        Botania.proxy.lightningFX(player.worldObj, player.centerVector(), target.centerVector(), 1.0f, 96708, 11198463)
-                        player.playSoundAtEntity("ambient.weather.thunder", 100.0f, 0.8f + player.worldObj.rand.nextFloat() * 0.2f)
+                        Botania.proxy.lightningFX(player.worldObj, Vector3.fromEntityCenter(player), Vector3.fromEntityCenter(target), 1.0f, 96708, 11198463)
+                        player.worldObj.playSoundEffect(target.posX.toDouble(), target.posY.toDouble(), target.posZ.toDouble(), "ambient.weather.thunder", 100.0f, 0.8f + player.worldObj.rand.nextFloat() * 0.2f)
                     }
-                    chainLightning(stack!!, target, player, thor)
+                    chainLightning(stack!!, target, player, thor, prowess)
                 }
 
             }
         }
+    }
+
+    fun getSpeed(thor: Boolean, prowess: Boolean): Int {
+        return SPEED - (if (thor) THOR_SPEEDUP else 0) - (if (prowess) PROWESS_SPEEDUP else 0)
+    }
+    fun getDamage(thor: Boolean, prowess: Boolean): Float {
+        return DAMAGE + (if (thor) THOR_POWERUP else 0f) + (if (prowess) PROWESS_POWERUP else 0f)
+    }
+    fun getRange(thor: Boolean, prowess: Boolean): Float {
+        return CHAINRANGE + (if (thor) THOR_RANGEUP else 0f) + (if (prowess) PROWESS_RANGEUP else 0f)
+    }
+    fun getTargetCap(thor: Boolean, prowess: Boolean): Int {
+        return TARGETS + (if (thor) THOR_TARGETS else 0) + (if (prowess) PROWESS_TARGETS else 0)
     }
 
     override fun onItemRightClick(par1ItemStack: ItemStack, par2World: World?, par3EntityPlayer: EntityPlayer?): ItemStack {
@@ -121,11 +159,13 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
         return null
     }
 
-    fun chainLightning(stack: ItemStack, entity: EntityLivingBase?, attacker: EntityLivingBase?, supercharge: Boolean): Boolean {
+    fun chainLightning(stack: ItemStack, entity: EntityLivingBase?, attacker: EntityLivingBase?, thor: Boolean, prowess: Boolean): Boolean {
         if (entity !is EntityPlayer && entity != null) {
-            val range = if (!supercharge) 8.0 else 10.0
+            val range = getRange(thor, prowess)
+            val targets = getTargetCap(thor, prowess)
+            var dmg = getDamage(thor, prowess)
+
             val alreadyTargetedEntities = ArrayList<Entity>()
-            var dmg = if (!supercharge) 6 else 8
             val lightningSeed = ItemNBTHelper.getLong(stack, "lightningSeed", 0L)
             val selector = object : IEntitySelector {
                 override fun isEntityApplicable(e: Entity): Boolean {
@@ -135,8 +175,8 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
             val rand = Random(lightningSeed)
             var lightningSource: EntityLivingBase = entity
 
-            for (i in 0..if (!supercharge) 4 else 6) {
-                val entities = entity.worldObj.getEntitiesWithinAABBExcludingEntity(lightningSource, lightningSource.boundingBox(range.toInt()), selector)
+            for (i in 0..targets) {
+                val entities = entity.worldObj.getEntitiesWithinAABBExcludingEntity(lightningSource, AxisAlignedBB.getBoundingBox(lightningSource.posX - range, lightningSource.posY - range, lightningSource.posZ - range, lightningSource.posX + range, lightningSource.posY + range, lightningSource.posZ + range), selector)
                 if (entities.isEmpty()) {
                     break
                 }
@@ -148,7 +188,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                     target.attackEntityFrom(DamageSource.causeMobDamage(attacker), dmg.toFloat())
                 }
 
-                Botania.proxy.lightningFX(entity.worldObj, lightningSource.centerVector(), target.centerVector(), 1.0f, 96708, 11198463)
+                Botania.proxy.lightningFX(entity.worldObj, Vector3.fromEntityCenter(lightningSource), Vector3.fromEntityCenter(target), 1.0f, 96708, 11198463)
                 alreadyTargetedEntities.add(target)
                 lightningSource = target
                 --dmg
@@ -168,11 +208,11 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
     }
 
     override fun isFull3D(): Boolean {
-        return true;
+        return true
     }
 
     override fun usesMana(stack: ItemStack): Boolean {
-        return true;
+        return true
     }
 
     override fun onAvatarUpdate(tile: IAvatarTile, stack: ItemStack) {
@@ -187,7 +227,8 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                 }
             }
 
-            val entities = world.selectEntitiesWithinAABB(EntityLivingBase::class.java, te.boundingBox(range), selector)
+            val entities = world.selectEntitiesWithinAABB(EntityLivingBase::class.java, AxisAlignedBB.getBoundingBox((te.xCoord - range).toDouble(), (te.yCoord - range).toDouble(),
+                    (te.zCoord - range).toDouble(), (te.xCoord + range).toDouble(), (te.yCoord + range).toDouble(), (te.zCoord + range).toDouble()), selector)
 
             if (entities.size == 0) return
 
@@ -204,46 +245,45 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
             }
 
             if (target == null) {
-                if (entities.size > 0)
-                    while (entities.size > 0) {
-                        var i = world.rand.nextInt(entities.size)
+                while (entities.size > 0) {
+                    var i = world.rand.nextInt(entities.size)
 
-                        if (entities[i] is EntityLivingBase && entities[i] is IMob && entities[i] !is EntityPlayer) {
-                            var entity: EntityLivingBase = entities[i] as EntityLivingBase
-                            if (entity is EntityLivingBase && !entity.isDead) {
-                                target = entity
-                                break
-                            }
+                    if (entities[i] is EntityLivingBase && entities[i] is IMob && entities[i] !is EntityPlayer) {
+                        var entity: EntityLivingBase = entities[i] as EntityLivingBase
+                        if (entity is EntityLivingBase && !entity.isDead) {
+                            target = entity
+                            break
                         }
-
-                        entities.remove(i)
                     }
+
+                    entities.remove(entities[i])
+                }
             }
 
             if (target != null) {
                 ItemNBTHelper.setInt(stack, "target", target.entityId)
 
-                val var5 = Vector3.fromEntityCenter(target)
-                val var7 = var5.copy().add(0.0, 1.0, 0.0)
+                val targetCenter = Vector3.fromEntityCenter(target)
+                val targetShift = targetCenter.copy().add(0.0, 1.0, 0.0)
 
-                Botania.proxy.lightningFX(world, var5, var7, 1.0f, 96708, 11198463)
-
+                if (tile.elapsedFunctionalTicks % 10 == 0)
+                    Botania.proxy.lightningFX(world, targetCenter, targetShift, 2.0f, 96708, 11198463)
                 Botania.proxy.sparkleFX(world, te.xCoord.toDouble() + 0.5, te.yCoord.toDouble() + 2.5, te.zCoord.toDouble() + 0.5, 0.667f, 0.875f, 1f, 6.0f, 6)
 
                 if (tile.elapsedFunctionalTicks % 100 == 0) {
 
-                    target.attackEntityFrom(DamageSource.causeMobDamage(null), 10.toFloat())
+                    target.attackEntityFrom(DamageSource.causeMobDamage(null), DAMAGE)
 
                     if (!world.isRemote) tile.recieveMana(-COST_AVATAR)
 
                     var vect = Vector3()
                     vect.set(te.xCoord.toDouble() + 0.5, te.yCoord.toDouble() + 2.5, te.zCoord.toDouble() + 0.5)
 
-                    Botania.proxy.lightningFX(world, vect, target.centerVector(), 1.0f, 96708, 11198463)
+                    Botania.proxy.lightningFX(world, vect, Vector3.fromEntityCenter(target), 1.0f, 96708, 11198463)
 
-                    target.playSoundAtEntity("ambient.weather.thunder", 100.0f, 0.8f + world.rand.nextFloat() * 0.2f)
+                    world.playSoundEffect(target.posX.toDouble(), target.posY.toDouble(), target.posZ.toDouble(), "ambient.weather.thunder", 100.0f, 0.8f + world.rand.nextFloat() * 0.2f)
 
-                    chainLightning(stack, target, null, false)
+                    chainLightning(stack, target, null, false, false)
                 }
             }
 

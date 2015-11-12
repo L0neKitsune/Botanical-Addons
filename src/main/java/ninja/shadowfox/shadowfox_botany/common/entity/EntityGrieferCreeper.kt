@@ -8,37 +8,37 @@ import vazkii.botania.common.entity.EntityManaStorm
 /**
  * Created by l0nekitsune on 10/29/15.
  */
-class EntityGrieferCreeper(p_i1701_1_: World): EntityCreeper(p_i1701_1_) {
+class EntityGrieferCreeper(world: World): EntityCreeper(world) {
     private var lastActiveTime: Int = 0
     /** The amount of time since the creeper was close enough to the player to ignite  */
     private var timeSinceIgnited: Int = 0
     private var explosionRadius = 6
     private var fuseTime = 30
 
-    override fun writeEntityToNBT(p_70014_1_: NBTTagCompound) {
-        super.writeEntityToNBT(p_70014_1_)
+    override fun writeEntityToNBT(tag: NBTTagCompound) {
+        super.writeEntityToNBT(tag)
 
         if (this.dataWatcher.getWatchableObjectByte(17).toInt() == 1) {
-            p_70014_1_.setBoolean("powered", true)
+            tag.setBoolean("powered", true)
         }
 
-        p_70014_1_.setShort("Fuse", this.fuseTime.toShort())
-        p_70014_1_.setBoolean("ignited", this.func_146078_ca())
+        tag.setShort("Fuse", this.fuseTime.toShort())
+        tag.setBoolean("ignited", this.func_146078_ca())
     }
 
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    override fun readEntityFromNBT(p_70037_1_: NBTTagCompound) {
-        super.readEntityFromNBT(p_70037_1_)
-        this.dataWatcher.updateObject(17, java.lang.Byte.valueOf((if (p_70037_1_.getBoolean("powered")) 1 else 0).toByte()))
+    override fun readEntityFromNBT(tag: NBTTagCompound) {
+        super.readEntityFromNBT(tag)
+        this.dataWatcher.updateObject(17, java.lang.Byte.valueOf((if (tag.getBoolean("powered")) 1 else 0).toByte()))
 
-        if (p_70037_1_.hasKey("Fuse", 99)) {
-            this.fuseTime = p_70037_1_.getShort("Fuse").toInt()
+        if (tag.hasKey("Fuse", 99)) {
+            this.fuseTime = tag.getShort("Fuse").toInt()
         }
 
-        if (p_70037_1_.getBoolean("ignited")) {
+        if (tag.getBoolean("ignited")) {
             this.func_146079_cb()
         }
     }
