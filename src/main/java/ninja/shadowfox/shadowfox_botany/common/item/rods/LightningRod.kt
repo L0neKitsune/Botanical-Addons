@@ -203,20 +203,19 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
             }
 
             if (target == null) {
-                if (entities.size > 0)
-                    while (entities.size > 0) {
-                        var i = world.rand.nextInt(entities.size)
+                while (entities.size > 0) {
+                    var i = world.rand.nextInt(entities.size)
 
-                        if (entities[i] is EntityLivingBase && entities[i] is IMob && entities[i] !is EntityPlayer) {
-                            var entity: EntityLivingBase = entities[i] as EntityLivingBase
-                            if (entity is EntityLivingBase && !entity.isDead) {
-                                target = entity
-                                break
-                            }
+                    if (entities[i] is EntityLivingBase && entities[i] is IMob && entities[i] !is EntityPlayer) {
+                        var entity: EntityLivingBase = entities[i] as EntityLivingBase
+                        if (entity is EntityLivingBase && !entity.isDead) {
+                            target = entity
+                            break
                         }
-
-                        entities.remove(i)
                     }
+
+                    entities.remove(entities[i])
+                }
             }
 
             if (target != null) {
