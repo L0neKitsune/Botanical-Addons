@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.EnumAction
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
+import net.minecraft.util.MathHelper
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.DamageSource
 import net.minecraft.util.ResourceLocation
@@ -80,11 +81,11 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                 val shockspeed = getSpeed(thor, prowess)
                 val damage = getDamage(thor, prowess)
 
-                val targetCenter = Vector3.fromEntityCenter(target)
-                val targetShift = targetCenter.copy().add(0.0, 2.0, 0.0)
+                val targetCenter = Vector3.fromEntityCenter(target).add(0.0, 0.75, 0.0).add(Vector3(target.lookVec).multiply(-0.25))
+                val targetShift = targetCenter.copy().add(getHeadOrientation(target))
 
-                val playerCenter = Vector3.fromEntityCenter(player)
-                val playerShift = playerCenter.copy().add(0.0, 2.0, 0.0)
+                val playerCenter = Vector3.fromEntityCenter(player).add(0.0, 0.75, 0.0).add(Vector3(player.lookVec).multiply(-0.25))
+                val playerShift = playerCenter.copy().add(getHeadOrientation(player))
                 if (count % (shockspeed / 10) == 0) {
                     Botania.proxy.lightningFX(player.worldObj, targetCenter, targetShift, 2.0f, 96708, 11198463)
                     Botania.proxy.lightningFX(player.worldObj, playerCenter, playerShift, 2.0f, 96708, 11198463)
@@ -216,6 +217,14 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
         return true
     }
 
+    fun getHeadOrientation(entity: EntityLivingBase): Vector3 {
+        val f1 = MathHelper.cos(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat());
+        val f2 = MathHelper.sin(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat());
+        val f3 = -MathHelper.cos(-(entity.rotationPitch-90) * 0.017453292F);
+        val f4 = MathHelper.sin(-(entity.rotationPitch-90) * 0.017453292F);
+        return Vector3((f2 * f3).toDouble(), f4.toDouble(), (f1 * f3).toDouble())
+    }
+
     override fun onAvatarUpdate(tile: IAvatarTile, stack: ItemStack) {
         val te = tile as TileEntity
         val world = te.worldObj
@@ -264,8 +273,8 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
             if (target != null) {
                 ItemNBTHelper.setInt(stack, "target", target.entityId)
 
-                val targetCenter = Vector3.fromEntityCenter(target)
-                val targetShift = targetCenter.copy().add(0.0, 1.0, 0.0)
+                val targetCenter = Vector3.fromEntityCenter(target).add(0.0, 0.75, 0.0).add(Vector3(target.lookVec).multiply(-0.25))
+                val targetShift = targetCenter.copy().add(getHeadOrientation(target))
 
                 if (tile.getElapsedFunctionalTicks() % 10 == 0)
                     Botania.proxy.lightningFX(world, targetCenter, targetShift, 2.0f, 96708, 11198463)
