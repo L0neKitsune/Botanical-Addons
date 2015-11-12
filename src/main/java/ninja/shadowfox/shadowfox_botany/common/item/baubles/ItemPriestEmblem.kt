@@ -48,14 +48,14 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
 
     companion object {
         public fun getEmblem(meta: Int, player: EntityPlayer): ItemStack? {
-            var baubles = PlayerHandler.getPlayerBaubles(player);
-            var stack = baubles.getStackInSlot(0);
-            return if (stack != null && stack.getItem() == ShadowFoxItems.emblem && stack.getItemDamage() == meta) stack else null;
+            var baubles = PlayerHandler.getPlayerBaubles(player)
+            var stack = baubles.getStackInSlot(0)
+            return if (stack != null && stack.getItem() == ShadowFoxItems.emblem && stack.getItemDamage() == meta && ItemNBTHelper.getByte(stack, "active", 0) == 1.toByte()) stack else null
         }
     }
 
     val TYPES = 1
-    val COST = 1
+    val COST = 2
     var icons: Array<IIcon?> = arrayOfNulls<IIcon>(TYPES)
 
     init {
@@ -90,25 +90,27 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
     }
 
     fun getHeadOrientation(entity: EntityLivingBase): Vector3 {
-        val f1 = MathHelper.cos(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat());
-        val f2 = MathHelper.sin(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat());
-        val f3 = -MathHelper.cos(-(entity.rotationPitch-90) * 0.017453292F);
-        val f4 = MathHelper.sin(-(entity.rotationPitch-90) * 0.017453292F);
+        val f1 = MathHelper.cos(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat())
+        val f2 = MathHelper.sin(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat())
+        val f3 = -MathHelper.cos(-(entity.rotationPitch-90) * 0.017453292F)
+        val f4 = MathHelper.sin(-(entity.rotationPitch-90) * 0.017453292F)
         return Vector3((f2 * f3).toDouble(), f4.toDouble(), (f1 * f3).toDouble())
     }
 
     override fun onWornTick(stack: ItemStack, player: EntityLivingBase) {
         if (player.ticksExisted % 10 == 0) {
-            when (stack.getItemDamage()) {
-                0 -> {
-                        var playerHead = Vector3.fromEntityCenter(player).add(0.0, 0.75, 0.0).add(Vector3(player.lookVec).multiply(-0.25))
-                        val playerShift = playerHead.copy().add(getHeadOrientation(player))
-                        Botania.proxy.lightningFX(player.worldObj, playerHead, playerShift, 2.0f, 96708, 11198463)
-                }
-            }
+            
             if(player is EntityPlayer) {
-                if (ManaItemHandler.requestManaExact(stack, player, COST, true))
+                if (ManaItemHandler.requestManaExact(stack, player, COST, true)) {
                     ItemNBTHelper.setByte(stack, "active", 1.toByte())
+                    when (stack.getItemDamage()) {
+                        0 -> {
+                                var playerHead = Vector3.fromEntityCenter(player).add(0.0, 0.75, 0.0).add(Vector3(player.lookVec).multiply(-0.25))
+                                val playerShift = playerHead.copy().add(getHeadOrientation(player))
+                                Botania.proxy.lightningFX(player.worldObj, playerHead, playerShift, 2.0f, 96708, 11198463)
+                        }
+                    }
+                }
                 else
                     ItemNBTHelper.setByte(stack, "active", 0.toByte())
             }

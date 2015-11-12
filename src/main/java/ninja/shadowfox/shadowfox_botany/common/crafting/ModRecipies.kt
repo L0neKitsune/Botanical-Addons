@@ -28,6 +28,7 @@ public object ModRecipes {
     val recipesSlabsFull: List<IRecipe>
     val recipesColoredSkyDirtRod: List<IRecipe>
     val recipesLightningRod: IRecipe
+    val recipesPriestOfThor: IRecipe
     val recipesLeafDyes: List<IRecipe>
     val recipesRedstoneRoot: List<IRecipe>
     val recipesPastoralSeeds: List<RecipeManaInfusion>
@@ -109,15 +110,27 @@ public object ModRecipes {
         recipesColoredSkyDirtRod = BotaniaAPI.getLatestAddedRecipes(16)
 
         addOreDictRecipe(ItemStack(ShadowFoxItems.lightningRod, 1),
-                " DW",
-                " SD",
+                " TW",
+                " ST",
                 "E  ",
                 'E', LibOreDict.ENDER_AIR_BOTTLE,
-                'D', LibOreDict.DRAGONSTONE,
+                'T', LibOreDict.TERRA_STEEL,
                 'S', LibOreDict.DREAMWOOD_TWIG,
                 'W', LibOreDict.RUNE[13])
 
         recipesLightningRod = BotaniaAPI.getLatestAddedRecipe()
+
+        addOreDictRecipe(ItemStack(ShadowFoxItems.emblem, 1, 0),
+                "SES",
+                "TGT",
+                " W ",
+                'E', LibOreDict.ENDER_AIR_BOTTLE,
+                'T', LibOreDict.TERRASTEEL_NUGGET,
+                'G', LibOreDict.LIFE_ESSENCE,
+                'W', LibOreDict.RUNE[13],
+                'S', ItemStack(Items.string, 1))
+
+        recipesPriestOfThor = BotaniaAPI.getLatestAddedRecipe()
 
         for (i in 0..15)
             addShapelessOreDictRecipe(ItemStack(BotaniaItems.manaResource, 1, 6), "dustRedstone", ItemStack(ShadowFoxBlocks.irisGrass, 1, i))

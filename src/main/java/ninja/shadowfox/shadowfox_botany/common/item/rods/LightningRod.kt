@@ -234,10 +234,10 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
     }
 
     fun getHeadOrientation(entity: EntityLivingBase): Vector3 {
-        val f1 = MathHelper.cos(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat());
-        val f2 = MathHelper.sin(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat());
-        val f3 = -MathHelper.cos(-(entity.rotationPitch-90) * 0.017453292F);
-        val f4 = MathHelper.sin(-(entity.rotationPitch-90) * 0.017453292F);
+        val f1 = MathHelper.cos(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat())
+        val f2 = MathHelper.sin(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat())
+        val f3 = -MathHelper.cos(-(entity.rotationPitch-90) * 0.017453292F)
+        val f4 = MathHelper.sin(-(entity.rotationPitch-90) * 0.017453292F)
         return Vector3((f2 * f3).toDouble(), f4.toDouble(), (f1 * f3).toDouble())
     }
 
