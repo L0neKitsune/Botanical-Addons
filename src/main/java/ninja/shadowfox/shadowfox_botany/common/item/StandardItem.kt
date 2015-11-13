@@ -21,6 +21,10 @@ open class StandardItem(name: String) : Item() {
         return super.setUnlocalizedName(par1Str)
     }
 
+    override fun getItemStackDisplayName(stack: ItemStack): String {
+        return super.getItemStackDisplayName(stack).replace("&".toRegex(), "\u00a7")
+    }
+
     override fun getUnlocalizedNameInefficiently(par1ItemStack: ItemStack): String {
         return super.getUnlocalizedNameInefficiently(par1ItemStack).replace("item\\.".toRegex(), "item.shadowfox_botany:")
     }

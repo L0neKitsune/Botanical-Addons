@@ -24,6 +24,8 @@ item.shadowfox_botany:lightningRod.name=Rod of the Thundercaller
 item.shadowfox_botany:priestEmblem0.name=Priestly Emblem: Thor
 item.shadowfox_botany:priestEmblem1.name=Priestly Emblem: Sif
 
+item.shadowfox_botany:aesirEmblem.name=Priestly Emblem: &6Aesir&r
+
 entity.shadowfox_botany:voidCreeper.name=Manaseal Creeper
 
 tile.shadowfox_botany:coloredDirt.name=Iridescent Dirt

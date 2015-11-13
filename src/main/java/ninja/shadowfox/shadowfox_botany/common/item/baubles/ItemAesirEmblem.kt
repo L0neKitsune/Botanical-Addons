@@ -45,20 +45,12 @@ import cpw.mods.fml.relauncher.SideOnly
 import baubles.api.BaubleType
 import baubles.common.lib.PlayerHandler
 
-class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsingItem {
+import kotlin.properties.Delegates
 
-    companion object {
-        val TYPES = 2
-        public fun getEmblem(meta: Int, player: EntityPlayer): ItemStack? {
-            var baubles = PlayerHandler.getPlayerBaubles(player)
-            var stack = baubles.getStackInSlot(0)
-            return if (stack != null && ((stack.getItem() == ShadowFoxItems.emblem && stack.getItemDamage() == meta) || stack.getItem() == ShadowFoxItems.aesirEmblem) && ItemNBTHelper.getByte(stack, "active", 0) == 1.toByte()) stack else null
-        }
-    }
+class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingItem {
 
-    val COST = 2
-    var icons: Array<IIcon?> = arrayOfNulls<IIcon>(TYPES)
-    var baubleIcons: Array<IIcon?> = arrayOfNulls<IIcon>(TYPES)
+    val COST = 2*ItemPriestEmblem.TYPES
+    var baubleIcon: IIcon by Delegates.notNull()
 
     init {
         setHasSubtypes(true)
@@ -73,32 +65,14 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
         return super.getItemStackDisplayName(stack).replace("&".toRegex(), "\u00a7")
     }
 
+    @SideOnly(Side.CLIENT)
     override fun registerIcons(par1IconRegister: IIconRegister) {
-        for(i in 0..(TYPES - 1))
-            icons[i] = IconHelper.forItem(par1IconRegister, this, i)
-        for(i in 0..(TYPES - 1))
-            baubleIcons[i] = IconHelper.forItem(par1IconRegister, this, "Render"+i.toString())
-    }
-
-    override fun getSubItems(item: Item, tab: CreativeTabs?, list: MutableList<Any?>) {
-        for(i in 0..(TYPES - 1))
-            list.add(ItemStack(item, 1, i))
-    }
-
-    override fun getIconFromDamage(dmg: Int): IIcon? {
-        return icons[Math.min(TYPES - 1, dmg)]
-    }
-
-    fun getBaubleIconFromDamage(dmg: Int): IIcon? {
-        return baubleIcons[Math.min(TYPES - 1, dmg)]
+        this.itemIcon = IconHelper.forItem(par1IconRegister, this)
+        baubleIcon = IconHelper.forItem(par1IconRegister, this, "Render")
     }
 
     override fun getBaubleType(stack: ItemStack) : BaubleType {
         return BaubleType.AMULET
-    }
-
-    override fun getUnlocalizedName(par1ItemStack: ItemStack): String {
-        return super.getUnlocalizedName(par1ItemStack) + par1ItemStack.getItemDamage()
     }
 
     fun getHeadOrientation(entity: EntityLivingBase): Vector3 {
@@ -116,31 +90,14 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
                 if (ManaItemHandler.requestManaExact(stack, player, COST, true)) {
                     ItemNBTHelper.setByte(stack, "active", 1.toByte())
                     if (!this.hasPhantomInk(stack)) {
-                        when (stack.getItemDamage()) {
-                            0 -> {
-                                var playerHead = Vector3.fromEntityCenter(player).add(0.0, 0.75, 0.0).add(Vector3(player.lookVec).multiply(-0.25))
-                                val playerShift = playerHead.copy().add(getHeadOrientation(player))
-                                Botania.proxy.lightningFX(player.worldObj, playerHead, playerShift, 2.0f, 96708, 11198463)
-                            }
-                            1 -> {
-                                for (i in 0..6) {
-                                    var xmotion = (Math.random()-0.5).toFloat() * 0.15f
-                                    var zmotion = (Math.random()-0.5).toFloat() * 0.15f
-                                    // Brown
-                                    var r = 0.6F
-                                    var g = 0.3F
-                                    var b = 0.0F
-                                    val held = player.inventory.getCurrentItem()
-                                    if (held != null && held.getItem() == ShadowFoxItems.colorfulSkyDirtRod) {
-                                        val color = Color(ColorfulItem.colorFromItemStack(held))
-                                        r = color.red.toFloat() / 255F
-                                        g = color.green.toFloat() / 255F
-                                        b = color.blue.toFloat() / 255F
-                                    }
-                                    Botania.proxy.wispFX(player.worldObj, player.posX, player.posY - player.yOffset, player.posZ, r, g, b, Math.random().toFloat() * 0.15f + 0.15f, xmotion, 0.0075f, zmotion)
-                                }
-                            }
-                        }
+                        val shift = getHeadOrientation(player)
+                        val x = player.posX + shift.x * 0.25
+                        val y = player.posY + shift.y * 0.25
+                        val z = player.posZ + shift.z * 0.25
+                        val xmotion = shift.x.toFloat() * 0.025f
+                        val ymotion = shift.y.toFloat() * 0.025f
+                        val zmotion = shift.z.toFloat() * 0.025f
+                        Botania.proxy.wispFX(player.worldObj, x, y, z, 1.0f, 1.0f, 1.0f, Math.random().toFloat() * 0.15f + 0.15f, xmotion, ymotion, zmotion)
                     }
                 }
                 else
@@ -163,12 +120,11 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
             GL11.glTranslatef(-0.26F, -0.4F, if (armor) 0.2F else 0.15F)
             GL11.glScalef(0.5F, 0.5F, 0.5F)
 
-            var icon = getBaubleIconFromDamage(stack.getItemDamage())
-            var f = icon!!.getMinU()
-            var f1 = icon!!.getMaxU()
-            var f2 = icon!!.getMinV()
-            var f3 = icon!!.getMaxV()
-            ItemRenderer.renderItemIn2D(Tessellator.instance, f1, f2, f, f3, icon!!.getIconWidth(), icon!!.getIconHeight(), 1F / 32F)
+            var f = baubleIcon!!.getMinU()
+            var f1 = baubleIcon!!.getMaxU()
+            var f2 = baubleIcon!!.getMinV()
+            var f3 = baubleIcon!!.getMaxV()
+            ItemRenderer.renderItemIn2D(Tessellator.instance, f1, f2, f, f3, baubleIcon!!.getIconWidth(), baubleIcon!!.getIconHeight(), 1F / 32F)
         }
     }
 }
