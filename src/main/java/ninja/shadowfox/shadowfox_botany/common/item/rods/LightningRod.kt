@@ -35,7 +35,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
 
     val COST = 300
     val PRIEST_COST = 200
-    val THOR_COST = 200
+    val THOR_COST = 700
     val PROWESS_COST = 50
 
     val SPEED = 90
@@ -77,49 +77,47 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
     }
 
     override fun onUsingTick(stack: ItemStack?, player: EntityPlayer?, count: Int) {
-        if (count != this.getMaxItemUseDuration(stack) && !player!!.worldObj.isRemote && ManaItemHandler.requestManaExactForTool(stack, player, COST, false)) {
+        if (count != this.getMaxItemUseDuration(stack) && !player!!.worldObj.isRemote) {
 
-            var target = getTarget(player!!.worldObj, player, ItemNBTHelper.getInt(stack, "target", -1))
-            var thor: Boolean
-            var priest: Boolean
-            var prowess: Boolean
-            if (target != null) {
-                ItemNBTHelper.setInt(stack, "target", target.entityId)
-                thor = (vazkii.botania.common.item.relic.ItemThorRing.getThorRing(player) != null)
-                priest = (ItemPriestEmblem.getEmblem(0, player) != null)
-                prowess = IManaProficiencyArmor.Helper.hasProficiency(player)
+            var thor = (vazkii.botania.common.item.relic.ItemThorRing.getThorRing(player) != null)
+            var priest = (ItemPriestEmblem.getEmblem(0, player) != null)
+            var prowess = IManaProficiencyArmor.Helper.hasProficiency(player)
+            
+            if (ManaItemHandler.requestManaExactForTool(stack, player, getCost(thor, prowess, priest), false)) {
+                var target = getTarget(player!!.worldObj, player, ItemNBTHelper.getInt(stack, "target", -1))
+                if (target != null) {
+                    ItemNBTHelper.setInt(stack, "target", target.entityId)
 
-                val shockspeed = getSpeed(thor, prowess, priest)
-                val damage = getDamage(thor, prowess, priest)
+                    val shockspeed = getSpeed(thor, prowess, priest)
+                    val damage = getDamage(thor, prowess, priest)
 
-                val targetCenter = Vector3.fromEntityCenter(target).add(0.0, 0.75, 0.0).add(Vector3(target.lookVec).multiply(-0.25))
-                val targetShift = targetCenter.copy().add(getHeadOrientation(target))
+                    val targetCenter = Vector3.fromEntityCenter(target).add(0.0, 0.75, 0.0).add(Vector3(target.lookVec).multiply(-0.25))
+                    val targetShift = targetCenter.copy().add(getHeadOrientation(target))
 
-                val playerCenter = Vector3.fromEntityCenter(player).add(0.0, 0.75, 0.0).add(Vector3(player.lookVec).multiply(-0.25))
-                val playerShift = playerCenter.copy().add(getHeadOrientation(player))
-                if (count % (shockspeed / 10) == 0) {
-                    Botania.proxy.lightningFX(player.worldObj, targetCenter, targetShift, 2.0f, 96708, 11198463)
-                    Botania.proxy.lightningFX(player.worldObj, playerCenter, playerShift, 2.0f, 96708, 11198463)
-                }
-
-
-
-                if (count % shockspeed == 0) {
-                    if (ConfigHandler.realLightning && thor) {
-                        if (spawnLightning(player.worldObj, target.posX.toDouble(), target.posY.toDouble(), target.posZ.toDouble())) {
-                            if (ManaItemHandler.requestManaExactForTool(stack, player, getCost(thor, prowess, priest), true))
-                                target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage)
-                        }
-                    } else {
-                        if (ManaItemHandler.requestManaExactForTool(stack, player, getCost(thor, prowess, priest), true)) {
-                            target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage)
-                            Botania.proxy.lightningFX(player.worldObj, Vector3.fromEntityCenter(player), Vector3.fromEntityCenter(target), 1.0f, 96708, 11198463)
-                            player.worldObj.playSoundEffect(target.posX.toDouble(), target.posY.toDouble(), target.posZ.toDouble(), "ambient.weather.thunder", 100.0f, 0.8f + player.worldObj.rand.nextFloat() * 0.2f)
-                        }
-                        chainLightning(stack!!, target, player, thor, prowess, priest)
+                    val playerCenter = Vector3.fromEntityCenter(player).add(0.0, 0.75, 0.0).add(Vector3(player.lookVec).multiply(-0.25))
+                    val playerShift = playerCenter.copy().add(getHeadOrientation(player))
+                    if (count % (shockspeed / 10) == 0) {
+                        Botania.proxy.lightningFX(player.worldObj, targetCenter, targetShift, 2.0f, 96708, 11198463)
+                        Botania.proxy.lightningFX(player.worldObj, playerCenter, playerShift, 2.0f, 96708, 11198463)
                     }
-                }
 
+                    if (count % shockspeed == 0) {
+                        if (ConfigHandler.realLightning && thor) {
+                            if (spawnLightning(player.worldObj, target.posX.toDouble(), target.posY.toDouble(), target.posZ.toDouble())) {
+                                if (ManaItemHandler.requestManaExactForTool(stack, player, getCost(thor, prowess, priest), true))
+                                    target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage)
+                            }
+                        } else {
+                            if (ManaItemHandler.requestManaExactForTool(stack, player, getCost(thor, prowess, priest), true)) {
+                                target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage)
+                                Botania.proxy.lightningFX(player.worldObj, Vector3.fromEntityCenter(player), Vector3.fromEntityCenter(target), 1.0f, 96708, 11198463)
+                                player.worldObj.playSoundEffect(target.posX.toDouble(), target.posY.toDouble(), target.posZ.toDouble(), "ambient.weather.thunder", 100.0f, 0.8f + player.worldObj.rand.nextFloat() * 0.2f)
+                            }
+                            chainLightning(stack!!, target, player, thor, prowess, priest)
+                        }
+                    }
+
+                }
             }
         }
     }

@@ -41,14 +41,14 @@ import baubles.common.lib.PlayerHandler
 class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsingItem {
 
     companion object {
-        public fun getEmblem(meta: Int, player: EntityPlayer): ItemStack? {
+        val TYPES = 2
+        public fun getEmblem(meta: Int, player: EntityPlayer?): ItemStack? {
             var baubles = PlayerHandler.getPlayerBaubles(player)
             var stack = baubles.getStackInSlot(0)
-            return if (stack != null && stack.item == ShadowFoxItems.emblem && stack.itemDamage == meta && ItemNBTHelper.getByte(stack, "active", 0) == 1.toByte()) stack else null
+            return if (stack != null && ((stack.item == ShadowFoxItems.emblem && stack.getItemDamage() == meta) || stack.item == ShadowFoxItems.aesirEmblem) && ItemNBTHelper.getByte(stack, "active", 0) == 1.toByte()) stack else null
         }
     }
 
-    val TYPES = 2
     val COST = 2
     var icons: Array<IIcon?> = arrayOfNulls(TYPES)
     var baubleIcons: Array<IIcon?> = arrayOfNulls(TYPES)
@@ -60,6 +60,10 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
 
     override fun getUnlocalizedNameInefficiently(par1ItemStack: ItemStack): String {
         return super.getUnlocalizedNameInefficiently(par1ItemStack).replace("item\\.botania:".toRegex(), "item.shadowfox_botany:")
+    }
+
+    override fun getItemStackDisplayName(stack: ItemStack): String {
+        return super.getItemStackDisplayName(stack).replace("&".toRegex(), "\u00a7")
     }
 
     override fun registerIcons(par1IconRegister: IIconRegister) {
@@ -154,7 +158,7 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
 
             var icon = getBaubleIconFromDamage(stack.itemDamage)
             if(icon != null)
-            ItemRenderer.renderItemIn2D(Tessellator.instance, icon.maxU, icon.minV, icon.minU, icon.maxV, icon.iconWidth, icon.iconHeight, 1F / 32F)
+                ItemRenderer.renderItemIn2D(Tessellator.instance, icon.maxU, icon.minV, icon.minU, icon.maxV, icon.iconWidth, icon.iconHeight, 1F / 32F)
         }
     }
 }
