@@ -42,7 +42,7 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
 
     companion object {
         val TYPES = 2
-        public fun getEmblem(meta: Int, player: EntityPlayer): ItemStack? {
+        public fun getEmblem(meta: Int, player: EntityPlayer?): ItemStack? {
             var baubles = PlayerHandler.getPlayerBaubles(player)
             var stack = baubles.getStackInSlot(0)
             return if (stack != null && ((stack.item == ShadowFoxItems.emblem && stack.getItemDamage() == meta) || stack.item == ShadowFoxItems.aesirEmblem) && ItemNBTHelper.getByte(stack, "active", 0) == 1.toByte()) stack else null
@@ -158,7 +158,7 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
 
             var icon = getBaubleIconFromDamage(stack.itemDamage)
             if(icon != null)
-            ItemRenderer.renderItemIn2D(Tessellator.instance, icon.maxU, icon.minV, icon.minU, icon.maxV, icon.iconWidth, icon.iconHeight, 1F / 32F)
+                ItemRenderer.renderItemIn2D(Tessellator.instance, icon.maxU, icon.minV, icon.minU, icon.maxV, icon.iconWidth, icon.iconHeight, 1F / 32F)
         }
     }
 }

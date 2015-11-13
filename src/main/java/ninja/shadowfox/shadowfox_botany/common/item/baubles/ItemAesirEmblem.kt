@@ -119,11 +119,7 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
             GL11.glTranslatef(-0.26F, -0.4F, if (armor) 0.2F else 0.15F)
             GL11.glScalef(0.5F, 0.5F, 0.5F)
 
-            var f = baubleIcon!!.minU
-            var f1 = baubleIcon!!.maxU
-            var f2 = baubleIcon!!.minV
-            var f3 = baubleIcon!!.maxV
-            ItemRenderer.renderItemIn2D(Tessellator.instance, f1, f2, f, f3, baubleIcon!!.iconWidth, baubleIcon!!.iconHeight, 1F / 32F)
+            ItemRenderer.renderItemIn2D(Tessellator.instance, baubleIcon.maxU, baubleIcon.minV, baubleIcon.minU, baubleIcon.maxV, baubleIcon.iconWidth, baubleIcon.iconHeight, 1F / 32F)
         }
     }
 }
