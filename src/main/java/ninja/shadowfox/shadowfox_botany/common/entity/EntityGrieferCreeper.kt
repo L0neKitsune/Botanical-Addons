@@ -5,9 +5,7 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.world.World
 import vazkii.botania.common.entity.EntityManaStorm
 
-/**
- * Created by l0nekitsune on 10/29/15.
- */
+
 class EntityGrieferCreeper(world: World): EntityCreeper(world) {
     private var lastActiveTime: Int = 0
     /** The amount of time since the creeper was close enough to the player to ignite  */

@@ -3,10 +3,8 @@ package ninja.shadowfox.shadowfox_botany.common.blocks
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
-import net.minecraft.block.material.Material
 import net.minecraft.block.Block
 import net.minecraft.block.BlockTallGrass
-import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.passive.EntitySheep
@@ -16,7 +14,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import net.minecraftforge.common.IShearable
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxGrassItemBlock
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper

@@ -3,11 +3,8 @@ package ninja.shadowfox.shadowfox_botany.common.blocks
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
-import net.minecraft.init.Blocks
-import net.minecraft.block.material.Material
 import net.minecraft.block.Block
 import net.minecraft.block.BlockDoublePlant
-import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.passive.EntitySheep
@@ -18,9 +15,7 @@ import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraft.stats.StatList
-import net.minecraftforge.common.IShearable
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler
-import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxDoubleGrassItemBlock0
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxDoubleGrassItemBlock1
@@ -38,7 +33,7 @@ import kotlin.properties.Delegates
 
 public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), ILexiconable {
 
-    val name = "irisDoubleGrass${colorSet}"
+    val name = "irisDoubleGrass$colorSet"
     val TYPES: Int = 8
     internal var field_150128_a: IntArray? = null
     var topIcon: IIcon by Delegates.notNull()

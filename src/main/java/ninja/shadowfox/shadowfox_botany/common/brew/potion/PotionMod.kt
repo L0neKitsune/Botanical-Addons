@@ -7,9 +7,7 @@ import net.minecraft.entity.EntityLivingBase
 import net.minecraft.potion.Potion
 import net.minecraft.util.ResourceLocation
 
-/**
- * Created by l0nekitsune on 11/6/15.
- */
+
 open class PotionMod(id: Int, name: String, badEffect: Boolean, color: Int, iconIndex: Int) :
         Potion(id, badEffect, color) {
 

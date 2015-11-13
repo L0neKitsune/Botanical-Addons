@@ -5,9 +5,7 @@ import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemPriestEmblem
 import ninja.shadowfox.shadowfox_botany.common.item.rods.ColorfulSkyDirtRod
 import ninja.shadowfox.shadowfox_botany.common.item.rods.LightningRod
 
-/**
- * Created by l0nekitsune on 10/19/15.
- */
+
 object ShadowFoxItems {
     val irisSeeds: Item
     val colorfulSkyDirtRod: Item

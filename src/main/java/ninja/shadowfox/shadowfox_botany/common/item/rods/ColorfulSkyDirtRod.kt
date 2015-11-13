@@ -4,7 +4,6 @@ import java.awt.Color
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
-import net.minecraft.init.Blocks
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
@@ -22,9 +21,7 @@ import vazkii.botania.api.mana.ManaItemHandler
 import vazkii.botania.common.Botania
 import vazkii.botania.common.core.helper.Vector3
 
-/**
- * Created by l0nekitsune on 10/19/15.
- */
+
 class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulDirtRod(name), IAvatarWieldable {
 
     private val avatarOverlay = ResourceLocation("shadowfox_botany:textures/model/avatarDirtRainbow.png")
@@ -41,14 +38,14 @@ class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulDirtRod(
 
             else if (ManaItemHandler.requestManaExactForTool(stack, player, COST * 2, false)) {
                 val color = Color(getColorFromItemStack(stack, 0))
-                val r = color.getRed() / 255F
-                val g = color.getGreen() / 255F
-                val b = color.getBlue() / 255F
+                val r = color.red / 255F
+                val g = color.green / 255F
+                val b = color.blue / 255F
 
                 val sif = (ItemPriestEmblem.getEmblem(1, player) != null)
                 var basePlayerRange = 5.0
                 if (player is EntityPlayerMP)
-                    basePlayerRange = player.theItemInWorldManager.getBlockReachDistance()
+                    basePlayerRange = player.theItemInWorldManager.blockReachDistance
                 val distmultiplier = if (sif) basePlayerRange else 3.0
 
                 val playerVec = Vector3.fromEntityCenter(player)
@@ -84,7 +81,7 @@ class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulDirtRod(
 
     override fun onAvatarUpdate(tile: IAvatarTile, stack: ItemStack) {
         var te = tile as TileEntity
-        var world = te.getWorldObj()
+        var world = te.worldObj
         val x = te.xCoord
         val y = te.yCoord
         val z = te.zCoord
@@ -102,11 +99,11 @@ class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulDirtRod(
         val block = world.getBlock(x+xl, y, z+zl)
 
         val color = Color(getColorFromItemStack(stack, 0))
-        val r = color.getRed() / 255F
-        val g = color.getGreen() / 255F
-        val b = color.getBlue() / 255F
+        val r = color.red / 255F
+        val g = color.green / 255F
+        val b = color.blue / 255F
 
-        if (tile.getCurrentMana() >= COST && block.isAir(world, x+xl, y, z+zl) && tile.getElapsedFunctionalTicks() % 50 == 0 && tile.isEnabled()) {
+        if (tile.currentMana >= COST && block.isAir(world, x+xl, y, z+zl) && tile.elapsedFunctionalTicks % 50 == 0 && tile.isEnabled) {
             world.setBlock(x+xl, y, z+zl, ShadowFoxBlocks.coloredDirtBlock, stack.itemDamage, 1 or 2)
             tile.recieveMana(-COST)
             for (i in 0..6)
