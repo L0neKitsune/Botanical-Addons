@@ -4,8 +4,6 @@ import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
 import vazkii.botania.api.BotaniaAPI
-import vazkii.botania.common.block.decor.slabs.BlockBiomeStoneSlab
-import vazkii.botania.common.block.decor.stairs.BlockBiomeStoneStairs
 
 public object ShadowFoxBlocks {
 

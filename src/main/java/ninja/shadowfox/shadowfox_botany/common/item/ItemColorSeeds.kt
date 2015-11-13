@@ -79,7 +79,7 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
             var dim = event.world.provider.dimensionId
             if(blockSwappers.containsKey(dim)) {
                 var swappers = blockSwappers[dim] as ArrayList<BlockSwapper?>
-                var swappersSafe = ArrayList<BlockSwapper?>(swappers)
+                var swappersSafe = ArrayList(swappers)
                 for (s in swappersSafe)
                     s?.tick(swappers)
             }

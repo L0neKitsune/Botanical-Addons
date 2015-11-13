@@ -10,7 +10,6 @@ import java.awt.Color
 
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.ItemRenderer
-import net.minecraft.client.renderer.OpenGlHelper
 import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.client.renderer.texture.TextureMap
@@ -19,26 +18,20 @@ import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.util.EnumChatFormatting
 import net.minecraft.util.IIcon
 import net.minecraft.util.MathHelper
-import net.minecraft.util.StatCollector
 import net.minecraftforge.client.event.RenderPlayerEvent
 
 import org.lwjgl.opengl.GL11
 
-import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.item.IBaubleRender
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
-import vazkii.botania.client.core.handler.ClientTickHandler
 import vazkii.botania.common.Botania
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.core.helper.Vector3
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
-import vazkii.botania.common.lib.LibItemNames
 
-import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 
@@ -52,13 +45,13 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
         public fun getEmblem(meta: Int, player: EntityPlayer): ItemStack? {
             var baubles = PlayerHandler.getPlayerBaubles(player)
             var stack = baubles.getStackInSlot(0)
-            return if (stack != null && ((stack.getItem() == ShadowFoxItems.emblem && stack.getItemDamage() == meta) || stack.getItem() == ShadowFoxItems.aesirEmblem) && ItemNBTHelper.getByte(stack, "active", 0) == 1.toByte()) stack else null
+            return if (stack != null && ((stack.item == ShadowFoxItems.emblem && stack.getItemDamage() == meta) || stack.item == ShadowFoxItems.aesirEmblem) && ItemNBTHelper.getByte(stack, "active", 0) == 1.toByte()) stack else null
         }
     }
 
     val COST = 2
-    var icons: Array<IIcon?> = arrayOfNulls<IIcon>(TYPES)
-    var baubleIcons: Array<IIcon?> = arrayOfNulls<IIcon>(TYPES)
+    var icons: Array<IIcon?> = arrayOfNulls(TYPES)
+    var baubleIcons: Array<IIcon?> = arrayOfNulls(TYPES)
 
     init {
         setHasSubtypes(true)
@@ -98,7 +91,7 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
     }
 
     override fun getUnlocalizedName(par1ItemStack: ItemStack): String {
-        return super.getUnlocalizedName(par1ItemStack) + par1ItemStack.getItemDamage()
+        return super.getUnlocalizedName(par1ItemStack) + par1ItemStack.itemDamage
     }
 
     fun getHeadOrientation(entity: EntityLivingBase): Vector3 {
@@ -116,7 +109,7 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
                 if (ManaItemHandler.requestManaExact(stack, player, COST, true)) {
                     ItemNBTHelper.setByte(stack, "active", 1.toByte())
                     if (!this.hasPhantomInk(stack)) {
-                        when (stack.getItemDamage()) {
+                        when (stack.itemDamage) {
                             0 -> {
                                 var playerHead = Vector3.fromEntityCenter(player).add(0.0, 0.75, 0.0).add(Vector3(player.lookVec).multiply(-0.25))
                                 val playerShift = playerHead.copy().add(getHeadOrientation(player))
@@ -131,7 +124,7 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
                                     var g = 0.3F
                                     var b = 0.0F
                                     val held = player.inventory.getCurrentItem()
-                                    if (held != null && held.getItem() == ShadowFoxItems.colorfulSkyDirtRod) {
+                                    if (held != null && held.item == ShadowFoxItems.colorfulSkyDirtRod) {
                                         val color = Color(ColorfulItem.colorFromItemStack(held))
                                         r = color.red.toFloat() / 255F
                                         g = color.green.toFloat() / 255F
@@ -163,12 +156,9 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
             GL11.glTranslatef(-0.26F, -0.4F, if (armor) 0.2F else 0.15F)
             GL11.glScalef(0.5F, 0.5F, 0.5F)
 
-            var icon = getBaubleIconFromDamage(stack.getItemDamage())
-            var f = icon!!.getMinU()
-            var f1 = icon!!.getMaxU()
-            var f2 = icon!!.getMinV()
-            var f3 = icon!!.getMaxV()
-            ItemRenderer.renderItemIn2D(Tessellator.instance, f1, f2, f, f3, icon!!.getIconWidth(), icon!!.getIconHeight(), 1F / 32F)
+            var icon = getBaubleIconFromDamage(stack.itemDamage)
+            if(icon != null)
+            ItemRenderer.renderItemIn2D(Tessellator.instance, icon.maxU, icon.minV, icon.minU, icon.maxV, icon.iconWidth, icon.iconHeight, 1F / 32F)
         }
     }
 }

@@ -8,7 +8,6 @@ import net.minecraft.util.IIcon
 import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.passive.EntitySheep
-import net.minecraft.item.ItemBlockWithMetadata
 import net.minecraft.item.ItemStack
 import net.minecraft.util.StatCollector
 import java.awt.Color
