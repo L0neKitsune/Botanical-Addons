@@ -18,6 +18,8 @@ misc.shadowfox_botany.color.14=Red
 misc.shadowfox_botany.color.15=Black
 misc.shadowfox_botany.color.16=Rainbow
 
+misc.shadowfox_botany.creative=Creative
+
 item.shadowfox_botany:colorfulSkyDirtRod.name=Rod of the Iridescence
 item.shadowfox_botany:lightningRod.name=Rod of the Thundercaller
 

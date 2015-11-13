@@ -57,6 +57,16 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
         setCreativeTab(ShadowFoxCreativeTab)
     }
 
+    override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>?, par4: Boolean) {
+        if(par1ItemStack == null) return
+        this.addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.creative")+"&r", par3List)
+        super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4)
+    } 
+
+    fun addStringToTooltip(s : String, tooltip : MutableList<Any?>?) {
+        tooltip!!.add(s.replace("&".toRegex(), "\u00a7"))
+    }
+
     override fun getUnlocalizedNameInefficiently(par1ItemStack: ItemStack): String {
         return super.getUnlocalizedNameInefficiently(par1ItemStack).replace("item\\.botania:".toRegex(), "item.shadowfox_botany:")
     }
