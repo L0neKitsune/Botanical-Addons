@@ -91,7 +91,7 @@ class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulItem(nam
                 var basePlayerRange = 5.0
                 if (player is EntityPlayerMP)
                     basePlayerRange = player.theItemInWorldManager.blockReachDistance
-                val distmultiplier = if (sif) basePlayerRange+0.1 else 3.1
+                val distmultiplier = if (sif) basePlayerRange-1 else 3.0
 
                 val playerVec = Vector3.fromEntityCenter(player)
                 val lookVec = Vector3(player.lookVec).multiply(distmultiplier)
