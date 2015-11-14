@@ -45,6 +45,9 @@ open class ColorfulItem(name: String) : Item() {
                 return ItemStack(ShadowFoxBlocks.rainbowDirtBlock)
             return ItemStack(ShadowFoxBlocks.coloredDirtBlock, 1, meta)
         }
+        fun isRainbow(meta: Int): Boolean {
+            return meta == TYPES
+        }
     }
 
     init {
