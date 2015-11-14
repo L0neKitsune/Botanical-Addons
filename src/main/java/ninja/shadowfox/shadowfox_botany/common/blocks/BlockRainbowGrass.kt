@@ -43,16 +43,10 @@ public class BlockRainbowGrass() : BlockTallGrass() {
     }
 
     override fun func_149853_b(world:World, random:Random, x:Int, y:Int, z:Int) {
-        // if (ShadowFoxBlocks.irisTallGrass0.canPlaceBlockAt(world, x, y, z)) {
-        //     if (l < 8) {
-        //         world.setBlock(x, y, z, ShadowFoxBlocks.rainbowTallGrass0, 0, 2)
-        //         world.setBlock(x, y + 1, z, ShadowFoxBlocks.rainbowTallGrass0, 8, 2)
-        //     }
-        //     else {
-        //         world.setBlock(x, y, z, ShadowFoxBlocks.irisTallGrass1, 0, 2)
-        //         world.setBlock(x, y + 1, z, ShadowFoxBlocks.irisTallGrass1, 8, 2)
-        //     }
-        // }
+        if (ShadowFoxBlocks.rainbowTallGrass.canPlaceBlockAt(world, x, y, z)) {
+            world.setBlock(x, y, z, ShadowFoxBlocks.rainbowTallGrass, 0, 2)
+            world.setBlock(x, y + 1, z, ShadowFoxBlocks.rainbowTallGrass, 8, 2)
+        }
     }
 
     internal fun register(name: String) {

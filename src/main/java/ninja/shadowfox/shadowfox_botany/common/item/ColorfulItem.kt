@@ -8,9 +8,12 @@ import net.minecraft.entity.passive.EntitySheep
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Item
+import net.minecraft.block.Block
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.util.IIcon
 import net.minecraft.util.StatCollector
+import vazkii.botania.common.Botania
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import kotlin.properties.Delegates
@@ -18,12 +21,29 @@ import kotlin.properties.Delegates
 open class ColorfulItem(name: String) : Item() {
 
     companion object {
+        val TYPES = 16
+        fun rainbowColor(): Int {
+            return Color.HSBtoRGB(Botania.proxy.getWorldElapsedTicks() * 2 % 360 / 360F, 0.8F, 1F)
+        }
         fun colorFromItemStack(par1ItemStack : ItemStack) : Int {
+            if(par1ItemStack.itemDamage == TYPES) {
+                return rainbowColor()
+            }
             if(par1ItemStack.itemDamage >= EntitySheep.fleeceColorTable.size)
                 return 0xFFFFFF
 
             var color = EntitySheep.fleeceColorTable[par1ItemStack.itemDamage]
             return Color(color[0], color[1], color[2]).rgb
+        }
+        fun dirtFromMeta(meta: Int): Block? {
+            if (meta == TYPES)
+                return ShadowFoxBlocks.rainbowDirtBlock
+            return ShadowFoxBlocks.coloredDirtBlock
+        }
+        fun dirtStack(meta: Int): ItemStack? {
+            if (meta == TYPES)
+                return ItemStack(ShadowFoxBlocks.rainbowDirtBlock)
+            return ItemStack(ShadowFoxBlocks.coloredDirtBlock, 1, meta)
         }
     }
 
@@ -63,11 +83,7 @@ open class ColorfulItem(name: String) : Item() {
     override fun getColorFromItemStack(par1ItemStack : ItemStack, pass : Int) : Int {
         if (pass > 0)
             return 0xFFFFFF
-        if(par1ItemStack.itemDamage >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF
-
-        var color = EntitySheep.fleeceColorTable[par1ItemStack.itemDamage]
-        return Color(color[0], color[1], color[2]).rgb
+        return colorFromItemStack(par1ItemStack)
     }
 
     fun addStringToTooltip(s : String, tooltip : MutableList<Any?>?) {

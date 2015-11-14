@@ -4,14 +4,12 @@ import net.minecraft.item.Item
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemAesirEmblem
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemPriestEmblem
 import ninja.shadowfox.shadowfox_botany.common.item.rods.ColorfulSkyDirtRod
-import ninja.shadowfox.shadowfox_botany.common.item.rods.RainbowSkyDirtRod
 import ninja.shadowfox.shadowfox_botany.common.item.rods.LightningRod
 
 
 object ShadowFoxItems {
     val irisSeeds: Item
     val colorfulSkyDirtRod: Item
-    val rainbowSkyDirtRod: Item
     val lightningRod: Item
     val emblem: Item
     val aesirEmblem: Item
@@ -19,7 +17,6 @@ object ShadowFoxItems {
     init {
         irisSeeds = ItemColorSeeds()
         colorfulSkyDirtRod = ColorfulSkyDirtRod()
-        rainbowSkyDirtRod = RainbowSkyDirtRod()
         lightningRod = LightningRod()
         emblem = ItemPriestEmblem()
         aesirEmblem = ItemAesirEmblem()

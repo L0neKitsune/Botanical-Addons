@@ -15,6 +15,6 @@ open class ShadowFoxRainbowItemBlock(par2Block: Block) : ShadowFoxItemBlockMod(p
 
     override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>?, par4: Boolean) {
         if(par1ItemStack == null) return
-        addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color.rainbow")+"&r", par3List)
+        addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color.16")+"&r", par3List)
     }
 }

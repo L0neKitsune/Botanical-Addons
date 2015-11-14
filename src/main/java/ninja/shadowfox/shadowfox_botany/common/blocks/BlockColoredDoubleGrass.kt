@@ -200,7 +200,11 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
             if (flag && world.getBlock(x, y - 1, z) !== block && world.getBlock(x, y - 1, z) !== block) {
                 return false
             }
-            val iicon = if ((i1 and 8) != 0) (block as BlockColoredDoubleGrass).topIcon else (block as BlockColoredDoubleGrass).bottomIcon
+            var iicon: IIcon? = null
+            if (block is BlockColoredDoubleGrass)
+                iicon = if ((i1 and 8) != 0) block.topIcon else block.bottomIcon
+            else if (block is BlockRainbowDoubleGrass)
+                iicon = if ((i1 and 8) != 0) block.topIcon else block.bottomIcon
             renderer.drawCrossedSquares(iicon, d19, d0, d1, 1.0f)
             return true
         }

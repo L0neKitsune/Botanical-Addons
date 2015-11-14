@@ -23,6 +23,7 @@ public object ShadowFoxBlocks {
 
     public var irisTallGrass0: Block
     public var irisTallGrass1: Block
+    public var rainbowTallGrass: Block
 
 
     public var coloredSlabs: Array<Block>
@@ -63,6 +64,7 @@ public object ShadowFoxBlocks {
 
         irisTallGrass0 = BlockColoredDoubleGrass(0)
         irisTallGrass1 = BlockColoredDoubleGrass(1)
+        rainbowTallGrass = BlockRainbowDoubleGrass()
 
         OreDictionary.registerOre("treeSapling", irisSapling)
 

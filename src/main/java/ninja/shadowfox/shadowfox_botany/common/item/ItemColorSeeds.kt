@@ -26,9 +26,8 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
         FMLCommonHandler.instance().bus().register(this)
     }
 
-    val TYPES = 16
     override fun getSubItems(par1: Item, par2: CreativeTabs?, par3: MutableList<Any?>) {
-        for(i in 0..(TYPES-1))
+        for(i in 0..(TYPES))
             par3.add(ItemStack(par1, 1, i))
     }
 
@@ -45,6 +44,9 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
         var y: Double
         var z: Double
         val velMul = 0.025f
+
+        val blockToSet = ColorfulItem.dirtFromMeta(par1ItemStack.itemDamage)
+        val metaToSet = par1ItemStack.itemDamage % TYPES
 
         if ((block === Blocks.dirt || block == Blocks.grass) && bmeta == 0) {
             var meta = par1ItemStack.itemDamage
