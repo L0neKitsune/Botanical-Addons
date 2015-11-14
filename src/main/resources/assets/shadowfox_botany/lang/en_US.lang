@@ -16,11 +16,12 @@ misc.shadowfox_botany.color.12=Brown
 misc.shadowfox_botany.color.13=Green
 misc.shadowfox_botany.color.14=Red
 misc.shadowfox_botany.color.15=Black
-misc.shadowfox_botany.color.16=Rainbow
+misc.shadowfox_botany.color.rainbow=Bifrost
 
 misc.shadowfox_botany.creative=Creative
 
 item.shadowfox_botany:colorfulSkyDirtRod.name=Rod of the Iridescence
+item.shadowfox_botany:rainbowSkyDirtRod.name=Rod of the Iridescence
 item.shadowfox_botany:lightningRod.name=Rod of the Thundercaller
 
 item.shadowfox_botany:priestEmblem0.name=Priestly Emblem: Thor
@@ -30,6 +31,7 @@ item.shadowfox_botany:aesirEmblem.name=Priestly Emblem: &6Aesir&r
 
 entity.shadowfox_botany:voidCreeper.name=Manaseal Creeper
 
+tile.shadowfox_botany:rainbowDirt.name=Iridescent Dirt
 tile.shadowfox_botany:coloredDirt.name=Iridescent Dirt
 tile.shadowfox_botany:irisLeaves.name=Iridescent Leaves
 tile.shadowfox_botany:irisWood.name=Iridescent Log

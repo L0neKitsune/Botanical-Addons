@@ -8,6 +8,7 @@ import vazkii.botania.api.BotaniaAPI
 public object ShadowFoxBlocks {
 
     public var coloredDirtBlock: Block
+    public var rainbowDirtBlock: Block
     public var irisSapling: Block
     public var irisLeaves: Block
     public var irisGrass: Block
@@ -34,6 +35,7 @@ public object ShadowFoxBlocks {
     init {
 //        orangeBlock = OrangeBlock()
         coloredDirtBlock = BlockColoredDirt()
+        rainbowDirtBlock = BlockRainbowDirt()
         irisSapling = BlockColoredSapling()
         irisLeaves = BlockColoredLeaves()
         irisGrass = BlockColoredGrass()
