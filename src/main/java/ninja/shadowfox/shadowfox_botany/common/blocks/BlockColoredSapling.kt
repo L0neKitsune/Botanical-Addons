@@ -116,7 +116,7 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
 
             val plantedOn: Block = world.getBlock(x, y - 1, z)
 
-            if(plantedOn == ShadowFoxBlocks.coloredDirtBlock) {
+            if(canGrowHere(plantedOn)) {
                 val l = world.getBlockMetadata(x, y, z)
 
                 val obj: WorldGenerator = ColoredTreeGen(5)
@@ -150,7 +150,11 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
      * canFertilize
      */
     override fun func_149851_a(world: World?, x: Int, y: Int, z: Int, isRemote: Boolean): Boolean {
-        return true
+        return canGrowHere(world!!.getBlock(x, y - 1, z))
+    }
+
+    fun canGrowHere(block: Block): Boolean {
+        return block == ShadowFoxBlocks.coloredDirtBlock || block == ShadowFoxBlocks.rainbowDirtBlock
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {

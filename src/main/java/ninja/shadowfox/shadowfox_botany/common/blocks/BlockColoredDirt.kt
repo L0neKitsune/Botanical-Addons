@@ -63,7 +63,7 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
                     j1 += (random.nextInt(3) - 1) * random.nextInt(3) / 2
                     k1 += random.nextInt(3) - 1
 
-                    if (world.getBlock(i1, j1 - 1, k1) == this && !world.getBlock(i1, j1, k1).isNormalCube) {
+                    if ((world.getBlock(i1, j1 - 1, k1) == this || world.getBlock(i1, j1 - 1, k1) == ShadowFoxBlocks.rainbowDirtBlock) && !world.getBlock(i1, j1, k1).isNormalCube) {
                         ++l1
                         continue
                     }

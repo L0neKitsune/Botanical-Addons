@@ -7,11 +7,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.StatCollector
 
 
-open class ShadowFoxRainbowItemBlock(par2Block: Block) : ItemBlockWithMetadata(par2Block, par2Block) {
-
-    override fun getUnlocalizedNameInefficiently(par1ItemStack: ItemStack): String {
-        return (super.getUnlocalizedNameInefficiently(par1ItemStack)).replace("tile.", "tile.shadowfox_botany:")
-    }
+open class ShadowFoxRainbowItemBlock(par2Block: Block) : ShadowFoxItemBlockMod(par2Block) {
 
     fun addStringToTooltip(s : String, tooltip : MutableList<Any?>?) {
         tooltip!!.add(s.replace("&".toRegex(), "\u00a7"))

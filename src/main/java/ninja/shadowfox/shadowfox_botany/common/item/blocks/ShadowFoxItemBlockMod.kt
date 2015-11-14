@@ -4,7 +4,7 @@ import net.minecraft.block.Block
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 
-public class ShadowFoxItemBlockMod(block: Block) : ItemBlock(block){
+open class ShadowFoxItemBlockMod(block: Block) : ItemBlock(block){
 
     override fun getUnlocalizedNameInefficiently(par1ItemStack: ItemStack): String {
         return getUnlocalizedNameInefficiently_(par1ItemStack).replace("tile.", "tile.shadowfox_botany:")

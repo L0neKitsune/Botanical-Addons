@@ -31,7 +31,7 @@ import java.util.Random
 import net.minecraft.util.*
 import kotlin.properties.Delegates
 
-class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable {
+class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable {
 
     private val name = "rainbowDirt"
     private val TYPES = 16
@@ -52,41 +52,41 @@ class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     }
 
     override fun func_149853_b(world: World, random: Random, x: Int, y: Int, z: Int) {
-        // var l = 0
+        var l = 0
 
-        // while (l < 128) {
-        //     var i1 = x
-        //     var j1 = y + 1
-        //     var k1 = z
-        //     var l1 = 0
+        while (l < 128) {
+            var i1 = x
+            var j1 = y + 1
+            var k1 = z
+            var l1 = 0
 
-        //     while (true) {
-        //         if (l1 < l / 16) {
-        //             i1 += random.nextInt(3) - 1
-        //             j1 += (random.nextInt(3) - 1) * random.nextInt(3) / 2
-        //             k1 += random.nextInt(3) - 1
+            while (true) {
+                if (l1 < l / 16) {
+                    i1 += random.nextInt(3) - 1
+                    j1 += (random.nextInt(3) - 1) * random.nextInt(3) / 2
+                    k1 += random.nextInt(3) - 1
 
-        //             if (world.getBlock(i1, j1 - 1, k1) == this && !world.getBlock(i1, j1, k1).isNormalCube) {
-        //                 ++l1
-        //                 continue
-        //             }
-        //         }
-        //         else if (world.getBlock(i1, j1, k1).isAir(world, i1, j1, k1)) {
-        //             if (random.nextInt(8) != 0) {
-        //                 if (ShadowFoxBlocks.irisGrass.canBlockStay(world, i1, j1, k1)) {
-        //                     var meta = world.getBlockMetadata(i1, j1-1, k1)
-        //                     world.setBlock(i1, j1, k1, ShadowFoxBlocks.irisGrass, meta, 3)
-        //                 }
-        //             }
-        //             else {
-        //                 world.getBiomeGenForCoords(i1, k1).plantFlower(world, random, i1, j1, k1)
-        //             }
-        //         }
+                    if ((world.getBlock(i1, j1 - 1, k1) == this || world.getBlock(i1, j1 - 1, k1) == ShadowFoxBlocks.coloredDirtBlock) && !world.getBlock(i1, j1, k1).isNormalCube) {
+                        ++l1
+                        continue
+                    }
+                }
+                else if (world.getBlock(i1, j1, k1).isAir(world, i1, j1, k1)) {
+                    if (random.nextInt(8) != 0) {
+                        if (ShadowFoxBlocks.rainbowGrass.canBlockStay(world, i1, j1, k1)) {
+                            var meta = world.getBlockMetadata(i1, j1-1, k1)
+                            world.setBlock(i1, j1, k1, ShadowFoxBlocks.rainbowGrass, meta, 3)
+                        }
+                    }
+                    else {
+                        world.getBiomeGenForCoords(i1, k1).plantFlower(world, random, i1, j1, k1)
+                    }
+                }
 
-        //         ++l
-        //         break
-        //     }
-        // }
+                ++l
+                break
+            }
+        }
     }
 
     override fun isToolEffective(type: String?, metadata: Int): Boolean {
@@ -95,11 +95,6 @@ class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
 
     override fun getHarvestTool(metadata : Int): String {
         return "shovel"
-    }
-
-    @SideOnly(Side.CLIENT)
-    override fun getBlockColor(): Int {
-        return 0xFFFFFF
     }
 
     override fun shouldRegisterInNameSet(): Boolean {
@@ -130,13 +125,9 @@ class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(reg: IIconRegister) {}
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
 
     override fun canSustainPlant(world: IBlockAccess?, x: Int, y: Int, z: Int, direction: ForgeDirection?, plantable: IPlantable?): Boolean {
         return true
-    }
-
-    override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
-        return LexiconRegistry.coloredDirt
     }
 }

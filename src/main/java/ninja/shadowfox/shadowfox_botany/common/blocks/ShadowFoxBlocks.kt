@@ -12,6 +12,7 @@ public object ShadowFoxBlocks {
     public var irisSapling: Block
     public var irisLeaves: Block
     public var irisGrass: Block
+    public var rainbowGrass: Block
 
     public var irisWood0: Block
     public var irisWood1: Block
@@ -39,6 +40,7 @@ public object ShadowFoxBlocks {
         irisSapling = BlockColoredSapling()
         irisLeaves = BlockColoredLeaves()
         irisGrass = BlockColoredGrass()
+        rainbowGrass = BlockRainbowGrass()
 
         irisWood0 = BlockColoredWood(0)
         irisWood1 = BlockColoredWood(1)
