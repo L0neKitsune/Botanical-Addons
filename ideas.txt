@@ -3,12 +3,16 @@ Would like to avoid mana generating items unless it fits well with botania and i
 
 Functional trees - need mana to grow, but functionality is permanent and free (will drop saplings?)
     Holy Oak - Causes Damage to undead mobs that stand below it (take that skeletons) - wilts if leaves are broken
+        Wire's comments: nah, functionality like this requires mana in botania, that's just how it do
     Lux Wood - Glows (tree and planks made from it)
     Nether Oak - Fire resistant (sustaining?) - leaves have a good burn time (1/2 charcoal)
+        Wire's comments: Leaves are too easy to get for the leaves to be that good. Or good at all.
     ??? - Blast resistant wood
     ??? - Anti (Mana Seal?) Creeper - potentially prevent mana pool drain if I implement it
     Ward Wood - prevents mobs from crossing (e.g. warding stones thaumcraft) may have sustaining cost
+        Wire's comments: Naaaaaah, warded blocks aren't a fun time code-wise and sometimes bug out
     Donar Oak - acts as a lightning rod, used for thundercaller rod
+        Wire's comments: But... you can't make a block be a lightning rod, can you?
 
 Extension methods or helpers for commonly used snippets of code
 
@@ -21,14 +25,15 @@ Crafting mechanic for trees
     api
 
 More Mobs - need models
-    Mana Seal Creeper (Replace with Wraith)?
+    Mana Seal Creeper (Replace with Mana Wraith)?
         tracks down pools
         drains player mana / gives debuff
         drops debuff crafting item / mana crystals (if it absorbs enough mana)
         aggros automatically to players with mana reserves
-    Friendlier Potatoes
+    Friendlier Potatoes - +10 to adorbs
     Boss Mob ?
         potentially mid tier to unlock priestly tier stuff
+        Wire's comments: priest stuff is meant to only be gated behind the Guardian.
 
 Gated Lexica Pages
     Have tiered lexica entries to avoid duplicating sections (Good example would be unlocking info about thor ring
@@ -40,13 +45,15 @@ Splash Potions
     each tier would be an item with x uses so you only had to do one infusion for x uses cost would be tiered as well
         mana - 3
         alf - 6
-        bifrost - 9 ???
     Poison
     Wither
     Mana Seal
-    Holy Water - Damages undead
+    Divinity - Damages undead
 
 Botanists Bane - "Imagine Breaker"
+    Wire's comments: Don't do this, man. Touma's arm doesn't like being cut off.
+        Also, malicious magic v. other players isn't a botanist's thing. It's to everyone or noone.
+
     An unholy relic of an ancient time, merely having this weapon on your person is enough to completely drain any
     personal reserves of mana, damaging mana based armor and cursing you with a powerful mana seal (10:00 sustained/no milk???),
     however this is not its true purpose.  Striking a botanist with this weapon will do large amounts of damage increasing relative to there personal store of
