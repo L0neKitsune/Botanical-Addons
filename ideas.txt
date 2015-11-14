@@ -8,6 +8,7 @@ Functional trees - need mana to grow, but functionality is permanent and free (w
     ??? - Blast resistant wood
     ??? - Anti (Mana Seal?) Creeper - potentially prevent mana pool drain if I implement it
     Ward Wood - prevents mobs from crossing (e.g. warding stones thaumcraft) may have sustaining cost
+    Donar Oak - acts as a lightning rod, used for thundercaller rod
 
 Extension methods or helpers for commonly used snippets of code
 
@@ -45,11 +46,12 @@ Splash Potions
     Mana Seal
     Holy Water - Damages undead
 
-Botanists Bane - For fun and profit.
+Botanists Bane - "Imagine Breaker"
     An unholy relic of an ancient time, merely having this weapon on your person is enough to completely drain any
-    personal reserves of mana, damaging mana based armor and cursing you with a powerful mana seal (10:00 sustained/no milk???), however this is not its true purpose.
-    Striking a botanist with this weapon will do large amounts of damage increasing relative to there personal store of
+    personal reserves of mana, damaging mana based armor and cursing you with a powerful mana seal (10:00 sustained/no milk???),
+    however this is not its true purpose.  Striking a botanist with this weapon will do large amounts of damage increasing relative to there personal store of
     power(full pool = 10 hearts), as well as cursing them with a long lasting mana seal(1:00).
+
 
 
 
