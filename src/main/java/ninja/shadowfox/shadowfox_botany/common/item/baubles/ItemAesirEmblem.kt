@@ -20,6 +20,7 @@ import net.minecraftforge.client.event.RenderPlayerEvent
 
 import org.lwjgl.opengl.GL11
 
+import vazkii.botania.api.item.ICosmeticAttachable
 import vazkii.botania.api.item.IBaubleRender
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
@@ -88,7 +89,7 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
             if(player is EntityPlayer) {
                 if (ManaItemHandler.requestManaExact(stack, player, COST, true)) {
                     ItemNBTHelper.setByte(stack, "active", 1.toByte())
-                    if (!this.hasPhantomInk(stack)) {
+                    if (!this.hasPhantomInk(stack) && (this as ICosmeticAttachable).getCosmeticItem(stack) == null) {
                         val shift = getHeadOrientation(player)
                         val x = player.posX + shift.x * 0.25
                         val y = player.posY + shift.y * 0.25

@@ -24,6 +24,7 @@ import net.minecraftforge.client.event.RenderPlayerEvent
 
 import org.lwjgl.opengl.GL11
 
+import vazkii.botania.api.item.ICosmeticAttachable
 import vazkii.botania.api.item.IBaubleRender
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
@@ -108,7 +109,7 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
             if(player is EntityPlayer) {
                 if (ManaItemHandler.requestManaExact(stack, player, COST, true)) {
                     ItemNBTHelper.setByte(stack, "active", 1.toByte())
-                    if (!this.hasPhantomInk(stack)) {
+                    if (!this.hasPhantomInk(stack) && (this as ICosmeticAttachable).getCosmeticItem(stack) == null) {
                         when (stack.itemDamage) {
                             0 -> {
                                 var playerHead = Vector3.fromEntityCenter(player).add(0.0, 0.75, 0.0).add(Vector3(player.lookVec).multiply(-0.25))

@@ -70,7 +70,7 @@ public class BlockRainbowWood() : ShadowFoxRotatedPillar(Material.wood), ILexico
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(iconRegister: IIconRegister) {}
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
 
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {

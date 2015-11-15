@@ -70,7 +70,7 @@ public class BlockRainbowLeaves(): ShadowFoxLeaves() {
     override fun registerBlockIcons(iconRegister: IIconRegister) {}
 
     @SideOnly(Side.CLIENT)
-    override fun getIcon(meta: Int, pass: Int): IIcon {
+    override fun getIcon(side: Int, meta: Int): IIcon {
         return this.blockIcon
     }
 
