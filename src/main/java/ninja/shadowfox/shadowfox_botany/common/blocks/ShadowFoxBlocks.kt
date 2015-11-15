@@ -13,6 +13,7 @@ public object ShadowFoxBlocks {
     public var irisLeaves: Block
     public var irisGrass: Block
     public var rainbowGrass: Block
+    public var rainbowPlanks: Block
 
     public var irisWood0: Block
     public var irisWood1: Block
@@ -28,8 +29,13 @@ public object ShadowFoxBlocks {
     public var rainbowWood: Block
 
     public var coloredSlabs: Array<Block>
+    public var rainbowSlabs: Block
+
     public var coloredSlabsFull: Array<Block>
+    public var rainbowSlabsFull: Block
+
     public var coloredStairs: Array<Block>
+    public var rainbowStairs: Block
 
     val WOOD: Array<String> = arrayOf("irisWoodWhite", "irisWoodOrange", "irisWoodMagenta", "irisWoodLightBlue", "irisWoodYellow", "irisWoodLime", "irisWoodPink", "irisWoodGray", "irisWoodLightGray", "irisWoodCyan", "irisWoodPurple", "irisWoodBlue", "irisWoodBrown", "irisWoodGreen", "irisWoodRed", "irisWoodBlack")
     val LEAVES: Array<String> = arrayOf("irisLeavesWhite", "irisLeavesOrange", "irisLeavesMagenta", "irisLeavesLightBlue", "irisLeavesYellow", "irisLeavesLime", "irisLeavesPink", "irisLeavesGray", "irisLeavesLightGray", "irisLeavesCyan", "irisLeavesPurple", "irisLeavesBlue", "irisLeavesBrown", "irisLeavesGreen", "irisLeavesRed", "irisLeavesBlack")
@@ -45,6 +51,7 @@ public object ShadowFoxBlocks {
         rainbowGrass = BlockRainbowGrass()
         rainbowLeaves = BlockRainbowLeaves()
         rainbowWood = BlockRainbowWood()
+        rainbowPlanks = BlockRainbowPlanks()
 
         irisWood0 = BlockColoredWood(0)
         irisWood1 = BlockColoredWood(1)
@@ -54,15 +61,23 @@ public object ShadowFoxBlocks {
         coloredPlanks = BlockColoredPlanks()
 
         coloredSlabs = Array<Block>(16 , {i -> SlabColoredWood(false, i)})
+        rainbowSlabs = SlabRainbowWood(false)
+
         coloredSlabsFull = Array<Block>(16 , {i -> SlabColoredWood(true, i)})
+        rainbowSlabsFull = SlabRainbowWood(true)
+
         coloredStairs = Array<Block>(16 , {i -> StairsColoredWood(i)})
+        rainbowStairs = StairsRainbowWood()
+
+        (rainbowSlabs as ShadowFoxSlabs).register()
+        (rainbowSlabsFull as ShadowFoxSlabs).register()
 
         for (i in coloredSlabs) {
-            (i as SlabColoredWood).register()
+            (i as ShadowFoxSlabs).register()
         }
 
         for (i in coloredSlabsFull) {
-            (i as SlabColoredWood).register()
+            (i as ShadowFoxSlabs).register()
         }
 
         irisTallGrass0 = BlockColoredDoubleGrass(0)

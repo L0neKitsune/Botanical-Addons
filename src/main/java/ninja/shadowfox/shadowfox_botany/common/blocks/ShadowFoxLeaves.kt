@@ -38,7 +38,7 @@ abstract class ShadowFoxLeaves(): BlockLeaves(), IShearable, ILexiconable {
 
     abstract override fun quantityDropped(random: Random): Int
 
-    internal fun register(name: String) {
+    open fun register(name: String) {
         GameRegistry.registerBlock(this, ShadowFoxMetaItemBlock::class.java, name)
     }
 

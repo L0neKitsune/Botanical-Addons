@@ -1,6 +1,7 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
+import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.client.Minecraft
@@ -12,6 +13,7 @@ import net.minecraft.util.IIcon
 import net.minecraft.world.World
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxRainbowItemBlock
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.client.render.block.InterpolatedIcon
@@ -25,6 +27,10 @@ public class BlockRainbowLeaves(): ShadowFoxLeaves() {
     init {
         setBlockName("rainbowLeaves")
         MinecraftForge.EVENT_BUS.register(this)
+    }
+
+    override fun register(name: String) {
+        GameRegistry.registerBlock(this, ShadowFoxRainbowItemBlock::class.java, name)
     }
 
     override fun quantityDropped(random: Random): Int {
@@ -48,7 +54,7 @@ public class BlockRainbowLeaves(): ShadowFoxLeaves() {
                 this.icon = icon
 
             var icon_opq = InterpolatedIcon("shadowfox_botany:rainbowLeaves_opaque");
-            if(event.map.setTextureEntry("shadowfox_botany:rainbowLeaves_opaque", icon))
+            if(event.map.setTextureEntry("shadowfox_botany:rainbowLeaves_opaque", icon_opq))
                 this.icon_opaque = icon_opq
         }
     }

@@ -24,8 +24,12 @@ abstract class ShadowFoxRotatedPillar(mat: Material) : ShadowFoxBlockMod(mat), I
     init { }
 
     override fun setBlockName(par1Str: String): Block {
-        GameRegistry.registerBlock(this, ShadowFoxLogItemBlock::class.java, par1Str)
+        register(par1Str)
         return super.setBlockName(par1Str)
+    }
+
+    open fun register(par1Str: String) {
+        GameRegistry.registerBlock(this, ShadowFoxLogItemBlock::class.java, par1Str)
     }
 
     override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item {
