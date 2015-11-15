@@ -19,7 +19,9 @@ public object MultipartHandler {
     // registerAllMultiparts(ShadowFoxBlocks.irisWood1)
     // registerAllMultiparts(ShadowFoxBlocks.irisWood2)
     // registerAllMultiparts(ShadowFoxBlocks.irisWood3)
+    registerAllMultiparts(ShadowFoxBlocks.rainbowWood)
     // registerAllMultiparts(ShadowFoxBlocks.coloredPlanks)
+    registerAllMultiparts(ShadowFoxBlocks.rainbowPlanks)
 	}
 
 	fun registerAllMultiparts(block: Block) {
