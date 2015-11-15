@@ -174,13 +174,13 @@ class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulItem(nam
     }
 
     override fun provideBlock(player : EntityPlayer, requestor : ItemStack, stack: ItemStack, block: Block, meta: Int, doit: Boolean) : Boolean{
-        if(block == ShadowFoxBlocks.coloredDirtBlock)
+        if(block == ShadowFoxBlocks.coloredDirtBlock || block == ShadowFoxBlocks.rainbowDirtBlock)
             return !doit || ManaItemHandler.requestManaExactForTool(requestor, player, COST, true)
         return false
     }
 
     override fun getBlockCount(player: EntityPlayer, requestor: ItemStack, stack: ItemStack, block: Block, meta: Int) : Int {
-        if(block == ShadowFoxBlocks.coloredDirtBlock)
+        if(block == ShadowFoxBlocks.coloredDirtBlock || block == ShadowFoxBlocks.rainbowDirtBlock)
             return -1
         return 0
     }
