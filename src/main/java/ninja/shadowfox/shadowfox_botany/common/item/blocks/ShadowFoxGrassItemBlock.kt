@@ -3,6 +3,7 @@ package ninja.shadowfox.shadowfox_botany.common.item.blocks
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import ninja.shadowfox.shadowfox_botany.common.blocks.BlockRainbowDoubleGrass
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.util.IIcon
 import net.minecraft.block.Block
@@ -49,6 +50,13 @@ open class ShadowFoxDoubleGrassItemBlock0(par2Block: Block) : ShadowFoxMetaItemB
         if(par1ItemStack == null) return
         addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + (par1ItemStack.itemDamage+(colorSet*8)))+"&r", par3List)
     } 
+}
+
+open class ShadowFoxRainbowDoubleGrassItemBlock(var par2Block: Block) : ShadowFoxRainbowItemBlock(par2Block) {
+
+    override fun getIcon(stack: ItemStack, pass: Int): IIcon {
+        return (par2Block as BlockRainbowDoubleGrass).topIcon
+    }
 }
 
 open class ShadowFoxDoubleGrassItemBlock1(par2Block: Block) : ShadowFoxDoubleGrassItemBlock0(par2Block) {

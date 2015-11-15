@@ -26,9 +26,8 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
         FMLCommonHandler.instance().bus().register(this)
     }
 
-    val TYPES = 16
     override fun getSubItems(par1: Item, par2: CreativeTabs?, par3: MutableList<Any?>) {
-        for(i in 0..(TYPES-1))
+        for(i in 0..(TYPES))
             par3.add(ItemStack(par1, 1, i))
     }
 
@@ -49,17 +48,27 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
         if ((block === Blocks.dirt || block == Blocks.grass) && bmeta == 0) {
             var meta = par1ItemStack.itemDamage
             var swapper = addBlockSwapper(par3World, par4, par5, par6, meta)
-            par3World.setBlock(par4, par5, par6, ShadowFoxBlocks.coloredDirtBlock, swapper.metaToSet, 1 or 2)
-            if (par3World.getBlock(par4, par5+1, par6) == Blocks.tallgrass && par3World.getBlockMetadata(par4, par5+1, par6) == 1)
-                par3World.setBlock(par4, par5+1, par6, ShadowFoxBlocks.irisGrass, swapper.metaToSet, 1 or 2)
+            par3World.setBlock(par4, par5, par6, swapper.blockToSet, swapper.metaToSet, 1 or 2)
+            if (par3World.getBlock(par4, par5+1, par6) == Blocks.tallgrass && par3World.getBlockMetadata(par4, par5+1, par6) == 1) {
+                if (ColorfulItem.isRainbow(meta))
+                    par3World.setBlock(par4, par5+1, par6, ShadowFoxBlocks.rainbowGrass, 0, 1 or 2)
+                else
+                    par3World.setBlock(par4, par5+1, par6, ShadowFoxBlocks.irisGrass, swapper.metaToSet, 1 or 2)
+            }
             else if (par3World.getBlock(par4, par5+1, par6) == Blocks.double_plant && par3World.getBlockMetadata(par4, par5+1, par6) == 2) {
-                if (swapper.metaToSet < 8) {
-                    par3World.setBlock(par4, par5+1, par6, ShadowFoxBlocks.irisTallGrass0, swapper.metaToSet, 2)
-                    par3World.setBlock(par4, par5+2, par6, ShadowFoxBlocks.irisTallGrass0, 8, 2)
+                if (ColorfulItem.isRainbow(meta)) {
+                    par3World.setBlock(par4, par5+1, par6, ShadowFoxBlocks.rainbowTallGrass, 0, 2)
+                    par3World.setBlock(par4, par5+2, par6, ShadowFoxBlocks.rainbowTallGrass, 8, 2)
                 }
                 else {
-                    par3World.setBlock(par4, par5+1, par6, ShadowFoxBlocks.irisTallGrass1, swapper.metaToSet-8, 2)
-                    par3World.setBlock(par4, par5+2, par6, ShadowFoxBlocks.irisTallGrass1, 8, 2)
+                    if (swapper.metaToSet < 8) {
+                        par3World.setBlock(par4, par5+1, par6, ShadowFoxBlocks.irisTallGrass0, swapper.metaToSet, 2)
+                        par3World.setBlock(par4, par5+2, par6, ShadowFoxBlocks.irisTallGrass0, 8, 2)
+                    }
+                    else {
+                        par3World.setBlock(par4, par5+1, par6, ShadowFoxBlocks.irisTallGrass1, swapper.metaToSet-8, 2)
+                        par3World.setBlock(par4, par5+2, par6, ShadowFoxBlocks.irisTallGrass1, 8, 2)
+                    }
                 }
             }
             for (i in 0..49) {
@@ -105,6 +114,8 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
 
         var world: World
         var rand: Random
+        var blockToSet: Block?
+        var rainbow: Boolean
         var metaToSet: Int
 
         var startCoords: ChunkCoordinates
@@ -112,7 +123,9 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
 
         init {
             this.world = world
-            metaToSet = meta
+            blockToSet = ColorfulItem.dirtFromMeta(meta)
+            rainbow = ColorfulItem.isRainbow(meta)
+            metaToSet = meta % 16
             var seed = coords.posX xor coords.posY xor coords.posZ
             rand = Random(seed.toLong())
             startCoords = coords
@@ -130,7 +143,7 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
                         var block: Block = world.getBlock(x, y, z)
                         var meta: Int = world.getBlockMetadata(x, y, z)
 
-                        if(block === ShadowFoxBlocks.coloredDirtBlock && meta === metaToSet) {
+                        if(block === blockToSet && meta === metaToSet) {
                             if(ticksExisted % 20 == 0) {
                                 var validCoords = ArrayList<ChunkCoordinates>()
                                 for(k in -1..1)
@@ -145,17 +158,27 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
                                     }
                                 if(!validCoords.isEmpty() && !world.isRemote) {
                                     var coords = validCoords[rand.nextInt(validCoords.size)]
-                                    world.setBlock(coords.posX, coords.posY, coords.posZ, ShadowFoxBlocks.coloredDirtBlock, metaToSet, 1 or 2)
-                                    if (world.getBlock(coords.posX, coords.posY+1, coords.posZ) == Blocks.tallgrass && world.getBlockMetadata(coords.posX, coords.posY+1, coords.posZ) == 1)
-                                        world.setBlock(coords.posX, coords.posY+1, coords.posZ, ShadowFoxBlocks.irisGrass, metaToSet, 1 or 2)
+                                    world.setBlock(coords.posX, coords.posY, coords.posZ, blockToSet, metaToSet, 1 or 2)
+                                    if (world.getBlock(coords.posX, coords.posY+1, coords.posZ) == Blocks.tallgrass && world.getBlockMetadata(coords.posX, coords.posY+1, coords.posZ) == 1) {
+                                        if (rainbow)
+                                            world.setBlock(coords.posX, coords.posY+1, coords.posZ, ShadowFoxBlocks.rainbowGrass, 0, 1 or 2)
+                                        else
+                                            world.setBlock(coords.posX, coords.posY+1, coords.posZ, ShadowFoxBlocks.irisGrass, metaToSet, 1 or 2)
+                                    }
                                     else if (world.getBlock(coords.posX, coords.posY+1, coords.posZ) == Blocks.double_plant && world.getBlockMetadata(coords.posX, coords.posY+1, coords.posZ) == 2) {
-                                        if (metaToSet < 8) {
-                                            world.setBlock(coords.posX, coords.posY + 1, coords.posZ, ShadowFoxBlocks.irisTallGrass0, metaToSet, 2)
-                                            world.setBlock(coords.posX, coords.posY + 2, coords.posZ, ShadowFoxBlocks.irisTallGrass0, 8, 2)
+                                        if (rainbow) { 
+                                            world.setBlock(coords.posX, coords.posY+1, coords.posZ, ShadowFoxBlocks.rainbowTallGrass, 0, 2)
+                                            world.setBlock(coords.posX, coords.posY+2, coords.posZ, ShadowFoxBlocks.rainbowTallGrass, 8, 2)
                                         }
                                         else {
-                                            world.setBlock(coords.posX, coords.posY + 1, coords.posZ, ShadowFoxBlocks.irisTallGrass1, metaToSet-8, 2)
-                                            world.setBlock(coords.posX, coords.posY + 2, coords.posZ, ShadowFoxBlocks.irisTallGrass1, 8, 2)
+                                            if (metaToSet < 8) {
+                                                world.setBlock(coords.posX, coords.posY + 1, coords.posZ, ShadowFoxBlocks.irisTallGrass0, metaToSet, 2)
+                                                world.setBlock(coords.posX, coords.posY + 2, coords.posZ, ShadowFoxBlocks.irisTallGrass0, 8, 2)
+                                            }
+                                            else {
+                                                world.setBlock(coords.posX, coords.posY + 1, coords.posZ, ShadowFoxBlocks.irisTallGrass1, metaToSet-8, 2)
+                                                world.setBlock(coords.posX, coords.posY + 2, coords.posZ, ShadowFoxBlocks.irisTallGrass1, 8, 2)
+                                            }
                                         }
                                     }
                                 }

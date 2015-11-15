@@ -1,6 +1,7 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks
 
 import cpw.mods.fml.common.registry.GameRegistry
+import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
@@ -17,21 +18,22 @@ import net.minecraft.world.World
 import net.minecraftforge.common.IPlantable
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.util.ForgeDirection
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
+import net.minecraftforge.client.event.TextureStitchEvent
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxRainbowItemBlock
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
+import vazkii.botania.client.render.block.InterpolatedIcon
 import java.awt.Color
 import java.util.Random
 import net.minecraft.util.*
 import kotlin.properties.Delegates
 
-class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable {
+class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable {
 
-    private val name = "coloredDirt"
+    private val name = "rainbowDirt"
     private val TYPES = 16
-    internal var icons: IIcon by Delegates.notNull()
 
     init {
         blockHardness = 0.5F
@@ -63,16 +65,16 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
                     j1 += (random.nextInt(3) - 1) * random.nextInt(3) / 2
                     k1 += random.nextInt(3) - 1
 
-                    if ((world.getBlock(i1, j1 - 1, k1) == this || world.getBlock(i1, j1 - 1, k1) == ShadowFoxBlocks.rainbowDirtBlock) && !world.getBlock(i1, j1, k1).isNormalCube) {
+                    if ((world.getBlock(i1, j1 - 1, k1) == this || world.getBlock(i1, j1 - 1, k1) == ShadowFoxBlocks.coloredDirtBlock) && !world.getBlock(i1, j1, k1).isNormalCube) {
                         ++l1
                         continue
                     }
                 }
                 else if (world.getBlock(i1, j1, k1).isAir(world, i1, j1, k1)) {
                     if (random.nextInt(8) != 0) {
-                        if (ShadowFoxBlocks.irisGrass.canBlockStay(world, i1, j1, k1)) {
+                        if (ShadowFoxBlocks.rainbowGrass.canBlockStay(world, i1, j1, k1)) {
                             var meta = world.getBlockMetadata(i1, j1-1, k1)
-                            world.setBlock(i1, j1, k1, ShadowFoxBlocks.irisGrass, meta, 3)
+                            world.setBlock(i1, j1, k1, ShadowFoxBlocks.rainbowGrass, meta, 3)
                         }
                     }
                     else {
@@ -94,36 +96,6 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
         return "shovel"
     }
 
-    @SideOnly(Side.CLIENT)
-    override fun getBlockColor(): Int {
-        return 0xFFFFFF
-    }
-
-
-
-    /**
-     * Returns the color this block should be rendered. Used by leaves.
-     */
-    @SideOnly(Side.CLIENT)
-    override fun getRenderColor(meta: Int): Int {
-        if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF
-
-        var color = EntitySheep.fleeceColorTable[meta]
-        return Color(color[0], color[1], color[2]).rgb
-    }
-
-    @SideOnly(Side.CLIENT)
-    override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int {
-        val meta = world!!.getBlockMetadata(x, y, z)
-
-        if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF
-
-        var color = EntitySheep.fleeceColorTable[meta]
-        return Color(color[0], color[1], color[2]).rgb
-    }
-
     override fun shouldRegisterInNameSet(): Boolean {
         return false
     }
@@ -137,31 +109,22 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
         return super.setBlockName(par1Str)
     }
 
-    @SideOnly(Side.CLIENT)
-    override fun getIcon(side : Int, meta : Int) : IIcon {
-        return icons
-    }
-
     internal fun register(name: String) {
-        GameRegistry.registerBlock(this, ShadowFoxMetaItemBlock::class.java, name)
+        GameRegistry.registerBlock(this, ShadowFoxRainbowItemBlock::class.java, name)
     }
 
-
-    override fun getPickBlock(target: MovingObjectPosition?, world: World, x: Int, y: Int, z: Int): ItemStack {
-        val meta = world.getBlockMetadata(x, y, z)
-        return ItemStack(this, 1, meta)
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    fun loadTextures(event: TextureStitchEvent.Pre) {
+        if(event.map.textureType == 0) {
+            var icon = InterpolatedIcon("shadowfox_botany:rainbowDirt");
+            if(event.map.setTextureEntry("shadowfox_botany:rainbowDirt", icon))
+                this.blockIcon = icon
+        }
     }
 
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        icons = IconHelper.forBlock(par1IconRegister, this)
-    }
-
-    override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {
-        if (list != null && item != null)
-            for (i in 0..(TYPES - 1)) {
-                list.add(ItemStack(item, 1, i))
-            }
-    }
+    @SideOnly(Side.CLIENT)
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
 
     override fun canSustainPlant(world: IBlockAccess?, x: Int, y: Int, z: Int, direction: ForgeDirection?, plantable: IPlantable?): Boolean {
         return true

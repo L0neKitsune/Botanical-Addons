@@ -7,7 +7,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import java.util.*
 
 
-class ColoredTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
+class SimpleTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
 
     init {}
 
@@ -50,7 +50,7 @@ class ColoredTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
                 var block2: Block = world!!.getBlock(x, y - 1, z)
                 val soilMeta = world.getBlockMetadata(x, y - 1, z)
 
-                var isSoil: Boolean = block2 == ShadowFoxBlocks.coloredDirtBlock
+                var isSoil: Boolean = (block2 == ShadowFoxBlocks.coloredDirtBlock || block2 == ShadowFoxBlocks.rainbowDirtBlock)
 
                 if (isSoil && y < 256 - l - 1) {
                     block2.onPlantGrow(world, x, y - 1, z, x, y, z)
@@ -74,7 +74,11 @@ class ColoredTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
                                     var block1: Block = world.getBlock(i2, k1, k2)
 
                                     if (block1.isAir(world, i2, k1, k2) || block1.isLeaves(world, i2, k1, k2)) {
-                                        setBlockAndNotifyAdequately(world, i2, k1, k2, ShadowFoxBlocks.irisLeaves, soilMeta)
+                                        if(block2 == ShadowFoxBlocks.coloredDirtBlock) {
+                                            setBlockAndNotifyAdequately(world, i2, k1, k2, ShadowFoxBlocks.irisLeaves, soilMeta)
+                                        } else {
+                                            setBlockAndNotifyAdequately(world, i2, k1, k2, ShadowFoxBlocks.rainbowLeaves, 0)
+                                        }
                                     }
                                 }
                             }
@@ -85,6 +89,7 @@ class ColoredTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
                         block = world.getBlock(x, y + k1, z)
 
                         if (block.isAir(world, x, y + k1, z) || block.isLeaves(world, x, y + k1, z)) {
+                            if(block2 == ShadowFoxBlocks.coloredDirtBlock){
                             var woodType : Block
                             when ((soilMeta / 4).toInt()) {
                                 1 -> woodType = ShadowFoxBlocks.irisWood1
@@ -96,6 +101,11 @@ class ColoredTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
                             }
 
                             setBlockAndNotifyAdequately(world, x, y + k1, z, woodType, soilMeta and 3)
+                            }
+                            else {
+                                setBlockAndNotifyAdequately(world, x, y + k1, z, ShadowFoxBlocks.rainbowWood, 0)
+
+                            }
                         }
                     }
                     return true

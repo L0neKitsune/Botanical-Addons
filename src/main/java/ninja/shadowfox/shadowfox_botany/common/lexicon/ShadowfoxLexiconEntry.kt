@@ -1,14 +1,17 @@
 package ninja.shadowfox.shadowfox_botany.common.lexicon
 
 import net.minecraft.block.Block
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.*
 
+fun ShadowfoxLexiconEntry(unlocalizedName: String, category: LexiconCategory, block: Block) = ShadowfoxLexiconEntry(unlocalizedName, category, ItemStack(block))
+fun ShadowfoxLexiconEntry(unlocalizedName: String, category: LexiconCategory, item: Item) = ShadowfoxLexiconEntry(unlocalizedName, category, ItemStack(item))
 
-public class ShadowfoxLexiconEntry(unlocalizedName: String, category: LexiconCategory, var block: Block? = null) : LexiconEntry(unlocalizedName, category), IAddonEntry {
+public class ShadowfoxLexiconEntry(unlocalizedName: String, category: LexiconCategory, var stack: ItemStack? = null) : LexiconEntry(unlocalizedName, category), IAddonEntry {
     init {
-        if (block != null) icon = ItemStack(block,1)
+        if (stack != null) icon = stack
         BotaniaAPI.addEntry(this, category)
     }
 
