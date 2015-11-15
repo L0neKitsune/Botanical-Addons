@@ -7,7 +7,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import java.util.*
 
 
-class ColoredTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
+class SimpleTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
 
     init {}
 

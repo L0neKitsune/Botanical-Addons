@@ -24,7 +24,8 @@ public object ShadowFoxBlocks {
     public var irisTallGrass0: Block
     public var irisTallGrass1: Block
     public var rainbowTallGrass: Block
-
+    public var rainbowLeaves: Block
+    public var rainbowWood: Block
 
     public var coloredSlabs: Array<Block>
     public var coloredSlabsFull: Array<Block>
@@ -42,6 +43,8 @@ public object ShadowFoxBlocks {
         irisLeaves = BlockColoredLeaves()
         irisGrass = BlockColoredGrass()
         rainbowGrass = BlockRainbowGrass()
+        rainbowLeaves = BlockRainbowLeaves()
+        rainbowWood = BlockRainbowWood()
 
         irisWood0 = BlockColoredWood(0)
         irisWood1 = BlockColoredWood(1)

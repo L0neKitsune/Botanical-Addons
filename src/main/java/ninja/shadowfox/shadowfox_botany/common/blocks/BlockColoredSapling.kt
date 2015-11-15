@@ -18,7 +18,7 @@ import net.minecraftforge.common.EnumPlantType
 import net.minecraftforge.common.IPlantable
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
-import ninja.shadowfox.shadowfox_botany.common.world.ColoredTreeGen
+import ninja.shadowfox.shadowfox_botany.common.world.SimpleTreeGen
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
@@ -119,7 +119,7 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
             if(canGrowHere(plantedOn)) {
                 val l = world.getBlockMetadata(x, y, z)
 
-                val obj: WorldGenerator = ColoredTreeGen(5)
+                val obj: WorldGenerator = SimpleTreeGen(5)
 
                 world.setBlock(x, y, z, Blocks.air, 0, 4)
 
