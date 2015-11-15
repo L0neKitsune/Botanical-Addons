@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
+import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
@@ -45,17 +46,23 @@ public class BlockRainbowLeaves(): ShadowFoxLeaves() {
         return arrayOf("rainbowLeaves")
     }
 
+    @SideOnly(Side.CLIENT)
+    override fun getRenderColor(meta: Int): Int {
+        return 0xFFFFFF
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int {
+        return 0xFFFFFF
+    }
+
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
         if(event.map.textureType == 0) {
             var icon = InterpolatedIcon("shadowfox_botany:rainbowLeaves");
             if(event.map.setTextureEntry("shadowfox_botany:rainbowLeaves", icon))
-                this.icon = icon
-
-            var icon_opq = InterpolatedIcon("shadowfox_botany:rainbowLeaves_opaque");
-            if(event.map.setTextureEntry("shadowfox_botany:rainbowLeaves_opaque", icon_opq))
-                this.icon_opaque = icon_opq
+                this.blockIcon = icon
         }
     }
 
@@ -64,8 +71,7 @@ public class BlockRainbowLeaves(): ShadowFoxLeaves() {
 
     @SideOnly(Side.CLIENT)
     override fun getIcon(meta: Int, pass: Int): IIcon {
-        this.setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics)
-        return if (this.field_150121_P) icon else icon_opaque
+        return this.blockIcon
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
