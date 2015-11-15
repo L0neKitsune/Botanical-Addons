@@ -34,7 +34,7 @@ import java.awt.Color
 import java.util.*
 import kotlin.properties.Delegates
 
-public class BlockRainbowDoubleGrass() : BlockDoublePlant() {
+public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
 
     val name = "rainbowDoubleGrass"
     internal var field_150128_a: IntArray? = null
@@ -137,5 +137,9 @@ public class BlockRainbowDoubleGrass() : BlockDoublePlant() {
     override fun isShearable(item: ItemStack, world: IBlockAccess, x: Int, y: Int, z: Int): Boolean {
         var meta = world.getBlockMetadata(x, y, z)
         return !isTop(meta)
+    }
+
+    override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
+        return LexiconRegistry.pastoralSeeds
     }
 }

@@ -28,7 +28,7 @@ import java.awt.Color
 import java.util.*
 import kotlin.properties.Delegates
 
-public class BlockRainbowGrass() : BlockTallGrass() {
+public class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
 
     init {
         setCreativeTab(ShadowFoxCreativeTab)
@@ -84,5 +84,9 @@ public class BlockRainbowGrass() : BlockTallGrass() {
             if(event.map.setTextureEntry("shadowfox_botany:rainbowGrass", icon))
                 this.blockIcon = icon
         }
+    }
+
+    override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
+        return LexiconRegistry.pastoralSeeds
     }
 }

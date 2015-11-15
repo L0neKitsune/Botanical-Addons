@@ -30,7 +30,7 @@ import java.util.Random
 import net.minecraft.util.*
 import kotlin.properties.Delegates
 
-class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable {
+class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable {
 
     private val name = "rainbowDirt"
     private val TYPES = 16
@@ -128,5 +128,9 @@ class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable {
 
     override fun canSustainPlant(world: IBlockAccess?, x: Int, y: Int, z: Int, direction: ForgeDirection?, plantable: IPlantable?): Boolean {
         return true
+    }
+
+    override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
+        return LexiconRegistry.coloredDirt
     }
 }

@@ -11,22 +11,22 @@ public object ShadowFoxBlocks {
     public var rainbowDirtBlock: Block
     public var irisSapling: Block
     public var irisLeaves: Block
+    public var rainbowLeaves: Block
     public var irisGrass: Block
     public var rainbowGrass: Block
-    public var rainbowPlanks: Block
 
     public var irisWood0: Block
     public var irisWood1: Block
     public var irisWood2: Block
     public var irisWood3: Block
+    public var rainbowWood: Block
 
     public var coloredPlanks: Block
+    public var rainbowPlanks: Block
 
     public var irisTallGrass0: Block
     public var irisTallGrass1: Block
     public var rainbowTallGrass: Block
-    public var rainbowLeaves: Block
-    public var rainbowWood: Block
 
     public var coloredSlabs: Array<Block>
     public var rainbowSlabs: Block
@@ -47,18 +47,18 @@ public object ShadowFoxBlocks {
         rainbowDirtBlock = BlockRainbowDirt()
         irisSapling = BlockColoredSapling()
         irisLeaves = BlockColoredLeaves()
+        rainbowLeaves = BlockRainbowLeaves()
         irisGrass = BlockColoredGrass()
         rainbowGrass = BlockRainbowGrass()
-        rainbowLeaves = BlockRainbowLeaves()
-        rainbowWood = BlockRainbowWood()
-        rainbowPlanks = BlockRainbowPlanks()
 
         irisWood0 = BlockColoredWood(0)
         irisWood1 = BlockColoredWood(1)
         irisWood2 = BlockColoredWood(2)
         irisWood3 = BlockColoredWood(3)
+        rainbowWood = BlockRainbowWood()
 
         coloredPlanks = BlockColoredPlanks()
+        rainbowPlanks = BlockRainbowPlanks()
 
         coloredSlabs = Array<Block>(16 , {i -> SlabColoredWood(false, i)})
         rainbowSlabs = SlabRainbowWood(false)
@@ -69,16 +69,16 @@ public object ShadowFoxBlocks {
         coloredStairs = Array<Block>(16 , {i -> StairsColoredWood(i)})
         rainbowStairs = StairsRainbowWood()
 
-        (rainbowSlabs as ShadowFoxSlabs).register()
-        (rainbowSlabsFull as ShadowFoxSlabs).register()
 
         for (i in coloredSlabs) {
             (i as ShadowFoxSlabs).register()
         }
+        (rainbowSlabs as ShadowFoxSlabs).register()
 
         for (i in coloredSlabsFull) {
             (i as ShadowFoxSlabs).register()
         }
+        (rainbowSlabsFull as ShadowFoxSlabs).register()
 
         irisTallGrass0 = BlockColoredDoubleGrass(0)
         irisTallGrass1 = BlockColoredDoubleGrass(1)
@@ -86,8 +86,9 @@ public object ShadowFoxBlocks {
 
         OreDictionary.registerOre("treeSapling", irisSapling)
 
+        var t: ItemStack
         for (i in 0..3){
-            var t = ItemStack(irisWood0, 1, i)
+            t = ItemStack(irisWood0, 1, i)
             OreDictionary.registerOre("logWood", t)
             OreDictionary.registerOre("irisWood", t)
             OreDictionary.registerOre(WOOD[i], t)
@@ -107,12 +108,17 @@ public object ShadowFoxBlocks {
             OreDictionary.registerOre("irisWood", t)
             OreDictionary.registerOre(WOOD[i+12], t)
         }
+        t = ItemStack(rainbowWood)
+        OreDictionary.registerOre("logWood", t)
+        OreDictionary.registerOre("irisWood", t)
+        OreDictionary.registerOre("irisWoodRainbow", t)
 
 
+        OreDictionary.registerOre("irisDirt", ItemStack(rainbowDirtBlock))
         for (i in 0..15) {
             OreDictionary.registerOre("irisDirt", ItemStack(coloredDirtBlock, 1, i))
             
-            var t = ItemStack(irisLeaves, 1, i)
+            t = ItemStack(irisLeaves, 1, i)
             OreDictionary.registerOre("treeLeaves", t)
             OreDictionary.registerOre("irisLeaves", t)
             OreDictionary.registerOre(LEAVES[i], t)
@@ -129,6 +135,19 @@ public object ShadowFoxBlocks {
             OreDictionary.registerOre("slabWood", t)
             OreDictionary.registerOre("irisSlabs", t)
         }
+        t = ItemStack(rainbowLeaves)
+        OreDictionary.registerOre("treeLeaves", t)
+        OreDictionary.registerOre("irisLeaves", t)
+        OreDictionary.registerOre("irisLeavesRainbow", t)
+        t = ItemStack(rainbowPlanks)
+        OreDictionary.registerOre("plankWood", t)
+        OreDictionary.registerOre("irisPlanks", t)
+        t = ItemStack(rainbowStairs)
+        OreDictionary.registerOre("stairWood", t)
+        OreDictionary.registerOre("irisStairs", t)
+        t = ItemStack(rainbowSlabs)
+        OreDictionary.registerOre("slabWood", t)
+        OreDictionary.registerOre("irisSlabs", t)
 
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
     }
