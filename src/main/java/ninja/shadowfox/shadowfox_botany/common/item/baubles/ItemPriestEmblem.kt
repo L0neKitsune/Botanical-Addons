@@ -108,7 +108,8 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
             if(player is EntityPlayer) {
                 if (ManaItemHandler.requestManaExact(stack, player, COST, true)) {
                     ItemNBTHelper.setByte(stack, "active", 1.toByte())
-                    if (!this.hasPhantomInk(stack) && (this as ICosmeticAttachable).getCosmeticItem(stack) == null) {
+                    var cosmeticStack = (this as ICosmeticAttachable).getCosmeticItem(stack)
+                    if (!this.hasPhantomInk(stack) && (cosmeticStack == null || cosmeticStack.item is IPriestColorOverride)) {
                         when (stack.itemDamage) {
                             0 -> {
                                 var playerHead = Vector3.fromEntityCenter(player).add(0.0, 0.75, 0.0).add(Vector3(player.lookVec).multiply(-0.25))

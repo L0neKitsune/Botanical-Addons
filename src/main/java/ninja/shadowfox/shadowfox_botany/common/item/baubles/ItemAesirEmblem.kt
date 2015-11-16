@@ -92,7 +92,8 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
             if(player is EntityPlayer) {
                 if (ManaItemHandler.requestManaExact(stack, player, COST, true)) {
                     ItemNBTHelper.setByte(stack, "active", 1.toByte())
-                    if (!this.hasPhantomInk(stack) && (this as ICosmeticAttachable).getCosmeticItem(stack) == null) {
+                    var cosmeticStack = (this as ICosmeticAttachable).getCosmeticItem(stack)
+                    if (!this.hasPhantomInk(stack) && (cosmeticStack == null || cosmeticStack.item is IPriestColorOverride)) {
                         val shift = getHeadOrientation(player)
                         val x = player.posX + shift.x * 0.25
                         val y = player.posY + shift.y * 0.25

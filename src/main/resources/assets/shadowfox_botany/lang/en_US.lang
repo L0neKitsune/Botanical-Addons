@@ -83,6 +83,8 @@ shadowfox_botany.entry.irisSapling=Iridescent Trees
 shadowfox_botany.tagline.irisSapling=Grow trees with all the colors of the wind
 shadowfox_botany.entry.irisSeeds=Iridescent Grass
 shadowfox_botany.tagline.irisSeeds=Rainbow grass for your colorful landscapes
+shadowfox_botany.entry.coatOfArms=Coats of Arms
+shadowfox_botany.tagline.coatOfArms=Declare your allegiance
 
 shadowfox_botany.page.coloredDirt0=Using the latent power in &1Mystical Flowers&0, you can make dirt that shimmers every color of the rainbow. This mystical dirt is capable of growing trees and plants without water or a hoe. If put next to a &1Pure Daisy&0, it will revert to its uncolored state.
 shadowfox_botany.page.coloredDirt1=Beauty from the dross
@@ -107,3 +109,6 @@ shadowfox_botany.page.irisSapling5=Grinding them down
 shadowfox_botany.page.irisSeeds0=If &1Bone Meal&0 is used on &1Iridescent Dirt&0, it will grow &1Iridescent Grass&0 instead of &1Tall Grass&0. When this &1Iridescent Grass&0 is thrown into a &4Mana Pool&0, you get out something quite like the &1Pasture Seed&0. It will transmute &1Grass&0 and &1Dirt&0 into &1Iridescent Dirt&0, with a simple right click.
 shadowfox_botany.page.irisSeeds1=/etc/sudoers
 shadowfox_botany.page.irisSeeds2=Tiger Orchid monoculture
+
+shadowfox_botany.page.coatOfArms0=Much like &1Cosmetic Baubles&0, the &1Coat of Arms&0 can add a touch of style to any baubles a player has equipped. These can be worn as Amulets slot, or crafted alongside another &4Bauble&0 much like &4Cosmetic Overrides&0.<br>Wearing a &1Coat of Arms&0 will change the color of any clerical abilities you might use, identifying your allegiance.
+shadowfox_botany.page.coatOfArms1=Papers, please
