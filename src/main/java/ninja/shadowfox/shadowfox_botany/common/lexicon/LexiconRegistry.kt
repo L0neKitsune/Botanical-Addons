@@ -19,8 +19,12 @@ public object LexiconRegistry {
     val lightningRod : LexiconEntry
     val pastoralSeeds : LexiconEntry
     val coatOfArms : LexiconEntry
+//    val dendrology: ShadowFoxLexiconCategory
 
     init {
+
+//        dendrology = ShadowFoxLexiconCategory("dendrology", 0)
+
         coloredDirt = ShadowfoxLexiconEntry("coloredDirt", BotaniaAPI.categoryMisc, block = ShadowFoxBlocks.rainbowDirtBlock)
         coloredDirt.setLexiconPages(PageText("0"), PageCraftingRecipe("1", ModRecipes.recipesColoredDirt))
 
