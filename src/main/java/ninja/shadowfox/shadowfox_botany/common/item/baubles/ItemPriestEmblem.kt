@@ -1,6 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.item.baubles
 
-
+import ninja.shadowfox.shadowfox_botany.common.item.IPriestColorOverride
 import ninja.shadowfox.shadowfox_botany.common.item.ColorfulItem
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
@@ -114,23 +114,19 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
                             0 -> {
                                 var playerHead = Vector3.fromEntityCenter(player).add(0.0, 0.75, 0.0).add(Vector3(player.lookVec).multiply(-0.25))
                                 val playerShift = playerHead.copy().add(getHeadOrientation(player))
-                                Botania.proxy.lightningFX(player.worldObj, playerHead, playerShift, 2.0f, 96708, 11198463)
+                                val color = Color(IPriestColorOverride.getColor(player, 0x0079C4))
+                                val innerColor = Color(color.rgb).brighter().brighter()
+                                Botania.proxy.lightningFX(player.worldObj, playerHead, playerShift, 2.0f, color.rgb, innerColor.rgb)
                             }
                             1 -> {
                                 for (i in 0..6) {
                                     var xmotion = (Math.random()-0.5).toFloat() * 0.15f
                                     var zmotion = (Math.random()-0.5).toFloat() * 0.15f
-                                    // Brown
-                                    var r = 0.6F
-                                    var g = 0.3F
-                                    var b = 0.0F
-                                    val held = player.inventory.getCurrentItem()
-                                    if (held != null && held.item == ShadowFoxItems.colorfulSkyDirtRod) {
-                                        val color = Color(ColorfulItem.colorFromItemStack(held))
-                                        r = color.red.toFloat() / 255F
-                                        g = color.green.toFloat() / 255F
-                                        b = color.blue.toFloat() / 255F
-                                    }
+                                    // 964B00 is brown
+                                    val color = Color(IPriestColorOverride.getColor(player, 0x964B00))
+                                    val r = color.red.toFloat() / 255F
+                                    val g = color.green.toFloat() / 255F
+                                    val b = color.blue.toFloat() / 255F
                                     Botania.proxy.wispFX(player.worldObj, player.posX, player.posY - player.yOffset, player.posZ, r, g, b, Math.random().toFloat() * 0.15f + 0.15f, xmotion, 0.0075f, zmotion)
                                 }
                             }
