@@ -45,6 +45,24 @@ tile.shadowfox_botany:rainbowDoubleGrass.name=Iridescent Double Grass
 tile.shadowfox_botany:irisDoubleGrass.name=Iridescent Double Grass
 item.shadowfox_botany:irisSeeds.name=Iridescent Seeds
 
+item.shadowfox_botany:coatOfArms0.name=Chilean Shield
+item.shadowfox_botany:coatOfArms1.name=French Shield
+item.shadowfox_botany:coatOfArms2.name=Parisian Shield
+item.shadowfox_botany:coatOfArms3.name=Germanic Shield
+item.shadowfox_botany:coatOfArms4.name=Greek Shield
+item.shadowfox_botany:coatOfArms5.name=Icelandic Shield
+item.shadowfox_botany:coatOfArms6.name=Irish Shield
+item.shadowfox_botany:coatOfArms7.name=Israeli Shield
+item.shadowfox_botany:coatOfArms8.name=Jamaican Shield
+item.shadowfox_botany:coatOfArms9.name=Singaporean Shield
+item.shadowfox_botany:coatOfArms10.name=South African Shield
+item.shadowfox_botany:coatOfArms11.name=Spanish Shield
+item.shadowfox_botany:coatOfArms12.name=Swiss Shield
+item.shadowfox_botany:coatOfArms13.name=Texan Shield
+item.shadowfox_botany:coatOfArms14.name=Ukranian Shield
+item.shadowfox_botany:coatOfArms15.name=American Shield
+item.shadowfox_botany:coatOfArms16.name=Fabulous Shield
+
 tile.shadowfox_botany:rainbowPlanksSlab.name=Iridescent Slab
 tile.shadowfox_botany:rainbowPlanksSlabFull.name=Iridescent Slab
 tile.shadowfox_botany:irisPlanksSlab.name=Iridescent Slab

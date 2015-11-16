@@ -44,7 +44,15 @@ object IconHelper {
         return forItem(ir, item, Integer.toString(i))
     }
 
+    fun forItem(ir: IIconRegister, item: Item, i: Int, dir: String): IIcon {
+        return forItem(ir, item, Integer.toString(i), dir)
+    }
+
     fun forItem(ir: IIconRegister, item: Item, s: String): IIcon {
         return forName(ir, item.unlocalizedName.replace("item\\.".toRegex(), "") + s)
+    }
+
+    fun forItem(ir: IIconRegister, item: Item, s: String, dir: String): IIcon {
+        return forName(ir, item.unlocalizedName.replace("item\\.".toRegex(), "") + s, dir)
     }
 }
