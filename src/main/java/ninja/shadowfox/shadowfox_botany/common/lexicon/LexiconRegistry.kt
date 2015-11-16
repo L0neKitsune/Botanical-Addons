@@ -18,6 +18,7 @@ public object LexiconRegistry {
     val technicolor : LexiconEntry
     val lightningRod : LexiconEntry
     val pastoralSeeds : LexiconEntry
+    val coatOfArms : LexiconEntry
 //    val dendrology: ShadowFoxLexiconCategory
 
     init {
@@ -52,6 +53,10 @@ public object LexiconRegistry {
                 PageCraftingRecipe("1", ModRecipes.recipesRedstoneRoot),
                 PageManaInfusionRecipe("2", ModRecipes.recipesPastoralSeeds))
 
+        coatOfArms = ShadowfoxLexiconEntry("coatOfArms", BotaniaAPI.categoryTools, ItemStack(ShadowFoxItems.coatOfArms, 1, 16))
+        coatOfArms.setLexiconPages(PageText("0"),
+                PageCraftingRecipe("1", ModRecipes.recipesCoatOfArms))
+
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.emblem, 1, 0), lightningRod, 3)
@@ -80,6 +85,7 @@ public object LexiconRegistry {
         for (i in 0..16) {
             LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.colorfulSkyDirtRod, 1, i), technicolor, 1)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.irisSeeds, 1, i), pastoralSeeds, 2)
+            LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.coatOfArms, 1, i), coatOfArms, 1)
         }
         for (i in 0..7) {
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisTallGrass0, 1, i), pastoralSeeds, 0)

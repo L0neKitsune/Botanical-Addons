@@ -1,5 +1,8 @@
 package ninja.shadowfox.shadowfox_botany.common.item.baubles
 
+import java.awt.Color
+
+import ninja.shadowfox.shadowfox_botany.common.item.IPriestColorOverride
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 
@@ -20,6 +23,7 @@ import net.minecraftforge.client.event.RenderPlayerEvent
 
 import org.lwjgl.opengl.GL11
 
+import vazkii.botania.api.item.ICosmeticAttachable
 import vazkii.botania.api.item.IBaubleRender
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
@@ -88,7 +92,8 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
             if(player is EntityPlayer) {
                 if (ManaItemHandler.requestManaExact(stack, player, COST, true)) {
                     ItemNBTHelper.setByte(stack, "active", 1.toByte())
-                    if (!this.hasPhantomInk(stack)) {
+                    var cosmeticStack = (this as ICosmeticAttachable).getCosmeticItem(stack)
+                    if (!this.hasPhantomInk(stack) && (cosmeticStack == null || cosmeticStack.item is IPriestColorOverride)) {
                         val shift = getHeadOrientation(player)
                         val x = player.posX + shift.x * 0.25
                         val y = player.posY + shift.y * 0.25
@@ -96,7 +101,11 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
                         val xmotion = shift.x.toFloat() * 0.025f
                         val ymotion = shift.y.toFloat() * 0.025f
                         val zmotion = shift.z.toFloat() * 0.025f
-                        Botania.proxy.wispFX(player.worldObj, x, y, z, 1.0f, 1.0f, 1.0f, Math.random().toFloat() * 0.15f + 0.15f, xmotion, ymotion, zmotion)
+                        val color = Color(IPriestColorOverride.getColor(player, 0xFFFFFF))
+                        val r = color.red.toFloat() / 255f
+                        val g = color.green.toFloat() / 255f
+                        val b = color.blue.toFloat() / 255f
+                        Botania.proxy.wispFX(player.worldObj, x, y, z, r, g, b, Math.random().toFloat() * 0.15f + 0.15f, xmotion, ymotion, zmotion)
                     }
                 }
                 else
