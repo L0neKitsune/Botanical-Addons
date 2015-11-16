@@ -100,7 +100,7 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
                         val xmotion = shift.x.toFloat() * 0.025f
                         val ymotion = shift.y.toFloat() * 0.025f
                         val zmotion = shift.z.toFloat() * 0.025f
-                        val color = Color(IPriestColorOverride.getColor(player, 0x0079C4))
+                        val color = Color(IPriestColorOverride.getColor(player, 0xFFFFFF))
                         val r = color.red.toFloat() / 255f
                         val g = color.green.toFloat() / 255f
                         val b = color.blue.toFloat() / 255f

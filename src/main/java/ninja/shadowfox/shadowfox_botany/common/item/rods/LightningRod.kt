@@ -16,6 +16,7 @@ import net.minecraft.util.DamageSource
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
+import ninja.shadowfox.shadowfox_botany.common.item.IPriestColorOverride
 import ninja.shadowfox.shadowfox_botany.common.item.StandardItem
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemPriestEmblem
 import vazkii.botania.api.item.IAvatarTile
@@ -27,6 +28,7 @@ import vazkii.botania.common.Botania
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.core.helper.Vector3
 import vazkii.botania.common.entity.EntityDoppleganger
+import java.awt.Color
 import java.util.*
 
 public open class LightningRod(name: String = "lightningRod") : StandardItem(name), IManaUsingItem, IAvatarWieldable {
@@ -82,6 +84,9 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
             var thor = (vazkii.botania.common.item.relic.ItemThorRing.getThorRing(player) != null)
             var priest = (ItemPriestEmblem.getEmblem(0, player) != null)
             var prowess = IManaProficiencyArmor.Helper.hasProficiency(player)
+
+            val color = IPriestColorOverride.getColor(player, 0x0079C4)
+            val innerColor = Color(color).brighter().brighter().rgb
             
             if (ManaItemHandler.requestManaExactForTool(stack, player, getCost(thor, prowess, priest), false)) {
                 var target = getTarget(player!!.worldObj, player, ItemNBTHelper.getInt(stack, "target", -1))
@@ -97,8 +102,8 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                     val playerCenter = Vector3.fromEntityCenter(player).add(0.0, 0.75, 0.0).add(Vector3(player.lookVec).multiply(-0.25))
                     val playerShift = playerCenter.copy().add(getHeadOrientation(player))
                     if (count % (shockspeed / 10) == 0) {
-                        Botania.proxy.lightningFX(player.worldObj, targetCenter, targetShift, 2.0f, 96708, 11198463)
-                        Botania.proxy.lightningFX(player.worldObj, playerCenter, playerShift, 2.0f, 96708, 11198463)
+                        Botania.proxy.lightningFX(player.worldObj, targetCenter, targetShift, 2.0f, color, innerColor)
+                        Botania.proxy.lightningFX(player.worldObj, playerCenter, playerShift, 2.0f, color, innerColor)
                     }
 
                     if (count % shockspeed == 0) {
@@ -110,10 +115,10 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                         } else {
                             if (ManaItemHandler.requestManaExactForTool(stack, player, getCost(thor, prowess, priest), true)) {
                                 target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage)
-                                Botania.proxy.lightningFX(player.worldObj, Vector3.fromEntityCenter(player), Vector3.fromEntityCenter(target), 1.0f, 96708, 11198463)
+                                Botania.proxy.lightningFX(player.worldObj, Vector3.fromEntityCenter(player), Vector3.fromEntityCenter(target), 1.0f, color, innerColor)
                                 player.worldObj.playSoundEffect(target.posX.toDouble(), target.posY.toDouble(), target.posZ.toDouble(), "ambient.weather.thunder", 100.0f, 0.8f + player.worldObj.rand.nextFloat() * 0.2f)
                             }
-                            chainLightning(stack!!, target, player, thor, prowess, priest)
+                            chainLightning(stack!!, target, player, thor, prowess, priest, color, innerColor)
                         }
                     }
 
@@ -174,7 +179,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
         return null
     }
 
-    fun chainLightning(stack: ItemStack, entity: EntityLivingBase?, attacker: EntityLivingBase?, thor: Boolean, prowess: Boolean, priest: Boolean): Boolean {
+    fun chainLightning(stack: ItemStack, entity: EntityLivingBase?, attacker: EntityLivingBase?, thor: Boolean, prowess: Boolean, priest: Boolean, color: Int, innerColor: Int): Boolean {
         if (entity !is EntityPlayer && entity != null) {
             val range = getRange(thor, prowess, priest)
             val targets = getTargetCap(thor, prowess, priest)
@@ -203,7 +208,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                     target.attackEntityFrom(DamageSource.causeMobDamage(attacker), dmg.toFloat())
                 }
 
-                Botania.proxy.lightningFX(entity.worldObj, Vector3.fromEntityCenter(lightningSource), Vector3.fromEntityCenter(target), 1.0f, 96708, 11198463)
+                Botania.proxy.lightningFX(entity.worldObj, Vector3.fromEntityCenter(lightningSource), Vector3.fromEntityCenter(target), 1.0f, color, innerColor)
                 alreadyTargetedEntities.add(target)
                 lightningSource = target
                 --dmg
@@ -242,6 +247,9 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
         val te = tile as TileEntity
         val world = te.worldObj
         val range = 18
+
+        val color = 0x0079C4
+        val innerColor = Color(color).brighter().brighter().rgb
 
         if (tile.currentMana >= COST_AVATAR && tile.isEnabled && tile.elapsedFunctionalTicks % 10 == 0) {
             val selector = object : IEntitySelector {
@@ -290,7 +298,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                 val targetShift = targetCenter.copy().add(getHeadOrientation(target))
 
                 if (tile.elapsedFunctionalTicks % 10 == 0)
-                    Botania.proxy.lightningFX(world, targetCenter, targetShift, 2.0f, 96708, 11198463)
+                    Botania.proxy.lightningFX(world, targetCenter, targetShift, 2.0f, color, innerColor)
                 Botania.proxy.sparkleFX(world, te.xCoord.toDouble() + 0.5, te.yCoord.toDouble() + 2.5, te.zCoord.toDouble() + 0.5, 0.667f, 0.875f, 1f, 6.0f, 6)
 
                 if (tile.elapsedFunctionalTicks % 100 == 0) {
@@ -302,11 +310,11 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                     var vect = Vector3()
                     vect.set(te.xCoord.toDouble() + 0.5, te.yCoord.toDouble() + 2.5, te.zCoord.toDouble() + 0.5)
 
-                    Botania.proxy.lightningFX(world, vect, Vector3.fromEntityCenter(target), 1.0f, 96708, 11198463)
+                    Botania.proxy.lightningFX(world, vect, Vector3.fromEntityCenter(target), 1.0f, color, innerColor)
 
                     world.playSoundEffect(target.posX.toDouble(), target.posY.toDouble(), target.posZ.toDouble(), "ambient.weather.thunder", 100.0f, 0.8f + world.rand.nextFloat() * 0.2f)
 
-                    chainLightning(stack, target, null, false, false, false)
+                    chainLightning(stack, target, null, false, false, false, color, innerColor)
                 }
             }
 
