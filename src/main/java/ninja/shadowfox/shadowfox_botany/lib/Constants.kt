@@ -6,5 +6,6 @@ object Constants {
     const val MODNAME = "Botanical Addons"
     const val VERSION = "0.1.2"
     const val DEPENDENCIES = "required-after:Forge@[10.13.2.1291,);required-after:Botania@[r1.7-227,)"
+
     var doubleFlowerRenderID: Int = 90
 }

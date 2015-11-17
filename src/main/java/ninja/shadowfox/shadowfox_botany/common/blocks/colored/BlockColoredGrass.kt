@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks.colored
 
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxGrassItemBlock
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
@@ -37,11 +38,11 @@ public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
 
     }
 
-    override fun func_149851_a(world:World, x:Int, y:Int, z:Int, remote: Boolean): Boolean {
+    override fun func_149851_a(world: World, x:Int, y:Int, z:Int, remote: Boolean): Boolean {
         return true
     }
 
-    override fun func_149853_b(world:World, random:Random, x:Int, y:Int, z:Int) {
+    override fun func_149853_b(world: World, random: Random, x:Int, y:Int, z:Int) {
         var l = world.getBlockMetadata(x, y, z)
         var b0 = l % 8
 
