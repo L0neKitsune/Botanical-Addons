@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks.rainbow
 
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
@@ -17,6 +17,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.client.event.TextureStitchEvent
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxRainbowItemBlock
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
@@ -38,11 +39,11 @@ public class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
 
     }
 
-    override fun func_149851_a(world:World, x:Int, y:Int, z:Int, remote: Boolean): Boolean {
+    override fun func_149851_a(world: World, x:Int, y:Int, z:Int, remote: Boolean): Boolean {
         return true
     }
 
-    override fun func_149853_b(world:World, random:Random, x:Int, y:Int, z:Int) {
+    override fun func_149853_b(world: World, random: Random, x:Int, y:Int, z:Int) {
         if (ShadowFoxBlocks.rainbowTallGrass.canPlaceBlockAt(world, x, y, z)) {
             world.setBlock(x, y, z, ShadowFoxBlocks.rainbowTallGrass, 0, 2)
             world.setBlock(x, y + 1, z, ShadowFoxBlocks.rainbowTallGrass, 8, 2)

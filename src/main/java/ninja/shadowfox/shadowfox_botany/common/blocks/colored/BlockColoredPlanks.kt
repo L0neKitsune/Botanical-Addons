@@ -1,12 +1,13 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks.colored
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
+import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.entity.passive.EntitySheep
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -14,20 +15,21 @@ import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import net.minecraftforge.client.event.TextureStitchEvent
-import net.minecraftforge.common.MinecraftForge
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxRainbowItemBlock
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
-import vazkii.botania.client.render.block.InterpolatedIcon
+import java.awt.Color
 import java.util.*
 import kotlin.properties.Delegates
 
 
-public class BlockRainbowPlanks(): ShadowFoxBlockMod(Material.wood), ILexiconable {
+class BlockColoredPlanks() : ShadowFoxBlockMod(Material.wood), ILexiconable {
 
-    private val name = "rainbowPlanks"
+    private val name = "irisPlanks"
+    private val TYPES = 16
     protected var icons : IIcon by Delegates.notNull()
 
     init {
@@ -36,18 +38,36 @@ public class BlockRainbowPlanks(): ShadowFoxBlockMod(Material.wood), ILexiconabl
         stepSound = Block.soundTypeWood
 
         setBlockName(this.name)
-        MinecraftForge.EVENT_BUS.register(this)
     }
 
-    @SubscribeEvent
     @SideOnly(Side.CLIENT)
-    fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 0) {
-            var icon = InterpolatedIcon("shadowfox_botany:rainbowPlanks");
-            if(event.map.setTextureEntry("shadowfox_botany:rainbowPlanks", icon))
-                this.icons = icon
-        }
+    override fun getBlockColor(): Int {
+        return 0xFFFFFF
     }
+
+    /**
+     * Returns the color this block should be rendered. Used by leaves.
+     */
+    @SideOnly(Side.CLIENT)
+    override fun getRenderColor(meta: Int): Int {
+        if (meta >= EntitySheep.fleeceColorTable.size)
+            return 0xFFFFFF
+
+        var color = EntitySheep.fleeceColorTable[meta]
+        return Color(color[0], color[1], color[2]).rgb
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int {
+        val meta = world!!.getBlockMetadata(x, y, z)
+
+        if (meta >= EntitySheep.fleeceColorTable.size)
+            return 0xFFFFFF
+
+        var color = EntitySheep.fleeceColorTable[meta]
+        return Color(color[0], color[1], color[2]).rgb
+    }
+
 
     override fun shouldRegisterInNameSet(): Boolean {
         return false
@@ -77,7 +97,7 @@ public class BlockRainbowPlanks(): ShadowFoxBlockMod(Material.wood), ILexiconabl
     override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean { return true }
 
     internal fun register(name: String) {
-        GameRegistry.registerBlock(this, ShadowFoxRainbowItemBlock::class.java, name)
+        GameRegistry.registerBlock(this, ShadowFoxMetaItemBlock::class.java, name)
     }
 
 
@@ -86,7 +106,17 @@ public class BlockRainbowPlanks(): ShadowFoxBlockMod(Material.wood), ILexiconabl
         return ItemStack(this, 1, meta)
     }
 
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
+            icons = IconHelper.forBlock(par1IconRegister, this)
+
+    }
+
+    override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {
+        if (list != null && item != null)
+            for (i in 0..(TYPES - 1)) {
+                list.add(ItemStack(item, 1, i))
+            }
+    }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return LexiconRegistry.irisSapling
