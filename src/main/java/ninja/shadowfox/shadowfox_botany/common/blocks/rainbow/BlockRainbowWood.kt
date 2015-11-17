@@ -60,11 +60,11 @@ public class BlockRainbowWood() : ShadowFoxRotatedPillar(Material.wood), ILexico
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
         if(event.map.textureType == 0) {
-            var iconSide = InterpolatedIcon("shadowfox_botany:rainbowWoodSide");
+            var iconSide = InterpolatedIcon("shadowfox_botany:rainbowWoodSide")
             if(event.map.setTextureEntry("shadowfox_botany:rainbowWoodSide", iconSide))
                 this.iconSide = iconSide
 
-            var iconTop = InterpolatedIcon("shadowfox_botany:rainbowWoodTop");
+            var iconTop = InterpolatedIcon("shadowfox_botany:rainbowWoodTop")
             if(event.map.setTextureEntry("shadowfox_botany:rainbowWoodTop", iconTop))
                 this.iconTop = iconTop
         }
