@@ -27,10 +27,10 @@ class BlockColoredWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBl
     @SideOnly(Side.CLIENT)
     override fun getRenderColor(m: Int): Int {
         if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[meta];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[meta]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     @SideOnly(Side.CLIENT)

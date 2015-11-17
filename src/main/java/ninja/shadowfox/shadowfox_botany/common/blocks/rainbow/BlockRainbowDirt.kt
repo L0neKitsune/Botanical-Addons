@@ -119,7 +119,7 @@ class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
         if(event.map.textureType == 0) {
-            var icon = InterpolatedIcon("shadowfox_botany:rainbowDirt");
+            var icon = InterpolatedIcon("shadowfox_botany:rainbowDirt")
             if(event.map.setTextureEntry("shadowfox_botany:rainbowDirt", icon))
                 this.blockIcon = icon
         }

@@ -44,7 +44,7 @@ public class BlockRainbowPlanks(): ShadowFoxBlockMod(Material.wood), ILexiconabl
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
         if(event.map.textureType == 0) {
-            var icon = InterpolatedIcon("shadowfox_botany:rainbowPlanks");
+            var icon = InterpolatedIcon("shadowfox_botany:rainbowPlanks")
             if(event.map.setTextureEntry("shadowfox_botany:rainbowPlanks", icon))
                 this.icons = icon
         }

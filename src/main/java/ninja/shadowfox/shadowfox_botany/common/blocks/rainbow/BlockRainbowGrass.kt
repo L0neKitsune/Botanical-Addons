@@ -34,7 +34,7 @@ public class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
     init {
         setCreativeTab(ShadowFoxCreativeTab)
         setStepSound(Block.soundTypeGrass)
-        MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(this)
         setBlockName("rainbowGrass")
 
     }
@@ -81,7 +81,7 @@ public class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
         if(event.map.textureType == 0) {
-            var icon = InterpolatedIcon("shadowfox_botany:rainbowGrass");
+            var icon = InterpolatedIcon("shadowfox_botany:rainbowGrass")
             if(event.map.setTextureEntry("shadowfox_botany:rainbowGrass", icon))
                 this.blockIcon = icon
         }

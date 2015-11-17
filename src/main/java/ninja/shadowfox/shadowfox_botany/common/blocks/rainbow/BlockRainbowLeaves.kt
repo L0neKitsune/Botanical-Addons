@@ -62,7 +62,7 @@ public class BlockRainbowLeaves(): ShadowFoxLeaves() {
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
         if(event.map.textureType == 0) {
-            var icon = InterpolatedIcon("shadowfox_botany:rainbowLeaves");
+            var icon = InterpolatedIcon("shadowfox_botany:rainbowLeaves")
             if(event.map.setTextureEntry("shadowfox_botany:rainbowLeaves", icon))
                 this.blockIcon = icon
         }

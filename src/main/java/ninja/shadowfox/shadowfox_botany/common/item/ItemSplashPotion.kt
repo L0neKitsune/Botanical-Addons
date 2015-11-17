@@ -35,8 +35,6 @@ public class ItemSplashPotion() : StandardItem("splashPotion"), IBrewItem, IBrew
         super.getSubItems(item, tab, list)
 
         if (item != null && list != null) {
-            val var4 = BotaniaAPI.brewMap.keys.iterator()
-
             for (brew in BotaniaAPI.brewMap.keys) {
                 val brewStack = this.getItemForBrew(BotaniaAPI.brewMap[brew] as Brew, ItemStack(this))
                 if (brewStack != null) {
