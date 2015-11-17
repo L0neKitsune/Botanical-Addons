@@ -19,13 +19,14 @@ public object LexiconRegistry {
     val lightningRod : LexiconEntry
     val pastoralSeeds : LexiconEntry
     val coatOfArms : LexiconEntry
+    val colorOverride : LexiconEntry
 //    val dendrology: ShadowFoxLexiconCategory
 
     init {
 
 //        dendrology = ShadowFoxLexiconCategory("dendrology", 0)
 
-        coloredDirt = ShadowfoxLexiconEntry("coloredDirt", BotaniaAPI.categoryMisc, block = ShadowFoxBlocks.rainbowDirtBlock)
+        coloredDirt = ShadowfoxLexiconEntry("coloredDirt", BotaniaAPI.categoryMisc, ShadowFoxBlocks.rainbowDirtBlock)
         coloredDirt.setLexiconPages(PageText("0"), PageCraftingRecipe("1", ModRecipes.recipesColoredDirt))
 
         technicolor = ShadowfoxLexiconEntry("technicolorRod", BotaniaAPI.categoryTools, ItemStack(ShadowFoxItems.colorfulSkyDirtRod, 1, 16)).setKnowledgeType(BotaniaAPI.elvenKnowledge)
@@ -34,13 +35,13 @@ public object LexiconRegistry {
                 PageText("2"),
                 PageCraftingRecipe("3", ModRecipes.recipesPriestOfSif))
 
-        lightningRod = ShadowfoxLexiconEntry("lightningRod", BotaniaAPI.categoryTools).setKnowledgeType(BotaniaAPI.elvenKnowledge)
+        lightningRod = ShadowfoxLexiconEntry("lightningRod", BotaniaAPI.categoryTools, ShadowFoxItems.lightningRod).setKnowledgeType(BotaniaAPI.elvenKnowledge)
         lightningRod.setLexiconPages(PageText("0"), 
                 PageCraftingRecipe("1", ModRecipes.recipesLightningRod),
                 PageText("2"),
                 PageCraftingRecipe("3", ModRecipes.recipesPriestOfThor))
 
-        irisSapling = ShadowfoxLexiconEntry("irisSapling", BotaniaAPI.categoryMisc, block = ShadowFoxBlocks.irisSapling)
+        irisSapling = ShadowfoxLexiconEntry("irisSapling", BotaniaAPI.categoryMisc, ShadowFoxBlocks.irisSapling)
         irisSapling.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesWoodPanel),
                 PageCraftingRecipe("2", ModRecipes.recipesSlabs),
@@ -48,19 +49,24 @@ public object LexiconRegistry {
                 PageCraftingRecipe("4", ModRecipes.recipesSlabsFull),
                 PageCraftingRecipe("5", ModRecipes.recipesLeafDyes))
 
-        pastoralSeeds = ShadowfoxLexiconEntry("irisSeeds", BotaniaAPI.categoryTools, block = ShadowFoxBlocks.rainbowGrass)
+        pastoralSeeds = ShadowfoxLexiconEntry("irisSeeds", BotaniaAPI.categoryTools, ShadowFoxBlocks.rainbowGrass)
         pastoralSeeds.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesRedstoneRoot),
                 PageManaInfusionRecipe("2", ModRecipes.recipesPastoralSeeds))
 
-        coatOfArms = ShadowfoxLexiconEntry("coatOfArms", BotaniaAPI.categoryTools, ItemStack(ShadowFoxItems.coatOfArms, 1, 16))
+        coatOfArms = ShadowfoxLexiconEntry("coatOfArms", BotaniaAPI.categoryMisc, ItemStack(ShadowFoxItems.coatOfArms, 1, 16))
         coatOfArms.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesCoatOfArms))
+
+        colorOverride = ShadowfoxLexiconEntry("colorOverride", BotaniaAPI.categoryMisc, ShadowFoxItems.colorOverride).setKnowledgeType(BotaniaAPI.elvenKnowledge)
+        colorOverride.setLexiconPages(PageText("0"),
+                PageCraftingRecipe("1", ModRecipes.recipesColorOverride))
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.emblem, 1, 0), lightningRod, 3)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.emblem, 1, 1), technicolor, 3)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.colorOverride), colorOverride, 1)
         for (i in 0..3){
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood0, 1, i), irisSapling, 1)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood1, 1, i), irisSapling, 1)
