@@ -63,6 +63,8 @@ item.shadowfox_botany:coatOfArms14.name=Ukranian Shield
 item.shadowfox_botany:coatOfArms15.name=American Shield
 item.shadowfox_botany:coatOfArms16.name=Fabulous Shield
 
+item.shadowfox_botany:colorOverride.name=Clerical Colorizer
+
 tile.shadowfox_botany:rainbowPlanksSlab.name=Iridescent Slab
 tile.shadowfox_botany:rainbowPlanksSlabFull.name=Iridescent Slab
 tile.shadowfox_botany:irisPlanksSlab.name=Iridescent Slab
@@ -85,6 +87,8 @@ shadowfox_botany.entry.irisSeeds=Iridescent Grass
 shadowfox_botany.tagline.irisSeeds=Rainbow grass for your colorful landscapes
 shadowfox_botany.entry.coatOfArms=Coats of Arms
 shadowfox_botany.tagline.coatOfArms=Declare your allegiance
+shadowfox_botany.entry.colorOverride=Clerical Colorization
+shadowfox_botany.tagline.colorOverride=Colorful magic
 
 shadowfox_botany.page.coloredDirt0=Using the latent power in &1Mystical Flowers&0, you can make dirt that shimmers every color of the rainbow. This mystical dirt is capable of growing trees and plants without water or a hoe. If put next to a &1Pure Daisy&0, it will revert to its uncolored state.
 shadowfox_botany.page.coloredDirt1=Beauty from the dross
@@ -110,5 +114,8 @@ shadowfox_botany.page.irisSeeds0=If &1Bone Meal&0 is used on &1Iridescent Dirt&0
 shadowfox_botany.page.irisSeeds1=/etc/sudoers
 shadowfox_botany.page.irisSeeds2=Tiger Orchid monoculture
 
-shadowfox_botany.page.coatOfArms0=Much like &1Cosmetic Baubles&0, the &1Coat of Arms&0 can add a touch of style to any baubles a player has equipped. These can be worn as Amulets slot, or crafted alongside another &4Bauble&0 much like &4Cosmetic Overrides&0.<br>Wearing a &1Coat of Arms&0 will change the color of any clerical abilities you might use, identifying your allegiance.
+shadowfox_botany.page.coatOfArms0=Much like &1Cosmetic Baubles&0, the &1Coat of Arms&0 can add a touch of style to any baubles a player has equipped. These can be worn as an &4Amulet&0, or crafted alongside another &4Bauble&0 much like &4Cosmetic Overrides&0.<br>Wearing a &1Coat of Arms&0 will act as a &1Clerical Colorizer&0, changing the color of any clerical abilities you might use so as to declare your allegiance.
 shadowfox_botany.page.coatOfArms1=Papers, please
+
+shadowfox_botany.page.colorOverride0=The &1Clerical Colorizer&0, the &4Ring&0 form of the &1Paintslinger's Lens&0 can change even the color of magic. Wearing one will affect any clerically aligned abilities, changing their color. These can be crafted alongside another &4Bauble&0 much like &4Cosmetic Overrides&0. They can by dyed much like leather with &1Floral Powder&0, and cleared by simply putting one in a crafting table.
+shadowfox_botany.page.colorOverride1=Beware of the dark clerics
