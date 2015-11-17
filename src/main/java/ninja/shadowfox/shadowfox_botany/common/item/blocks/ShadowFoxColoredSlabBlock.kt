@@ -5,11 +5,11 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemSlab
 import net.minecraft.item.ItemStack
 import net.minecraft.util.StatCollector
-import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxSlabs
-import ninja.shadowfox.shadowfox_botany.common.blocks.SlabColoredWood
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxSlabs
+import ninja.shadowfox.shadowfox_botany.common.blocks.colored.BlockColoredWoodSlab
 
 
-open class ShadowFoxItemBlockSlab(val par1: Block) : ItemSlab(par1, (par1 as ShadowFoxSlabs).getSingleBlock(), par1.getFullBlock(), false) {
+open class ShadowFoxColoredSlabBlock(val par1: Block) : ItemSlab(par1, (par1 as ShadowFoxSlabs).getSingleBlock(), par1.getFullBlock(), false) {
 
     override fun getUnlocalizedName(par1ItemStack: ItemStack): String {
         return field_150939_a.unlocalizedName.replace("tile.".toRegex(), "tile.shadowfox_botany:").replace("\\d+$".toRegex(), "")

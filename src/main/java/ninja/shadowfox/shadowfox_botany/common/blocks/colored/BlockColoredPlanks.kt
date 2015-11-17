@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks.colored
 
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
@@ -15,6 +15,7 @@ import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry

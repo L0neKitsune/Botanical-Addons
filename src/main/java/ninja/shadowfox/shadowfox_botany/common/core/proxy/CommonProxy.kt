@@ -7,7 +7,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import cpw.mods.fml.client.registry.RenderingRegistry
 import ninja.shadowfox.shadowfox_botany.lib.Constants
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.blocks.BlockColoredDoubleGrass
+import ninja.shadowfox.shadowfox_botany.common.blocks.colored.BlockColoredDoubleGrass
 import ninja.shadowfox.shadowfox_botany.common.brew.ShadowFoxPotions
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.core.handler.MultipartHandler

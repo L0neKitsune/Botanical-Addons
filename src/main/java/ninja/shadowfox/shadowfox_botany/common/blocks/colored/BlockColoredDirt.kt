@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks.colored
 
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
@@ -25,6 +25,8 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
 import java.util.Random
 import net.minecraft.util.*
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import kotlin.properties.Delegates
 
 class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable {

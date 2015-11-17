@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks.colored
 
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
@@ -9,12 +9,14 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxSlabs
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import java.awt.Color
 
-class SlabColoredWood(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks.coloredPlanks) :
+class BlockColoredWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks.coloredPlanks) :
         ShadowFoxSlabs(full, meta, source, source.unlocalizedName.replace("tile.".toRegex(), "") + "Slab" + (if (full) "Full" else "") + meta), ILexiconable
 {
     init {
@@ -25,10 +27,10 @@ class SlabColoredWood(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks.
     @SideOnly(Side.CLIENT)
     override fun getRenderColor(m: Int): Int {
         if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF;
+            return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[meta];
-        return Color(color[0], color[1], color[2]).rgb;
+        var color = EntitySheep.fleeceColorTable[meta]
+        return Color(color[0], color[1], color[2]).rgb
     }
 
     @SideOnly(Side.CLIENT)

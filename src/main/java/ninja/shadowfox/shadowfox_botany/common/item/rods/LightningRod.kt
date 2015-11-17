@@ -5,8 +5,10 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityCreature
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.effect.EntityLightningBolt
+import net.minecraft.entity.monster.EntitySlime
 import net.minecraft.entity.monster.IMob
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.EnumAction
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
@@ -148,10 +150,10 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
         return par1ItemStack
     }
 
-    fun getTarget(world: World, player: EntityPlayer, trial_target: Int, range: Float = 12.0f): EntityCreature? {
+    fun getTarget(world: World, player: EntityPlayer, trial_target: Int, range: Float = 12.0f): EntityLivingBase? {
         val selector = object : IEntitySelector {
             override fun isEntityApplicable(e: Entity): Boolean {
-                return e is IMob && e !is EntityPlayer
+                return e is IMob && e !is EntityPlayer && e !is EntityPlayerMP
             }
         }
 
@@ -170,7 +172,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
             while (potential.size > 0) {
                 var i = world.rand.nextInt(potential.size)
                 if (!(potential[i] as EntityLivingBase).isDead) {
-                    return potential[i] as EntityCreature
+                    return potential[i] as EntityLivingBase
                 }
 
                 potential.remove(i)
@@ -189,7 +191,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
             val lightningSeed = ItemNBTHelper.getLong(stack, "lightningSeed", 0L)
             val selector = object : IEntitySelector {
                 override fun isEntityApplicable(e: Entity): Boolean {
-                    return e is IMob && e !is EntityPlayer && !alreadyTargetedEntities.contains(e)
+                    return e is IMob && e !is EntityPlayer && e !is EntityPlayerMP && !alreadyTargetedEntities.contains(e)
                 }
             }
             val rand = Random(lightningSeed)
@@ -254,7 +256,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
         if (tile.currentMana >= COST_AVATAR && tile.isEnabled && tile.elapsedFunctionalTicks % 10 == 0) {
             val selector = object : IEntitySelector {
                 override fun isEntityApplicable(e: Entity): Boolean {
-                    return (if (true) e is EntityLivingBase else e is IMob) && e !is EntityPlayer && e !is EntityDoppleganger
+                    return (if (true) e is EntityLivingBase else e is IMob) && e !is EntityPlayer && e !is EntityPlayerMP && e !is EntityDoppleganger
                 }
             }
 
@@ -279,7 +281,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                 while (entities.size > 0) {
                     var i = world.rand.nextInt(entities.size)
 
-                    if (entities[i] is EntityLivingBase && entities[i] is IMob && entities[i] !is EntityPlayer) {
+                    if (entities[i] is EntityLivingBase && entities[i] is IMob && entities[i] !is EntityPlayer && entities[i] !is EntityPlayerMP) {
                         var entity: EntityLivingBase = entities[i] as EntityLivingBase
                         if (entity is EntityLivingBase && !entity.isDead) {
                             target = entity
