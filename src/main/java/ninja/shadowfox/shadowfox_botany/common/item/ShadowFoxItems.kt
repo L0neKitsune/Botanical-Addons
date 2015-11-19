@@ -15,6 +15,7 @@ object ShadowFoxItems {
     val emblem: Item
     val aesirEmblem: Item
     val coatOfArms: Item
+    val invisibleFlameLens: Item
 
     init {
         irisSeeds = ItemColorSeeds()
@@ -23,5 +24,6 @@ object ShadowFoxItems {
         emblem = ItemPriestEmblem()
         aesirEmblem = ItemAesirEmblem()
         coatOfArms = ItemCoatOfArms()
+        invisibleFlameLens = ItemLensFlashInvisible()
     }
 }
