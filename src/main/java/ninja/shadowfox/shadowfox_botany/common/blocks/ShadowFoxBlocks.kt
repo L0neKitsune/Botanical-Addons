@@ -39,7 +39,8 @@ public object ShadowFoxBlocks {
 
     public var coloredStairs: Array<Block>
     public var rainbowStairs: Block
-    public var lightningRod: Block
+    public var invisibleFlame: Block
+//    public var lightningRod: Block
 
     val WOOD: Array<String> = arrayOf("irisWoodWhite", "irisWoodOrange", "irisWoodMagenta", "irisWoodLightBlue", "irisWoodYellow", "irisWoodLime", "irisWoodPink", "irisWoodGray", "irisWoodLightGray", "irisWoodCyan", "irisWoodPurple", "irisWoodBlue", "irisWoodBrown", "irisWoodGreen", "irisWoodRed", "irisWoodBlack")
     val LEAVES: Array<String> = arrayOf("irisLeavesWhite", "irisLeavesOrange", "irisLeavesMagenta", "irisLeavesLightBlue", "irisLeavesYellow", "irisLeavesLime", "irisLeavesPink", "irisLeavesGray", "irisLeavesLightGray", "irisLeavesCyan", "irisLeavesPurple", "irisLeavesBlue", "irisLeavesBrown", "irisLeavesGreen", "irisLeavesRed", "irisLeavesBlack")
@@ -53,6 +54,7 @@ public object ShadowFoxBlocks {
         rainbowLeaves = BlockRainbowLeaves()
         irisGrass = BlockColoredGrass()
         rainbowGrass = BlockRainbowGrass()
+        invisibleFlame = BlockManaInvisibleFlame()
 
         irisWood0 = BlockColoredWood(0)
         irisWood1 = BlockColoredWood(1)
@@ -75,7 +77,7 @@ public object ShadowFoxBlocks {
         irisTallGrass0 = BlockColoredDoubleGrass(0)
         irisTallGrass1 = BlockColoredDoubleGrass(1)
         rainbowTallGrass = BlockRainbowDoubleGrass()
-        lightningRod = BlockLightningRod()
+//        lightningRod = BlockLightningRod()
 
         register()
         initOreDict()

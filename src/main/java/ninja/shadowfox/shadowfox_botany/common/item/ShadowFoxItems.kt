@@ -12,8 +12,9 @@ object ShadowFoxItems {
     val emblem: Item
     val aesirEmblem: Item
     val coatOfArms: Item
-    val testingRod: Item
-    val splashPotion: Item
+    val invisibleFlameLens: Item
+//    val testingRod: Item
+//    val splashPotion: Item
     val colorOverride: Item
 
     init {
@@ -23,8 +24,9 @@ object ShadowFoxItems {
         emblem = ItemPriestEmblem()
         aesirEmblem = ItemAesirEmblem()
         coatOfArms = ItemCoatOfArms()
-        testingRod = TestingRod()
-        splashPotion = ItemSplashPotion()
+        invisibleFlameLens = ItemLensFlashInvisible()
+//        testingRod = TestingRod()
+//        splashPotion = ItemSplashPotion()
         colorOverride = ItemColorOverride()
     }
 }
