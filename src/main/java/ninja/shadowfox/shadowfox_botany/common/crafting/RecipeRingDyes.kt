@@ -19,6 +19,8 @@ class RecipeRingDyes: IRecipe {
     override fun matches(inventory: InventoryCrafting, world: World): Boolean {
         var itemstack: ItemStack? = null
 
+        var colors = 0
+
         for (i in 0..(inventory.sizeInventory-1)) {
             var tempstack = inventory.getStackInSlot(i)
 
@@ -27,12 +29,15 @@ class RecipeRingDyes: IRecipe {
                     if (itemstack != null)
                         return false
                     itemstack = tempstack
+                    if ((itemstack.item as ItemColorOverride).hasColor(tempstack)) colors++
                 }
-                else if (tempstack.item != BotaniaItems.dye)
+                else if (tempstack.item == BotaniaItems.dye)
+                    colors++
+                else
                     return false
             }
         }
-        return itemstack != null
+        return colors > 0 && itemstack != null
     }
 
     /**
