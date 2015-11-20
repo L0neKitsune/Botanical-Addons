@@ -8,10 +8,7 @@ import net.minecraft.block.Block
 import net.minecraft.block.IGrowable
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
-import net.minecraft.creativetab.CreativeTabs
-import net.minecraft.entity.passive.EntitySheep
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
@@ -19,23 +16,18 @@ import net.minecraftforge.common.IPlantable
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.util.ForgeDirection
 import net.minecraftforge.client.event.TextureStitchEvent
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxRainbowItemBlock
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.client.render.block.InterpolatedIcon
-import java.awt.Color
 import java.util.Random
-import net.minecraft.util.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import kotlin.properties.Delegates
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxColoredItemBlock
 
 class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable {
 
     private val name = "rainbowDirt"
-    private val TYPES = 16
 
     init {
         blockHardness = 0.5F
@@ -112,7 +104,7 @@ class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     }
 
     internal fun register(name: String) {
-        GameRegistry.registerBlock(this, ShadowFoxRainbowItemBlock::class.java, name)
+        GameRegistry.registerBlock(this, ShadowFoxColoredItemBlock::class.java, name)
     }
 
     @SubscribeEvent

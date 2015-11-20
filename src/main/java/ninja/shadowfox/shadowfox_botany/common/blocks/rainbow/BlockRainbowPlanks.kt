@@ -17,7 +17,7 @@ import net.minecraft.world.World
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxRainbowItemBlock
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxColoredItemBlock
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
@@ -78,7 +78,7 @@ public class BlockRainbowPlanks(): ShadowFoxBlockMod(Material.wood), ILexiconabl
     override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean { return true }
 
     internal fun register(name: String) {
-        GameRegistry.registerBlock(this, ShadowFoxRainbowItemBlock::class.java, name)
+        GameRegistry.registerBlock(this, ShadowFoxColoredItemBlock::class.java, name)
     }
 
 

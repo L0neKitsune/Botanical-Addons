@@ -8,7 +8,6 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockTallGrass
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
-import net.minecraft.entity.passive.EntitySheep
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -19,15 +18,12 @@ import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.client.event.TextureStitchEvent
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxRainbowItemBlock
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxColoredItemBlock
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.client.render.block.InterpolatedIcon
-import java.awt.Color
 import java.util.*
-import kotlin.properties.Delegates
 
 public class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
 
@@ -51,7 +47,7 @@ public class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
     }
 
     internal fun register(name: String) {
-        GameRegistry.registerBlock(this, ShadowFoxRainbowItemBlock::class.java, name)
+        GameRegistry.registerBlock(this, ShadowFoxColoredItemBlock::class.java, name)
     }
 
     override fun setBlockName(par1Str: String): Block {

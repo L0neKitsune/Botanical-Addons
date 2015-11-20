@@ -14,7 +14,7 @@ import net.minecraft.world.World
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxRotatedPillar
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxRainbowItemBlock
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxColoredItemBlock
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
@@ -35,7 +35,7 @@ public class BlockRainbowWood() : ShadowFoxRotatedPillar(Material.wood), ILexico
     }
 
     override fun register(par1Str: String){
-        GameRegistry.registerBlock(this, ShadowFoxRainbowItemBlock::class.java, par1Str)
+        GameRegistry.registerBlock(this, ShadowFoxColoredItemBlock::class.java, par1Str)
     }
 
     override fun breakBlock(world: World, x: Int, y: Int, z: Int, block: Block, fortune: Int) {

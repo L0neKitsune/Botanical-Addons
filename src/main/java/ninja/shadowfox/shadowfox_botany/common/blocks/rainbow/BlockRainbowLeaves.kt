@@ -4,7 +4,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
-import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
@@ -16,7 +15,7 @@ import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxRainbowItemBlock
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxColoredItemBlock
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.client.render.block.InterpolatedIcon
@@ -33,7 +32,7 @@ public class BlockRainbowLeaves(): ShadowFoxLeaves() {
     }
 
     override fun register(name: String) {
-        GameRegistry.registerBlock(this, ShadowFoxRainbowItemBlock::class.java, name)
+        GameRegistry.registerBlock(this, ShadowFoxColoredItemBlock::class.java, name)
     }
 
     override fun quantityDropped(random: Random): Int {
