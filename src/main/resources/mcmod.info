@@ -2,13 +2,13 @@
     {
         "modid": "botanical_addons",
         "name": "Botanical Addons",
-        "description": "A few small addons to Botania.",
+        "description": "Rainbows and clerics, to sit among your lovely flowers.",
         "version": "${version}",
         "mcversion": "${mcversion}",
         "url": "",
         "updateUrl": "",
-        "authorList": ["L0neKitsune"],
-        "credits": "Vazkii, wiresegal, Azanor, ChickenBones, PowerCrystals, cpw",
+        "authorList": ["L0neKitsune", "WireSegal"],
+        "credits": "Vazkii, Azanor, ChickenBones, PowerCrystals, cpw",
         "logoFile": "",
         "screenshots": [],
         "dependencies": []
