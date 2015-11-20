@@ -52,7 +52,7 @@ open class ShadowFoxDoubleGrassItemBlock0(par2Block: Block) : ShadowFoxMetaItemB
     } 
 }
 
-open class ShadowFoxRainbowDoubleGrassItemBlock(var par2Block: Block) : ShadowFoxRainbowItemBlock(par2Block) {
+open class ShadowFoxRainbowDoubleGrassItemBlock(var par2Block: Block) : ShadowFoxColoredItemBlock(par2Block) {
 
     override fun getIcon(stack: ItemStack, pass: Int): IIcon {
         return (par2Block as BlockRainbowDoubleGrass).topIcon
