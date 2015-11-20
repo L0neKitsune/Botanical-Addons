@@ -22,7 +22,7 @@ open class ShadowFoxColoredSlabBlock(val par1: Block) : ItemSlab(par1, (par1 as 
     override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>?, par4: Boolean) {
         if(par1ItemStack == null) return
         val meta = "\\d+$".toRegex().find(field_150939_a.unlocalizedName)
-        addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + if (meta != null) meta.value else "16") + "&r", par3List)
+        addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + (meta?.value ?: "16")) + "&r", par3List)
     } 
 
 }
