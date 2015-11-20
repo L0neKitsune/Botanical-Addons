@@ -19,7 +19,8 @@ open class ShadowFoxColoredItemBlock(par2Block: Block) : ItemBlockWithMetadata(p
 
     override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>?, par4: Boolean) {
         if(par1ItemStack == null) return
-        addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + "\\d+$".toRegex().find(field_150939_a.unlocalizedName)?.value) + "&r", par3List)
+        var color = "\\d+$".toRegex().find(field_150939_a.unlocalizedName)
+        addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + if (color != null) color.value else "16") + "&r", par3List)
     } 
 
     override fun getUnlocalizedName(par1ItemStack: ItemStack?): String {
