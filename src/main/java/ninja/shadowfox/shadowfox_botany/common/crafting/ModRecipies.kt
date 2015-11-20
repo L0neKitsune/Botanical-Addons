@@ -35,6 +35,8 @@ public object ModRecipes {
     val recipesRedstoneRoot: List<IRecipe>
     val recipesPastoralSeeds: List<RecipeManaInfusion>
     val recipesColorOverride: IRecipe
+    val recipesinvisibleLens: IRecipe
+    val recipesinvisibleLensUndo: IRecipe
     val recipesPlainDirt: RecipePureDaisy
     val recipesIrisSapling: RecipePureDaisyExclusion
 
@@ -180,6 +182,16 @@ public object ModRecipes {
                 'E', LibOreDict.ELEMENTIUM)
 
         recipesColorOverride = BotaniaAPI.getLatestAddedRecipe()
+
+        addShapelessOreDictRecipe(ItemStack(ShadowFoxItems.invisibleFlameLens),
+                ItemStack(BotaniaItems.lens, 1, 17), BotaniaItems.phantomInk)
+
+        recipesinvisibleLens = BotaniaAPI.getLatestAddedRecipe()
+
+        addShapelessOreDictRecipe(ItemStack(BotaniaItems.lens, 1, 17),
+                ItemStack(ShadowFoxItems.invisibleFlameLens), BotaniaItems.phantomInk)
+
+        recipesinvisibleLensUndo = BotaniaAPI.getLatestAddedRecipe()
 
         for (i in 0..15)
             addShapelessOreDictRecipe(ItemStack(BotaniaItems.manaResource, 1, 6), "dustRedstone", ItemStack(ShadowFoxBlocks.irisGrass, 1, i))
