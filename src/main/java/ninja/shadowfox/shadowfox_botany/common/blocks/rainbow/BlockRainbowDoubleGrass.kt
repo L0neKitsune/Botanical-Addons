@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks.rainbow
 
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
@@ -30,6 +30,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import net.minecraft.client.renderer.RenderBlocks
 import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.EntityRenderer
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import java.awt.Color
 import java.util.*
 import kotlin.properties.Delegates

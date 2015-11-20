@@ -1,15 +1,17 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks.rainbow
 
 import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.world.World
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxStairs
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 
 
-class StairsRainbowWood(source: Block = ShadowFoxBlocks.rainbowPlanks) : ShadowFoxStairs(source, 0, ShadowFoxBlocks.rainbowPlanks.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs"), ILexiconable
+class BlockRainbowWoodStairs(source: Block = ShadowFoxBlocks.rainbowPlanks) : ShadowFoxStairs(source, 0, ShadowFoxBlocks.rainbowPlanks.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs"), ILexiconable
 {
     init { }
 

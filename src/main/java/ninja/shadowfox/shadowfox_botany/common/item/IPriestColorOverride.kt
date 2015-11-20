@@ -9,26 +9,15 @@ interface IPriestColorOverride {
     companion object {
         public fun getColor(player: EntityPlayer?): Int? {
             if (player != null) {
-                var held = player.inventory.getCurrentItem()
-                if (held != null && held.item is IPriestColorOverride)
-                    return (held.item as IPriestColorOverride).colorOverride(held)
-                else if (held != null && held.item is ICosmeticAttachable && (held.item as ICosmeticAttachable).getCosmeticItem(held) != null) {
-                            var cosmeticStack = (held.item as ICosmeticAttachable).getCosmeticItem(held)
-                            if (cosmeticStack != null && cosmeticStack.item is IPriestColorOverride) 
-                                return (cosmeticStack.item as IPriestColorOverride).colorOverride(cosmeticStack)
-                        }
-                else {
-                    var baubles = PlayerHandler.getPlayerBaubles(player)
-                    for (i in 0..3) {
-                        var stack = baubles.getStackInSlot(i)
-                        if (stack != null && stack.item is IPriestColorOverride) 
-                            return (stack.item as IPriestColorOverride).colorOverride(stack)
-                        else if (stack != null && stack.item is ICosmeticAttachable && (stack.item as ICosmeticAttachable).getCosmeticItem(stack) != null) {
-                            var cosmeticStack = (stack.item as ICosmeticAttachable).getCosmeticItem(stack)
-                            if (cosmeticStack != null && cosmeticStack.item is IPriestColorOverride) 
-                                return (cosmeticStack.item as IPriestColorOverride).colorOverride(cosmeticStack)
-                        }
-                            
+                var baubles = PlayerHandler.getPlayerBaubles(player)
+                for (i in 0..3) {
+                    var stack = baubles.getStackInSlot(i)
+                    if (stack != null && stack.item is IPriestColorOverride) 
+                        return (stack.item as IPriestColorOverride).colorOverride(stack)
+                    else if (stack != null && stack.item is ICosmeticAttachable && (stack.item as ICosmeticAttachable).getCosmeticItem(stack) != null) {
+                        var cosmeticStack = (stack.item as ICosmeticAttachable).getCosmeticItem(stack)
+                        if (cosmeticStack != null && cosmeticStack.item is IPriestColorOverride) 
+                            return (cosmeticStack.item as IPriestColorOverride).colorOverride(cosmeticStack)
                     }
                 }
             }

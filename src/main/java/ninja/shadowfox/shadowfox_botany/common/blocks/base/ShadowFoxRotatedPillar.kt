@@ -1,10 +1,11 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks.base
 
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
+import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
@@ -29,7 +30,7 @@ abstract class ShadowFoxRotatedPillar(mat: Material) : ShadowFoxBlockMod(mat), I
     }
 
     open fun register(par1Str: String) {
-        GameRegistry.registerBlock(this, ShadowFoxLogItemBlock::class.java, par1Str)
+        GameRegistry.registerBlock(this, ShadowFoxColoredItemBlock::class.java, par1Str)
     }
 
     override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item {
@@ -67,6 +68,7 @@ abstract class ShadowFoxRotatedPillar(mat: Material) : ShadowFoxBlockMod(mat), I
         return j1 or b0
     }
 
+    abstract override fun registerBlockIcons(par1IconRegister: IIconRegister)
     override fun getPickBlock(target: MovingObjectPosition?, world: World, x: Int, y: Int, z: Int): ItemStack {
         val meta = world.getBlockMetadata(x, y, z)
         return ItemStack(this, 1, meta and 3)

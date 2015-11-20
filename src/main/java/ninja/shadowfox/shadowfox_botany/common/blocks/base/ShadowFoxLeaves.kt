@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks.base
 
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side

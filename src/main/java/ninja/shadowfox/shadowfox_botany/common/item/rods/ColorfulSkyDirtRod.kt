@@ -15,7 +15,6 @@ import net.minecraft.world.World
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.item.ColorfulItem
-import ninja.shadowfox.shadowfox_botany.common.item.IPriestColorOverride
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemPriestEmblem
 import vazkii.botania.client.core.handler.ItemsRemainingRenderHandler
 import vazkii.botania.api.item.IAvatarTile
@@ -27,7 +26,7 @@ import vazkii.botania.common.Botania
 import vazkii.botania.common.core.helper.Vector3
 
 
-class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulItem(name), IAvatarWieldable, IManaUsingItem, IBlockProvider, IPriestColorOverride {
+class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulItem(name), IAvatarWieldable, IManaUsingItem, IBlockProvider {
 
     private val avatarOverlay = ResourceLocation("shadowfox_botany:textures/model/avatarDirtRainbow.png")
 
@@ -63,12 +62,6 @@ class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulItem(nam
 
     init {
         setMaxStackSize(1)
-    }
-
-    override fun colorOverride(stack: ItemStack?): Int? {
-        if (stack != null)
-            return getColorFromItemStack(stack, 0)
-        return null
     }
 
     override fun onItemUse(par1ItemStack : ItemStack, par2EntityPlayer : EntityPlayer, par3World : World,

@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks.rainbow
 
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
@@ -28,6 +28,8 @@ import vazkii.botania.client.render.block.InterpolatedIcon
 import java.awt.Color
 import java.util.Random
 import net.minecraft.util.*
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import kotlin.properties.Delegates
 
 class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable {
@@ -117,7 +119,7 @@ class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
         if(event.map.textureType == 0) {
-            var icon = InterpolatedIcon("shadowfox_botany:rainbowDirt");
+            var icon = InterpolatedIcon("shadowfox_botany:rainbowDirt")
             if(event.map.setTextureEntry("shadowfox_botany:rainbowDirt", icon))
                 this.blockIcon = icon
         }

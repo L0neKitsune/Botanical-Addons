@@ -14,6 +14,8 @@ import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.recipe.RecipePureDaisy
 import vazkii.botania.api.recipe.RecipeManaInfusion
 import vazkii.botania.common.lib.LibOreDict
+import net.minecraftforge.oredict.RecipeSorter
+import net.minecraftforge.oredict.RecipeSorter.Category
 import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
 import vazkii.botania.common.item.ModItems as BotaniaItems
 
@@ -32,10 +34,14 @@ public object ModRecipes {
     val recipesLeafDyes: List<IRecipe>
     val recipesRedstoneRoot: List<IRecipe>
     val recipesPastoralSeeds: List<RecipeManaInfusion>
+    val recipesColorOverride: IRecipe
     val recipesPlainDirt: RecipePureDaisy
     val recipesIrisSapling: RecipePureDaisyExclusion
 
     init {
+
+        GameRegistry.addRecipe(RecipeRingDyes())
+        RecipeSorter.register("shadowfox_botany:ringdye", RecipeRingDyes::class.java, Category.SHAPELESS, "")
 
         for (i in 0..15)
             GameRegistry.addShapedRecipe(ItemStack(ShadowFoxBlocks.coloredDirtBlock, 8, i),
@@ -165,6 +171,15 @@ public object ModRecipes {
                 'S', LibOreDict.MANA_STRING)
 
         recipesCoatOfArms = BotaniaAPI.getLatestAddedRecipes(17)
+
+        addOreDictRecipe(ItemStack(ShadowFoxItems.colorOverride),
+                "PE ",
+                "E E",
+                " E ",
+                'P', ItemStack(BotaniaItems.lens, 1, 14), // Paintslinger's Lens
+                'E', LibOreDict.ELEMENTIUM)
+
+        recipesColorOverride = BotaniaAPI.getLatestAddedRecipe()
 
         for (i in 0..15)
             addShapelessOreDictRecipe(ItemStack(BotaniaItems.manaResource, 1, 6), "dustRedstone", ItemStack(ShadowFoxBlocks.irisGrass, 1, i))

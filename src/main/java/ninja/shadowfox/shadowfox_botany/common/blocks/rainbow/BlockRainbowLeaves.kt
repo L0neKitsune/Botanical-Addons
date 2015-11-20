@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks.rainbow
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.common.registry.GameRegistry
@@ -14,6 +14,8 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxRainbowItemBlock
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.LexiconEntry
@@ -60,7 +62,7 @@ public class BlockRainbowLeaves(): ShadowFoxLeaves() {
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
         if(event.map.textureType == 0) {
-            var icon = InterpolatedIcon("shadowfox_botany:rainbowLeaves");
+            var icon = InterpolatedIcon("shadowfox_botany:rainbowLeaves")
             if(event.map.setTextureEntry("shadowfox_botany:rainbowLeaves", icon))
                 this.blockIcon = icon
         }
