@@ -45,14 +45,14 @@ class BlockManaInvisibleFlame : ShadowFoxBlockMod(Material.cloth) {
     override fun hasTileEntity(metadata: Int): Boolean = true
 
 
-    override fun getBlocksMovement(p_149655_1_: IBlockAccess?, p_149655_2_: Int, p_149655_3_: Int, p_149655_4_: Int): Boolean = true
-    override fun getCollisionBoundingBoxFromPool(p_149668_1_: World?, p_149668_2_: Int, p_149668_3_: Int, p_149668_4_: Int): AxisAlignedBB? = null
+    override fun getBlocksMovement(world: IBlockAccess?, x: Int, y: Int, z: Int): Boolean = true
+    override fun getCollisionBoundingBoxFromPool(world: World?, x: Int, y: Int, z: Int): AxisAlignedBB? = null
 
     override fun getDrops(world: World, x: Int, y: Int, z: Int, metadata: Int, fortune: Int): ArrayList<ItemStack> {
         return ArrayList()
     }
 
-    override fun createTileEntity(p_149915_1_: World?, p_149915_2_: Int): TileEntity? {
+    override fun createTileEntity(world: World?, meta: Int): TileEntity? {
         return TileInvisibleManaFlame()
     }
 }
