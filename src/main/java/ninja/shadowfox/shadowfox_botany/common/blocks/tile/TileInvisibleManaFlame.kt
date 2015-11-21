@@ -11,7 +11,7 @@ import vazkii.botania.common.integration.coloredlights.ColoredLightHelper
 
 class TileInvisibleManaFlame() : TileEntity() {
     private val TAG_COLOR = "color"
-    public var color = 2162464
+    public var color = 0x20FF20
     internal var lightColor = -1
 
     override fun updateEntity() {
