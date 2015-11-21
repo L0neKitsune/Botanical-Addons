@@ -125,7 +125,7 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
             IBaubleRender.Helper.rotateIfSneaking(event.entityPlayer)
             var armor = event.entityPlayer.getCurrentArmor(2) != null
             GL11.glRotatef(180F, 1F, 0F, 0F)
-            GL11.glTranslatef(-0.26F, -0.4F, if (armor) 0.2F else 0.15F)
+            GL11.glTranslatef(-0.26F, -0.4F, if (armor) 0.21F else 0.15F)
             GL11.glScalef(0.5F, 0.5F, 0.5F)
 
             ItemRenderer.renderItemIn2D(Tessellator.instance, baubleIcon.maxU, baubleIcon.minV, baubleIcon.minU, baubleIcon.maxV, baubleIcon.iconWidth, baubleIcon.iconHeight, 1F / 32F)

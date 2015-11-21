@@ -19,6 +19,8 @@ import java.util.*
 
 class BlockManaInvisibleFlame : ShadowFoxBlockMod(Material.cloth) {
 
+    override val registerInCreative = false
+
     init {
         this.setBlockName("invisibleFlame")
         val f = 0.25f

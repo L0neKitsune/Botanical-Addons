@@ -14,7 +14,7 @@ import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxItemBlockMod
 open class ShadowFoxBlockMod(par2Material: Material) : Block(par2Material) {
     var originalLight: Int = 0
 
-    val registerInCreative: Boolean = true
+    open val registerInCreative: Boolean = true
 
     init {
         if (registerInCreative) {
