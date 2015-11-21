@@ -1,12 +1,17 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks
 
+import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxSlabs
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.*
+import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileInvisibleManaFlame
 import vazkii.botania.api.BotaniaAPI
+import vazkii.botania.client.lib.LibResources
+import vazkii.botania.common.block.tile.TileManaFlame
+import vazkii.botania.common.lib.LibBlockNames
 
 public object ShadowFoxBlocks {
 
@@ -81,6 +86,8 @@ public object ShadowFoxBlocks {
 
         register()
         initOreDict()
+
+        GameRegistry.registerTileEntity(TileInvisibleManaFlame::class.java, "shadowfox_botany:manaInvisibleFlame")
 
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
     }

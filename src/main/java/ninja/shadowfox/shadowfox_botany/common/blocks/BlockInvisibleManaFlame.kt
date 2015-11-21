@@ -1,5 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks
 
+import cpw.mods.fml.common.Optional
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
@@ -22,6 +23,11 @@ class BlockManaInvisibleFlame : ShadowFoxBlockMod(Material.cloth) {
         this.setStepSound(Block.soundTypeCloth)
         this.setBlockBounds(f, f, f, 1.0f - f, 1.0f - f, 1.0f - f)
         this.setLightLevel(1.0f)
+    }
+
+    @Optional.Method(modid = "easycoloredlights")
+    override fun getLightValue(world: IBlockAccess, x: Int, y: Int, z: Int): Int {
+        return (world.getTileEntity(x, y, z) as TileInvisibleManaFlame).getLightColor()
     }
 
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {
