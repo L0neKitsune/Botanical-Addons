@@ -5,8 +5,10 @@ import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.item.ItemStack
+import net.minecraft.init.Blocks
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.AxisAlignedBB
+import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
@@ -30,9 +32,14 @@ class BlockManaInvisibleFlame : ShadowFoxBlockMod(Material.cloth) {
         return (world.getTileEntity(x, y, z) as TileInvisibleManaFlame).getLightColor()
     }
 
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        blockIcon = IconHelper.forName(par1IconRegister, "transparent")
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
+
+    override fun getRenderType(): Int = -1
+
+    override fun getIcon(side: Int, meta: Int): IIcon {
+        return Blocks.fire.getIcon(side, meta)
     }
+
     override fun isOpaqueCube(): Boolean = false
     override fun renderAsNormalBlock(): Boolean = false
     override fun hasTileEntity(metadata: Int): Boolean = true
