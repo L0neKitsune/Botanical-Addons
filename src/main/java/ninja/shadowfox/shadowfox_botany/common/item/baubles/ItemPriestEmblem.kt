@@ -41,7 +41,7 @@ import baubles.common.lib.PlayerHandler
 class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsingItem {
 
     companion object {
-        val TYPES = 2
+        val TYPES = 3
         public fun getEmblem(meta: Int, player: EntityPlayer?): ItemStack? {
             var baubles = PlayerHandler.getPlayerBaubles(player)
             var stack = baubles.getStackInSlot(0)
@@ -150,7 +150,7 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
             IBaubleRender.Helper.rotateIfSneaking(event.entityPlayer)
             var armor = event.entityPlayer.getCurrentArmor(2) != null
             GL11.glRotatef(180F, 1F, 0F, 0F)
-            GL11.glTranslatef(-0.26F, -0.4F, if (armor) 0.2F else 0.15F)
+            GL11.glTranslatef(-0.26F, -0.4F, if (armor) 0.21F else 0.15F)
             GL11.glScalef(0.5F, 0.5F, 0.5F)
 
             var icon = getBaubleIconFromDamage(stack.itemDamage)

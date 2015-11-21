@@ -129,7 +129,10 @@ public open class InterdictionRod(name: String = "interdictionRod") : StandardIt
         return COST + if (prowess) PROWESS_COST else 0 + if (priest) PRIEST_COST else 0
     }
     fun getVelocity(prowess: Boolean, priest: Boolean): Double {
-        return VELOCITY + if (prowess) PROWESS_VELOCTY else 0.0 + if (priest) PRIEST_VELOCITY else 0.0
+        var vel = VELOCITY 
+        if (prowess) vel += PROWESS_VELOCTY 
+        if (priest) vel += PRIEST_VELOCITY
+        return vel
     }
     fun getRange(prowess: Boolean, priest: Boolean): Int {
         return RANGE + if (prowess) PROWESS_RANGE else 0 + if (priest) PRIEST_RANGE else 0

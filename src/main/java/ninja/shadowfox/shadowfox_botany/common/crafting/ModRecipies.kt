@@ -32,6 +32,8 @@ public object ModRecipes {
     val recipesLightningRod: IRecipe
     val recipesPriestOfThor: IRecipe
     val recipesLeafDyes: List<IRecipe>
+    val recipesInterdictionRod: IRecipe
+    val recipesPriestOfNjord: IRecipe
     val recipesRedstoneRoot: List<IRecipe>
     val recipesPastoralSeeds: List<RecipeManaInfusion>
     val recipesColorOverride: IRecipe
@@ -130,7 +132,7 @@ public object ModRecipes {
                 'E', LibOreDict.ENDER_AIR_BOTTLE,
                 'T', LibOreDict.TERRA_STEEL,
                 'S', LibOreDict.DREAMWOOD_TWIG,
-                'W', LibOreDict.RUNE[13])
+                'W', LibOreDict.RUNE[13]) // Wrath
 
         recipesLightningRod = BotaniaAPI.getLatestAddedRecipe()
 
@@ -141,7 +143,7 @@ public object ModRecipes {
                 'E', LibOreDict.ENDER_AIR_BOTTLE,
                 'T', LibOreDict.TERRASTEEL_NUGGET,
                 'G', LibOreDict.LIFE_ESSENCE,
-                'W', LibOreDict.RUNE[13],
+                'W', LibOreDict.RUNE[13], // Wrath
                 'S', LibOreDict.MANA_STRING)
 
         recipesPriestOfThor = BotaniaAPI.getLatestAddedRecipe()
@@ -153,7 +155,7 @@ public object ModRecipes {
                 'D', LibOreDict.DRAGONSTONE,
                 'N', "nuggetGold",
                 'G', LibOreDict.LIFE_ESSENCE,
-                'P', LibOreDict.RUNE[2],
+                'P', LibOreDict.RUNE[2], // Earth
                 'S', LibOreDict.MANA_STRING)
 
         recipesPriestOfSif = BotaniaAPI.getLatestAddedRecipe()
@@ -182,6 +184,29 @@ public object ModRecipes {
                 'E', LibOreDict.ELEMENTIUM)
 
         recipesColorOverride = BotaniaAPI.getLatestAddedRecipe()
+
+        addOreDictRecipe(ItemStack(ShadowFoxItems.interdictionRod),
+                " AS",
+                " DA",
+                "P  ",
+                'P', LibOreDict.RUNE[15], // Pride
+                'A', LibOreDict.RUNE[3], // Air
+                'S', ItemStack(BotaniaItems.tornadoRod),
+                'D', LibOreDict.DREAMWOOD_TWIG)
+
+        recipesInterdictionRod = BotaniaAPI.getLatestAddedRecipe()
+
+        addOreDictRecipe(ItemStack(ShadowFoxItems.emblem, 1, 2),
+                "SAS",
+                "NGN",
+                " P ",
+                'P', LibOreDict.RUNE[15], // Pride
+                'N', LibOreDict.MANASTEEL_NUGGET,
+                'G', LibOreDict.LIFE_ESSENCE,
+                'A', LibOreDict.RUNE[3], // Air
+                'S', LibOreDict.MANA_STRING)
+
+        recipesPriestOfNjord = BotaniaAPI.getLatestAddedRecipe()
 
         addShapelessOreDictRecipe(ItemStack(ShadowFoxItems.invisibleFlameLens),
                 ItemStack(BotaniaItems.lens, 1, 17), BotaniaItems.phantomInk)
