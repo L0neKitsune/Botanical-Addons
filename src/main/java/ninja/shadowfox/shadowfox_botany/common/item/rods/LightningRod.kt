@@ -301,7 +301,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
 
                 if (tile.elapsedFunctionalTicks % 10 == 0)
                     Botania.proxy.lightningFX(world, targetCenter, targetShift, 2.0f, color, innerColor)
-                Botania.proxy.sparkleFX(world, te.xCoord.toDouble() + 0.5, te.yCoord.toDouble() + 2.5, te.zCoord.toDouble() + 0.5, 0.667f, 0.875f, 1f, 6.0f, 6)
+                Botania.proxy.sparkleFX(world, te.xCoord.toDouble() + 0.5, te.yCoord.toDouble() + 2.5, te.zCoord.toDouble() + 0.5, 0.667f, 0.875f, 1f, 2.0f, 6)
 
                 if (tile.elapsedFunctionalTicks % 100 == 0) {
 
