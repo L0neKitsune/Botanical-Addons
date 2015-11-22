@@ -117,7 +117,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                         } else {
                             if (ManaItemHandler.requestManaExactForTool(stack, player, getCost(thor, prowess, priest), true)) {
                                 target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage)
-                                Botania.proxy.lightningFX(player.worldObj, Vector3.fromEntityCenter(player), Vector3.fromEntityCenter(target), 1.0f, color, innerColor)
+                                Botania.proxy.lightningFX(player.worldObj, playerCenter, Vector3.fromEntityCenter(target), 1.0f, color, innerColor)
                                 player.worldObj.playSoundEffect(target.posX.toDouble(), target.posY.toDouble(), target.posZ.toDouble(), "ambient.weather.thunder", 100.0f, 0.8f + player.worldObj.rand.nextFloat() * 0.2f)
                             }
                             chainLightning(stack!!, target, player, thor, prowess, priest, color, innerColor)
@@ -299,9 +299,13 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
                 val targetCenter = Vector3.fromEntityCenter(target).add(0.0, 0.75, 0.0).add(Vector3(target.lookVec).multiply(-0.25))
                 val targetShift = targetCenter.copy().add(getHeadOrientation(target))
 
-                if (tile.elapsedFunctionalTicks % 10 == 0)
+                val thisCenter = Vector3.fromTileEntityCenter(te).add(0.0, 0.5, 0.0)
+                val thisShift = thisCenter.copy().add(0.0, 1.0, 0.0)
+
+                if (tile.elapsedFunctionalTicks % 10 == 0) {
                     Botania.proxy.lightningFX(world, targetCenter, targetShift, 2.0f, color, innerColor)
-                Botania.proxy.sparkleFX(world, te.xCoord.toDouble() + 0.5, te.yCoord.toDouble() + 2.5, te.zCoord.toDouble() + 0.5, 0.667f, 0.875f, 1f, 6.0f, 6)
+                    Botania.proxy.lightningFX(world, thisCenter, thisShift, 2.0f, color, innerColor)
+                }
 
                 if (tile.elapsedFunctionalTicks % 100 == 0) {
 
@@ -309,8 +313,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
 
                     if (!world.isRemote) tile.recieveMana(-COST_AVATAR)
 
-                    var vect = Vector3()
-                    vect.set(te.xCoord.toDouble() + 0.5, te.yCoord.toDouble() + 2.5, te.zCoord.toDouble() + 0.5)
+                    var vect = Vector3.fromTileEntityCenter(te).add(0.0, 0.5, 0.0)
 
                     Botania.proxy.lightningFX(world, vect, Vector3.fromEntityCenter(target), 1.0f, color, innerColor)
 

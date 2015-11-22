@@ -43,8 +43,8 @@ public object ShadowFoxBlocks {
     public var coloredStairs: Array<Block>
     public var rainbowStairs: Block
     public var invisibleFlame: Block
-    public var itemDisplay: Block
-//    public var lightningRod: Block
+    // public var itemDisplay: Block
+    // public var lightningRod: Block
 
     val WOOD: Array<String> = arrayOf("irisWoodWhite", "irisWoodOrange", "irisWoodMagenta", "irisWoodLightBlue", "irisWoodYellow", "irisWoodLime", "irisWoodPink", "irisWoodGray", "irisWoodLightGray", "irisWoodCyan", "irisWoodPurple", "irisWoodBlue", "irisWoodBrown", "irisWoodGreen", "irisWoodRed", "irisWoodBlack")
     val LEAVES: Array<String> = arrayOf("irisLeavesWhite", "irisLeavesOrange", "irisLeavesMagenta", "irisLeavesLightBlue", "irisLeavesYellow", "irisLeavesLime", "irisLeavesPink", "irisLeavesGray", "irisLeavesLightGray", "irisLeavesCyan", "irisLeavesPurple", "irisLeavesBlue", "irisLeavesBrown", "irisLeavesGreen", "irisLeavesRed", "irisLeavesBlack")
@@ -81,14 +81,14 @@ public object ShadowFoxBlocks {
         irisTallGrass0 = BlockColoredDoubleGrass(0)
         irisTallGrass1 = BlockColoredDoubleGrass(1)
         rainbowTallGrass = BlockRainbowDoubleGrass()
-        itemDisplay = BlockItemDisplay()
-//        lightningRod = BlockLightningRod()
+        // itemDisplay = BlockItemDisplay()
+        // lightningRod = BlockLightningRod()
 
         register()
         initOreDict()
 
         GameRegistry.registerTileEntity(TileInvisibleManaFlame::class.java, "shadowfox_botany:manaInvisibleFlame")
-        GameRegistry.registerTileEntity(TileItemDisplay::class.java, "shadowfox_botany:itemDisplay")
+        // GameRegistry.registerTileEntity(TileItemDisplay::class.java, "shadowfox_botany:itemDisplay")
 
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
     }

@@ -17,6 +17,7 @@ public object LexiconRegistry {
     val irisSapling : LexiconEntry
     val technicolor : LexiconEntry
     val lightningRod : LexiconEntry
+    val interdictionRod : LexiconEntry
     val pastoralSeeds : LexiconEntry
     val coatOfArms : LexiconEntry
     val colorOverride : LexiconEntry
@@ -62,10 +63,18 @@ public object LexiconRegistry {
         colorOverride.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesColorOverride))
 
+        interdictionRod = ShadowfoxLexiconEntry("interdictionRod", BotaniaAPI.categoryTools, ShadowFoxItems.interdictionRod).setKnowledgeType(BotaniaAPI.elvenKnowledge)
+        interdictionRod.setLexiconPages(PageText("0"),
+                PageCraftingRecipe("1", ModRecipes.recipesInterdictionRod),
+                PageText("2"),
+                PageCraftingRecipe("3", ModRecipes.recipesPriestOfNjord))
+
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.interdictionRod), interdictionRod, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.emblem, 1, 0), lightningRod, 3)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.emblem, 1, 1), technicolor, 3)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.emblem, 1, 2), interdictionRod, 3)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.colorOverride), colorOverride, 1)
         for (i in 0..3){
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood0, 1, i), irisSapling, 1)

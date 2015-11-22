@@ -85,6 +85,8 @@ shadowfox_botany.entry.technicolorRod=Rod of the Iridescence
 shadowfox_botany.tagline.technicolorRod=Rainbow dirt made from thin air
 shadowfox_botany.entry.lightningRod=Rod of the Thundercaller
 shadowfox_botany.tagline.lightningRod=Stike fear and thunder into your foes
+shadowfox_botany.entry.interdictionRod=Rod of the Hurricane
+shadowfox_botany.tagline.interdictionRod=Push enemies out of your personal space
 shadowfox_botany.entry.irisSapling=Iridescent Trees
 shadowfox_botany.tagline.irisSapling=Grow trees with all the colors of the wind
 shadowfox_botany.entry.irisSeeds=Iridescent Grass
@@ -106,6 +108,11 @@ shadowfox_botany.page.lightningRod0=The &1Rod of the Thundercaller&0, much like 
 shadowfox_botany.page.lightningRod1=Not quite a blessed blade
 shadowfox_botany.page.lightningRod2=It appears that connecting your soul to the ancient god of lightning, &4Thor&0, can increase your proficiency with the power of thunder. By donning the &1Priestly Emblem: Thor&0, this can be achieved. It seems that &4Manatide Prowess&0 has a similar effect upon the rod.<br>There appear to be even further power trapped within the rod, but it would take a god to get it out.
 shadowfox_botany.page.lightningRod3=In anger smite the earth
+
+shadowfox_botany.page.interdictionRod0=The &1Rod of the Hurricane&0 is one for those who don't like people in their personal space. Using it will seal the area around you, creating a sphere of force where other living beings cannot tread, and projectiles cannot pass. Whenever something tries to break this seal, &4Mana&0 is consumed to repel it.
+shadowfox_botany.page.interdictionRod1=really not feelin up to it right now
+shadowfox_botany.page.interdictionRod2=It appears that connecting your soul to the ancient god of wind, &4Njord&0, can increase your proficiency with the power of air. By donning the &1Priestly Emblem: Njord&0, the force you exert with this rod will become much greater. It seems that &4Manatide Prowess&0 has a similar, but weaker effect upon the rod.
+shadowfox_botany.page.interdictionRod3=At the doom of men he will come back
 
 shadowfox_botany.page.irisSapling0=Blessed by the goddess of rainbows, these saplings are made from their earthly counterparts by the purifying magic of a &1Pure Daisy&0. These saplings will only grow on &1Iridescent Dirt&0 and take on the hue of the dirt they lay their roots in.<br><br>They're just &oreally&0 big carnations
 shadowfox_botany.page.irisSapling1=Planks

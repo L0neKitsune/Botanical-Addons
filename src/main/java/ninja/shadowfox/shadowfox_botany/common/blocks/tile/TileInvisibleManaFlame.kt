@@ -49,12 +49,12 @@ class TileInvisibleManaFlame() : ShadowFoxTile() {
         return this.lightColor
     }
 
-    override fun writeCustomNBT(cmp: NBTTagCompound) {
-        cmp.setInteger("color", this.color)
+    override fun writeCustomNBT(nbttagcompound: NBTTagCompound) {
+        nbttagcompound.setInteger("color", this.color)
     }
 
-    override fun readCustomNBT(cmp: NBTTagCompound) {
-        this.color = cmp.getInteger("color")
+    override fun readCustomNBT(nbttagcompound: NBTTagCompound) {
+        this.color = nbttagcompound.getInteger("color")
     }
 
     override fun getDescriptionPacket(): Packet {
@@ -63,8 +63,8 @@ class TileInvisibleManaFlame() : ShadowFoxTile() {
         return S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, -999, nbttagcompound)
     }
 
-    override fun onDataPacket(net: NetworkManager?, packet: S35PacketUpdateTileEntity?) {
-        super.onDataPacket(net, packet)
-        this.readCustomNBT(packet!!.func_148857_g())
+    override fun onDataPacket(net: NetworkManager?, pkt: S35PacketUpdateTileEntity?) {
+        super.onDataPacket(net, pkt)
+        this.readCustomNBT(pkt!!.func_148857_g())
     }
 }
