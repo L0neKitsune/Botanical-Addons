@@ -130,6 +130,16 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
                                     Botania.proxy.wispFX(player.worldObj, player.posX, player.posY - player.yOffset, player.posZ, r, g, b, Math.random().toFloat() * 0.15f + 0.15f, xmotion, 0.0075f, zmotion)
                                 }
                             }
+                            2 -> {
+                                for (i in 0..6) {
+                                    val vec = getHeadOrientation(player).multiply(0.52)
+                                    val color = Color(IPriestColorOverride.getColor(player, 0x0000FF))
+                                    val r = color.red.toFloat() / 255F
+                                    val g = color.green.toFloat() / 255F
+                                    val b = color.blue.toFloat() / 255F
+                                    Botania.proxy.sparkleFX(player.worldObj, player.posX+vec.x, player.posY+vec.y, player.posZ+vec.z, r, g, b, 1.0f, 5)
+                                }
+                            }
                         }
                     }
                 }
