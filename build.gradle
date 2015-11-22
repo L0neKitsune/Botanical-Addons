@@ -50,7 +50,7 @@ minecraft {
 }
 
 dependencies {
-    compile files('libs/Botania r1.7-234-deobf.jar')
+    compile files('libs/Botania r1.7-235-deobf.jar')
     compile files('libs/Baubles-deobf.jar')
 
     compile "codechicken:CodeChickenLib:1.7.10-1.1.3.140:dev"

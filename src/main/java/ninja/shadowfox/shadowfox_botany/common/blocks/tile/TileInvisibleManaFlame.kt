@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity
 import vazkii.botania.common.Botania
 import vazkii.botania.common.integration.coloredlights.ColoredLightHelper
 
-class TileInvisibleManaFlame() : TileEntity() {
+class TileInvisibleManaFlame() : ShadowFoxTile() {
     private val TAG_COLOR = "color"
     public var color = 0x20FF20
     internal var lightColor = -1
@@ -49,23 +49,14 @@ class TileInvisibleManaFlame() : TileEntity() {
         return this.lightColor
     }
 
-    fun writeCustomNBT(cmp: NBTTagCompound?) {
-        cmp!!.setInteger("color", this.color)
+    override fun writeCustomNBT(cmp: NBTTagCompound) {
+        cmp.setInteger("color", this.color)
     }
 
-    fun readCustomNBT(cmp: NBTTagCompound?) {
-        this.color = cmp!!.getInteger("color")
+    override fun readCustomNBT(cmp: NBTTagCompound) {
+        this.color = cmp.getInteger("color")
     }
 
-    override fun writeToNBT(par1nbtTagCompound: NBTTagCompound) {
-        super.writeToNBT(par1nbtTagCompound)
-        this.writeCustomNBT(par1nbtTagCompound)
-    }
-
-    override fun readFromNBT(par1nbtTagCompound: NBTTagCompound) {
-        super.readFromNBT(par1nbtTagCompound)
-        this.readCustomNBT(par1nbtTagCompound)
-    }
     override fun getDescriptionPacket(): Packet {
         val nbttagcompound = NBTTagCompound()
         this.writeCustomNBT(nbttagcompound)
