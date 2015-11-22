@@ -9,6 +9,7 @@ import net.minecraft.entity.monster.EntitySlime
 import net.minecraft.entity.monster.IMob
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
+import net.minecraft.entity.IProjectile
 import net.minecraft.item.EnumAction
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
@@ -26,6 +27,7 @@ import vazkii.botania.api.item.IAvatarWieldable
 import vazkii.botania.api.item.IManaProficiencyArmor
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
+import vazkii.botania.api.internal.IManaBurst
 import vazkii.botania.common.Botania
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.core.helper.Vector3
@@ -61,20 +63,58 @@ public open class InterdictionRod(name: String = "interdictionRod") : StandardIt
         return par1ItemStack
     }
 
-    val selector = object : IEntitySelector {
+    object PLAYER_SELECTOR : IEntitySelector {
         override fun isEntityApplicable(e: Entity): Boolean {
-            return e is EntityLivingBase
+            return e is EntityLivingBase || (e is IProjectile && !(e is IManaBurst))
         }
     }
 
-    val avatar_selector = object : IEntitySelector {
+    object AVATAR_SELECTOR : IEntitySelector {
         override fun isEntityApplicable(e: Entity): Boolean {
             return e is EntityLivingBase && !(e is EntityPlayer)
         }
     }
 
+    fun particleRing(world: World, x: Int, y: Int, z: Int, range: Int, r: Float, g: Float, b: Float) {
+        particleRing(world, x.toDouble(), y.toDouble(), z.toDouble(), range, r, g, b)
+    }
+    fun particleRing(world: World, x: Double, y: Double, z: Double, range: Int, r: Float, g: Float, b: Float) {
+        val m = 0.15F
+        val mv = 0.35F
+        for (i in 0..359 step 8) {
+            val rad = i.toDouble() * Math.PI / 180.0
+            val dispx = x + 0.5 - Math.cos(rad) * range.toFloat()
+            val dispy = y + 0.5
+            val dispz = z + 0.5 - Math.sin(rad) * range.toFloat()
+
+            Botania.proxy.wispFX(world, dispx, dispy, dispz, r, g, b, 0.2F, (Math.random() - 0.5).toFloat() * m, (Math.random() - 0.5).toFloat() * mv, (Math.random() - 0.5F).toFloat() * m)
+        }
+    }
+    fun pushEntities(x: Int, y: Int, z: Int, range: Int, velocity: Double, entities: List<Any?>): Boolean {
+        return pushEntities(x.toDouble(), y.toDouble(), z.toDouble(), range, velocity, entities)
+    }
+    fun pushEntities(x: Double, y: Double, z: Double, range: Int, velocity: Double, entities: List<Any?>): Boolean {
+        var flag = false
+        for (entityLiving in entities) {
+            if (entityLiving is Entity) {
+                var xDif = entityLiving.posX - x
+                var yDif = entityLiving.posY - (y + 1)
+                var zDif = entityLiving.posZ - z
+                var dist = Math.sqrt(xDif*xDif+yDif*yDif+zDif*zDif)
+                if (dist <= range) {
+                    entityLiving.motionX = velocity * xDif
+                    entityLiving.motionY = velocity * yDif
+                    entityLiving.motionZ = velocity * zDif
+                    entityLiving.fallDistance = 0f
+                    flag = true
+                }
+            }
+        }
+        return flag
+    }
+
     override fun onUsingTick(stack: ItemStack?, player: EntityPlayer?, count: Int) {
-        if (!player!!.worldObj.isRemote) {
+        if (player != null) {
             var world = player.worldObj
             var x = player.posX
             var y = player.posY
@@ -88,25 +128,18 @@ public open class InterdictionRod(name: String = "interdictionRod") : StandardIt
             val velocity = getVelocity(prowess, priest)
 
             if (ManaItemHandler.requestManaExactForTool(stack, player, cost, false)) {
+                val color = Color(IPriestColorOverride.getColor(player, 0x0000FF))
+                val r = color.red.toFloat() / 255f
+                val g = color.green.toFloat() / 255f
+                val b = color.blue.toFloat() / 255f
+                if (count % 5 == 0) particleRing(world, x, y, z, range, r, g, b)
+
                 val exclude: EntityLivingBase = player
                 val entities = world.getEntitiesWithinAABBExcludingEntity(exclude, 
                     AxisAlignedBB.getBoundingBox(x - range, y - range, z - range, 
-                        x + range, y + range, z + range), selector)
-                var flag = false
-
-                for (entityLiving in entities) {
-                    if (entityLiving is EntityLivingBase) {
-                        var xDif = entityLiving.posX - x
-                        var yDif = entityLiving.posY - (y + 1)
-                        var zDif = entityLiving.posZ - z
-                        entityLiving.motionX = velocity * xDif
-                        entityLiving.motionY = velocity * yDif
-                        entityLiving.motionZ = velocity * zDif
-                        entityLiving.fallDistance = 0f
-                        flag = true
-                    }
-                }
-                if (flag) {
+                        x + range, y + range, z + range), PLAYER_SELECTOR)
+                
+                if (pushEntities(x, y, z, range, velocity, entities)) {
                     world.playSoundAtEntity(player, "shadowfox_botany:wind", 0.4F, 1F)
                     ManaItemHandler.requestManaExactForTool(stack, player, cost, true)
                 }
@@ -145,31 +178,16 @@ public open class InterdictionRod(name: String = "interdictionRod") : StandardIt
         var y = te.yCoord.toDouble()
         var z = te.zCoord.toDouble()
 
-        val cost = AVATAR_COST
-        val range = RANGE
-        val velocity = VELOCITY
+        if (tile.currentMana >= AVATAR_COST) {
+            if (tile.elapsedFunctionalTicks % 5 == 0) particleRing(world, x, y, z, RANGE, 0f, 0f, 1f)
 
-        if (tile.currentMana >= cost) {
             val entities = world.selectEntitiesWithinAABB(EntityLivingBase::class.java, 
-                AxisAlignedBB.getBoundingBox(x - range, y - range, z - range, 
-                    x + range, y + range, z + range), avatar_selector)
-            var flag = false
+                AxisAlignedBB.getBoundingBox(x - RANGE, y - RANGE, z - RANGE, 
+                    x + RANGE, y + RANGE, z + RANGE), AVATAR_SELECTOR)
 
-            for (entityLiving in entities) {
-                if (entityLiving is EntityLivingBase) {
-                    var xDif = entityLiving.posX - x
-                    var yDif = entityLiving.posY - (y + 1)
-                    var zDif = entityLiving.posZ - z
-                    entityLiving.motionX = velocity * xDif
-                    entityLiving.motionY = velocity * yDif
-                    entityLiving.motionZ = velocity * zDif
-                    entityLiving.fallDistance = 0f
-                    flag = true
-                }
-            }
-            if (flag) {
+            if (pushEntities(x, y, z, RANGE, VELOCITY, entities)) {
                 world.playSoundEffect(x.toDouble(), y.toDouble(), z.toDouble(), "shadowfox_botany:wind", 0.4F, 1F)
-                tile.recieveMana(-cost)
+                tile.recieveMana(-AVATAR_COST)
             }
         }
     }
