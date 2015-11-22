@@ -16,7 +16,7 @@ class RecipeRingDyes: IRecipe {
     /**
      * Used to check if a recipe matches current crafting inventory
      */
-    override fun matches(inventory: InventoryCrafting, world: World): Boolean {
+    override fun matches(inventory: InventoryCrafting, world: World?): Boolean {
         var itemstack: ItemStack? = null
 
         var colors = 0

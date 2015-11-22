@@ -1,6 +1,12 @@
 package ninja.shadowfox.shadowfox_botany.common.item.rods
 
+import cpw.mods.fml.relauncher.Side
+import cpw.mods.fml.relauncher.SideOnly
+import cpw.mods.fml.common.eventhandler.SubscribeEvent
+import net.minecraftforge.client.event.TextureStitchEvent
+import net.minecraftforge.common.MinecraftForge
 import net.minecraft.command.IEntitySelector
+import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityCreature
 import net.minecraft.entity.EntityLivingBase
@@ -12,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.EnumAction
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
+import net.minecraft.util.IIcon
 import net.minecraft.util.MathHelper
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.DamageSource
@@ -30,12 +37,16 @@ import vazkii.botania.common.Botania
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.core.helper.Vector3
 import vazkii.botania.common.entity.EntityDoppleganger
+import vazkii.botania.client.render.block.InterpolatedIcon
 import java.awt.Color
 import java.util.*
+import kotlin.properties.Delegates
 
 public open class LightningRod(name: String = "lightningRod") : StandardItem(name), IManaUsingItem, IAvatarWieldable {
     private val avatarOverlay = ResourceLocation("shadowfox_botany:textures/model/avatarLightning.png")
     private val COST_AVATAR = 150
+
+    var icon: IIcon by Delegates.notNull()
 
     val COST = 300
     val PRIEST_COST = 200
@@ -65,6 +76,26 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
 
     init {
         setMaxStackSize(1)
+        MinecraftForge.EVENT_BUS.register(this)
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun registerIcons(par1IconRegister: IIconRegister) {}
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    fun loadTextures(event: TextureStitchEvent.Pre) {
+        if(event.map.textureType == 1) {
+            var localIcon = InterpolatedIcon("shadowfox_botany:lightningRod")
+            if(event.map.setTextureEntry("shadowfox_botany:lightningRod", localIcon)) {
+                this.icon = localIcon
+            }
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun getIconFromDamage(meta: Int): IIcon {
+        return this.icon
     }
 
     override fun getItemUseAction(par1ItemStack: ItemStack?): EnumAction {
