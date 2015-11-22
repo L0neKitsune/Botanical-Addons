@@ -17,6 +17,7 @@ object ShadowFoxItems {
 //    val testingRod: Item
 //    val splashPotion: Item
     val colorOverride: Item
+//    val fortressFinder: Item
 
     init {
         irisSeeds = ItemColorSeeds()
@@ -30,5 +31,6 @@ object ShadowFoxItems {
 //        testingRod = TestingRod()
 //        splashPotion = ItemSplashPotion()
         colorOverride = ItemColorOverride()
+//        fortressFinder = ItemFortressFinder()
     }
 }

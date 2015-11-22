@@ -5,6 +5,7 @@ import net.minecraft.inventory.ISidedInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.nbt.NBTTagList
+import net.minecraft.world.gen.structure.StructureNetherBridgePieces
 
 class TileItemDisplay() : ShadowFoxTile(), ISidedInventory {
     private val slots = intArrayOf(0)
