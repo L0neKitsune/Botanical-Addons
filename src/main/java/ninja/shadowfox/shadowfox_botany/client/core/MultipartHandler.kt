@@ -1,7 +1,8 @@
-package ninja.shadowfox.shadowfox_botany.common.core.handler
+package ninja.shadowfox.shadowfox_botany.client.core
 
 import java.util.ArrayList
 
+import cpw.mods.fml.relauncher.FMLLaunchHandler
 import net.minecraft.block.Block
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
