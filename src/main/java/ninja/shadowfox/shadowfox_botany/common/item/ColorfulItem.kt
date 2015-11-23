@@ -23,7 +23,7 @@ open class ColorfulItem(name: String) : Item() {
     companion object {
         val TYPES = 16
         fun rainbowColor(): Int {
-            return Color.HSBtoRGB(Botania.proxy.getWorldElapsedTicks() * 2 % 360 / 360F, 0.8F, 1F)
+            return Color.HSBtoRGB(Botania.proxy.getWorldElapsedTicks() * 2 % 360 / 360F, 1F, 1F)
         }
         fun colorFromItemStack(par1ItemStack : ItemStack) : Int {
             if(par1ItemStack.itemDamage == TYPES) {

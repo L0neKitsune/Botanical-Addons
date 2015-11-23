@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.projectile.EntityThrowable
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.util.StatCollector
@@ -18,7 +19,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileInvisibleManaFlame
 import vazkii.botania.api.internal.IManaBurst
 import vazkii.botania.api.mana.BurstProperties
-import vazkii.botania.api.mana.ILens
+import vazkii.botania.api.mana.ICompositableLens
 import vazkii.botania.common.Botania
 import vazkii.botania.common.block.ModBlocks
 import vazkii.botania.common.item.lens.ItemLens
@@ -27,9 +28,10 @@ import vazkii.botania.common.crafting.recipe.LensDyeingRecipe
 import java.awt.Color
 
 
-class ItemLensFlashInvisible() : StandardItem("lensLight"), ILens {
+class ItemLensFlashInvisible() : StandardItem("lensPhantomLight"), ICompositableLens {
 
     init {
+        setMaxStackSize(1)
         GameRegistry.addRecipe(LensDyeingRecipe())
         RecipeSorter.register("shadowfox_botany:lensDying", LensDyeingRecipe::class.java, RecipeSorter.Category.SHAPELESS, "")
     }
@@ -47,6 +49,9 @@ class ItemLensFlashInvisible() : StandardItem("lensLight"), ILens {
         if (storedColor == 16 && entity.worldObj.isRemote) {
             burst.color = this.getLensColor(stack)
         }
+        val compositeLens = getCompositeLens(stack)
+        if(compositeLens != null && compositeLens.item is ICompositableLens)
+            (compositeLens.item as ICompositableLens).updateBurst(burst, compositeLens)
     }
 
     override fun getLensColor(stack: ItemStack?): Int {
@@ -78,9 +83,11 @@ class ItemLensFlashInvisible() : StandardItem("lensLight"), ILens {
         if(par1ItemStack == null) return
 
         var storedColor = getStoredColor(par1ItemStack)
+        var compositeLens = getCompositeLens(par1ItemStack)
         if(storedColor != -1)
             addStringToTooltip(StatCollector.translateToLocal("botaniamisc.color").format(StatCollector.translateToLocal("botania.color" + storedColor)), par3List)
-        addStringToTooltip(StatCollector.translateToLocal("botaniamisc.hasPhantomInk"), par3List)
+        if (compositeLens == null)
+            addStringToTooltip(StatCollector.translateToLocal("botaniamisc.hasPhantomInk"), par3List)
     }
 
     override fun collideBurst(burst: IManaBurst?, pos: MovingObjectPosition?, isManaBlock: Boolean, dead: Boolean, p4: ItemStack?): Boolean {
@@ -111,6 +118,9 @@ class ItemLensFlashInvisible() : StandardItem("lensLight"), ILens {
                 }
             }
         }
+        val compositeLens = getCompositeLens(p4)
+        if(compositeLens != null && compositeLens.item is ICompositableLens)
+            return (compositeLens.item as ICompositableLens).collideBurst(burst, pos, isManaBlock, dead, compositeLens)
         return dead
     }
 
@@ -120,6 +130,9 @@ class ItemLensFlashInvisible() : StandardItem("lensLight"), ILens {
             if (storedColor != -1) {
                 p1.color = this.getLensColor(p0)
             }
+            val compositeLens = getCompositeLens(p0)
+            if(compositeLens != null && compositeLens.item is ICompositableLens)
+                (compositeLens.item as ICompositableLens).apply(compositeLens, p1)
         }
     }
 
@@ -131,9 +144,6 @@ class ItemLensFlashInvisible() : StandardItem("lensLight"), ILens {
     }
 
     fun getItemShortTermName(stack: ItemStack): String {
-        if (stack.item is ItemLensFlashInvisible) {
-            return StatCollector.translateToLocal("item.botania:lensLight.short")
-        }
         return StatCollector.translateToLocal(stack.getUnlocalizedName().replace("item\\.".toRegex(), "item.botania:") + ".short");
     }
 
@@ -146,7 +156,38 @@ class ItemLensFlashInvisible() : StandardItem("lensLight"), ILens {
         return if (par2 == 1) this.itemIcon else ItemLens.iconGlass
     }
 
-    override fun getCompositeLens(p0: ItemStack?): ItemStack? = null
-    override fun setCompositeLens(p0: ItemStack?, p1: ItemStack?): ItemStack? = null
-    override fun canCombineLenses(p0: ItemStack?, p1: ItemStack?): Boolean = false
+    override fun getCompositeLens(stack: ItemStack?): ItemStack? {
+        if (stack != null) {
+            var cmp = ItemNBTHelper.getCompound(stack, "compositeLens", false)
+            var lens = ItemStack.loadItemStackFromNBT(cmp)
+            return lens
+        }
+        return null
+    }
+
+    override fun setCompositeLens(sourceLens: ItemStack, compositeLens: ItemStack): ItemStack {
+        var cmp = NBTTagCompound()
+        compositeLens.writeToNBT(cmp)
+        ItemNBTHelper.setCompound(sourceLens, "compositeLens", cmp)
+        return sourceLens
+    }
+
+    override fun canCombineLenses(sourceLens: ItemStack, compositeLens: ItemStack): Boolean {
+        val sourceItem = sourceLens.item as ICompositableLens
+        val compositeItem = compositeLens.item as ICompositableLens
+        if(sourceItem == compositeItem && sourceLens.itemDamage == compositeLens.itemDamage)
+            return false
+
+        if(!sourceItem.isCombinable(sourceLens) || !compositeItem.isCombinable(compositeLens))
+            return false
+
+        if(ItemLens.isBlacklisted(sourceLens, compositeLens))
+            return false
+
+        return true
+    }
+
+    override fun getProps(stack: ItemStack): Int = 4 or 8 // PROP_TOUCH | PROP_INTERACTION
+
+    override fun isCombinable(stack: ItemStack): Boolean = true
 }

@@ -48,6 +48,7 @@ tile.shadowfox_botany:irisDoubleGrass.name=Iridescent Double Grass
 item.shadowfox_botany:irisSeeds.name=Iridescent Seeds
 
 tile.shadowfox_botany:invisibleFlame.name=Phantom Mana Flash
+item.botania:lensPhantomLight.short=Phantom Flash
 
 item.shadowfox_botany:coatOfArms0.name=Chilean Shield
 item.shadowfox_botany:coatOfArms1.name=French Shield
