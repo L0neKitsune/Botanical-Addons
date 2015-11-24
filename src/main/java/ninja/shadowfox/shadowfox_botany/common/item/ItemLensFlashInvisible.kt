@@ -144,7 +144,7 @@ class ItemLensFlashInvisible() : StandardItem("lensPhantomLight"), ICompositable
     }
 
     fun getItemShortTermName(stack: ItemStack): String {
-        return StatCollector.translateToLocal(stack.getUnlocalizedName().replace("item\\.".toRegex(), "item.botania:") + ".short")
+        return StatCollector.translateToLocal(stack.getUnlocalizedName().replace("item\\.".toRegex(), "item.botania:") + ".short");
     }
 
     override fun getColorFromItemStack(par1ItemStack: ItemStack, par2: Int): Int {

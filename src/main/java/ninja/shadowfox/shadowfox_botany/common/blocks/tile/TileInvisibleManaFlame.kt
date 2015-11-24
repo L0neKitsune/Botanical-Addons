@@ -1,6 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.tile
 
-import cpw.mods.fml.relauncher.FMLLaunchHandler
+
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.network.NetworkManager
 import net.minecraft.network.Packet
@@ -15,7 +15,7 @@ class TileInvisibleManaFlame() : ShadowFoxTile() {
     internal var lightColor = -1
 
     override fun updateEntity() {
-        if (FMLLaunchHandler.side().isClient())
+        try {
             if(Botania.proxy.isClientPlayerWearingMonocle) {
                 val c = 0.3f
                 if (Math.random() < c.toDouble()) {
@@ -33,6 +33,9 @@ class TileInvisibleManaFlame() : ShadowFoxTile() {
                     Botania.proxy.wispFX(this.worldObj, x, y, z, r, g, b, s, -m)
                 }
             }
+        } catch (e: NullPointerException) {
+            ///Shhh you didn't see this...
+        }
     }
 
     fun getLightColor(): Int {
