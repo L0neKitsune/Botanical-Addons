@@ -99,6 +99,8 @@ shadowfox_botany.entry.coatOfArms=Coats of Arms
 shadowfox_botany.tagline.coatOfArms=Declare your allegiance
 shadowfox_botany.entry.colorOverride=Clerical Colorization
 shadowfox_botany.tagline.colorOverride=Colorful magic
+shadowfox_botany.entry.attribution=Holy Symbols
+shadowfox_botany.tagline.attribution=Keys to something greater
 
 shadowfox_botany.page.coloredDirt0=Using the latent power in &1Mystical Flowers&0, you can make dirt that shimmers every color of the rainbow. This mystical dirt is capable of growing trees and plants without water or a hoe. If put next to a &1Pure Daisy&0, it will revert to its uncolored state.
 shadowfox_botany.page.coloredDirt1=Beauty from the dross
@@ -134,3 +136,6 @@ shadowfox_botany.page.coatOfArms1=Papers, please
 
 shadowfox_botany.page.colorOverride0=The &1Clerical Colorizer&0, the &4Ring&0 form of the &1Paintslinger's Lens&0 can change even the color of magic. Wearing one will affect any clerically aligned abilities, changing their color. These can be crafted alongside another &4Bauble&0 much like &4Cosmetic Overrides&0. They can by dyed much like leather with &1Floral Powder&0, and cleared by simply putting one in a crafting table.
 shadowfox_botany.page.colorOverride1=Beware of the dark clerics
+
+shadowfox_botany.page.attribution0=The &1Holy Symbol&0 is an artifact with what seems to be a wild storm of unrealized potential. Although crafted of simple materials, it has a ready acceptance of other materials.<br>There seems to be no overworldly way of fully combining them, however, and the &4Nether&0 and the &4End&0 have given no clues. Perhaps you must look in &2other places&0.
+shadowfox_botany.page.attribution1=Priestly fashion
