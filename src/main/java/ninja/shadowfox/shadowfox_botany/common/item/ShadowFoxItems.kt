@@ -1,5 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.item
 
+import net.minecraft.block.BlockTripWire
 import net.minecraft.item.Item
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.*
 import ninja.shadowfox.shadowfox_botany.common.item.rods.*
@@ -17,7 +18,7 @@ object ShadowFoxItems {
 //    val testingRod: Item
 //    val splashPotion: Item
     val colorOverride: Item
-//    val fortressFinder: Item
+    val fortressFinder: Item
 
     init {
         irisSeeds = ItemColorSeeds()
@@ -31,6 +32,6 @@ object ShadowFoxItems {
 //        testingRod = TestingRod()
 //        splashPotion = ItemSplashPotion()
         colorOverride = ItemColorOverride()
-//        fortressFinder = ItemFortressFinder()
+        fortressFinder = ItemFortressFinder()
     }
 }

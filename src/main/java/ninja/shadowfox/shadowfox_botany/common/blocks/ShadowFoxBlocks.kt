@@ -9,7 +9,9 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.colored.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileInvisibleManaFlame
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileItemDisplay
+import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
 import vazkii.botania.api.BotaniaAPI
+import vazkii.botania.api.lexicon.multiblock.MultiblockSet
 
 public object ShadowFoxBlocks {
 
@@ -43,7 +45,8 @@ public object ShadowFoxBlocks {
     public var coloredStairs: Array<Block>
     public var rainbowStairs: Block
     public var invisibleFlame: Block
-    // public var itemDisplay: Block
+    public var itemDisplay: Block
+    public var treeCrafter: MultiblockSet
     // public var lightningRod: Block
 
     val WOOD: Array<String> = arrayOf("irisWoodWhite", "irisWoodOrange", "irisWoodMagenta", "irisWoodLightBlue", "irisWoodYellow", "irisWoodLime", "irisWoodPink", "irisWoodGray", "irisWoodLightGray", "irisWoodCyan", "irisWoodPurple", "irisWoodBlue", "irisWoodBrown", "irisWoodGreen", "irisWoodRed", "irisWoodBlack")
@@ -81,14 +84,15 @@ public object ShadowFoxBlocks {
         irisTallGrass0 = BlockColoredDoubleGrass(0)
         irisTallGrass1 = BlockColoredDoubleGrass(1)
         rainbowTallGrass = BlockRainbowDoubleGrass()
-        // itemDisplay = BlockItemDisplay()
+        itemDisplay = BlockItemDisplay()
         // lightningRod = BlockLightningRod()
+        treeCrafter = TileTreeCrafter.makeMultiblockSet()
 
         register()
         initOreDict()
 
         GameRegistry.registerTileEntity(TileInvisibleManaFlame::class.java, "shadowfox_botany:manaInvisibleFlame")
-        // GameRegistry.registerTileEntity(TileItemDisplay::class.java, "shadowfox_botany:itemDisplay")
+        GameRegistry.registerTileEntity(TileItemDisplay::class.java, "shadowfox_botany:itemDisplay")
 
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
     }

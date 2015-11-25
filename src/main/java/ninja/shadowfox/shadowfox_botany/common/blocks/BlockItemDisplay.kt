@@ -19,16 +19,13 @@ import java.util.*
 
 class BlockItemDisplay() : ShadowFoxBlockMod(Material.wood) {
 
-    override val registerInCreative = true
-
     init {
-        this.setBlockName("itemDisplay")
-        this.setStepSound(Block.soundTypeWood)
-        this.setLightLevel(1.0f)
+        setBlockName("itemDisplay")
+        setStepSound(Block.soundTypeWood)
+        setLightLevel(1.0f)
     }
 
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-    }
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) { }
 
     override fun getIcon(side: Int, meta: Int): IIcon {
         return Blocks.stone.getIcon(side, meta)

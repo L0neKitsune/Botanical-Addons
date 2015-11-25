@@ -17,15 +17,20 @@ class ItemFortressFinder() : StandardItem("itemFortressFinder") {
         {
             if (par2World.chunkProvider is ChunkProviderHell)
             {
-//                par2World.chunkProvider.genNetherBridge.
+                val mapStructure = (par2World.chunkProvider as ChunkProviderHell).genNetherBridge
+
+                val pos = mapStructure.func_151545_a(par2World, par3EntityPlayer.posX.toInt(), par3EntityPlayer.posY.toInt(), par3EntityPlayer.posZ.toInt())
+                if (pos != null) {
+                    par3EntityPlayer.addChatComponentMessage(ChatComponentText("x:${pos.chunkPosX} y:${pos.chunkPosY} z:${pos.chunkPosZ}"))
+                }
             }
 
         }
         else if(!par2World.isRemote && par3EntityPlayer.dimension != -1)
         {
-            par3EntityPlayer.addChatComponentMessage(ChatComponentText("You need to be in the Nether to use this."));
+            par3EntityPlayer.addChatComponentMessage(ChatComponentText("You need to be in the Nether to use this."))
         }
 
-        return par1ItemStack;
+        return par1ItemStack
     }
 }

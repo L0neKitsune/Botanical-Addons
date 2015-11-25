@@ -9,6 +9,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.api.lexicon.LexiconRecipeMappings
 import vazkii.botania.common.lexicon.page.PageCraftingRecipe
 import vazkii.botania.common.lexicon.page.PageManaInfusionRecipe
+import vazkii.botania.common.lexicon.page.PageMultiblock
 import vazkii.botania.common.lexicon.page.PageText
 
 public object LexiconRegistry {
@@ -21,11 +22,13 @@ public object LexiconRegistry {
     val pastoralSeeds : LexiconEntry
     val coatOfArms : LexiconEntry
     val colorOverride : LexiconEntry
-//    val dendrology: ShadowFoxLexiconCategory
+    val treeCrafting : LexiconEntry
+    val dendrology: ShadowFoxLexiconCategory
 
     init {
 
-//        dendrology = ShadowFoxLexiconCategory("dendrology", 0)
+        dendrology = ShadowFoxLexiconCategory("dendrology", 0)
+        BotaniaAPI.addCategory(dendrology)
 
         coloredDirt = ShadowfoxLexiconEntry("coloredDirt", BotaniaAPI.categoryMisc, ShadowFoxBlocks.rainbowDirtBlock)
         coloredDirt.setLexiconPages(PageText("0"), PageCraftingRecipe("1", ModRecipes.recipesColoredDirt))
@@ -68,6 +71,10 @@ public object LexiconRegistry {
                 PageCraftingRecipe("1", ModRecipes.recipesInterdictionRod),
                 PageText("2"),
                 PageCraftingRecipe("3", ModRecipes.recipesPriestOfNjord))
+
+        treeCrafting = ShadowfoxLexiconEntry("treeCrafting", dendrology, ShadowFoxBlocks.irisSapling).setKnowledgeType(BotaniaAPI.basicKnowledge)
+        treeCrafting.setLexiconPages(PageText("0"),
+                PageMultiblock("1", ShadowFoxBlocks.treeCrafter))
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)

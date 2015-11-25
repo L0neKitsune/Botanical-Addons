@@ -33,7 +33,7 @@ public class ClientProxy : CommonProxy() {
     private fun initRenderers() {
         MinecraftForgeClient.registerItemRenderer(ShadowFoxItems.invisibleFlameLens, RenderLens())
 
-        // ClientRegistry.bindTileEntitySpecialRenderer(TileItemDisplay::class.java, RenderTileItemDisplay())
+        ClientRegistry.bindTileEntitySpecialRenderer(TileItemDisplay::class.java, RenderTileItemDisplay())
 
         RenderingRegistry.registerEntityRenderingHandler(EntityGrieferCreeper::class.java, RenderGrieferCreeper())
         RenderingRegistry.registerEntityRenderingHandler(EntityVoidCreeper::class.java, RenderGrieferCreeper())
