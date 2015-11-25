@@ -39,7 +39,6 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
         blockHardness = 0.5F
         setLightLevel(0f)
         stepSound = Block.soundTypeGravel
-        MinecraftForge.EVENT_BUS.register(this)
         setBlockName(this.name)
     }
 
@@ -154,6 +153,7 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
         return ItemStack(this, 1, meta)
     }
 
+    @SideOnly(Side.CLIENT)
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {
         icons = IconHelper.forBlock(par1IconRegister, this)
     }

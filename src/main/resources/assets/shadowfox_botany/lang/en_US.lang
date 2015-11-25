@@ -20,6 +20,8 @@ misc.shadowfox_botany.color.16=Bifrost
 
 misc.shadowfox_botany.creative=Creative
 
+item.shadowfox_botany:attributionBauble.name=Holy Symbol
+
 item.shadowfox_botany:colorfulSkyDirtRod.name=Rod of the Iridescence
 item.shadowfox_botany:lightningRod.name=Rod of the Thundercaller
 item.shadowfox_botany:interdictionRod.name=Rod of the Hurricane
@@ -48,6 +50,7 @@ tile.shadowfox_botany:irisDoubleGrass.name=Iridescent Double Grass
 item.shadowfox_botany:irisSeeds.name=Iridescent Seeds
 
 tile.shadowfox_botany:invisibleFlame.name=Phantom Mana Flash
+item.botania:lensPhantomLight.short=Phantom Flash
 
 item.shadowfox_botany:coatOfArms0.name=Chilean Shield
 item.shadowfox_botany:coatOfArms1.name=French Shield

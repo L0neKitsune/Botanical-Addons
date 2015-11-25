@@ -2,6 +2,7 @@ package ninja.shadowfox.shadowfox_botany.common.blocks.rainbow
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.common.registry.GameRegistry
+import cpw.mods.fml.relauncher.FMLLaunchHandler
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
@@ -30,7 +31,9 @@ public class BlockRainbowWood() : ShadowFoxRotatedPillar(Material.wood), ILexico
         setLightLevel(0f)
         stepSound = Block.soundTypeWood
 
-        MinecraftForge.EVENT_BUS.register(this)
+        
+        if (FMLLaunchHandler.side().isClient())
+            MinecraftForge.EVENT_BUS.register(this)
         setBlockName(name)
     }
 

@@ -19,6 +19,7 @@ class ItemFortressFinder() : StandardItem("itemFortressFinder") {
             {
                 val mapStructure = (par2World.chunkProvider as ChunkProviderHell).genNetherBridge
 
+                // Unfortunately doesn't work :C
                 val pos = mapStructure.func_151545_a(par2World, par3EntityPlayer.posX.toInt(), par3EntityPlayer.posY.toInt(), par3EntityPlayer.posZ.toInt())
                 if (pos != null) {
                     par3EntityPlayer.addChatComponentMessage(ChatComponentText("x:${pos.chunkPosX} y:${pos.chunkPosY} z:${pos.chunkPosZ}"))

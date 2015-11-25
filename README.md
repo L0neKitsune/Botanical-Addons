@@ -28,6 +28,6 @@ Using Manatide Prowess and the Ring of Thor will increase the power of the rod. 
 ![Priestly Emblem: Thor](./screenshots/ThorEmblem.png)
 
 Requires:
-* Botania - 227
+* Botania - 236
 
 Botanical Add-ons by L0neKitsune and Wire Segal is licensed under the [Botania License](http://botaniamod.net/license.php)

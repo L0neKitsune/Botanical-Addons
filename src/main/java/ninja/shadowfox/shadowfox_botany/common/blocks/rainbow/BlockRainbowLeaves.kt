@@ -2,6 +2,7 @@ package ninja.shadowfox.shadowfox_botany.common.blocks.rainbow
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.common.registry.GameRegistry
+import cpw.mods.fml.relauncher.FMLLaunchHandler
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.client.renderer.texture.IIconRegister
@@ -23,12 +24,11 @@ import java.util.*
 
 
 public class BlockRainbowLeaves(): ShadowFoxLeaves() {
-    lateinit protected var icon : IIcon
-    lateinit protected var icon_opaque : IIcon
 
     init {
         setBlockName("rainbowLeaves")
-        MinecraftForge.EVENT_BUS.register(this)
+        if (FMLLaunchHandler.side().isClient())
+            MinecraftForge.EVENT_BUS.register(this)
     }
 
     override fun register(name: String) {
