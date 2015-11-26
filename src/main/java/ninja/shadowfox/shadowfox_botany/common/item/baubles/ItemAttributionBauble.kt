@@ -25,6 +25,8 @@ import net.minecraft.util.StatCollector
 import net.minecraft.world.World
 
 import net.minecraftforge.client.event.RenderPlayerEvent
+import net.minecraftforge.client.event.TextureStitchEvent
+import net.minecraftforge.common.MinecraftForge
 
 import org.lwjgl.opengl.GL11
 
@@ -40,9 +42,12 @@ import vazkii.botania.common.block.decor.BlockTinyPotato
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.core.helper.Vector3
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
+import vazkii.botania.client.render.block.InterpolatedIcon
 
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
+import cpw.mods.fml.relauncher.FMLLaunchHandler
+import cpw.mods.fml.common.eventhandler.SubscribeEvent
 
 import baubles.api.BaubleType
 import baubles.common.lib.PlayerHandler
@@ -58,6 +63,18 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
     init {
         setHasSubtypes(true)
         setCreativeTab(ShadowFoxCreativeTab)
+        if (FMLLaunchHandler.side().isClient())
+            MinecraftForge.EVENT_BUS.register(this)
+    }
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    fun loadTextures(event: TextureStitchEvent.Pre) {
+        if(event.map.textureType == 1) {
+            var icon = InterpolatedIcon("shadowfox_botany:attributionBauble-WireSegal")
+            if(event.map.setTextureEntry("shadowfox_botany:attributionBauble-WireSegal", icon))
+                this.wireIcon = icon
+        }
     }
 
     override fun getUnlocalizedNameInefficiently(par1ItemStack: ItemStack): String {
@@ -71,7 +88,6 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
     override fun registerIcons(par1IconRegister: IIconRegister) {
         this.itemIcon = IconHelper.forItem(par1IconRegister, this)
         this.defaultIcon = IconHelper.forItem(par1IconRegister, this, "Render")
-        this.wireIcon = IconHelper.forItem(par1IconRegister, this, "-WireSegal")
         this.kitsuneIcon = IconHelper.forItem(par1IconRegister, this, "-L0neKitsune")
     }
 
@@ -134,7 +150,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
                 GL11.glRotatef(-90F, 0F, 1F, 0F)
                 model.render()
             } else {
-                if (name == "yrsegal" || name == "theLorist") {
+                if (name != "yrsegal" || name == "theLorist") {
                     // Render the Blueflare
                     Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture)
                     IBaubleRender.Helper.translateToHeadLevel(event.entityPlayer)
@@ -168,7 +184,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
                 scale(0.1F)
 
                 ModelBiped().bipedBody.render(1F)
-            } else if (name != "yrsegal" && name != "theLorist") {
+            } else if (name == "yrsegal" && name != "theLorist") {
                 // Render the Holy Symbol
                 var armor = event.entityPlayer.getCurrentArmor(2) != null
                 GL11.glRotatef(180F, 1F, 0F, 0F)
