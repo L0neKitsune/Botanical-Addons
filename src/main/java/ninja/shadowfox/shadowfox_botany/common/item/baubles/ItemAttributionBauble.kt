@@ -134,12 +134,12 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
             stack.getTagCompound().removeTag("display")
         }
     }
-
-    val potatoTexture = ResourceLocation(if (ClientProxy.dootDoot) LibResources.MODEL_TINY_POTATO_HALLOWEEN else LibResources.MODEL_TINY_POTATO)
-    val cloakTexture = ResourceLocation("shadowfox_botany:textures/model/attributionBauble-Tristaric.png")
+    
 
     @SideOnly(Side.CLIENT)
     override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {
+        val potatoTexture = ResourceLocation(if (ClientProxy.dootDoot) LibResources.MODEL_TINY_POTATO_HALLOWEEN else LibResources.MODEL_TINY_POTATO)
+        val cloakTexture = ResourceLocation("shadowfox_botany:textures/model/attributionBauble-Tristaric.png")
         var name = event.entityPlayer.commandSenderName
         if(type == IBaubleRender.RenderType.HEAD) {
             if (stack.itemDamage != 0) {
