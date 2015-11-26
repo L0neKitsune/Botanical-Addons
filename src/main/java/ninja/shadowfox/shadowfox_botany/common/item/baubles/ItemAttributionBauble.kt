@@ -163,6 +163,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
                 Minecraft.getMinecraft().renderEngine.bindTexture(cloakTexture)
                 var armor = event.entityPlayer.getCurrentArmor(2) != null
                 GL11.glTranslatef(0F, if (armor) -0.07F else -0.01F, 0F)
+                if (armor) scale(1.005F)
 
                 scale(0.1F)
 
