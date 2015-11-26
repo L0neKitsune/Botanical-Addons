@@ -8,6 +8,7 @@ import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import java.awt.Color
 
 import net.minecraft.client.Minecraft
+import net.minecraft.client.model.ModelBiped
 import net.minecraft.client.renderer.ItemRenderer
 import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.texture.IIconRegister
@@ -24,6 +25,8 @@ import net.minecraft.util.StatCollector
 import net.minecraft.world.World
 
 import net.minecraftforge.client.event.RenderPlayerEvent
+import net.minecraftforge.client.event.TextureStitchEvent
+import net.minecraftforge.common.MinecraftForge
 
 import org.lwjgl.opengl.GL11
 
@@ -39,9 +42,12 @@ import vazkii.botania.common.block.decor.BlockTinyPotato
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.core.helper.Vector3
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
+import vazkii.botania.client.render.block.InterpolatedIcon
 
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
+import cpw.mods.fml.relauncher.FMLLaunchHandler
+import cpw.mods.fml.common.eventhandler.SubscribeEvent
 
 import baubles.api.BaubleType
 import baubles.common.lib.PlayerHandler
@@ -57,10 +63,22 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
     init {
         setHasSubtypes(true)
         setCreativeTab(ShadowFoxCreativeTab)
+        if (FMLLaunchHandler.side().isClient())
+            MinecraftForge.EVENT_BUS.register(this)
+    }
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    fun loadTextures(event: TextureStitchEvent.Pre) {
+        if(event.map.textureType == 1) {
+            var icon = InterpolatedIcon("shadowfox_botany:attributionBauble-WireSegal")
+            if(event.map.setTextureEntry("shadowfox_botany:attributionBauble-WireSegal", icon))
+                this.wireIcon = icon
+        }
     }
 
     override fun getUnlocalizedNameInefficiently(par1ItemStack: ItemStack): String {
-        return super.getUnlocalizedNameInefficiently(par1ItemStack).replace("item\\.botania:".toRegex(), "item.shadowfox_botany:").replace("\\d*$".toRegex(), "")
+        return super.getUnlocalizedNameInefficiently(par1ItemStack).replace("item\\.botania:".toRegex(), "item.shadowfox_botany:")
     }
 
     override fun getItemStackDisplayName(stack: ItemStack): String {
@@ -70,7 +88,6 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
     override fun registerIcons(par1IconRegister: IIconRegister) {
         this.itemIcon = IconHelper.forItem(par1IconRegister, this)
         this.defaultIcon = IconHelper.forItem(par1IconRegister, this, "Render")
-        this.wireIcon = IconHelper.forItem(par1IconRegister, this, "-WireSegal")
         this.kitsuneIcon = IconHelper.forItem(par1IconRegister, this, "-L0neKitsune")
     }
 
@@ -118,18 +135,23 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
         }
     }
 
+    val potatoTexture = ResourceLocation(if (ClientProxy.dootDoot) LibResources.MODEL_TINY_POTATO_HALLOWEEN else LibResources.MODEL_TINY_POTATO)
+    val cloakTexture = ResourceLocation("shadowfox_botany:textures/model/attributionBauble-Tristaric.png")
+
     @SideOnly(Side.CLIENT)
     override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {
         var name = event.entityPlayer.commandSenderName
         if(type == IBaubleRender.RenderType.HEAD) {
             if (stack.itemDamage != 0) {
-                Minecraft.getMinecraft().renderEngine.bindTexture(ResourceLocation(if (ClientProxy.dootDoot) LibResources.MODEL_TINY_POTATO_HALLOWEEN else LibResources.MODEL_TINY_POTATO))
+                // Render the Tiny Potato on your head... a tiny headtato, if you will.
+                Minecraft.getMinecraft().renderEngine.bindTexture(potatoTexture)
                 val model = ModelTinyPotato()
                 GL11.glTranslatef(0.0F, -2.0F, 0.0F)
                 GL11.glRotatef(-90F, 0F, 1F, 0F)
                 model.render()
             } else {
-                if (name == "yrsegal" || name == "theLorist") {
+                if (name != "yrsegal" || name == "theLorist") {
+                    // Render the Blueflare
                     Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture)
                     IBaubleRender.Helper.translateToHeadLevel(event.entityPlayer)
                     faceTranslate()
@@ -137,19 +159,6 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
                     scale(0.35F)
                     GL11.glTranslatef(0.3F, -0.6F, if (armor) -0.15F else 0F)
                     ItemRenderer.renderItemIn2D(Tessellator.instance, wireIcon.maxU, wireIcon.minV, wireIcon.minU, wireIcon.maxV, wireIcon.iconWidth, wireIcon.iconHeight, 1F / 32F)
-                } else if (name == "Tristaric") {
-                    val color = Color(IPriestColorOverride.getColor(event.entityPlayer, 0x800080))
-                    val r = color.red.toFloat() / 255f
-                    val g = color.green.toFloat() / 255f
-                    val b = color.blue.toFloat() / 255f
-                    var radius = (Botania.proxy.worldElapsedTicks % 60).toDouble() / 120.0 * Math.PI
-                    var cx = event.entityPlayer.posX
-                    var cy = event.entityPlayer.posY + 0.5
-                    var cz = event.entityPlayer.posZ
-                    for (iInt in 0..3 step 1) {
-                        var i = iInt.toFloat()/2F
-                        Botania.proxy.wispFX(event.entityPlayer.worldObj, cx+Math.cos(radius+i*Math.PI.toFloat())*0.75, cy, cz+Math.sin(radius+i*Math.PI.toFloat())*0.75, r, g, b, 0.3F)
-                    }
                 }
             }
         }
@@ -157,6 +166,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
             Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture)
             IBaubleRender.Helper.rotateIfSneaking(event.entityPlayer)
             if (name == "l0nekitsune") {
+                // Render a fox tail
                 chestTranslate()
                 GL11.glRotatef(-90F, 0F, 1F, 0F)
                 GL11.glScalef(0.5F, 0.5F, 0.5F)
@@ -164,7 +174,18 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
                 ItemRenderer.renderItemIn2D(Tessellator.instance, kitsuneIcon.maxU, kitsuneIcon.minV, kitsuneIcon.minU, kitsuneIcon.maxV, kitsuneIcon.iconWidth, kitsuneIcon.iconHeight, 1F / 32F)
                 GL11.glTranslatef(0F, 0F, 0.025F)
                 ItemRenderer.renderItemIn2D(Tessellator.instance, kitsuneIcon.maxU, kitsuneIcon.minV, kitsuneIcon.minU, kitsuneIcon.maxV, kitsuneIcon.iconWidth, kitsuneIcon.iconHeight, 1F / 32F)
-            } else if (name != "yrsegal" && name != "theLorist" && name != "Tristaric") {
+            } else if (name == "Tristaric") {
+                // Render a cloak
+                Minecraft.getMinecraft().renderEngine.bindTexture(cloakTexture)
+                var armor = event.entityPlayer.getCurrentArmor(2) != null
+                GL11.glTranslatef(0F, if (armor) -0.07F else -0.01F, 0F)
+                if (armor) scale(1.005F)
+
+                scale(0.1F)
+
+                ModelBiped().bipedBody.render(1F)
+            } else if (name == "yrsegal" && name != "theLorist") {
+                // Render the Holy Symbol
                 var armor = event.entityPlayer.getCurrentArmor(2) != null
                 GL11.glRotatef(180F, 1F, 0F, 0F)
                 GL11.glTranslatef(-0.26F, -0.4F, if (armor) 0.21F else 0.15F)

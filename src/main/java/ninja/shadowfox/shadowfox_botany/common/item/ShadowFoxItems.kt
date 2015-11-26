@@ -1,6 +1,8 @@
 package ninja.shadowfox.shadowfox_botany.common.item
 
 import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
+import net.minecraftforge.oredict.OreDictionary
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.*
 import ninja.shadowfox.shadowfox_botany.common.item.rods.*
 
@@ -36,5 +38,11 @@ object ShadowFoxItems {
         //        testingRod = TestingRod()
         //        splashPotion = ItemSplashPotion()
         //        fortressFinder = ItemFortressFinder()
+        initOreDict()
+    }
+
+    fun initOreDict() {
+        OreDictionary.registerOre("holyPendant", ItemStack(attributionBauble, 1, 0))
+        OreDictionary.registerOre("holyPendant", ItemStack(attributionBauble, 1, 1))
     }
 }

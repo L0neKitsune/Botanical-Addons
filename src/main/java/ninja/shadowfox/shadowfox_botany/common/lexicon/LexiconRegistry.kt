@@ -1,10 +1,12 @@
 package ninja.shadowfox.shadowfox_botany.common.lexicon
 
+import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import ninja.shadowfox.shadowfox_botany.common.crafting.ModRecipes
 import net.minecraft.item.ItemStack
 import vazkii.botania.api.BotaniaAPI
+import vazkii.botania.common.lexicon.LexiconData
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.api.lexicon.LexiconRecipeMappings
 import vazkii.botania.common.lexicon.page.PageCraftingRecipe
@@ -24,6 +26,9 @@ public object LexiconRegistry {
     val colorOverride : LexiconEntry
     val treeCrafting : LexiconEntry
     val dendrology: ShadowFoxLexiconCategory
+    val attribution : LexiconEntry
+
+//    val dendrology: ShadowFoxLexiconCategory
 
     init {
 
@@ -75,6 +80,9 @@ public object LexiconRegistry {
         treeCrafting = ShadowfoxLexiconEntry("treeCrafting", dendrology, ShadowFoxBlocks.irisSapling).setKnowledgeType(BotaniaAPI.basicKnowledge)
         treeCrafting.setLexiconPages(PageText("0"),
                 PageMultiblock("1", ShadowFoxBlocks.treeCrafter))
+        attribution = ShadowfoxLexiconEntry("attribution", BotaniaAPI.categoryBaubles, ShadowFoxItems.attributionBauble)
+        attribution.setLexiconPages(PageText("0"),
+                PageCraftingRecipe("1", ModRecipes.recipesAttribution))
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
@@ -83,6 +91,10 @@ public object LexiconRegistry {
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.emblem, 1, 1), technicolor, 3)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.emblem, 1, 2), interdictionRod, 3)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.colorOverride), colorOverride, 1)
+
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.attributionBauble, 1, 0), attribution, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.attributionBauble, 1, 1), LexiconData.tinyPotato, 1)
+
         for (i in 0..3){
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood0, 1, i), irisSapling, 1)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood1, 1, i), irisSapling, 1)

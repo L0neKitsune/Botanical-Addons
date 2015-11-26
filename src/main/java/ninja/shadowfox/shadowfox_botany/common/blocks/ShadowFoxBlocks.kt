@@ -4,12 +4,11 @@ import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxSlabs
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.*
-import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileInvisibleManaFlame
-import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileItemDisplay
-import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
+
+import ninja.shadowfox.shadowfox_botany.common.blocks.tile.*
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.multiblock.MultiblockSet
 
@@ -49,6 +48,8 @@ public object ShadowFoxBlocks {
     public var treeCrafter: MultiblockSet
     // public var lightningRod: Block
 
+    public var barrier: Block
+
     val WOOD: Array<String> = arrayOf("irisWoodWhite", "irisWoodOrange", "irisWoodMagenta", "irisWoodLightBlue", "irisWoodYellow", "irisWoodLime", "irisWoodPink", "irisWoodGray", "irisWoodLightGray", "irisWoodCyan", "irisWoodPurple", "irisWoodBlue", "irisWoodBrown", "irisWoodGreen", "irisWoodRed", "irisWoodBlack")
     val LEAVES: Array<String> = arrayOf("irisLeavesWhite", "irisLeavesOrange", "irisLeavesMagenta", "irisLeavesLightBlue", "irisLeavesYellow", "irisLeavesLime", "irisLeavesPink", "irisLeavesGray", "irisLeavesLightGray", "irisLeavesCyan", "irisLeavesPurple", "irisLeavesBlue", "irisLeavesBrown", "irisLeavesGreen", "irisLeavesRed", "irisLeavesBlack")
 
@@ -87,6 +88,8 @@ public object ShadowFoxBlocks {
         itemDisplay = BlockItemDisplay()
         // lightningRod = BlockLightningRod()
         treeCrafter = TileTreeCrafter.makeMultiblockSet()
+
+        barrier = BlockBarrier()
 
         register()
         initOreDict()
