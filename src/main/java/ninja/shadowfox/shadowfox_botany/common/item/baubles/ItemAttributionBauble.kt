@@ -8,6 +8,7 @@ import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import java.awt.Color
 
 import net.minecraft.client.Minecraft
+import net.minecraft.client.model.ModelBiped
 import net.minecraft.client.renderer.ItemRenderer
 import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.texture.IIconRegister
@@ -118,7 +119,8 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
         }
     }
 
-    val tristaricOrbs = 4
+    val potatoTexture = ResourceLocation(if (ClientProxy.dootDoot) LibResources.MODEL_TINY_POTATO_HALLOWEEN else LibResources.MODEL_TINY_POTATO)
+    val cloakTexture = ResourceLocation("shadowfox_botany:textures/model/attributionBauble-Tristaric.png")
 
     @SideOnly(Side.CLIENT)
     override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {
@@ -126,7 +128,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
         if(type == IBaubleRender.RenderType.HEAD) {
             if (stack.itemDamage != 0) {
                 // Render the Tiny Potato on your head... a tiny headtato, if you will.
-                Minecraft.getMinecraft().renderEngine.bindTexture(ResourceLocation(if (ClientProxy.dootDoot) LibResources.MODEL_TINY_POTATO_HALLOWEEN else LibResources.MODEL_TINY_POTATO))
+                Minecraft.getMinecraft().renderEngine.bindTexture(potatoTexture)
                 val model = ModelTinyPotato()
                 GL11.glTranslatef(0.0F, -2.0F, 0.0F)
                 GL11.glRotatef(-90F, 0F, 1F, 0F)
@@ -141,20 +143,6 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
                     scale(0.35F)
                     GL11.glTranslatef(0.3F, -0.6F, if (armor) -0.15F else 0F)
                     ItemRenderer.renderItemIn2D(Tessellator.instance, wireIcon.maxU, wireIcon.minV, wireIcon.minU, wireIcon.maxV, wireIcon.iconWidth, wireIcon.iconHeight, 1F / 32F)
-                } else if (name == "Tristaric") {
-                    // Render <tristaricOrbs> orbs floating around the player's head.
-                    val color = Color(IPriestColorOverride.getColor(event.entityPlayer, 0x800080))
-                    val r = color.red.toFloat() / 255f
-                    val g = color.green.toFloat() / 255f
-                    val b = color.blue.toFloat() / 255f
-                    var radius = (Botania.proxy.worldElapsedTicks % 60).toDouble() / 30.0 * tristaricOrbs.toDouble() * Math.PI
-                    var cx = event.entityPlayer.posX
-                    var cy = event.entityPlayer.posY + 0.5
-                    var cz = event.entityPlayer.posZ
-                    for (iInt in 0..(tristaricOrbs - 1) step 1) {
-                        var i = iInt.toFloat()*2F/tristaricOrbs.toFloat()
-                        Botania.proxy.wispFX(event.entityPlayer.worldObj, cx+Math.cos(radius+i*Math.PI.toFloat())*0.75, cy, cz+Math.sin(radius+i*Math.PI.toFloat())*0.75, r, g, b, 0.3F)
-                    }
                 }
             }
         }
@@ -170,7 +158,16 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
                 ItemRenderer.renderItemIn2D(Tessellator.instance, kitsuneIcon.maxU, kitsuneIcon.minV, kitsuneIcon.minU, kitsuneIcon.maxV, kitsuneIcon.iconWidth, kitsuneIcon.iconHeight, 1F / 32F)
                 GL11.glTranslatef(0F, 0F, 0.025F)
                 ItemRenderer.renderItemIn2D(Tessellator.instance, kitsuneIcon.maxU, kitsuneIcon.minV, kitsuneIcon.minU, kitsuneIcon.maxV, kitsuneIcon.iconWidth, kitsuneIcon.iconHeight, 1F / 32F)
-            } else if (name != "yrsegal" && name != "theLorist" && name != "Tristaric") {
+            } else if (name != "Tristaric") {
+                // Render a cloak
+                Minecraft.getMinecraft().renderEngine.bindTexture(cloakTexture)
+                var armor = event.entityPlayer.getCurrentArmor(2) != null
+                GL11.glTranslatef(0F, if (armor) -0.07F else -0.01F, 0F)
+
+                scale(0.1F)
+
+                ModelBiped().bipedBody.render(1F)
+            } else if (name != "yrsegal" && name != "theLorist") {
                 // Render the Holy Symbol
                 var armor = event.entityPlayer.getCurrentArmor(2) != null
                 GL11.glRotatef(180F, 1F, 0F, 0F)
