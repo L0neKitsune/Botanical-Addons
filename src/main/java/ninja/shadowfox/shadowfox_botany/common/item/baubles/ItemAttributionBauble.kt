@@ -184,7 +184,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
                 scale(0.1F)
 
                 ModelBiped().bipedBody.render(1F)
-            } else if (name == "yrsegal" && name != "theLorist") {
+            } else if (name != "yrsegal" && name != "theLorist") {
                 // Render the Holy Symbol
                 var armor = event.entityPlayer.getCurrentArmor(2) != null
                 GL11.glRotatef(180F, 1F, 0F, 0F)
