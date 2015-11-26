@@ -150,7 +150,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
                 GL11.glRotatef(-90F, 0F, 1F, 0F)
                 model.render()
             } else {
-                if (name != "yrsegal" || name == "theLorist") {
+                if (name == "yrsegal" || name == "theLorist") {
                     // Render the Blueflare
                     Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture)
                     IBaubleRender.Helper.translateToHeadLevel(event.entityPlayer)
