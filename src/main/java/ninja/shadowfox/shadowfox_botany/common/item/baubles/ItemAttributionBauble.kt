@@ -158,7 +158,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
                 ItemRenderer.renderItemIn2D(Tessellator.instance, kitsuneIcon.maxU, kitsuneIcon.minV, kitsuneIcon.minU, kitsuneIcon.maxV, kitsuneIcon.iconWidth, kitsuneIcon.iconHeight, 1F / 32F)
                 GL11.glTranslatef(0F, 0F, 0.025F)
                 ItemRenderer.renderItemIn2D(Tessellator.instance, kitsuneIcon.maxU, kitsuneIcon.minV, kitsuneIcon.minU, kitsuneIcon.maxV, kitsuneIcon.iconWidth, kitsuneIcon.iconHeight, 1F / 32F)
-            } else if (name != "Tristaric") {
+            } else if (name == "Tristaric") {
                 // Render a cloak
                 Minecraft.getMinecraft().renderEngine.bindTexture(cloakTexture)
                 var armor = event.entityPlayer.getCurrentArmor(2) != null
