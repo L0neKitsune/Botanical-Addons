@@ -35,6 +35,8 @@ item.shadowfox_botany:aesirEmblem.name=Priestly Emblem: &6Aesir&r
 
 entity.shadowfox_botany:voidCreeper.name=Manaseal Creeper
 
+tile.shadowfox_botany:barrier.name=Barrier
+
 tile.shadowfox_botany:rainbowDirt.name=Iridescent Dirt
 tile.shadowfox_botany:coloredDirt.name=Iridescent Dirt
 tile.shadowfox_botany:rainbowLeaves.name=Iridescent Leaves

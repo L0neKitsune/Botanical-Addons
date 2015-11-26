@@ -45,6 +45,8 @@ public object ShadowFoxBlocks {
     // public var itemDisplay: Block
     // public var lightningRod: Block
 
+    public var barrier: Block
+
     val WOOD: Array<String> = arrayOf("irisWoodWhite", "irisWoodOrange", "irisWoodMagenta", "irisWoodLightBlue", "irisWoodYellow", "irisWoodLime", "irisWoodPink", "irisWoodGray", "irisWoodLightGray", "irisWoodCyan", "irisWoodPurple", "irisWoodBlue", "irisWoodBrown", "irisWoodGreen", "irisWoodRed", "irisWoodBlack")
     val LEAVES: Array<String> = arrayOf("irisLeavesWhite", "irisLeavesOrange", "irisLeavesMagenta", "irisLeavesLightBlue", "irisLeavesYellow", "irisLeavesLime", "irisLeavesPink", "irisLeavesGray", "irisLeavesLightGray", "irisLeavesCyan", "irisLeavesPurple", "irisLeavesBlue", "irisLeavesBrown", "irisLeavesGreen", "irisLeavesRed", "irisLeavesBlack")
 
@@ -82,6 +84,8 @@ public object ShadowFoxBlocks {
         rainbowTallGrass = BlockRainbowDoubleGrass()
         // itemDisplay = BlockItemDisplay()
         // lightningRod = BlockLightningRod()
+
+        barrier = BlockBarrier()
 
         register()
         initOreDict()
