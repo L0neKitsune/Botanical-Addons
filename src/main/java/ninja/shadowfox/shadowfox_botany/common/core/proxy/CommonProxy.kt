@@ -30,7 +30,9 @@ public open class CommonProxy {
         LexiconRegistry
     }
 
-    open fun init(event: FMLInitializationEvent) {}
+    open fun init(event: FMLInitializationEvent) {
+        ShadowFoxBlocks.registerBurnables()
+    }
 
     open fun postInit(event: FMLPostInitializationEvent){
         ConfigHandler.loadPostInit()

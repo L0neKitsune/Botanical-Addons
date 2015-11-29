@@ -19,7 +19,7 @@ import java.awt.Color
 
 class BlockColoredWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.coloredPlanks) : ShadowFoxStairs(source, meta, source.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs" + meta), ILexiconable
 {
-    init { }
+    init {}
 
     @SideOnly(Side.CLIENT)
     override fun getRenderColor(m: Int): Int {

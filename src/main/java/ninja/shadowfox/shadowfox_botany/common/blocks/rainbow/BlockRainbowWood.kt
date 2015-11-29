@@ -30,7 +30,6 @@ public class BlockRainbowWood() : ShadowFoxRotatedPillar(Material.wood), ILexico
         blockHardness = 2F
         setLightLevel(0f)
         stepSound = Block.soundTypeWood
-
         
         if (FMLLaunchHandler.side().isClient())
             MinecraftForge.EVENT_BUS.register(this)

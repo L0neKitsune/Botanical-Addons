@@ -1,6 +1,7 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks
 
 import cpw.mods.fml.common.registry.GameRegistry
+import net.minecraft.init.Blocks
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
@@ -11,6 +12,10 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.tile.*
 import vazkii.botania.api.BotaniaAPI
 
 public object ShadowFoxBlocks {
+
+    fun setBurnable(block: Block, encouragement: Int, flammablility: Int) {
+        Blocks.fire.setFireInfo(block, encouragement, flammablility)
+    }
 
     public var coloredDirtBlock: Block
     public var rainbowDirtBlock: Block
@@ -94,6 +99,29 @@ public object ShadowFoxBlocks {
         // GameRegistry.registerTileEntity(TileItemDisplay::class.java, "shadowfox_botany:itemDisplay")
 
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
+    }
+
+    fun registerBurnables() {
+        setBurnable(irisWood0, 5, 5)
+        setBurnable(irisWood1, 5, 5)
+        setBurnable(irisWood2, 5, 5)
+        setBurnable(irisWood3, 5, 5)
+        setBurnable(rainbowWood, 5, 5)
+
+        setBurnable(coloredPlanks, 5, 20)
+        setBurnable(rainbowPlanks, 5, 20)
+
+        for (i in 0..15) setBurnable(coloredSlabs[i], 5, 20)
+        for (i in 0..15) setBurnable(coloredSlabsFull[i], 5, 20)
+        setBurnable(rainbowSlabs, 5, 20)
+        setBurnable(rainbowSlabsFull, 5, 20)
+
+        for (i in 0..15) setBurnable(coloredStairs[i], 5, 20)
+        setBurnable(rainbowStairs, 5, 20)
+
+        setBurnable(irisLeaves, 30, 60)
+        setBurnable(rainbowLeaves, 30, 60)
+
     }
 
     /**

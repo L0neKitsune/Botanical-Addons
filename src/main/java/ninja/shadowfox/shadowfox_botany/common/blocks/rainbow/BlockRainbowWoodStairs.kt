@@ -13,7 +13,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 
 class BlockRainbowWoodStairs(source: Block = ShadowFoxBlocks.rainbowPlanks) : ShadowFoxStairs(source, 0, ShadowFoxBlocks.rainbowPlanks.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs"), ILexiconable
 {
-    init { }
+    init {}
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return LexiconRegistry.irisSapling
