@@ -116,36 +116,48 @@ public object ShadowFoxBlocks {
         OreDictionary.registerOre("treeSapling", irisSapling)
 
         var t: ItemStack
+
+        t = ItemStack(rainbowWood)
+        OreDictionary.registerOre("irisWoodRainbow", t)
+
+        OreDictionary.registerOre("irisDirt", ItemStack(rainbowDirtBlock))
+
         for (i in 0..3){
+            t = ItemStack(irisWood0, 1, i)
+            OreDictionary.registerOre(WOOD[i], t)
+
+            t = ItemStack(irisWood1, 1, i)
+            OreDictionary.registerOre(WOOD[i+4], t)
+
+            t = ItemStack(irisWood2, 1, i)
+            OreDictionary.registerOre(WOOD[i+8], t)
+
+            t = ItemStack(irisWood3, 1, i)
+            OreDictionary.registerOre(WOOD[i+12], t)
+        }
+
+        for (i in 0..15) {
+            OreDictionary.registerOre("irisDirt", ItemStack(coloredDirtBlock, 1, i))
+
+            t = ItemStack(rainbowWood, 1, i)
+            OreDictionary.registerOre("logWood", t)
+            OreDictionary.registerOre("irisWood", t)
+
             t = ItemStack(irisWood0, 1, i)
             OreDictionary.registerOre("logWood", t)
             OreDictionary.registerOre("irisWood", t)
-            OreDictionary.registerOre(WOOD[i], t)
 
             t = ItemStack(irisWood1, 1, i)
             OreDictionary.registerOre("logWood", t)
             OreDictionary.registerOre("irisWood", t)
-            OreDictionary.registerOre(WOOD[i+4], t)
 
             t = ItemStack(irisWood2, 1, i)
             OreDictionary.registerOre("logWood", t)
             OreDictionary.registerOre("irisWood", t)
-            OreDictionary.registerOre(WOOD[i+8], t)
 
             t = ItemStack(irisWood3, 1, i)
             OreDictionary.registerOre("logWood", t)
             OreDictionary.registerOre("irisWood", t)
-            OreDictionary.registerOre(WOOD[i+12], t)
-        }
-        t = ItemStack(rainbowWood)
-        OreDictionary.registerOre("logWood", t)
-        OreDictionary.registerOre("irisWood", t)
-        OreDictionary.registerOre("irisWoodRainbow", t)
-
-
-        OreDictionary.registerOre("irisDirt", ItemStack(rainbowDirtBlock))
-        for (i in 0..15) {
-            OreDictionary.registerOre("irisDirt", ItemStack(coloredDirtBlock, 1, i))
 
             t = ItemStack(irisLeaves, 1, i)
             OreDictionary.registerOre("treeLeaves", t)
