@@ -2,12 +2,11 @@ package ninja.shadowfox.shadowfox_botany.common.item
 
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
-import vazkii.botania.api.mana.IManaItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.StatCollector
 
-class ItemWiltedLotus : StandardItem("wiltedLotus"), IManaItem {
+class ItemWiltedLotus : StandardItem("wiltedLotus") {
 
     init {
         setHasSubtypes(true)
