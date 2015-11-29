@@ -122,6 +122,12 @@ public object ShadowFoxBlocks {
         setBurnable(irisLeaves, 30, 60)
         setBurnable(rainbowLeaves, 30, 60)
 
+        setBurnable(irisGrass, 60, 100)
+        setBurnable(irisTallGrass0, 60, 100)
+        setBurnable(irisTallGrass1, 60, 100)
+
+        setBurnable(rainbowGrass, 60, 100)
+        setBurnable(rainbowTallGrass, 60, 100)
     }
 
     /**
