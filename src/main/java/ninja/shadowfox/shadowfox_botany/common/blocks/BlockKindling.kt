@@ -42,7 +42,7 @@ class BlockKindling() : ShadowFoxBlockMod(Material.cloth), IFuelHandler, ILexico
     }
 
     override fun getBurnTime(fuel: ItemStack): Int {
-        return if (fuel.item == Item.getItemFromBlock(this)) 2000 else 0
+        return if (fuel.item == Item.getItemFromBlock(this)) 3200 else 0
     }
 
     override fun isFireSource(world: World?, x: Int, y: Int, z: Int, side: ForgeDirection): Boolean {
