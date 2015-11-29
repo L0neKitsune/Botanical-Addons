@@ -29,6 +29,7 @@ public class ConfigHandler {
         var realLightning = false
         var uberCreepers = false
         var passiveLightning = true
+        var blackLotusDropRate = 0.05
         var potionIDManaVoid = 110
         private var potionArrayLimit = 0
         private var verifiedPotionArray = false
@@ -49,6 +50,9 @@ public class ConfigHandler {
 
             desc = "Lightning rod can hit passive mobs"
             passiveLightning = loadPropBool("passiveLightning.enabled", desc, passiveLightning)
+
+            desc = "Rate of black loti dropping from Manaseal Creepers"
+            blackLotusDropRate = loadPropDouble("voidCreepers.dropRate", desc, blackLotusDropRate)
 
             potionIDManaVoid = loadPropPotionId("manaVoid", potionIDManaVoid)
 
