@@ -1,6 +1,7 @@
 package ninja.shadowfox.shadowfox_botany.common.lexicon
 
 import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
+import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import ninja.shadowfox.shadowfox_botany.common.crafting.ModRecipes
@@ -24,6 +25,7 @@ public object LexiconRegistry {
     val coatOfArms : LexiconEntry
     val colorOverride : LexiconEntry
     val attribution : LexiconEntry
+    val sealCreepers: LexiconEntry
 
 //    val dendrology: ShadowFoxLexiconCategory
 
@@ -77,6 +79,14 @@ public object LexiconRegistry {
         attribution.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesAttribution))
 
+        sealCreepers = ShadowfoxLexiconEntry("sealCreepers", BotaniaAPI.categoryBasics, ShadowFoxItems.wiltedLotus)
+        if (ConfigHandler.blackLotusDropRate > 0.0)
+            sealCreepers.setLexiconPages(PageText("0"),
+                    PageText("1Drop"))
+        else
+            sealCreepers.setLexiconPages(PageText("0"),
+                    PageText("1NoDrop"))
+
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.interdictionRod), interdictionRod, 1)
@@ -87,6 +97,9 @@ public object LexiconRegistry {
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.attributionBauble, 1, 0), attribution, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.attributionBauble, 1, 1), LexiconData.tinyPotato, 1)
+
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.wiltedLotus, 1, 0), sealCreepers, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.wiltedLotus, 1, 1), sealCreepers, 1)
 
         for (i in 0..3){
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood0, 1, i), irisSapling, 1)

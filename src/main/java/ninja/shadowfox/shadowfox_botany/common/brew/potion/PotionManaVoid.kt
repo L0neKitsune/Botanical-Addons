@@ -2,12 +2,15 @@ package ninja.shadowfox.shadowfox_botany.common.brew.potion
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.item.ItemStack
 import net.minecraft.inventory.IInventory
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.living.LivingEvent
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
+import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.mana.IManaItem
+import vazkii.botania.common.item.ModItems
 
 
 class PotionManaVoid : PotionMod(ConfigHandler.potionIDManaVoid, "manaVoid", true, 192, 0) {
@@ -29,7 +32,7 @@ class PotionManaVoid : PotionMod(ConfigHandler.potionIDManaVoid, "manaVoid", tru
                 if (baublesInv != null) {
                     size = invSize + baublesInv.sizeInventory
                 }
-                val mana = 100
+                val mana = 500
 
                 for (i in 0..size) {
                     val useBaubles = i >= invSize
@@ -53,6 +56,14 @@ class PotionManaVoid : PotionMod(ConfigHandler.potionIDManaVoid, "manaVoid", tru
                             }
                             break
                         }
+                    }
+                }
+                for (slot in 0..invSize-1) {
+                    val stackInSlot = mainInv.getStackInSlot(slot)
+                    if (stackInSlot != null && stackInSlot.item == ModItems.blackLotus) {
+                        var wiltStack = ItemStack(ShadowFoxItems.wiltedLotus, stackInSlot.stackSize, stackInSlot.itemDamage)
+                        wiltStack.stackTagCompound = stackInSlot.tagCompound
+                        mainInv.setInventorySlotContents(slot, wiltStack)
                     }
                 }
             }

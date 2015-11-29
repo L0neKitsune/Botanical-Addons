@@ -20,6 +20,7 @@ object ShadowFoxItems {
 //    val splashPotion: Item
     val colorOverride: Item
     val attributionBauble: Item
+    val wiltedLotus: Item
 
     init {
         irisSeeds = ItemColorSeeds()
@@ -34,6 +35,7 @@ object ShadowFoxItems {
 //        splashPotion = ItemSplashPotion()
         colorOverride = ItemColorOverride()
         attributionBauble = ItemAttributionBauble()
+        wiltedLotus = ItemWiltedLotus()
 
         initOreDict()
     }
