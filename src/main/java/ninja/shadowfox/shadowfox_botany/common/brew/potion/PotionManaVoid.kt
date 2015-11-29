@@ -32,7 +32,7 @@ class PotionManaVoid : PotionMod(ConfigHandler.potionIDManaVoid, "manaVoid", tru
                 if (baublesInv != null) {
                     size = invSize + baublesInv.sizeInventory
                 }
-                val mana = 500
+                val mana = 1040 // Will drain about 1/4 of a tablet in 5 seconds
 
                 for (i in 0..size) {
                     val useBaubles = i >= invSize
