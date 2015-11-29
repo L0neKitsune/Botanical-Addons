@@ -40,6 +40,7 @@ public object ModRecipes {
     val recipesinvisibleLens: IRecipe
     val recipesinvisibleLensUndo: IRecipe
     val recipesAttribution: IRecipe
+    val recipesKindling: IRecipe
     val recipesPlainDirt: RecipePureDaisy
     val recipesIrisSapling: RecipePureDaisyExclusion
 
@@ -218,6 +219,15 @@ public object ModRecipes {
                 'S', LibOreDict.MANA_STRING)
 
         recipesAttribution = BotaniaAPI.getLatestAddedRecipe()
+
+        addOreDictRecipe(ItemStack(ShadowFoxBlocks.kindling),
+                " S ",
+                "SBS",
+                " S ",
+                'B', "powderBlaze",
+                'S', LibOreDict.MANA_STRING)
+
+        recipesKindling = BotaniaAPI.getLatestAddedRecipe()
 
         addShapelessOreDictRecipe(ItemStack(ShadowFoxItems.invisibleFlameLens),
                 ItemStack(BotaniaItems.lens, 1, 17), BotaniaItems.phantomInk)

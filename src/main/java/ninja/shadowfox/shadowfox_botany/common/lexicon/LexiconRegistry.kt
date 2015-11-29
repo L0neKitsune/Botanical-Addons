@@ -26,6 +26,7 @@ public object LexiconRegistry {
     val colorOverride : LexiconEntry
     val attribution : LexiconEntry
     val sealCreepers: LexiconEntry
+    val kindling: LexiconEntry
 
 //    val dendrology: ShadowFoxLexiconCategory
 
@@ -86,6 +87,10 @@ public object LexiconRegistry {
         else
             sealCreepers.setLexiconPages(PageText("0"),
                     PageText("1NoDrop"))
+
+        kindling = ShadowfoxLexiconEntry("kindling", BotaniaAPI.categoryMisc, ShadowFoxBlocks.kindling)
+        kindling.setLexiconPages(PageText("0"),
+                PageCraftingRecipe("1", ModRecipes.recipesKindling))
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
