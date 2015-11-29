@@ -21,6 +21,14 @@ class BlockRainbowWoodSlab(full: Boolean, source: Block = ShadowFoxBlocks.rainbo
         GameRegistry.registerFuelHandler(this)
     }
 
+    override fun isToolEffective(type: String?, metadata: Int): Boolean {
+        return (type != null && type.equals("axe", true))
+    }
+
+    override fun getHarvestTool(metadata : Int): String {
+        return "axe"
+    }
+
     override fun getFullBlock(): BlockSlab {
         return ShadowFoxBlocks.rainbowSlabsFull as BlockSlab
     }

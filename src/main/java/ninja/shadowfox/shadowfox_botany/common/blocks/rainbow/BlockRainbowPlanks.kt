@@ -54,6 +54,14 @@ public class BlockRainbowPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.
         }
     }
 
+    override fun isToolEffective(type: String?, metadata: Int): Boolean {
+        return (type != null && type.equals("axe", true))
+    }
+
+    override fun getHarvestTool(metadata : Int): String {
+        return "axe"
+    }
+
     override fun shouldRegisterInNameSet(): Boolean {
         return false
     }

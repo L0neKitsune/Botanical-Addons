@@ -18,4 +18,12 @@ class BlockRainbowWoodStairs(source: Block = ShadowFoxBlocks.rainbowPlanks) : Sh
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return LexiconRegistry.irisSapling
     }
+
+    override fun isToolEffective(type: String?, metadata: Int): Boolean {
+        return (type != null && type.equals("axe", true))
+    }
+
+    override fun getHarvestTool(metadata : Int): String {
+        return "axe"
+    }
 }

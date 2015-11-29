@@ -30,6 +30,14 @@ class BlockColoredWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.coloredP
         return Color(color[0], color[1], color[2]).rgb
     }
 
+    override fun isToolEffective(type: String?, metadata: Int): Boolean {
+        return (type != null && type.equals("axe", true))
+    }
+
+    override fun getHarvestTool(metadata : Int): String {
+        return "axe"
+    }
+
     @SideOnly(Side.CLIENT)
     override fun colorMultiplier(p_149720_1_: IBlockAccess?, p_149720_2_: Int, p_149720_3_: Int, p_149720_4_: Int): Int {
         if (meta >= EntitySheep.fleeceColorTable.size)
