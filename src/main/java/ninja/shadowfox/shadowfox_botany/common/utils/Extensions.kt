@@ -23,6 +23,8 @@ fun Entity.centerVector(): Vector3 {
     return Vector3.fromEntityCenter(this)
 }
 
+
+
 fun TileEntity.centerVector(): Vector3 {
     return Vector3.fromTileEntityCenter(this)
 }

@@ -165,33 +165,33 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
         else if (type == IBaubleRender.RenderType.BODY && stack.itemDamage == 0) {
             Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture)
             IBaubleRender.Helper.rotateIfSneaking(event.entityPlayer)
-            if (name == "l0nekitsune") {
+//            if (name == "l0nekitsune") {
                 // Render a fox tail
                 chestTranslate()
                 GL11.glRotatef(-90F, 0F, 1F, 0F)
-                GL11.glScalef(0.5F, 0.5F, 0.5F)
+                GL11.glScalef(1F, 1F, 1F)
                 GL11.glTranslatef(-1.30F, -0.4F, -1.0F)
                 ItemRenderer.renderItemIn2D(Tessellator.instance, kitsuneIcon.maxU, kitsuneIcon.minV, kitsuneIcon.minU, kitsuneIcon.maxV, kitsuneIcon.iconWidth, kitsuneIcon.iconHeight, 1F / 32F)
                 GL11.glTranslatef(0F, 0F, 0.025F)
                 ItemRenderer.renderItemIn2D(Tessellator.instance, kitsuneIcon.maxU, kitsuneIcon.minV, kitsuneIcon.minU, kitsuneIcon.maxV, kitsuneIcon.iconWidth, kitsuneIcon.iconHeight, 1F / 32F)
-            } else if (name == "Tristaric") {
-                // Render a cloak
-                Minecraft.getMinecraft().renderEngine.bindTexture(cloakTexture)
-                var armor = event.entityPlayer.getCurrentArmor(2) != null
-                GL11.glTranslatef(0F, if (armor) -0.07F else -0.01F, 0F)
-                if (armor) scale(1.005F)
-
-                scale(0.1F)
-
-                ModelBiped().bipedBody.render(1F)
-            } else if (name == "yrsegal" && name != "theLorist") {
-                // Render the Holy Symbol
-                var armor = event.entityPlayer.getCurrentArmor(2) != null
-                GL11.glRotatef(180F, 1F, 0F, 0F)
-                GL11.glTranslatef(-0.26F, -0.4F, if (armor) 0.21F else 0.15F)
-                scale(0.5F)
-                ItemRenderer.renderItemIn2D(Tessellator.instance, defaultIcon.maxU, defaultIcon.minV, defaultIcon.minU, defaultIcon.maxV, defaultIcon.iconWidth, defaultIcon.iconHeight, 1F / 32F)
-            } 
+//            } else if (name == "Tristaric") {
+//                // Render a cloak
+//                Minecraft.getMinecraft().renderEngine.bindTexture(cloakTexture)
+//                var armor = event.entityPlayer.getCurrentArmor(2) != null
+//                GL11.glTranslatef(0F, if (armor) -0.07F else -0.01F, 0F)
+//                if (armor) scale(1.005F)
+//
+//                scale(0.1F)
+//
+//                ModelBiped().bipedBody.render(1F)
+//            } else if (name == "yrsegal" && name != "theLorist") {
+//                // Render the Holy Symbol
+//                var armor = event.entityPlayer.getCurrentArmor(2) != null
+//                GL11.glRotatef(180F, 1F, 0F, 0F)
+//                GL11.glTranslatef(-0.26F, -0.4F, if (armor) 0.21F else 0.15F)
+//                scale(0.5F)
+//                ItemRenderer.renderItemIn2D(Tessellator.instance, defaultIcon.maxU, defaultIcon.minV, defaultIcon.minU, defaultIcon.maxV, defaultIcon.iconWidth, defaultIcon.iconHeight, 1F / 32F)
+//            }
         }
     }
 }

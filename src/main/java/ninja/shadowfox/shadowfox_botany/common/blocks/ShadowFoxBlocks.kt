@@ -94,7 +94,7 @@ public object ShadowFoxBlocks {
         register()
         initOreDict()
 
-        GameRegistry.registerTileEntity(TileInvisibleManaFlame::class.java, "shadowfox_botany:manaInvisibleFlame")
+//        GameRegistry.registerTileEntity(TileInvisibleManaFlame::class.java, "shadowfox_botany:manaInvisibleFlame")
         GameRegistry.registerTileEntity(TileItemDisplay::class.java, "shadowfox_botany:itemDisplay")
 
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
