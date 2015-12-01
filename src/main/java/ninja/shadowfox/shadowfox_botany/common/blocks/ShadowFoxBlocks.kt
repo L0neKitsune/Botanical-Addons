@@ -1,6 +1,7 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks
 
 import cpw.mods.fml.common.registry.GameRegistry
+import net.minecraft.init.Blocks
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
@@ -13,6 +14,10 @@ import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.multiblock.MultiblockSet
 
 public object ShadowFoxBlocks {
+
+    fun setBurnable(block: Block, encouragement: Int, flammablility: Int) {
+        Blocks.fire.setFireInfo(block, encouragement, flammablility)
+    }
 
     public var coloredDirtBlock: Block
     public var rainbowDirtBlock: Block
@@ -50,6 +55,8 @@ public object ShadowFoxBlocks {
     // public var lightningRod: Block
 
     public var barrier: Block
+
+    public var kindling: Block
 
     val WOOD: Array<String> = arrayOf("irisWoodWhite", "irisWoodOrange", "irisWoodMagenta", "irisWoodLightBlue", "irisWoodYellow", "irisWoodLime", "irisWoodPink", "irisWoodGray", "irisWoodLightGray", "irisWoodCyan", "irisWoodPurple", "irisWoodBlue", "irisWoodBrown", "irisWoodGreen", "irisWoodRed", "irisWoodBlack")
     val LEAVES: Array<String> = arrayOf("irisLeavesWhite", "irisLeavesOrange", "irisLeavesMagenta", "irisLeavesLightBlue", "irisLeavesYellow", "irisLeavesLime", "irisLeavesPink", "irisLeavesGray", "irisLeavesLightGray", "irisLeavesCyan", "irisLeavesPurple", "irisLeavesBlue", "irisLeavesBrown", "irisLeavesGreen", "irisLeavesRed", "irisLeavesBlack")
@@ -93,6 +100,8 @@ public object ShadowFoxBlocks {
 
         barrier = BlockBarrier()
 
+        kindling = BlockKindling()
+
         register()
         initOreDict()
 
@@ -100,6 +109,35 @@ public object ShadowFoxBlocks {
         GameRegistry.registerTileEntity(TileItemDisplay::class.java, "shadowfox_botany:itemDisplay")
 
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
+    }
+
+    fun registerBurnables() {
+        setBurnable(irisWood0, 5, 5)
+        setBurnable(irisWood1, 5, 5)
+        setBurnable(irisWood2, 5, 5)
+        setBurnable(irisWood3, 5, 5)
+        setBurnable(rainbowWood, 5, 5)
+
+        setBurnable(coloredPlanks, 5, 20)
+        setBurnable(rainbowPlanks, 5, 20)
+
+        for (i in 0..15) setBurnable(coloredSlabs[i], 5, 20)
+        for (i in 0..15) setBurnable(coloredSlabsFull[i], 5, 20)
+        setBurnable(rainbowSlabs, 5, 20)
+        setBurnable(rainbowSlabsFull, 5, 20)
+
+        for (i in 0..15) setBurnable(coloredStairs[i], 5, 20)
+        setBurnable(rainbowStairs, 5, 20)
+
+        setBurnable(irisLeaves, 30, 60)
+        setBurnable(rainbowLeaves, 30, 60)
+
+        setBurnable(irisGrass, 60, 100)
+        setBurnable(irisTallGrass0, 60, 100)
+        setBurnable(irisTallGrass1, 60, 100)
+
+        setBurnable(rainbowGrass, 60, 100)
+        setBurnable(rainbowTallGrass, 60, 100)
     }
 
     /**

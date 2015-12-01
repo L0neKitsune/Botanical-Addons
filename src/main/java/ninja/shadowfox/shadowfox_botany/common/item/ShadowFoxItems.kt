@@ -18,6 +18,7 @@ object ShadowFoxItems {
     val invisibleFlameLens: Item
     val colorOverride: Item
     val attributionBauble: Item
+    val wiltedLotus: Item
 
     //    val testingRod: Item
     //    val splashPotion: Item
@@ -33,6 +34,7 @@ object ShadowFoxItems {
         invisibleFlameLens = ItemLensFlashInvisible()
         colorOverride = ItemColorOverride()
         attributionBauble = ItemAttributionBauble()
+        wiltedLotus = ItemWiltedLotus()
 
         //        testingRod = TestingRod()
         //        splashPotion = ItemSplashPotion()

@@ -46,6 +46,14 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.materi
         return 0xFFFFFF
     }
 
+    override fun isToolEffective(type: String?, metadata: Int): Boolean {
+        return (type != null && type.equals("axe", true))
+    }
+
+    override fun getHarvestTool(metadata : Int): String {
+        return "axe"
+    }
+
     /**
      * Returns the color this block should be rendered. Used by leaves.
      */

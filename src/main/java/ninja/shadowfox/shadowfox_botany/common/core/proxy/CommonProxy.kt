@@ -7,6 +7,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry
 import ninja.shadowfox.shadowfox_botany.lib.Constants
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.BlockColoredDoubleGrass
+// import ninja.shadowfox.shadowfox_botany.common.blocks.colored.BlockManaBathtub
 import ninja.shadowfox.shadowfox_botany.common.brew.ShadowFoxPotions
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.crafting.ModRecipes
@@ -20,7 +21,9 @@ public open class CommonProxy {
         ConfigHandler.loadConfig(event.suggestedConfigurationFile)
 
         Constants.doubleFlowerRenderID = RenderingRegistry.getNextAvailableRenderId()
+        // Constants.bathtubRenderID = RenderingRegistry.getNextAvailableRenderId()
         RenderingRegistry.registerBlockHandler(BlockColoredDoubleGrass.ColoredDoublePlantRenderer())
+        // RenderingRegistry.registerBlockHandler(BlockManaBathtub.BathtubRenderer())
 
         ShadowFoxBlocks
         ShadowFoxItems
@@ -30,7 +33,9 @@ public open class CommonProxy {
         LexiconRegistry
     }
 
-    open fun init(event: FMLInitializationEvent) {}
+    open fun init(event: FMLInitializationEvent) {
+        ShadowFoxBlocks.registerBurnables()
+    }
 
     open fun postInit(event: FMLPostInitializationEvent){
         ConfigHandler.loadPostInit()
