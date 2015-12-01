@@ -19,7 +19,6 @@ object ShadowFoxItems {
     val colorOverride: Item
     val attributionBauble: Item
 
-    //    val fortressFinder: Item
     //    val testingRod: Item
     //    val splashPotion: Item
 
@@ -37,7 +36,6 @@ object ShadowFoxItems {
 
         //        testingRod = TestingRod()
         //        splashPotion = ItemSplashPotion()
-        //        fortressFinder = ItemFortressFinder()
         initOreDict()
     }
 

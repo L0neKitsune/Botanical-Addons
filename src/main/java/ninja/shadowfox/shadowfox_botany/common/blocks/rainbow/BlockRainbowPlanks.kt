@@ -1,12 +1,12 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.rainbow
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
+import cpw.mods.fml.common.IFuelHandler
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.FMLLaunchHandler
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
-import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
@@ -17,6 +17,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
+import ninja.shadowfox.shadowfox_botany.common.blocks.material.MaterialCustomSmeltingWood
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxColoredItemBlock
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
@@ -27,7 +28,7 @@ import java.util.*
 import kotlin.properties.Delegates
 
 
-public class BlockRainbowPlanks(): ShadowFoxBlockMod(Material.wood), ILexiconable {
+public class BlockRainbowPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.material), ILexiconable, IFuelHandler {
 
     private val name = "rainbowPlanks"
     protected var icons : IIcon by Delegates.notNull()
@@ -40,6 +41,7 @@ public class BlockRainbowPlanks(): ShadowFoxBlockMod(Material.wood), ILexiconabl
         setBlockName(this.name)
         if (FMLLaunchHandler.side().isClient())
             MinecraftForge.EVENT_BUS.register(this)
+        GameRegistry.registerFuelHandler(this)
     }
 
     @SubscribeEvent
@@ -93,5 +95,9 @@ public class BlockRainbowPlanks(): ShadowFoxBlockMod(Material.wood), ILexiconabl
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return LexiconRegistry.irisSapling
+    }
+
+    override fun getBurnTime(fuel: ItemStack): Int {
+        return if (fuel.item == Item.getItemFromBlock(this)) 300 else 0
     }
 }

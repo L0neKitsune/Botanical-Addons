@@ -27,3 +27,13 @@ open class ShadowFoxColoredItemBlock(par2Block: Block) : ItemBlockWithMetadata(p
         return super.getUnlocalizedName(par1ItemStack)
     }
 }
+
+class ShadowFoxColoredWoodBlock(par2Block: Block): ShadowFoxColoredItemBlock(par2Block) {
+
+    override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>?, par4: Boolean) {
+        if(par1ItemStack == null) return
+        val metaMatch = "\\d+$".toRegex().find(field_150939_a.unlocalizedName)
+        val meta = if (metaMatch == null) 16 else metaMatch.value.toInt() * 4 + par1ItemStack.itemDamage
+        addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + meta) + "&r", par3List)
+    }
+}

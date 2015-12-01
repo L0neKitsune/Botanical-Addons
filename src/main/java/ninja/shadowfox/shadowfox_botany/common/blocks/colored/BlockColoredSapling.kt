@@ -1,5 +1,7 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.colored
 
+import cpw.mods.fml.common.IFuelHandler
+import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
@@ -8,6 +10,7 @@ import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.IIcon
@@ -27,7 +30,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 import kotlin.properties.Delegates
 
-public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowable, IPlantable, ILexiconable {
+public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowable, IPlantable, ILexiconable, IFuelHandler {
 
     internal var icon: IIcon by Delegates.notNull()
 
@@ -36,6 +39,8 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
         this.setBlockBounds(0.5F - 0.4F, 0.0F, 0.5F - 0.4F, 0.5F + 0.4F, 0.4F * 2.0F, 0.5F + 0.4F)
         stepSound = Block.soundTypeGrass
         this.setBlockName("irisSapling")
+
+        GameRegistry.registerFuelHandler(this)
     }
 
     @SideOnly(Side.CLIENT)
@@ -161,5 +166,9 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return LexiconRegistry.irisSapling
+    }
+
+    override fun getBurnTime(fuel: ItemStack): Int {
+        return if (fuel.item == Item.getItemFromBlock(this)) 100 else 0
     }
 }

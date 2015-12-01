@@ -5,10 +5,15 @@ import net.minecraft.entity.monster.EntityCreeper
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Items
 import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.potion.PotionEffect
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.world.World
+
+import vazkii.botania.common.item.ModItems
+
+import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.brew.ShadowFoxPotions
 
 /**
@@ -46,6 +51,14 @@ class EntityVoidCreeper(world: World): EntityCreeper(world) {
 
     override fun getDropItem(): Item {
         return Items.gunpowder
+    }
+
+    override fun dropFewItems(par1: Boolean, par2: Int) {
+      if (par1) {
+        if (Math.random() < ConfigHandler.blackLotusDropRate) {
+            this.entityDropItem(ItemStack(ModItems.blackLotus), 1F)
+        }
+      }
     }
 
     override fun onUpdate() {
