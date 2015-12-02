@@ -19,7 +19,8 @@ public object ShadowFoxAPI {
         addTreeRecipe(
                 RecipeTreeCrafting(
                         0,
-                        ItemStack(Items.diamond, 64),
+                        Blocks.diamond_block,
+                        0,
                         *arrayOf(
                             ItemStack(Items.apple, 1),
                             ItemStack(Items.apple, 1),

@@ -2,6 +2,7 @@ package ninja.shadowfox.shadowfox_botany.api.recipe
 
 import akka.event.Logging
 import cpw.mods.fml.common.FMLLog
+import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
 import org.apache.logging.log4j.Level
@@ -9,12 +10,10 @@ import java.util.*
 import kotlin.properties.Delegates
 
 
-public class RecipeTreeCrafting(val mana: Int, output: ItemStack, vararg inputs: Any) {
-    internal val output: ItemStack
+public class RecipeTreeCrafting(val mana: Int, val output: Block, val meta: Int, vararg inputs: Any) {
     internal val inputs: ArrayList<Any>
 
     init {
-        this.output = output
         val inputsToSet = ArrayList<Any>()
         val var4 = inputs
         val var5 = inputs.size

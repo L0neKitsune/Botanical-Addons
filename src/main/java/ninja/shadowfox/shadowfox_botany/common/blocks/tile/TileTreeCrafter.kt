@@ -139,24 +139,20 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             ticks = 0
             var inputs = getRecipeInputs()
             if (worldObj.getBlock(xCoord, yCoord + 1, zCoord) is BlockColoredSapling) {
-                Minecraft.getMinecraft().thePlayer.addChatMessage((ChatComponentText("Trying $inputs")).setChatStyle((ChatStyle()).setColor(EnumChatFormatting.RED)))
-                if (ShadowFoxAPI.treeRecipes[0].matches(inputs)) {
-                    worldObj.setBlockToAir(xCoord, yCoord + 1, zCoord)
+                for (recipe in ShadowFoxAPI.treeRecipes) {
+                    if (recipe.matches(inputs)) {
+                        worldObj.setBlockToAir(xCoord, yCoord + 1, zCoord)
+                        worldObj.setBlock(xCoord, yCoord + 1, zCoord, recipe.output, recipe.meta, 3)
 
-                    val output: ItemStack = ShadowFoxAPI.treeRecipes[0].output.copy()
-                    Minecraft.getMinecraft().thePlayer.addChatMessage((ChatComponentText("Outputting $output")).setChatStyle((ChatStyle()).setColor(EnumChatFormatting.RED)))
+                        for (i in ITEMDISPLAY_LOCATIONS.indices) {
+                            val block = worldObj.getTileEntity(ITEMDISPLAY_LOCATIONS[i][0] + xCoord, ITEMDISPLAY_LOCATIONS[i][1] + yCoord, ITEMDISPLAY_LOCATIONS[i][2] + zCoord)
 
-                    if (!worldObj.isRemote) {
-                        worldObj.spawnEntityInWorld(EntityItem(worldObj, xCoord.toDouble(), yCoord.toDouble() + 4, zCoord.toDouble(), output))
-                    }
+                            if (block is TileItemDisplay) {
+                                block.setInventorySlotContents(0, null)
+                                block.invalidate()
+                            }
 
-                    for (i in ITEMDISPLAY_LOCATIONS.indices) {
-                        val block = worldObj.getTileEntity(ITEMDISPLAY_LOCATIONS[i][0] + xCoord, ITEMDISPLAY_LOCATIONS[i][1] + yCoord, ITEMDISPLAY_LOCATIONS[i][2] + zCoord)
-
-                        if (block is TileItemDisplay) {
-                            block.setInventorySlotContents(0, null)
                         }
-
                     }
                 }
             }
