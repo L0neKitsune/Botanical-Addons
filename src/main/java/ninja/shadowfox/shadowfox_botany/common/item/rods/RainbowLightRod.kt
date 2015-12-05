@@ -70,18 +70,19 @@ class RainbowLightRod : StandardItem("rainbowLightRod"), IManaUsingItem, IPhanto
         var toPlace = ItemStack(ShadowFoxBlocks.rainbowFlame)
         if (ManaItemHandler.requestManaExactForTool(par1ItemStack, par2EntityPlayer, COST, false)) {
                 val dir = ForgeDirection.getOrientation(direction)
-
-                toPlace.tryPlaceItemIntoWorld(par2EntityPlayer, par3World, x, y, z, direction, par8, par9, par10)
-                if (toPlace.stackSize == 0) {
-                    ManaItemHandler.requestManaExactForTool(par1ItemStack, par2EntityPlayer, COST, true)
-                    val tile = par3World.getTileEntity(x+dir.offsetX, y+dir.offsetY, z+dir.offsetZ)
-                    if (tile is TileRainbowManaFlame) {
-                        tile.invisible = hasPhantomInk(par1ItemStack)
+                if (par3World.getBlock(x+dir.offsetX, y+dir.offsetY, z+dir.offsetZ).isAir(par3World, x+dir.offsetX, y+dir.offsetY, z+dir.offsetZ)) {
+                    toPlace.tryPlaceItemIntoWorld(par2EntityPlayer, par3World, x, y, z, direction, par8, par9, par10)
+                    if (toPlace.stackSize == 0) {
+                        ManaItemHandler.requestManaExactForTool(par1ItemStack, par2EntityPlayer, COST, true)
+                        val tile = par3World.getTileEntity(x+dir.offsetX, y+dir.offsetY, z+dir.offsetZ)
+                        if (tile is TileRainbowManaFlame) {
+                            tile.invisible = hasPhantomInk(par1ItemStack)
+                        }
                     }
+                    return true
                 }
             }
-
-            return true
+        return false
     }
 
     fun addStringToTooltip(s : String, tooltip : MutableList<Any?>) {

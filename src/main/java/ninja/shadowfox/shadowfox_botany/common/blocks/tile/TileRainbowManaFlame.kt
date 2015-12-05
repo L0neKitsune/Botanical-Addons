@@ -8,7 +8,7 @@ import java.util.Random
 
 class TileRainbowManaFlame : TileManaFlame() {
     private val TAG_INVISIBLE = "invisible"
-    public var invisible = true
+    public var invisible = false
 
     override fun writeCustomNBT(nbttagcompound: NBTTagCompound) {
         nbttagcompound.setBoolean(TAG_INVISIBLE, this.invisible)
