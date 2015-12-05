@@ -27,7 +27,7 @@ class ShadowFoxGrassItemBlock(par2Block: Block) : ShadowFoxMetaItemBlock(par2Blo
 
 open class ShadowFoxDoubleGrassItemBlock0(par2Block: Block) : ShadowFoxMetaItemBlock(par2Block) {
 
-	open val colorSet = 0
+    open val colorSet = 0
     var topIcon: IIcon by Delegates.notNull()
 
     @SideOnly(Side.CLIENT)
@@ -60,5 +60,5 @@ open class ShadowFoxRainbowDoubleGrassItemBlock(var par2Block: Block) : ShadowFo
 }
 
 open class ShadowFoxDoubleGrassItemBlock1(par2Block: Block) : ShadowFoxDoubleGrassItemBlock0(par2Block) {
-	override val colorSet = 1
+    override val colorSet = 1
 }

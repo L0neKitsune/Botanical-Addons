@@ -134,7 +134,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
             stack.getTagCompound().removeTag("display")
         }
     }
-    
+
 
     @SideOnly(Side.CLIENT)
     override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {

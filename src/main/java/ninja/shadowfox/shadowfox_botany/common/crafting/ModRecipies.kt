@@ -71,7 +71,7 @@ public object ModRecipes {
         addShapelessOreDictRecipe(ItemStack(ShadowFoxBlocks.rainbowPlanks, 4), ShadowFoxBlocks.rainbowWood)
 
         recipesWoodPanel = BotaniaAPI.getLatestAddedRecipes(17)
-        
+
         for (i in 0..15)
             GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.coloredSlabs[i], 6, i),
                 "QQQ",
@@ -99,7 +99,7 @@ public object ModRecipes {
         GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.rainbowStairs, 4),
                 "Q  ", "QQ ", "QQQ",
                 'Q', ItemStack(ShadowFoxBlocks.rainbowPlanks))
-        
+
         recipesStairsL = BotaniaAPI.getLatestAddedRecipes(17)
 
         for (i in 0..15)
@@ -109,7 +109,7 @@ public object ModRecipes {
             ItemStack(ShadowFoxBlocks.rainbowSlabs), ItemStack(ShadowFoxBlocks.rainbowSlabs))
 
         recipesSlabsFull = BotaniaAPI.getLatestAddedRecipes(17)
-        
+
         for (i in 0..15)
             addOreDictRecipe(ItemStack(ShadowFoxItems.colorfulSkyDirtRod, 1, i),
                     " PD",
@@ -125,7 +125,7 @@ public object ModRecipes {
                 'D', ItemStack(ShadowFoxBlocks.rainbowDirtBlock),
                 'R', ItemStack(BotaniaItems.skyDirtRod, 1),
                 'P', LibOreDict.PIXIE_DUST, 'S', LibOreDict.DRAGONSTONE)
-        
+
         recipesColoredSkyDirtRod = BotaniaAPI.getLatestAddedRecipes(16)
 
         addOreDictRecipe(ItemStack(ShadowFoxItems.lightningRod, 1),
@@ -270,7 +270,7 @@ public object ModRecipes {
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood2, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood3, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.rainbowWood, ItemStack(Items.coal, 1, 1), 0.15F)
-    
+
     }
 
     private fun addOreDictRecipe(output: ItemStack, vararg recipe: Any) {

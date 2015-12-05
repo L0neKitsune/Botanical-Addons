@@ -88,7 +88,7 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
 
     override fun onWornTick(stack: ItemStack, player: EntityLivingBase) {
         if (player.ticksExisted % 10 == 0) {
-            
+
             if(player is EntityPlayer) {
                 if (ManaItemHandler.requestManaExact(stack, player, COST, true)) {
                     ItemNBTHelper.setByte(stack, "active", 1.toByte())

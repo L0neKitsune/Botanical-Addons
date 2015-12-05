@@ -169,7 +169,7 @@ public open class InterdictionRod(name: String = "interdictionRod") : StandardIt
                 val entities = world.getEntitiesWithinAABBExcludingEntity(exclude, 
                     AxisAlignedBB.getBoundingBox(x - range, y - range, z - range, 
                         x + range, y + range, z + range), PLAYER_SELECTOR)
-                
+
                 if (pushEntities(x, y, z, range, velocity, entities)) {
                     if (count % 3 == 0) world.playSoundAtEntity(player, "shadowfox_botany:wind", 0.4F, 1F)
                     ManaItemHandler.requestManaExactForTool(stack, player, cost, true)

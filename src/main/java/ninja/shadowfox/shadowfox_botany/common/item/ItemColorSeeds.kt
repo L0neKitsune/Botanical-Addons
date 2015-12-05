@@ -187,7 +187,7 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
                     }
                 }
             }
-            
+
             if(ticksExisted >= 80)
                 list.remove(this)
         }

@@ -8,7 +8,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import vazkii.botania.client.render.item.RenderLens
-import ninja.shadowfox.shadowfox_botany.client.core.MultipartHandler
+import ninja.shadowfox.shadowfox_botany.client.core.multipart.MultipartHandler
 import ninja.shadowfox.shadowfox_botany.client.render.entity.RenderGrieferCreeper
 import ninja.shadowfox.shadowfox_botany.client.render.tile.RenderTileItemDisplay
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileItemDisplay
