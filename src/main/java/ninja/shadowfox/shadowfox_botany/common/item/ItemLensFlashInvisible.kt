@@ -16,7 +16,6 @@ import net.minecraft.util.StatCollector
 import net.minecraftforge.common.util.ForgeDirection
 import net.minecraftforge.oredict.RecipeSorter
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileManaFlame
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileInvisibleManaFlame
 import vazkii.botania.api.internal.IManaBurst
 import vazkii.botania.api.mana.BurstProperties
@@ -107,7 +106,7 @@ class ItemLensFlashInvisible() : StandardItem("lensPhantomLight"), ICompositable
                 val blockAt = entity.worldObj.getBlock(pos.blockX, pos.blockY, pos.blockZ)
                 val blockAt_ = entity.worldObj.getBlock(x, y, z)
 
-                if (blockAt === ModBlocks.manaFlame || blockAt is TileManaFlame)
+                if (blockAt === ModBlocks.manaFlame || blockAt === ShadowFoxBlocks.invisibleFlame)
                     entity.worldObj.setBlock(pos.blockX, pos.blockY, pos.blockZ, Blocks.air)
                 else if (blockAt_.isAir(entity.worldObj, x, y, z) || blockAt_.isReplaceable(entity.worldObj, x, y, z)) {
                     entity.worldObj.setBlock(x, y, z, ShadowFoxBlocks.invisibleFlame, 0, 0)
