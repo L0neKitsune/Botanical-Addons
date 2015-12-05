@@ -47,6 +47,8 @@ public object ShadowFoxBlocks {
     public var coloredStairs: Array<Block>
     public var rainbowStairs: Block
     public var invisibleFlame: Block
+    public var rainbowFlame: Block
+
     // public var itemDisplay: Block
     // public var lightningRod: Block
 
@@ -66,7 +68,8 @@ public object ShadowFoxBlocks {
         rainbowLeaves = BlockRainbowLeaves()
         irisGrass = BlockColoredGrass()
         rainbowGrass = BlockRainbowGrass()
-        invisibleFlame = BlockManaInvisibleFlame()
+        invisibleFlame = BlockManaFlame("invisibleFlame", TileInvisibleManaFlame::class.java)
+        rainbowFlame = BlockManaFlame("rainbowFlame", TileRainbowManaFlame::class.java)
 
         irisWood0 = BlockColoredWood(0)
         irisWood1 = BlockColoredWood(1)
@@ -100,6 +103,7 @@ public object ShadowFoxBlocks {
         initOreDict()
 
         GameRegistry.registerTileEntity(TileInvisibleManaFlame::class.java, "shadowfox_botany:manaInvisibleFlame")
+        GameRegistry.registerTileEntity(TileRainbowManaFlame::class.java, "shadowfox_botany:manaRainbowFlame")
         // GameRegistry.registerTileEntity(TileItemDisplay::class.java, "shadowfox_botany:itemDisplay")
 
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
