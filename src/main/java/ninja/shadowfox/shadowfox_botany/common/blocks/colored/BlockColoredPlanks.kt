@@ -1,10 +1,10 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.colored
 
+import cpw.mods.fml.common.IFuelHandler
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
-import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.passive.EntitySheep
@@ -15,6 +15,7 @@ import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import ninja.shadowfox.shadowfox_botany.common.blocks.material.MaterialCustomSmeltingWood
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
@@ -25,8 +26,7 @@ import java.awt.Color
 import java.util.*
 import kotlin.properties.Delegates
 
-
-class BlockColoredPlanks() : ShadowFoxBlockMod(Material.wood), ILexiconable {
+class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.material), ILexiconable, IFuelHandler {
 
     private val name = "irisPlanks"
     private val TYPES = 16
@@ -38,11 +38,20 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(Material.wood), ILexiconable {
         stepSound = Block.soundTypeWood
 
         setBlockName(this.name)
+        GameRegistry.registerFuelHandler(this)
     }
 
     @SideOnly(Side.CLIENT)
     override fun getBlockColor(): Int {
         return 0xFFFFFF
+    }
+
+    override fun isToolEffective(type: String?, metadata: Int): Boolean {
+        return (type != null && type.equals("axe", true))
+    }
+
+    override fun getHarvestTool(metadata : Int): String {
+        return "axe"
     }
 
     /**
@@ -120,5 +129,9 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(Material.wood), ILexiconable {
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return LexiconRegistry.irisSapling
+    }
+
+    override fun getBurnTime(fuel: ItemStack): Int {
+        return if (fuel.item == Item.getItemFromBlock(this)) 300 else 0
     }
 }

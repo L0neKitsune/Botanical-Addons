@@ -39,6 +39,8 @@ public object ModRecipes {
     val recipesColorOverride: IRecipe
     val recipesinvisibleLens: IRecipe
     val recipesinvisibleLensUndo: IRecipe
+    val recipesAttribution: IRecipe
+    val recipesKindling: IRecipe
     val recipesPlainDirt: RecipePureDaisy
     val recipesIrisSapling: RecipePureDaisyExclusion
 
@@ -137,26 +139,26 @@ public object ModRecipes {
         recipesLightningRod = BotaniaAPI.getLatestAddedRecipe()
 
         addOreDictRecipe(ItemStack(ShadowFoxItems.emblem, 1, 0),
-                "SWS",
-                "TGT",
-                " E ",
+                "EGE",
+                "TAT",
+                " W ",
                 'E', LibOreDict.ENDER_AIR_BOTTLE,
                 'T', LibOreDict.TERRASTEEL_NUGGET,
                 'G', LibOreDict.LIFE_ESSENCE,
                 'W', LibOreDict.RUNE[13], // Wrath
-                'S', LibOreDict.MANA_STRING)
+                'A', "holyPendant")
 
         recipesPriestOfThor = BotaniaAPI.getLatestAddedRecipe()
 
         addOreDictRecipe(ItemStack(ShadowFoxItems.emblem, 1, 1),
-                "SPS",
-                "NGN",
-                " D ",
+                "DGD",
+                "NAN",
+                " P ",
                 'D', LibOreDict.DRAGONSTONE,
                 'N', "nuggetGold",
                 'G', LibOreDict.LIFE_ESSENCE,
                 'P', LibOreDict.RUNE[2], // Earth
-                'S', LibOreDict.MANA_STRING)
+                'A', "holyPendant")
 
         recipesPriestOfSif = BotaniaAPI.getLatestAddedRecipe()
 
@@ -197,16 +199,35 @@ public object ModRecipes {
         recipesInterdictionRod = BotaniaAPI.getLatestAddedRecipe()
 
         addOreDictRecipe(ItemStack(ShadowFoxItems.emblem, 1, 2),
-                "SAS",
-                "NGN",
+                "RGR",
+                "NAN",
                 " P ",
                 'P', LibOreDict.RUNE[15], // Pride
                 'N', LibOreDict.MANASTEEL_NUGGET,
                 'G', LibOreDict.LIFE_ESSENCE,
-                'A', LibOreDict.RUNE[3], // Air
-                'S', LibOreDict.MANA_STRING)
+                'R', LibOreDict.RUNE[3], // Air
+                'A', "holyPendant")
 
         recipesPriestOfNjord = BotaniaAPI.getLatestAddedRecipe()
+
+        addOreDictRecipe(ItemStack(ShadowFoxItems.attributionBauble),
+                "S S",
+                "Q Q",
+                " G ",
+                'G', "ingotGold",
+                'Q', "gemQuartz",
+                'S', LibOreDict.MANA_STRING)
+
+        recipesAttribution = BotaniaAPI.getLatestAddedRecipe()
+
+        addOreDictRecipe(ItemStack(ShadowFoxBlocks.kindling),
+                " S ",
+                "SBS",
+                " S ",
+                'B', "powderBlaze",
+                'S', LibOreDict.MANA_STRING)
+
+        recipesKindling = BotaniaAPI.getLatestAddedRecipe()
 
         addShapelessOreDictRecipe(ItemStack(ShadowFoxItems.invisibleFlameLens),
                 ItemStack(BotaniaItems.lens, 1, 17), BotaniaItems.phantomInk)

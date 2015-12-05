@@ -70,50 +70,52 @@ class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulItem(nam
     }
 
     override fun onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer) : ItemStack {
-        if(!world.isRemote) {
-            var blockstack = ColorfulItem.dirtStack(stack.itemDamage)
-            if (player.isSneaking) {
+        var blockstack = ColorfulItem.dirtStack(stack.itemDamage)
+        if (player.isSneaking) {
+            var damage = stack.itemDamage
+            if (!world.isRemote) {
                 if (stack.itemDamage >= 16) stack.itemDamage = 0 else stack.itemDamage++
-                world.playSoundAtEntity(player, "botania:ding", 0.1F, 1F)
-                blockstack = ColorfulItem.dirtStack(stack.itemDamage)
-                blockstack!!.setStackDisplayName(StatCollector.translateToLocal("misc.shadowfox_botany.color." + stack.itemDamage))
-                ItemsRemainingRenderHandler.set(blockstack, -2)
-            }
+                damage = stack.itemDamage
+            } else if (damage >= 16) damage = 0 else damage++
+            world.playSoundAtEntity(player, "botania:ding", 0.1F, 1F)
+            blockstack = ColorfulItem.dirtStack(damage)
+            blockstack!!.setStackDisplayName(StatCollector.translateToLocal("misc.shadowfox_botany.color." + damage))
+            ItemsRemainingRenderHandler.set(blockstack, -2)
+        }
 
-            else if (ManaItemHandler.requestManaExactForTool(stack, player, COST * 2, false)) {
+        else if (!world.isRemote && ManaItemHandler.requestManaExactForTool(stack, player, COST * 2, false)) {
 
-                val color = Color(getColorFromItemStack(stack, 0))
-                val r = color.red / 255F
-                val g = color.green / 255F
-                val b = color.blue / 255F
+            val color = Color(getColorFromItemStack(stack, 0))
+            val r = color.red / 255F
+            val g = color.green / 255F
+            val b = color.blue / 255F
 
-                val sif = (ItemPriestEmblem.getEmblem(1, player) != null)
-                var basePlayerRange = 5.0
-                if (player is EntityPlayerMP)
-                    basePlayerRange = player.theItemInWorldManager.blockReachDistance
-                val distmultiplier = if (sif) basePlayerRange-1 else 3.0
+            val sif = (ItemPriestEmblem.getEmblem(1, player) != null)
+            var basePlayerRange = 5.0
+            if (player is EntityPlayerMP)
+                basePlayerRange = player.theItemInWorldManager.blockReachDistance
+            val distmultiplier = if (sif) basePlayerRange-1 else 3.0
 
-                val playerVec = Vector3.fromEntityCenter(player)
-                val lookVec = Vector3(player.lookVec).multiply(distmultiplier)
-                val placeVec = playerVec.copy().add(lookVec)
+            val playerVec = Vector3.fromEntityCenter(player)
+            val lookVec = Vector3(player.lookVec).multiply(distmultiplier)
+            val placeVec = playerVec.copy().add(lookVec)
 
-                val x = MathHelper.floor_double(placeVec.x)
-                val y = MathHelper.floor_double(placeVec.y) + 1
-                val z = MathHelper.floor_double(placeVec.z)
+            val x = MathHelper.floor_double(placeVec.x)
+            val y = MathHelper.floor_double(placeVec.y) + 1
+            val z = MathHelper.floor_double(placeVec.z)
 
-                val entities = world.getEntitiesWithinAABB(EntityLivingBase::class.java,
-                        AxisAlignedBB.getBoundingBox(x.toDouble(), y.toDouble(), z.toDouble(), (x + 1).toDouble(),
-                                (y + 1).toDouble(), (z + 1).toDouble())).size
+            val entities = world.getEntitiesWithinAABB(EntityLivingBase::class.java,
+                    AxisAlignedBB.getBoundingBox(x.toDouble(), y.toDouble(), z.toDouble(), (x + 1).toDouble(),
+                            (y + 1).toDouble(), (z + 1).toDouble())).size
 
-                if (entities == 0) {
-                    blockstack!!.tryPlaceItemIntoWorld(player, world, x, y, z, 0, 0F, 0F, 0F)
+            if (entities == 0) {
+                blockstack!!.tryPlaceItemIntoWorld(player, world, x, y, z, 0, 0F, 0F, 0F)
 
-                    if (blockstack.stackSize == 0) {
-                        ManaItemHandler.requestManaExactForTool(stack, player, COST * 2, true)
-                        for (i in 0..6)
-                            Botania.proxy.sparkleFX(world, x + Math.random(), y + Math.random(), z + Math.random(),
-                                    r, g, b, 1F, 5)
-                    }
+                if (blockstack.stackSize == 0) {
+                    ManaItemHandler.requestManaExactForTool(stack, player, COST * 2, true)
+                    for (i in 0..6)
+                        Botania.proxy.sparkleFX(world, x + Math.random(), y + Math.random(), z + Math.random(),
+                                r, g, b, 1F, 5)
                 }
             }
         }

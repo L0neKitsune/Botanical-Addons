@@ -1,5 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.colored
 
+import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
@@ -12,6 +13,7 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxColoredWoodBlock
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxRotatedPillar
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
@@ -45,6 +47,10 @@ class BlockColoredWood(val colorSet: Int) : ShadowFoxRotatedPillar(Material.wood
                     }
                 }
         }
+    }
+
+    override fun register(par1Str: String) {
+        GameRegistry.registerBlock(this, ShadowFoxColoredWoodBlock::class.java, par1Str)
     }
 
     @SideOnly(Side.CLIENT)

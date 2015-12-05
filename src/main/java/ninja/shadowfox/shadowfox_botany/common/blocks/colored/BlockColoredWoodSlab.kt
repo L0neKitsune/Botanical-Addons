@@ -1,7 +1,10 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.colored
 
+import cpw.mods.fml.common.IFuelHandler
+import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
+import net.minecraft.item.Item
 import net.minecraft.block.Block
 import net.minecraft.block.BlockSlab
 import net.minecraft.entity.passive.EntitySheep
@@ -17,11 +20,12 @@ import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import java.awt.Color
 
 class BlockColoredWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks.coloredPlanks) :
-        ShadowFoxSlabs(full, meta, source, source.unlocalizedName.replace("tile.".toRegex(), "") + "Slab" + (if (full) "Full" else "") + meta), ILexiconable
+        ShadowFoxSlabs(full, meta, source, source.unlocalizedName.replace("tile.".toRegex(), "") + "Slab" + (if (full) "Full" else "") + meta), ILexiconable, IFuelHandler
 {
     init {
         this.setHardness(1.5f)
         this.setResistance(10.0f)
+        GameRegistry.registerFuelHandler(this)
     }
 
     @SideOnly(Side.CLIENT)
@@ -31,6 +35,14 @@ class BlockColoredWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBl
 
         var color = EntitySheep.fleeceColorTable[meta]
         return Color(color[0], color[1], color[2]).rgb
+    }
+
+    override fun isToolEffective(type: String?, metadata: Int): Boolean {
+        return (type != null && type.equals("axe", true))
+    }
+
+    override fun getHarvestTool(metadata : Int): String {
+        return "axe"
     }
 
     @SideOnly(Side.CLIENT)
@@ -53,5 +65,9 @@ class BlockColoredWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBl
 
     override fun getEntry(world: World?, x: Int, y: Int, z: Int, player: EntityPlayer?, lexicon: ItemStack?): LexiconEntry {
         return LexiconRegistry.irisSapling
+    }
+
+    override fun getBurnTime(fuel: ItemStack): Int {
+        return if (fuel.item == Item.getItemFromBlock(this)) 150 else 0
     }
 }

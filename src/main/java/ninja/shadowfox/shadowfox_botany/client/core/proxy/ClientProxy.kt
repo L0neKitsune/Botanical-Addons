@@ -1,5 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.client.core.proxy
 
+import cpw.mods.fml.common.Loader
 import cpw.mods.fml.client.registry.ClientRegistry
 import net.minecraftforge.client.MinecraftForgeClient
 import cpw.mods.fml.client.registry.RenderingRegistry
@@ -7,6 +8,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import vazkii.botania.client.render.item.RenderLens
+import ninja.shadowfox.shadowfox_botany.client.core.MultipartHandler
 import ninja.shadowfox.shadowfox_botany.client.render.entity.RenderGrieferCreeper
 import ninja.shadowfox.shadowfox_botany.client.render.tile.RenderTileItemDisplay
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileItemDisplay
@@ -24,6 +26,9 @@ public class ClientProxy : CommonProxy() {
         super.init(event)
 
         this.initRenderers()
+
+        if (Loader.isModLoaded("ForgeMultipart"))
+            MultipartHandler
     }
 
     override fun postInit(event: FMLPostInitializationEvent) {

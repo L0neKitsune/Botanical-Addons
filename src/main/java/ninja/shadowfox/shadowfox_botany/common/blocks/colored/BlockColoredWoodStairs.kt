@@ -19,7 +19,7 @@ import java.awt.Color
 
 class BlockColoredWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.coloredPlanks) : ShadowFoxStairs(source, meta, source.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs" + meta), ILexiconable
 {
-    init { }
+    init {}
 
     @SideOnly(Side.CLIENT)
     override fun getRenderColor(m: Int): Int {
@@ -28,6 +28,14 @@ class BlockColoredWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.coloredP
 
         var color = EntitySheep.fleeceColorTable[meta]
         return Color(color[0], color[1], color[2]).rgb
+    }
+
+    override fun isToolEffective(type: String?, metadata: Int): Boolean {
+        return (type != null && type.equals("axe", true))
+    }
+
+    override fun getHarvestTool(metadata : Int): String {
+        return "axe"
     }
 
     @SideOnly(Side.CLIENT)

@@ -20,6 +20,13 @@ misc.shadowfox_botany.color.16=Bifrost
 
 misc.shadowfox_botany.creative=Creative
 
+item.shadowfox_botany:wiltedLotus0.name=Wilted Lotus
+item.shadowfox_botany:wiltedLotus1.name=Deathly Lotus
+misc.shadowfox_botany:lotusDesc=It emits discordant magical vibes
+
+item.shadowfox_botany:attributionBauble0.name=Holy Symbol
+item.shadowfox_botany:attributionBauble1.name=Pendant of Headtato Summoning
+
 item.shadowfox_botany:colorfulSkyDirtRod.name=Rod of the Iridescence
 item.shadowfox_botany:lightningRod.name=Rod of the Thundercaller
 item.shadowfox_botany:interdictionRod.name=Rod of the Hurricane
@@ -31,6 +38,8 @@ item.shadowfox_botany:priestEmblem2.name=Priestly Emblem: Njord
 item.shadowfox_botany:aesirEmblem.name=Priestly Emblem: &6Aesir&r
 
 entity.shadowfox_botany:voidCreeper.name=Manaseal Creeper
+
+tile.shadowfox_botany:barrier.name=Barrier
 
 tile.shadowfox_botany:rainbowDirt.name=Iridescent Dirt
 tile.shadowfox_botany:coloredDirt.name=Iridescent Dirt
@@ -48,6 +57,8 @@ tile.shadowfox_botany:irisDoubleGrass.name=Iridescent Double Grass
 item.shadowfox_botany:irisSeeds.name=Iridescent Seeds
 
 tile.shadowfox_botany:invisibleFlame.name=Phantom Mana Flash
+tile.shadowfox_botany:rainbowFlame.name=Rainbow Mana Flash
+item.botania:lensPhantomLight.short=Phantom Flash
 
 item.shadowfox_botany:coatOfArms0.name=Chilean Shield
 item.shadowfox_botany:coatOfArms1.name=French Shield
@@ -68,6 +79,8 @@ item.shadowfox_botany:coatOfArms15.name=American Shield
 item.shadowfox_botany:coatOfArms16.name=Fabulous Shield
 
 item.shadowfox_botany:colorOverride.name=Clerical Colorizer
+
+tile.shadowfox_botany:kindling.name=Blaze Kindling
 
 tile.shadowfox_botany:rainbowPlanksSlab.name=Iridescent Slab
 tile.shadowfox_botany:rainbowPlanksSlabFull.name=Iridescent Slab
@@ -95,6 +108,12 @@ shadowfox_botany.entry.coatOfArms=Coats of Arms
 shadowfox_botany.tagline.coatOfArms=Declare your allegiance
 shadowfox_botany.entry.colorOverride=Clerical Colorization
 shadowfox_botany.tagline.colorOverride=Colorful magic
+shadowfox_botany.entry.attribution=Holy Symbols
+shadowfox_botany.tagline.attribution=Keys to something greater
+shadowfox_botany.entry.sealCreepers=Manaseal Creepers
+shadowfox_botany.tagline.sealCreepers=A storm in the Manatide
+shadowfox_botany.entry.kindling=Blaze Kindling
+shadowfox_botany.tagline.kindling=Quickened firespread
 
 shadowfox_botany.page.coloredDirt0=Using the latent power in &1Mystical Flowers&0, you can make dirt that shimmers every color of the rainbow. This mystical dirt is capable of growing trees and plants without water or a hoe. If put next to a &1Pure Daisy&0, it will revert to its uncolored state.
 shadowfox_botany.page.coloredDirt1=Beauty from the dross
@@ -130,3 +149,13 @@ shadowfox_botany.page.coatOfArms1=Papers, please
 
 shadowfox_botany.page.colorOverride0=The &1Clerical Colorizer&0, the &4Ring&0 form of the &1Paintslinger's Lens&0 can change even the color of magic. Wearing one will affect any clerically aligned abilities, changing their color. These can be crafted alongside another &4Bauble&0 much like &4Cosmetic Overrides&0. They can by dyed much like leather with &1Floral Powder&0, and cleared by simply putting one in a crafting table.
 shadowfox_botany.page.colorOverride1=Beware of the dark clerics
+
+shadowfox_botany.page.attribution0=The &1Holy Symbol&0 is an artifact with what seems to be a wild storm of unrealized potential. Although crafted of simple materials, it has a ready acceptance of other materials.<br>There seems to be no overworldly way of fully combining them, however, and the &4Nether&0 and the &4End&0 have given no clues. Perhaps you must look in &2other places&0.
+shadowfox_botany.page.attribution1=Priestly fashion
+
+shadowfox_botany.page.sealCreepers0=The &4Manatide&0 flows throughout the world, but as with a river, there are always bumps and rapids. The &4Manaseal Creeper&0 is a walking rift in the flow of &4Mana&0. Should it explode near you, you'll find yourself stricken with a &4Manatide Storm&0, which will eat away at your mana, taking away what could be hours of generation. It's recommended to stay away from them at all costs.
+shadowfox_botany.page.sealCreepers1Drop=However, they do have one interesting property. They crystallize their mana inside, occasionally resulting in a &1Black Lotus&0 found on their corpse. Their storming energy, combined with this crystallized mana, can react with fully-formed &1Loti&0. When a &4Manatide Storm&0 comes into contact with a &1Black Lotus&0, it will break their harmony and result in a &1Wilted Lotus&0, a powerful magical resource.
+shadowfox_botany.page.sealCreepers1NoDrop=However, they do have one interesting property. Their storming energy can react with fully-formed &1Black Loti&0. When a &4Manatide Storm&0 comes into contact with one of these flowers, it will break their harmony and result in a &1Wilted Lotus&0, a powerful magical resource.
+
+shadowfox_botany.page.kindling0=&1Blaze Kindling&0 is like &1Netherrack&0 on steroids. Not only will it sustain flames, but it will take them in from nearby blocks, very quickly, It can also be extinguished and lit simply by using it with an open hand.
+shadowfox_botany.page.kindling1=Stop drop and roll
