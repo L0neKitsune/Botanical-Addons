@@ -8,11 +8,11 @@ import net.minecraft.tileentity.TileEntity
 import vazkii.botania.common.Botania
 import vazkii.botania.common.integration.coloredlights.ColoredLightHelper
 
-abstract open class TileManaFlame : ShadowFoxTile() {
+abstract class TileManaFlame : ShadowFoxTile() {
 
-    abstract open fun getColor(): Int
+    abstract fun getColor(): Int
 
-    abstract open fun shouldRender(): Boolean
+    abstract fun shouldRender(): Boolean
 
     override fun updateEntity() {
         try {

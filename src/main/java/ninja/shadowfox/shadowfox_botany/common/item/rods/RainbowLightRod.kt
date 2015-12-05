@@ -1,10 +1,15 @@
 package ninja.shadowfox.shadowfox_botany.common.item.rods
 
-import net.minecraft.init.Blocks
-import net.minecraft.item.ItemStack
+import cpw.mods.fml.relauncher.Side
+import cpw.mods.fml.relauncher.SideOnly
+
+import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.init.Blocks
+import net.minecraft.item.ItemStack
 import net.minecraft.util.AxisAlignedBB
+import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.util.StatCollector
 import net.minecraft.world.World
@@ -13,12 +18,16 @@ import net.minecraftforge.common.util.ForgeDirection
 
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileRainbowManaFlame
+import ninja.shadowfox.shadowfox_botany.common.item.ColorfulItem
 import ninja.shadowfox.shadowfox_botany.common.item.StandardItem
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 
 import vazkii.botania.api.item.IPhantomInkable
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
 import vazkii.botania.common.core.helper.ItemNBTHelper
+
+import kotlin.properties.Delegates
 
 class RainbowLightRod : StandardItem("rainbowLightRod"), IManaUsingItem, IPhantomInkable {
 
@@ -26,6 +35,30 @@ class RainbowLightRod : StandardItem("rainbowLightRod"), IManaUsingItem, IPhanto
 
     init {
         setMaxStackSize(1)
+    }
+
+    @SideOnly(Side.CLIENT)
+    var overlayIcon: IIcon by Delegates.notNull()
+
+    override fun requiresMultipleRenderPasses() : Boolean {
+        return true
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun registerIcons(par1IIconRegister : IIconRegister) {
+        this.itemIcon = IconHelper.forItem(par1IIconRegister, this)
+        this.overlayIcon = IconHelper.forItem(par1IIconRegister, this, "Overlay")
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun getIconFromDamageForRenderPass(meta: Int, pass: Int) : IIcon {
+        return if (pass === 1) this.overlayIcon else super.getIconFromDamageForRenderPass(meta, pass)
+    }
+
+    override fun getColorFromItemStack(par1ItemStack : ItemStack, pass : Int) : Int {
+        if (pass > 0)
+            return 0xFFFFFF
+        return ColorfulItem.rainbowColor()
     }
 
     override fun onItemUse(par1ItemStack : ItemStack, par2EntityPlayer : EntityPlayer, par3World : World,
