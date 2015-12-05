@@ -16,13 +16,17 @@ public object MultipartHandler {
     init {
         registerAllMultiparts(ShadowFoxBlocks.coloredDirtBlock)
         registerAllMultiparts(ShadowFoxBlocks.rainbowDirtBlock)
+
         registerAllColoredMultiparts(ShadowFoxBlocks.irisWood0)
         registerAllColoredMultiparts(ShadowFoxBlocks.irisWood1)
         registerAllColoredMultiparts(ShadowFoxBlocks.irisWood2)
         registerAllColoredMultiparts(ShadowFoxBlocks.irisWood3)
         registerAllMultiparts(ShadowFoxBlocks.rainbowWood)
+
         registerAllColoredMultiparts(ShadowFoxBlocks.coloredPlanks)
         registerAllColoredMultiparts(ShadowFoxBlocks.rainbowPlanks)
+
+        registerAllMultiparts(ShadowFoxBlocks.kindling)
     }
 
     fun registerAllMultiparts(block: Block) {
