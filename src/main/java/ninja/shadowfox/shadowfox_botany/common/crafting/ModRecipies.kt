@@ -41,6 +41,7 @@ public object ModRecipes {
     val recipesinvisibleLensUndo: IRecipe
     val recipesAttribution: IRecipe
     val recipesKindling: IRecipe
+    val recipesRainbowRod: IRecipe
     val recipesPlainDirt: RecipePureDaisy
     val recipesIrisSapling: RecipePureDaisyExclusion
 
@@ -253,6 +254,16 @@ public object ModRecipes {
 
         recipesIrisSapling = RecipePureDaisyExclusion("treeSapling", ShadowFoxBlocks.irisSapling, 0)
         BotaniaAPI.pureDaisyRecipes.add(recipesIrisSapling as RecipePureDaisy)
+
+        addOreDictRecipe(ItemStack(ShadowFoxItems.rainbowRod),
+                " GB",
+                " DG",
+                "D  ",
+                'G', "glowstone",
+                'B', ItemStack(BotaniaBlocks.bifrostPerm),
+                'D', LibOreDict.DREAMWOOD_TWIG)
+
+        recipesRainbowRod = BotaniaAPI.getLatestAddedRecipe()
 
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood1, ItemStack(Items.coal, 1, 1), 0.15F)

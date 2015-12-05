@@ -21,7 +21,7 @@ class TileRainbowManaFlame : TileManaFlame() {
     override fun getColor(): Int {
         var time = ClientTickHandler.ticksInGame + ClientTickHandler.partialTicks
         time += Random((this.xCoord xor this.yCoord xor this.zCoord).toLong()).nextInt(100000)
-        return Color.HSBtoRGB(time * 0.005F, 0.6F, 1F)
+        return Color.HSBtoRGB(time * 0.005F, 1F, 1F)
     }
     override fun shouldRender(): Boolean = Botania.proxy.isClientPlayerWearingMonocle || !this.invisible
 }

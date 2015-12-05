@@ -38,19 +38,12 @@ class RainbowLightRod : StandardItem("rainbowLightRod"), IManaUsingItem, IPhanto
         if (ManaItemHandler.requestManaExactForTool(par1ItemStack, par2EntityPlayer, COST, false)) {
                 val dir = ForgeDirection.getOrientation(direction)
 
-                val aabb = AxisAlignedBB.getBoundingBox((x + dir.offsetX).toDouble(),
-                        (y+dir.offsetY).toDouble(), (z+dir.offsetZ).toDouble(),
-                        (x+dir.offsetX+1).toDouble(), (y+dir.offsetY+1).toDouble(), (z+dir.offsetZ+1).toDouble())
-                val entities = par3World.getEntitiesWithinAABB(EntityLivingBase::class.java, aabb).size
-
-                if (entities == 0) {
-                    toPlace!!.tryPlaceItemIntoWorld(par2EntityPlayer, par3World, x, y, z, direction, par8, par9, par10)
-                    if (toPlace.stackSize == 0) {
-                        ManaItemHandler.requestManaExactForTool(par1ItemStack, par2EntityPlayer, COST, true)
-                        val tile = par3World.getTileEntity(x+dir.offsetX, y+dir.offsetY, z+dir.offsetZ)
-                        if (tile is TileRainbowManaFlame) {
-                            tile.invisible = hasPhantomInk(par1ItemStack)
-                        }
+                toPlace.tryPlaceItemIntoWorld(par2EntityPlayer, par3World, x, y, z, direction, par8, par9, par10)
+                if (toPlace.stackSize == 0) {
+                    ManaItemHandler.requestManaExactForTool(par1ItemStack, par2EntityPlayer, COST, true)
+                    val tile = par3World.getTileEntity(x+dir.offsetX, y+dir.offsetY, z+dir.offsetZ)
+                    if (tile is TileRainbowManaFlame) {
+                        tile.invisible = hasPhantomInk(par1ItemStack)
                     }
                 }
             }
