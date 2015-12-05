@@ -106,45 +106,8 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
         if (player.ticksExisted % 10 == 0) {
 
             if(player is EntityPlayer) {
-                if (ManaItemHandler.requestManaExact(stack, player, COST, true)) {
-                    ItemNBTHelper.setByte(stack, "active", 1.toByte())
-                    var cosmeticStack = (this as ICosmeticAttachable).getCosmeticItem(stack)
-                    if (!this.hasPhantomInk(stack) && (cosmeticStack == null || cosmeticStack.item is IPriestColorOverride)) {
-                        when (stack.itemDamage) {
-                            0 -> {
-                                var playerHead = Vector3.fromEntityCenter(player).add(0.0, 0.75, 0.0).add(Vector3(player.lookVec).multiply(-0.25))
-                                val playerShift = playerHead.copy().add(getHeadOrientation(player))
-                                val color = Color(IPriestColorOverride.getColor(player, 0x0079C4))
-                                val innerColor = Color(color.rgb).brighter().brighter()
-                                Botania.proxy.lightningFX(player.worldObj, playerHead, playerShift, 2.0f, color.rgb, innerColor.rgb)
-                            }
-                            1 -> {
-                                for (i in 0..6) {
-                                    var xmotion = (Math.random()-0.5).toFloat() * 0.15f
-                                    var zmotion = (Math.random()-0.5).toFloat() * 0.15f
-                                    // 964B00 is brown
-                                    val color = Color(IPriestColorOverride.getColor(player, 0x964B00))
-                                    val r = color.red.toFloat() / 255F
-                                    val g = color.green.toFloat() / 255F
-                                    val b = color.blue.toFloat() / 255F
-                                    Botania.proxy.wispFX(player.worldObj, player.posX, player.posY - player.yOffset, player.posZ, r, g, b, Math.random().toFloat() * 0.15f + 0.15f, xmotion, 0.0075f, zmotion)
-                                }
-                            }
-                            2 -> {
-                                for (i in 0..6) {
-                                    val vec = getHeadOrientation(player).multiply(0.52)
-                                    val color = Color(IPriestColorOverride.getColor(player, 0x0000FF))
-                                    val r = color.red.toFloat() / 255F
-                                    val g = color.green.toFloat() / 255F
-                                    val b = color.blue.toFloat() / 255F
-                                    Botania.proxy.sparkleFX(player.worldObj, player.posX+vec.x, player.posY+vec.y, player.posZ+vec.z, r, g, b, 1.0f, 5)
-                                }
-                            }
-                        }
-                    }
-                }
-                else
-                    ItemNBTHelper.setByte(stack, "active", 0.toByte())
+                if (ManaItemHandler.requestManaExact(stack, player, COST, true)) ItemNBTHelper.setByte(stack, "active", 1.toByte())
+                else ItemNBTHelper.setByte(stack, "active", 0.toByte())
             }
         }
     }
@@ -156,9 +119,44 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
     @SideOnly(Side.CLIENT)
     override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {
         if(type == IBaubleRender.RenderType.BODY) {
+            val player = event.entityPlayer
+            if (player.ticksExisted % 10 == 0) {
+                when (stack.itemDamage) {
+                    0 -> {
+                        var playerHead = Vector3.fromEntityCenter(player).add(0.0, 0.75, 0.0)
+                        val playerShift = playerHead.copy().add(getHeadOrientation(player))
+                        val color = Color(IPriestColorOverride.getColor(player, 0x0079C4))
+                        val innerColor = Color(color.rgb).brighter().brighter()
+                        Botania.proxy.lightningFX(player.worldObj, playerHead, playerShift, 2.0f, color.rgb, innerColor.rgb)
+                    }
+                    1 -> {
+                        for (i in 0..6) {
+                            var xmotion = (Math.random()-0.5).toFloat() * 0.15f
+                            var zmotion = (Math.random()-0.5).toFloat() * 0.15f
+                            // 964B00 is brown
+                            val color = Color(IPriestColorOverride.getColor(player, 0x964B00))
+                            val r = color.red.toFloat() / 255F
+                            val g = color.green.toFloat() / 255F
+                            val b = color.blue.toFloat() / 255F
+                            Botania.proxy.wispFX(player.worldObj, player.posX, player.posY - player.yOffset, player.posZ, r, g, b, Math.random().toFloat() * 0.15f + 0.15f, xmotion, 0.0075f, zmotion)
+                        }
+                    }
+                    2 -> {
+                        for (i in 0..6) {
+                            val vec = getHeadOrientation(player).multiply(0.52)
+                            val color = Color(IPriestColorOverride.getColor(player, 0x0000FF))
+                            val r = color.red.toFloat() / 255F
+                            val g = color.green.toFloat() / 255F
+                            val b = color.blue.toFloat() / 255F
+                            Botania.proxy.sparkleFX(player.worldObj, player.posX+vec.x, player.posY+vec.y, player.posZ+vec.z, r, g, b, 1.0f, 5)
+                        }
+                    }
+                }
+            }
+            
             Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture)
-            IBaubleRender.Helper.rotateIfSneaking(event.entityPlayer)
-            var armor = event.entityPlayer.getCurrentArmor(2) != null
+            IBaubleRender.Helper.rotateIfSneaking(player)
+            var armor = player.getCurrentArmor(2) != null
             GL11.glRotatef(180F, 1F, 0F, 0F)
             GL11.glTranslatef(-0.26F, -0.4F, if (armor) 0.21F else 0.15F)
             GL11.glScalef(0.5F, 0.5F, 0.5F)

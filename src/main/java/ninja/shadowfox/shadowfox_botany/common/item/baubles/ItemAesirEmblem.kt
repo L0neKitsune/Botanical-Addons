@@ -88,28 +88,9 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
 
     override fun onWornTick(stack: ItemStack, player: EntityLivingBase) {
         if (player.ticksExisted % 10 == 0) {
-
             if(player is EntityPlayer) {
-                if (ManaItemHandler.requestManaExact(stack, player, COST, true)) {
-                    ItemNBTHelper.setByte(stack, "active", 1.toByte())
-                    var cosmeticStack = (this as ICosmeticAttachable).getCosmeticItem(stack)
-                    if (!this.hasPhantomInk(stack) && (cosmeticStack == null || cosmeticStack.item is IPriestColorOverride)) {
-                        val shift = getHeadOrientation(player)
-                        val x = player.posX + shift.x * 0.25
-                        val y = player.posY + shift.y * 0.25
-                        val z = player.posZ + shift.z * 0.25
-                        val xmotion = shift.x.toFloat() * 0.025f
-                        val ymotion = shift.y.toFloat() * 0.025f
-                        val zmotion = shift.z.toFloat() * 0.025f
-                        val color = Color(IPriestColorOverride.getColor(player, 0xFFFFFF))
-                        val r = color.red.toFloat() / 255f
-                        val g = color.green.toFloat() / 255f
-                        val b = color.blue.toFloat() / 255f
-                        Botania.proxy.wispFX(player.worldObj, x, y, z, r, g, b, Math.random().toFloat() * 0.15f + 0.15f, xmotion, ymotion, zmotion)
-                    }
-                }
-                else
-                    ItemNBTHelper.setByte(stack, "active", 0.toByte())
+                if (ManaItemHandler.requestManaExact(stack, player, COST, true)) ItemNBTHelper.setByte(stack, "active", 1.toByte())
+                else ItemNBTHelper.setByte(stack, "active", 0.toByte())
             }
         }
     }
@@ -121,9 +102,25 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
     @SideOnly(Side.CLIENT)
     override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {
         if(type == IBaubleRender.RenderType.BODY) {
+            val player = event.entityPlayer
+            if (player.ticksExisted % 10 == 0) {
+                val shift = getHeadOrientation(player)
+                val x = player.posX + shift.x * 0.25
+                val y = player.posY + shift.y * 0.25
+                val z = player.posZ + shift.z * 0.25
+                val xmotion = shift.x.toFloat() * 0.025f
+                val ymotion = shift.y.toFloat() * 0.025f
+                val zmotion = shift.z.toFloat() * 0.025f
+                val color = Color(IPriestColorOverride.getColor(player, 0xFFFFFF))
+                val r = color.red.toFloat() / 255f
+                val g = color.green.toFloat() / 255f
+                val b = color.blue.toFloat() / 255f
+                Botania.proxy.wispFX(player.worldObj, x, y, z, r, g, b, Math.random().toFloat() * 0.15f + 0.15f, xmotion, ymotion, zmotion)
+            }
+            
             Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture)
-            IBaubleRender.Helper.rotateIfSneaking(event.entityPlayer)
-            var armor = event.entityPlayer.getCurrentArmor(2) != null
+            IBaubleRender.Helper.rotateIfSneaking(player)
+            var armor = player.getCurrentArmor(2) != null
             GL11.glRotatef(180F, 1F, 0F, 0F)
             GL11.glTranslatef(-0.26F, -0.4F, if (armor) 0.21F else 0.15F)
             GL11.glScalef(0.5F, 0.5F, 0.5F)

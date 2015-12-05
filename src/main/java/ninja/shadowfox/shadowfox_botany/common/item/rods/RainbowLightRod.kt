@@ -45,9 +45,9 @@ class RainbowLightRod : StandardItem("rainbowLightRod"), IManaUsingItem, IPhanto
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerIcons(par1IIconRegister : IIconRegister) {
-        this.itemIcon = IconHelper.forItem(par1IIconRegister, this)
-        this.overlayIcon = IconHelper.forItem(par1IIconRegister, this, "Overlay")
+    override fun registerIcons(par1IconRegister : IIconRegister) {
+        this.itemIcon = IconHelper.forItem(par1IconRegister, this)
+        this.overlayIcon = IconHelper.forItem(par1IconRegister, this, "Overlay")
     }
 
     @SideOnly(Side.CLIENT)
