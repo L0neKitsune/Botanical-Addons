@@ -14,7 +14,7 @@ import codechicken.microblock.MicroMaterialRegistry
 public object MultipartHandler {
 
     init {
-        registerAllMultiparts(ShadowFoxBlocks.coloredDirtBlock)
+        registerAllColoredMultiparts(ShadowFoxBlocks.coloredDirtBlock)
         registerAllMultiparts(ShadowFoxBlocks.rainbowDirtBlock)
 
         registerAllColoredMultiparts(ShadowFoxBlocks.irisWood0)
