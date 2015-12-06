@@ -10,6 +10,7 @@ import net.minecraft.init.Blocks
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
+import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.IIcon
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
@@ -23,6 +24,12 @@ class BlockItemDisplay() : ShadowFoxBlockMod(Material.wood) {
         setBlockName("itemDisplay")
         setStepSound(Block.soundTypeWood)
         setLightLevel(1.0f)
+        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F)
+    }
+
+    override fun addCollisionBoxesToList(world:World, x:Int, y:Int, z:Int, axis:AxisAlignedBB, bounds:MutableList<Any?>, entity:Entity?) {
+        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F)
+        super.addCollisionBoxesToList(world, x, y, z, axis, bounds, entity)
     }
 
     override fun registerBlockIcons(par1IconRegister: IIconRegister) { }
@@ -79,8 +86,8 @@ class BlockItemDisplay() : ShadowFoxBlockMod(Material.wood) {
         }
     }
 
-    override fun isOpaqueCube(): Boolean = true
-    override fun renderAsNormalBlock(): Boolean = true
+    override fun isOpaqueCube(): Boolean = false
+    override fun renderAsNormalBlock(): Boolean = false
     override fun hasTileEntity(metadata: Int): Boolean = true
 
     override fun getDrops(world: World, x: Int, y: Int, z: Int, metadata: Int, fortune: Int): ArrayList<ItemStack> {

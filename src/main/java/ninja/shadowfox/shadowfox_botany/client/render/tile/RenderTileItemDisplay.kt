@@ -36,11 +36,11 @@ class RenderTileItemDisplay() : TileEntitySpecialRenderer() {
 
             GL11.glPushMatrix()
             GL11.glScalef(0.5f, 0.5f, 0.5f)
-            GL11.glTranslatef(1.0f, 2.5f, 1.0f)
+            GL11.glTranslatef(1.0f, 1.25f, 1.0f)
             GL11.glRotatef(360f + var27.toFloat(), 0.0f, 1.0f, 0.0f)
             GL11.glTranslatef(0.0f, 0.0f, 0.5f)
             GL11.glRotatef(90.0f, 0.0f, 1.0f, 0.0f)
-            GL11.glTranslated(0.0, 0.15 * Math.sin(var27 / 5.0), 0.0)
+            GL11.glTranslated(0.0, 0.15 * Math.sin(var27 / 7.5), 0.0)
             val scale = display.getStackInSlot(0)
 
             if (scale != null) {

@@ -48,7 +48,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             val mb = Multiblock()
 
             for (i in ITEMDISPLAY_LOCATIONS.indices) {
-                mb.addComponent(ITEMDISPLAY_LOCATIONS[i][0], ITEMDISPLAY_LOCATIONS[i][1] + 2, ITEMDISPLAY_LOCATIONS[i][2], ModBlocks.pylon, 0)
+                mb.addComponent(ITEMDISPLAY_LOCATIONS[i][0], ITEMDISPLAY_LOCATIONS[i][1] + 1, ITEMDISPLAY_LOCATIONS[i][2], ModBlocks.pylon, 0)
                 mb.addComponent(ITEMDISPLAY_LOCATIONS[i][0], ITEMDISPLAY_LOCATIONS[i][1], ITEMDISPLAY_LOCATIONS[i][2], ShadowFoxBlocks.itemDisplay, 0)
             }
 
@@ -67,9 +67,8 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         fun canEnchanterExist(world: World, x: Int, y: Int, z: Int, meta: Int, player: EntityPlayer?): Boolean {
 
             for (i in ITEMDISPLAY_LOCATIONS.indices) {
-                if (world.getBlock(ITEMDISPLAY_LOCATIONS[i][0] + x, ITEMDISPLAY_LOCATIONS[i][1] + 2 + y, ITEMDISPLAY_LOCATIONS[i][2] + z) !== ModBlocks.pylon) {
                     player?.addChatMessage((ChatComponentText("Pylons")).setChatStyle((ChatStyle()).setColor(EnumChatFormatting.RED)))
-
+                if (world.getBlock(ITEMDISPLAY_LOCATIONS[i][0] + x, ITEMDISPLAY_LOCATIONS[i][1] + 1 + y, ITEMDISPLAY_LOCATIONS[i][2] + z) !== ModBlocks.pylon) {
                     return false
                 }
                 if (world.getBlock(ITEMDISPLAY_LOCATIONS[i][0] + x, ITEMDISPLAY_LOCATIONS[i][1] + y, ITEMDISPLAY_LOCATIONS[i][2] + z) !== ShadowFoxBlocks.itemDisplay) {
