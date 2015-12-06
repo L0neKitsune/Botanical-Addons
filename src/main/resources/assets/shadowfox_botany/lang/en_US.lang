@@ -93,6 +93,8 @@ tile.shadowfox_botany:irisPlanksStairs.name=Iridescent Stairs
 
 shadowfox_botany.potion.manaVoid=Manatide Storm
 
+shadowfox_botany.category.dendrology=Dendrology
+
 shadowfox_botany.entry.coloredDirt=Iridescent Dirt
 shadowfox_botany.tagline.coloredDirt=Rainbow dirt for your decoration needs
 shadowfox_botany.entry.technicolorRod=Rod of the Iridescence
