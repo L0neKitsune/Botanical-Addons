@@ -42,15 +42,9 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         public fun makeMultiblockSet(): MultiblockSet {
             val mb = Multiblock()
 
-<<<<<<< HEAD
-            for (i in ITEMDISPLAY_LOCATIONS.indices) {
-                mb.addComponent(ITEMDISPLAY_LOCATIONS[i][0], ITEMDISPLAY_LOCATIONS[i][1] + 1, ITEMDISPLAY_LOCATIONS[i][2], ModBlocks.pylon, 0)
-                mb.addComponent(ITEMDISPLAY_LOCATIONS[i][0], ITEMDISPLAY_LOCATIONS[i][1], ITEMDISPLAY_LOCATIONS[i][2], ShadowFoxBlocks.itemDisplay, 0)
-=======
             for (i in ITEMDISPLAY_LOCATIONS) {
-                mb.addComponent(i.x, i.y + 2, i.z, ModBlocks.pylon, 0)
+                mb.addComponent(i.x, i.y + 1, i.z, ModBlocks.pylon, 0)
                 mb.addComponent(i.x, i.y, i.z, ShadowFoxBlocks.itemDisplay, 0)
->>>>>>> origin/develop-l0nekitsune
             }
 
             for (i in OBSIDIAN_LOCATIONS) {
