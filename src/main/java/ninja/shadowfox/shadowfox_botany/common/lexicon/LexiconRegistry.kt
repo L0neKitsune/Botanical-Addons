@@ -32,12 +32,9 @@ public object LexiconRegistry {
     val kindling: LexiconEntry
     val waveRod: LexiconEntry
 
-//    val dendrology: ShadowFoxLexiconCategory
-
     init {
 
-        dendrology = ShadowFoxLexiconCategory("dendrology", 0)
-        BotaniaAPI.addCategory(dendrology)
+        dendrology = ShadowFoxLexiconCategory("dendrology", 1)
 
         coloredDirt = ShadowfoxLexiconEntry("coloredDirt", BotaniaAPI.categoryMisc, ShadowFoxBlocks.rainbowDirtBlock)
         coloredDirt.setLexiconPages(PageText("0"), PageCraftingRecipe("1", ModRecipes.recipesColoredDirt))
@@ -54,8 +51,8 @@ public object LexiconRegistry {
                 PageText("2"),
                 PageCraftingRecipe("3", ModRecipes.recipesPriestOfThor))
 
-        irisSapling = ShadowfoxLexiconEntry("irisSapling", BotaniaAPI.categoryMisc, ShadowFoxBlocks.irisSapling)
-        irisSapling.setLexiconPages(PageText("0"),
+        irisSapling = ShadowfoxLexiconEntry("irisSapling", dendrology, ShadowFoxBlocks.irisSapling)
+        irisSapling.setPriority().setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesWoodPanel),
                 PageCraftingRecipe("2", ModRecipes.recipesSlabs),
                 PageCraftingRecipe("3", ModRecipes.recipesStairsR + ModRecipes.recipesStairsL),
@@ -81,9 +78,10 @@ public object LexiconRegistry {
                 PageText("2"),
                 PageCraftingRecipe("3", ModRecipes.recipesPriestOfNjord))
 
-        treeCrafting = ShadowfoxLexiconEntry("treeCrafting", dendrology, ShadowFoxBlocks.irisSapling).setKnowledgeType(BotaniaAPI.basicKnowledge)
-        treeCrafting.setLexiconPages(PageText("0"),
+        treeCrafting = ShadowfoxLexiconEntry("treeCrafting", dendrology, ShadowFoxBlocks.treeCrafterBlock)
+        treeCrafting.setPriority().setLexiconPages(PageText("0"),
                 PageMultiblock("1", ShadowFoxBlocks.treeCrafter))
+
         attribution = ShadowfoxLexiconEntry("attribution", BotaniaAPI.categoryBaubles, ShadowFoxItems.attributionBauble)
         attribution.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesAttribution))

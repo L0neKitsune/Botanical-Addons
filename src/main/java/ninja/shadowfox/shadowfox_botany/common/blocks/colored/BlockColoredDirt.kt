@@ -105,6 +105,7 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
         if(p2 != null){
             if (TileTreeCrafter.canEnchanterExist(p2, p3, p4, p5, p6, p0)){
                 p2.setBlock(p3, p4, p5, ShadowFoxBlocks.treeCrafterBlock, p6, 3)
+                p2.playSoundEffect(p3, p4, p5, "botania:enchanterBlock", 0.5F, 0.6F)
 
                 return true
             }

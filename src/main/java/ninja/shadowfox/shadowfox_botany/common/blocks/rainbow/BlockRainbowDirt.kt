@@ -18,15 +18,17 @@ import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.util.ForgeDirection
 import net.minecraftforge.client.event.TextureStitchEvent
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import vazkii.botania.api.wand.IWandable
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.client.render.block.InterpolatedIcon
 import java.util.Random
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxColoredItemBlock
 
-class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable {
+class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable, IWandable {
 
     private val name = "rainbowDirt"
 
@@ -44,6 +46,19 @@ class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     }
     override fun func_149852_a(world: World, random: Random, x: Int, y: Int, z: Int): Boolean {
         return true
+    }
+
+    override fun onUsedByWand(p0: EntityPlayer?, p1: ItemStack?, p2: World?, p3: Int, p4: Int, p5: Int, p6: Int): Boolean {
+        if(p2 != null){
+            if (TileTreeCrafter.canEnchanterExist(p2, p3, p4, p5, p6, p0)){
+                p2.setBlock(p3, p4, p5, ShadowFoxBlocks.treeCrafterBlock, p6, 3)
+                p2.playSoundEffect(p3, p4, p5, "botania:enchanterBlock", 0.5F, 0.6F)
+
+                return true
+            }
+        }
+
+        return false
     }
 
     override fun func_149853_b(world: World, random: Random, x: Int, y: Int, z: Int) {

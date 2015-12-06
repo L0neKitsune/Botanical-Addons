@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import vazkii.botania.client.core.helper.IconHelper
-import vazkii.botania.common.item.block.ItemBlockMod
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxItemBlockMod
 
 
 abstract  class ShadowFoxTileContainer<T: TileEntity>(material: Material): BlockContainer(material) {
@@ -27,7 +27,7 @@ abstract  class ShadowFoxTileContainer<T: TileEntity>(material: Material): Block
 
     override fun setBlockName(par1Str: String): Block {
         if (this.shouldRegisterInNameSet()) {
-            GameRegistry.registerBlock(this, ItemBlockMod::class.java, par1Str)
+            GameRegistry.registerBlock(this, ShadowFoxItemBlockMod::class.java, par1Str)
         }
 
         return super.setBlockName(par1Str)

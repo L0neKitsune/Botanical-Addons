@@ -13,6 +13,7 @@ import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
 import ninja.shadowfox.shadowfox_botany.common.blocks.BlockItemDisplay
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.BlockColoredSapling
+import ninja.shadowfox.shadowfox_botany.common.lexicon.MultiblockComponentRainbow
 import vazkii.botania.api.lexicon.multiblock.Multiblock
 import vazkii.botania.api.lexicon.multiblock.MultiblockSet
 import vazkii.botania.api.lexicon.multiblock.component.ColorSwitchingComponent
@@ -56,10 +57,10 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             }
 
             for (i in COLOREDWOOD_LOCATIONS.indices) {
-                mb.addComponent(ColorSwitchingComponent(ChunkCoordinates(COLOREDWOOD_LOCATIONS[i][0], COLOREDWOOD_LOCATIONS[i][1], COLOREDWOOD_LOCATIONS[i][2]), ShadowFoxBlocks.coloredPlanks))
+                mb.addComponent(MultiblockComponentRainbow(ChunkCoordinates(COLOREDWOOD_LOCATIONS[i][0], COLOREDWOOD_LOCATIONS[i][1], COLOREDWOOD_LOCATIONS[i][2]), ShadowFoxBlocks.coloredPlanks, ShadowFoxBlocks.rainbowPlanks))
             }
 
-            mb.addComponent(ColorSwitchingComponent(ChunkCoordinates(0, 0, 0), ShadowFoxBlocks.coloredDirtBlock))
+            mb.addComponent(MultiblockComponentRainbow(ChunkCoordinates(0, 0, 0), ShadowFoxBlocks.coloredDirtBlock, ShadowFoxBlocks.rainbowDirtBlock))
             return mb.makeSet()
         }
 
@@ -85,13 +86,15 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             }
 
             for (i in COLOREDWOOD_LOCATIONS.indices) {
-                if (world.getBlock(COLOREDWOOD_LOCATIONS[i][0] + x, COLOREDWOOD_LOCATIONS[i][1] + y, COLOREDWOOD_LOCATIONS[i][2] + z) !== ShadowFoxBlocks.coloredPlanks) {
+                val blockAt = world.getBlock(COLOREDWOOD_LOCATIONS[i][0] + x, COLOREDWOOD_LOCATIONS[i][1] + y, COLOREDWOOD_LOCATIONS[i][2] + z)
+                if (blockAt !== ShadowFoxBlocks.coloredPlanks && blockAt !== ShadowFoxBlocks.rainbowPlanks) {
                     player?.addChatMessage((ChatComponentText("Wood")).setChatStyle((ChatStyle()).setColor(EnumChatFormatting.RED)))
                     return false
                 }
             }
 
-            if (world.getBlock(x, y, z) !== ShadowFoxBlocks.treeCrafterBlock && world.getBlock(x, y, z) !== ShadowFoxBlocks.coloredDirtBlock) {
+            val blockAt = world.getBlock(x, y, z)
+            if (blockAt !== ShadowFoxBlocks.treeCrafterBlock && blockAt !== ShadowFoxBlocks.coloredDirtBlock && blockAt !== ShadowFoxBlocks.rainbowDirtBlock) {
                 player?.addChatMessage((ChatComponentText("Dirt")).setChatStyle((ChatStyle()).setColor(EnumChatFormatting.RED)))
                 return false
             }
