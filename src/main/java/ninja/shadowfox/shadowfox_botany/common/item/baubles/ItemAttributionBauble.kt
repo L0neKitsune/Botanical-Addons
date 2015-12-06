@@ -134,7 +134,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
             stack.getTagCompound().removeTag("display")
         }
     }
-    
+
 
     @SideOnly(Side.CLIENT)
     override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {
@@ -191,7 +191,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
                 GL11.glTranslatef(-0.26F, -0.4F, if (armor) 0.21F else 0.15F)
                 scale(0.5F)
                 ItemRenderer.renderItemIn2D(Tessellator.instance, defaultIcon.maxU, defaultIcon.minV, defaultIcon.minU, defaultIcon.maxV, defaultIcon.iconWidth, defaultIcon.iconHeight, 1F / 32F)
-            } 
+            }
         }
     }
 }

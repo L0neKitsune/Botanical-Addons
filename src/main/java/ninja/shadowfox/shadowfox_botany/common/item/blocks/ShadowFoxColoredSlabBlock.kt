@@ -23,6 +23,6 @@ open class ShadowFoxColoredSlabBlock(val par1: Block) : ItemSlab(par1, (par1 as 
         if(par1ItemStack == null) return
         val meta = "\\d+$".toRegex().find(field_150939_a.unlocalizedName)
         addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + (meta?.value ?: "16")) + "&r", par3List)
-    } 
+    }
 
 }

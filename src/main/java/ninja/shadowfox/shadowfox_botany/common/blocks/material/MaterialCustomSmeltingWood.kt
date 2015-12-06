@@ -4,11 +4,11 @@ import net.minecraft.block.material.Material
 import net.minecraft.block.material.MapColor
 
 class MaterialCustomSmeltingWood: Material(MapColor.woodColor) {
-	companion object {
-		val material = MaterialCustomSmeltingWood()
-	}
+    companion object {
+        val material = MaterialCustomSmeltingWood()
+    }
 
-	init {
-		this.setBurning()
-	}
+    init {
+        this.setBurning()
+    }
 }

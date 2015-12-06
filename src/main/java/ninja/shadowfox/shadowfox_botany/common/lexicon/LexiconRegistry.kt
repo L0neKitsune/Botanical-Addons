@@ -27,6 +27,7 @@ public object LexiconRegistry {
     val attribution : LexiconEntry
     val sealCreepers: LexiconEntry
     val kindling: LexiconEntry
+    val waveRod: LexiconEntry
 
 //    val dendrology: ShadowFoxLexiconCategory
 
@@ -38,13 +39,13 @@ public object LexiconRegistry {
         coloredDirt.setLexiconPages(PageText("0"), PageCraftingRecipe("1", ModRecipes.recipesColoredDirt))
 
         technicolor = ShadowfoxLexiconEntry("technicolorRod", BotaniaAPI.categoryTools, ItemStack(ShadowFoxItems.colorfulSkyDirtRod, 1, 16)).setKnowledgeType(BotaniaAPI.elvenKnowledge)
-        technicolor.setLexiconPages(PageText("0"), 
+        technicolor.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesColoredSkyDirtRod),
                 PageText("2"),
                 PageCraftingRecipe("3", ModRecipes.recipesPriestOfSif))
 
         lightningRod = ShadowfoxLexiconEntry("lightningRod", BotaniaAPI.categoryTools, ShadowFoxItems.lightningRod).setKnowledgeType(BotaniaAPI.elvenKnowledge)
-        lightningRod.setLexiconPages(PageText("0"), 
+        lightningRod.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesLightningRod),
                 PageText("2"),
                 PageCraftingRecipe("3", ModRecipes.recipesPriestOfThor))
@@ -92,9 +93,14 @@ public object LexiconRegistry {
         kindling.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesKindling))
 
+        waveRod = ShadowfoxLexiconEntry("waveRod", BotaniaAPI.categoryTools, ShadowFoxItems.rainbowRod).setKnowledgeType(BotaniaAPI.elvenKnowledge)
+        waveRod.setLexiconPages(PageText("0"),
+                PageCraftingRecipe("1", ModRecipes.recipesRainbowRod))
+
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.interdictionRod), interdictionRod, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.rainbowRod), waveRod, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.emblem, 1, 0), lightningRod, 3)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.emblem, 1, 1), technicolor, 3)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.emblem, 1, 2), interdictionRod, 3)
