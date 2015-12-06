@@ -10,6 +10,7 @@ import ninja.shadowfox.shadowfox_botany.common.item.rods.*
 object ShadowFoxItems {
     val irisSeeds: Item
     val colorfulSkyDirtRod: Item
+    val rainbowRod: Item
     val lightningRod: Item
     val interdictionRod: Item
     val emblem: Item
@@ -26,6 +27,7 @@ object ShadowFoxItems {
     init {
         irisSeeds = ItemColorSeeds()
         colorfulSkyDirtRod = ColorfulSkyDirtRod()
+        rainbowRod = RainbowLightRod()
         lightningRod = LightningRod()
         interdictionRod = InterdictionRod()
         emblem = ItemPriestEmblem()

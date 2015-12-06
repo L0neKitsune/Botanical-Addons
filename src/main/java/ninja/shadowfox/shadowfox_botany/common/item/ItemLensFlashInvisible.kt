@@ -113,7 +113,7 @@ class ItemLensFlashInvisible() : StandardItem("lensPhantomLight"), ICompositable
 
                     val tile = entity.worldObj.getTileEntity(x, y, z)
                     if (tile is TileInvisibleManaFlame) {
-                        tile.color = burst.color
+                        tile.flameColor = burst.color
                     }
                 }
             }
@@ -144,7 +144,7 @@ class ItemLensFlashInvisible() : StandardItem("lensPhantomLight"), ICompositable
     }
 
     fun getItemShortTermName(stack: ItemStack): String {
-        return StatCollector.translateToLocal(stack.getUnlocalizedName().replace("item\\.".toRegex(), "item.botania:") + ".short");
+        return StatCollector.translateToLocal(stack.getUnlocalizedName().replace("item\\.".toRegex(), "item.botania:") + ".short")
     }
 
     override fun getColorFromItemStack(par1ItemStack: ItemStack, par2: Int): Int {

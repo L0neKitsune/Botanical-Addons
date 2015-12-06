@@ -166,10 +166,10 @@ public open class InterdictionRod(name: String = "interdictionRod") : StandardIt
                 if (count % 5 == 0) particleRing(world, x, y, z, range, r, g, b)
 
                 val exclude: EntityLivingBase = player
-                val entities = world.getEntitiesWithinAABBExcludingEntity(exclude, 
-                    AxisAlignedBB.getBoundingBox(x - range, y - range, z - range, 
+                val entities = world.getEntitiesWithinAABBExcludingEntity(exclude,
+                    AxisAlignedBB.getBoundingBox(x - range, y - range, z - range,
                         x + range, y + range, z + range), PLAYER_SELECTOR)
-                
+
                 if (pushEntities(x, y, z, range, velocity, entities)) {
                     if (count % 3 == 0) world.playSoundAtEntity(player, "shadowfox_botany:wind", 0.4F, 1F)
                     ManaItemHandler.requestManaExactForTool(stack, player, cost, true)
@@ -193,8 +193,8 @@ public open class InterdictionRod(name: String = "interdictionRod") : StandardIt
         return COST + if (prowess) PROWESS_COST else 0 + if (priest) PRIEST_COST else 0
     }
     fun getVelocity(prowess: Boolean, priest: Boolean): Double {
-        var vel = VELOCITY 
-        if (prowess) vel += PROWESS_VELOCTY 
+        var vel = VELOCITY
+        if (prowess) vel += PROWESS_VELOCTY
         if (priest) vel += PRIEST_VELOCITY
         return vel
     }
@@ -212,8 +212,8 @@ public open class InterdictionRod(name: String = "interdictionRod") : StandardIt
         if (tile.currentMana >= AVATAR_COST) {
             if (tile.elapsedFunctionalTicks % 5 == 0) particleRing(world, x, y, z, RANGE, 0f, 0f, 1f)
 
-            val entities = world.selectEntitiesWithinAABB(EntityLivingBase::class.java, 
-                AxisAlignedBB.getBoundingBox(x - RANGE, y - RANGE, z - RANGE, 
+            val entities = world.selectEntitiesWithinAABB(EntityLivingBase::class.java,
+                AxisAlignedBB.getBoundingBox(x - RANGE, y - RANGE, z - RANGE,
                     x + RANGE, y + RANGE, z + RANGE), AVATAR_SELECTOR)
 
             if (pushEntities(x, y, z, RANGE, VELOCITY, entities)) {
