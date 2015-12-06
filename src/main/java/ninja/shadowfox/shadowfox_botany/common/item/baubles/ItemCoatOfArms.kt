@@ -34,9 +34,9 @@ class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorO
     val TYPES = 16
     var icons: Array<IIcon?> = arrayOfNulls(TYPES+1)
     val colorMap: IntArray = intArrayOf(
-        0x00137F, 0x0043FF, 0x0043FF, 0xFFD800, 
-        0x002EFF, 0x001A8E, 0x009944, 0x003BFF, 
-        0x00FF3B, 0xFF003B, 0x603A20, 0xFFFF00, 
+        0x00137F, 0x0043FF, 0x0043FF, 0xFFD800,
+        0x002EFF, 0x001A8E, 0x009944, 0x003BFF,
+        0x00FF3B, 0xFF003B, 0x603A20, 0xFFFF00,
         0xFF0015, 0x0048FF, 0xFFD400, 0xFFFFFF
     )
 

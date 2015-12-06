@@ -30,6 +30,7 @@ item.shadowfox_botany:attributionBauble1.name=Pendant of Headtato Summoning
 item.shadowfox_botany:colorfulSkyDirtRod.name=Rod of the Iridescence
 item.shadowfox_botany:lightningRod.name=Rod of the Thundercaller
 item.shadowfox_botany:interdictionRod.name=Rod of the Hurricane
+item.shadowfox_botany:rainbowLightRod.name=Rod of the Shining Wave
 
 item.shadowfox_botany:priestEmblem0.name=Priestly Emblem: Thor
 item.shadowfox_botany:priestEmblem1.name=Priestly Emblem: Sif
@@ -54,9 +55,13 @@ tile.shadowfox_botany:rainbowGrass.name=Iridescent Grass
 tile.shadowfox_botany:irisGrass.name=Iridescent Grass
 tile.shadowfox_botany:rainbowDoubleGrass.name=Iridescent Double Grass
 tile.shadowfox_botany:irisDoubleGrass.name=Iridescent Double Grass
+
+tile.shadowfox_botany:treeCrafter.name=Dendric Suffuser
+
 item.shadowfox_botany:irisSeeds.name=Iridescent Seeds
 
 tile.shadowfox_botany:invisibleFlame.name=Phantom Mana Flash
+tile.shadowfox_botany:rainbowFlame.name=Rainbow Mana Flash
 item.botania:lensPhantomLight.short=Phantom Flash
 
 item.shadowfox_botany:coatOfArms0.name=Chilean Shield
@@ -101,6 +106,8 @@ shadowfox_botany.entry.interdictionRod=Rod of the Hurricane
 shadowfox_botany.tagline.interdictionRod=Push enemies out of your personal space
 shadowfox_botany.entry.irisSapling=Iridescent Trees
 shadowfox_botany.tagline.irisSapling=Grow trees with all the colors of the wind
+shadowfox_botany.entry.treeCrafting=Tree Suffusion
+shadowfox_botany.tagline.treeCrafting=Infusing trees with mana and material
 shadowfox_botany.entry.irisSeeds=Iridescent Grass
 shadowfox_botany.tagline.irisSeeds=Rainbow grass for your colorful landscapes
 shadowfox_botany.entry.coatOfArms=Coats of Arms
@@ -113,10 +120,9 @@ shadowfox_botany.entry.sealCreepers=Manaseal Creepers
 shadowfox_botany.tagline.sealCreepers=A storm in the Manatide
 shadowfox_botany.entry.kindling=Blaze Kindling
 shadowfox_botany.tagline.kindling=Quickened firespread
+shadowfox_botany.entry.waveRod=Rod of the Shining Wave
+shadowfox_botany.tagline.waveRod=Rainbow lights
 
-shadowfox_botany.entry.treeCrafting=Dendric Suffuser
-shadowfox_botany.page.treeCrafting0=The &1Dendric Suffuser&0, is a large multiblock structure that is able to infuse mana into &1Iridescent Saplings&0 giving them new properties.
-shadowfox_botany.page.treeCrafting1=&1Dendric Suffuser&0
 shadowfox_botany.category.dendrology=Mystical Dendrology
 
 shadowfox_botany.page.coloredDirt0=Using the latent power in &1Mystical Flowers&0, you can make dirt that shimmers every color of the rainbow. This mystical dirt is capable of growing trees and plants without water or a hoe. If put next to a &1Pure Daisy&0, it will revert to its uncolored state.
@@ -144,6 +150,9 @@ shadowfox_botany.page.irisSapling3=Stairs
 shadowfox_botany.page.irisSapling4=And back again
 shadowfox_botany.page.irisSapling5=Grinding them down
 
+shadowfox_botany.page.treeCrafting0=Affecting life is much harder than making or destroying it. The &1Iridescent Tree&0 has a natural lack of regular life, which lends itself to making beautiful spectrums of wood. It seems possible to re-add this life, by drawing mana into a &4Dendric Suffuser&0. This machine, of &1Obsidian&0 and materials of &4Iridesence&0, will suffuse the purified tree with life, creating interesting new varieties of life.
+shadowfox_botany.page.treeCrafting1=The Dendric Suffuser
+
 shadowfox_botany.page.irisSeeds0=If &1Bone Meal&0 is used on &1Iridescent Dirt&0, it will grow &1Iridescent Grass&0 instead of &1Tall Grass&0. When this &1Iridescent Grass&0 is thrown into a &4Mana Pool&0, you get out something quite like the &1Pasture Seed&0. It will transmute &1Grass&0 and &1Dirt&0 into &1Iridescent Dirt&0, with a simple right click.
 shadowfox_botany.page.irisSeeds1=/etc/sudoers
 shadowfox_botany.page.irisSeeds2=Tiger Orchid monoculture
@@ -163,3 +172,6 @@ shadowfox_botany.page.sealCreepers1NoDrop=However, they do have one interesting 
 
 shadowfox_botany.page.kindling0=&1Blaze Kindling&0 is like &1Netherrack&0 on steroids. Not only will it sustain flames, but it will take them in from nearby blocks, very quickly, It can also be extinguished and lit simply by using it with an open hand.
 shadowfox_botany.page.kindling1=Stop drop and roll
+
+shadowfox_botany.page.waveRod0=One particularly frustrating property of the &1Mana Lens: Flash&0 is its tendency to lock the color of a &1Mana Flash&0 immidiately upon making it. Even if you want to make a rainbow &1Flash&0, you'll get one color. By using the power of the &4Bifrost&0, you can make the rainbow you've been searching for.<br>It can be tinged with &1Phantom Ink&0.
+shadowfox_botany.page.waveRod1=All the colors of the wind

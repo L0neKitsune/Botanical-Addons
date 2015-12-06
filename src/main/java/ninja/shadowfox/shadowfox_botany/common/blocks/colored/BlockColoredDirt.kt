@@ -26,8 +26,6 @@ import java.util.Random
 import net.minecraft.util.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
-import vazkii.botania.api.wand.IWandable
 import kotlin.properties.Delegates
 
 class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable {

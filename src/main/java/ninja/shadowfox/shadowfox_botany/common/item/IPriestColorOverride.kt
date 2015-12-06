@@ -12,11 +12,11 @@ interface IPriestColorOverride {
                 var baubles = PlayerHandler.getPlayerBaubles(player)
                 for (i in 0..3) {
                     var stack = baubles.getStackInSlot(i)
-                    if (stack != null && stack.item is IPriestColorOverride) 
+                    if (stack != null && stack.item is IPriestColorOverride)
                         return (stack.item as IPriestColorOverride).colorOverride(stack)
                     else if (stack != null && stack.item is ICosmeticAttachable && (stack.item as ICosmeticAttachable).getCosmeticItem(stack) != null) {
                         var cosmeticStack = (stack.item as ICosmeticAttachable).getCosmeticItem(stack)
-                        if (cosmeticStack != null && cosmeticStack.item is IPriestColorOverride) 
+                        if (cosmeticStack != null && cosmeticStack.item is IPriestColorOverride)
                             return (cosmeticStack.item as IPriestColorOverride).colorOverride(cosmeticStack)
                     }
                 }
@@ -25,7 +25,7 @@ interface IPriestColorOverride {
         }
         public fun getColor(player: EntityPlayer?, default: Int): Int {
             var color = getColor(player)
-            if (color != null) 
+            if (color != null)
                 return color
             return default
         }

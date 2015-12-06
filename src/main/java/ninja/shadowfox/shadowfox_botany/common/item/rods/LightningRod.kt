@@ -120,7 +120,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
 
             val color = IPriestColorOverride.getColor(player, 0x0079C4)
             val innerColor = Color(color).brighter().brighter().rgb
-            
+
             if (ManaItemHandler.requestManaExactForTool(stack, player, getCost(thor, prowess, priest), false)) {
                 var target = getTarget(player!!.worldObj, player, ItemNBTHelper.getInt(stack, "target", -1))
                 if (target != null) {

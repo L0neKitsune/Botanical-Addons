@@ -12,17 +12,17 @@ import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
-import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileInvisibleManaFlame
+import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileManaFlame
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import java.util.*
 
 
-class BlockManaInvisibleFlame : ShadowFoxBlockMod(Material.cloth) {
+class BlockManaFlame(name: String, val Tile: Class<out TileManaFlame>) : ShadowFoxBlockMod(Material.cloth) {
 
     override val registerInCreative = false
 
     init {
-        this.setBlockName("invisibleFlame")
+        this.setBlockName(name)
         val f = 0.25f
         this.setStepSound(Block.soundTypeCloth)
         this.setBlockBounds(f, f, f, 1.0f - f, 1.0f - f, 1.0f - f)
@@ -31,7 +31,7 @@ class BlockManaInvisibleFlame : ShadowFoxBlockMod(Material.cloth) {
 
     @Optional.Method(modid = "easycoloredlights")
     override fun getLightValue(world: IBlockAccess, x: Int, y: Int, z: Int): Int {
-        return (world.getTileEntity(x, y, z) as TileInvisibleManaFlame).getLightColor()
+        return this.Tile.cast(world.getTileEntity(x, y, z)).getLightColor()
     }
 
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
@@ -55,6 +55,6 @@ class BlockManaInvisibleFlame : ShadowFoxBlockMod(Material.cloth) {
     }
 
     override fun createTileEntity(world: World?, meta: Int): TileEntity? {
-        return TileInvisibleManaFlame()
+        return this.Tile.newInstance()
     }
 }

@@ -15,6 +15,8 @@ import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
 import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.BlockColoredSapling
+import ninja.shadowfox.shadowfox_botany.common.lexicon.MultiblockComponentRainbow
+
 import org.apache.logging.log4j.Level
 import vazkii.botania.api.internal.VanillaPacketDispatcher
 import vazkii.botania.api.lexicon.multiblock.Multiblock
@@ -50,11 +52,12 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             }
 
             for (i in COLOREDWOOD_LOCATIONS) {
-                mb.addComponent(ColorSwitchingComponent(ChunkCoordinates(i.x, i.y, i.z), ShadowFoxBlocks.coloredPlanks))
+                mb.addComponent(MultiblockComponentRainbow(ChunkCoordinates(i.x, i.y, i.z), ShadowFoxBlocks.coloredPlanks, ShadowFoxBlocks.rainbowPlanks))
             }
 
-            mb.addComponent(ColorSwitchingComponent(ChunkCoordinates(0, 0, 0), ShadowFoxBlocks.coloredDirtBlock))
-            mb.addComponent(ColorSwitchingComponent(ChunkCoordinates(0, 4, 0), ShadowFoxBlocks.coloredPlanks))
+            mb.addComponent(MultiblockComponentRainbow(ChunkCoordinates(0, 0, 0), ShadowFoxBlocks.coloredDirtBlock, ShadowFoxBlocks.rainbowPlanks))
+            mb.addComponent(MultiblockComponentRainbow(ChunkCoordinates(0, 4, 0), ShadowFoxBlocks.coloredPlanks, ShadowFoxBlocks.rainbowPlanks))
+
             return mb.makeSet()
         }
 
