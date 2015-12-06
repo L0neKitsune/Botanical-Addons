@@ -54,7 +54,7 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
         if(par1ItemStack == null) return
         this.addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.creative")+"&r", par3List)
         super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4)
-    } 
+    }
 
     fun addStringToTooltip(s : String, tooltip : MutableList<Any?>?) {
         tooltip!!.add(s.replace("&".toRegex(), "\u00a7"))
@@ -117,7 +117,7 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
                 val b = color.blue.toFloat() / 255f
                 Botania.proxy.wispFX(player.worldObj, x, y, z, r, g, b, Math.random().toFloat() * 0.15f + 0.15f, xmotion, ymotion, zmotion)
             }
-            
+
             Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture)
             IBaubleRender.Helper.rotateIfSneaking(player)
             var armor = player.getCurrentArmor(2) != null

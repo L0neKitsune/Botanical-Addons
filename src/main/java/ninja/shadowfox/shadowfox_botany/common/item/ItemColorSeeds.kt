@@ -166,7 +166,7 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
                                             world.setBlock(coords.posX, coords.posY+1, coords.posZ, ShadowFoxBlocks.irisGrass, metaToSet, 1 or 2)
                                     }
                                     else if (world.getBlock(coords.posX, coords.posY+1, coords.posZ) == Blocks.double_plant && world.getBlockMetadata(coords.posX, coords.posY+1, coords.posZ) == 2) {
-                                        if (rainbow) { 
+                                        if (rainbow) {
                                             world.setBlock(coords.posX, coords.posY+1, coords.posZ, ShadowFoxBlocks.rainbowTallGrass, 0, 2)
                                             world.setBlock(coords.posX, coords.posY+2, coords.posZ, ShadowFoxBlocks.rainbowTallGrass, 8, 2)
                                         }

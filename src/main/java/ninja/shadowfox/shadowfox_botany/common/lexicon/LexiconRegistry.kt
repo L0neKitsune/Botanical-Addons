@@ -39,13 +39,13 @@ public object LexiconRegistry {
         coloredDirt.setLexiconPages(PageText("0"), PageCraftingRecipe("1", ModRecipes.recipesColoredDirt))
 
         technicolor = ShadowfoxLexiconEntry("technicolorRod", BotaniaAPI.categoryTools, ItemStack(ShadowFoxItems.colorfulSkyDirtRod, 1, 16)).setKnowledgeType(BotaniaAPI.elvenKnowledge)
-        technicolor.setLexiconPages(PageText("0"), 
+        technicolor.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesColoredSkyDirtRod),
                 PageText("2"),
                 PageCraftingRecipe("3", ModRecipes.recipesPriestOfSif))
 
         lightningRod = ShadowfoxLexiconEntry("lightningRod", BotaniaAPI.categoryTools, ShadowFoxItems.lightningRod).setKnowledgeType(BotaniaAPI.elvenKnowledge)
-        lightningRod.setLexiconPages(PageText("0"), 
+        lightningRod.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesLightningRod),
                 PageText("2"),
                 PageCraftingRecipe("3", ModRecipes.recipesPriestOfThor))
