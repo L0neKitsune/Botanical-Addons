@@ -114,6 +114,11 @@ shadowfox_botany.tagline.sealCreepers=A storm in the Manatide
 shadowfox_botany.entry.kindling=Blaze Kindling
 shadowfox_botany.tagline.kindling=Quickened firespread
 
+shadowfox_botany.entry.treeCrafting=Dendric Suffuser
+shadowfox_botany.page.treeCrafting0=The &1Dendric Suffuser&0, is a large multiblock structure that is able to infuse mana into &1Iridescent Saplings&0 giving them new properties.
+shadowfox_botany.page.treeCrafting1=&1Dendric Suffuser&0
+shadowfox_botany.category.dendrology=Mystical Dendrology
+
 shadowfox_botany.page.coloredDirt0=Using the latent power in &1Mystical Flowers&0, you can make dirt that shimmers every color of the rainbow. This mystical dirt is capable of growing trees and plants without water or a hoe. If put next to a &1Pure Daisy&0, it will revert to its uncolored state.
 shadowfox_botany.page.coloredDirt1=Beauty from the dross
 

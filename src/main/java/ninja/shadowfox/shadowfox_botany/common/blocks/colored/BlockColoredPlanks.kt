@@ -1,5 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.colored
 
+import cpw.mods.fml.common.FMLLog
 import cpw.mods.fml.common.IFuelHandler
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
@@ -15,18 +16,22 @@ import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.material.MaterialCustomSmeltingWood
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
+import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import org.apache.logging.log4j.Level
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
+import vazkii.botania.api.wand.IWandable
 import java.awt.Color
 import java.util.*
 import kotlin.properties.Delegates
 
-class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.material), ILexiconable, IFuelHandler {
+class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.material), ILexiconable, IFuelHandler, IWandable {
 
     private val name = "irisPlanks"
     private val TYPES = 16
@@ -52,6 +57,20 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.materi
 
     override fun getHarvestTool(metadata : Int): String {
         return "axe"
+    }
+
+    override fun onUsedByWand(p0: EntityPlayer?, p1: ItemStack?, p2: World?, p3: Int, p4: Int, p5: Int, p6: Int): Boolean {
+        if(p2 != null){
+            if (TileTreeCrafter.canEnchanterExist(p2, p3, p4, p5, p6, p0)){
+                FMLLog.log(Level.INFO, "Making Block")
+                p2.setBlock(p3, p4, p5, ShadowFoxBlocks.treeCrafterBlock, p6, 3)
+
+                return true
+            }
+        }
+
+        FMLLog.log(Level.INFO, "Can't Make Block")
+        return false
     }
 
     /**
