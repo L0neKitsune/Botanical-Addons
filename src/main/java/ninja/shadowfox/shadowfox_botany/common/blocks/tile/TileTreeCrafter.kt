@@ -67,19 +67,16 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         fun canEnchanterExist(world: World, x: Int, y: Int, z: Int, meta: Int, player: EntityPlayer?): Boolean {
 
             for (i in ITEMDISPLAY_LOCATIONS.indices) {
-                    player?.addChatMessage((ChatComponentText("Pylons")).setChatStyle((ChatStyle()).setColor(EnumChatFormatting.RED)))
                 if (world.getBlock(ITEMDISPLAY_LOCATIONS[i][0] + x, ITEMDISPLAY_LOCATIONS[i][1] + 1 + y, ITEMDISPLAY_LOCATIONS[i][2] + z) !== ModBlocks.pylon) {
                     return false
                 }
                 if (world.getBlock(ITEMDISPLAY_LOCATIONS[i][0] + x, ITEMDISPLAY_LOCATIONS[i][1] + y, ITEMDISPLAY_LOCATIONS[i][2] + z) !== ShadowFoxBlocks.itemDisplay) {
-                    player?.addChatMessage((ChatComponentText("Displays")).setChatStyle((ChatStyle()).setColor(EnumChatFormatting.RED)))
                     return false
                 }
             }
 
             for (i in OBSIDIAN_LOCATIONS.indices) {
                 if (world.getBlock(OBSIDIAN_LOCATIONS[i][0] + x, OBSIDIAN_LOCATIONS[i][1] + y, OBSIDIAN_LOCATIONS[i][2] + z) !== Blocks.obsidian) {
-                    player?.addChatMessage((ChatComponentText("Obsidian")).setChatStyle((ChatStyle()).setColor(EnumChatFormatting.RED)))
                     return false
                 }
             }
@@ -87,14 +84,12 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             for (i in COLOREDWOOD_LOCATIONS.indices) {
                 val blockAt = world.getBlock(COLOREDWOOD_LOCATIONS[i][0] + x, COLOREDWOOD_LOCATIONS[i][1] + y, COLOREDWOOD_LOCATIONS[i][2] + z)
                 if (blockAt !== ShadowFoxBlocks.coloredPlanks && blockAt !== ShadowFoxBlocks.rainbowPlanks) {
-                    player?.addChatMessage((ChatComponentText("Wood")).setChatStyle((ChatStyle()).setColor(EnumChatFormatting.RED)))
                     return false
                 }
             }
 
             val blockAt = world.getBlock(x, y, z)
             if (blockAt !== ShadowFoxBlocks.treeCrafterBlock && blockAt !== ShadowFoxBlocks.coloredDirtBlock && blockAt !== ShadowFoxBlocks.rainbowDirtBlock) {
-                player?.addChatMessage((ChatComponentText("Dirt")).setChatStyle((ChatStyle()).setColor(EnumChatFormatting.RED)))
                 return false
             }
 
