@@ -6,8 +6,10 @@ import net.minecraft.block.material.Material
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.ScaledResolution
 import net.minecraft.client.renderer.texture.IIconRegister
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
@@ -15,13 +17,16 @@ import net.minecraftforge.common.IPlantable
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxTileContainer
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
+import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import vazkii.botania.api.lexicon.ILexiconable
+import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.api.wand.IWandHUD
 import vazkii.botania.common.block.tile.TileEnchanter
 import vazkii.botania.common.block.tile.TileRuneAltar
 import java.util.*
 
 
-class BlockTreeCrafter(): ShadowFoxTileContainer<TileTreeCrafter>(Material.wood), IWandHUD {
+class BlockTreeCrafter(): ShadowFoxTileContainer<TileTreeCrafter>(Material.wood), IWandHUD, ILexiconable {
     internal var random: Random
     override val registerInCreative: Boolean = false
 
@@ -67,5 +72,9 @@ class BlockTreeCrafter(): ShadowFoxTileContainer<TileTreeCrafter>(Material.wood)
 
     override fun renderHUD(mc: Minecraft, res: ScaledResolution, world: World, x: Int, y: Int, z: Int) {
         (world.getTileEntity(x, y, z) as TileTreeCrafter).renderHUD(mc, res)
+    }
+
+    override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
+        return LexiconRegistry.treeCrafting
     }
 }
