@@ -3,6 +3,8 @@ package ninja.shadowfox.shadowfox_botany.common.blocks
 import net.minecraft.block.Block
 import net.minecraft.block.IGrowable
 import net.minecraft.block.material.Material
+import net.minecraft.client.Minecraft
+import net.minecraft.client.gui.ScaledResolution
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.init.Blocks
 import net.minecraft.item.Item
@@ -13,10 +15,13 @@ import net.minecraftforge.common.IPlantable
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxTileContainer
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
+import vazkii.botania.api.wand.IWandHUD
+import vazkii.botania.common.block.tile.TileEnchanter
+import vazkii.botania.common.block.tile.TileRuneAltar
 import java.util.*
 
 
-class BlockTreeCrafter(): ShadowFoxTileContainer<TileTreeCrafter>(Material.ground) {
+class BlockTreeCrafter(): ShadowFoxTileContainer<TileTreeCrafter>(Material.wood), IWandHUD {
     internal var random: Random
     override val registerInCreative: Boolean = false
 
@@ -36,18 +41,31 @@ class BlockTreeCrafter(): ShadowFoxTileContainer<TileTreeCrafter>(Material.groun
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
 
     override fun getIcon(p_149691_1_: Int, p_149691_2_: Int): IIcon? {
-        return Blocks.lapis_block.getIcon(p_149691_1_, p_149691_2_)
+        return ShadowFoxBlocks.rainbowPlanks.getIcon(p_149691_1_, p_149691_2_)
     }
 
     override fun createNewTileEntity(var1: World, var2: Int): TileTreeCrafter {
         return TileTreeCrafter()
     }
 
-    override fun canSustainPlant(world: IBlockAccess?, x: Int, y: Int, z: Int, direction: ForgeDirection?, plantable: IPlantable?): Boolean {
+    override fun hasComparatorInputOverride(): Boolean {
         return true
     }
 
+    override fun getComparatorInputOverride(par1World: World?, par2: Int, par3: Int, par4: Int, par5: Int): Int {
+        val crafter = par1World!!.getTileEntity(par2, par3, par4) as TileTreeCrafter
+        return crafter.signal
+    }
+
+//    override fun canSustainPlant(world: IBlockAccess?, x: Int, y: Int, z: Int, direction: ForgeDirection?, plantable: IPlantable?): Boolean {
+//        return true
+//    }
+
     override fun getItemDropped(p_149650_1_: Int, p_149650_2_: Random?, p_149650_3_: Int): Item {
-        return Item.getItemFromBlock(ShadowFoxBlocks.coloredDirtBlock)
+        return Item.getItemFromBlock(ShadowFoxBlocks.coloredPlanks)
+    }
+
+    override fun renderHUD(mc: Minecraft, res: ScaledResolution, world: World, x: Int, y: Int, z: Int) {
+        (world.getTileEntity(x, y, z) as TileTreeCrafter).renderHUD(mc, res)
     }
 }

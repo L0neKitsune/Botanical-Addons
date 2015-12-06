@@ -1,5 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.colored
 
+import cpw.mods.fml.common.FMLLog
 import cpw.mods.fml.common.IFuelHandler
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
@@ -15,22 +16,26 @@ import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.material.MaterialCustomSmeltingWood
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
+import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import org.apache.logging.log4j.Level
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
+import vazkii.botania.api.wand.IWandable
 import java.awt.Color
 import java.util.*
 import kotlin.properties.Delegates
 
-class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.material), ILexiconable, IFuelHandler {
+class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.material), ILexiconable, IFuelHandler, IWandable {
 
     private val name = "irisPlanks"
     private val TYPES = 16
-    protected var icons : IIcon by Delegates.notNull()
+    protected var icons: IIcon by Delegates.notNull()
 
     init {
         blockHardness = 2F
@@ -50,8 +55,21 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.materi
         return (type != null && type.equals("axe", true))
     }
 
-    override fun getHarvestTool(metadata : Int): String {
+    override fun getHarvestTool(metadata: Int): String {
         return "axe"
+    }
+
+    override fun onUsedByWand(p0: EntityPlayer?, p1: ItemStack?, p2: World?, p3: Int, p4: Int, p5: Int, p6: Int): Boolean {
+        if (p2 != null) {
+            if (TileTreeCrafter.canEnchanterExist(p2, p3, p4, p5, p6, p0)) {
+                p2.setBlock(p3, p4, p5, ShadowFoxBlocks.treeCrafterBlock, p6, 3)
+                p2.playSoundEffect(p3.toDouble(), p4.toDouble(), p5.toDouble(), "botania:enchanterBlock", 0.5F, 0.6F)
+
+                return true
+            }
+        }
+
+        return false
     }
 
     /**
@@ -91,7 +109,9 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.materi
         return super.setBlockName(par1Str)
     }
 
-    override fun quantityDropped(random: Random): Int { return 1 }
+    override fun quantityDropped(random: Random): Int {
+        return 1
+    }
 
     override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item {
         return Item.getItemFromBlock(this)
@@ -103,7 +123,9 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.materi
         return icons
     }
 
-    override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean { return true }
+    override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean {
+        return true
+    }
 
     internal fun register(name: String) {
         GameRegistry.registerBlock(this, ShadowFoxMetaItemBlock::class.java, name)
@@ -116,11 +138,11 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.materi
     }
 
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-            icons = IconHelper.forBlock(par1IconRegister, this)
+        icons = IconHelper.forBlock(par1IconRegister, this)
 
     }
 
-    override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {
+    override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {
         if (list != null && item != null)
             for (i in 0..(TYPES - 1)) {
                 list.add(ItemStack(item, 1, i))

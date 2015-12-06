@@ -32,7 +32,6 @@ public class RecipeTreeCrafting(val mana: Int, val output: Block, val meta: Int,
 
 
     fun matches(items: List<ItemStack>): Boolean {
-        FMLLog.log(Level.ERROR, "Inputs $inputs")
         var inputsMissing = ArrayList(inputs)
 
         for (i in items) {
@@ -55,14 +54,10 @@ public class RecipeTreeCrafting(val mana: Int, val output: Block, val meta: Int,
                     inputsMissing.removeAt(j)
                     break
                 } else {
-                    FMLLog.log(Level.ERROR, "WTF $j : ${j.javaClass}")
                     break
                 }
             }
         }
-
-        FMLLog.log(Level.ERROR, "WTF $inputsMissing")
-
         return inputsMissing.isEmpty()
     }
 

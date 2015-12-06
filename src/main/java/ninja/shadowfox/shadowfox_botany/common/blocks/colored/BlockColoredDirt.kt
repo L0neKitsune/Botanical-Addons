@@ -26,11 +26,9 @@ import java.util.Random
 import net.minecraft.util.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
-import vazkii.botania.api.wand.IWandable
 import kotlin.properties.Delegates
 
-class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable, IWandable {
+class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable {
 
     private val name = "coloredDirt"
     private val TYPES = 16
@@ -99,19 +97,6 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     @SideOnly(Side.CLIENT)
     override fun getBlockColor(): Int {
         return 0xFFFFFF
-    }
-
-    override fun onUsedByWand(p0: EntityPlayer?, p1: ItemStack?, p2: World?, p3: Int, p4: Int, p5: Int, p6: Int): Boolean {
-        if(p2 != null){
-            if (TileTreeCrafter.canEnchanterExist(p2, p3, p4, p5, p6, p0)){
-                p2.setBlock(p3, p4, p5, ShadowFoxBlocks.treeCrafterBlock, p6, 3)
-                p2.playSoundEffect(p3.toDouble(), p4.toDouble(), p5.toDouble(), "botania:enchanterBlock", 0.5F, 0.6F)
-
-                return true
-            }
-        }
-
-        return false
     }
 
     /**
