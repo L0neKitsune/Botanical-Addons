@@ -269,18 +269,21 @@ public object ModRecipes {
         recipesRainbowRod = BotaniaAPI.getLatestAddedRecipe()
 
         addOreDictRecipe(ItemStack(ShadowFoxBlocks.itemDisplay),
-                "NWN",
+                "N"
+                "W",
                 'N', LibOreDict.MANASTEEL_NUGGET,
                 'W', ItemStack(BotaniaDecorBlocks.livingwoodSlab))
         addOreDictRecipe(ItemStack(ShadowFoxBlocks.itemDisplay, 1, 1),
-                "NWN",
+                "N"
+                "W",
                 'N', LibOreDict.TERRASTEEL_NUGGET,
                 'W', ItemStack(BotaniaDecorBlocks.livingwoodSlab))
 
         recipesItemDisplay = BotaniaAPI.getLatestAddedRecipes(2)
 
         addOreDictRecipe(ItemStack(ShadowFoxBlocks.itemDisplay, 1, 2),
-                "NWN",
+                "N"
+                "W",
                 'N', LibOreDict.ELEMENTIUM_NUGGET,
                 'W', ItemStack(BotaniaDecorBlocks.dreamwoodSlab))
 
