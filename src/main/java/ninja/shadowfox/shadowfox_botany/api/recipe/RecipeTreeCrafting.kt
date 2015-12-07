@@ -38,7 +38,7 @@ public class RecipeTreeCrafting(val mana: Int, val output: Block, val meta: Int,
             }
         }
 
-        FMLLog.log(Level.INFO, "Missing: [$inputsMissing]")
+        // FMLLog.log(Level.INFO, "Missing: [$inputsMissing]")
         return inputsMissing.isEmpty()
     }
 
