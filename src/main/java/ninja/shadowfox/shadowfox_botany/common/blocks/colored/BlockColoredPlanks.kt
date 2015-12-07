@@ -1,6 +1,5 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.colored
 
-import cpw.mods.fml.common.FMLLog
 import cpw.mods.fml.common.IFuelHandler
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
@@ -23,7 +22,6 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
-import org.apache.logging.log4j.Level
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.api.wand.IWandable
@@ -62,7 +60,8 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.materi
     override fun onUsedByWand(p0: EntityPlayer?, p1: ItemStack?, p2: World?, p3: Int, p4: Int, p5: Int, p6: Int): Boolean {
         if (p2 != null) {
             if (TileTreeCrafter.canEnchanterExist(p2, p3, p4, p5, p6, p0)) {
-                p2.setBlock(p3, p4, p5, ShadowFoxBlocks.treeCrafterBlock, p6, 3)
+                val meta = p2.getBlockMetadata(p3, p4, p5)
+                p2.setBlock(p3, p4, p5, ShadowFoxBlocks.treeCrafterBlock, meta, 3)
                 p2.playSoundEffect(p3.toDouble(), p4.toDouble(), p5.toDouble(), "botania:enchanterBlock", 0.5F, 0.6F)
 
                 return true

@@ -26,7 +26,7 @@ import vazkii.botania.common.block.tile.TileRuneAltar
 import java.util.*
 
 
-class BlockTreeCrafter(): ShadowFoxTileContainer<TileTreeCrafter>(Material.wood), IWandHUD, ILexiconable {
+open class BlockTreeCrafter(name: String = "treeCrafter"): ShadowFoxTileContainer<TileTreeCrafter>(Material.wood), IWandHUD, ILexiconable {
     internal var random: Random
     override val registerInCreative: Boolean = false
 
@@ -35,7 +35,7 @@ class BlockTreeCrafter(): ShadowFoxTileContainer<TileTreeCrafter>(Material.wood)
         setResistance(5.0f)
         setLightLevel(1.0f)
         setStepSound(Block.soundTypeStone)
-        setBlockName("treeCrafter")
+        setBlockName(name)
         random = Random()
     }
 
@@ -76,5 +76,11 @@ class BlockTreeCrafter(): ShadowFoxTileContainer<TileTreeCrafter>(Material.wood)
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return LexiconRegistry.treeCrafting
+    }
+}
+
+public class BlockTreeCrafterRainbow() : BlockTreeCrafter(name = "treeCrafterRB") {
+    override fun getItemDropped(p_149650_1_: Int, p_149650_2_: Random?, p_149650_3_: Int): Item {
+        return Item.getItemFromBlock(ShadowFoxBlocks.rainbowPlanks)
     }
 }

@@ -52,6 +52,7 @@ public object ShadowFoxBlocks {
     public var itemDisplay: Block
     public var treeCrafter: MultiblockSet
     public var treeCrafterBlock: Block
+    public var treeCrafterBlockRB: Block
 
     public var invisibleFlame: Block
     public var rainbowFlame: Block
@@ -102,6 +103,7 @@ public object ShadowFoxBlocks {
         // lightningRod = BlockLightningRod()
         treeCrafter = TileTreeCrafter.makeMultiblockSet()
         treeCrafterBlock = BlockTreeCrafter()
+        treeCrafterBlockRB = BlockTreeCrafterRainbow()
 
         barrier = BlockBarrier()
 

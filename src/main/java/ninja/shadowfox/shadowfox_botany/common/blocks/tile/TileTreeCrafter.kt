@@ -93,8 +93,9 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             }
 
             if (world.getBlock(x, y0 + 4, z) !== ShadowFoxBlocks.treeCrafterBlock &&
+                    world.getBlock(x, y0 + 4, z) !== ShadowFoxBlocks.treeCrafterBlockRB &&
                     world.getBlock(x, y0 + 4, z) !== ShadowFoxBlocks.coloredPlanks && 
-                     world.getBlock(x, y0 + 4, z) !== ShadowFoxBlocks.rainbowPlanks) {
+                    world.getBlock(x, y0 + 4, z) !== ShadowFoxBlocks.rainbowPlanks) {
                 FMLLog.log(Level.INFO, "Core Block")
                 return false
             }
@@ -124,12 +125,16 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
     private var manaRequired: Int = 0
     private var stage: Int = 0
     private var stageTicks: Int = 0
-    public var signal = 0
+    public  var signal = 0
 
     override fun updateEntity() {
-        if (!canEnchanterExist(this.worldObj, this.xCoord, this.yCoord, this.zCoord, this.getBlockMetadata(), null)) {
+        if (!canEnchanterExist(this.worldObj, this.xCoord, this.yCoord, this.zCoord, this.blockMetadata, null)) {
+            val block = worldObj.getBlock(xCoord, yCoord, zCoord)
             val meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord)
-            worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, ShadowFoxBlocks.coloredPlanks, meta, 3)
+
+            if(block === ShadowFoxBlocks.treeCrafterBlock)
+                worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, ShadowFoxBlocks.coloredPlanks, meta, 3)
+            else worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, ShadowFoxBlocks.rainbowPlanks, 0, 3)
 
             for (var11 in 0..49) {
                 val var13 = Math.random().toFloat()
