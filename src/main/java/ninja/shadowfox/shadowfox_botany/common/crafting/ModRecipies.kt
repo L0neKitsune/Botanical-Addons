@@ -17,6 +17,7 @@ import vazkii.botania.common.lib.LibOreDict
 import net.minecraftforge.oredict.RecipeSorter
 import net.minecraftforge.oredict.RecipeSorter.Category
 import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
+import vazkii.botania.common.block.ModFluffBlocks as BotaniaDecorBlocks
 import vazkii.botania.common.item.ModItems as BotaniaItems
 
 public object ModRecipes {
@@ -270,18 +271,18 @@ public object ModRecipes {
         addOreDictRecipe(ItemStack(ShadowFoxBlocks.itemDisplay),
                 "NWN",
                 'N', LibOreDict.MANASTEEL_NUGGET,
-                'W', LibOreDict.LIVING_WOOD)
+                'W', ItemStack(BotaniaDecorBlocks.livingwoodSlab))
         addOreDictRecipe(ItemStack(ShadowFoxBlocks.itemDisplay, 1, 1),
                 "NWN",
                 'N', LibOreDict.TERRASTEEL_NUGGET,
-                'W', LibOreDict.LIVING_WOOD)
+                'W', ItemStack(BotaniaDecorBlocks.livingwoodSlab))
 
         recipesItemDisplay = BotaniaAPI.getLatestAddedRecipes(2)
 
         addOreDictRecipe(ItemStack(ShadowFoxBlocks.itemDisplay, 1, 2),
                 "NWN",
                 'N', LibOreDict.ELEMENTIUM_NUGGET,
-                'W', LibOreDict.DREAM_WOOD)
+                'W', ItemStack(BotaniaDecorBlocks.dreamwoodSlab))
 
         recipesItemDisplayElven = BotaniaAPI.getLatestAddedRecipe()
 
