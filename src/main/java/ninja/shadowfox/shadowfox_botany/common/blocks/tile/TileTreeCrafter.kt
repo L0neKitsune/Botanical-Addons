@@ -11,17 +11,18 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.*
 import net.minecraft.world.World
+import net.minecraftforge.oredict.OreDictionary
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
 import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.BlockColoredSapling
 import ninja.shadowfox.shadowfox_botany.common.lexicon.MultiblockComponentRainbow
+import ninja.shadowfox.shadowfox_botany.common.utils.itemEquals
 
 import org.apache.logging.log4j.Level
 import vazkii.botania.api.internal.VanillaPacketDispatcher
 import vazkii.botania.api.lexicon.multiblock.Multiblock
 import vazkii.botania.api.lexicon.multiblock.MultiblockSet
-import vazkii.botania.api.lexicon.multiblock.component.ColorSwitchingComponent
 import vazkii.botania.api.mana.IManaPool
 import vazkii.botania.api.mana.spark.ISparkAttachable
 import vazkii.botania.api.mana.spark.ISparkEntity
@@ -66,7 +67,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             val y0 = y - 4
 
             for (i in ITEMDISPLAY_LOCATIONS) {
-                if (!i.isBlock(world, ModBlocks.pylon, x0 = x, y0 = y0 + 1, z0 = z)) {
+                if (!i.isBlock(world, ModBlocks.pylon, x0 = x, y0 = y0 + 2, z0 = z)) {
                     FMLLog.log(Level.INFO, "Pylon at $i")
                     return false
                 }
@@ -191,7 +192,6 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             2 -> {
                 stageTicks++
                 signal = 2
-                20 tickDelay { FMLLog.log(Level.INFO, "Stage 2: $stageTicks ticks") }
                 forRecipe { craftingFanciness(it) }
             }
             3 -> 40 tickDelay { advanceStage() }
@@ -258,6 +258,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
 
         }
 
+        FMLLog.log(Level.INFO, "Items: [$items]")
         return items
     }
 
@@ -300,10 +301,18 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             Botania.proxy.sparkleFX(this.worldObj, this.xCoord.toDouble() + 0.5 + Math.random() * 0.4 - 0.2, (this.yCoord + 1).toDouble(), this.zCoord.toDouble() + 0.5 + Math.random() * 0.4 - 0.2, red, green, blue, Math.random().toFloat(), 10)
         }
 
+        var recipeItems = ArrayList(recipe.inputs)
+
         itemDisplays {
-            it.apply {
-                setInventorySlotContents(0, null)
-                invalidate()
+            for(rItem in recipeItems) {
+                if (it.getStackInSlot(0)?.itemEquals(rItem) ?: false) {
+                    it.apply {
+                        setInventorySlotContents(0, null)
+                        invalidate()
+                    }
+                    recipeItems.remove(rItem)
+                    break
+                }
             }
         }
     }
@@ -338,4 +347,3 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         }
     }
 }
-
