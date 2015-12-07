@@ -87,9 +87,10 @@ open class BlockTreeCrafter(name: String = "treeCrafter"): ShadowFoxTileContaine
     override fun getRenderBlockPass(): Int = 1
     override fun getRenderType(): Int = Constants.multipassRenderingID
 
-    override fun innerBlock(world: IBlockAccess?, x: Int, y: Int, z: Int): Block = ShadowFoxBlocks.coloredPlanks
+    override fun innerBlock(): Block = ShadowFoxBlocks.coloredPlanks
+    override fun innerBlock(world: IBlockAccess?, x: Int, y: Int, z: Int): Block = innerBlock()
 }
 
 public class BlockTreeCrafterRainbow() : BlockTreeCrafter(name = "treeCrafterRB") {
-    override fun innerBlock(world: IBlockAccess?, x: Int, y: Int, z: Int): Block = ShadowFoxBlocks.rainbowPlanks
+    override fun innerBlock(): Block = ShadowFoxBlocks.rainbowPlanks
 }

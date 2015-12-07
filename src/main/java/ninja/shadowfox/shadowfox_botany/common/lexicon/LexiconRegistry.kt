@@ -79,7 +79,7 @@ public object LexiconRegistry {
                 PageText("2"),
                 PageCraftingRecipe("3", ModRecipes.recipesPriestOfNjord))
 
-        treeCrafting = ShadowfoxLexiconEntry("treeCrafting", dendrology, ShadowFoxBlocks.treeCrafterBlock)
+        treeCrafting = ShadowfoxLexiconEntry("treeCrafting", dendrology, ShadowFoxBlocks.treeCrafterBlockRB)
         treeCrafting.setPriority().setLexiconPages(PageText("0"),
                 PageMultiblock("1", ShadowFoxBlocks.treeCrafter))
 

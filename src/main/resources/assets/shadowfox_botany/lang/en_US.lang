@@ -61,6 +61,7 @@ tile.shadowfox_botany:rainbowDoubleGrass.name=Iridescent Double Grass
 tile.shadowfox_botany:irisDoubleGrass.name=Iridescent Double Grass
 
 tile.shadowfox_botany:treeCrafter.name=Dendric Suffuser
+tile.shadowfox_botany:treeCrafterRB.name=Dendric Suffuser
 
 item.shadowfox_botany:irisSeeds.name=Iridescent Seeds
 

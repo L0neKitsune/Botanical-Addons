@@ -9,8 +9,9 @@ import java.util.*
 public object ShadowFoxAPI {
     var treeRecipes: MutableList<RecipeTreeCrafting> = ArrayList()
 
-    public fun addTreeRecipe(recipe: RecipeTreeCrafting) {
+    public fun addTreeRecipe(recipe: RecipeTreeCrafting): RecipeTreeCrafting {
         treeRecipes.add(recipe)
+        return recipe
     }
 
     init {
