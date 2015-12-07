@@ -27,7 +27,7 @@ class MultipassRenderer: ISimpleBlockRenderingHandler {
 
     public override fun renderWorldBlock(world: IBlockAccess, x: Int, y: Int, z: Int, block: Block, modelId: Int, renderer: RenderBlocks): Boolean {
         if (block is IMultipassRenderer)
-            if (pass == 1) renderer.renderStandardBlock(block, x, y, z) else renderer.renderStandardBlock(block.innerBlock(), x, y, z)
+            if (pass == 1) renderer.renderStandardBlock(block, x, y, z) else renderer.renderStandardBlock(block.innerBlock(world, x, y, z), x, y, z)
         return true
     }
 }
