@@ -42,6 +42,10 @@ entity.shadowfox_botany:voidCreeper.name=Manaseal Creeper
 
 tile.shadowfox_botany:barrier.name=Barrier
 
+tile.shadowfox_botany:itemDisplay0.name=Manasteel Item Platform
+tile.shadowfox_botany:itemDisplay1.name=Terrasteel Item Platform
+tile.shadowfox_botany:itemDisplay2.name=Elementium Item Platform
+
 tile.shadowfox_botany:rainbowDirt.name=Iridescent Dirt
 tile.shadowfox_botany:coloredDirt.name=Iridescent Dirt
 tile.shadowfox_botany:rainbowLeaves.name=Iridescent Leaves
