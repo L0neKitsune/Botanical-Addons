@@ -138,6 +138,8 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
                 Botania.proxy.wispFX(this.worldObj, this.xCoord.toDouble() + 0.5, this.yCoord.toDouble() + 0.5, this.zCoord.toDouble() + 0.5, var13, var16, var19, Math.random().toFloat() * 0.15f + 0.15f, (Math.random() - 0.5).toFloat() * 0.25f, (Math.random() - 0.5).toFloat() * 0.25f, (Math.random() - 0.5).toFloat() * 0.25f)
             }
 
+            worldObj.playSoundEffect(this.xCoord.toDouble(), this.yCoord.toDouble(), this.zCoord.toDouble(), "botania:enchanterBlock", 0.5F, 10F)
+
             return //finishes execution just in case
         }
 
