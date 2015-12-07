@@ -45,7 +45,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
 
             for (i in ITEMDISPLAY_LOCATIONS) {
                 mb.addComponent(i.x, i.y + 1, i.z, ModBlocks.pylon, 0)
-                mb.addComponent(i.x, i.y, i.z, ShadowFoxBlocks.itemDisplay, 0)
+                mb.addComponent(MultiblockComponentRainbow(ChunkCoordinates(i.x, i.y, i.z), ShadowFoxBlocks.itemDisplay))
             }
 
             for (i in OBSIDIAN_LOCATIONS) {
