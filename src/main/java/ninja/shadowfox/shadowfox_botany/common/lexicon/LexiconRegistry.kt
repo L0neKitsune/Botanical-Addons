@@ -31,6 +31,7 @@ public object LexiconRegistry {
     val sealCreepers: LexiconEntry
     val kindling: LexiconEntry
     val waveRod: LexiconEntry
+    val itemDisplay: LexiconEntry
 
     init {
 
@@ -102,6 +103,10 @@ public object LexiconRegistry {
         waveRod.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesRainbowRod))
 
+        itemDisplay = ShadowfoxLexiconEntry("itemDisplay", BotaniaAPI.categoryMisc, ItemStack(ShadowFoxBlocks.itemDisplay, 1, 1))
+        itemDisplay.setLexiconPages(PageText("0"),
+                PageCraftingRecipe("1", ModRecipes.recipesItemDisplay))
+
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.interdictionRod), interdictionRod, 1)
@@ -116,6 +121,9 @@ public object LexiconRegistry {
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.wiltedLotus, 1, 0), sealCreepers, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.wiltedLotus, 1, 1), sealCreepers, 1)
+
+        for (i in 0..2)
+            LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.itemDisplay, 1, i), itemDisplay, 1)
 
         for (i in 0..3){
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood0, 1, i), irisSapling, 1)

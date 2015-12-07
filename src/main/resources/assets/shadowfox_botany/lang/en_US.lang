@@ -126,6 +126,8 @@ shadowfox_botany.entry.kindling=Blaze Kindling
 shadowfox_botany.tagline.kindling=Quickened firespread
 shadowfox_botany.entry.waveRod=Rod of the Prismatic Lake
 shadowfox_botany.tagline.waveRod=Rainbow lights
+shadowfox_botany.entry.itemDisplay=Item Platforms
+shadowfox_botany.tagline.itemDisplay=Display items without letting them despawn
 
 shadowfox_botany.category.dendrology=Dendrology
 
@@ -179,3 +181,6 @@ shadowfox_botany.page.kindling1=Stop drop and roll
 
 shadowfox_botany.page.waveRod0=One particularly frustrating property of the &1Mana Lens: Flash&0 is its tendency to lock the color of a &1Mana Flash&0 immidiately upon making it. Even if you want to make a rainbow &1Flash&0, you'll get one color. By using the power of the &1Rod of the Prismatic Lake&0, you can make the rainbow you've been searching for.<br>It can be tinged with &1Phantom Ink&0.
 shadowfox_botany.page.waveRod1=All the colors of the wind
+
+shadowfox_botany.page.itemDisplay0=The &1Item Platform&0 is a neat way to display an item without having it despawn. Giving it an item via right click or hopper will show it floating above the platform. It's a neat way to show off your piles of resources.
+shadowfox_botany.page.itemDisplay1=Terrasteel makes you look rich

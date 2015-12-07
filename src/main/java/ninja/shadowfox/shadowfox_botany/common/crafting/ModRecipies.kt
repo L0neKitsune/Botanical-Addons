@@ -42,6 +42,8 @@ public object ModRecipes {
     val recipesAttribution: IRecipe
     val recipesKindling: IRecipe
     val recipesRainbowRod: IRecipe
+    val recipesItemDisplay: List<IRecipe>
+    val recipesItemDisplayElven: IRecipe
     val recipesPlainDirt: RecipePureDaisy
     val recipesIrisSapling: RecipePureDaisyExclusion
 
@@ -264,6 +266,24 @@ public object ModRecipes {
                 'D', LibOreDict.DREAMWOOD_TWIG)
 
         recipesRainbowRod = BotaniaAPI.getLatestAddedRecipe()
+
+        addOreDictRecipe(ItemStack(ShadowFoxBlocks.itemDisplay),
+                "NWN",
+                'N', LibOreDict.MANASTEEL_NUGGET,
+                'W', LibOreDict.LIVING_WOOD)
+        addOreDictRecipe(ItemStack(ShadowFoxBlocks.itemDisplay, 1, 1),
+                "NWN",
+                'N', LibOreDict.TERRASTEEL_NUGGET,
+                'W', LibOreDict.LIVING_WOOD)
+
+        recipesItemDisplay = BotaniaAPI.getLatestAddedRecipes(2)
+
+        addOreDictRecipe(ItemStack(ShadowFoxBlocks.itemDisplay, 1, 2),
+                "NWN",
+                'N', LibOreDict.ELEMENTIUM_NUGGET,
+                'W', LibOreDict.DREAM_WOOD)
+
+        recipesItemDisplayElven = BotaniaAPI.getLatestAddedRecipe()
 
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood1, ItemStack(Items.coal, 1, 1), 0.15F)
