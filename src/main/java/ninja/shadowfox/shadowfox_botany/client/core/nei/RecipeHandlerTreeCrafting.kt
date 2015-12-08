@@ -16,7 +16,7 @@ import vazkii.botania.client.integration.nei.RecipeHandlerPetalApothecary
 
 
 class RecipeHandlerTreeCrafting : RecipeHandlerPetalApothecary() {
-    inner class CachedTreeCrafterRecipe(recipe: RecipeTreeCrafting?) : CacheRecipeIntermidiate(this, recipe) {
+    inner class CachedTreeCrafterRecipe(recipe: RecipeTreeCrafting?) : CacheRecipeIntermediate(this, recipe) {
         internal var manaUsage = 0
 
         init {

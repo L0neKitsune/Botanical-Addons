@@ -199,8 +199,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
                     }
                 }
 
-                if (mana >= manaRequired) {
-
+                if (mana >= manaRequired && stageTicks > 200) { //A bit of an artificial delay
                     manaRequired = 0
                     advanceStage()
                 } else {

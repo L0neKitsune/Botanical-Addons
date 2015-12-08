@@ -59,7 +59,7 @@ public object ShadowFoxBlocks {
 
     public var lightningSapling: Block
     public var lightningWood: Block
-//    public var lightningLeaves: Block
+    public var lightningLeaves: Block
 
     public var invisibleFlame: Block
     public var rainbowFlame: Block
@@ -111,7 +111,7 @@ public object ShadowFoxBlocks {
 
         lightningSapling = BlockLightningSapling()
         lightningWood = BlockLightningWood()
-//        lightningLeaves = B()
+        lightningLeaves = BlockLightningLeaves()
 
         barrier = BlockBarrier()
 

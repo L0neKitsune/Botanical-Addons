@@ -14,8 +14,8 @@ class TileLightningRod() : TileEntity() {
 
     override fun updateEntity() {
         if (worldObj != null) {
-            for (e in getLightningBoltsWithinAABB(worldObj, AxisAlignedBB.getBoundingBox((xCoord - 64).toDouble(), (yCoord - 64).toDouble(), (zCoord - 64).toDouble(),
-                    (xCoord + 64).toDouble(), (yCoord + 64).toDouble(), (zCoord + 64).toDouble()))) {
+            for (e in getLightningBoltsWithinAABB(worldObj, AxisAlignedBB.getBoundingBox((xCoord - 32).toDouble(), (yCoord - 32).toDouble(), (zCoord - 32).toDouble(),
+                    (xCoord + 32).toDouble(), (yCoord + 32).toDouble(), (zCoord + 32).toDouble()))) {
                 worldObj.removeEntity(e)
 
                 worldObj.addWeatherEffect(FakeLightning(worldObj, xCoord.toDouble(), (yCoord + 1).toDouble(), zCoord.toDouble()))

@@ -6,8 +6,8 @@ import vazkii.botania.client.integration.nei.RecipeHandlerPetalApothecary;
 /**
  * Created by l0nekitsune on 12/7/15.
  */
-public class CacheRecipeIntermidiate extends RecipeHandlerPetalApothecary.CachedPetalApothecaryRecipe {
-    CacheRecipeIntermidiate(RecipeHandlerPetalApothecary outer, RecipeTreeCrafting recipe){
+public class CacheRecipeIntermediate extends RecipeHandlerPetalApothecary.CachedPetalApothecaryRecipe {
+    CacheRecipeIntermediate(RecipeHandlerPetalApothecary outer, RecipeTreeCrafting recipe){
         outer.super(recipe, false);
     }
 }

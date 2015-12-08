@@ -25,6 +25,7 @@ public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITile
         isBlockContainer = true
     }
 
+    override fun canSustainLeaves(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean = true
     override fun isWood(world: IBlockAccess?, x: Int, y: Int, z: Int): Boolean = true
 
     override fun breakBlock(world: World, x: Int, y: Int, z: Int, block: Block, fortune: Int) {

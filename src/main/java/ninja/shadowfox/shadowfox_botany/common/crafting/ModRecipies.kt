@@ -51,6 +51,7 @@ public object ModRecipes {
     val recipesIrisSapling: RecipePureDaisyExclusion
 
     val recipesTreeTest: RecipeTreeCrafting
+    val recipesLightningTree: RecipeTreeCrafting
 
     init {
 
@@ -296,6 +297,11 @@ public object ModRecipes {
         recipesTreeTest = ShadowFoxAPI.addTreeRecipe(500000,
                 Blocks.diamond_block, 0,
                 ItemStack(Items.apple, 1), ItemStack(Items.apple, 1), ItemStack(Items.apple, 1), ItemStack(Items.apple, 1))
+
+        recipesLightningTree = ShadowFoxAPI.addTreeRecipe(50000,
+                ShadowFoxBlocks.lightningSapling, 0,
+                ItemStack(Items.iron_ingot, 1), ShadowFoxBlocks.LEAVES[10],ItemStack(Items.iron_ingot, 1), ShadowFoxBlocks.LEAVES[10],ItemStack(Items.iron_ingot, 1), ShadowFoxBlocks.LEAVES[10],ItemStack(BotaniaBlocks.teruTeruBozu, 1))
+
 
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood1, ItemStack(Items.coal, 1, 1), 0.15F)

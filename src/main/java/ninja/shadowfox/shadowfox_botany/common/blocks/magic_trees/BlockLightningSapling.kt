@@ -8,7 +8,6 @@ import net.minecraft.world.gen.feature.WorldGenerator
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.BlockColoredSapling
 import ninja.shadowfox.shadowfox_botany.common.world.HeartWoodTreeGen
-import ninja.shadowfox.shadowfox_botany.common.world.SimpleTreeGen
 import java.util.*
 
 
@@ -40,7 +39,7 @@ class BlockLightningSapling() : BlockColoredSapling(name = "magicalSapling") {
                 val l = world.getBlockMetadata(x, y, z)
 
                 val obj: WorldGenerator = HeartWoodTreeGen(5, ShadowFoxBlocks.lightningWood, 0,
-                        ShadowFoxBlocks.lightningWood, 1, ShadowFoxBlocks.rainbowLeaves, 0)
+                        ShadowFoxBlocks.lightningWood, 1, ShadowFoxBlocks.lightningLeaves, 0)
 
                 world.setBlock(x, y, z, Blocks.air, 0, 4)
 
