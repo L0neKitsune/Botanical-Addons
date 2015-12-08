@@ -8,11 +8,13 @@ import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxItemBlockMod
+import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 
-class BlockLightningLeaves(): ShadowFoxLeaves() {
+class BlockLightningLeaves(): ShadowFoxLeaves(), ILexiconable {
     init {
         setBlockName("lightningLeaves")
     }
@@ -34,6 +36,6 @@ class BlockLightningLeaves(): ShadowFoxLeaves() {
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
-        return null
+        return LexiconRegistry.lightningSapling
     }
 }
