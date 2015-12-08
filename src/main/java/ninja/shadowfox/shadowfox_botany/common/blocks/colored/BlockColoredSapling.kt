@@ -30,7 +30,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 import kotlin.properties.Delegates
 
-public open class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowable, IPlantable, ILexiconable, IFuelHandler {
+public open class BlockColoredSapling(val name: String = "irisSapling") : ShadowFoxBlockMod(Material.plants), IGrowable, IPlantable, ILexiconable, IFuelHandler {
 
     internal var icon: IIcon by Delegates.notNull()
 
@@ -38,7 +38,7 @@ public open class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IG
         this.setTickRandomly(true)
         this.setBlockBounds(0.5F - 0.4F, 0.0F, 0.5F - 0.4F, 0.5F + 0.4F, 0.4F * 2.0F, 0.5F + 0.4F)
         stepSound = Block.soundTypeGrass
-        this.setBlockName("irisSapling")
+        this.setBlockName(name)
 
         GameRegistry.registerFuelHandler(this)
     }

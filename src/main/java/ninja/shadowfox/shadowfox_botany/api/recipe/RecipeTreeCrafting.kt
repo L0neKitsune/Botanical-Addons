@@ -7,39 +7,33 @@ import ninja.shadowfox.shadowfox_botany.common.utils.itemEquals
 import org.apache.logging.log4j.Level
 import java.util.*
 
+import vazkii.botania.api.recipe.RecipePetals
 
-public class RecipeTreeCrafting(val mana: Int, val output: Block, val meta: Int, vararg inputs: Any) {
-    internal val inputs: ArrayList<Any>
 
-    init {
-        val inputsToSet = ArrayList<Any>()
-        val var4 = inputs
-        val var5 = inputs.size
-
-        for (var6 in 0..var5 - 1) {
-            val obj = var4[var6]
-            if (obj !is String && obj !is ItemStack) {
-                throw IllegalArgumentException("Invalid input")
-            }
-
-            inputsToSet.add(obj)
-        }
-
-        this.inputs = inputsToSet
-    }
-
+public class RecipeTreeCrafting(val mana: Int, val outputBlock: Block, val meta: Int, vararg inputs: Any): RecipePetals(ItemStack(outputBlock, 1, meta), *inputs) {
 
     fun matches(items: List<ItemStack>): Boolean {
         var inputsMissing = ArrayList(inputs)
 
         for (i in items) {
             for (j in inputsMissing.indices) {
-                if (i.itemEquals(inputsMissing[j])) inputsMissing.removeAt(j) ; break
+                var inp = inputsMissing[j]
+                if (inp is ItemStack)
+                    if(inp.itemDamage.toShort() == Short.MAX_VALUE)
+                        inp.setItemDamage(i.itemDamage)
+                if (i.itemEquals(inp)) {
+                    inputsMissing.removeAt(j)
+                    break
+                }
             }
         }
 
-        FMLLog.log(Level.INFO, "Missing: [$inputsMissing]")
+        // FMLLog.log(Level.INFO, "Missing: [$inputsMissing]")
         return inputsMissing.isEmpty()
+    }
+
+    fun getManaUsage(): Int {
+        return this.mana
     }
 
 }

@@ -7,9 +7,6 @@ import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.world.World
 import net.minecraftforge.event.ForgeEventFactory
-import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.BlockLightningWood
-import ninja.shadowfox.shadowfox_botany.common.utils.centerVector
-import vazkii.botania.common.Botania
 import java.util.*
 
 
@@ -17,16 +14,11 @@ class TileLightningRod() : TileEntity() {
 
     override fun updateEntity() {
         if (worldObj != null) {
-            if (worldObj.getBlock(xCoord, yCoord + 1, zCoord) !is BlockLightningWood) {
-                for (e in getLightningBoltsWithinAABB(worldObj, AxisAlignedBB.getBoundingBox((xCoord - 64).toDouble(), (yCoord - 64).toDouble(), (zCoord - 64).toDouble(),
-                        (xCoord + 64).toDouble(), (yCoord + 64).toDouble(), (zCoord + 64).toDouble()))) {
-                    worldObj.removeEntity(e)
+            for (e in getLightningBoltsWithinAABB(worldObj, AxisAlignedBB.getBoundingBox((xCoord - 64).toDouble(), (yCoord - 64).toDouble(), (zCoord - 64).toDouble(),
+                    (xCoord + 64).toDouble(), (yCoord + 64).toDouble(), (zCoord + 64).toDouble()))) {
+                worldObj.removeEntity(e)
 
-                    val wispLoc = this.centerVector()
-
-                    Botania.proxy.wispFX(worldObj, wispLoc.x, wispLoc.y - 4, wispLoc.z, 1f, 1f, 1f, 5f)
-                    worldObj.addWeatherEffect(FakeLightning(worldObj, xCoord.toDouble(), (yCoord + 1).toDouble(), zCoord.toDouble()))
-                }
+                worldObj.addWeatherEffect(FakeLightning(worldObj, xCoord.toDouble(), (yCoord + 1).toDouble(), zCoord.toDouble()))
             }
         }
     }

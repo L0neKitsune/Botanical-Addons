@@ -8,10 +8,14 @@ import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.util.IIcon
+import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import ninja.shadowfox.shadowfox_botany.lib.Constants
+import ninja.shadowfox.shadowfox_botany.client.render.tile.MultipassRenderer
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.IMultipassRenderer
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxTileContainer
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
@@ -19,7 +23,7 @@ import vazkii.botania.api.wand.IWandHUD
 import java.util.*
 
 
-open class BlockTreeCrafter(name: String = "treeCrafter"): ShadowFoxTileContainer<TileTreeCrafter>(Material.wood), IWandHUD, ILexiconable {
+open class BlockTreeCrafter(name: String = "treeCrafter"): ShadowFoxTileContainer<TileTreeCrafter>(Material.wood), IWandHUD, ILexiconable, IMultipassRenderer {
     internal var random: Random
     override val registerInCreative: Boolean = false
 
@@ -36,10 +40,8 @@ open class BlockTreeCrafter(name: String = "treeCrafter"): ShadowFoxTileContaine
         return false
     }
 
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
-
-    override fun getIcon(p_149691_1_: Int, p_149691_2_: Int): IIcon? {
-        return ShadowFoxBlocks.rainbowPlanks.getIcon(p_149691_1_, p_149691_2_)
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
+        this.blockIcon = IconHelper.forName(par1IconRegister, "treeCrafter")
     }
 
     override fun createNewTileEntity(var1: World, var2: Int): TileTreeCrafter {
@@ -60,7 +62,7 @@ open class BlockTreeCrafter(name: String = "treeCrafter"): ShadowFoxTileContaine
 //    }
 
     override fun getItemDropped(p_149650_1_: Int, p_149650_2_: Random?, p_149650_3_: Int): Item {
-        return Item.getItemFromBlock(ShadowFoxBlocks.coloredPlanks)
+        return Item.getItemFromBlock(innerBlock(null, 0, 0, 0))
     }
 
     override fun renderHUD(mc: Minecraft, res: ScaledResolution, world: World, x: Int, y: Int, z: Int) {
@@ -70,10 +72,18 @@ open class BlockTreeCrafter(name: String = "treeCrafter"): ShadowFoxTileContaine
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return LexiconRegistry.treeCrafting
     }
+    override fun renderAsNormalBlock(): Boolean = false
+    override fun canRenderInPass(pass: Int): Boolean {
+        MultipassRenderer.pass = pass
+        return true
+    }
+    override fun getRenderBlockPass(): Int = 1
+    override fun getRenderType(): Int = Constants.multipassRenderingID
+
+    override fun innerBlock(): Block = ShadowFoxBlocks.coloredPlanks
+    override fun innerBlock(world: IBlockAccess?, x: Int, y: Int, z: Int): Block = innerBlock()
 }
 
 public class BlockTreeCrafterRainbow() : BlockTreeCrafter(name = "treeCrafterRB") {
-    override fun getItemDropped(p_149650_1_: Int, p_149650_2_: Random?, p_149650_3_: Int): Item {
-        return Item.getItemFromBlock(ShadowFoxBlocks.rainbowPlanks)
-    }
+    override fun innerBlock(): Block = ShadowFoxBlocks.rainbowPlanks
 }

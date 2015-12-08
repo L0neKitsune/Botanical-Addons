@@ -7,6 +7,7 @@ import net.minecraft.client.gui.ScaledResolution
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.*
@@ -44,7 +45,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             val mb = Multiblock()
 
             for (i in ITEMDISPLAY_LOCATIONS) {
-                mb.addComponent(i.x, i.y + 1, i.z, ModBlocks.pylon, 0)
+                mb.addComponent(i.x, i.y + 2, i.z, ModBlocks.pylon, 0)
                 mb.addComponent(MultiblockComponentRainbow(ChunkCoordinates(i.x, i.y, i.z), ShadowFoxBlocks.itemDisplay))
             }
 
@@ -68,18 +69,18 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
 
             for (i in ITEMDISPLAY_LOCATIONS) {
                 if (!i.isBlock(world, ModBlocks.pylon, x0 = x, y0 = y0 + 2, z0 = z)) {
-                    FMLLog.log(Level.INFO, "Pylon at $i")
+                    // FMLLog.log(Level.INFO, "Pylon at $i")
                     return false
                 }
                 if (!i.isBlock(world, ShadowFoxBlocks.itemDisplay, x0 = x, y0 = y0, z0 = z)) {
-                    FMLLog.log(Level.INFO, "Item Display at $i")
+                    // FMLLog.log(Level.INFO, "Item Display at $i")
                     return false
                 }
             }
 
             for (i in OBSIDIAN_LOCATIONS) {
                 if (!i.isBlock(world, Blocks.obsidian, x0 = x, y0 = y0, z0 = z)) {
-                    FMLLog.log(Level.INFO, "Obsidian at $i")
+                    // FMLLog.log(Level.INFO, "Obsidian at $i")
                     return false
                 }
             }
@@ -87,7 +88,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             for (i in COLOREDWOOD_LOCATIONS) {
                 if (!i.isBlock(world, ShadowFoxBlocks.coloredPlanks, x0 = x, y0 = y0, z0 = z) &&
                         !i.isBlock(world, ShadowFoxBlocks.rainbowPlanks, x0 = x, y0 = y0, z0 = z)) {
-                    FMLLog.log(Level.INFO, "Colored Wood at $i")
+                    // FMLLog.log(Level.INFO, "Colored Wood at $i")
                     return false
                 }
             }
@@ -96,13 +97,13 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
                     world.getBlock(x, y0 + 4, z) !== ShadowFoxBlocks.treeCrafterBlockRB &&
                     world.getBlock(x, y0 + 4, z) !== ShadowFoxBlocks.coloredPlanks && 
                     world.getBlock(x, y0 + 4, z) !== ShadowFoxBlocks.rainbowPlanks) {
-                FMLLog.log(Level.INFO, "Core Block")
+                // FMLLog.log(Level.INFO, "Core Block")
                 return false
             }
 
             if (world.getBlock(x, y0, z) !== ShadowFoxBlocks.coloredDirtBlock &&
                     world.getBlock(x, y0, z) !== ShadowFoxBlocks.rainbowDirtBlock) {
-                FMLLog.log(Level.INFO, "Dirt Block")
+                // FMLLog.log(Level.INFO, "Dirt Block")
                 return false
             }
 
@@ -148,13 +149,28 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             return //finishes execution just in case
         }
 
+        var recipe = getRecipe()
+        var recipeItems = ArrayList<Any>()
+        if (recipe != null) recipeItems = ArrayList(recipe.inputs)
+
+
         itemDisplays {
-            if (it.getStackInSlot(0) != null) {
+            var stack = it.getStackInSlot(0)
+            if (stack != null) {
+
                 val s = 0.2f + Math.random().toFloat() * 0.1f
                 val m = 0.03f + Math.random().toFloat() * 0.015f
-
-                Botania.proxy.wispFX(this.worldObj, it.xCoord.toDouble() + .5, it.yCoord + 3.toDouble() + .5, it.zCoord.toDouble() + .5,
-                        1.0f, 1.0f, 1.0f, s, -m)
+                
+                for (rItem in recipeItems) {
+                    if (stack.itemEquals(rItem)) {
+                        if (mana > 0) { 
+                            worldObj.spawnParticle("iconcrack_${Item.getIdFromItem(stack.item)}_${stack.itemDamage}", it.xCoord.toDouble() + .5,  it.yCoord + 1.0, it.zCoord.toDouble() + .5, (this.xCoord.toDouble()-it.xCoord.toDouble())/8.0, 0.1, (this.zCoord.toDouble()-it.zCoord.toDouble())/8.0)
+                            Botania.proxy.wispFX(this.worldObj, it.xCoord.toDouble() + .5, it.yCoord + 3.toDouble() + .5, it.zCoord.toDouble() + .5, 1.0f, 1.0f, 1.0f, s, -m)
+                        }  
+                        recipeItems.remove(rItem)
+                        break
+                    }
+                }
             }
         }
 
@@ -246,7 +262,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         if (this.manaRequired > 0 && recipe != null) {
             val x = res.scaledWidth / 2 + 20
             val y = res.scaledHeight / 2 - 8
-            RenderHelper.renderProgressPie(x, y, this.mana.toFloat() / this.manaRequired.toFloat(), ItemStack(recipe.output))
+            RenderHelper.renderProgressPie(x, y, this.mana.toFloat() / this.manaRequired.toFloat(), recipe.output)
         }
 
     }
@@ -265,7 +281,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
 
         }
 
-        FMLLog.log(Level.INFO, "Items: [$items]")
+        // FMLLog.log(Level.INFO, "Items: [$items]")
         return items
     }
 
@@ -297,7 +313,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         stage = 0
 
         worldObj.setBlockToAir(xCoord, yCoord - 3 , zCoord)
-        worldObj.setBlock(xCoord, yCoord - 3, zCoord, recipe.output, recipe.meta, 3)
+        worldObj.setBlock(xCoord, yCoord - 3, zCoord, recipe.outputBlock, recipe.meta, 3)
 
         this.worldObj.playSoundEffect(this.xCoord.toDouble(), this.yCoord.toDouble(), this.zCoord.toDouble(), "botania:enchanterEnchant", 1.0f, 1.0f)
 

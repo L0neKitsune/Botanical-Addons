@@ -8,4 +8,5 @@ object Constants {
     const val DEPENDENCIES = "required-after:Forge@[10.13.2.1291,);required-after:Botania@[r1.7-236,)"
 
     var doubleFlowerRenderID: Int = -1
+    var multipassRenderingID: Int = -1
 }

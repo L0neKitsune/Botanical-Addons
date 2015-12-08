@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
+import net.minecraft.block.ITileEntityProvider
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
@@ -17,6 +18,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.IIcon
+import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxSubtypeItemBlock
@@ -28,7 +30,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 
-class BlockItemDisplay() : ShadowFoxBlockMod(Material.wood) {
+class BlockItemDisplay() : ShadowFoxBlockMod(Material.wood), ILexiconable, ITileEntityProvider {
 
     val TYPES = 3
     var icons: Array<IIcon?> = arrayOfNulls(TYPES)
@@ -36,7 +38,9 @@ class BlockItemDisplay() : ShadowFoxBlockMod(Material.wood) {
 
     init {
         setBlockName("itemDisplay")
+        blockHardness = 2F
         setStepSound(Block.soundTypeWood)
+        isBlockContainer = true
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F)
     }
 
@@ -69,6 +73,10 @@ class BlockItemDisplay() : ShadowFoxBlockMod(Material.wood) {
             sideIcons[i] = IconHelper.forBlock(par1IconRegister, this, "Side"+i)
         }
 
+    }
+
+    override fun createNewTileEntity(p_149915_1_: World?, p_149915_2_: Int): TileEntity? {
+        return TileItemDisplay()
     }
 
     @SideOnly(Side.CLIENT)
@@ -124,15 +132,51 @@ class BlockItemDisplay() : ShadowFoxBlockMod(Material.wood) {
         }
     }
 
+    override fun getPickBlock(target: MovingObjectPosition?, world: World, x: Int, y: Int, z: Int): ItemStack {
+        val meta = world.getBlockMetadata(x, y, z)
+        return ItemStack(this, 1, meta)
+    }
+
+    override fun damageDropped(par1: Int): Int = par1
+
     override fun isOpaqueCube(): Boolean = false
     override fun renderAsNormalBlock(): Boolean = false
     override fun hasTileEntity(metadata: Int): Boolean = true
 
-    override fun getDrops(world: World, x: Int, y: Int, z: Int, metadata: Int, fortune: Int): ArrayList<ItemStack> {
-        return ArrayList()
+    /**
+     * Called whenever the block is added into the world. Args: world, x, y, z
+     */
+    override fun onBlockAdded(p_149726_1_: World?, p_149726_2_: Int, p_149726_3_: Int, p_149726_4_: Int) {
+        super.onBlockAdded(p_149726_1_, p_149726_2_, p_149726_3_, p_149726_4_)
+    }
+
+    override fun onBlockEventReceived(p_149696_1_: World?, p_149696_2_: Int, p_149696_3_: Int, p_149696_4_: Int, p_149696_5_: Int, p_149696_6_: Int): Boolean {
+        super.onBlockEventReceived(p_149696_1_, p_149696_2_, p_149696_3_, p_149696_4_, p_149696_5_, p_149696_6_)
+        val tileentity = p_149696_1_!!.getTileEntity(p_149696_2_, p_149696_3_, p_149696_4_)
+        return if (tileentity != null) tileentity.receiveClientEvent(p_149696_5_, p_149696_6_) else false
+    }
+
+    override fun breakBlock(world: World, x: Int, y: Int, z: Int, block: Block, meta: Int) {
+        Random()
+        val tileEntity = world.getTileEntity(x, y, z)
+        if (tileEntity is IInventory) {
+            for (i in 0..tileEntity.sizeInventory - 1) {
+                val item = tileEntity.getStackInSlot(i)
+                if (item != null && item.stackSize > 0) {
+                    val entityItem = EntityItem(world, x.toDouble(), y.toDouble(), z.toDouble(), item.copy())
+                    world.spawnEntityInWorld(entityItem)
+                }
+            }
+        }
+        super.breakBlock(world, x, y, z, block, meta)
+        world.removeTileEntity(x, y, z)
     }
 
     override fun createTileEntity(world: World?, meta: Int): TileEntity? {
         return TileItemDisplay()
+    }
+
+    override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
+        return LexiconRegistry.itemDisplay
     }
 }

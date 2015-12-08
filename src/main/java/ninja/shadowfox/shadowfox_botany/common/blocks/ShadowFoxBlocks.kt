@@ -7,6 +7,9 @@ import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.*
+import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.BlockLightningLeaves
+import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.BlockLightningSapling
+import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.BlockLightningWood
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.*
 
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.*
@@ -54,10 +57,12 @@ public object ShadowFoxBlocks {
     public var treeCrafterBlock: Block
     public var treeCrafterBlockRB: Block
 
+    public var lightningSapling: Block
+    public var lightningWood: Block
+//    public var lightningLeaves: Block
+
     public var invisibleFlame: Block
     public var rainbowFlame: Block
-
-    // public var lightningRod: Block
 
     public var barrier: Block
 
@@ -100,10 +105,13 @@ public object ShadowFoxBlocks {
         irisTallGrass1 = BlockColoredDoubleGrass(1)
         rainbowTallGrass = BlockRainbowDoubleGrass()
         itemDisplay = BlockItemDisplay()
-        // lightningRod = BlockLightningRod()
         treeCrafter = TileTreeCrafter.makeMultiblockSet()
         treeCrafterBlock = BlockTreeCrafter()
         treeCrafterBlockRB = BlockTreeCrafterRainbow()
+
+        lightningSapling = BlockLightningSapling()
+        lightningWood = BlockLightningWood()
+//        lightningLeaves = B()
 
         barrier = BlockBarrier()
 

@@ -5,6 +5,7 @@ import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import ninja.shadowfox.shadowfox_botany.common.crafting.ModRecipes
+import vazkii.botania.common.lexicon.page.PageTreeCrafting
 import net.minecraft.item.ItemStack
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.common.lexicon.LexiconData
@@ -31,6 +32,7 @@ public object LexiconRegistry {
     val sealCreepers: LexiconEntry
     val kindling: LexiconEntry
     val waveRod: LexiconEntry
+    val itemDisplay: LexiconEntry
 
     init {
 
@@ -78,7 +80,7 @@ public object LexiconRegistry {
                 PageText("2"),
                 PageCraftingRecipe("3", ModRecipes.recipesPriestOfNjord))
 
-        treeCrafting = ShadowfoxLexiconEntry("treeCrafting", dendrology, ShadowFoxBlocks.treeCrafterBlock)
+        treeCrafting = ShadowfoxLexiconEntry("treeCrafting", dendrology, ShadowFoxBlocks.treeCrafterBlockRB)
         treeCrafting.setPriority().setLexiconPages(PageText("0"),
                 PageMultiblock("1", ShadowFoxBlocks.treeCrafter))
 
@@ -102,6 +104,10 @@ public object LexiconRegistry {
         waveRod.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesRainbowRod))
 
+        itemDisplay = ShadowfoxLexiconEntry("itemDisplay", BotaniaAPI.categoryMisc, ItemStack(ShadowFoxBlocks.itemDisplay, 1, 1))
+        itemDisplay.setLexiconPages(PageText("0"),
+                PageCraftingRecipe("1", ModRecipes.recipesItemDisplay))
+
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.interdictionRod), interdictionRod, 1)
@@ -116,6 +122,12 @@ public object LexiconRegistry {
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.wiltedLotus, 1, 0), sealCreepers, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.wiltedLotus, 1, 1), sealCreepers, 1)
+
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.treeCrafterBlock), treeCrafting, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.treeCrafterBlockRB), treeCrafting, 1)
+
+        for (i in 0..2)
+            LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.itemDisplay, 1, i), itemDisplay, 1)
 
         for (i in 0..3){
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood0, 1, i), irisSapling, 1)
