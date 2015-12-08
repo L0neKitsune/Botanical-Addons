@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.client.nei
+package ninja.shadowfox.shadowfox_botany.client.core.nei
 
 import ninja.shadowfox.shadowfox_botany.lib.Constants
 import codechicken.nei.api.API
