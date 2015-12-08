@@ -15,9 +15,9 @@ class BlockLightningSapling() : BlockColoredSapling(name = "magicalSapling") {
     override fun growTree(world: World?, x: Int, y: Int, z: Int, random: Random?) {
         if(world != null) {
 
-            for (i in -64..64 + 1 - 1) {
-                for (j in -64..64 + 1 - 1) {
-                    for (k in -64..64 + 1 - 1) {
+            for (i in -95..95) {
+                for (j in -95..95) {
+                    for (k in -95..95) {
                         val xp = x + i
                         val yp = y + j
                         val zp = z + k

@@ -174,7 +174,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             }
         }
 
-        20 tickDelay { if (getRecipe() == null) stage = 0 }
+        20 tickDelay { if (getRecipe() == null) {stage = 0 ; manaRequired = 0 ; mana = 0}}
 
         when (stage) {
             0 -> {
@@ -190,16 +190,9 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             1 -> {
                 stageTicks++
                 signal = 1
-                10 tickDelay {
-                    for (i in 0..359) {
-                        val radian = (i.toDouble() * 3.141592653589793 / 180.0).toFloat()
-                        val xp = xCoord.toDouble() + Math.cos(radian.toDouble()) * 3
-                        val zp = zCoord.toDouble() + Math.sin(radian.toDouble()) * 3
-                        Botania.proxy.wispFX(worldObj, xp + 0.5, yCoord - 3.0, zp + 0.5, 0.0f, 1.0f, 1.0f, 0.3f, -0.01f)
-                    }
-                }
+                workingFanciness()
 
-                if (mana >= manaRequired && stageTicks > 200) { //A bit of an artificial delay
+                if (mana >= manaRequired) { //A bit of an artificial delay
                     manaRequired = 0
                     advanceStage()
                 } else {
@@ -213,8 +206,11 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             }
             2 -> {
                 stageTicks++
-                signal = 2
-                forRecipe { craftingFanciness(it) }
+                signal = 1
+                workingFanciness()
+                if (stageTicks > 100){
+                    forRecipe { craftingFanciness(it) }
+                }
             }
             3 -> 40 tickDelay { advanceStage() }
             else -> {
@@ -225,8 +221,19 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         ticksAlive++
     }
 
+    fun workingFanciness(){
+        10 tickDelay {
+            for (i in 0..359) {
+                val radian = (i.toDouble() * 3.141592653589793 / 180.0).toFloat()
+                val xp = xCoord.toDouble() + Math.cos(radian.toDouble()) * 3
+                val zp = zCoord.toDouble() + Math.sin(radian.toDouble()) * 3
+                Botania.proxy.wispFX(worldObj, xp + 0.5, yCoord - 3.0, zp + 0.5, 0.0f, 1.0f, 1.0f, 0.3f, -0.01f)
+            }
+        }
+    }
+
     fun getRecipe() : RecipeTreeCrafting? {
-        if (worldObj.getBlock(xCoord, yCoord - 3, zCoord) is BlockColoredSapling) {
+        if (worldObj.getBlock(xCoord, yCoord - 3, zCoord) === ShadowFoxBlocks.irisSapling) {
             for (recipe in ShadowFoxAPI.treeRecipes)
                 if (recipe.matches(getRecipeInputs())) return recipe
         }
