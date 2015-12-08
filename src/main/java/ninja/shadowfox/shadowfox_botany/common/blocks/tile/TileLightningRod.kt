@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.entity
+package ninja.shadowfox.shadowfox_botany.common.blocks.tile
 
 import net.minecraft.entity.Entity
 import net.minecraft.entity.effect.EntityLightningBolt
@@ -6,19 +6,20 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.world.World
-import ninja.shadowfox.shadowfox_botany.common.blocks.BlockLightningRod
+import net.minecraftforge.event.ForgeEventFactory
+import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.BlockLightningWood
 import ninja.shadowfox.shadowfox_botany.common.utils.centerVector
 import vazkii.botania.common.Botania
 import java.util.*
 
 
-class EntityLightningRod() : TileEntity() {
+class TileLightningRod() : TileEntity() {
 
     override fun updateEntity() {
         if (worldObj != null) {
-            if (worldObj.getBlock(xCoord, yCoord + 1, zCoord) !is BlockLightningRod) {
-                for (e in getLightningBoltsWithinAABB(worldObj, AxisAlignedBB.getBoundingBox((xCoord - 30).toDouble(), (yCoord - 30).toDouble(), (zCoord - 30).toDouble(),
-                        (xCoord + 30).toDouble(), (yCoord + 30).toDouble(), (zCoord + 30).toDouble()))) {
+            if (worldObj.getBlock(xCoord, yCoord + 1, zCoord) !is BlockLightningWood) {
+                for (e in getLightningBoltsWithinAABB(worldObj, AxisAlignedBB.getBoundingBox((xCoord - 64).toDouble(), (yCoord - 64).toDouble(), (zCoord - 64).toDouble(),
+                        (xCoord + 64).toDouble(), (yCoord + 64).toDouble(), (zCoord + 64).toDouble()))) {
                     worldObj.removeEntity(e)
 
                     val wispLoc = this.centerVector()
@@ -35,11 +36,19 @@ class EntityLightningRod() : TileEntity() {
 
         for (effect in world.weatherEffects) {
             if (effect is EntityLightningBolt && effect !is FakeLightning) {
+                if(effect.posX.inRange(box.minX, box.maxX) &&
+                        effect.posY.inRange(box.minY, box.maxY) &&
+                        effect.posZ.inRange(box.minZ, box.maxZ))
+
                 bolts.add(effect)
             }
         }
 
         return bolts
+    }
+
+    fun Double.inRange(min:Double, max: Double): Boolean {
+        return (this > min && this < max)
     }
 
     /**
@@ -85,7 +94,7 @@ class EntityLightningRod() : TileEntity() {
 
                     for (l in list.indices) {
                         val entity = list[l] as Entity
-                        if (!net.minecraftforge.event.ForgeEventFactory.onEntityStruckByLightning(entity, this))
+                        if (!ForgeEventFactory.onEntityStruckByLightning(entity, this))
                             entity.onStruckByLightning(this)
                     }
                 }
