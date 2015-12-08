@@ -262,7 +262,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         if (this.manaRequired > 0 && recipe != null) {
             val x = res.scaledWidth / 2 + 20
             val y = res.scaledHeight / 2 - 8
-            RenderHelper.renderProgressPie(x, y, this.mana.toFloat() / this.manaRequired.toFloat(), ItemStack(recipe.output))
+            RenderHelper.renderProgressPie(x, y, this.mana.toFloat() / this.manaRequired.toFloat(), recipe.output)
         }
 
     }
@@ -313,7 +313,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         stage = 0
 
         worldObj.setBlockToAir(xCoord, yCoord - 3 , zCoord)
-        worldObj.setBlock(xCoord, yCoord - 3, zCoord, recipe.output, recipe.meta, 3)
+        worldObj.setBlock(xCoord, yCoord - 3, zCoord, recipe.outputBlock, recipe.meta, 3)
 
         this.worldObj.playSoundEffect(this.xCoord.toDouble(), this.yCoord.toDouble(), this.zCoord.toDouble(), "botania:enchanterEnchant", 1.0f, 1.0f)
 

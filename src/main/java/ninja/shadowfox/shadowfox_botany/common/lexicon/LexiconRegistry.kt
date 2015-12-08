@@ -5,6 +5,7 @@ import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import ninja.shadowfox.shadowfox_botany.common.crafting.ModRecipes
+import vazkii.botania.common.lexicon.page.PageTreeCrafting
 import net.minecraft.item.ItemStack
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.common.lexicon.LexiconData
@@ -121,6 +122,9 @@ public object LexiconRegistry {
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.wiltedLotus, 1, 0), sealCreepers, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.wiltedLotus, 1, 1), sealCreepers, 1)
+
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.treeCrafterBlock), treeCrafting, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.treeCrafterBlockRB), treeCrafting, 1)
 
         for (i in 0..2)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.itemDisplay, 1, i), itemDisplay, 1)

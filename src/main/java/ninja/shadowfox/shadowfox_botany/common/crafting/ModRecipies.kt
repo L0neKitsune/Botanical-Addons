@@ -8,6 +8,8 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.IRecipe
 import net.minecraftforge.oredict.ShapedOreRecipe
 import net.minecraftforge.oredict.ShapelessOreRecipe
+import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
+import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import vazkii.botania.api.BotaniaAPI
@@ -47,6 +49,8 @@ public object ModRecipes {
     val recipesItemDisplayElven: IRecipe
     val recipesPlainDirt: RecipePureDaisy
     val recipesIrisSapling: RecipePureDaisyExclusion
+
+    val recipesTreeTest: RecipeTreeCrafting
 
     init {
 
@@ -288,6 +292,10 @@ public object ModRecipes {
                 'W', ItemStack(BotaniaDecorBlocks.dreamwoodSlab))
 
         recipesItemDisplayElven = BotaniaAPI.getLatestAddedRecipe()
+
+        recipesTreeTest = ShadowFoxAPI.addTreeRecipe(500000,
+                Blocks.diamond_block, 0,
+                ItemStack(Items.apple, 1), ItemStack(Items.apple, 1), ItemStack(Items.apple, 1), ItemStack(Items.apple, 1))
 
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood1, ItemStack(Items.coal, 1, 1), 0.15F)
