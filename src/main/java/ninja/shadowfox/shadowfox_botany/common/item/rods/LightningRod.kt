@@ -122,7 +122,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
             val innerColor = Color(color).brighter().brighter().rgb
 
             if (ManaItemHandler.requestManaExactForTool(stack, player, getCost(thor, prowess, priest), false)) {
-                var target = getTarget(player!!.worldObj, player, ItemNBTHelper.getInt(stack, "target", -1))
+                var target = getTarget(player.worldObj, player, ItemNBTHelper.getInt(stack, "target", -1))
                 if (target != null) {
                     ItemNBTHelper.setInt(stack, "target", target.entityId)
 

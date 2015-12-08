@@ -33,6 +33,7 @@ public object LexiconRegistry {
     val kindling: LexiconEntry
     val waveRod: LexiconEntry
     val itemDisplay: LexiconEntry
+    val lightningSapling: LexiconEntry
 
     init {
 
@@ -108,6 +109,10 @@ public object LexiconRegistry {
         itemDisplay.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesItemDisplay))
 
+        lightningSapling = ShadowfoxLexiconEntry("lightningSapling", dendrology, ShadowFoxBlocks.lightningSapling)
+        lightningSapling.setLexiconPages(PageText("0"),
+                PageTreeCrafting("1", ModRecipes.recipesLightningTree))
+
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.interdictionRod), interdictionRod, 1)
@@ -125,6 +130,10 @@ public object LexiconRegistry {
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.treeCrafterBlock), treeCrafting, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.treeCrafterBlockRB), treeCrafting, 1)
+
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.lightningSapling), lightningSapling, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.lightningWood), lightningSapling, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.lightningLeaves), lightningSapling, 1)
 
         for (i in 0..2)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.itemDisplay, 1, i), itemDisplay, 1)

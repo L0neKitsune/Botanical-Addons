@@ -15,10 +15,12 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxRotatedPillar
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileLightningRod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxItemBlockMod
+import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
-public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITileEntityProvider{
+public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITileEntityProvider, ILexiconable {
 
     init {
         setBlockName("lightningWood")
@@ -80,6 +82,6 @@ public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITile
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
-        return null
+        return LexiconRegistry.lightningSapling
     }
 }

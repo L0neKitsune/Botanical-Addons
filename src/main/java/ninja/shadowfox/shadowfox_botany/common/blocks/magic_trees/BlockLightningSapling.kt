@@ -2,16 +2,20 @@ package ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees
 
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
+import net.minecraft.item.ItemStack
 import net.minecraft.world.World
 import net.minecraft.world.gen.feature.WorldGenerator
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.BlockColoredSapling
 import ninja.shadowfox.shadowfox_botany.common.world.HeartWoodTreeGen
+import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 
-class BlockLightningSapling() : BlockColoredSapling(name = "magicalSapling") {
+class BlockLightningSapling() : BlockColoredSapling(name = "lightningSapling") {
     override fun growTree(world: World?, x: Int, y: Int, z: Int, random: Random?) {
         if(world != null) {
 
@@ -52,5 +56,9 @@ class BlockLightningSapling() : BlockColoredSapling(name = "magicalSapling") {
 
     override fun canGrowHere(block: Block): Boolean {
         return block.material == Material.ground || block.material == Material.grass
+    }
+
+    override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
+        return LexiconRegistry.lightningSapling
     }
 }
