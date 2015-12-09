@@ -11,7 +11,6 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityCreature
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.effect.EntityLightningBolt
-import net.minecraft.entity.monster.EntitySlime
 import net.minecraft.entity.monster.IMob
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
@@ -122,7 +121,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
             val innerColor = Color(color).brighter().brighter().rgb
 
             if (ManaItemHandler.requestManaExactForTool(stack, player, getCost(thor, prowess, priest), false)) {
-                var target = getTarget(player!!.worldObj, player, ItemNBTHelper.getInt(stack, "target", -1))
+                var target = getTarget(player.worldObj, player, ItemNBTHelper.getInt(stack, "target", -1))
                 if (target != null) {
                     ItemNBTHelper.setInt(stack, "target", target.entityId)
 
@@ -182,11 +181,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
     }
 
     fun getTarget(world: World, player: EntityPlayer, trial_target: Int, range: Float = 12.0f): EntityLivingBase? {
-        val selector = object : IEntitySelector {
-            override fun isEntityApplicable(e: Entity): Boolean {
-                return e is IMob && e !is EntityPlayer && e !is EntityPlayerMP
-            }
-        }
+        val selector = IEntitySelector { e -> e is IMob && e !is EntityPlayer && e !is EntityPlayerMP }
 
         val potential = world.selectEntitiesWithinAABB(EntityLivingBase::class.java, AxisAlignedBB.getBoundingBox(player.posX - range, player.posY - range, player.posZ - range, player.posX + range, player.posY + range, player.posZ + range), selector)
 
@@ -220,11 +215,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
 
             val alreadyTargetedEntities = ArrayList<Entity>()
             val lightningSeed = ItemNBTHelper.getLong(stack, "lightningSeed", 0L)
-            val selector = object : IEntitySelector {
-                override fun isEntityApplicable(e: Entity): Boolean {
-                    return e is IMob && e !is EntityPlayer && e !is EntityPlayerMP && !alreadyTargetedEntities.contains(e)
-                }
-            }
+            val selector = IEntitySelector { e -> e is IMob && e !is EntityPlayer && e !is EntityPlayerMP && !alreadyTargetedEntities.contains(e) }
             val rand = Random(lightningSeed)
             var lightningSource: EntityLivingBase = entity
 
@@ -285,11 +276,7 @@ public open class LightningRod(name: String = "lightningRod") : StandardItem(nam
         val innerColor = Color(color).brighter().brighter().rgb
 
         if (tile.currentMana >= COST_AVATAR && tile.isEnabled && tile.elapsedFunctionalTicks % 10 == 0) {
-            val selector = object : IEntitySelector {
-                override fun isEntityApplicable(e: Entity): Boolean {
-                    return (if (true) e is EntityLivingBase else e is IMob) && e !is EntityPlayer && e !is EntityPlayerMP && e !is EntityDoppleganger
-                }
-            }
+            val selector = IEntitySelector { e -> (if (true) e is EntityLivingBase else e is IMob) && e !is EntityPlayer && e !is EntityPlayerMP && e !is EntityDoppleganger }
 
             val entities = world.selectEntitiesWithinAABB(EntityLivingBase::class.java, AxisAlignedBB.getBoundingBox((te.xCoord - range).toDouble(), (te.yCoord - range).toDouble(),
                     (te.zCoord - range).toDouble(), (te.xCoord + range).toDouble(), (te.yCoord + range).toDouble(), (te.zCoord + range).toDouble()), selector)

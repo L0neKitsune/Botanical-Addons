@@ -15,23 +15,24 @@ class TileItemDisplay() : ShadowFoxTile(), ISidedInventory {
         return this.inventory[par1]
     }
 
-    override fun decrStackSize(par1: Int, par2: Int): ItemStack? {
-        if (this.inventory[par1] != null) {
-            if (!this.worldObj.isRemote) {
-                this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord)
+    override fun decrStackSize(slot: Int, par2: Int): ItemStack? {
+        if (inventory[slot] != null) {
+
+            if (!worldObj.isRemote) {
+                worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord)
             }
 
             val itemstack: ItemStack
 
-            if (inventory[par1]!!.stackSize <= par2) {
-                itemstack = inventory[par1]!!
-                inventory[par1] = null
+            if (inventory[slot]!!.stackSize <= par2) {
+                itemstack = inventory[slot]!!
+                inventory[slot] = null
                 markDirty()
                 return itemstack
             } else {
-                itemstack = inventory[par1]!!.splitStack(par2)
-                if (inventory[par1]!!.stackSize == 0) {
-                    inventory[par1] = null
+                itemstack = inventory[slot]!!.splitStack(par2)
+                if (inventory[slot]!!.stackSize == 0) {
+                    inventory[slot] = null
                 }
 
                 this.markDirty()
@@ -105,7 +106,7 @@ class TileItemDisplay() : ShadowFoxTile(), ISidedInventory {
 
     override fun getInventoryStackLimit(): Int = 1
 
-    override fun canUpdate(): Boolean  = false
+    override fun canUpdate(): Boolean = true
 
     override fun isItemValidForSlot(par1: Int, par2ItemStack: ItemStack): Boolean = true
     override fun getAccessibleSlotsFromSide(par1: Int): IntArray = slots

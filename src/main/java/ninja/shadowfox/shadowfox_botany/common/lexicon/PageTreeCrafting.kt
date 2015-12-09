@@ -1,0 +1,47 @@
+package vazkii.botania.common.lexicon.page
+
+import net.minecraft.client.Minecraft
+import net.minecraft.client.gui.FontRenderer
+import net.minecraft.item.ItemStack
+import net.minecraft.util.StatCollector
+import org.lwjgl.opengl.GL11
+import vazkii.botania.api.internal.IGuiLexiconEntry
+import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import vazkii.botania.client.core.handler.HUDHandler
+import vazkii.botania.common.block.ModBlocks
+import vazkii.botania.common.block.tile.mana.TilePool
+import cpw.mods.fml.relauncher.Side
+import cpw.mods.fml.relauncher.SideOnly
+
+public class PageTreeCrafting: PagePetalRecipe<RecipeTreeCrafting> {
+    constructor(unlocalizedName:String, recipes:List<RecipeTreeCrafting>) : super(unlocalizedName, recipes) {}
+    constructor(unlocalizedName:String, recipes:RecipeTreeCrafting) : super(unlocalizedName, recipes) {}
+
+    override fun getMiddleStack(): ItemStack {
+        return ItemStack(ShadowFoxBlocks.treeCrafterBlockRB)
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun renderManaBar(gui:IGuiLexiconEntry, recipe:RecipeTreeCrafting, mx:Int, my:Int) {
+        val font = Minecraft.getMinecraft().fontRenderer
+        GL11.glEnable(GL11.GL_BLEND)
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
+        val manaUsage = StatCollector.translateToLocal("botaniamisc.manaUsage")
+        font.drawString(manaUsage, gui.getLeft() + gui.getWidth() / 2 - font.getStringWidth(manaUsage) / 2, gui.getTop() + 110, 1711276032)
+        var ratio = 10
+        val x = gui.getLeft() + gui.getWidth() / 2 - 50
+        val y = gui.getTop() + 120
+        if (mx > x + 1 && mx <= x + 101 && my > y - 14 && my <= y + 11)
+            ratio = 1
+        HUDHandler.renderManaBar(x, y, 255, 0.75f, recipe.getManaUsage(), TilePool.MAX_MANA / ratio)
+        val ratioString = StatCollector.translateToLocal("botaniamisc.ratio").format(ratio)
+        val stopStr = StatCollector.translateToLocal("botaniamisc.shiftToStopSpin")
+        val unicode = font.getUnicodeFlag()
+        font.setUnicodeFlag(true)
+        font.drawString(stopStr, x + 50 - font.getStringWidth(stopStr) / 2, y + 15, -1728053248)
+        font.drawString(ratioString, x + 50 - font.getStringWidth(ratioString) / 2, y + 5, -1728053248)
+        font.setUnicodeFlag(unicode)
+        GL11.glDisable(GL11.GL_BLEND)
+    }
+}

@@ -27,10 +27,10 @@ misc.shadowfox_botany:lotusDesc=It emits discordant magical vibes
 item.shadowfox_botany:attributionBauble0.name=Holy Symbol
 item.shadowfox_botany:attributionBauble1.name=Pendant of Headtato Summoning
 
-item.shadowfox_botany:colorfulSkyDirtRod.name=Rod of the Iridescence
-item.shadowfox_botany:lightningRod.name=Rod of the Thundercaller
-item.shadowfox_botany:interdictionRod.name=Rod of the Hurricane
-item.shadowfox_botany:rainbowLightRod.name=Rod of the Shining Wave
+item.shadowfox_botany:colorfulSkyDirtRod.name=Rod of the Vibrant Plains
+item.shadowfox_botany:lightningRod.name=Rod of the Thundering Peaks
+item.shadowfox_botany:interdictionRod.name=Rod of the Stormy Sea
+item.shadowfox_botany:rainbowLightRod.name=Rod of the Prismatic Lake
 
 item.shadowfox_botany:priestEmblem0.name=Priestly Emblem: Thor
 item.shadowfox_botany:priestEmblem1.name=Priestly Emblem: Sif
@@ -41,6 +41,10 @@ item.shadowfox_botany:aesirEmblem.name=Priestly Emblem: &6Aesir&r
 entity.shadowfox_botany:voidCreeper.name=Manaseal Creeper
 
 tile.shadowfox_botany:barrier.name=Barrier
+
+tile.shadowfox_botany:itemDisplay0.name=Manasteel Item Platform
+tile.shadowfox_botany:itemDisplay1.name=Terrasteel Item Platform
+tile.shadowfox_botany:itemDisplay2.name=Elementium Item Platform
 
 tile.shadowfox_botany:rainbowDirt.name=Iridescent Dirt
 tile.shadowfox_botany:coloredDirt.name=Iridescent Dirt
@@ -55,6 +59,11 @@ tile.shadowfox_botany:rainbowGrass.name=Iridescent Grass
 tile.shadowfox_botany:irisGrass.name=Iridescent Grass
 tile.shadowfox_botany:rainbowDoubleGrass.name=Iridescent Double Grass
 tile.shadowfox_botany:irisDoubleGrass.name=Iridescent Double Grass
+
+shadowfox_botany.nei.treeCrafter=Dendric Suffuser
+tile.shadowfox_botany:treeCrafter.name=Dendric Suffuser
+tile.shadowfox_botany:treeCrafterRB.name=Dendric Suffuser
+
 item.shadowfox_botany:irisSeeds.name=Iridescent Seeds
 
 tile.shadowfox_botany:invisibleFlame.name=Phantom Mana Flash
@@ -91,20 +100,24 @@ tile.shadowfox_botany:irisPlanksSlabFull.name=Iridescent Slab
 tile.shadowfox_botany:rainbowPlanksStairs.name=Iridescent Stairs
 tile.shadowfox_botany:irisPlanksStairs.name=Iridescent Stairs
 
-shadowfox_botany.potion.manaVoid=Manatide Storm
+tile.shadowfox_botany:lightningSapling.name=Thunderous Oak Sapling
+tile.shadowfox_botany:lightningWood.name=Thunderous Log
+tile.shadowfox_botany:lightningLeaves.name=Thunderous Leaves
 
-shadowfox_botany.category.dendrology=Dendrology
+shadowfox_botany.potion.manaVoid=Manatide Storm
 
 shadowfox_botany.entry.coloredDirt=Iridescent Dirt
 shadowfox_botany.tagline.coloredDirt=Rainbow dirt for your decoration needs
-shadowfox_botany.entry.technicolorRod=Rod of the Iridescence
+shadowfox_botany.entry.technicolorRod=Rod of the Vibrant Plains
 shadowfox_botany.tagline.technicolorRod=Rainbow dirt made from thin air
-shadowfox_botany.entry.lightningRod=Rod of the Thundercaller
+shadowfox_botany.entry.lightningRod=Rod of the Thundering Peaks
 shadowfox_botany.tagline.lightningRod=Stike fear and thunder into your foes
-shadowfox_botany.entry.interdictionRod=Rod of the Hurricane
+shadowfox_botany.entry.interdictionRod=Rod of the Stormy Sea
 shadowfox_botany.tagline.interdictionRod=Push enemies out of your personal space
 shadowfox_botany.entry.irisSapling=Iridescent Trees
 shadowfox_botany.tagline.irisSapling=Grow trees with all the colors of the wind
+shadowfox_botany.entry.treeCrafting=Tree Suffusion
+shadowfox_botany.tagline.treeCrafting=Infusing trees with mana and material
 shadowfox_botany.entry.irisSeeds=Iridescent Grass
 shadowfox_botany.tagline.irisSeeds=Rainbow grass for your colorful landscapes
 shadowfox_botany.entry.coatOfArms=Coats of Arms
@@ -117,23 +130,29 @@ shadowfox_botany.entry.sealCreepers=Manaseal Creepers
 shadowfox_botany.tagline.sealCreepers=A storm in the Manatide
 shadowfox_botany.entry.kindling=Blaze Kindling
 shadowfox_botany.tagline.kindling=Quickened firespread
-shadowfox_botany.entry.waveRod=Rod of the Shining Wave
+shadowfox_botany.entry.waveRod=Rod of the Prismatic Lake
 shadowfox_botany.tagline.waveRod=Rainbow lights
+shadowfox_botany.entry.itemDisplay=Item Platforms
+shadowfox_botany.tagline.itemDisplay=Display items without letting them despawn
+shadowfox_botany.entry.lightningSapling=Thunderous Oak
+shadowfox_botany.tagline.lightningSapling=A lightning-absorbing tree
+
+shadowfox_botany.category.dendrology=Dendrology
 
 shadowfox_botany.page.coloredDirt0=Using the latent power in &1Mystical Flowers&0, you can make dirt that shimmers every color of the rainbow. This mystical dirt is capable of growing trees and plants without water or a hoe. If put next to a &1Pure Daisy&0, it will revert to its uncolored state.
 shadowfox_botany.page.coloredDirt1=Beauty from the dross
 
-shadowfox_botany.page.technicolorRod0=The &1Rod of the Iridescense&0, like the &1Rod of the Highlands&0, can place &1Iridescent Dirt&0 in the air at the cost of mana. Unlike its less colorful counterpart, sneaking and clicking in the air will shift the rod between the various colors of &4Iridescense&0.<br>This rod can be given to a &1Livingwood Avatar&0.
+shadowfox_botany.page.technicolorRod0=The &1Rod of the Vibrant Plains&0, like the &1Rod of the Highlands&0, can place &1Iridescent Dirt&0 in the air at the cost of mana. Unlike its less colorful counterpart, sneaking and clicking in the air will shift the rod between the various colors of &4Iridescense&0.<br>This rod can be given to a &1Livingwood Avatar&0.
 shadowfox_botany.page.technicolorRod1=Simply drowning in colors
-shadowfox_botany.page.technicolorRod2=It appears that connecting your soul to the ancient god of earth, &4Sif&0, can increase your ability to use the &1Rod of the Iridescense&0. By donning the &1Priestly Emblem: Sif&0, your range extends beyond this rod's normal limits. Wearing the &1Ring of Far Reach&0 will increase your range further with the Emblem's power.
+shadowfox_botany.page.technicolorRod2=It appears that connecting your soul to the ancient god of earth, &4Sif&0, can increase your ability to use the &1Rod of the Vibrant Plains&0. By donning the &1Priestly Emblem: Sif&0, your range extends beyond this rod's normal limits. Wearing the &1Ring of Far Reach&0 will increase your range further with the Emblem's power.
 shadowfox_botany.page.technicolorRod3=Welcome now, and take the crystal cup
 
-shadowfox_botany.page.lightningRod0=The &1Rod of the Thundercaller&0, much like its sword cousin, the &1Thundercaller&0, can summon lightning to strike your enemies. It will leap from enemy to enemy, killing them all in turn.<br>A &1Livingwood Avatar&0 can also wield this rod.
+shadowfox_botany.page.lightningRod0=The &1Rod of the Thundering Peaks&0, much like its sword cousin, the &1Thundercaller&0, can summon lightning to strike your enemies. It will leap from enemy to enemy, killing them all in turn.<br>A &1Livingwood Avatar&0 can also wield this rod.
 shadowfox_botany.page.lightningRod1=Not quite a blessed blade
 shadowfox_botany.page.lightningRod2=It appears that connecting your soul to the ancient god of lightning, &4Thor&0, can increase your proficiency with the power of thunder. By donning the &1Priestly Emblem: Thor&0, this can be achieved. It seems that &4Manatide Prowess&0 has a similar effect upon the rod.<br>There appear to be even further power trapped within the rod, but it would take a god to get it out.
 shadowfox_botany.page.lightningRod3=In anger smite the earth
 
-shadowfox_botany.page.interdictionRod0=The &1Rod of the Hurricane&0 is one for those who don't like people in their personal space. Using it will seal the area around you, creating a sphere of force where other living beings cannot tread, and projectiles cannot pass. Whenever something tries to break this seal, &4Mana&0 is consumed to repel it.
+shadowfox_botany.page.interdictionRod0=The &1Rod of the Stormy Sea&0 is one for those who don't like people in their personal space. Using it will seal the area around you, creating a sphere of force where other living beings cannot tread, and projectiles cannot pass. Whenever something tries to break this seal, &4Mana&0 is consumed to repel it.
 shadowfox_botany.page.interdictionRod1=really not feelin up to it right now
 shadowfox_botany.page.interdictionRod2=It appears that connecting your soul to the ancient god of wind, &4Njord&0, can increase your proficiency with the power of air. By donning the &1Priestly Emblem: Njord&0, the force you exert with this rod will become much greater. It seems that &4Manatide Prowess&0 has a similar, but weaker effect upon the rod.
 shadowfox_botany.page.interdictionRod3=At the doom of men he will come back
@@ -144,6 +163,9 @@ shadowfox_botany.page.irisSapling2=Slabs
 shadowfox_botany.page.irisSapling3=Stairs
 shadowfox_botany.page.irisSapling4=And back again
 shadowfox_botany.page.irisSapling5=Grinding them down
+
+shadowfox_botany.page.treeCrafting0=Affecting life is much harder than making or destroying it. The &1Iridescent Tree&0 has a natural lack of regular life, which lends itself to making beautiful spectrums of wood. It seems possible to re-add this life, by drawing mana into a &4Dendric Suffuser&0. This machine, of &1Obsidian&0 and materials of &4Iridesence&0, will suffuse the purified tree with life, creating interesting new varieties of life.
+shadowfox_botany.page.treeCrafting1=The Dendric Suffuser
 
 shadowfox_botany.page.irisSeeds0=If &1Bone Meal&0 is used on &1Iridescent Dirt&0, it will grow &1Iridescent Grass&0 instead of &1Tall Grass&0. When this &1Iridescent Grass&0 is thrown into a &4Mana Pool&0, you get out something quite like the &1Pasture Seed&0. It will transmute &1Grass&0 and &1Dirt&0 into &1Iridescent Dirt&0, with a simple right click.
 shadowfox_botany.page.irisSeeds1=/etc/sudoers
@@ -165,5 +187,11 @@ shadowfox_botany.page.sealCreepers1NoDrop=However, they do have one interesting 
 shadowfox_botany.page.kindling0=&1Blaze Kindling&0 is like &1Netherrack&0 on steroids. Not only will it sustain flames, but it will take them in from nearby blocks, very quickly, It can also be extinguished and lit simply by using it with an open hand.
 shadowfox_botany.page.kindling1=Stop drop and roll
 
-shadowfox_botany.page.waveRod0=One particularly frustrating property of the &1Mana Lens: Flash&0 is its tendency to lock the color of a &1Mana Flash&0 immidiately upon making it. Even if you want to make a rainbow &1Flash&0, you'll get one color. By using the power of the &4Bifrost&0, you can make the rainbow you've been searching for.<br>It can be tinged with &1Phantom Ink&0.
+shadowfox_botany.page.waveRod0=One particularly frustrating property of the &1Mana Lens: Flash&0 is its tendency to lock the color of a &1Mana Flash&0 immidiately upon making it. Even if you want to make a rainbow &1Flash&0, you'll get one color. By using the power of the &1Rod of the Prismatic Lake&0, you can make the rainbow you've been searching for.<br>It can be tinged with &1Phantom Ink&0.
 shadowfox_botany.page.waveRod1=All the colors of the wind
+
+shadowfox_botany.page.itemDisplay0=The &1Item Platform&0 is a neat way to display an item without having it despawn. Giving it an item via right click or hopper will show it floating above the platform. It's a neat way to show off your piles of resources.
+shadowfox_botany.page.itemDisplay1=Terrasteel makes you look rich
+
+shadowfox_botany.page.lightningSapling0=The &1Thunderous Oak&0 is a tree that acts like a lightning rod. It absorbs lightning from the surrounding area and redirects it to itself. The process of drawing in the lightning can sometimes damage items and creatures, and light terrain on fire where the lightning was. The effect is reduced by the existence of the Oak, though.
+shadowfox_botany.page.lightningSapling1=Thor will hate you

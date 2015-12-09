@@ -30,7 +30,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 import kotlin.properties.Delegates
 
-public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowable, IPlantable, ILexiconable, IFuelHandler {
+public open class BlockColoredSapling(val name: String = "irisSapling") : ShadowFoxBlockMod(Material.plants), IGrowable, IPlantable, ILexiconable, IFuelHandler {
 
     internal var icon: IIcon by Delegates.notNull()
 
@@ -38,7 +38,7 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
         this.setTickRandomly(true)
         this.setBlockBounds(0.5F - 0.4F, 0.0F, 0.5F - 0.4F, 0.5F + 0.4F, 0.4F * 2.0F, 0.5F + 0.4F)
         stepSound = Block.soundTypeGrass
-        this.setBlockName("irisSapling")
+        this.setBlockName(name)
 
         GameRegistry.registerFuelHandler(this)
     }
@@ -117,7 +117,7 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
         }
     }
 
-    public fun growTree(world: World?, x: Int, y: Int, z: Int, random: Random?) {
+    public open fun growTree(world: World?, x: Int, y: Int, z: Int, random: Random?) {
         if(world != null) {
             if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(world, random, x, y, z)) return
 
@@ -160,7 +160,7 @@ public class BlockColoredSapling() : ShadowFoxBlockMod(Material.plants), IGrowab
         return canGrowHere(world!!.getBlock(x, y - 1, z))
     }
 
-    fun canGrowHere(block: Block): Boolean {
+    open fun canGrowHere(block: Block): Boolean {
         return block == ShadowFoxBlocks.coloredDirtBlock || block == ShadowFoxBlocks.rainbowDirtBlock
     }
 

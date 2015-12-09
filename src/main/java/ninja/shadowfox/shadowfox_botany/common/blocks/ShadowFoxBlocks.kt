@@ -7,9 +7,14 @@ import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.*
+import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.BlockLightningLeaves
+import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.BlockLightningSapling
+import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.BlockLightningWood
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.*
+
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.*
 import vazkii.botania.api.BotaniaAPI
+import vazkii.botania.api.lexicon.multiblock.MultiblockSet
 
 public object ShadowFoxBlocks {
 
@@ -46,11 +51,18 @@ public object ShadowFoxBlocks {
 
     public var coloredStairs: Array<Block>
     public var rainbowStairs: Block
+
+    public var itemDisplay: Block
+    public var treeCrafter: MultiblockSet
+    public var treeCrafterBlock: Block
+    public var treeCrafterBlockRB: Block
+
+    public var lightningSapling: Block
+    public var lightningWood: Block
+    public var lightningLeaves: Block
+
     public var invisibleFlame: Block
     public var rainbowFlame: Block
-
-    // public var itemDisplay: Block
-    // public var lightningRod: Block
 
     public var barrier: Block
 
@@ -92,8 +104,14 @@ public object ShadowFoxBlocks {
         irisTallGrass0 = BlockColoredDoubleGrass(0)
         irisTallGrass1 = BlockColoredDoubleGrass(1)
         rainbowTallGrass = BlockRainbowDoubleGrass()
-        // itemDisplay = BlockItemDisplay()
-        // lightningRod = BlockLightningRod()
+        itemDisplay = BlockItemDisplay()
+        treeCrafter = TileTreeCrafter.makeMultiblockSet()
+        treeCrafterBlock = BlockTreeCrafter()
+        treeCrafterBlockRB = BlockTreeCrafterRainbow()
+
+        lightningSapling = BlockLightningSapling()
+        lightningWood = BlockLightningWood()
+        lightningLeaves = BlockLightningLeaves()
 
         barrier = BlockBarrier()
 
@@ -104,7 +122,8 @@ public object ShadowFoxBlocks {
 
         GameRegistry.registerTileEntity(TileInvisibleManaFlame::class.java, "shadowfox_botany:manaInvisibleFlame")
         GameRegistry.registerTileEntity(TileRainbowManaFlame::class.java, "shadowfox_botany:manaRainbowFlame")
-        // GameRegistry.registerTileEntity(TileItemDisplay::class.java, "shadowfox_botany:itemDisplay")
+        GameRegistry.registerTileEntity(TileItemDisplay::class.java, "shadowfox_botany:itemDisplay")
+        GameRegistry.registerTileEntity(TileTreeCrafter::class.java, "shadowfox_botany:treeCrafter")
 
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
     }

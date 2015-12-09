@@ -1,51 +1,61 @@
-package ninja.shadowfox.shadowfox_botany.common.entity
+package ninja.shadowfox.shadowfox_botany.common.blocks.tile
 
 import net.minecraft.entity.Entity
 import net.minecraft.entity.effect.EntityLightningBolt
+import net.minecraft.init.Blocks
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.world.World
-import ninja.shadowfox.shadowfox_botany.common.blocks.BlockLightningRod
-import ninja.shadowfox.shadowfox_botany.common.utils.centerVector
-import vazkii.botania.common.Botania
+import net.minecraftforge.event.ForgeEventFactory
 import java.util.*
 
 
-class EntityLightningRod() : TileEntity() {
+class TileLightningRod() : TileEntity() {
 
     override fun updateEntity() {
         if (worldObj != null) {
-            if (worldObj.getBlock(xCoord, yCoord + 1, zCoord) !is BlockLightningRod) {
-                for (e in getLightningBoltsWithinAABB(worldObj, AxisAlignedBB.getBoundingBox((xCoord - 30).toDouble(), (yCoord - 30).toDouble(), (zCoord - 30).toDouble(),
-                        (xCoord + 30).toDouble(), (yCoord + 30).toDouble(), (zCoord + 30).toDouble()))) {
-                    worldObj.removeEntity(e)
-
-                    val wispLoc = this.centerVector()
-
-                    Botania.proxy.wispFX(worldObj, wispLoc.x, wispLoc.y - 4, wispLoc.z, 1f, 1f, 1f, 5f)
-                    worldObj.addWeatherEffect(FakeLightning(worldObj, xCoord.toDouble(), (yCoord + 1).toDouble(), zCoord.toDouble()))
-                }
+            for (e in getBoltsWithinAABB(worldObj, AxisAlignedBB.getBoundingBox((xCoord - 48).toDouble(), (yCoord - 48).toDouble(), (zCoord - 48).toDouble(),
+                    (xCoord + 48).toDouble(), (yCoord + 48).toDouble(), (zCoord + 48).toDouble()))) {
+                worldObj.removeEntity(e)
+                worldObj.addWeatherEffect(FakeLightning(worldObj, xCoord.toDouble(), (yCoord + 1).toDouble(), zCoord.toDouble()))
             }
+
+            for (x in xCoord - 2..xCoord + 2)
+                for (y in yCoord - 2..yCoord + 2)
+                    for (z in zCoord - 2..zCoord + 2){
+                        if (worldObj.getBlock(x, y, z) === Blocks.fire){
+                            worldObj.setBlockToAir(x, y, z)
+                        }
+                    }
         }
     }
 
-    fun getLightningBoltsWithinAABB(world: World, box: AxisAlignedBB): ArrayList<EntityLightningBolt> {
+    fun getBoltsWithinAABB(world: World, box: AxisAlignedBB): ArrayList<EntityLightningBolt> {
         var bolts = ArrayList<EntityLightningBolt>()
 
         for (effect in world.weatherEffects) {
             if (effect is EntityLightningBolt && effect !is FakeLightning) {
-                bolts.add(effect)
+                if (effect.posX.inRange(box.minX, box.maxX) &&
+                        effect.posY.inRange(box.minY, box.maxY) &&
+                        effect.posZ.inRange(box.minZ, box.maxZ)) {
+
+                    bolts.add(effect)
+                }
             }
         }
 
         return bolts
     }
 
+    fun Double.inRange(min: Double, max: Double): Boolean {
+        return (this > min && this < max)
+    }
+
     /**
      * Like real lightning but less fire
      */
-    class FakeLightning(world: World, x: Double, y: Double, z: Double) : EntityLightningBolt(world, x , y, z) {
+    class FakeLightning(world: World, x: Double, y: Double, z: Double) : EntityLightningBolt(world, x, y, z) {
         private var lightningState: Int = 0
         private var boltLivingTime: Int = 0
 
@@ -85,15 +95,20 @@ class EntityLightningRod() : TileEntity() {
 
                     for (l in list.indices) {
                         val entity = list[l] as Entity
-                        if (!net.minecraftforge.event.ForgeEventFactory.onEntityStruckByLightning(entity, this))
+                        if (!ForgeEventFactory.onEntityStruckByLightning(entity, this))
                             entity.onStruckByLightning(this)
                     }
                 }
             }
         }
 
-        override fun entityInit() {}
-        override fun readEntityFromNBT(p_70037_1_: NBTTagCompound) {}
-        override fun writeEntityToNBT(p_70014_1_: NBTTagCompound) {}
+        override fun entityInit() {
+        }
+
+        override fun readEntityFromNBT(p_70037_1_: NBTTagCompound) {
+        }
+
+        override fun writeEntityToNBT(p_70014_1_: NBTTagCompound) {
+        }
     }
 }
