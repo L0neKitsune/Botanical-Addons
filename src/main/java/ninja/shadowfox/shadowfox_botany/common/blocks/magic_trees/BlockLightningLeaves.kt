@@ -1,9 +1,12 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees
 
 import cpw.mods.fml.common.registry.GameRegistry
+import cpw.mods.fml.relauncher.Side
+import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
@@ -18,6 +21,10 @@ class BlockLightningLeaves(): ShadowFoxLeaves(), ILexiconable {
     init {
         setBlockName("lightningLeaves")
     }
+
+    @SideOnly(Side.CLIENT) override fun getBlockColor(): Int = 0xFFFFFF
+    @SideOnly(Side.CLIENT) override fun getRenderColor(meta: Int): Int = 0xFFFFFF
+    @SideOnly(Side.CLIENT) override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int = 0xFFFFFF
 
     override fun register(name: String) {
         GameRegistry.registerBlock(this, ShadowFoxItemBlockMod::class.java, name)
