@@ -4,6 +4,7 @@ import cpw.mods.fml.common.FMLLog
 import net.minecraft.block.Block
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.ScaledResolution
+import net.minecraft.client.renderer.entity.RenderItem
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
@@ -21,6 +22,9 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.colored.BlockColoredSaplin
 import ninja.shadowfox.shadowfox_botany.common.lexicon.MultiblockComponentRainbow
 import ninja.shadowfox.shadowfox_botany.common.utils.itemEquals
 
+import org.lwjgl.opengl.GL11
+import org.lwjgl.opengl.GL12
+
 import org.apache.logging.log4j.Level
 import vazkii.botania.api.internal.VanillaPacketDispatcher
 import vazkii.botania.api.lexicon.multiblock.Multiblock
@@ -30,6 +34,7 @@ import vazkii.botania.api.mana.spark.ISparkAttachable
 import vazkii.botania.api.mana.spark.ISparkEntity
 import vazkii.botania.api.mana.spark.SparkHelper
 import vazkii.botania.client.core.helper.RenderHelper
+import vazkii.botania.client.core.handler.HUDHandler
 import vazkii.botania.common.Botania
 import vazkii.botania.common.block.ModBlocks
 import java.util.*
@@ -150,7 +155,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             return //finishes execution just in case
         }
 
-        var recipe = getRecipe()
+        var recipe = getValidRecipe()
         var recipeItems = ArrayList<Any>()
         if (recipe != null) recipeItems = ArrayList(recipe.inputs)
 
@@ -176,17 +181,16 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             }
         }
 
-        20 tickDelay { if (getRecipe() == null) {stage = 0 ; manaRequired = 0 ; mana = 0}}
+        if (getValidRecipe() == null) stage = 0
+        if (stage == 0) {manaRequired = 0 ; mana = 0}
 
         when (stage) {
             0 -> {
                 signal = 0
-                60 tickDelay {
-                    forRecipe {
-                        mana = 0
-                        manaRequired = it.mana
-                        advanceStage()
-                    }
+                forRecipe {
+                    mana = 0
+                    manaRequired = it.mana
+                    advanceStage()
                 }
             }
             1 -> {
@@ -194,7 +198,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
                 signal = 1
                 workingFanciness()
 
-                if (mana >= manaRequired) { //A bit of an artificial delay
+                if (mana >= manaRequired) {
                     manaRequired = 0
                     advanceStage()
                 } else {
@@ -207,16 +211,10 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
                 }
             }
             2 -> {
-                stageTicks++
-                signal = 1
-                workingFanciness()
-                if (stageTicks > 100){
-                    forRecipe { craftingFanciness(it) }
-                }
+                forRecipe { craftingFanciness(it) }
             }
-            3 -> 40 tickDelay { advanceStage() }
             else -> {
-                stage == 0
+                stage = 0
             }
         }
 
@@ -234,17 +232,21 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         }
     }
 
-    fun getRecipe() : RecipeTreeCrafting? {
+    fun getValidRecipe() : RecipeTreeCrafting? {
         if (worldObj.getBlock(xCoord, yCoord - 3, zCoord) === ShadowFoxBlocks.irisSapling) {
-            for (recipe in ShadowFoxAPI.treeRecipes)
-                if (recipe.matches(getRecipeInputs())) return recipe
+            return getRecipe()
         }
+        return null
+    }
 
+    fun getRecipe() : RecipeTreeCrafting? {
+        for (recipe in ShadowFoxAPI.treeRecipes)
+            if (recipe.matches(getRecipeInputs())) return recipe
         return null
     }
 
     fun forRecipe(action: (RecipeTreeCrafting) -> Unit){
-        val recipe = getRecipe()
+        val recipe = getValidRecipe()
         if (recipe != null){
             action.invoke(recipe)
         }
@@ -265,14 +267,39 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         }
     }
 
-    fun renderHUD(mc: Minecraft, res: ScaledResolution) {
+    fun renderHUD(mc:Minecraft, res:ScaledResolution) {
+        val xc = res.getScaledWidth() / 2
+        val yc = res.getScaledHeight() / 2
+        var angle = -90f
+        val radius = 24
         val recipe = getRecipe()
-        if (this.manaRequired > 0 && recipe != null) {
-            val x = res.scaledWidth / 2 + 20
-            val y = res.scaledHeight / 2 - 8
-            RenderHelper.renderProgressPie(x, y, this.mana.toFloat() / this.manaRequired.toFloat(), recipe.output)
+        val items = getRecipeInputs()
+        if (recipe != null && (this.mana == 0 || this.manaRequired > 0)) {
+            val sapling = worldObj.getBlock(xCoord, yCoord - 3, zCoord) == ShadowFoxBlocks.irisSapling
+            GL11.glEnable(GL11.GL_BLEND)
+            GL11.glEnable(GL12.GL_RESCALE_NORMAL)
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
+            val progress = this.mana.toFloat() / this.manaRequired.toFloat()
+            mc.renderEngine.bindTexture(HUDHandler.manaBar)
+            GL11.glColor4f(1f, 1f, 1f, 1f)
+            RenderHelper.drawTexturedModalRect(xc + radius + 9, yc - 8, 0f, if (sapling) 0 else 22, 8, 22, 15)
+            net.minecraft.client.renderer.RenderHelper.enableGUIStandardItemLighting()
+            if (!sapling) RenderItem.getInstance().renderItemIntoGUI(mc.fontRenderer, mc.renderEngine, ItemStack(ShadowFoxBlocks.irisSapling), xc + radius + 16, yc + 8)
+            RenderHelper.renderProgressPie(xc + radius + 32, yc - 8, progress, recipe.getOutput())
+            net.minecraft.client.renderer.RenderHelper.disableStandardItemLighting()
+            if (!sapling) mc.fontRenderer.drawStringWithShadow("+", xc + radius + 14, yc + 12, 0xFFFFFF)
         }
-
+        net.minecraft.client.renderer.RenderHelper.enableGUIStandardItemLighting()
+        val anglePer = 360f / items.size
+        for (i in items) {
+            val xPos = xc + Math.cos(angle * Math.PI / 180.0) * radius - 8
+            val yPos = yc + Math.sin(angle * Math.PI / 180.0) * radius - 8
+            GL11.glTranslated(xPos, yPos, 0.0)
+            RenderItem.getInstance().renderItemIntoGUI(mc.fontRenderer, mc.renderEngine, i, 0, 0)
+            GL11.glTranslated(-xPos, -yPos, 0.0)
+            angle += anglePer
+        }
+        net.minecraft.client.renderer.RenderHelper.disableStandardItemLighting()
     }
 
     fun getRecipeInputs(): ArrayList<ItemStack> {

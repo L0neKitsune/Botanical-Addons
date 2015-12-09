@@ -14,7 +14,7 @@ import vazkii.botania.client.core.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxItemBlockMod
 
 
-abstract  class ShadowFoxTileContainer<T: TileEntity>(material: Material): BlockContainer(material) {
+abstract class ShadowFoxTileContainer<T: TileEntity>(material: Material): BlockContainer(material) {
     var originalLight: Int = 0
     open val registerInCreative: Boolean = true
 
