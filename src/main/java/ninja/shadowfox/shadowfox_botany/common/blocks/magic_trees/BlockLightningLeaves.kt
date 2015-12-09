@@ -1,8 +1,13 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees
 
 import cpw.mods.fml.common.registry.GameRegistry
+import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
+import cpw.mods.fml.relauncher.FMLLaunchHandler
+import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.client.event.TextureStitchEvent
+import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -12,6 +17,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxItemBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import vazkii.botania.client.render.block.InterpolatedIcon
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
@@ -20,6 +26,26 @@ import java.util.*
 class BlockLightningLeaves(): ShadowFoxLeaves(), ILexiconable {
     init {
         setBlockName("lightningLeaves")
+        if (FMLLaunchHandler.side().isClient())
+            MinecraftForge.EVENT_BUS.register(this)
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun registerBlockIcons(iconRegister: IIconRegister) {}
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    fun loadTextures(event: TextureStitchEvent.Pre) {
+        if(event.map.textureType == 0) {
+            var success = true
+            var icon = InterpolatedIcon("shadowfox_botany:lightningLeaves")
+            if(!event.map.setTextureEntry("shadowfox_botany:lightningLeaves", icon))
+                success = false
+            var iconOpaque = InterpolatedIcon("shadowfox_botany:lightningLeaves_opaque")
+            if(!event.map.setTextureEntry("shadowfox_botany:lightningLeaves_opaque", iconOpaque))
+                success = false
+            if (success) icons = arrayOf(icon, iconOpaque)
+        }
     }
 
     @SideOnly(Side.CLIENT) override fun getBlockColor(): Int = 0xFFFFFF

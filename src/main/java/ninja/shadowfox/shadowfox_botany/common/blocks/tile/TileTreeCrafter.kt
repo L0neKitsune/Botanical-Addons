@@ -170,7 +170,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
                 for (rItem in recipeItems) {
                     if (stack.itemEquals(rItem)) {
                         if (mana > 0) { 
-                            if (stack.item is ItemBlock) worldObj.spawnParticle("blockcrack_${Item.getIdFromItem(stack.item)}_${stack.itemDamage}", it.xCoord.toDouble() + .5,  it.yCoord + 1.0, it.zCoord.toDouble() + .5, (this.xCoord.toDouble()-it.xCoord.toDouble())/8.0, 0.1, (this.zCoord.toDouble()-it.zCoord.toDouble())/8.0)
+                            if (stack.item is ItemBlock) worldObj.spawnParticle("blockcrack_${Item.getIdFromItem(stack.item)}_${stack.itemDamage}", it.xCoord.toDouble() + .5,  it.yCoord + 1.0, it.zCoord.toDouble() + .5, (this.xCoord.toDouble()-it.xCoord.toDouble())*8.0, 0.1, (this.zCoord.toDouble()-it.zCoord.toDouble())*8.0)
                             else worldObj.spawnParticle("iconcrack_${Item.getIdFromItem(stack.item)}_${stack.itemDamage}", it.xCoord.toDouble() + .5,  it.yCoord + 1.0, it.zCoord.toDouble() + .5, (this.xCoord.toDouble()-it.xCoord.toDouble())/8.0, 0.1, (this.zCoord.toDouble()-it.zCoord.toDouble())/8.0)
                             Botania.proxy.wispFX(this.worldObj, it.xCoord.toDouble() + .5, it.yCoord + 3.toDouble() + .5, it.zCoord.toDouble() + .5, 1.0f, 1.0f, 1.0f, s, -m)
                         }  
