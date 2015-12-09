@@ -15,6 +15,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxRotatedPillar
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileLightningRod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxItemBlockMod
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
@@ -75,11 +76,10 @@ public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITile
         GameRegistry.registerBlock(this, ShadowFoxItemBlockMod::class.java, par1Str)
     }
 
-    override fun getIcon(side: Int, meta: Int): IIcon {
-        return ShadowFoxBlocks.irisWood0.getIcon(side, meta)
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
+        this.iconTop = IconHelper.forName(par1IconRegister, "lightningWood_top")
+        this.iconSide = IconHelper.forName(par1IconRegister, "lightningWood")
     }
-
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return LexiconRegistry.lightningSapling

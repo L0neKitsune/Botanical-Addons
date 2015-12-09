@@ -38,7 +38,7 @@ object ShadowFoxItems {
         attributionBauble = ItemAttributionBauble()
         wiltedLotus = ItemWiltedLotus()
 
-        testingRod = TestingRod()
+        // testingRod = TestingRod()
         //        splashPotion = ItemSplashPotion()
         initOreDict()
     }
