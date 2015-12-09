@@ -21,7 +21,7 @@ object ShadowFoxItems {
     val attributionBauble: Item
     val wiltedLotus: Item
 
-    val testingRod: Item
+    // val testingRod: Item
     //    val splashPotion: Item
 
     init {
