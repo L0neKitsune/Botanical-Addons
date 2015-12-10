@@ -96,13 +96,17 @@ tile.shadowfox_botany:rainbowPlanksSlab.name=Iridescent Slab
 tile.shadowfox_botany:rainbowPlanksSlabFull.name=Iridescent Slab
 tile.shadowfox_botany:irisPlanksSlab.name=Iridescent Slab
 tile.shadowfox_botany:irisPlanksSlabFull.name=Iridescent Slab
+tile.shadowfox_botany:lightningPlanksSlab.name=Thunderous Slab
+tile.shadowfox_botany:lightningPlanksSlabFull.name=Thunderous Slab
 
 tile.shadowfox_botany:rainbowPlanksStairs.name=Iridescent Stairs
 tile.shadowfox_botany:irisPlanksStairs.name=Iridescent Stairs
+tile.shadowfox_botany:lightningPlanksStairs.name=Thunderous Stairs
 
 tile.shadowfox_botany:lightningSapling.name=Thunderous Oak Sapling
 tile.shadowfox_botany:lightningWood.name=Thunderous Log
 tile.shadowfox_botany:lightningLeaves.name=Thunderous Leaves
+tile.shadowfox_botany:lightningPlanks.name=Thunderous Planks
 
 shadowfox_botany.potion.manaVoid=Manatide Storm
 

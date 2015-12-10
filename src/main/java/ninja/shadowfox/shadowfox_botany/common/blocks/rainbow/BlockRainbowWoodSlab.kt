@@ -11,10 +11,11 @@ import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxSlabs
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 
 
-class BlockRainbowWoodSlab(full: Boolean, source: Block = ShadowFoxBlocks.rainbowPlanks): ShadowFoxSlabs(full, 0, source, source.unlocalizedName.replace("tile.".toRegex(), "") + "Slab" + (if (full) "Full" else "")), IFuelHandler {
+open class BlockRainbowWoodSlab(full: Boolean, source: Block = ShadowFoxBlocks.rainbowPlanks): ShadowFoxSlabs(full, 0, source, source.unlocalizedName.replace("tile.".toRegex(), "") + "Slab" + (if (full) "Full" else "")), IFuelHandler {
     init {
         this.setHardness(1.5f)
         this.setResistance(10.0f)
@@ -38,7 +39,7 @@ class BlockRainbowWoodSlab(full: Boolean, source: Block = ShadowFoxBlocks.rainbo
     }
 
     override fun getEntry(world: World?, x: Int, y: Int, z: Int, player: EntityPlayer?, lexicon: ItemStack?): LexiconEntry {
-        return LexiconRegistry.irisSapling
+        return (source as ILexiconable).getEntry(world, x, y, z, player, lexicon)
     }
 
     override fun getBurnTime(fuel: ItemStack): Int {

@@ -38,7 +38,6 @@ public object ModRecipes {
     val recipesInterdictionRod: IRecipe
     val recipesPriestOfNjord: IRecipe
     val recipesRedstoneRoot: List<IRecipe>
-    val recipesPastoralSeeds: List<RecipeManaInfusion>
     val recipesColorOverride: IRecipe
     val recipesinvisibleLens: IRecipe
     val recipesinvisibleLensUndo: IRecipe
@@ -47,6 +46,13 @@ public object ModRecipes {
     val recipesRainbowRod: IRecipe
     val recipesItemDisplay: List<IRecipe>
     val recipesItemDisplayElven: IRecipe
+    val recipesThunderousPlanks: IRecipe
+    val recipesThunderousStairsL: IRecipe
+    val recipesThunderousStairsR: IRecipe
+    val recipesThunderousSlabs: IRecipe
+
+    val recipesPastoralSeeds: List<RecipeManaInfusion>
+
     val recipesPlainDirt: RecipePureDaisy
     val recipesIrisSapling: RecipePureDaisyExclusion
 
@@ -297,8 +303,30 @@ public object ModRecipes {
                 ShadowFoxBlocks.lightningSapling, 0,
                 LibOreDict.MANA_STEEL, LibOreDict.MANA_STEEL, LibOreDict.MANA_STEEL,
                 LibOreDict.RUNE[13], // Wrath
-                ShadowFoxBlocks.LEAVES[10], ShadowFoxBlocks.LEAVES[10], ShadowFoxBlocks.LEAVES[10], 
+                ShadowFoxBlocks.LEAVES[10], ShadowFoxBlocks.LEAVES[10], ShadowFoxBlocks.LEAVES[10], // Purple
                 ItemStack(BotaniaBlocks.teruTeruBozu)) 
+
+        addShapelessOreDictRecipe(ItemStack(ShadowFoxBlocks.lightningPlanks, 4), ShadowFoxBlocks.lightningWood)
+
+        recipesThunderousPlanks = BotaniaAPI.getLatestAddedRecipe()
+
+        GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.lightningSlabs, 6),
+            "QQQ",
+            'Q', ItemStack(ShadowFoxBlocks.lightningPlanks))
+
+        recipesThunderousSlabs = BotaniaAPI.getLatestAddedRecipe()
+
+        GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.lightningStairs, 4),
+                    "Q  ", "QQ ", "QQQ",
+                    'Q', ItemStack(ShadowFoxBlocks.lightningPlanks))
+
+        recipesThunderousStairsL = BotaniaAPI.getLatestAddedRecipe()
+
+        GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.lightningStairs, 4),
+                    "  Q", " QQ", "QQQ",
+                    'Q', ItemStack(ShadowFoxBlocks.lightningPlanks))
+
+        recipesThunderousStairsR = BotaniaAPI.getLatestAddedRecipe()
 
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood1, ItemStack(Items.coal, 1, 1), 0.15F)
