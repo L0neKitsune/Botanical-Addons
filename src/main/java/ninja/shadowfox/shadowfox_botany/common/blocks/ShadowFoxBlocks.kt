@@ -61,6 +61,7 @@ public object ShadowFoxBlocks {
     public var lightningSapling: Block
     public var lightningWood: Block
     public var lightningLeaves: Block
+    public var lightningPlanks: Block
 
     public var invisibleFlame: Block
     public var rainbowFlame: Block
@@ -114,6 +115,7 @@ public object ShadowFoxBlocks {
         lightningSapling = BlockLightningSapling()
         lightningWood = BlockLightningWood()
         lightningLeaves = BlockLightningLeaves()
+        lightningPlanks = BlockLightningPlanks()
 
         barrier = BlockBarrier()
 
@@ -186,6 +188,10 @@ public object ShadowFoxBlocks {
 
         OreDictionary.registerOre("irisDirt", ItemStack(rainbowDirtBlock))
 
+        OreDictionary.registerOre("treeLeaves", ItemStack(lightningLeaves))
+        OreDictionary.registerOre("plankWood", ItemStack(lightningPlanks))
+        OreDictionary.registerOre("treeSapling", ItemStack(lightningSapling))
+
         for (i in 0..3){
             t = ItemStack(irisWood0, 1, i)
             OreDictionary.registerOre(WOOD[i], t)
@@ -210,6 +216,8 @@ public object ShadowFoxBlocks {
 
         for (i in 0..15) {
             OreDictionary.registerOre("irisDirt", ItemStack(coloredDirtBlock, 1, i))
+
+            OreDictionary.registerOre("logWood", ItemStack(lightningWood, 1, i))
 
             t = ItemStack(rainbowWood, 1, i)
             OreDictionary.registerOre("logWood", t)
