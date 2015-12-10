@@ -74,8 +74,9 @@ class SimpleTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
                                     var block1: Block = world.getBlock(i2, k1, k2)
 
                                     if (block1.isAir(world, i2, k1, k2) || block1.isLeaves(world, i2, k1, k2)) {
+                                        var leavesType = if (soilMeta > 8) ShadowFoxBlocks.irisLeaves1 else ShadowFoxBlocks.irisLeaves0
                                         if(block2 == ShadowFoxBlocks.coloredDirtBlock) {
-                                            setBlockAndNotifyAdequately(world, i2, k1, k2, ShadowFoxBlocks.irisLeaves, soilMeta)
+                                            setBlockAndNotifyAdequately(world, i2, k1, k2, leavesType, soilMeta % 8)
                                         } else {
                                             setBlockAndNotifyAdequately(world, i2, k1, k2, ShadowFoxBlocks.rainbowLeaves, 0)
                                         }

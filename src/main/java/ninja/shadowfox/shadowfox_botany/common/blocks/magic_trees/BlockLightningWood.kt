@@ -86,7 +86,7 @@ public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITile
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(iconRegister: IIconRegister) {}
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)

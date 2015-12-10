@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
+import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.common.IShearable
@@ -65,7 +66,8 @@ abstract class ShadowFoxLeaves(): BlockLeaves(), IShearable, ILexiconable {
 
     override fun onSheared(item: ItemStack, world: IBlockAccess, x: Int, y: Int, z: Int, fortune: Int): ArrayList<ItemStack> {
         val ret = ArrayList<ItemStack>()
-        ret.add(ItemStack(this, 1, world.getBlockMetadata(x, y, z)))
+        val meta = world.getBlockMetadata(x, y, z) and this.decayBit().inv()
+        ret.add(ItemStack(this, 1, meta))
         return ret
     }
 
@@ -73,6 +75,9 @@ abstract class ShadowFoxLeaves(): BlockLeaves(), IShearable, ILexiconable {
 
     override fun updateTick(world: World?, x: Int, y: Int, z: Int, random: Random?) {
         if (!world!!.isRemote) {
+            val meta = world.getBlockMetadata(x, y, z)
+            if (!this.canDecay(meta)) return
+
             val b0 = 4
             val i1 = b0 + 1
             val b1 = 32
@@ -160,6 +165,15 @@ abstract class ShadowFoxLeaves(): BlockLeaves(), IShearable, ILexiconable {
             else removeLeaves(world, x, y, z)
 
         }
+    }
+
+    override fun getPickBlock(target: MovingObjectPosition?, world: World, x: Int, y: Int, z: Int): ItemStack {
+        return ItemStack(this, 1, world.getBlockMetadata(x, y, z) and decayBit().inv())
+    }
+
+    abstract fun decayBit(): Int
+    fun canDecay(meta: Int): Boolean {
+        return meta and decayBit() == 0
     }
 
     override fun getDamageValue(world: World, x: Int, y: Int, z: Int): Int {

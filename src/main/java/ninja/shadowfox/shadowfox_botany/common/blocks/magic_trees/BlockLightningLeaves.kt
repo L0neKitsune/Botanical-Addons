@@ -18,12 +18,11 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxItemBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.client.render.block.InterpolatedIcon
-import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 
-class BlockLightningLeaves(): ShadowFoxLeaves(), ILexiconable {
+class BlockLightningLeaves(): ShadowFoxLeaves() {
     init {
         setBlockName("lightningLeaves")
         if (FMLLaunchHandler.side().isClient())
@@ -67,6 +66,8 @@ class BlockLightningLeaves(): ShadowFoxLeaves(), ILexiconable {
     override fun func_150125_e(): Array<out String>? {
         return arrayOf("lightningLeaves")
     }
+
+    override fun decayBit(): Int = 0x1
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return LexiconRegistry.lightningSapling

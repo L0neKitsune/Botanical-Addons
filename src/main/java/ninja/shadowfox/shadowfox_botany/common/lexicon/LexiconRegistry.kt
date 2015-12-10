@@ -146,7 +146,6 @@ public object LexiconRegistry {
         }
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.rainbowWood), irisSapling, 1)
         for (i in 0..15) {
-            LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisLeaves, 1, i), irisSapling, 5)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i), irisSapling, 1)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.coloredSlabs[i], 1), irisSapling, 2)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.coloredStairs[i], 1), irisSapling, 3)
@@ -165,6 +164,8 @@ public object LexiconRegistry {
             LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.coatOfArms, 1, i), coatOfArms, 1)
         }
         for (i in 0..7) {
+            LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisLeaves0, 1, i), irisSapling, 0)
+            LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisLeaves1, 1, i), irisSapling, 0)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisTallGrass0, 1, i), pastoralSeeds, 0)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisTallGrass1, 1, i), pastoralSeeds, 0)
         }
