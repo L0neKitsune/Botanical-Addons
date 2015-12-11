@@ -35,8 +35,9 @@ item.shadowfox_botany:rainbowLightRod.name=Rod of the Prismatic Lake
 item.shadowfox_botany:priestEmblem0.name=Priestly Emblem: Thor
 item.shadowfox_botany:priestEmblem1.name=Priestly Emblem: Sif
 item.shadowfox_botany:priestEmblem2.name=Priestly Emblem: Njord
-
 item.shadowfox_botany:aesirEmblem.name=Priestly Emblem: &6Aesir&r
+
+item.shadowfox_botany:resource0.name=Thunderous Twig
 
 entity.shadowfox_botany:voidCreeper.name=Manaseal Creeper
 
@@ -199,3 +200,7 @@ shadowfox_botany.page.itemDisplay1=Terrasteel makes you look rich
 
 shadowfox_botany.page.lightningSapling0=The &1Thunderous Oak&0 is a tree that acts like a lightning rod. It absorbs lightning from the surrounding area and redirects it to itself. The process of drawing in the lightning can sometimes damage items and creatures, and light terrain on fire where the lightning was. The effect is reduced by the existence of the Oak, though.
 shadowfox_botany.page.lightningSapling1=Thor will hate you
+shadowfox_botany.page.lightningSapling2=Planks
+shadowfox_botany.page.lightningSapling3=Slabs
+shadowfox_botany.page.lightningSapling4=Stairs
+shadowfox_botany.page.lightningSapling5=And twigs
