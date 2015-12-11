@@ -21,9 +21,9 @@ class TileLightningRod() : TileEntity() {
                 worldObj.addWeatherEffect(FakeLightning(worldObj, xCoord.toDouble(), (yCoord + 1).toDouble(), zCoord.toDouble()))
             }
 
-            for (x in xCoord - 2..xCoord + 2)
-                for (y in yCoord - 2..yCoord + 2)
-                    for (z in zCoord - 2..zCoord + 2){
+            for (x in (xCoord - 2)..(xCoord + 2))
+                for (y in (yCoord - 2)..(yCoord + 2))
+                    for (z in (zCoord - 2)..(zCoord + 2)) {
                         if (worldObj.getBlock(x, y, z) === Blocks.fire){
                             worldObj.setBlockToAir(x, y, z)
                         }
