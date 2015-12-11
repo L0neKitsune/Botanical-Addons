@@ -19,7 +19,7 @@ import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.client.event.TextureStitchEvent
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxColoredItemBlock
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
@@ -49,7 +49,7 @@ public class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
     }
 
     internal fun register(name: String) {
-        GameRegistry.registerBlock(this, ShadowFoxColoredItemBlock::class.java, name)
+        GameRegistry.registerBlock(this, ItemIridescentBlockMod::class.java, name)
     }
 
     override fun setBlockName(par1Str: String): Block {

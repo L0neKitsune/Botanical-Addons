@@ -15,7 +15,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxItemBlockMod
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.client.render.block.InterpolatedIcon
 import vazkii.botania.api.lexicon.LexiconEntry
@@ -52,7 +52,7 @@ class BlockLightningLeaves(): ShadowFoxLeaves() {
     @SideOnly(Side.CLIENT) override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int = 0xFFFFFF
 
     override fun register(name: String) {
-        GameRegistry.registerBlock(this, ShadowFoxItemBlockMod::class.java, name)
+        GameRegistry.registerBlock(this, ItemBlockMod::class.java, name)
     }
 
     override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item {

@@ -19,7 +19,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.material.MaterialCustomSmeltingWood
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemSubtypedBlockMod
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
@@ -127,7 +127,7 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.materi
     }
 
     internal fun register(name: String) {
-        GameRegistry.registerBlock(this, ShadowFoxMetaItemBlock::class.java, name)
+        GameRegistry.registerBlock(this, ItemSubtypedBlockMod::class.java, name)
     }
 
 

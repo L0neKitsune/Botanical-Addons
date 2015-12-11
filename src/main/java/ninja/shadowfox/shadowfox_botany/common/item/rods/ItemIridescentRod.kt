@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.item.ColorfulItem
+import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemPriestEmblem
 import vazkii.botania.client.core.handler.ItemsRemainingRenderHandler
 import vazkii.botania.api.item.IAvatarTile
@@ -26,7 +26,7 @@ import vazkii.botania.common.Botania
 import vazkii.botania.common.core.helper.Vector3
 
 
-class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulItem(name), IAvatarWieldable, IManaUsingItem, IBlockProvider {
+class ItemIridescentRod(name: String = "colorfulSkyDirtRod") : ItemIridescent(name), IAvatarWieldable, IManaUsingItem, IBlockProvider {
 
     private val avatarOverlay = ResourceLocation("shadowfox_botany:textures/model/avatarDirtRainbow.png")
 
@@ -66,11 +66,11 @@ class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulItem(nam
 
     override fun onItemUse(par1ItemStack : ItemStack, par2EntityPlayer : EntityPlayer, par3World : World,
                            par4 : Int, par5 : Int, par6 : Int, par7 : Int, par8 : Float, par9 : Float, par10 : Float) : Boolean{
-        return place(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7, par8, par9, par10, ColorfulItem.dirtStack(par1ItemStack.itemDamage), COST, 0.35F, 0.2F, 0.05F)
+        return place(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7, par8, par9, par10, ItemIridescent.dirtStack(par1ItemStack.itemDamage), COST, 0.35F, 0.2F, 0.05F)
     }
 
     override fun onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer) : ItemStack {
-        var blockstack = ColorfulItem.dirtStack(stack.itemDamage)
+        var blockstack = ItemIridescent.dirtStack(stack.itemDamage)
         if (player.isSneaking) {
             var damage = stack.itemDamage
             if (!world.isRemote) {
@@ -78,7 +78,7 @@ class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulItem(nam
                 damage = stack.itemDamage
             } else if (damage >= 16) damage = 0 else damage++
             world.playSoundAtEntity(player, "botania:ding", 0.1F, 1F)
-            blockstack = ColorfulItem.dirtStack(damage)
+            blockstack = ItemIridescent.dirtStack(damage)
             blockstack!!.setStackDisplayName(StatCollector.translateToLocal("misc.shadowfox_botany.color." + damage))
             ItemsRemainingRenderHandler.set(blockstack, -2)
         }
@@ -150,7 +150,7 @@ class ColorfulSkyDirtRod(name: String = "colorfulSkyDirtRod") : ColorfulItem(nam
         val b = color.blue / 255F
 
         if (tile.currentMana >= COST && block.isAir(world, x+xl, y, z+zl) && tile.elapsedFunctionalTicks % 50 == 0 && tile.isEnabled) {
-            world.setBlock(x+xl, y, z+zl, ColorfulItem.dirtFromMeta(stack.itemDamage), stack.itemDamage, 1 or 2)
+            world.setBlock(x+xl, y, z+zl, ItemIridescent.dirtFromMeta(stack.itemDamage), stack.itemDamage, 1 or 2)
             tile.recieveMana(-COST)
             for (i in 0..6)
                 Botania.proxy.sparkleFX(world, x+xl + Math.random(), y + Math.random(), z+zl + Math.random(),

@@ -283,13 +283,13 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             mc.renderEngine.bindTexture(HUDHandler.manaBar)
             GL11.glColor4f(1f, 1f, 1f, 1f)
             RenderHelper.drawTexturedModalRect(xc + radius + 9, yc - 8, 0f, if (sapling) 0 else 22, 8, 22, 15)
-            net.minecraft.client.renderer.RenderHelper.enableGUIStandardItemLighting()
+            net.minecraft.client.renderer.RenderHelper.enableGUIItemModLighting()
             if (!sapling) RenderItem.getInstance().renderItemIntoGUI(mc.fontRenderer, mc.renderEngine, ItemStack(ShadowFoxBlocks.irisSapling), xc + radius + 16, yc + 8)
             RenderHelper.renderProgressPie(xc + radius + 32, yc - 8, progress, recipe.getOutput())
-            net.minecraft.client.renderer.RenderHelper.disableStandardItemLighting()
+            net.minecraft.client.renderer.RenderHelper.disableItemModLighting()
             if (!sapling) mc.fontRenderer.drawStringWithShadow("+", xc + radius + 14, yc + 12, 0xFFFFFF)
         }
-        net.minecraft.client.renderer.RenderHelper.enableGUIStandardItemLighting()
+        net.minecraft.client.renderer.RenderHelper.enableGUIItemModLighting()
         val anglePer = 360f / items.size
         for (i in items) {
             val xPos = xc + Math.cos(angle * Math.PI / 180.0) * radius - 8
@@ -299,7 +299,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             GL11.glTranslated(-xPos, -yPos, 0.0)
             angle += anglePer
         }
-        net.minecraft.client.renderer.RenderHelper.disableStandardItemLighting()
+        net.minecraft.client.renderer.RenderHelper.disableItemModLighting()
     }
 
     fun getRecipeInputs(): ArrayList<ItemStack> {

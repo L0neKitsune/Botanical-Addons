@@ -6,7 +6,7 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.StatCollector
 
-class ItemWiltedLotus : StandardItem("wiltedLotus") {
+class ItemWiltedLotus : ItemMod("wiltedLotus") {
 
     init {
         setHasSubtypes(true)

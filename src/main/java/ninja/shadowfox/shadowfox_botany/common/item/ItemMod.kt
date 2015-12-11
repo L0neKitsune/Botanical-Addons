@@ -10,7 +10,7 @@ import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 
 
-open class StandardItem(name: String) : Item() {
+open class ItemMod(name: String) : Item() {
     init {
         setCreativeTab(ShadowFoxCreativeTab)
         setUnlocalizedName(name)

@@ -6,7 +6,6 @@ import net.minecraftforge.oredict.OreDictionary
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.*
 import ninja.shadowfox.shadowfox_botany.common.item.rods.*
 
-
 object ShadowFoxItems {
     val irisSeeds: Item
     val colorfulSkyDirtRod: Item
@@ -22,15 +21,14 @@ object ShadowFoxItems {
     val wiltedLotus: Item
     val resource: Item
 
-    // val testingRod: Item
-    //    val splashPotion: Item
+    // val splashPotion: Item
 
     init {
         irisSeeds = ItemColorSeeds()
-        colorfulSkyDirtRod = ColorfulSkyDirtRod()
-        rainbowRod = RainbowLightRod()
-        lightningRod = LightningRod()
-        interdictionRod = InterdictionRod()
+        colorfulSkyDirtRod = ItemIridescentRod()
+        rainbowRod = ItemRainbowLightRod()
+        lightningRod = ItemLightningRod()
+        interdictionRod = ItemInterdictionRod()
         emblem = ItemPriestEmblem()
         aesirEmblem = ItemAesirEmblem()
         coatOfArms = ItemCoatOfArms()
@@ -38,10 +36,9 @@ object ShadowFoxItems {
         colorOverride = ItemColorOverride()
         attributionBauble = ItemAttributionBauble()
         wiltedLotus = ItemWiltedLotus()
-        resource = ResourceItem()
+        resource = ItemResource()
 
-        // testingRod = TestingRod()
-        //        splashPotion = ItemSplashPotion()
+        // splashPotion = ItemSplashPotion()
         initOreDict()
     }
 

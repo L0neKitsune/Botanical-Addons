@@ -18,7 +18,7 @@ import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import kotlin.properties.Delegates
 
-open class ColorfulItem(name: String) : Item() {
+open class ItemIridescent(name: String) : Item() {
 
     companion object {
         val TYPES = 16

@@ -5,7 +5,7 @@ import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.block.Block
 import net.minecraft.block.BlockStairs
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxColoredItemBlock
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentBlockMod
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 
@@ -26,6 +26,6 @@ abstract  class ShadowFoxStairs(val source: Block, val meta: Int, val name: Stri
     }
 
     open fun register() {
-        GameRegistry.registerBlock(this, ShadowFoxColoredItemBlock::class.java, name)
+        GameRegistry.registerBlock(this, ItemIridescentBlockMod::class.java, name)
     }
 }

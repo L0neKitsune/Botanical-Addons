@@ -7,8 +7,8 @@ import net.minecraft.block.BlockSlab
 
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.BlockRainbowWoodSlab
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.BlockRainbowWoodStairs
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxItemBlockMod
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxSlabItemBlock
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemSlabMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 
 class BlockLightningWoodSlab(full: Boolean, source: Block = ShadowFoxBlocks.lightningPlanks): BlockRainbowWoodSlab(full, source) {
@@ -17,7 +17,7 @@ class BlockLightningWoodSlab(full: Boolean, source: Block = ShadowFoxBlocks.ligh
     }
 
     override fun register() {
-        GameRegistry.registerBlock(this, ShadowFoxSlabItemBlock::class.java, name)
+        GameRegistry.registerBlock(this, ItemSlabMod::class.java, name)
     }
 
     override fun getSingleBlock(): BlockSlab {
@@ -27,6 +27,6 @@ class BlockLightningWoodSlab(full: Boolean, source: Block = ShadowFoxBlocks.ligh
 
 class BlockLightningWoodStairs(source: Block = ShadowFoxBlocks.lightningPlanks): BlockRainbowWoodStairs(source) {
     override fun register() {
-        GameRegistry.registerBlock(this, ShadowFoxItemBlockMod::class.java, name)
+        GameRegistry.registerBlock(this, ItemBlockMod::class.java, name)
     }
 }

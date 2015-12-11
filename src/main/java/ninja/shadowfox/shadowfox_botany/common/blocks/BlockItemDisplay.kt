@@ -21,7 +21,7 @@ import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxSubtypeItemBlock
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemUniqueSubtypedBlockMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileItemDisplay
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
@@ -59,7 +59,7 @@ class BlockItemDisplay() : ShadowFoxBlockMod(Material.wood), ILexiconable, ITile
     }
 
     internal fun register(name: String) {
-        GameRegistry.registerBlock(this, ShadowFoxSubtypeItemBlock::class.java, name)
+        GameRegistry.registerBlock(this, ItemUniqueSubtypedBlockMod::class.java, name)
     }
 
     override fun addCollisionBoxesToList(world:World, x:Int, y:Int, z:Int, axis:AxisAlignedBB, bounds:MutableList<Any?>, entity:Entity?) {

@@ -9,7 +9,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxSlabs
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.BlockColoredWoodSlab
 
 
-open class ShadowFoxColoredSlabBlock(par1: Block) : ShadowFoxSlabItemBlock(par1) {
+open class ItemColoredSlabMod(par1: Block) : ItemSlabMod(par1) {
 
     fun addStringToTooltip(s : String, tooltip : MutableList<Any?>?) {
         tooltip!!.add(s.replace("&".toRegex(), "\u00a7"))
@@ -23,7 +23,7 @@ open class ShadowFoxColoredSlabBlock(par1: Block) : ShadowFoxSlabItemBlock(par1)
 
 }
 
-open class ShadowFoxSlabItemBlock(val par1: Block) : ItemSlab(par1, (par1 as ShadowFoxSlabs).getSingleBlock(), par1.getFullBlock(), false) {
+open class ItemSlabMod(val par1: Block) : ItemSlab(par1, (par1 as ShadowFoxSlabs).getSingleBlock(), par1.getFullBlock(), false) {
 
     override fun getUnlocalizedName(par1ItemStack: ItemStack): String {
         return field_150939_a.unlocalizedName.replace("tile.".toRegex(), "tile.shadowfox_botany:").replace("\\d+$".toRegex(), "")

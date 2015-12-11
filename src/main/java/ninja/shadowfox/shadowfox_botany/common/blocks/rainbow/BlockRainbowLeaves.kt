@@ -16,7 +16,7 @@ import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxColoredItemBlock
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.client.render.block.InterpolatedIcon
@@ -32,7 +32,7 @@ public class BlockRainbowLeaves(): ShadowFoxLeaves() {
     }
 
     override fun register(name: String) {
-        GameRegistry.registerBlock(this, ShadowFoxColoredItemBlock::class.java, name)
+        GameRegistry.registerBlock(this, ItemIridescentBlockMod::class.java, name)
     }
 
     override fun quantityDropped(random: Random): Int {

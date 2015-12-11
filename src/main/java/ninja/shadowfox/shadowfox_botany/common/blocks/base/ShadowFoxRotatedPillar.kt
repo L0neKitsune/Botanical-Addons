@@ -30,7 +30,7 @@ abstract class ShadowFoxRotatedPillar(mat: Material) : ShadowFoxBlockMod(mat), I
     }
 
     open fun register(par1Str: String) {
-        GameRegistry.registerBlock(this, ShadowFoxColoredItemBlock::class.java, par1Str)
+        GameRegistry.registerBlock(this, ItemIridescentBlockMod::class.java, par1Str)
     }
 
     override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item {

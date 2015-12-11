@@ -21,7 +21,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.material.MaterialCustomSmeltingWood
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxItemBlockMod
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
@@ -93,7 +93,7 @@ public class BlockLightningPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWoo
     override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean { return true }
 
     internal fun register(name: String) {
-        GameRegistry.registerBlock(this, ShadowFoxItemBlockMod::class.java, name)
+        GameRegistry.registerBlock(this, ItemBlockMod::class.java, name)
     }
 
 

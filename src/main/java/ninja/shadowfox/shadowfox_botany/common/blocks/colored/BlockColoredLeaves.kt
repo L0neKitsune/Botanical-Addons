@@ -13,7 +13,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxColoredLeavesBlock
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentLeavesMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.lexicon.LexiconEntry
@@ -31,7 +31,7 @@ public class BlockColoredLeaves(val colorSet: Int) : ShadowFoxLeaves() {
     }
 
     override fun register(name: String) {
-        GameRegistry.registerBlock(this, ShadowFoxColoredLeavesBlock::class.java, name)
+        GameRegistry.registerBlock(this, ItemIridescentLeavesMod::class.java, name)
     }
 
     @SideOnly(Side.CLIENT)

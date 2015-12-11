@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.StatCollector
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
 
-open class ShadowFoxMetaItemBlock(par2Block: Block) : ItemBlockWithMetadata(par2Block, par2Block) {
+open class ItemSubtypedBlockMod(par2Block: Block) : ItemBlockWithMetadata(par2Block, par2Block) {
 
     override fun getMetadata(meta: Int): Int {
         if (field_150939_a is ShadowFoxLeaves) return meta or field_150939_a.decayBit()
@@ -32,7 +32,7 @@ open class ShadowFoxMetaItemBlock(par2Block: Block) : ItemBlockWithMetadata(par2
     }
 }
 
-class ShadowFoxSubtypeItemBlock(par2Block: Block): ItemBlockWithMetadata(par2Block, par2Block) {
+class ItemUniqueSubtypedBlockMod(par2Block: Block): ItemBlockWithMetadata(par2Block, par2Block) {
     override fun getMetadata(meta: Int): Int {
         if (field_150939_a is ShadowFoxLeaves) return meta or field_150939_a.decayBit()
         return meta

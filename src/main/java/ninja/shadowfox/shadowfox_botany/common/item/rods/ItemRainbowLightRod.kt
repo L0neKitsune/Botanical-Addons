@@ -18,8 +18,8 @@ import net.minecraftforge.common.util.ForgeDirection
 
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileRainbowManaFlame
-import ninja.shadowfox.shadowfox_botany.common.item.ColorfulItem
-import ninja.shadowfox.shadowfox_botany.common.item.StandardItem
+import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
+import ninja.shadowfox.shadowfox_botany.common.item.ItemMod
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 
 import vazkii.botania.api.item.IPhantomInkable
@@ -29,7 +29,7 @@ import vazkii.botania.common.core.helper.ItemNBTHelper
 
 import kotlin.properties.Delegates
 
-class RainbowLightRod : StandardItem("rainbowLightRod"), IManaUsingItem, IPhantomInkable {
+class ItemRainbowLightRod : ItemMod("rainbowLightRod"), IManaUsingItem, IPhantomInkable {
 
     val COST = 100
 
@@ -58,7 +58,7 @@ class RainbowLightRod : StandardItem("rainbowLightRod"), IManaUsingItem, IPhanto
     override fun getColorFromItemStack(par1ItemStack : ItemStack, pass : Int) : Int {
         if (pass > 0)
             return 0xFFFFFF
-        return ColorfulItem.rainbowColor()
+        return ItemIridescent.rainbowColor()
     }
 
     override fun onItemUse(par1ItemStack : ItemStack, par2EntityPlayer : EntityPlayer, par3World : World,

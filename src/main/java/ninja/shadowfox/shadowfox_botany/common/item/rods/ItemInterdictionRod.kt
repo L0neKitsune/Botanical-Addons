@@ -27,7 +27,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.item.IPriestColorOverride
-import ninja.shadowfox.shadowfox_botany.common.item.StandardItem
+import ninja.shadowfox.shadowfox_botany.common.item.ItemMod
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemPriestEmblem
 import vazkii.botania.api.item.IAvatarTile
 import vazkii.botania.api.item.IAvatarWieldable
@@ -44,7 +44,7 @@ import java.awt.Color
 import java.util.*
 import kotlin.properties.Delegates
 
-public open class InterdictionRod(name: String = "interdictionRod") : StandardItem(name), IManaUsingItem, IAvatarWieldable {
+public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMod(name), IManaUsingItem, IAvatarWieldable {
     private val avatarOverlay = ResourceLocation("shadowfox_botany:textures/model/avatarInterdiction.png")
 
     var icon: IIcon by Delegates.notNull()

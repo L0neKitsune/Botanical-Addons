@@ -17,8 +17,8 @@ import net.minecraft.world.World
 import net.minecraft.stats.StatList
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxDoubleGrassItemBlock0
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxDoubleGrassItemBlock1
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentTallGrassMod0
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentTallGrassMod1
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.lib.Constants
@@ -59,8 +59,8 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
 
     internal fun register(name: String) {
         when (colorSet) {
-            1 -> GameRegistry.registerBlock(this, ShadowFoxDoubleGrassItemBlock1::class.java, name)
-            else -> GameRegistry.registerBlock(this, ShadowFoxDoubleGrassItemBlock0::class.java, name)
+            1 -> GameRegistry.registerBlock(this, ItemIridescentTallGrassMod1::class.java, name)
+            else -> GameRegistry.registerBlock(this, ItemIridescentTallGrassMod0::class.java, name)
         }
     }
 

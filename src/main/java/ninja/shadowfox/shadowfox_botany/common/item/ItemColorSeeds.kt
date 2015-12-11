@@ -19,7 +19,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.common.gameevent.TickEvent
 import cpw.mods.fml.common.gameevent.TickEvent.Phase
 
-class ItemColorSeeds() : ColorfulItem("irisSeeds") {
+class ItemColorSeeds() : ItemIridescent("irisSeeds") {
     private val blockSwappers = HashMap<Int, MutableList<BlockSwapper?>>()
 
     init {
@@ -50,13 +50,13 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
             var swapper = addBlockSwapper(par3World, par4, par5, par6, meta)
             par3World.setBlock(par4, par5, par6, swapper.blockToSet, swapper.metaToSet, 1 or 2)
             if (par3World.getBlock(par4, par5+1, par6) == Blocks.tallgrass && par3World.getBlockMetadata(par4, par5+1, par6) == 1) {
-                if (ColorfulItem.isRainbow(meta))
+                if (ItemIridescent.isRainbow(meta))
                     par3World.setBlock(par4, par5+1, par6, ShadowFoxBlocks.rainbowGrass, 0, 1 or 2)
                 else
                     par3World.setBlock(par4, par5+1, par6, ShadowFoxBlocks.irisGrass, swapper.metaToSet, 1 or 2)
             }
             else if (par3World.getBlock(par4, par5+1, par6) == Blocks.double_plant && par3World.getBlockMetadata(par4, par5+1, par6) == 2) {
-                if (ColorfulItem.isRainbow(meta)) {
+                if (ItemIridescent.isRainbow(meta)) {
                     par3World.setBlock(par4, par5+1, par6, ShadowFoxBlocks.rainbowTallGrass, 0, 2)
                     par3World.setBlock(par4, par5+2, par6, ShadowFoxBlocks.rainbowTallGrass, 8, 2)
                 }
@@ -123,8 +123,8 @@ class ItemColorSeeds() : ColorfulItem("irisSeeds") {
 
         init {
             this.world = world
-            blockToSet = ColorfulItem.dirtFromMeta(meta)
-            rainbow = ColorfulItem.isRainbow(meta)
+            blockToSet = ItemIridescent.dirtFromMeta(meta)
+            rainbow = ItemIridescent.isRainbow(meta)
             metaToSet = meta % 16
             var seed = coords.posX xor coords.posY xor coords.posZ
             rand = Random(seed.toLong())

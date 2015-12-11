@@ -17,7 +17,7 @@ import net.minecraftforge.oredict.RecipeSorter.Category
 
 import org.lwjgl.opengl.GL11
 
-import ninja.shadowfox.shadowfox_botany.common.item.ColorfulItem
+import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
 import ninja.shadowfox.shadowfox_botany.common.item.IPriestColorOverride
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
@@ -55,7 +55,7 @@ class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorO
             if (stack.itemDamage < TYPES && stack.itemDamage >= 0)
                 return colorMap[stack.itemDamage]
             else if (stack.itemDamage == TYPES)
-                return ColorfulItem.rainbowColor()
+                return ItemIridescent.rainbowColor()
         }
         return null
     }

@@ -8,7 +8,7 @@ import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxItemBlockMod
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
 
 
 open class ShadowFoxBlockMod(par2Material: Material) : Block(par2Material) {
@@ -24,7 +24,7 @@ open class ShadowFoxBlockMod(par2Material: Material) : Block(par2Material) {
 
     override fun setBlockName(par1Str: String): Block {
         if (shouldRegisterInNameSet())
-            GameRegistry.registerBlock(this, ShadowFoxItemBlockMod::class.java, par1Str)
+            GameRegistry.registerBlock(this, ItemBlockMod::class.java, par1Str)
         return super.setBlockName(par1Str)
     }
 

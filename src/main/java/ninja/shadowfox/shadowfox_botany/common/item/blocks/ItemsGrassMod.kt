@@ -15,7 +15,7 @@ import java.awt.Color
 import kotlin.properties.Delegates
 
 
-class ShadowFoxGrassItemBlock(par2Block: Block) : ShadowFoxMetaItemBlock(par2Block) {
+class ItemIridescentGrassMod(par2Block: Block) : ItemSubtypedBlockMod(par2Block) {
     override fun getColorFromItemStack(par1ItemStack : ItemStack, pass : Int) : Int {
         if(par1ItemStack.itemDamage >= EntitySheep.fleeceColorTable.size)
             return 0xFFFFFF
@@ -25,7 +25,7 @@ class ShadowFoxGrassItemBlock(par2Block: Block) : ShadowFoxMetaItemBlock(par2Blo
     }
 }
 
-open class ShadowFoxDoubleGrassItemBlock0(par2Block: Block) : ShadowFoxMetaItemBlock(par2Block) {
+open class ItemIridescentTallGrassMod0(par2Block: Block) : ItemSubtypedBlockMod(par2Block) {
 
     open val colorSet = 0
     var topIcon: IIcon by Delegates.notNull()
@@ -52,13 +52,13 @@ open class ShadowFoxDoubleGrassItemBlock0(par2Block: Block) : ShadowFoxMetaItemB
     }
 }
 
-open class ShadowFoxRainbowDoubleGrassItemBlock(var par2Block: Block) : ShadowFoxColoredItemBlock(par2Block) {
+open class ItemRainbowDoubleGrassMod(var par2Block: Block) : ItemIridescentBlockMod(par2Block) {
 
     override fun getIcon(stack: ItemStack, pass: Int): IIcon {
         return (par2Block as BlockRainbowDoubleGrass).topIcon
     }
 }
 
-open class ShadowFoxDoubleGrassItemBlock1(par2Block: Block) : ShadowFoxDoubleGrassItemBlock0(par2Block) {
+open class ItemIridescentTallGrassMod1(par2Block: Block) : ItemIridescentTallGrassMod0(par2Block) {
     override val colorSet = 1
 }

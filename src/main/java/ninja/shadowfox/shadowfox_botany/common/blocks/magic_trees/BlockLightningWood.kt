@@ -20,7 +20,7 @@ import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxRotatedPillar
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileLightningRod
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxItemBlockMod
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.client.render.block.InterpolatedIcon
@@ -82,7 +82,7 @@ public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITile
     override fun createTileEntity(world: World?, metadata: Int): TileEntity? = TileLightningRod()
 
     override fun register(par1Str: String) {
-        GameRegistry.registerBlock(this, ShadowFoxItemBlockMod::class.java, par1Str)
+        GameRegistry.registerBlock(this, ItemBlockMod::class.java, par1Str)
     }
 
     @SideOnly(Side.CLIENT)

@@ -19,7 +19,7 @@ import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 
 import vazkii.botania.client.render.block.InterpolatedIcon
 
-class ResourceItem(): StandardItem("resource") {
+class ItemResource(): ItemMod("resource") {
 
     init {
         setHasSubtypes(true)

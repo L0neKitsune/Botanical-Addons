@@ -12,7 +12,7 @@ import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxColoredSlabBlock
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemColoredSlabMod
 import vazkii.botania.api.lexicon.ILexiconable
 import java.util.*
 
@@ -59,7 +59,7 @@ abstract class ShadowFoxSlabs(val full: Boolean, val meta: Int, val source: Bloc
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
 
     open fun register() {
-        GameRegistry.registerBlock(this, ShadowFoxColoredSlabBlock::class.java, name)
+        GameRegistry.registerBlock(this, ItemColoredSlabMod::class.java, name)
     }
 
     override fun func_150002_b(i: Int): String {

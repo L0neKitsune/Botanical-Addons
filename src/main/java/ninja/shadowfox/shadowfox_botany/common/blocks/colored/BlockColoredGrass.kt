@@ -16,7 +16,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxGrassItemBlock
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentGrassMod
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
@@ -59,7 +59,7 @@ public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
     }
 
     internal fun register(name: String) {
-        GameRegistry.registerBlock(this, ShadowFoxGrassItemBlock::class.java, name)
+        GameRegistry.registerBlock(this, ItemIridescentGrassMod::class.java, name)
     }
 
     override fun setBlockName(par1Str: String): Block {

@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.StatCollector
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
 
-open class ShadowFoxColoredItemBlock(par2Block: Block) : ItemBlockWithMetadata(par2Block, par2Block) {
+open class ItemIridescentBlockMod(par2Block: Block) : ItemBlockWithMetadata(par2Block, par2Block) {
 
     override fun getMetadata(meta: Int): Int {
         if (field_150939_a is ShadowFoxLeaves) return meta or field_150939_a.decayBit()
@@ -33,7 +33,7 @@ open class ShadowFoxColoredItemBlock(par2Block: Block) : ItemBlockWithMetadata(p
     }
 }
 
-class ShadowFoxColoredWoodBlock(par2Block: Block): ShadowFoxColoredItemBlock(par2Block) {
+class ItemIridescentWoodMod(par2Block: Block): ItemIridescentBlockMod(par2Block) {
 
     override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>?, par4: Boolean) {
         if(par1ItemStack == null) return
@@ -43,7 +43,7 @@ class ShadowFoxColoredWoodBlock(par2Block: Block): ShadowFoxColoredItemBlock(par
     }
 }
 
-class ShadowFoxColoredLeavesBlock(par2Block: Block): ShadowFoxColoredItemBlock(par2Block) {
+class ItemIridescentLeavesMod(par2Block: Block): ItemIridescentBlockMod(par2Block) {
     override fun getMetadata(meta: Int): Int {
         if (field_150939_a is ShadowFoxLeaves) return meta or field_150939_a.decayBit()
         return meta

@@ -14,7 +14,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.common.IShearable
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemSubtypedBlockMod
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.lexicon.ILexiconable
 import java.util.*
@@ -40,7 +40,7 @@ abstract class ShadowFoxLeaves(): BlockLeaves(), IShearable, ILexiconable {
     abstract override fun quantityDropped(random: Random): Int
 
     open fun register(name: String) {
-        GameRegistry.registerBlock(this, ShadowFoxMetaItemBlock::class.java, name)
+        GameRegistry.registerBlock(this, ItemSubtypedBlockMod::class.java, name)
     }
 
 

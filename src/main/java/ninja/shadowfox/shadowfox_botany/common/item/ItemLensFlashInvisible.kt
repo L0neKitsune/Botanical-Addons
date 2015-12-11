@@ -28,7 +28,7 @@ import vazkii.botania.common.crafting.recipe.LensDyeingRecipe
 import java.awt.Color
 
 
-class ItemLensFlashInvisible() : StandardItem("lensPhantomLight"), ICompositableLens {
+class ItemLensFlashInvisible() : ItemMod("lensPhantomLight"), ICompositableLens {
 
     init {
         setMaxStackSize(1)

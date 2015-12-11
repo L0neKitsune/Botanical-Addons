@@ -21,7 +21,7 @@ import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.client.event.TextureStitchEvent
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxRainbowDoubleGrassItemBlock
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemRainbowDoubleGrassMod
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.lib.Constants
@@ -77,7 +77,7 @@ public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
     }
 
     internal fun register(name: String) {
-        GameRegistry.registerBlock(this, ShadowFoxRainbowDoubleGrassItemBlock::class.java, name)
+        GameRegistry.registerBlock(this, ItemRainbowDoubleGrassMod::class.java, name)
     }
 
     fun setBlockNameSafe(par1Str: String): Block {

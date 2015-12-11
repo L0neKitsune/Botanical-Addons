@@ -26,7 +26,7 @@ import java.util.Random
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxColoredItemBlock
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentBlockMod
 
 class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable {
 
@@ -108,7 +108,7 @@ class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     }
 
     internal fun register(name: String) {
-        GameRegistry.registerBlock(this, ShadowFoxColoredItemBlock::class.java, name)
+        GameRegistry.registerBlock(this, ItemIridescentBlockMod::class.java, name)
     }
 
     @SubscribeEvent

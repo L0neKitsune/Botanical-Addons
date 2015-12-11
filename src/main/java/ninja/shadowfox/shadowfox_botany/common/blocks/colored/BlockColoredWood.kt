@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxColoredWoodBlock
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentWoodMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxRotatedPillar
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
@@ -55,7 +55,7 @@ class BlockColoredWood(val colorSet: Int) : ShadowFoxRotatedPillar(Material.wood
     }
 
     override fun register(par1Str: String) {
-        GameRegistry.registerBlock(this, ShadowFoxColoredWoodBlock::class.java, par1Str)
+        GameRegistry.registerBlock(this, ItemIridescentWoodMod::class.java, par1Str)
     }
 
     @SideOnly(Side.CLIENT)
