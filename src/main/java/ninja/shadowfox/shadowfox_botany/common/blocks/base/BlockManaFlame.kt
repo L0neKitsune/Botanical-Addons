@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks.base
 
 import cpw.mods.fml.common.Optional
 import net.minecraft.block.Block

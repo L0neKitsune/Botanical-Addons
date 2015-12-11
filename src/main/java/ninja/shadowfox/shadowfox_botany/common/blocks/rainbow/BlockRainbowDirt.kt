@@ -18,12 +18,14 @@ import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.util.ForgeDirection
 import net.minecraftforge.client.event.TextureStitchEvent
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import vazkii.botania.api.wand.IWandable
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.client.render.block.InterpolatedIcon
 import java.util.Random
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxColoredItemBlock
 
 class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable {

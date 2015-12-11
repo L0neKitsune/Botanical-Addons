@@ -15,7 +15,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.common.IPlantable
-import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ShadowFoxMetaItemBlock
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
@@ -99,8 +98,6 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     override fun getBlockColor(): Int {
         return 0xFFFFFF
     }
-
-
 
     /**
      * Returns the color this block should be rendered. Used by leaves.

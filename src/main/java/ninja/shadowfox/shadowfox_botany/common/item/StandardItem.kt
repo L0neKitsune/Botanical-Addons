@@ -14,6 +14,7 @@ open class StandardItem(name: String) : Item() {
     init {
         setCreativeTab(ShadowFoxCreativeTab)
         setUnlocalizedName(name)
+
     }
 
     override fun setUnlocalizedName(par1Str: String): Item {

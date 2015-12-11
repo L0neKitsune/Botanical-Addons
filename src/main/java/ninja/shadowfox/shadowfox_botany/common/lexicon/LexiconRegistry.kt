@@ -5,6 +5,7 @@ import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import ninja.shadowfox.shadowfox_botany.common.crafting.ModRecipes
+import vazkii.botania.common.lexicon.page.PageTreeCrafting
 import net.minecraft.item.ItemStack
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.common.lexicon.LexiconData
@@ -12,6 +13,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.api.lexicon.LexiconRecipeMappings
 import vazkii.botania.common.lexicon.page.PageCraftingRecipe
 import vazkii.botania.common.lexicon.page.PageManaInfusionRecipe
+import vazkii.botania.common.lexicon.page.PageMultiblock
 import vazkii.botania.common.lexicon.page.PageText
 
 public object LexiconRegistry {
@@ -24,16 +26,18 @@ public object LexiconRegistry {
     val pastoralSeeds : LexiconEntry
     val coatOfArms : LexiconEntry
     val colorOverride : LexiconEntry
+    val treeCrafting : LexiconEntry
+    val dendrology: ShadowFoxLexiconCategory
     val attribution : LexiconEntry
     val sealCreepers: LexiconEntry
     val kindling: LexiconEntry
     val waveRod: LexiconEntry
-
-//    val dendrology: ShadowFoxLexiconCategory
+    val itemDisplay: LexiconEntry
+    val lightningSapling: LexiconEntry
 
     init {
 
-//        dendrology = ShadowFoxLexiconCategory("dendrology", 0)
+        dendrology = ShadowFoxLexiconCategory("dendrology", 1)
 
         coloredDirt = ShadowfoxLexiconEntry("coloredDirt", BotaniaAPI.categoryMisc, ShadowFoxBlocks.rainbowDirtBlock)
         coloredDirt.setLexiconPages(PageText("0"), PageCraftingRecipe("1", ModRecipes.recipesColoredDirt))
@@ -50,8 +54,8 @@ public object LexiconRegistry {
                 PageText("2"),
                 PageCraftingRecipe("3", ModRecipes.recipesPriestOfThor))
 
-        irisSapling = ShadowfoxLexiconEntry("irisSapling", BotaniaAPI.categoryMisc, ShadowFoxBlocks.irisSapling)
-        irisSapling.setLexiconPages(PageText("0"),
+        irisSapling = ShadowfoxLexiconEntry("irisSapling", dendrology, ShadowFoxBlocks.irisSapling)
+        irisSapling.setPriority().setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesWoodPanel),
                 PageCraftingRecipe("2", ModRecipes.recipesSlabs),
                 PageCraftingRecipe("3", ModRecipes.recipesStairsR + ModRecipes.recipesStairsL),
@@ -77,6 +81,10 @@ public object LexiconRegistry {
                 PageText("2"),
                 PageCraftingRecipe("3", ModRecipes.recipesPriestOfNjord))
 
+        treeCrafting = ShadowfoxLexiconEntry("treeCrafting", dendrology, ShadowFoxBlocks.treeCrafterBlockRB)
+        treeCrafting.setPriority().setLexiconPages(PageText("0"),
+                PageMultiblock("1", ShadowFoxBlocks.treeCrafter))
+
         attribution = ShadowfoxLexiconEntry("attribution", BotaniaAPI.categoryBaubles, ShadowFoxItems.attributionBauble)
         attribution.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesAttribution))
@@ -97,6 +105,14 @@ public object LexiconRegistry {
         waveRod.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesRainbowRod))
 
+        itemDisplay = ShadowfoxLexiconEntry("itemDisplay", BotaniaAPI.categoryMisc, ItemStack(ShadowFoxBlocks.itemDisplay, 1, 1))
+        itemDisplay.setLexiconPages(PageText("0"),
+                PageCraftingRecipe("1", ModRecipes.recipesItemDisplay))
+
+        lightningSapling = ShadowfoxLexiconEntry("lightningSapling", dendrology, ShadowFoxBlocks.lightningSapling)
+        lightningSapling.setLexiconPages(PageText("0"),
+                PageTreeCrafting("1", ModRecipes.recipesLightningTree))
+
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.interdictionRod), interdictionRod, 1)
@@ -112,6 +128,16 @@ public object LexiconRegistry {
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.wiltedLotus, 1, 0), sealCreepers, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.wiltedLotus, 1, 1), sealCreepers, 1)
 
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.treeCrafterBlock), treeCrafting, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.treeCrafterBlockRB), treeCrafting, 1)
+
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.lightningSapling), lightningSapling, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.lightningWood), lightningSapling, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.lightningLeaves), lightningSapling, 1)
+
+        for (i in 0..2)
+            LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.itemDisplay, 1, i), itemDisplay, 1)
+
         for (i in 0..3){
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood0, 1, i), irisSapling, 1)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood1, 1, i), irisSapling, 1)
@@ -120,7 +146,6 @@ public object LexiconRegistry {
         }
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.rainbowWood), irisSapling, 1)
         for (i in 0..15) {
-            LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisLeaves, 1, i), irisSapling, 5)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i), irisSapling, 1)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.coloredSlabs[i], 1), irisSapling, 2)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.coloredStairs[i], 1), irisSapling, 3)
@@ -139,6 +164,8 @@ public object LexiconRegistry {
             LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.coatOfArms, 1, i), coatOfArms, 1)
         }
         for (i in 0..7) {
+            LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisLeaves0, 1, i), irisSapling, 0)
+            LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisLeaves1, 1, i), irisSapling, 0)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisTallGrass0, 1, i), pastoralSeeds, 0)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisTallGrass1, 1, i), pastoralSeeds, 0)
         }

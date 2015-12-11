@@ -17,8 +17,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
 
 
-class BlockColoredWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.coloredPlanks) : ShadowFoxStairs(source, meta, source.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs" + meta), ILexiconable
-{
+class BlockColoredWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.coloredPlanks) : ShadowFoxStairs(source, meta, source.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs" + meta), ILexiconable {
     init {}
 
     @SideOnly(Side.CLIENT)

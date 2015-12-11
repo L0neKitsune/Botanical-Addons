@@ -5,9 +5,14 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemBlockWithMetadata
 import net.minecraft.item.ItemStack
 import net.minecraft.util.StatCollector
-
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
 
 open class ShadowFoxColoredItemBlock(par2Block: Block) : ItemBlockWithMetadata(par2Block, par2Block) {
+
+    override fun getMetadata(meta: Int): Int {
+        if (field_150939_a is ShadowFoxLeaves) return meta or field_150939_a.decayBit()
+        return meta
+    }
 
     override fun getUnlocalizedNameInefficiently(par1ItemStack: ItemStack): String {
         return (super.getUnlocalizedNameInefficiently(par1ItemStack)).replace("tile.", "tile.shadowfox_botany:").replace("\\d+$".toRegex(), "")
@@ -34,6 +39,19 @@ class ShadowFoxColoredWoodBlock(par2Block: Block): ShadowFoxColoredItemBlock(par
         if(par1ItemStack == null) return
         val metaMatch = "\\d+$".toRegex().find(field_150939_a.unlocalizedName)
         val meta = if (metaMatch == null) 16 else metaMatch.value.toInt() * 4 + par1ItemStack.itemDamage
+        addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + meta) + "&r", par3List)
+    }
+}
+
+class ShadowFoxColoredLeavesBlock(par2Block: Block): ShadowFoxColoredItemBlock(par2Block) {
+    override fun getMetadata(meta: Int): Int {
+        if (field_150939_a is ShadowFoxLeaves) return meta or field_150939_a.decayBit()
+        return meta
+    }
+    override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>?, par4: Boolean) {
+        if(par1ItemStack == null) return
+        val metaMatch = "\\d+$".toRegex().find(field_150939_a.unlocalizedName)
+        val meta = if (metaMatch == null) 16 else metaMatch.value.toInt() * 8 + par1ItemStack.itemDamage % 8
         addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + meta) + "&r", par3List)
     }
 }

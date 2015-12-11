@@ -7,9 +7,12 @@ import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.*
+import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.*
+
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.*
 import vazkii.botania.api.BotaniaAPI
+import vazkii.botania.api.lexicon.multiblock.MultiblockSet
 
 public object ShadowFoxBlocks {
 
@@ -20,7 +23,8 @@ public object ShadowFoxBlocks {
     public var coloredDirtBlock: Block
     public var rainbowDirtBlock: Block
     public var irisSapling: Block
-    public var irisLeaves: Block
+    public var irisLeaves0: Block
+    public var irisLeaves1: Block
     public var rainbowLeaves: Block
     public var irisGrass: Block
     public var rainbowGrass: Block
@@ -46,11 +50,23 @@ public object ShadowFoxBlocks {
 
     public var coloredStairs: Array<Block>
     public var rainbowStairs: Block
+
+    public var itemDisplay: Block
+    public var treeCrafter: MultiblockSet
+    public var treeCrafterBlock: Block
+    public var treeCrafterBlockRB: Block
+
+    public var lightningSapling: Block
+    public var lightningWood: Block
+    public var lightningLeaves: Block
+    public var lightningPlanks: Block
+
+    public var lightningStairs: Block
+    public var lightningSlabs: Block
+    public var lightningSlabsFull: Block
+
     public var invisibleFlame: Block
     public var rainbowFlame: Block
-
-    // public var itemDisplay: Block
-    // public var lightningRod: Block
 
     public var barrier: Block
 
@@ -64,7 +80,8 @@ public object ShadowFoxBlocks {
         coloredDirtBlock = BlockColoredDirt()
         rainbowDirtBlock = BlockRainbowDirt()
         irisSapling = BlockColoredSapling()
-        irisLeaves = BlockColoredLeaves()
+        irisLeaves0 = BlockColoredLeaves(0)
+        irisLeaves1 = BlockColoredLeaves(1)
         rainbowLeaves = BlockRainbowLeaves()
         irisGrass = BlockColoredGrass()
         rainbowGrass = BlockRainbowGrass()
@@ -92,8 +109,19 @@ public object ShadowFoxBlocks {
         irisTallGrass0 = BlockColoredDoubleGrass(0)
         irisTallGrass1 = BlockColoredDoubleGrass(1)
         rainbowTallGrass = BlockRainbowDoubleGrass()
-        // itemDisplay = BlockItemDisplay()
-        // lightningRod = BlockLightningRod()
+        itemDisplay = BlockItemDisplay()
+        treeCrafter = TileTreeCrafter.makeMultiblockSet()
+        treeCrafterBlock = BlockTreeCrafter()
+        treeCrafterBlockRB = BlockTreeCrafterRainbow()
+
+        lightningSapling = BlockLightningSapling()
+        lightningWood = BlockLightningWood()
+        lightningLeaves = BlockLightningLeaves()
+        lightningPlanks = BlockLightningPlanks()
+
+        lightningSlabs = BlockLightningWoodSlab(false)
+        lightningSlabsFull = BlockLightningWoodSlab(true)
+        lightningStairs = BlockLightningWoodStairs()
 
         barrier = BlockBarrier()
 
@@ -104,7 +132,8 @@ public object ShadowFoxBlocks {
 
         GameRegistry.registerTileEntity(TileInvisibleManaFlame::class.java, "shadowfox_botany:manaInvisibleFlame")
         GameRegistry.registerTileEntity(TileRainbowManaFlame::class.java, "shadowfox_botany:manaRainbowFlame")
-        // GameRegistry.registerTileEntity(TileItemDisplay::class.java, "shadowfox_botany:itemDisplay")
+        GameRegistry.registerTileEntity(TileItemDisplay::class.java, "shadowfox_botany:itemDisplay")
+        GameRegistry.registerTileEntity(TileTreeCrafter::class.java, "shadowfox_botany:treeCrafter")
 
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
     }
@@ -127,12 +156,21 @@ public object ShadowFoxBlocks {
         for (i in 0..15) setBurnable(coloredStairs[i], 5, 20)
         setBurnable(rainbowStairs, 5, 20)
 
-        setBurnable(irisLeaves, 30, 60)
+        setBurnable(irisLeaves0, 30, 60)
+        setBurnable(irisLeaves1, 30, 60)
         setBurnable(rainbowLeaves, 30, 60)
 
         setBurnable(irisGrass, 60, 100)
         setBurnable(irisTallGrass0, 60, 100)
         setBurnable(irisTallGrass1, 60, 100)
+
+        setBurnable(lightningLeaves, 30, 60)
+        setBurnable(lightningWood, 5, 5)
+        setBurnable(lightningPlanks, 5, 20)
+
+        setBurnable(lightningSlabs, 5, 20)
+        setBurnable(lightningSlabsFull, 5, 20)
+        setBurnable(lightningStairs, 5, 20)
 
         setBurnable(rainbowGrass, 60, 100)
         setBurnable(rainbowTallGrass, 60, 100)
@@ -152,6 +190,9 @@ public object ShadowFoxBlocks {
 
         (rainbowSlabs as ShadowFoxSlabs).register()
         (rainbowSlabsFull as ShadowFoxSlabs).register()
+
+        (lightningSlabs as ShadowFoxSlabs).register()
+        (lightningSlabsFull as ShadowFoxSlabs).register()
     }
 
     private fun initOreDict() {
@@ -163,6 +204,13 @@ public object ShadowFoxBlocks {
         OreDictionary.registerOre("irisWoodRainbow", t)
 
         OreDictionary.registerOre("irisDirt", ItemStack(rainbowDirtBlock))
+
+        OreDictionary.registerOre("treeLeaves", ItemStack(lightningLeaves))
+        OreDictionary.registerOre("plankWood", ItemStack(lightningPlanks))
+        OreDictionary.registerOre("treeSapling", ItemStack(lightningSapling))
+
+        OreDictionary.registerOre("slabWood", ItemStack(lightningSlabs))
+        OreDictionary.registerOre("stairWood", ItemStack(lightningStairs))
 
         for (i in 0..3){
             t = ItemStack(irisWood0, 1, i)
@@ -178,8 +226,18 @@ public object ShadowFoxBlocks {
             OreDictionary.registerOre(WOOD[i+12], t)
         }
 
+        for (i in 0..7) {
+            t = ItemStack(irisLeaves0, 1, i)
+            OreDictionary.registerOre(LEAVES[i], t)
+
+            t = ItemStack(irisLeaves1, 1, i)
+            OreDictionary.registerOre(LEAVES[i+8], t)
+        }
+
         for (i in 0..15) {
             OreDictionary.registerOre("irisDirt", ItemStack(coloredDirtBlock, 1, i))
+
+            OreDictionary.registerOre("logWood", ItemStack(lightningWood, 1, i))
 
             t = ItemStack(rainbowWood, 1, i)
             OreDictionary.registerOre("logWood", t)
@@ -201,10 +259,13 @@ public object ShadowFoxBlocks {
             OreDictionary.registerOre("logWood", t)
             OreDictionary.registerOre("irisWood", t)
 
-            t = ItemStack(irisLeaves, 1, i)
+            t = ItemStack(irisLeaves0, 1, i)
             OreDictionary.registerOre("treeLeaves", t)
             OreDictionary.registerOre("irisLeaves", t)
-            OreDictionary.registerOre(LEAVES[i], t)
+
+            t = ItemStack(irisLeaves1, 1, i)
+            OreDictionary.registerOre("treeLeaves", t)
+            OreDictionary.registerOre("irisLeaves", t)
 
             t = ItemStack(coloredPlanks, 1, i)
             OreDictionary.registerOre("plankWood", t)

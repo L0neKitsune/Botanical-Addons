@@ -5,9 +5,14 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemBlockWithMetadata
 import net.minecraft.item.ItemStack
 import net.minecraft.util.StatCollector
-
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
 
 open class ShadowFoxMetaItemBlock(par2Block: Block) : ItemBlockWithMetadata(par2Block, par2Block) {
+
+    override fun getMetadata(meta: Int): Int {
+        if (field_150939_a is ShadowFoxLeaves) return meta or field_150939_a.decayBit()
+        return meta
+    }
 
     override fun getUnlocalizedNameInefficiently(par1ItemStack: ItemStack): String {
         return (super.getUnlocalizedNameInefficiently(par1ItemStack)).replace("tile.", "tile.shadowfox_botany:").replace("\\d+$".toRegex(), "")
@@ -24,5 +29,16 @@ open class ShadowFoxMetaItemBlock(par2Block: Block) : ItemBlockWithMetadata(par2
 
     override fun getUnlocalizedName(par1ItemStack: ItemStack?): String {
         return super.getUnlocalizedName(par1ItemStack)
+    }
+}
+
+class ShadowFoxSubtypeItemBlock(par2Block: Block): ItemBlockWithMetadata(par2Block, par2Block) {
+    override fun getMetadata(meta: Int): Int {
+        if (field_150939_a is ShadowFoxLeaves) return meta or field_150939_a.decayBit()
+        return meta
+    }
+
+    override fun getUnlocalizedNameInefficiently(par1ItemStack: ItemStack): String {
+        return (super.getUnlocalizedNameInefficiently(par1ItemStack)).replace("tile.", "tile.shadowfox_botany:") + par1ItemStack.itemDamage
     }
 }

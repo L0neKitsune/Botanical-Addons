@@ -20,8 +20,7 @@ import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import java.awt.Color
 
 class BlockColoredWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks.coloredPlanks) :
-        ShadowFoxSlabs(full, meta, source, source.unlocalizedName.replace("tile.".toRegex(), "") + "Slab" + (if (full) "Full" else "") + meta), ILexiconable, IFuelHandler
-{
+        ShadowFoxSlabs(full, meta, source, source.unlocalizedName.replace("tile.".toRegex(), "") + "Slab" + (if (full) "Full" else "") + meta), ILexiconable, IFuelHandler {
     init {
         this.setHardness(1.5f)
         this.setResistance(10.0f)

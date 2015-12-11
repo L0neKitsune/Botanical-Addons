@@ -10,8 +10,7 @@ import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 
 
-abstract  class ShadowFoxStairs(val source: Block, val meta: Int, val name: String) : BlockStairs(source, meta), ILexiconable
-{
+abstract  class ShadowFoxStairs(val source: Block, val meta: Int, val name: String) : BlockStairs(source, meta), ILexiconable {
     var lexicaPage: LexiconEntry? = null
 
     init {
@@ -22,7 +21,11 @@ abstract  class ShadowFoxStairs(val source: Block, val meta: Int, val name: Stri
     }
 
     override fun setBlockName(par1Str: String): Block {
-        GameRegistry.registerBlock(this, ShadowFoxColoredItemBlock::class.java, par1Str)
+        register()
         return super.setBlockName(name)
+    }
+
+    open fun register() {
+        GameRegistry.registerBlock(this, ShadowFoxColoredItemBlock::class.java, name)
     }
 }

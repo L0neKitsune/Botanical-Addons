@@ -13,14 +13,16 @@ class TestingRod(name: String = "testingRod") : StandardItem(name) {
     }
 
     override fun onItemRightClick(par1ItemStack: ItemStack, par2World: World?, par3EntityPlayer: EntityPlayer?): ItemStack {
-        if(par2World != null && par3EntityPlayer != null)
-            spawnLightning(par2World, par3EntityPlayer.posX,par3EntityPlayer.posY, par3EntityPlayer.posZ)
+        if(par2World != null && par3EntityPlayer != null) {
+            if (par3EntityPlayer.isSneaking) par2World.thunderingStrength = 2.0f
+            else par2World.spawnLightning(par3EntityPlayer.posX, par3EntityPlayer.posY, par3EntityPlayer.posZ - 3)
+        }
 
         return par1ItemStack
     }
 
-    fun spawnLightning(world: World, posX: Double, posY: Double, posZ: Double): Boolean {
-        return world.addWeatherEffect(EntityLightningBolt(world, posX, posY, posZ))
+    fun World.spawnLightning(posX: Double, posY: Double, posZ: Double): Boolean {
+        return this.addWeatherEffect(EntityLightningBolt(this, posX, posY, posZ))
     }
 
     override fun isFull3D(): Boolean {
