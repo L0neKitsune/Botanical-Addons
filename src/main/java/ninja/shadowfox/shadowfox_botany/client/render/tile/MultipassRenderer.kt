@@ -28,7 +28,7 @@ class MultipassRenderer: ISimpleBlockRenderingHandler {
 
     public override fun renderInventoryBlock(block: Block, metadata: Int, modelID: Int, renderer: RenderBlocks) {
         if (block is IMultipassRenderer) {
-            renderInventoryBlock(block.innerBlock(), metadata, 1.0F, renderer, 0)
+            renderInventoryBlock(block.innerBlock(metadata), metadata, 1.0F, renderer, 0)
             renderInventoryBlock(block, metadata, 1.0F, renderer, 1)
         }
     }

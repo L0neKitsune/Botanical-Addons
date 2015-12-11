@@ -62,7 +62,7 @@ open class BlockTreeCrafter(name: String = "treeCrafter"): ShadowFoxTileContaine
 //    }
 
     override fun getItemDropped(p_149650_1_: Int, p_149650_2_: Random?, p_149650_3_: Int): Item {
-        return Item.getItemFromBlock(innerBlock(null, 0, 0, 0))
+        return Item.getItemFromBlock(innerBlock(0))
     }
 
     override fun renderHUD(mc: Minecraft, res: ScaledResolution, world: World, x: Int, y: Int, z: Int) {
@@ -80,10 +80,10 @@ open class BlockTreeCrafter(name: String = "treeCrafter"): ShadowFoxTileContaine
     override fun getRenderBlockPass(): Int = 1
     override fun getRenderType(): Int = Constants.multipassRenderingID
 
-    override fun innerBlock(): Block = ShadowFoxBlocks.coloredPlanks
-    override fun innerBlock(world: IBlockAccess?, x: Int, y: Int, z: Int): Block = innerBlock()
+    override fun innerBlock(meta: Int): Block = ShadowFoxBlocks.coloredPlanks
+    override fun innerBlock(world: IBlockAccess?, x: Int, y: Int, z: Int): Block = innerBlock(0)
 }
 
 public class BlockTreeCrafterRainbow() : BlockTreeCrafter(name = "treeCrafterRB") {
-    override fun innerBlock(): Block = ShadowFoxBlocks.rainbowPlanks
+    override fun innerBlock(meta: Int): Block = ShadowFoxBlocks.rainbowPlanks
 }
