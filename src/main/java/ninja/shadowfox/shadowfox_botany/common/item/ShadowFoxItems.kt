@@ -20,6 +20,7 @@ object ShadowFoxItems {
     val colorOverride: Item
     val attributionBauble: Item
     val wiltedLotus: Item
+    val resource: Item
 
     // val testingRod: Item
     //    val splashPotion: Item
@@ -37,6 +38,7 @@ object ShadowFoxItems {
         colorOverride = ItemColorOverride()
         attributionBauble = ItemAttributionBauble()
         wiltedLotus = ItemWiltedLotus()
+        resource = ResourceItem()
 
         // testingRod = TestingRod()
         //        splashPotion = ItemSplashPotion()
@@ -44,6 +46,9 @@ object ShadowFoxItems {
     }
 
     fun initOreDict() {
+
+        OreDictionary.registerOre("twigThunderwood", ItemStack(resource, 1, 0))
+
         OreDictionary.registerOre("holyPendant", ItemStack(attributionBauble, 1, 0))
         OreDictionary.registerOre("holyPendant", ItemStack(attributionBauble, 1, 1))
     }

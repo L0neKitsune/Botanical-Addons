@@ -50,6 +50,7 @@ public object ModRecipes {
     val recipesThunderousStairsL: IRecipe
     val recipesThunderousStairsR: IRecipe
     val recipesThunderousSlabs: IRecipe
+    val recipesThunderousTwig: IRecipe
 
     val recipesPastoralSeeds: List<RecipeManaInfusion>
 
@@ -142,12 +143,12 @@ public object ModRecipes {
         recipesColoredSkyDirtRod = BotaniaAPI.getLatestAddedRecipes(16)
 
         addOreDictRecipe(ItemStack(ShadowFoxItems.lightningRod, 1),
-                " TW",
+                " EW",
                 " ST",
-                "E  ",
+                "S  ",
                 'E', LibOreDict.ENDER_AIR_BOTTLE,
                 'T', LibOreDict.TERRA_STEEL,
-                'S', LibOreDict.DREAMWOOD_TWIG,
+                'S', "twigThunderwood",
                 'W', LibOreDict.RUNE[13]) // Wrath
 
         recipesLightningRod = BotaniaAPI.getLatestAddedRecipe()
@@ -327,6 +328,13 @@ public object ModRecipes {
                     'Q', ItemStack(ShadowFoxBlocks.lightningPlanks))
 
         recipesThunderousStairsR = BotaniaAPI.getLatestAddedRecipe()
+
+        GameRegistry.addRecipe(ItemStack(ShadowFoxItems.resource, 1, 0), // Thunderous Twig
+                    "Q", 
+                    "Q",
+                    'Q', ItemStack(ShadowFoxBlocks.lightningWood))
+
+        recipesThunderousTwig = BotaniaAPI.getLatestAddedRecipe()
 
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood1, ItemStack(Items.coal, 1, 1), 0.15F)

@@ -111,7 +111,11 @@ public object LexiconRegistry {
 
         lightningSapling = ShadowfoxLexiconEntry("lightningSapling", dendrology, ShadowFoxBlocks.lightningSapling)
         lightningSapling.setLexiconPages(PageText("0"),
-                PageTreeCrafting("1", ModRecipes.recipesLightningTree))
+                PageTreeCrafting("1", ModRecipes.recipesLightningTree),
+                PageCraftingRecipe("2", ModRecipes.recipesThunderousPlanks),
+                PageCraftingRecipe("3", ModRecipes.recipesThunderousSlabs),
+                PageCraftingRecipe("4", ModRecipes.recipesThunderousStairsR),
+                PageCraftingRecipe("5", ModRecipes.recipesThunderousTwig))
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
@@ -134,6 +138,10 @@ public object LexiconRegistry {
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.lightningSapling), lightningSapling, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.lightningWood), lightningSapling, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.lightningLeaves), lightningSapling, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.lightningPlanks), lightningSapling, 2)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.lightningSlabs), lightningSapling, 3)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.lightningStairs), lightningSapling, 4)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.resource, 1, 0), lightningSapling, 5)
 
         for (i in 0..2)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.itemDisplay, 1, i), itemDisplay, 1)
