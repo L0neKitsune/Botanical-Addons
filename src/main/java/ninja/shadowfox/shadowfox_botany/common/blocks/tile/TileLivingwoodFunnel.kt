@@ -213,30 +213,30 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
     }
 
     fun IInventory.addItemToSide(item: ItemStack?, side: Int): ItemStack? {
-        var item = item
+        var stack = item
         if (inventory is ISidedInventory && side > -1) {
             val aint = (this as ISidedInventory).getAccessibleSlotsFromSide(side)
 
             var l = 0
-            while (l < aint.size && item != null && item.stackSize > 0) {
-                item = pushToInventory(this, item, aint[l], side)
+            while (l < aint.size && stack != null && stack.stackSize > 0) {
+                stack = pushToInventory(this, stack, aint[l], side)
                 ++l
             }
         } else {
             val j = this.sizeInventory
 
             var k = 0
-            while (k < j && item != null && item.stackSize > 0) {
-                item = pushToInventory(this, item, k, side)
+            while (k < j && stack != null && stack.stackSize > 0) {
+                stack = pushToInventory(this, stack, k, side)
                 ++k
             }
         }
 
-        if (item != null && item.stackSize == 0) {
-            item = null
+        if (stack != null && stack.stackSize == 0) {
+            stack = null
         }
 
-        return item
+        return stack
     }
 
     private fun canInsertItem(p_145885_0_: IInventory, p_145885_1_: ItemStack, p_145885_2_: Int, side: Int): Boolean {
@@ -245,26 +245,26 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
 
 
     private fun pushToInventory(inventory: IInventory, item: ItemStack?, slot: Int, side: Int): ItemStack? {
-        var item = item
+        var stack = item
         val itemstack1 = inventory.getStackInSlot(slot)
 
-        if (item != null && canInsertItem(inventory, item, slot, side)) {
+        if (stack != null && canInsertItem(inventory, stack, slot, side)) {
             var flag = false
 
             if (itemstack1 == null) {
-                val max = Math.min(item.maxStackSize, inventory.inventoryStackLimit)
-                if (max >= item.stackSize) {
-                    inventory.setInventorySlotContents(slot, item)
-                    item = null
+                val max = Math.min(stack.maxStackSize, inventory.inventoryStackLimit)
+                if (max >= stack.stackSize) {
+                    inventory.setInventorySlotContents(slot, stack)
+                    stack = null
                 } else {
-                    inventory.setInventorySlotContents(slot, item.splitStack(max))
+                    inventory.setInventorySlotContents(slot, stack.splitStack(max))
                 }
                 flag = true
-            } else if (canAddToStack(itemstack1, item)) {
-                val max = Math.min(item.maxStackSize, inventory.inventoryStackLimit)
+            } else if (canAddToStack(itemstack1, stack)) {
+                val max = Math.min(stack.maxStackSize, inventory.inventoryStackLimit)
                 if (max > itemstack1.stackSize) {
-                    val l = Math.min(item.stackSize, max - itemstack1.stackSize)
-                    item.stackSize -= l
+                    val l = Math.min(stack.stackSize, max - itemstack1.stackSize)
+                    stack.stackSize -= l
                     itemstack1.stackSize += l
                     flag = l > 0
                 }
@@ -280,7 +280,7 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
             }
         }
 
-        return item
+        return stack
     }
 
     private fun canAddToStack(p_145894_0_: ItemStack, p_145894_1_: ItemStack): Boolean {
@@ -369,8 +369,6 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
                 }
             }
         } else {
-            val j = inventory.sizeInventory
-
             for (k in 0..inventory.sizeInventory - 1) {
                 if (inventory.getStackInSlot(k) != null) {
                     return false
@@ -383,6 +381,7 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
 
     fun renderHUD(mc: Minecraft, res: ScaledResolution) {
         val item = getStackInSlot(0)
+        println(item)
         if(item != null && item.stackSize > 0) {
             val xc = res.scaledWidth / 2.0
             val yc = res.scaledHeight / 2.0

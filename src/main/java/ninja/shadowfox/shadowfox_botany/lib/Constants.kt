@@ -9,4 +9,5 @@ object Constants {
 
     var doubleFlowerRenderID: Int = -1
     var multipassRenderingID: Int = -1
+    var hopperRenderingID: Int = -1
 }
