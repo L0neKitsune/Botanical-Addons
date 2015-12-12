@@ -67,6 +67,7 @@ public object ShadowFoxBlocks {
 
     public var invisibleFlame: Block
     public var rainbowFlame: Block
+    public var livingwoodFunnel: Block
 
     public var barrier: Block
 
@@ -122,6 +123,7 @@ public object ShadowFoxBlocks {
         lightningSlabs = BlockLightningWoodSlab(false)
         lightningSlabsFull = BlockLightningWoodSlab(true)
         lightningStairs = BlockLightningWoodStairs()
+        livingwoodFunnel = BlockFunnel()
 
         barrier = BlockBarrier()
 
@@ -134,6 +136,7 @@ public object ShadowFoxBlocks {
         GameRegistry.registerTileEntity(TileRainbowManaFlame::class.java, "shadowfox_botany:manaRainbowFlame")
         GameRegistry.registerTileEntity(TileItemDisplay::class.java, "shadowfox_botany:itemDisplay")
         GameRegistry.registerTileEntity(TileTreeCrafter::class.java, "shadowfox_botany:treeCrafter")
+        GameRegistry.registerTileEntity(TileLivingwoodFunnel::class.java, "shadowfox_botany:livingwoodFunnel")
 
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
     }

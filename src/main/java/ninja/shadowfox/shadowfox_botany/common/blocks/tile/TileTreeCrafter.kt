@@ -316,7 +316,6 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
 
         }
 
-        // FMLLog.log(Level.INFO, "Items: [$items]")
         return items
     }
 
