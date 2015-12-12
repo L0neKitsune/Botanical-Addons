@@ -381,7 +381,6 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
 
     fun renderHUD(mc: Minecraft, res: ScaledResolution) {
         val item = getStackInSlot(0)
-        println(item)
         if(item != null && item.stackSize > 0) {
             val xc = res.scaledWidth / 2.0
             val yc = res.scaledHeight / 2.0
