@@ -1,10 +1,8 @@
 package ninja.shadowfox.shadowfox_botany.api.recipe
 
-import cpw.mods.fml.common.FMLLog
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
-import org.apache.logging.log4j.Level
 import java.util.*
 
 import vazkii.botania.api.recipe.RecipePetals

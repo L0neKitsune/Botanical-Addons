@@ -34,6 +34,7 @@ public object LexiconRegistry {
     val waveRod: LexiconEntry
     val itemDisplay: LexiconEntry
     val lightningSapling: LexiconEntry
+    val livingwoodFunnel: LexiconEntry
 
     init {
 
@@ -108,6 +109,10 @@ public object LexiconRegistry {
         itemDisplay = ShadowfoxLexiconEntry("itemDisplay", BotaniaAPI.categoryMisc, ItemStack(ShadowFoxBlocks.itemDisplay, 1, 1))
         itemDisplay.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesItemDisplay))
+
+        livingwoodFunnel = ShadowfoxLexiconEntry("livingwoodFunnel", BotaniaAPI.categoryMisc, ItemStack(ShadowFoxBlocks.livingwoodFunnel, 1))
+        livingwoodFunnel.setLexiconPages(PageText("0"),
+                PageCraftingRecipe("1", ModRecipes.recipesLivingwoodFunnel))
 
         lightningSapling = ShadowfoxLexiconEntry("lightningSapling", dendrology, ShadowFoxBlocks.lightningSapling)
         lightningSapling.setLexiconPages(PageText("0"),

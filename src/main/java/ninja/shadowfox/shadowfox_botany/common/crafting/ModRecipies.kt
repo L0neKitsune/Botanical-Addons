@@ -58,6 +58,7 @@ public object ModRecipes {
     val recipesIrisSapling: RecipePureDaisyExclusion
 
     val recipesLightningTree: RecipeTreeCrafting
+    val recipesLivingwoodFunnel: IRecipe
 
     init {
 
@@ -335,6 +336,14 @@ public object ModRecipes {
                     'Q', ItemStack(ShadowFoxBlocks.lightningWood))
 
         recipesThunderousTwig = BotaniaAPI.getLatestAddedRecipe()
+
+        addOreDictRecipe(ItemStack(ShadowFoxBlocks.livingwoodFunnel, 1),
+                "L L",
+                "LCL",
+                " L ",
+                'L', LibOreDict.LIVING_WOOD, 'C', ItemStack(Blocks.chest))
+
+        recipesLivingwoodFunnel = BotaniaAPI.getLatestAddedRecipe()
 
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood1, ItemStack(Items.coal, 1, 1), 0.15F)
