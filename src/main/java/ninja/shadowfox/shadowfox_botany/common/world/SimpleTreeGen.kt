@@ -1,6 +1,7 @@
 package ninja.shadowfox.shadowfox_botany.common.world
 
 import net.minecraft.block.Block
+import net.minecraft.block.material.Material
 import net.minecraft.world.World
 import net.minecraft.world.gen.feature.WorldGenAbstractTree
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
@@ -31,7 +32,7 @@ class SimpleTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
                         if (i1 >= 0 && i1 < 256) {
                             block = world!!.getBlock(j1, i1, i2)
 
-                            if (!block.isReplaceable(world, j1, i1, i2)) {
+                            if (!block.isReplaceable(world, j1, i1, i2) && !block.isLeaves(world, j1, i1, i2) && !isWood(block)) {
                                 flag = false
                                 break@isGen
                             }
@@ -116,5 +117,9 @@ class SimpleTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
         }
         else return false
 
+    }
+
+    fun isWood(block: Block): Boolean {
+        return block.getMaterial() == Material.wood
     }
 }
