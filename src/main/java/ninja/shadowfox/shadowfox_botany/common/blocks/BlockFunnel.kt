@@ -28,6 +28,7 @@ import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
 import java.util.*
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler
+import net.minecraft.block.BlockHopper
 import net.minecraft.client.renderer.RenderBlocks
 import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.EntityRenderer
@@ -35,15 +36,18 @@ import net.minecraft.client.renderer.EntityRenderer
 /**
  * Created by l0nekitsune on 12/11/15.
  */
-class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood), IWandHUD
-{
+class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood), IWandHUD {
     private val field_149922_a = Random()
+    public lateinit var top_icon: IIcon
 
     companion object {
         @SideOnly(Side.CLIENT)
-        fun getHopperIcon(p_149916_0_: String): IIcon? {
+        fun getHopperIcon(string: String): IIcon? {
+            if (string == "hopper_top") return (ShadowFoxBlocks.livingwoodFunnel as BlockFunnel).top_icon
+
             return BotaniaBlocks.livingwood.getIcon(0, 0)
         }
+
         fun getDirectionFromMetadata(p_149918_0_: Int): Int = p_149918_0_ and 7
         fun getActiveStateFromMetadata(p_149917_0_: Int): Boolean = (p_149917_0_ and 8) != 8
     }
@@ -108,7 +112,7 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
      * their own) Args: x, y, z, neighbor Block
      */
     override fun onNeighborBlockChange(p_149689_1_: World?, p_149695_2_: Int, p_149695_3_: Int, p_149695_4_: Int, p_149695_5_: Block?) {
-        if(p_149689_1_ != null) this.updateBlockData(p_149689_1_, p_149695_2_, p_149695_3_, p_149695_4_)
+        if (p_149689_1_ != null) this.updateBlockData(p_149689_1_, p_149695_2_, p_149695_3_, p_149695_4_)
     }
 
     private fun updateBlockData(p_149919_1_: World, p_149919_2_: Int, p_149919_3_: Int, p_149919_4_: Int) {
@@ -204,6 +208,7 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
      */
     @SideOnly(Side.CLIENT)
     override fun getIcon(p_149691_1_: Int, p_149691_2_: Int): IIcon {
+        if (p_149691_1_ == 1) return top_icon
         return BotaniaBlocks.livingwood.getIcon(0, 0)
     }
 
@@ -218,12 +223,14 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
      * strength when this block inputs to a comparator.
      */
     override fun getComparatorInputOverride(p_149736_1_: World?, p_149736_2_: Int, p_149736_3_: Int, p_149736_4_: Int, p_149736_5_: Int): Int {
-        if(p_149736_1_ == null) return 0
+        if (p_149736_1_ == null) return 0
         return Container.calcRedstoneFromInventory(getTile(p_149736_1_, p_149736_2_, p_149736_3_, p_149736_4_))
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
+        top_icon = IconHelper.forName(par1IconRegister, "hopper_top")
+    }
 
     fun getTile(p_149920_0_: IBlockAccess, p_149920_1_: Int, p_149920_2_: Int, p_149920_3_: Int): TileLivingwoodFunnel? {
         return p_149920_0_.getTileEntity(p_149920_1_, p_149920_2_, p_149920_3_) as TileLivingwoodFunnel
@@ -235,14 +242,17 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
     @SideOnly(Side.CLIENT)
     override fun getItemIconName(): String = "shadowfox_botany:livingwood_funnel"
 
-    class HopperRenderer: ISimpleBlockRenderingHandler {
+    class HopperRenderer : ISimpleBlockRenderingHandler {
         override fun getRenderId(): Int {
             return Constants.hopperRenderingID
         }
 
-        public override fun shouldRender3DInInventory(modelId: Int): Boolean {return false}
+        public override fun shouldRender3DInInventory(modelId: Int): Boolean {
+            return false
+        }
 
-        public override fun renderInventoryBlock(block: Block, metadata: Int, modelID: Int, renderer: RenderBlocks){}
+        public override fun renderInventoryBlock(block: Block, metadata: Int, modelID: Int, renderer: RenderBlocks) {
+        }
 
         public override fun renderWorldBlock(world: IBlockAccess, x: Int, y: Int, z: Int, block: Block, modelId: Int, renderer: RenderBlocks): Boolean {
             val tessellator = Tessellator.instance
@@ -251,6 +261,7 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
             var f = (l shr 16 and 255).toFloat() / 255.0f
             var f1 = (l shr 8 and 255).toFloat() / 255.0f
             var f2 = (l and 255).toFloat() / 255.0f
+
             if (EntityRenderer.anaglyphEnable) {
                 val f3 = (f * 30.0f + f1 * 59.0f + f2 * 11.0f) / 100.0f
                 val f4 = (f * 30.0f + f1 * 70.0f) / 100.0f
@@ -260,59 +271,165 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
                 f2 = f5
             }
 
+            tessellator.setColorOpaque_F(f, f1, f2)
             val meta = world.getBlockMetadata(x, y, z)
 
-            tessellator.setColorOpaque_F(f, f1, f2)
             val i1 = BlockFunnel.getDirectionFromMetadata(meta)
-
             val d0 = 0.625
             renderer.setRenderBounds(0.0, d0, 0.0, 1.0, 1.0, 1.0)
 
-            tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z))
-            tessellator.setColorOpaque_F(f, f1, f2)
+            val p_147799_6_ = false
+
+            if (p_147799_6_) {
+                tessellator.startDrawingQuads()
+                tessellator.setNormal(0.0f, -1.0f, 0.0f)
+                renderer.renderFaceYNeg(block, 0.0, 0.0, 0.0, renderer.getBlockIconFromSideAndMetadata(block, 0, meta))
+                tessellator.draw()
+                tessellator.startDrawingQuads()
+                tessellator.setNormal(0.0f, 1.0f, 0.0f)
+                renderer.renderFaceYPos(block, 0.0, 0.0, 0.0, renderer.getBlockIconFromSideAndMetadata(block, 1, meta))
+                tessellator.draw()
+                tessellator.startDrawingQuads()
+                tessellator.setNormal(0.0f, 0.0f, -1.0f)
+                renderer.renderFaceZNeg(block, 0.0, 0.0, 0.0, renderer.getBlockIconFromSideAndMetadata(block, 2, meta))
+                tessellator.draw()
+                tessellator.startDrawingQuads()
+                tessellator.setNormal(0.0f, 0.0f, 1.0f)
+                renderer.renderFaceZPos(block, 0.0, 0.0, 0.0, renderer.getBlockIconFromSideAndMetadata(block, 3, meta))
+                tessellator.draw()
+                tessellator.startDrawingQuads()
+                tessellator.setNormal(-1.0f, 0.0f, 0.0f)
+                renderer.renderFaceXNeg(block, 0.0, 0.0, 0.0, renderer.getBlockIconFromSideAndMetadata(block, 4, meta))
+                tessellator.draw()
+                tessellator.startDrawingQuads()
+                tessellator.setNormal(1.0f, 0.0f, 0.0f)
+                renderer.renderFaceXPos(block, 0.0, 0.0, 0.0, renderer.getBlockIconFromSideAndMetadata(block, 5, meta))
+                tessellator.draw()
+            } else {
+                renderer.renderStandardBlock(block, x, y, z)
+            }
+
+
+            if (!p_147799_6_) {
+                tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z))
+                val j1 = block.colorMultiplier(renderer.blockAccess, x, y, z)
+                var f = (j1 shr 16 and 255).toFloat() / 255.0f
+                f1 = (j1 shr 8 and 255).toFloat() / 255.0f
+                var f2 = (j1 and 255).toFloat() / 255.0f
+
+                if (EntityRenderer.anaglyphEnable) {
+                    val f3 = (f * 30.0f + f1 * 59.0f + f2 * 11.0f) / 100.0f
+                    val f4 = (f * 30.0f + f1 * 70.0f) / 100.0f
+                    val f5 = (f * 30.0f + f2 * 70.0f) / 100.0f
+                    f = f3
+                    f1 = f4
+                    f2 = f5
+                }
+
+                tessellator.setColorOpaque_F(f, f1, f2)
+            }
 
             val iicon = BlockFunnel.getHopperIcon("hopper_outside")
             val iicon1 = BlockFunnel.getHopperIcon("hopper_inside")
+            f1 = 0.125f
 
-            renderer.renderFaceXPos(block, (x.toFloat() - 1.0f + f1).toDouble(), y.toDouble(), z.toDouble(), iicon)
-            renderer.renderFaceXNeg(block, (x.toFloat() + 1.0f - f1).toDouble(), y.toDouble(), z.toDouble(), iicon)
-            renderer.renderFaceZPos(block, x.toDouble(), y.toDouble(), (z.toFloat() - 1.0f + f1).toDouble(), iicon)
-            renderer.renderFaceZNeg(block, x.toDouble(), y.toDouble(), (z.toFloat() + 1.0f - f1).toDouble(), iicon)
-            renderer.renderFaceYPos(block, x.toDouble(), (y.toFloat() - 1.0f).toDouble() + d0, z.toDouble(), iicon1)
+            if (p_147799_6_) {
+                tessellator.startDrawingQuads()
+                tessellator.setNormal(1.0f, 0.0f, 0.0f)
+                renderer.renderFaceXPos(block, (-1.0f + f1).toDouble(), 0.0, 0.0, iicon)
+                tessellator.draw()
+                tessellator.startDrawingQuads()
+                tessellator.setNormal(-1.0f, 0.0f, 0.0f)
+                renderer.renderFaceXNeg(block, (1.0f - f1).toDouble(), 0.0, 0.0, iicon)
+                tessellator.draw()
+                tessellator.startDrawingQuads()
+                tessellator.setNormal(0.0f, 0.0f, 1.0f)
+                renderer.renderFaceZPos(block, 0.0, 0.0, (-1.0f + f1).toDouble(), iicon)
+                tessellator.draw()
+                tessellator.startDrawingQuads()
+                tessellator.setNormal(0.0f, 0.0f, -1.0f)
+                renderer.renderFaceZNeg(block, 0.0, 0.0, (1.0f - f1).toDouble(), iicon)
+                tessellator.draw()
+                tessellator.startDrawingQuads()
+                tessellator.setNormal(0.0f, 1.0f, 0.0f)
+                renderer.renderFaceYPos(block, 0.0, -1.0 + d0, 0.0, iicon1)
+                tessellator.draw()
+            } else {
+                renderer.renderFaceXPos(block, (x.toFloat() - 1.0f + f1).toDouble(), y.toDouble(), z.toDouble(), iicon)
+                renderer.renderFaceXNeg(block, (x.toFloat() + 1.0f - f1).toDouble(), y.toDouble(), z.toDouble(), iicon)
+                renderer.renderFaceZPos(block, x.toDouble(), y.toDouble(), (z.toFloat() - 1.0f + f1).toDouble(), iicon)
+                renderer.renderFaceZNeg(block, x.toDouble(), y.toDouble(), (z.toFloat() + 1.0f - f1).toDouble(), iicon)
+                renderer.renderFaceYPos(block, x.toDouble(), (y.toFloat() - 1.0f).toDouble() + d0, z.toDouble(), iicon1)
+            }
 
             renderer.setOverrideBlockTexture(iicon)
             val d3 = 0.25
             val d4 = 0.25
             renderer.setRenderBounds(d3, d4, d3, 1.0 - d3, d0 - 0.002, 1.0 - d3)
 
-            renderer.renderStandardBlock(block, x, y, z)
+            if (p_147799_6_) {
+                tessellator.startDrawingQuads()
+                tessellator.setNormal(1.0f, 0.0f, 0.0f)
+                renderer.renderFaceXPos(block, 0.0, 0.0, 0.0, iicon)
+                tessellator.draw()
+                tessellator.startDrawingQuads()
+                tessellator.setNormal(-1.0f, 0.0f, 0.0f)
+                renderer.renderFaceXNeg(block, 0.0, 0.0, 0.0, iicon)
+                tessellator.draw()
+                tessellator.startDrawingQuads()
+                tessellator.setNormal(0.0f, 0.0f, 1.0f)
+                renderer.renderFaceZPos(block, 0.0, 0.0, 0.0, iicon)
+                tessellator.draw()
+                tessellator.startDrawingQuads()
+                tessellator.setNormal(0.0f, 0.0f, -1.0f)
+                renderer.renderFaceZNeg(block, 0.0, 0.0, 0.0, iicon)
+                tessellator.draw()
+                tessellator.startDrawingQuads()
+                tessellator.setNormal(0.0f, 1.0f, 0.0f)
+                renderer.renderFaceYPos(block, 0.0, 0.0, 0.0, iicon)
+                tessellator.draw()
+                tessellator.startDrawingQuads()
+                tessellator.setNormal(0.0f, -1.0f, 0.0f)
+                renderer.renderFaceYNeg(block, 0.0, 0.0, 0.0, iicon)
+                tessellator.draw()
+            } else {
+                renderer.renderStandardBlock(block, x, y, z)
+            }
 
-            val d1 = 0.375
-            val d2 = 0.25
-            renderer.setOverrideBlockTexture(iicon)
-            if (i1 == 0) {
-                renderer.setRenderBounds(d1, 0.0, d1, 1.0 - d1, 0.25, 1.0 - d1)
-                renderer.renderStandardBlock(block, x, y, z)
-            }
-            if (i1 == 2) {
-                renderer.setRenderBounds(d1, d4, 0.0, 1.0 - d1, d4 + d2, d3)
-                renderer.renderStandardBlock(block, x, y, z)
-            }
-            if (i1 == 3) {
-                renderer.setRenderBounds(d1, d4, 1.0 - d3, 1.0 - d1, d4 + d2, 1.0)
-                renderer.renderStandardBlock(block, x, y, z)
-            }
-            if (i1 == 4) {
-                renderer.setRenderBounds(0.0, d4, d1, d3, d4 + d2, 1.0 - d1)
-                renderer.renderStandardBlock(block, x, y, z)
-            }
-            if (i1 == 5) {
-                renderer.setRenderBounds(1.0 - d3, d4, d1, 1.0, d4 + d2, 1.0 - d1)
-                renderer.renderStandardBlock(block, x, y, z)
+            if (!p_147799_6_) {
+                val d1 = 0.375
+                val d2 = 0.25
+                renderer.setOverrideBlockTexture(iicon)
+
+                if (i1 == 0) {
+                    renderer.setRenderBounds(d1, 0.0, d1, 1.0 - d1, 0.25, 1.0 - d1)
+                    renderer.renderStandardBlock(block, x, y, z)
+                }
+
+                if (i1 == 2) {
+                    renderer.setRenderBounds(d1, d4, 0.0, 1.0 - d1, d4 + d2, d3)
+                    renderer.renderStandardBlock(block, x, y, z)
+                }
+
+                if (i1 == 3) {
+                    renderer.setRenderBounds(d1, d4, 1.0 - d3, 1.0 - d1, d4 + d2, 1.0)
+                    renderer.renderStandardBlock(block, x, y, z)
+                }
+
+                if (i1 == 4) {
+                    renderer.setRenderBounds(0.0, d4, d1, d3, d4 + d2, 1.0 - d1)
+                    renderer.renderStandardBlock(block, x, y, z)
+                }
+
+                if (i1 == 5) {
+                    renderer.setRenderBounds(1.0 - d3, d4, d1, 1.0, d4 + d2, 1.0 - d1)
+                    renderer.renderStandardBlock(block, x, y, z)
+                }
             }
 
             renderer.clearOverrideBlockTexture()
-            return true
+
+            return true;
         }
     }
 }
