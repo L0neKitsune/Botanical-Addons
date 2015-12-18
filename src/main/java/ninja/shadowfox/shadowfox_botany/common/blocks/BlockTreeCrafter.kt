@@ -57,11 +57,7 @@ open class BlockTreeCrafter(name: String = "treeCrafter"): ShadowFoxTileContaine
         return crafter.signal
     }
 
-//    override fun canSustainPlant(world: IBlockAccess?, x: Int, y: Int, z: Int, direction: ForgeDirection?, plantable: IPlantable?): Boolean {
-//        return true
-//    }
-
-    override fun getItemDropped(p_149650_1_: Int, p_149650_2_: Random?, p_149650_3_: Int): Item {
+    override fun getItemDropped(meta: Int, random: Random?, fortune: Int): Item {
         return Item.getItemFromBlock(innerBlock(0))
     }
 

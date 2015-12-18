@@ -37,7 +37,7 @@ import net.minecraft.client.renderer.EntityRenderer
  * Created by l0nekitsune on 12/11/15.
  */
 class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood), IWandHUD {
-    private val field_149922_a = Random()
+    private val random = Random()
     public lateinit var top_icon: IIcon
 
     companion object {
@@ -48,8 +48,8 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
             return BotaniaBlocks.livingwood.getIcon(0, 0)
         }
 
-        fun getDirectionFromMetadata(p_149918_0_: Int): Int = p_149918_0_ and 7
-        fun getActiveStateFromMetadata(p_149917_0_: Int): Boolean = (p_149917_0_ and 8) != 8
+        fun getDirectionFromMetadata(meta: Int): Int = meta and 7
+        fun getActiveStateFromMetadata(meta: Int): Boolean = (meta and 8) != 8
     }
 
     init {
@@ -61,30 +61,30 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
-    override fun setBlockBoundsBasedOnState(p_149719_1_: IBlockAccess?, p_149719_2_: Int, p_149719_3_: Int, p_149719_4_: Int) {
+    override fun setBlockBoundsBasedOnState(world: IBlockAccess?, x: Int, y: Int, z: Int) {
         this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f)
     }
 
-    override fun addCollisionBoxesToList(p_149743_1_: World?, p_149743_2_: Int, p_149743_3_: Int, p_149743_4_: Int, p_149743_5_: AxisAlignedBB?, p_149743_6_: MutableList<Any?>?, p_149743_7_: Entity?) {
+    override fun addCollisionBoxesToList(world: World?, x: Int, y: Int, z: Int, axis: AxisAlignedBB?, bounds: MutableList<Any?>?, entity: Entity?) {
         this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 0.625f, 1.0f)
-        super.addCollisionBoxesToList(p_149743_1_, p_149743_2_, p_149743_3_, p_149743_4_, p_149743_5_, p_149743_6_, p_149743_7_)
+        super.addCollisionBoxesToList(world, x, y, z, axis, bounds, entity)
         val f = 0.125f
         this.setBlockBounds(0.0f, 0.0f, 0.0f, f, 1.0f, 1.0f)
-        super.addCollisionBoxesToList(p_149743_1_, p_149743_2_, p_149743_3_, p_149743_4_, p_149743_5_, p_149743_6_, p_149743_7_)
+        super.addCollisionBoxesToList(world, x, y, z, axis, bounds, entity)
         this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, f)
-        super.addCollisionBoxesToList(p_149743_1_, p_149743_2_, p_149743_3_, p_149743_4_, p_149743_5_, p_149743_6_, p_149743_7_)
+        super.addCollisionBoxesToList(world, x, y, z, axis, bounds, entity)
         this.setBlockBounds(1.0f - f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f)
-        super.addCollisionBoxesToList(p_149743_1_, p_149743_2_, p_149743_3_, p_149743_4_, p_149743_5_, p_149743_6_, p_149743_7_)
+        super.addCollisionBoxesToList(world, x, y, z, axis, bounds, entity)
         this.setBlockBounds(0.0f, 0.0f, 1.0f - f, 1.0f, 1.0f, 1.0f)
-        super.addCollisionBoxesToList(p_149743_1_, p_149743_2_, p_149743_3_, p_149743_4_, p_149743_5_, p_149743_6_, p_149743_7_)
+        super.addCollisionBoxesToList(world, x, y, z, axis, bounds, entity)
         this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f)
     }
 
     /**
      * Called when a block is placed using its ItemBlock. Args: World, X, Y, Z, side, hitX, hitY, hitZ, block metadata
      */
-    override fun onBlockPlaced(p_149660_1_: World?, p_149660_2_: Int, p_149660_3_: Int, p_149660_4_: Int, p_149660_5_: Int, p_149660_6_: Float, p_149660_7_: Float, p_149660_8_: Float, p_149660_9_: Int): Int {
-        var j1 = Facing.oppositeSide[p_149660_5_]
+    override fun onBlockPlaced(world: World?, x: Int, y: Int, z: Int, side: Int, hitX: Float, hitY: Float, hitZ: Float, meta: Int): Int {
+        var j1 = Facing.oppositeSide[side]
 
         if (j1 == 1) j1 = 0
         return j1
@@ -93,36 +93,29 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
     override fun createNewTileEntity(var1: World, var2: Int): TileLivingwoodFunnel = TileLivingwoodFunnel()
 
     /**
-     * Called when the block is placed in the world.
-     */
-    override fun onBlockPlacedBy(p_149689_1_: World?, p_149689_2_: Int, p_149689_3_: Int, p_149689_4_: Int, p_149689_5_: EntityLivingBase?, p_149689_6_: ItemStack?) {
-        super.onBlockPlacedBy(p_149689_1_, p_149689_2_, p_149689_3_, p_149689_4_, p_149689_5_, p_149689_6_)
-    }
-
-    /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
-    override fun onBlockAdded(p_149726_1_: World?, p_149726_2_: Int, p_149726_3_: Int, p_149726_4_: Int) {
-        super.onBlockAdded(p_149726_1_, p_149726_2_, p_149726_3_, p_149726_4_)
-        if (p_149726_1_ != null) this.updateBlockData(p_149726_1_, p_149726_2_, p_149726_3_, p_149726_4_)
+    override fun onBlockAdded(world: World?, x: Int, y: Int, z: Int) {
+        super.onBlockAdded(world, x, y, z)
+        if (world != null) this.updateBlockData(world, x, y, z)
     }
 
     /**
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor Block
      */
-    override fun onNeighborBlockChange(p_149689_1_: World?, p_149695_2_: Int, p_149695_3_: Int, p_149695_4_: Int, p_149695_5_: Block?) {
-        if (p_149689_1_ != null) this.updateBlockData(p_149689_1_, p_149695_2_, p_149695_3_, p_149695_4_)
+    override fun onNeighborBlockChange(world: World?, x: Int, y: Int, z: Int, neighbor: Block?) {
+        if (world != null) this.updateBlockData(world, x, y, z)
     }
 
-    private fun updateBlockData(p_149919_1_: World, p_149919_2_: Int, p_149919_3_: Int, p_149919_4_: Int) {
-        val l = p_149919_1_.getBlockMetadata(p_149919_2_, p_149919_3_, p_149919_4_)
+    private fun updateBlockData(world: World, x: Int, y: Int, z: Int) {
+        val l = world.getBlockMetadata(x, y, z)
         val i1 = getDirectionFromMetadata(l)
-        val flag = !p_149919_1_.isBlockIndirectlyGettingPowered(p_149919_2_, p_149919_3_, p_149919_4_)
+        val flag = !world.isBlockIndirectlyGettingPowered(x, y, z)
         val flag1 = getActiveStateFromMetadata(l)
 
         if (flag != flag1) {
-            p_149919_1_.setBlockMetadataWithNotify(p_149919_2_, p_149919_3_, p_149919_4_, i1 or (if (flag) 0 else 8), 4)
+            world.setBlockMetadataWithNotify(x, y, z, i1 or (if (flag) 0 else 8), 4)
         }
     }
 
@@ -131,45 +124,45 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
     }
 
 
-    override fun breakBlock(p_149749_1_: World, p_149749_2_: Int, p_149749_3_: Int, p_149749_4_: Int, p_149749_5_: Block?, p_149749_6_: Int) {
-        val tile = p_149749_1_.getTileEntity(p_149749_2_, p_149749_3_, p_149749_4_)
+    override fun breakBlock(world: World, x: Int, y: Int, z: Int, block: Block?, meta: Int) {
+        val tile = world.getTileEntity(x, y, z)
 
         if (tile != null && tile is TileLivingwoodFunnel) {
             for (i1 in 0..tile.sizeInventory - 1) {
                 val itemstack = tile.getStackInSlot(i1)
 
                 if (itemstack != null) {
-                    val f = this.field_149922_a.nextFloat() * 0.8f + 0.1f
-                    val f1 = this.field_149922_a.nextFloat() * 0.8f + 0.1f
-                    val f2 = this.field_149922_a.nextFloat() * 0.8f + 0.1f
+                    val f = this.random.nextFloat() * 0.8f + 0.1f
+                    val f1 = this.random.nextFloat() * 0.8f + 0.1f
+                    val f2 = this.random.nextFloat() * 0.8f + 0.1f
 
                     while (itemstack.stackSize > 0) {
-                        var j1 = this.field_149922_a.nextInt(21) + 10
+                        var j1 = this.random.nextInt(21) + 10
 
                         if (j1 > itemstack.stackSize) {
                             j1 = itemstack.stackSize
                         }
 
                         itemstack.stackSize -= j1
-                        val entityitem = EntityItem(p_149749_1_, (p_149749_2_.toFloat() + f).toDouble(), (p_149749_3_.toFloat() + f1).toDouble(), (p_149749_4_.toFloat() + f2).toDouble(), ItemStack(itemstack.item, j1, itemstack.itemDamage))
+                        val entityitem = EntityItem(world, (x.toFloat() + f).toDouble(), (y.toFloat() + f1).toDouble(), (z.toFloat() + f2).toDouble(), ItemStack(itemstack.item, j1, itemstack.itemDamage))
 
                         if (itemstack.hasTagCompound()) {
                             entityitem.entityItem.tagCompound = itemstack.tagCompound.copy() as NBTTagCompound
                         }
 
                         val f3 = 0.05f
-                        entityitem.motionX = (this.field_149922_a.nextGaussian().toFloat() * f3).toDouble()
-                        entityitem.motionY = (this.field_149922_a.nextGaussian().toFloat() * f3 + 0.2f).toDouble()
-                        entityitem.motionZ = (this.field_149922_a.nextGaussian().toFloat() * f3).toDouble()
-                        p_149749_1_.spawnEntityInWorld(entityitem)
+                        entityitem.motionX = (this.random.nextGaussian().toFloat() * f3).toDouble()
+                        entityitem.motionY = (this.random.nextGaussian().toFloat() * f3 + 0.2f).toDouble()
+                        entityitem.motionZ = (this.random.nextGaussian().toFloat() * f3).toDouble()
+                        world.spawnEntityInWorld(entityitem)
                     }
                 }
             }
 
-            p_149749_1_.func_147453_f(p_149749_2_, p_149749_3_, p_149749_4_, p_149749_5_)
+            world.func_147453_f(x, y, z, block)
         }
 
-        super.breakBlock(p_149749_1_, p_149749_2_, p_149749_3_, p_149749_4_, p_149749_5_, p_149749_6_)
+        super.breakBlock(world, x, y, z, block, meta)
     }
 
     /**
@@ -199,7 +192,7 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
      * coordinates.  Args: blockAccess, x, y, z, side
      */
     @SideOnly(Side.CLIENT)
-    override fun shouldSideBeRendered(p_149646_1_: IBlockAccess, p_149646_2_: Int, p_149646_3_: Int, p_149646_4_: Int, p_149646_5_: Int): Boolean {
+    override fun shouldSideBeRendered(world: IBlockAccess, x: Int, y: Int, z: Int, side: Int): Boolean {
         return true
     }
 
@@ -207,8 +200,8 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
      * Gets the block's texture. Args: side, meta
      */
     @SideOnly(Side.CLIENT)
-    override fun getIcon(p_149691_1_: Int, p_149691_2_: Int): IIcon {
-        if (p_149691_1_ == 1) return top_icon
+    override fun getIcon(side: Int, meta: Int): IIcon {
+        if (side == 1) return top_icon
         return BotaniaBlocks.livingwood.getIcon(0, 0)
     }
 
@@ -222,9 +215,9 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
      * If hasComparatorInputOverride returns true, the return value from this is used instead of the redstone signal
      * strength when this block inputs to a comparator.
      */
-    override fun getComparatorInputOverride(p_149736_1_: World?, p_149736_2_: Int, p_149736_3_: Int, p_149736_4_: Int, p_149736_5_: Int): Int {
-        if (p_149736_1_ == null) return 0
-        return Container.calcRedstoneFromInventory(getTile(p_149736_1_, p_149736_2_, p_149736_3_, p_149736_4_))
+    override fun getComparatorInputOverride(world: World?, x: Int, y: Int, z: Int, side: Int): Int {
+        if (world == null) return 0
+        return Container.calcRedstoneFromInventory(getTile(world, x, y, z))
     }
 
     @SideOnly(Side.CLIENT)
@@ -232,8 +225,8 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
         top_icon = IconHelper.forName(par1IconRegister, "hopper_top")
     }
 
-    fun getTile(p_149920_0_: IBlockAccess, p_149920_1_: Int, p_149920_2_: Int, p_149920_3_: Int): TileLivingwoodFunnel? {
-        return p_149920_0_.getTileEntity(p_149920_1_, p_149920_2_, p_149920_3_) as TileLivingwoodFunnel
+    fun getTile(world: IBlockAccess, x: Int, y: Int, z: Int): TileLivingwoodFunnel? {
+        return world.getTileEntity(x, y, z) as TileLivingwoodFunnel
     }
 
     /**
@@ -278,9 +271,9 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
             val d0 = 0.625
             renderer.setRenderBounds(0.0, d0, 0.0, 1.0, 1.0, 1.0)
 
-            val p_147799_6_ = false
+            val flag = false
 
-            if (p_147799_6_) {
+            if (flag) {
                 tessellator.startDrawingQuads()
                 tessellator.setNormal(0.0f, -1.0f, 0.0f)
                 renderer.renderFaceYNeg(block, 0.0, 0.0, 0.0, renderer.getBlockIconFromSideAndMetadata(block, 0, meta))
@@ -310,7 +303,7 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
             }
 
 
-            if (!p_147799_6_) {
+            if (!flag) {
                 tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z))
                 val j1 = block.colorMultiplier(renderer.blockAccess, x, y, z)
                 var f = (j1 shr 16 and 255).toFloat() / 255.0f
@@ -333,7 +326,7 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
             val iicon1 = BlockFunnel.getHopperIcon("hopper_inside")
             f1 = 0.125f
 
-            if (p_147799_6_) {
+            if (flag) {
                 tessellator.startDrawingQuads()
                 tessellator.setNormal(1.0f, 0.0f, 0.0f)
                 renderer.renderFaceXPos(block, (-1.0f + f1).toDouble(), 0.0, 0.0, iicon)
@@ -367,7 +360,7 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
             val d4 = 0.25
             renderer.setRenderBounds(d3, d4, d3, 1.0 - d3, d0 - 0.002, 1.0 - d3)
 
-            if (p_147799_6_) {
+            if (flag) {
                 tessellator.startDrawingQuads()
                 tessellator.setNormal(1.0f, 0.0f, 0.0f)
                 renderer.renderFaceXPos(block, 0.0, 0.0, 0.0, iicon)
@@ -396,7 +389,7 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
                 renderer.renderStandardBlock(block, x, y, z)
             }
 
-            if (!p_147799_6_) {
+            if (!flag) {
                 val d1 = 0.375
                 val d2 = 0.25
                 renderer.setOverrideBlockTexture(iicon)
@@ -429,7 +422,7 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
 
             renderer.clearOverrideBlockTexture()
 
-            return true;
+            return true
         }
     }
 }

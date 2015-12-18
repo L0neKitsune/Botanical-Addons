@@ -37,9 +37,9 @@ abstract class ShadowFoxTileContainer<T: TileEntity>(material: Material): BlockC
         return true
     }
 
-    override fun setLightLevel(p_149715_1_: Float): Block {
-        this.originalLight = (p_149715_1_ * 15.0f).toInt()
-        return super.setLightLevel(p_149715_1_)
+    override fun setLightLevel(light: Float): Block {
+        this.originalLight = (light * 15.0f).toInt()
+        return super.setLightLevel(light)
     }
 
     @SideOnly(Side.CLIENT)

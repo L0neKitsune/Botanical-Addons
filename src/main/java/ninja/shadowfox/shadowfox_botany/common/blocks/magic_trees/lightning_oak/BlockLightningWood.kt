@@ -57,17 +57,13 @@ public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITile
         world.removeTileEntity(x, y, z)
     }
 
-    override fun onBlockAdded(p_149726_1_: World?, p_149726_2_: Int, p_149726_3_: Int, p_149726_4_: Int) {
-        super.onBlockAdded(p_149726_1_, p_149726_2_, p_149726_3_, p_149726_4_)
+    override fun onBlockEventReceived(world: World?, x: Int, y: Int, z: Int, event: Int, eventArg: Int): Boolean {
+        super.onBlockEventReceived(world, x, y, z, event, eventArg)
+        val tileentity = world!!.getTileEntity(x, y, z)
+        return if (tileentity != null) tileentity.receiveClientEvent(event, eventArg) else false
     }
 
-    override fun onBlockEventReceived(p_149696_1_: World?, p_149696_2_: Int, p_149696_3_: Int, p_149696_4_: Int, p_149696_5_: Int, p_149696_6_: Int): Boolean {
-        super.onBlockEventReceived(p_149696_1_, p_149696_2_, p_149696_3_, p_149696_4_, p_149696_5_, p_149696_6_)
-        val tileentity = p_149696_1_!!.getTileEntity(p_149696_2_, p_149696_3_, p_149696_4_)
-        return if (tileentity != null) tileentity.receiveClientEvent(p_149696_5_, p_149696_6_) else false
-    }
-
-    override fun createNewTileEntity(p_149915_1_: World?, p_149915_2_: Int): TileEntity? {
+    override fun createNewTileEntity(world: World?, meta: Int): TileEntity? {
         return TileLightningRod()
     }
 

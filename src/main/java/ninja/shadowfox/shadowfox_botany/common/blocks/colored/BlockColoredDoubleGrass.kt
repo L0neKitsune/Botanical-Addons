@@ -125,7 +125,7 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
         return LexiconRegistry.pastoralSeeds
     }
 
-    fun func_149886_b(world: World, x: Int, y: Int, z: Int, meta: Int, player: EntityPlayer): Boolean {
+    fun dropBlock(world: World, x: Int, y: Int, z: Int, meta: Int, player: EntityPlayer): Boolean {
         if (isTop(meta)) {
             return false
         }

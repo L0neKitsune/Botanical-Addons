@@ -30,7 +30,7 @@ abstract class ShadowFoxSlabs(val full: Boolean, val meta: Int, val source: Bloc
 
     }
 
-    override fun setBlockName(p_149663_1_: String?): Block? {
+    override fun setBlockName(name: String?): Block? {
         return super.setBlockName(name)
     }
 
@@ -43,7 +43,7 @@ abstract class ShadowFoxSlabs(val full: Boolean, val meta: Int, val source: Bloc
         return ItemStack(getSingleBlock())
     }
 
-    override fun getItemDropped(p_149650_1_: Int, p_149650_2_: Random?, p_149650_3_: Int): Item {
+    override fun getItemDropped(meta: Int, random: Random?, fortune: Int): Item {
         return Item.getItemFromBlock(this.getSingleBlock())
     }
 

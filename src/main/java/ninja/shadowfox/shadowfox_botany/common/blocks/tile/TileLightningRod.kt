@@ -105,10 +105,10 @@ class TileLightningRod() : TileEntity() {
         override fun entityInit() {
         }
 
-        override fun readEntityFromNBT(p_70037_1_: NBTTagCompound) {
+        override fun readEntityFromNBT(tag: NBTTagCompound) {
         }
 
-        override fun writeEntityToNBT(p_70014_1_: NBTTagCompound) {
+        override fun writeEntityToNBT(tag: NBTTagCompound) {
         }
     }
 }

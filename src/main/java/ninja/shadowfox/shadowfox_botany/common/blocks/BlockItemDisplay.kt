@@ -13,6 +13,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
+import net.minecraft.inventory.Container
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -52,6 +53,15 @@ class BlockItemDisplay() : ShadowFoxBlockMod(Material.wood), ILexiconable, ITile
             }
     }
 
+    override fun hasComparatorInputOverride(): Boolean {
+        return true
+    }
+
+    override fun getComparatorInputOverride(world: World?, x: Int, y: Int, z: Int, direction: Int): Int {
+        if (world == null) return 0
+        return Container.calcRedstoneFromInventory(world.getTileEntity(x, y, z)!! as TileItemDisplay)
+    }
+
     override fun shouldRegisterInNameSet(): Boolean = false
 
     override fun setBlockName(par1Str: String): Block {
@@ -76,7 +86,7 @@ class BlockItemDisplay() : ShadowFoxBlockMod(Material.wood), ILexiconable, ITile
 
     }
 
-    override fun createNewTileEntity(p_149915_1_: World?, p_149915_2_: Int): TileEntity? {
+    override fun createNewTileEntity(world: World?, meta: Int): TileEntity? {
         return TileItemDisplay()
     }
 
@@ -85,7 +95,7 @@ class BlockItemDisplay() : ShadowFoxBlockMod(Material.wood), ILexiconable, ITile
         return if (side == 1 || side == 0) icons[Math.min(meta, TYPES-1)]!! else sideIcons[Math.min(meta, TYPES-1)]!!
     }
 
-    override fun onBlockActivated(world: World?, x: Int, y: Int, z: Int, player: EntityPlayer?, p_149727_6_: Int, p_149727_7_: Float, p_149727_8_: Float, p_149727_9_: Float): Boolean {
+    override fun onBlockActivated(world: World?, x: Int, y: Int, z: Int, player: EntityPlayer?, meta: Int, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (world!!.isRemote || player == null) return true
         else {
             var tileEntity = world.getTileEntity(x, y, z)
@@ -144,17 +154,10 @@ class BlockItemDisplay() : ShadowFoxBlockMod(Material.wood), ILexiconable, ITile
     override fun renderAsNormalBlock(): Boolean = false
     override fun hasTileEntity(metadata: Int): Boolean = true
 
-    /**
-     * Called whenever the block is added into the world. Args: world, x, y, z
-     */
-    override fun onBlockAdded(p_149726_1_: World?, p_149726_2_: Int, p_149726_3_: Int, p_149726_4_: Int) {
-        super.onBlockAdded(p_149726_1_, p_149726_2_, p_149726_3_, p_149726_4_)
-    }
-
-    override fun onBlockEventReceived(p_149696_1_: World?, p_149696_2_: Int, p_149696_3_: Int, p_149696_4_: Int, p_149696_5_: Int, p_149696_6_: Int): Boolean {
-        super.onBlockEventReceived(p_149696_1_, p_149696_2_, p_149696_3_, p_149696_4_, p_149696_5_, p_149696_6_)
-        val tileentity = p_149696_1_!!.getTileEntity(p_149696_2_, p_149696_3_, p_149696_4_)
-        return if (tileentity != null) tileentity.receiveClientEvent(p_149696_5_, p_149696_6_) else false
+    override fun onBlockEventReceived(world: World?, x: Int, y: Int, z: Int, event: Int, eventArg: Int): Boolean {
+        super.onBlockEventReceived(world, x, y, z, event, eventArg)
+        val tileentity = world!!.getTileEntity(x, y, z)
+        return if (tileentity != null) tileentity.receiveClientEvent(event, eventArg) else false
     }
 
     override fun breakBlock(world: World, x: Int, y: Int, z: Int, block: Block, meta: Int) {

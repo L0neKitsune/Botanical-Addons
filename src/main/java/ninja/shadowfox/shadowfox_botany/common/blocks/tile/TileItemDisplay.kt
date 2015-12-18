@@ -67,7 +67,7 @@ class TileItemDisplay() : ShadowFoxTile(), ISidedInventory {
     }
 
     override fun getInventoryName(): String = "container.itemDisplay"
-    override fun isUseableByPlayer(p_70300_1_: EntityPlayer?): Boolean = true
+    override fun isUseableByPlayer(player: EntityPlayer?): Boolean = true
     override fun hasCustomInventoryName(): Boolean = false
 
     override fun readCustomNBT(nbttagcompound: NBTTagCompound) {

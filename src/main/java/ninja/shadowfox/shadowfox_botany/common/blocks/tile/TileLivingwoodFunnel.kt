@@ -41,12 +41,12 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
                     if (transferCooldown <= 0 && BlockFunnel.getActiveStateFromMetadata(getBlockMetadata())) {
                         var flag = false
 
-                        if (!func_152104_k()) {
+                        if (!isEmpty()) {
                             flag = pushToAttachedInventory()
                         }
 
                         if (!isFull()) {
-                            flag = func_145891_a(this) || flag
+                            flag = canHopperPull(this) || flag
                         }
 
                         if (flag) {
@@ -90,7 +90,7 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
         return iinventory
     }
 
-    fun func_145891_a(funnel: IHopper): Boolean {
+    fun canHopperPull(funnel: IHopper): Boolean {
         val iinventory = getInventoryAbove(funnel)
         if (iinventory != null) {
             if (inventoryEmpty(iinventory, 0)) return false
@@ -136,7 +136,7 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
         return true
     }
 
-    private fun func_152104_k(): Boolean {
+    private fun isEmpty(): Boolean {
         val aitemstack = inventory
         val i = aitemstack.size
 
@@ -151,22 +151,22 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
         return true
     }
 
-    private fun func_152102_a(p_152102_1_: IInventory, p_152102_2_: Int): Boolean {
-        if (p_152102_1_ is ISidedInventory && p_152102_2_ > -1) {
-            val aint = p_152102_1_.getAccessibleSlotsFromSide(p_152102_2_)
+    private fun isFull(inventory: IInventory, side: Int): Boolean {
+        if (inventory is ISidedInventory && side > -1) {
+            val aint = inventory.getAccessibleSlotsFromSide(side)
 
             for (l in aint.indices) {
-                val itemstack1 = p_152102_1_.getStackInSlot(aint[l])
+                val itemstack1 = inventory.getStackInSlot(aint[l])
 
                 if (itemstack1 == null || itemstack1.stackSize != itemstack1.maxStackSize) {
                     return false
                 }
             }
         } else {
-            val j = p_152102_1_.sizeInventory
+            val j = inventory.sizeInventory
 
             for (k in 0..j - 1) {
-                val itemstack = p_152102_1_.getStackInSlot(k)
+                val itemstack = inventory.getStackInSlot(k)
 
                 if (itemstack == null || itemstack.stackSize != itemstack.maxStackSize) {
                     return false
@@ -185,7 +185,7 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
         } else {
             val i = Facing.oppositeSide[BlockHopper.getDirectionFromMetadata(this.getBlockMetadata())]
 
-            if (this.func_152102_a(iinventory, i)) {
+            if (this.isFull(iinventory, i)) {
                 return false
             } else {
                 for (j in 0..this.sizeInventory - 1) {
@@ -239,8 +239,8 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
         return stack
     }
 
-    private fun canInsertItem(p_145885_0_: IInventory, p_145885_1_: ItemStack, p_145885_2_: Int, side: Int): Boolean {
-        return if (!p_145885_0_.isItemValidForSlot(p_145885_2_, p_145885_1_)) false else p_145885_0_ !is ISidedInventory || p_145885_0_.canInsertItem(p_145885_2_, p_145885_1_, side)
+    private fun canInsertItem(inventory: IInventory, stack: ItemStack, slot: Int, side: Int): Boolean {
+        return if (!inventory.isItemValidForSlot(slot, stack)) false else inventory !is ISidedInventory || inventory.canInsertItem(slot, stack, side)
     }
 
 
@@ -283,8 +283,8 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
         return stack
     }
 
-    private fun canAddToStack(p_145894_0_: ItemStack, p_145894_1_: ItemStack): Boolean {
-        return if (p_145894_0_.item !== p_145894_1_.item) false else (if (p_145894_0_.itemDamage != p_145894_1_.itemDamage) false else (if (p_145894_0_.stackSize > p_145894_0_.maxStackSize) false else ItemStack.areItemStackTagsEqual(p_145894_0_, p_145894_1_)))
+    private fun canAddToStack(stack: ItemStack, mainStack: ItemStack): Boolean {
+        return if (stack.item !== mainStack.item) false else (if (stack.itemDamage != mainStack.itemDamage) false else (if (stack.stackSize > stack.maxStackSize) false else ItemStack.areItemStackTagsEqual(stack, mainStack)))
     }
 
     fun pullEntityFromWorld(inventory: IInventory, item: EntityItem?): Boolean {
@@ -312,21 +312,21 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
         return if (list.size > 0) list[0] as EntityItem else null
     }
 
-    private fun pullItemIn(inventory: IHopper, p_145892_1_: IInventory, p_145892_2_: Int, p_145892_3_: Int): Boolean {
-        val itemstack = p_145892_1_.getStackInSlot(p_145892_2_)
+    private fun pullItemIn(hopper: IHopper, inventory: IInventory, slot: Int, side: Int): Boolean {
+        val itemstack = inventory.getStackInSlot(slot)
 
-        if (itemstack != null && canPullItem(p_145892_1_, itemstack, p_145892_2_, p_145892_3_)) {
+        if (itemstack != null && canPullItem(inventory, itemstack, slot, side)) {
             if (itemstack.itemInFrames()) {
 
                 val itemstack1 = itemstack.copy()
-                val itemstack2 = inventory.addItemToSide(p_145892_1_.decrStackSize(p_145892_2_, 1), -1)
+                val itemstack2 = hopper.addItemToSide(inventory.decrStackSize(slot, 1), -1)
 
                 if (itemstack2 == null || itemstack2.stackSize == 0) {
-                    p_145892_1_.markDirty()
+                    inventory.markDirty()
                     return true
                 }
 
-                p_145892_1_.setInventorySlotContents(p_145892_2_, itemstack1)
+                inventory.setInventorySlotContents(slot, itemstack1)
             }
         }
 
@@ -355,8 +355,8 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
         return false
     }
 
-    private fun canPullItem(p_145890_0_: IInventory, p_145890_1_: ItemStack, p_145890_2_: Int, p_145890_3_: Int): Boolean {
-        return p_145890_0_ !is ISidedInventory || p_145890_0_.canExtractItem(p_145890_2_, p_145890_1_, p_145890_3_)
+    private fun canPullItem(inventory: IInventory, stack: ItemStack, slot: Int, side: Int): Boolean {
+        return inventory !is ISidedInventory || inventory.canExtractItem(slot, stack, side)
     }
 
     private fun inventoryEmpty(inventory: IInventory, side: Int): Boolean {

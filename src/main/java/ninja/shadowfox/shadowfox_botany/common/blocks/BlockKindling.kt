@@ -25,7 +25,7 @@ class BlockKindling() : ShadowFoxBlockMod(Material.cloth), IFuelHandler, ILexico
         GameRegistry.registerFuelHandler(this)
     }
 
-    override fun onBlockActivated(world: World?, x: Int, y: Int, z: Int, player: EntityPlayer?, p_149727_6_: Int, p_149727_7_: Float, p_149727_8_: Float, p_149727_9_: Float): Boolean {
+    override fun onBlockActivated(world: World?, x: Int, y: Int, z: Int, player: EntityPlayer?, meta: Int, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (world != null && player != null) {
             if (player.inventory.getCurrentItem() == null) {
                 if (world.getBlock(x,y+1,z).isAir(world,x,y+1,z)) {
