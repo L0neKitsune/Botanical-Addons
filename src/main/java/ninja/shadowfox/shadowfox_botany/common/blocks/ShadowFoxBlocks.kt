@@ -8,6 +8,7 @@ import net.minecraftforge.oredict.OreDictionary
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.*
+import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.lightning_oak.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.*
 
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.*

@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees
+package ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.lightning_oak
 
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.common.eventhandler.SubscribeEvent

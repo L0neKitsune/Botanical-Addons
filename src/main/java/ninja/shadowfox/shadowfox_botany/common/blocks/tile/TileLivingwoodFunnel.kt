@@ -316,7 +316,7 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
         val itemstack = p_145892_1_.getStackInSlot(p_145892_2_)
 
         if (itemstack != null && canPullItem(p_145892_1_, itemstack, p_145892_2_, p_145892_3_)) {
-            if (itemstack.itemInFrames()){
+            if (itemstack.itemInFrames()) {
 
                 val itemstack1 = itemstack.copy()
                 val itemstack2 = inventory.addItemToSide(p_145892_1_.decrStackSize(p_145892_2_, 1), -1)
@@ -333,7 +333,7 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
         return false
     }
 
-    private fun ItemStack.itemInFrames(): Boolean{
+    private fun ItemStack.itemInFrames(): Boolean {
         var frameItems: MutableList<ItemStack> = arrayListOf()
         val var17 = intArrayOf(3, 4, 2, 5)
         for (i in LibMisc.CARDINAL_DIRECTIONS) {
@@ -347,8 +347,8 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
                 }
             }
         }
-        if(frameItems.isEmpty()) return true
-        for(i in frameItems){
+        if (frameItems.isEmpty()) return true
+        for (i in frameItems) {
             if (this.item === i.item && this.itemDamage == i.itemDamage) return true
         }
 
@@ -380,31 +380,40 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
     }
 
     fun renderHUD(mc: Minecraft, res: ScaledResolution) {
-        val item = getStackInSlot(0)
-        if(item != null && item.stackSize > 0) {
+        if (getStackInSlot(0) != null && getStackInSlot(0)!!.stackSize > 0 ) {
+            net.minecraft.client.renderer.RenderHelper.enableGUIStandardItemLighting()
+
             val xc = res.scaledWidth / 2.0
             val yc = res.scaledHeight / 2.0
             GL11.glTranslated(xc, yc, 0.0)
-            RenderItem.getInstance().renderItemIntoGUI(mc.fontRenderer, mc.renderEngine, item, 0, 0)
+            RenderItem.getInstance().renderItemIntoGUI(mc.fontRenderer, mc.renderEngine, getStackInSlot(0), 0, 0)
             GL11.glTranslated(-xc, -yc, 0.0)
+
+            net.minecraft.client.renderer.RenderHelper.disableStandardItemLighting()
         }
     }
 
     override fun decrStackSize(slot: Int, par2: Int): ItemStack? {
-        if (this.inventory[slot] != null) {
+        if (inventory[slot] != null) {
+
+            if (!worldObj.isRemote) {
+                worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord)
+            }
+
             val itemstack: ItemStack
 
-            if (this.inventory[slot]!!.stackSize <= par2) {
-                itemstack = this.inventory[slot]!!
-                this.inventory[slot] = null
+            if (inventory[slot]!!.stackSize <= par2) {
+                itemstack = inventory[slot]!!
+                inventory[slot] = null
+                markDirty()
                 return itemstack
             } else {
-                itemstack = this.inventory[slot]!!.splitStack(par2)
-
-                if (this.inventory[slot]!!.stackSize == 0) {
-                    this.inventory[slot] = null
+                itemstack = inventory[slot]!!.splitStack(par2)
+                if (inventory[slot]!!.stackSize == 0) {
+                    inventory[slot] = null
                 }
 
+                this.markDirty()
                 return itemstack
             }
         } else {
@@ -473,8 +482,12 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
     override fun getXPos(): Double = xCoord.toDouble()
     override fun getYPos(): Double = yCoord.toDouble()
     override fun getZPos(): Double = zCoord.toDouble()
-    override fun openInventory() { }
-    override fun closeInventory() {}
+    override fun openInventory() {
+    }
+
+    override fun closeInventory() {
+    }
+
     override fun getInventoryStackLimit(): Int = 1
     override fun canUpdate(): Boolean = true
     override fun isItemValidForSlot(par1: Int, par2ItemStack: ItemStack): Boolean = true

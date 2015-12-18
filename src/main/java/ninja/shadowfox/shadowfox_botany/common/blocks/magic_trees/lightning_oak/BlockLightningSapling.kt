@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees
+package ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.lightning_oak
 
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
@@ -7,6 +7,7 @@ import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.world.World
 import net.minecraft.world.gen.feature.WorldGenerator
+import net.minecraftforge.event.terraingen.TerrainGen
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.BlockColoredSapling
 import ninja.shadowfox.shadowfox_botany.common.world.HeartWoodTreeGen
@@ -19,7 +20,7 @@ class BlockLightningSapling() : BlockColoredSapling(name = "lightningSapling") {
     override fun growTree(world: World?, x: Int, y: Int, z: Int, random: Random?) {
         if(world != null) {
 
-            if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(world, random, x, y, z)) return
+            if (!TerrainGen.saplingGrowTree(world, random, x, y, z)) return
             val plantedOn: Block = world.getBlock(x, y - 1, z)
 
             if(canGrowHere(plantedOn)) {
