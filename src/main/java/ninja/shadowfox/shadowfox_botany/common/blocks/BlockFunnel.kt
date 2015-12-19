@@ -9,6 +9,7 @@ import net.minecraft.client.gui.ScaledResolution
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.Entity
 import net.minecraft.entity.item.EntityItem
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Container
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
@@ -21,9 +22,12 @@ import ninja.shadowfox.shadowfox_botany.lib.Constants
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxTileContainer
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileLivingwoodFunnel
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
+import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.wand.IWandHUD
 import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
+import vazkii.botania.api.lexicon.ILexiconable
+import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler
@@ -32,7 +36,7 @@ import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.EntityRenderer
 
 
-class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood), IWandHUD {
+class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood), IWandHUD, ILexiconable {
     private val random = Random()
     public lateinit var top_icon: IIcon
     public lateinit var inside_icon: IIcon
@@ -426,5 +430,10 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
 
             return true
         }
+
+    }
+
+    override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
+        return LexiconRegistry.livingwoodFunnel
     }
 }
