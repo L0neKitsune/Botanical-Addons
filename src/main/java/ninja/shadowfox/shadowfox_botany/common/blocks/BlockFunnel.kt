@@ -8,7 +8,6 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.ScaledResolution
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.inventory.Container
 import net.minecraft.item.ItemStack
@@ -28,24 +27,25 @@ import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
 import java.util.*
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler
-import net.minecraft.block.BlockHopper
 import net.minecraft.client.renderer.RenderBlocks
 import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.EntityRenderer
 
-/**
- * Created by l0nekitsune on 12/11/15.
- */
+
 class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood), IWandHUD {
     private val random = Random()
     public lateinit var top_icon: IIcon
+    public lateinit var inside_icon: IIcon
+    public lateinit var outside_icon: IIcon
 
     companion object {
         @SideOnly(Side.CLIENT)
         fun getHopperIcon(string: String): IIcon? {
-            if (string == "hopper_top") return (ShadowFoxBlocks.livingwoodFunnel as BlockFunnel).top_icon
-
-            return BotaniaBlocks.livingwood.getIcon(0, 0)
+            when (string) {
+                "funnel_top" -> return (ShadowFoxBlocks.livingwoodFunnel as BlockFunnel).top_icon
+                "funnel_inside" -> return (ShadowFoxBlocks.livingwoodFunnel as BlockFunnel).inside_icon
+                else -> return (ShadowFoxBlocks.livingwoodFunnel as BlockFunnel).outside_icon
+            }
         }
 
         fun getDirectionFromMetadata(meta: Int): Int = meta and 7
@@ -202,7 +202,7 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
     @SideOnly(Side.CLIENT)
     override fun getIcon(side: Int, meta: Int): IIcon {
         if (side == 1) return top_icon
-        return BotaniaBlocks.livingwood.getIcon(0, 0)
+        return outside_icon
     }
 
     /**
@@ -222,7 +222,9 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
 
     @SideOnly(Side.CLIENT)
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        top_icon = IconHelper.forName(par1IconRegister, "hopper_top")
+        top_icon = IconHelper.forName(par1IconRegister, "funnel_top")
+        inside_icon = IconHelper.forName(par1IconRegister, "funnel_inside")
+        outside_icon = IconHelper.forName(par1IconRegister, "funnel_outside")
     }
 
     fun getTile(world: IBlockAccess, x: Int, y: Int, z: Int): TileLivingwoodFunnel? {
@@ -322,8 +324,8 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
                 tessellator.setColorOpaque_F(f, f1, f2)
             }
 
-            val iicon = BlockFunnel.getHopperIcon("hopper_outside")
-            val iicon1 = BlockFunnel.getHopperIcon("hopper_inside")
+            val iicon = BlockFunnel.getHopperIcon("funnel_outside")
+            val iicon1 = BlockFunnel.getHopperIcon("funnel_inside")
             f1 = 0.125f
 
             if (flag) {
