@@ -156,7 +156,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         }
 
         var recipe = getValidRecipe()
-        var recipeItems = ArrayList<Any>()
+        var recipeItems = ArrayList<Any?>()
         if (recipe != null) recipeItems = ArrayList(recipe.inputs)
 
 
@@ -168,15 +168,16 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
                 val m = 0.03f + Math.random().toFloat() * 0.015f
                 
                 for (rItem in recipeItems) {
-                    if (stack.itemEquals(rItem)) {
-                        if (mana > 0) { 
-                            if (stack.item is ItemBlock) worldObj.spawnParticle("blockcrack_${Item.getIdFromItem(stack.item)}_${stack.itemDamage}", it.xCoord.toDouble() + .5,  it.yCoord + 1.0, it.zCoord.toDouble() + .5, (this.xCoord.toDouble()-it.xCoord.toDouble())*8.0, 0.1, (this.zCoord.toDouble()-it.zCoord.toDouble())*8.0)
-                            else worldObj.spawnParticle("iconcrack_${Item.getIdFromItem(stack.item)}_${stack.itemDamage}", it.xCoord.toDouble() + .5,  it.yCoord + 1.0, it.zCoord.toDouble() + .5, (this.xCoord.toDouble()-it.xCoord.toDouble())/8.0, 0.1, (this.zCoord.toDouble()-it.zCoord.toDouble())/8.0)
-                            Botania.proxy.wispFX(this.worldObj, it.xCoord.toDouble() + .5, it.yCoord + 3.toDouble() + .5, it.zCoord.toDouble() + .5, 1.0f, 1.0f, 1.0f, s, -m)
-                        }  
-                        recipeItems.remove(rItem)
-                        break
-                    }
+                    if (rItem != null)
+                        if (stack.itemEquals(rItem)) {
+                            if (mana > 0) { 
+                                if (stack.item is ItemBlock) worldObj.spawnParticle("blockcrack_${Item.getIdFromItem(stack.item)}_${stack.itemDamage}", it.xCoord.toDouble() + .5,  it.yCoord + 1.0, it.zCoord.toDouble() + .5, (this.xCoord.toDouble()-it.xCoord.toDouble())*8.0, 0.1, (this.zCoord.toDouble()-it.zCoord.toDouble())*8.0)
+                                else worldObj.spawnParticle("iconcrack_${Item.getIdFromItem(stack.item)}_${stack.itemDamage}", it.xCoord.toDouble() + .5,  it.yCoord + 1.0, it.zCoord.toDouble() + .5, (this.xCoord.toDouble()-it.xCoord.toDouble())/8.0, 0.1, (this.zCoord.toDouble()-it.zCoord.toDouble())/8.0)
+                                Botania.proxy.wispFX(this.worldObj, it.xCoord.toDouble() + .5, it.yCoord + 3.toDouble() + .5, it.zCoord.toDouble() + .5, 1.0f, 1.0f, 1.0f, s, -m)
+                            }  
+                            recipeItems.remove(rItem)
+                            break
+                        }
                 }
             }
         }
@@ -361,15 +362,16 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         var recipeItems = ArrayList(recipe.inputs)
 
         itemDisplays {
-            for(rItem in recipeItems) {
-                if (it.getStackInSlot(0)?.itemEquals(rItem) ?: false) {
-                    it.apply {
-                        setInventorySlotContents(0, null)
-                        invalidate()
+            for(rItem: Any? in recipeItems) {
+                if (rItem != null)
+                    if (it.getStackInSlot(0)?.itemEquals(rItem) ?: false) {
+                        it.apply {
+                            setInventorySlotContents(0, null)
+                            invalidate()
+                        }
+                        recipeItems.remove(rItem)
+                        break
                     }
-                    recipeItems.remove(rItem)
-                    break
-                }
             }
         }
     }
