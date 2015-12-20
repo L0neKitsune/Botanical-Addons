@@ -5,6 +5,7 @@ import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
+import net.minecraft.block.BlockBush
 import net.minecraft.block.IGrowable
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
@@ -22,6 +23,8 @@ import net.minecraftforge.common.IPlantable
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.world.SimpleTreeGen
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
@@ -30,7 +33,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 import kotlin.properties.Delegates
 
-public open class BlockColoredSapling(val name: String = "irisSapling") : ShadowFoxBlockMod(Material.plants), IGrowable, IPlantable, ILexiconable, IFuelHandler {
+public open class BlockColoredSapling(val name: String = "irisSapling") : BlockBush(Material.plants), IGrowable, ILexiconable, IFuelHandler {
 
     internal var icon: IIcon by Delegates.notNull()
 
@@ -40,7 +43,14 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : Shadow
         stepSound = Block.soundTypeGrass
         this.setBlockName(name)
 
+        setCreativeTab(ShadowFoxCreativeTab)
+
         GameRegistry.registerFuelHandler(this)
+    }
+
+    override fun setBlockName(par1Str: String): Block {
+        GameRegistry.registerBlock(this, ItemBlockMod::class.java, par1Str)
+        return super.setBlockName(par1Str)
     }
 
     @SideOnly(Side.CLIENT)
@@ -52,6 +62,7 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : Shadow
         return null
     }
 
+    @SideOnly(Side.CLIENT)
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {
         icon = IconHelper.forBlock(par1IconRegister, this)
     }
@@ -94,7 +105,7 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : Shadow
         checkAndDropBlock(world, x, y, z)
     }
 
-    fun checkAndDropBlock(world: World?, x: Int, y: Int, z: Int){
+    override fun checkAndDropBlock(world: World?, x: Int, y: Int, z: Int){
         if (world != null && !this.canBlockStay(world, x, y, z)) {
             this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0)
             world.setBlock(x, y, z, Block.getBlockById(0), 0, 2)
