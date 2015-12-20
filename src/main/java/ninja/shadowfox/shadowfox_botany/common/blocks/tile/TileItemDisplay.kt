@@ -108,8 +108,8 @@ class TileItemDisplay() : ShadowFoxTile(), ISidedInventory {
 
     override fun canUpdate(): Boolean = true
 
-    override fun isItemValidForSlot(par1: Int, par2ItemStack: ItemStack): Boolean = true
+    override fun isItemValidForSlot(par1: Int, par2ItemStack: ItemStack?): Boolean = true
     override fun getAccessibleSlotsFromSide(par1: Int): IntArray = slots
-    override fun canInsertItem(par1: Int, par2ItemStack: ItemStack, par3: Int): Boolean = getStackInSlot(par1) == null
-    override fun canExtractItem(par1: Int, par2ItemStack: ItemStack, par3: Int): Boolean = true
+    override fun canInsertItem(par1: Int, par2ItemStack: ItemStack?, par3: Int): Boolean = getStackInSlot(par1) == null
+    override fun canExtractItem(par1: Int, par2ItemStack: ItemStack?, par3: Int): Boolean = true
 }
