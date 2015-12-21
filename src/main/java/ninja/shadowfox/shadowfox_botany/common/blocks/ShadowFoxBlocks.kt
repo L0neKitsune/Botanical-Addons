@@ -9,6 +9,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.base.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.lightning_oak.*
+import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.nether_oak.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.*
 
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.*
@@ -69,6 +70,15 @@ public object ShadowFoxBlocks {
     public var invisibleFlame: Block
     public var rainbowFlame: Block
     public var livingwoodFunnel: Block
+    public var schemaBlock: Block
+
+    public var netherSapling: Block
+    public var netherWood: Block
+    public var netherLeaves: Block
+    public var netherPlanks: Block
+    public var netherSlabs: Block
+    public var netherSlabsFull: Block
+    public var netherStairs: Block
 
     public var barrier: Block
 
@@ -126,9 +136,18 @@ public object ShadowFoxBlocks {
         lightningStairs = BlockLightningWoodStairs()
         livingwoodFunnel = BlockFunnel()
 
+        netherSapling = BlockNetherSapling()
+        netherWood = BlockNetherWood()
+        netherLeaves = BlockNetherLeaves()
+        netherPlanks = BlockNetherPlanks()
+        netherSlabs = BlockNetherWoodSlab(false)
+        netherSlabsFull = BlockNetherWoodSlab(true)
+        netherStairs = BlockNetherWoodStairs()
+
         barrier = BlockBarrier()
 
         kindling = BlockKindling()
+        schemaBlock = BlockSchema()
 
         register()
         initOreDict()
