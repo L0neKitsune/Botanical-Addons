@@ -1,6 +1,8 @@
 package ninja.shadowfox.shadowfox_botany.api.trees;
 
 import net.minecraft.block.Block;
+import java.util.ArrayList;
+import java.util.List;
 
 public class IridescentSaplingBaseVariant implements IIridescentSaplingVariant {
     public Block soil;
@@ -29,6 +31,13 @@ public class IridescentSaplingBaseVariant implements IIridescentSaplingVariant {
 
     public IridescentSaplingBaseVariant(Block soil, Block wood, Block leaves, int meta) {
         this(soil, wood, leaves, meta, meta);
+    }
+
+    @Override
+    public List<Block> getAcceptableSoils() {
+        List<Block> soils = new ArrayList();
+        soils.add(this.soil);
+        return soils;
     }
 
     @Override

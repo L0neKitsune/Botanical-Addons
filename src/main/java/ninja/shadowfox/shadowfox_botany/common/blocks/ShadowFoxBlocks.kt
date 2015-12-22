@@ -169,9 +169,9 @@ public object ShadowFoxBlocks {
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
 
         iridescentTree0 = ShadowFoxAPI.addTreeVariant(coloredDirtBlock, irisWood0, irisLeaves0, 0, 3);
-        iridescentTree1 = ShadowFoxAPI.addTreeVariant(coloredDirtBlock, irisWood0, irisLeaves0, 4, 7);
-        iridescentTree2 = ShadowFoxAPI.addTreeVariant(coloredDirtBlock, irisWood0, irisLeaves0, 8, 11, 8);
-        iridescentTree3 = ShadowFoxAPI.addTreeVariant(coloredDirtBlock, irisWood0, irisLeaves0, 12, 15, 8);
+        iridescentTree1 = ShadowFoxAPI.addTreeVariant(coloredDirtBlock, irisWood1, irisLeaves0, 4, 7);
+        iridescentTree2 = ShadowFoxAPI.addTreeVariant(coloredDirtBlock, irisWood2, irisLeaves1, 8, 11, 8);
+        iridescentTree3 = ShadowFoxAPI.addTreeVariant(coloredDirtBlock, irisWood3, irisLeaves1, 12, 15, 8);
         bifrostTree = ShadowFoxAPI.addTreeVariant(rainbowDirtBlock, rainbowWood, rainbowLeaves);
     }
 

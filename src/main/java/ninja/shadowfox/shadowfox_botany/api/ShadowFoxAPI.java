@@ -39,4 +39,19 @@ public class ShadowFoxAPI {
     public static IIridescentSaplingVariant addTreeVariant(Block soil, Block wood, Block leaves, int metaMin, int metaMax, int metaShift) {
         return addTreeVariant(new IridescentSaplingBaseVariant(soil, wood, leaves, metaMin, metaMax, metaShift));
     }
+
+    public static List<Block> iridescentSoils() {
+        List<Block> soils = new ArrayList();
+        for (IIridescentSaplingVariant variant : treeVariants) {
+            soils.addAll(variant.getAcceptableSoils());
+        }
+        return soils;
+    }
+
+    public static IIridescentSaplingVariant getTreeVariant(Block soil, int meta) {
+        for (IIridescentSaplingVariant variant : treeVariants) {
+            if (variant.matchesSoil(soil, meta)) return variant;
+        }
+        return null;
+    }
 }
