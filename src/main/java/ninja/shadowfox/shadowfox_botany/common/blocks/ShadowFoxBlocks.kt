@@ -5,6 +5,8 @@ import net.minecraft.init.Blocks
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
+import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
+import ninja.shadowfox.shadowfox_botany.api.trees.IIridescentSaplingVariant
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.*
@@ -84,6 +86,12 @@ public object ShadowFoxBlocks {
 
     public var kindling: Block
 
+    public var iridescentTree0: IIridescentSaplingVariant
+    public var iridescentTree1: IIridescentSaplingVariant
+    public var iridescentTree2: IIridescentSaplingVariant
+    public var iridescentTree3: IIridescentSaplingVariant
+    public var bifrostTree: IIridescentSaplingVariant
+
     val WOOD: Array<String> = arrayOf("irisWoodWhite", "irisWoodOrange", "irisWoodMagenta", "irisWoodLightBlue", "irisWoodYellow", "irisWoodLime", "irisWoodPink", "irisWoodGray", "irisWoodLightGray", "irisWoodCyan", "irisWoodPurple", "irisWoodBlue", "irisWoodBrown", "irisWoodGreen", "irisWoodRed", "irisWoodBlack")
     val LEAVES: Array<String> = arrayOf("irisLeavesWhite", "irisLeavesOrange", "irisLeavesMagenta", "irisLeavesLightBlue", "irisLeavesYellow", "irisLeavesLime", "irisLeavesPink", "irisLeavesGray", "irisLeavesLightGray", "irisLeavesCyan", "irisLeavesPurple", "irisLeavesBlue", "irisLeavesBrown", "irisLeavesGreen", "irisLeavesRed", "irisLeavesBlack")
 
@@ -159,6 +167,12 @@ public object ShadowFoxBlocks {
         GameRegistry.registerTileEntity(TileLivingwoodFunnel::class.java, "shadowfox_botany:livingwoodFunnel")
 
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
+
+        iridescentTree0 = ShadowFoxAPI.addTreeVariant(coloredDirtBlock, irisWood0, irisLeaves0, 0, 3);
+        iridescentTree1 = ShadowFoxAPI.addTreeVariant(coloredDirtBlock, irisWood0, irisLeaves0, 4, 7);
+        iridescentTree2 = ShadowFoxAPI.addTreeVariant(coloredDirtBlock, irisWood0, irisLeaves0, 8, 11, 8);
+        iridescentTree3 = ShadowFoxAPI.addTreeVariant(coloredDirtBlock, irisWood0, irisLeaves0, 12, 15, 8);
+        bifrostTree = ShadowFoxAPI.addTreeVariant(rainbowDirtBlock, rainbowWood, rainbowLeaves);
     }
 
     fun registerBurnables() {
