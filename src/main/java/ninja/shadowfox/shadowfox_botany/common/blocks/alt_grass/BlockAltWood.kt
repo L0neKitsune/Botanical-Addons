@@ -70,11 +70,11 @@ public class BlockAltWood(val set: Int) : ShadowFoxRotatedPillar(Material.wood),
     }
 
     override fun getTopIcon(meta: Int): IIcon {
-        return iconsTop[(set * 4) + meta]
+        return iconsTop[meta]
     }
 
     override fun getSideIcon(meta: Int): IIcon {
-        return iconsSide[(set * 4) + meta]
+        return iconsSide[meta]
     }
 
     override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {

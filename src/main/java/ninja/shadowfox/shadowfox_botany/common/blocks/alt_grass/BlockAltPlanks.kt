@@ -43,8 +43,8 @@ public class BlockAltPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.mate
         GameRegistry.registerFuelHandler(this)
     }
 
-    override fun registerBlockIcons(iconRegister: IIconRegister) {
-        icons = Array(6, { i -> IconHelper.forBlock(iconRegister, this, "${ALT_TYPES[i]}") })
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
+        icons = Array(6, { i -> IconHelper.forBlock(par1IconRegister, this, "${ALT_TYPES[i]}") })
     }
 
     override fun getIcon(side: Int, meta: Int): IIcon {

@@ -17,6 +17,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.*
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.multiblock.MultiblockSet
+import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
 
 public object ShadowFoxBlocks {
 
@@ -82,8 +83,8 @@ public object ShadowFoxBlocks {
     public var netherSlabsFull: Block
     public var netherStairs: Block
 
+    public var altWood0: Block
     public var altWood1: Block
-    public var altWood2: Block
     public var altLeaves: Block
     public var altPlanks: Block
     public var altSlabs: Array<Block>
@@ -99,6 +100,8 @@ public object ShadowFoxBlocks {
     public var iridescentTree2: IIridescentSaplingVariant
     public var iridescentTree3: IIridescentSaplingVariant
     public var bifrostTree: IIridescentSaplingVariant
+    public var altTree0: IIridescentSaplingVariant
+    public var altTree1: IIridescentSaplingVariant
 
     val WOOD: Array<String> = arrayOf("irisWoodWhite", "irisWoodOrange", "irisWoodMagenta", "irisWoodLightBlue", "irisWoodYellow", "irisWoodLime", "irisWoodPink", "irisWoodGray", "irisWoodLightGray", "irisWoodCyan", "irisWoodPurple", "irisWoodBlue", "irisWoodBrown", "irisWoodGreen", "irisWoodRed", "irisWoodBlack")
     val LEAVES: Array<String> = arrayOf("irisLeavesWhite", "irisLeavesOrange", "irisLeavesMagenta", "irisLeavesLightBlue", "irisLeavesYellow", "irisLeavesLime", "irisLeavesPink", "irisLeavesGray", "irisLeavesLightGray", "irisLeavesCyan", "irisLeavesPurple", "irisLeavesBlue", "irisLeavesBrown", "irisLeavesGreen", "irisLeavesRed", "irisLeavesBlack")
@@ -159,8 +162,8 @@ public object ShadowFoxBlocks {
         netherSlabsFull = BlockNetherWoodSlab(true)
         netherStairs = BlockNetherWoodStairs()
 
-        altWood1 = BlockAltWood(0)
-        altWood2 = BlockAltWood(1)
+        altWood0 = BlockAltWood(0)
+        altWood1 = BlockAltWood(1)
         altLeaves = BlockAltLeaves()
         altPlanks = BlockAltPlanks()
 
@@ -189,6 +192,8 @@ public object ShadowFoxBlocks {
         iridescentTree2 = ShadowFoxAPI.addTreeVariant(coloredDirtBlock, irisWood2, irisLeaves1, 8, 11, 8)
         iridescentTree3 = ShadowFoxAPI.addTreeVariant(coloredDirtBlock, irisWood3, irisLeaves1, 12, 15, 8)
         bifrostTree = ShadowFoxAPI.addTreeVariant(rainbowDirtBlock, rainbowWood, rainbowLeaves)
+        altTree0 = ShadowFoxAPI.addTreeVariant(BotaniaBlocks.altGrass, altWood0, altLeaves, 0, 3)
+        altTree1 = ShadowFoxAPI.addTreeVariant(BotaniaBlocks.altGrass, altWood1, altLeaves, 4, 5)
     }
 
     fun registerBurnables() {
