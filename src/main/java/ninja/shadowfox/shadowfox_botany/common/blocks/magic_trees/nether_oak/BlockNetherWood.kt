@@ -35,6 +35,9 @@ public class BlockNetherWood() : ShadowFoxRotatedPillar(Material.wood), ILexicon
     init {
         setBlockName("netherWood")
         isBlockContainer = true
+
+        blockHardness = 2F
+
         if (FMLLaunchHandler.side().isClient)
             MinecraftForge.EVENT_BUS.register(this)
     }

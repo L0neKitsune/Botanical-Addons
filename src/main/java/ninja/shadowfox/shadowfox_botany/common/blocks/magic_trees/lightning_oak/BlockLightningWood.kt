@@ -33,6 +33,9 @@ public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITile
     init {
         setBlockName("lightningWood")
         isBlockContainer = true
+
+        blockHardness = 2F
+
         if (FMLLaunchHandler.side().isClient())
             MinecraftForge.EVENT_BUS.register(this)
     }
