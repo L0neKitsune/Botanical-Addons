@@ -14,14 +14,11 @@ import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
-import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxRotatedPillar
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileLightningRod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.client.render.block.InterpolatedIcon
 import vazkii.botania.api.lexicon.ILexiconable
@@ -33,7 +30,7 @@ public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITile
     init {
         setBlockName("lightningWood")
         isBlockContainer = true
-        blockHardness = 2F
+        blockHardness = 2f
 
         if (FMLLaunchHandler.side().isClient)
             MinecraftForge.EVENT_BUS.register(this)
