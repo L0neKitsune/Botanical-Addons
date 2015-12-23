@@ -25,7 +25,9 @@ public object ShadowFoxBlocks {
         Blocks.fire.setFireInfo(block, encouragement, flammablility)
     }
     fun setBurnable(blocks: Array<Block>, encouragement: Int, flammablility: Int) {
-        for (i in blocks) Blocks.fire.setFireInfo(i, encouragement, flammablility)
+        for (i in blocks)
+            if (Block.getIdFromBlock(i) != -1)
+                Blocks.fire.setFireInfo(i, encouragement, flammablility)
     }
 
     public var coloredDirtBlock: Block
