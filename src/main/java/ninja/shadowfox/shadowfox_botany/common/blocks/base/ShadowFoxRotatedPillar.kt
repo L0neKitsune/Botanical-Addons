@@ -40,7 +40,7 @@ abstract class ShadowFoxRotatedPillar(mat: Material) : ShadowFoxBlockMod(mat), I
     @SideOnly(Side.CLIENT)
     override fun getIcon(side: Int, meta: Int): IIcon {
         val k = meta and 12
-        return if (k == 0 && (side == 1 || side == 0)) this.getTopIcon() else (if (k == 4 && (side == 5 || side == 4)) this.getTopIcon() else (if (k == 8 && (side == 2 || side == 3)) this.getTopIcon() else this.getSideIcon()))
+        return if (k == 0 && (side == 1 || side == 0)) this.getTopIcon(meta and 3) else (if (k == 4 && (side == 5 || side == 4)) this.getTopIcon(meta and 3) else (if (k == 8 && (side == 2 || side == 3)) this.getTopIcon(meta and 3) else this.getSideIcon(meta and 3)))
     }
 
     override fun quantityDropped(random: Random): Int = 1
@@ -48,8 +48,8 @@ abstract class ShadowFoxRotatedPillar(mat: Material) : ShadowFoxBlockMod(mat), I
     override fun damageDropped(meta: Int): Int = meta and 3
     override fun getRenderType(): Int = 31
 
-    @SideOnly(Side.CLIENT) fun getSideIcon(): IIcon = iconSide
-    @SideOnly(Side.CLIENT) fun getTopIcon(): IIcon = iconTop
+    @SideOnly(Side.CLIENT) open fun getSideIcon(meta: Int): IIcon = iconSide
+    @SideOnly(Side.CLIENT) open fun getTopIcon(meta: Int): IIcon = iconTop
 
     override fun createStackedBlock(meta: Int): ItemStack {
         return ItemStack(Item.getItemFromBlock(this), 1, meta and 3)

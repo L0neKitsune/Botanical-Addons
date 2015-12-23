@@ -19,9 +19,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraft.world.gen.feature.WorldGenerator
 import net.minecraftforge.common.EnumPlantType
-import net.minecraftforge.common.IPlantable
 import net.minecraftforge.common.util.ForgeDirection
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod

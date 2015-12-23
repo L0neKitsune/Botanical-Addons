@@ -4,13 +4,10 @@ import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 
 import net.minecraft.client.renderer.texture.IIconRegister
-import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
-import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.IIcon
-import net.minecraft.util.MovingObjectPosition
 import net.minecraft.util.StatCollector
 import net.minecraft.world.World
 
@@ -37,7 +34,6 @@ class ItemRainbowLightRod : ItemMod("rainbowLightRod"), IManaUsingItem, IPhantom
         setMaxStackSize(1)
     }
 
-    @SideOnly(Side.CLIENT)
     var overlayIcon: IIcon by Delegates.notNull()
 
     override fun requiresMultipleRenderPasses() : Boolean {

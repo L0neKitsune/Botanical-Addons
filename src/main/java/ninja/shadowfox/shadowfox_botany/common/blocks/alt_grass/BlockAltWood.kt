@@ -1,37 +1,37 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.lightning_oak
+package ninja.shadowfox.shadowfox_botany.common.blocks.alt_grass
 
 import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import cpw.mods.fml.relauncher.FMLLaunchHandler
 import net.minecraftforge.common.MinecraftForge
-import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraft.block.Block
-import net.minecraft.block.ITileEntityProvider
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
+import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxRotatedPillar
-import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileLightningRod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
-import vazkii.botania.client.render.block.InterpolatedIcon
+import ninja.shadowfox.shadowfox_botany.lib.ALT_TYPES
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
-public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITileEntityProvider, ILexiconable {
+public class BlockAltWood(val set: Int) : ShadowFoxRotatedPillar(Material.wood), ILexiconable {
+
+    lateinit protected var iconsTop : Array<IIcon>
+    lateinit protected var iconsSide : Array<IIcon>
 
     init {
-        setBlockName("lightningWood")
+        setBlockName("altWood$set")
         isBlockContainer = true
         blockHardness = 2F
 
@@ -56,47 +56,45 @@ public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITile
                 }
         }
         super.breakBlock(world, x, y, z, block, fortune)
-        world.removeTileEntity(x, y, z)
     }
 
-    override fun onBlockEventReceived(world: World?, x: Int, y: Int, z: Int, event: Int, eventArg: Int): Boolean {
-        super.onBlockEventReceived(world, x, y, z, event, eventArg)
-        val tileentity = world!!.getTileEntity(x, y, z)
-        return if (tileentity != null) tileentity.receiveClientEvent(event, eventArg) else false
-    }
-
-    override fun createNewTileEntity(world: World?, meta: Int): TileEntity? {
-        return TileLightningRod()
-    }
-
-    public fun isHeartWood(meta:Int) : Boolean {
-        return meta and 3 == 1
-    }
+    override fun isFireSource(world: World?, x: Int, y: Int, z: Int, side: ForgeDirection?): Boolean = true
+    override fun isFlammable(world: IBlockAccess?, x: Int, y: Int, z: Int, face: ForgeDirection?): Boolean = false
+    override fun getFireSpreadSpeed(world: IBlockAccess?, x: Int, y: Int, z: Int, face: ForgeDirection?): Int = 0
 
     override fun damageDropped(meta: Int): Int = 0
     override fun quantityDropped(random: Random): Int = 1
-
-    override fun hasTileEntity(metadata: Int): Boolean = isHeartWood(metadata)
-    override fun createTileEntity(world: World?, metadata: Int): TileEntity? = TileLightningRod()
 
     override fun register(par1Str: String) {
         GameRegistry.registerBlock(this, ItemBlockMod::class.java, par1Str)
     }
 
-    @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
+    override fun getTopIcon(meta: Int): IIcon {
+        return iconsTop[(set * 4) + meta]
+    }
 
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 0) {
-            var icon = InterpolatedIcon("shadowfox_botany:lightningWood")
-            if(event.map.setTextureEntry("shadowfox_botany:lightningWood", icon))
-                this.iconSide = icon
-            var iconTop = InterpolatedIcon("shadowfox_botany:lightningWood_top")
-            if(event.map.setTextureEntry("shadowfox_botany:lightningWood_top", iconTop))
-                this.iconTop = iconTop
+    override fun getSideIcon(meta: Int): IIcon {
+        return iconsSide[(set * 4) + meta]
+    }
+
+    override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {
+        if(list != null && item != null) {
+            if (set == 0) {
+                list.add(ItemStack(this, 1, 0))
+                list.add(ItemStack(this, 1, 1))
+                list.add(ItemStack(this, 1, 2))
+                list.add(ItemStack(this, 1, 3))
+            } else {
+                list.add(ItemStack(this, 1, 0))
+                list.add(ItemStack(this, 1, 1))
+            }
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
+        iconsTop = Array(if (set == 0 ) 4 else 2, { i -> IconHelper.forName(par1IconRegister, "altOak${ALT_TYPES[(set * 4) + i]}_top")})
+        iconsSide = Array(if (set == 0 ) 4 else 2, { i -> IconHelper.forName(par1IconRegister, "altOak${ALT_TYPES[(set * 4) + i]}_top")})
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {

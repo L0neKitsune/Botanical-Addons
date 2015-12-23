@@ -56,7 +56,6 @@ open class ItemIridescent(name: String) : Item() {
         setUnlocalizedName(name)
     }
 
-    @SideOnly(Side.CLIENT)
     var overlayIcon: IIcon by Delegates.notNull()
 
     override fun requiresMultipleRenderPasses() : Boolean {

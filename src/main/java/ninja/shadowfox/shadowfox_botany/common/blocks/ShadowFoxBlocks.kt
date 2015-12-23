@@ -5,6 +5,7 @@ import net.minecraft.init.Blocks
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
+import ninja.shadowfox.shadowfox_botany.common.blocks.alt_grass.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.*
@@ -80,6 +81,14 @@ public object ShadowFoxBlocks {
     public var netherSlabsFull: Block
     public var netherStairs: Block
 
+    public var altWood1: Block
+    public var altWood2: Block
+    public var altLeaves: Block
+    public var altPlanks: Block
+    public var altSlabs: Array<Block>
+    public var altSlabsFull: Array<Block>
+    public var altStairs: Array<Block>
+
     public var barrier: Block
 
     public var kindling: Block
@@ -110,12 +119,11 @@ public object ShadowFoxBlocks {
         rainbowPlanks = BlockRainbowPlanks()
 
         coloredSlabs = Array<Block>(16 , {i -> BlockColoredWoodSlab(false, i) })
-        rainbowSlabs = BlockRainbowWoodSlab(false)
-
         coloredSlabsFull = Array<Block>(16 , {i -> BlockColoredWoodSlab(true, i) })
-        rainbowSlabsFull = BlockRainbowWoodSlab(true)
-
         coloredStairs = Array<Block>(16 , {i -> BlockColoredWoodStairs(i) })
+
+        rainbowSlabsFull = BlockRainbowWoodSlab(true)
+        rainbowSlabs = BlockRainbowWoodSlab(false)
         rainbowStairs = BlockRainbowWoodStairs()
 
         irisTallGrass0 = BlockColoredDoubleGrass(0)
@@ -143,6 +151,15 @@ public object ShadowFoxBlocks {
         netherSlabs = BlockNetherWoodSlab(false)
         netherSlabsFull = BlockNetherWoodSlab(true)
         netherStairs = BlockNetherWoodStairs()
+
+        altWood1 = BlockAltWood(0)
+        altWood2 = BlockAltWood(1)
+        altLeaves = BlockAltLeaves()
+        altPlanks = BlockAltPlanks()
+
+        altSlabs = Array<Block>(6 , {i -> BlockAltWoodSlab(false, i) })
+        altSlabsFull = Array<Block>(6 , {i -> BlockAltWoodSlab(true, i) })
+        altStairs = Array<Block>(6 , {i -> BlockAltWoodStairs(i) })
 
         barrier = BlockBarrier()
 
