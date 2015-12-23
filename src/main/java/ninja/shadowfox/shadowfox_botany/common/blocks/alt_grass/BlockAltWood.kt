@@ -58,10 +58,6 @@ public class BlockAltWood(val set: Int) : ShadowFoxRotatedPillar(Material.wood),
         super.breakBlock(world, x, y, z, block, fortune)
     }
 
-    override fun isFireSource(world: World?, x: Int, y: Int, z: Int, side: ForgeDirection?): Boolean = true
-    override fun isFlammable(world: IBlockAccess?, x: Int, y: Int, z: Int, face: ForgeDirection?): Boolean = false
-    override fun getFireSpreadSpeed(world: IBlockAccess?, x: Int, y: Int, z: Int, face: ForgeDirection?): Int = 0
-
     override fun damageDropped(meta: Int): Int = 0
     override fun quantityDropped(random: Random): Int = 1
 

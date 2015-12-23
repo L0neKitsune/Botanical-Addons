@@ -24,6 +24,9 @@ public object ShadowFoxBlocks {
     fun setBurnable(block: Block, encouragement: Int, flammablility: Int) {
         Blocks.fire.setFireInfo(block, encouragement, flammablility)
     }
+    fun setBurnable(blocks: Array<Block>, encouragement: Int, flammablility: Int) {
+        for (i in blocks) Blocks.fire.setFireInfo(i, encouragement, flammablility)
+    }
 
     public var coloredDirtBlock: Block
     public var rainbowDirtBlock: Block
@@ -202,21 +205,28 @@ public object ShadowFoxBlocks {
         setBurnable(irisWood2, 5, 5)
         setBurnable(irisWood3, 5, 5)
         setBurnable(rainbowWood, 5, 5)
+        setBurnable(altWood0, 5, 5)
+        setBurnable(altWood1, 5, 5)
 
         setBurnable(coloredPlanks, 5, 20)
         setBurnable(rainbowPlanks, 5, 20)
+        setBurnable(altPlanks, 5, 20)
 
-        for (i in 0..15) setBurnable(coloredSlabs[i], 5, 20)
-        for (i in 0..15) setBurnable(coloredSlabsFull[i], 5, 20)
+        setBurnable(coloredSlabs, 5, 20)
+        setBurnable(coloredSlabsFull, 5, 20)
         setBurnable(rainbowSlabs, 5, 20)
         setBurnable(rainbowSlabsFull, 5, 20)
+        setBurnable(altSlabs, 5, 20)
+        setBurnable(altSlabsFull, 5, 20)
 
-        for (i in 0..15) setBurnable(coloredStairs[i], 5, 20)
+        setBurnable(coloredStairs, 5, 20)
         setBurnable(rainbowStairs, 5, 20)
+        setBurnable(altStairs, 5, 20)
 
         setBurnable(irisLeaves0, 30, 60)
         setBurnable(irisLeaves1, 30, 60)
         setBurnable(rainbowLeaves, 30, 60)
+        setBurnable(altLeaves, 30, 60)
 
         setBurnable(irisGrass, 60, 100)
         setBurnable(irisTallGrass0, 60, 100)
