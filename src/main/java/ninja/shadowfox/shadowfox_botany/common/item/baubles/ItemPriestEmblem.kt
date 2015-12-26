@@ -119,7 +119,7 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
     }
 
     fun addStringToTooltip(s : String, tooltip : MutableList<Any?>) {
-        tooltip!!.add(s.replace("&".toRegex(), "\u00a7"))
+        tooltip.add(s.replace("&".toRegex(), "\u00a7"))
     }
 
     override fun getIconFromDamage(dmg: Int): IIcon? {
