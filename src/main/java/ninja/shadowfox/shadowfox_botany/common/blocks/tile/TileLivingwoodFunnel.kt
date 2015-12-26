@@ -335,16 +335,12 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
 
     private fun ItemStack.itemInFrames(): Boolean {
         var frameItems: MutableList<ItemStack> = arrayListOf()
-        val var17 = intArrayOf(3, 4, 2, 5)
         for (i in LibMisc.CARDINAL_DIRECTIONS) {
             val var21 = AxisAlignedBB.getBoundingBox((xCoord + i.offsetX).toDouble(), (yCoord + i.offsetY).toDouble(), (zCoord + i.offsetZ).toDouble(), (xCoord + i.offsetX + 1).toDouble(), (yCoord + i.offsetY + 1).toDouble(), (zCoord + i.offsetZ + 1).toDouble())
             val frames = worldObj.getEntitiesWithinAABB(EntityItemFrame::class.java, var21)
             for (frame in frames) {
-                val orientation = (frame as EntityItemFrame).hangingDirection
-                if (var17[orientation] == i.ordinal) {
-                    if (frame.displayedItem != null)
-                        frameItems.add(frame.displayedItem)
-                }
+                if (frame.displayedItem != null)
+                    frameItems.add(frame.displayedItem)
             }
         }
         if (frameItems.isEmpty()) return true
