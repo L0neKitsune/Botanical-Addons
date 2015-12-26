@@ -43,7 +43,7 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : BlockS
 
         setCreativeTab(ShadowFoxCreativeTab)
 
-        // GameRegistry.registerFuelHandler(this)
+        GameRegistry.registerFuelHandler(this)
     }
 
     override fun setBlockName(par1Str: String): Block {
