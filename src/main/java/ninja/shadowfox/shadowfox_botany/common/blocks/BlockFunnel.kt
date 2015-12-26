@@ -58,6 +58,8 @@ class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood
 
     init {
         this.setBlockName("livingwoodFunnel")
+        blockHardness = 2f
+
         this.setCreativeTab(ShadowFoxCreativeTab)
         this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f)
     }
