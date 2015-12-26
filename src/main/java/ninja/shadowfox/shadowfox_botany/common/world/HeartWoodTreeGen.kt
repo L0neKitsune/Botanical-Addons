@@ -98,9 +98,5 @@ class HeartWoodTreeGen(val minTreeHeight: Int, val regWood: Block, val regMeta: 
         else return false
 
     }
-
-    fun isWood(block: Block): Boolean {
-        return block.getMaterial() == Material.wood
-    }
 }
 
