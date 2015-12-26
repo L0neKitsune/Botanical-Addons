@@ -339,8 +339,9 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
             val var21 = AxisAlignedBB.getBoundingBox((xCoord + i.offsetX).toDouble(), (yCoord + i.offsetY).toDouble(), (zCoord + i.offsetZ).toDouble(), (xCoord + i.offsetX + 1).toDouble(), (yCoord + i.offsetY + 1).toDouble(), (zCoord + i.offsetZ + 1).toDouble())
             val frames = worldObj.getEntitiesWithinAABB(EntityItemFrame::class.java, var21)
             for (frame in frames) {
-                if (frame.displayedItem != null)
-                    frameItems.add(frame.displayedItem)
+                if (frame is EntityItemFrame)
+                    if (frame.displayedItem != null)
+                        frameItems.add(frame.displayedItem)
             }
         }
         if (frameItems.isEmpty()) return true
