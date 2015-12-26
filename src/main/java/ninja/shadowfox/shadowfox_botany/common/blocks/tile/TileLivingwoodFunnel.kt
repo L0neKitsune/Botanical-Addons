@@ -294,13 +294,15 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
             return false
         } else {
             val itemstack = item.entityItem
-            val itemstack1 = inventory.addItemToSide(itemstack, -1)
+            if (itemstack.itemInFrames()) {
+                val itemstack1 = inventory.addItemToSide(itemstack, -1)
 
-            if (itemstack1 != null && itemstack1.stackSize != 0) {
-                item.setEntityItemStack(itemstack1)
-            } else {
-                flag = true
-                item.setDead()
+                if (itemstack1 != null && itemstack1.stackSize != 0) {
+                    item.setEntityItemStack(itemstack1)
+                } else {
+                    flag = true
+                    item.setDead()
+                }
             }
 
             return flag
