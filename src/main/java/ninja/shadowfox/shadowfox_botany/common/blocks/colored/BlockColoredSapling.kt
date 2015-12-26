@@ -5,10 +5,11 @@ import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
-import net.minecraft.block.BlockBush
+import net.minecraft.block.BlockSapling
 import net.minecraft.block.IGrowable
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
+import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.item.Item
@@ -31,19 +32,18 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 import kotlin.properties.Delegates
 
-public open class BlockColoredSapling(val name: String = "irisSapling") : BlockBush(Material.plants), IGrowable, ILexiconable, IFuelHandler {
+public open class BlockColoredSapling(val name: String = "irisSapling") : BlockSapling(), ILexiconable, IFuelHandler {
 
     internal var icon: IIcon by Delegates.notNull()
 
     init {
         this.setTickRandomly(true)
-        this.setBlockBounds(0.5F - 0.4F, 0.0F, 0.5F - 0.4F, 0.5F + 0.4F, 0.4F * 2.0F, 0.5F + 0.4F)
         stepSound = Block.soundTypeGrass
         this.setBlockName(name)
 
         setCreativeTab(ShadowFoxCreativeTab)
 
-        GameRegistry.registerFuelHandler(this)
+        // GameRegistry.registerFuelHandler(this)
     }
 
     override fun setBlockName(par1Str: String): Block {
@@ -112,6 +112,11 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : BlockB
 
     override fun canBlockStay(world: World, x: Int, y: Int, z: Int): Boolean {
         return world.getBlock(x, y - 1, z).canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this) || canGrowHere(world.getBlock(x, y - 1, z))
+    }
+
+    override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {
+        if(list != null && item != null)
+            list.add(ItemStack(this))
     }
 
     public fun markOrGrowMarked(world: World?, x: Int, y: Int, z: Int, random: Random?) {

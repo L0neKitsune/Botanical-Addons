@@ -32,7 +32,7 @@ class HeartWoodTreeGen(val minTreeHeight: Int, val regWood: Block, val regMeta: 
                         if (i1 >= 0 && i1 < 256) {
                             block = world!!.getBlock(j1, i1, i2)
 
-                            if (!block.isReplaceable(world, j1, i1, i2) && !block.isLeaves(world, j1, i1, i2) && !isWood(block)) {
+                            if (!block.isReplaceable(world, j1, i1, i2) && !block.isLeaves(world, j1, i1, i2) && block != regWood && block != heartWood) {
                                 flag = false
                                 break@isGen
                             }
