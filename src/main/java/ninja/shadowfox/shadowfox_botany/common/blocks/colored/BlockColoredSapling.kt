@@ -111,7 +111,7 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : BlockB
     }
 
     override fun canBlockStay(world: World, x: Int, y: Int, z: Int): Boolean {
-        return world.getBlock(x, y - 1, z).canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this)
+        return world.getBlock(x, y - 1, z).canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this) || canGrowHere(world.getBlock(x, y - 1, z))
     }
 
     public fun markOrGrowMarked(world: World?, x: Int, y: Int, z: Int, random: Random?) {
