@@ -1,6 +1,5 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.tile
 
-import cpw.mods.fml.common.FMLLog
 import net.minecraft.block.Block
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.ScaledResolution
@@ -14,18 +13,15 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.*
 import net.minecraft.world.World
-import net.minecraftforge.oredict.OreDictionary
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
 import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.blocks.colored.BlockColoredSapling
 import ninja.shadowfox.shadowfox_botany.common.lexicon.MultiblockComponentRainbow
 import ninja.shadowfox.shadowfox_botany.common.utils.itemEquals
 
 import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL12
 
-import org.apache.logging.log4j.Level
 import vazkii.botania.api.internal.VanillaPacketDispatcher
 import vazkii.botania.api.lexicon.multiblock.Multiblock
 import vazkii.botania.api.lexicon.multiblock.MultiblockSet
@@ -223,7 +219,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
     }
 
     fun workingFanciness(){
-        10 tickDelay {
+        10.tickDelay {
             for (i in 0..359) {
                 val radian = (i.toDouble() * 3.141592653589793 / 180.0).toFloat()
                 val xp = xCoord.toDouble() + Math.cos(radian.toDouble()) * 3
@@ -253,7 +249,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         }
     }
 
-    infix fun Int.tickDelay(lambda: () -> Any) {
+    fun Int.tickDelay(lambda: () -> Any) {
         if (ticksAlive % this == 0) {
             lambda.invoke()
         }
@@ -269,8 +265,8 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
     }
 
     fun renderHUD(mc:Minecraft, res:ScaledResolution) {
-        val xc = res.getScaledWidth() / 2
-        val yc = res.getScaledHeight() / 2
+        val xc = res.scaledWidth / 2
+        val yc = res.scaledHeight / 2
         var angle = -90f
         val radius = 24
         val recipe = getRecipe()
@@ -286,7 +282,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
             RenderHelper.drawTexturedModalRect(xc + radius + 9, yc - 8, 0f, if (sapling) 0 else 22, 8, 22, 15)
             net.minecraft.client.renderer.RenderHelper.enableGUIStandardItemLighting()
             if (!sapling) RenderItem.getInstance().renderItemIntoGUI(mc.fontRenderer, mc.renderEngine, ItemStack(ShadowFoxBlocks.irisSapling), xc + radius + 16, yc + 8)
-            RenderHelper.renderProgressPie(xc + radius + 32, yc - 8, progress, recipe.getOutput())
+            RenderHelper.renderProgressPie(xc + radius + 32, yc - 8, progress, recipe.output)
             net.minecraft.client.renderer.RenderHelper.disableStandardItemLighting()
             if (!sapling) mc.fontRenderer.drawStringWithShadow("+", xc + radius + 14, yc + 12, 0xFFFFFF)
         }
