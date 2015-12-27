@@ -56,12 +56,12 @@ public class IridescentSaplingBaseVariant implements IIridescentSaplingVariant {
     }
 
     @Override
-    public Block getLeaves() {
+    public Block getLeaves(Block soil, int meta) {
         return leaves;
     }
 
     @Override
-    public Block getWood() {
+    public Block getWood(Block soil, int meta) {
         return wood;
     }
 }

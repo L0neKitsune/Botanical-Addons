@@ -19,6 +19,8 @@ class SimpleTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
 
             var variant = ShadowFoxAPI.getTreeVariant(world.getBlock(x, y-1, z), world.getBlockMetadata(x, y - 1, z))
             if (variant != null) {
+                val wood = variant.getWood(world.getBlock(x, y-1, z), world.getBlockMetadata(x, y - 1, z))
+                val leaves = variant.getLeaves(world.getBlock(x, y-1, z), world.getBlockMetadata(x, y - 1, z))
 
                 if (y >= 1 && y + l + 1 <= 256) {
                     var b0 : Byte
@@ -36,7 +38,7 @@ class SimpleTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
                                 if (i1 >= 0 && i1 < 256) {
                                     block = world.getBlock(j1, i1, i2)
 
-                                    if (!block.isReplaceable(world, j1, i1, i2) && !block.isLeaves(world, j1, i1, i2) && block != variant.wood) {
+                                    if (!block.isReplaceable(world, j1, i1, i2) && !block.isLeaves(world, j1, i1, i2) && block != wood) {
                                         flag = false
                                         break@isGen
                                     }
@@ -77,7 +79,7 @@ class SimpleTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
                                             var block1: Block = world.getBlock(i2, k1, k2)
 
                                             if (block1.isAir(world, i2, k1, k2) || block1.isLeaves(world, i2, k1, k2)) {
-                                                setBlockAndNotifyAdequately(world, i2, k1, k2, variant.leaves, variant.getMeta(block2, soilMeta, variant.leaves))
+                                                setBlockAndNotifyAdequately(world, i2, k1, k2, leaves, variant.getMeta(block2, soilMeta, leaves))
                                             }
                                         }
                                     }
@@ -88,7 +90,7 @@ class SimpleTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
                                 block = world.getBlock(x, y + k1, z)
 
                                 if (block.isAir(world, x, y + k1, z) || block.isLeaves(world, x, y + k1, z)) {
-                                    setBlockAndNotifyAdequately(world, x, y + k1, z, variant.wood, variant.getMeta(block2, soilMeta, variant.wood))
+                                    setBlockAndNotifyAdequately(world, x, y + k1, z, wood, variant.getMeta(block2, soilMeta, wood))
                                 }
                             }
                             return true
@@ -100,9 +102,5 @@ class SimpleTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
         }
         return false
 
-    }
-
-    fun isWood(block: Block): Boolean {
-        return block.getMaterial() == Material.wood
     }
 }

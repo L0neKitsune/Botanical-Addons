@@ -75,7 +75,7 @@ class BlockAltLeaves(): ShadowFoxLeaves() {
             }
     }
 
-    override fun decayBit(): Int = 0x1
+    override fun decayBit(): Int = 0x8
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return LexiconRegistry.lightningSapling

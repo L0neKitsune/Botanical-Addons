@@ -8,17 +8,23 @@ import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import java.awt.Color
 
 import net.minecraft.client.Minecraft
+import net.minecraft.client.gui.GuiScreen
 import net.minecraft.client.renderer.ItemRenderer
 import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.client.renderer.texture.TextureMap
 import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.entity.EntityLiving
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.potion.Potion
+import net.minecraft.potion.PotionEffect
+import net.minecraft.util.DamageSource
 import net.minecraft.util.IIcon
 import net.minecraft.util.MathHelper
+import net.minecraft.util.StatCollector
 import net.minecraftforge.client.event.RenderPlayerEvent
 
 import org.lwjgl.opengl.GL11
@@ -45,7 +51,19 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
         public fun getEmblem(meta: Int, player: EntityPlayer?): ItemStack? {
             var baubles = PlayerHandler.getPlayerBaubles(player)
             var stack = baubles.getStackInSlot(0)
-            return if (stack != null && ((stack.item == ShadowFoxItems.emblem && stack.getItemDamage() == meta) || stack.item == ShadowFoxItems.aesirEmblem) && ItemNBTHelper.getByte(stack, "active", 0) == 1.toByte()) stack else null
+            return if (stack != null && ((stack.item == ShadowFoxItems.emblem && stack.getItemDamage() == meta) || stack.item == ShadowFoxItems.aesirEmblem) && isActive(stack)) stack else null
+        }
+        public fun isActive(stack: ItemStack): Boolean {
+            return ItemNBTHelper.getByte(stack, "active", 0) == 1.toByte()
+        }
+        public fun setActive(stack: ItemStack, state: Boolean) {
+            ItemNBTHelper.setByte(stack, "active", if (state) 1.toByte() else 0.toByte())
+        }
+        public fun isDangerous(stack: ItemStack): Boolean {
+            return ItemNBTHelper.getByte(stack, "dangerous", 0) == 1.toByte()
+        }
+        public fun setDangerous(stack: ItemStack, state: Boolean) {
+            ItemNBTHelper.setByte(stack, "dangerous", if (state) 1.toByte() else 0.toByte())
         }
     }
 
@@ -78,6 +96,32 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
             list.add(ItemStack(item, 1, i))
     }
 
+    override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>, par4: Boolean) {
+        if(par1ItemStack == null || par2EntityPlayer == null) return
+        if(!GuiScreen.isShiftKeyDown() && !par2EntityPlayer.capabilities.isCreativeMode) {
+            if (par2EntityPlayer.health <= 6.0f) 
+                this.addStringToTooltip(StatCollector.translateToLocal("misc.shadowfox_botany.healthDanger"), par3List)
+            else
+                this.addStringToTooltip(StatCollector.translateToLocal("misc.shadowfox_botany.healthWarning"), par3List)
+        }
+        super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4)
+    }
+
+    override fun addHiddenTooltip(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>, par4: Boolean) {
+        if(par1ItemStack == null || par2EntityPlayer == null) return
+        if (!par2EntityPlayer.capabilities.isCreativeMode) {
+            if (par2EntityPlayer.health <= 6.0f)
+                addStringToTooltip(StatCollector.translateToLocal("misc.shadowfox_botany.crisisOfFaith"), par3List)
+            else
+                addStringToTooltip(StatCollector.translateToLocal("misc.shadowfox_botany.lackOfFaith"), par3List)
+        }
+        super.addHiddenTooltip(par1ItemStack, par2EntityPlayer, par3List, par4)
+    }
+
+    fun addStringToTooltip(s : String, tooltip : MutableList<Any?>) {
+        tooltip.add(s.replace("&".toRegex(), "\u00a7"))
+    }
+
     override fun getIconFromDamage(dmg: Int): IIcon? {
         return icons[Math.min(TYPES - 1, dmg)]
     }
@@ -94,6 +138,30 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
         return super.getUnlocalizedName(par1ItemStack) + par1ItemStack.itemDamage
     }
 
+    override fun onEquippedOrLoadedIntoWorld(stack: ItemStack, player: EntityLivingBase) {
+        setDangerous(stack, false)
+    }
+
+    override fun onUnequipped(stack: ItemStack, player: EntityLivingBase) {
+        if (!(!isDangerous(stack) || (player is EntityPlayer && player.capabilities.isCreativeMode))) {
+            player.attackEntityFrom(FaithDamageSource.instance, 6.0f)
+            player.addPotionEffect(PotionEffect(Potion.blindness.id, 150, 0))
+            player.addPotionEffect(PotionEffect(Potion.confusion.id, 150, 2))
+            player.addPotionEffect(PotionEffect(Potion.moveSlowdown.id, 300, 2))
+            player.addPotionEffect(PotionEffect(Potion.weakness.id, 300, 2))
+        }
+        setDangerous(stack, false)
+    }
+
+    class FaithDamageSource: DamageSource("shadowfox_botany.lackOfFaith") {
+        companion object {
+            val instance = FaithDamageSource()
+        }
+        init {
+            this.setDamageBypassesArmor()
+        }
+    }
+
     fun getHeadOrientation(entity: EntityLivingBase): Vector3 {
         val f1 = MathHelper.cos(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat())
         val f2 = MathHelper.sin(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat())
@@ -106,8 +174,8 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
         if (player.ticksExisted % 10 == 0) {
 
             if(player is EntityPlayer) {
-                if (ManaItemHandler.requestManaExact(stack, player, COST, true)) ItemNBTHelper.setByte(stack, "active", 1.toByte())
-                else ItemNBTHelper.setByte(stack, "active", 0.toByte())
+                setActive(stack, ManaItemHandler.requestManaExact(stack, player, COST, true))
+                setDangerous(stack, true)
             }
         }
     }
@@ -120,7 +188,7 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
     override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {
         if(type == IBaubleRender.RenderType.BODY) {
             val player = event.entityPlayer
-            if (player.ticksExisted % 10 == 0) {
+            if (player.ticksExisted % 10 == 0 && isActive(stack)) {
                 when (stack.itemDamage) {
                     0 -> {
                         var playerHead = Vector3.fromEntityCenter(player).add(0.0, 0.75, 0.0)

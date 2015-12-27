@@ -1,5 +1,11 @@
 itemGroup.shadowfox_botany=Botanical Addons
 
+death.attack.shadowfox_botany.lackOfFaith=%1$s has suffered a crisis of faith
+misc.shadowfox_botany.lackOfFaith=&cUnequipping this bauble can be bad for your health.&r
+misc.shadowfox_botany.crisisOfFaith=&4Unequipping this bauble could be a death sentence.&r
+misc.shadowfox_botany.healthWarning=&cLosing faith in the gods can be deadly...&r
+misc.shadowfox_botany.healthDanger=&4Losing faith in the gods can be &ldeadly&4...&r
+
 misc.shadowfox_botany.color.0=White
 misc.shadowfox_botany.color.1=Orange
 misc.shadowfox_botany.color.2=Magenta
