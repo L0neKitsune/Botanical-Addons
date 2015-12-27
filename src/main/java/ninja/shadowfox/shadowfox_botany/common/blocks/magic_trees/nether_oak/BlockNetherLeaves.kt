@@ -41,7 +41,7 @@ class BlockNetherLeaves(): ShadowFoxLeaves() {
     }
 
     override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item {
-        return Item.getItemFromBlock(ShadowFoxBlocks.lightningSapling)
+        return Item.getItemFromBlock(ShadowFoxBlocks.netherSapling)
     }
 
     override fun quantityDropped(random: Random): Int {

@@ -10,7 +10,9 @@ import net.minecraft.util.IIcon
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import cpw.mods.fml.relauncher.FMLLaunchHandler
+import cpw.mods.fml.common.IFuelHandler
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
+import cpw.mods.fml.common.registry.GameRegistry
 
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
@@ -19,15 +21,16 @@ import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 
 import vazkii.botania.client.render.block.InterpolatedIcon
 
-class ItemResource(): ItemMod("resource") {
+class ItemResource(): ItemMod("resource"), IFuelHandler {
 
     init {
         setHasSubtypes(true)
         if (FMLLaunchHandler.side().isClient())
             MinecraftForge.EVENT_BUS.register(this)
+        GameRegistry.registerFuelHandler(this)
     }
 
-    val TYPES = 1
+    val TYPES = 5
     val INTERP = 0x1
 
     var icons: Array<IIcon?> = arrayOfNulls(TYPES)
@@ -67,5 +70,14 @@ class ItemResource(): ItemMod("resource") {
 
     override fun getIconFromDamage(dmg: Int): IIcon? {
         return icons[Math.min(TYPES - 1, dmg)]
+    }
+    override fun getBurnTime(fuel: ItemStack): Int {
+        if (fuel.item == ShadowFoxItems.resource) {
+            when (fuel.itemDamage) {
+                1,3 -> return 100 // Splinters smelt half an item.
+                4 -> return 2400 // Flame-Laced Coal smelts 12 items
+            }
+        }
+        return 0
     }
 }

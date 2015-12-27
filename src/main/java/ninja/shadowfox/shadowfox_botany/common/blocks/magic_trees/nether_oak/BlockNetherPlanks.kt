@@ -34,7 +34,7 @@ import java.util.*
 import kotlin.properties.Delegates
 
 
-public class BlockNetherPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.material), ILexiconable, IFuelHandler {
+public class BlockNetherPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.material), ILexiconable {
 
     private val name = "netherPlanks"
 
@@ -46,7 +46,6 @@ public class BlockNetherPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.m
         setBlockName(this.name)
         if (FMLLaunchHandler.side().isClient)
             MinecraftForge.EVENT_BUS.register(this)
-        GameRegistry.registerFuelHandler(this)
     }
 
     override fun isToolEffective(type: String?, metadata: Int): Boolean {
@@ -94,9 +93,5 @@ public class BlockNetherPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.m
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return LexiconRegistry.lightningSapling
-    }
-
-    override fun getBurnTime(fuel: ItemStack): Int {
-        return if (fuel.item == Item.getItemFromBlock(this)) 600 else 0
     }
 }

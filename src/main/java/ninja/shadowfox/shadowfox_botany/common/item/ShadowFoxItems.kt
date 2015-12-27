@@ -48,5 +48,8 @@ object ShadowFoxItems {
 
         OreDictionary.registerOre("holyPendant", ItemStack(attributionBauble, 1, 0))
         OreDictionary.registerOre("holyPendant", ItemStack(attributionBauble, 1, 1))
+
+        OreDictionary.registerOre("woodSplintersLightning", ItemStack(resource, 1, 1))
+        OreDictionary.registerOre("woodSplintersNether", ItemStack(resource, 1, 3))
     }
 }

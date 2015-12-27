@@ -44,6 +44,10 @@ item.shadowfox_botany:priestEmblem2.name=Priestly Emblem: Njord
 item.shadowfox_botany:aesirEmblem.name=Priestly Emblem: &6Aesir&r
 
 item.shadowfox_botany:resource0.name=Thunderous Twig
+item.shadowfox_botany:resource1.name=Thunderous Splinters
+item.shadowfox_botany:resource2.name=Infernal Twig
+item.shadowfox_botany:resource3.name=Infernal Splinters
+item.shadowfox_botany:resource4.name=Flame-Laced Charcoal
 
 entity.shadowfox_botany:voidCreeper.name=Manaseal Creeper
 
@@ -108,15 +112,23 @@ tile.shadowfox_botany:irisPlanksSlab.name=Iridescent Slab
 tile.shadowfox_botany:irisPlanksSlabFull.name=Iridescent Slab
 tile.shadowfox_botany:lightningPlanksSlab.name=Thunderous Slab
 tile.shadowfox_botany:lightningPlanksSlabFull.name=Thunderous Slab
+tile.shadowfox_botany:netherPlanksSlab.name=Infernal Slab
+tile.shadowfox_botany:netherPlanksSlabFull.name=Infernal Slab
 
 tile.shadowfox_botany:rainbowPlanksStairs.name=Iridescent Stairs
 tile.shadowfox_botany:irisPlanksStairs.name=Iridescent Stairs
 tile.shadowfox_botany:lightningPlanksStairs.name=Thunderous Stairs
+tile.shadowfox_botany:netherPlanksStairs.name=Infernal Stairs
 
 tile.shadowfox_botany:lightningSapling.name=Thunderous Oak Sapling
 tile.shadowfox_botany:lightningWood.name=Thunderous Log
 tile.shadowfox_botany:lightningLeaves.name=Thunderous Leaves
 tile.shadowfox_botany:lightningPlanks.name=Thunderous Planks
+
+tile.shadowfox_botany:netherSapling.name=Infernal Oak Sapling
+tile.shadowfox_botany:netherWood.name=Infernal Log
+tile.shadowfox_botany:netherLeaves.name=Infernal Leaves
+tile.shadowfox_botany:netherPlanks.name=Infernal Planks
 
 shadowfox_botany.potion.manaVoid=Manatide Storm
 
