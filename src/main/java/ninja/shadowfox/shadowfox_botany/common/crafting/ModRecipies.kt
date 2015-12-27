@@ -57,6 +57,7 @@ public object ModRecipes {
     val recipesInfernalStairsR: IRecipe
     val recipesInfernalSlabs: IRecipe
     val recipesInfernalTwig: IRecipe
+    val recipesSixTorches: IRecipe
 
     val recipesPastoralSeeds: List<RecipeManaInfusion>
 
@@ -152,10 +153,11 @@ public object ModRecipes {
 
         addOreDictRecipe(ItemStack(ShadowFoxItems.lightningRod, 1),
                 " EW",
-                " ST",
+                " DT",
                 "S  ",
                 'E', "woodSplintersLightning",
                 'T', LibOreDict.TERRA_STEEL,
+                'D', LibOreDict.DREAM_WOOD,
                 'S', "twigThunderwood",
                 'W', LibOreDict.RUNE[13]) // Wrath
 
@@ -387,6 +389,14 @@ public object ModRecipes {
                     'Q', ItemStack(ShadowFoxBlocks.netherWood))
 
         recipesInfernalTwig = BotaniaAPI.getLatestAddedRecipe()
+
+        GameRegistry.addRecipe(ItemStack(Blocks.torch, 6),
+                    "C", 
+                    "S",
+                    'C', ItemStack(ShadowFoxItems.resource, 1, 4), // Flame-Laced Coal
+                    'S', ItemStack(Items.stick)) 
+
+        recipesSixTorches = BotaniaAPI.getLatestAddedRecipe()
 
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood1, ItemStack(Items.coal, 1, 1), 0.15F)

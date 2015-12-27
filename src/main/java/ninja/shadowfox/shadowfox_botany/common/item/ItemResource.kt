@@ -31,7 +31,7 @@ class ItemResource(): ItemMod("resource"), IFuelHandler {
     }
 
     val TYPES = 5
-    val INTERP = 0x1
+    val INTERP = 0x11
 
     var icons: Array<IIcon?> = arrayOfNulls(TYPES)
 
