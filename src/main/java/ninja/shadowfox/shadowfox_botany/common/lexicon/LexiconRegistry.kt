@@ -131,7 +131,8 @@ public object LexiconRegistry {
                 PageCraftingRecipe("3", ModRecipes.recipesInfernalSlabs),
                 PageCraftingRecipe("4", ModRecipes.recipesInfernalStairsR),
                 PageCraftingRecipe("5", ModRecipes.recipesInfernalTwig),
-                PageFurnaceRecipe("6", ItemStack(ShadowFoxBlocks.netherPlanks)))
+                PageFurnaceRecipe("6", ItemStack(ShadowFoxBlocks.netherWood)),
+                PageFurnaceRecipe("7", ItemStack(ShadowFoxBlocks.netherPlanks)))
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)

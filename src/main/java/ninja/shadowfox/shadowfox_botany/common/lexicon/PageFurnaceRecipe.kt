@@ -79,9 +79,12 @@ public class PageFurnaceRecipe: PageRecipe {
         render.bindTexture(furnaceFlame)
         val flameCornerX = gui.getLeft() + gui.getWidth()/2 - 8
         val flameCornerY = gui.getTop() + gui.getHeight()/2 + 5
+        GL11.glEnable(GL11.GL_BLEND)
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
         (gui as GuiScreen).drawTexturedModalRect(flameCornerX, flameCornerY, 0, 0, 16, 16)
         var progress = Math.max(Math.min(renderTicksElapsed * 13 / rTPS, 13), 0)
         gui.drawTexturedModalRect(flameCornerX, flameCornerY + progress, 16, progress, 16, 16 - progress)
+        GL11.glDisable(GL11.GL_BLEND)
         
         render.bindTexture(manaInfusionOverlay)
         GL11.glEnable(GL11.GL_BLEND)
@@ -95,7 +98,7 @@ public class PageFurnaceRecipe: PageRecipe {
     override fun updateScreen() {
         if(ticksElapsed % 20 == 0) {
             recipeAt++
-            rTPS = renderTicksElapsed
+            if (renderTicksElapsed != 0) rTPS = renderTicksElapsed * 1
             renderTicksElapsed = 0
 
             if(recipeAt == recipes.size)
