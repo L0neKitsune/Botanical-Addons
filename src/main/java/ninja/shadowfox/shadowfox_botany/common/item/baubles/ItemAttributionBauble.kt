@@ -43,12 +43,15 @@ import kotlin.properties.Delegates
 
 class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble {
     private val kitsuneTexture = ResourceLocation("shadowfox_botany:textures/items/kitsunesTail.png")
+    private val potatoTexture: ResourceLocation
 
     var defaultIcon: IIcon by Delegates.notNull()
     var wireIcon: IIcon by Delegates.notNull()
     var kitsuneIcon: IIcon by Delegates.notNull()
+    var trisIcon: IIcon by Delegates.notNull()
 
     init {
+        potatoTexture = ResourceLocation(if (ClientProxy.dootDoot) LibResources.MODEL_TINY_POTATO_HALLOWEEN else LibResources.MODEL_TINY_POTATO)
         setHasSubtypes(true)
         setCreativeTab(ShadowFoxCreativeTab)
         if (FMLLaunchHandler.side().isClient())
@@ -77,6 +80,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
         this.itemIcon = IconHelper.forItem(par1IconRegister, this)
         this.defaultIcon = IconHelper.forItem(par1IconRegister, this, "Render")
         this.kitsuneIcon = IconHelper.forItem(par1IconRegister, this, "-L0neKitsune")
+        this.trisIcon = IconHelper.forItem(par1IconRegister, this, "-Tristaric")
     }
 
     override fun addHiddenTooltip(par1ItemStack: ItemStack, par2EntityPlayer: EntityPlayer, par3List: MutableList<Any?>, par4: Boolean) {
@@ -161,8 +165,6 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
 
     @SideOnly(Side.CLIENT)
     override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {
-        val potatoTexture = ResourceLocation(if (ClientProxy.dootDoot) LibResources.MODEL_TINY_POTATO_HALLOWEEN else LibResources.MODEL_TINY_POTATO)
-        val cloakTexture = ResourceLocation("shadowfox_botany:textures/model/attributionBauble-Tristaric.png")
         var name = event.entityPlayer.commandSenderName
         if(type == IBaubleRender.RenderType.HEAD) {
             if (stack.itemDamage != 0) {
@@ -178,10 +180,18 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
                     Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture)
                     IBaubleRender.Helper.translateToHeadLevel(event.entityPlayer)
                     faceTranslate()
-                    var armor = event.entityPlayer.getCurrentArmor(3) != null
                     scale(0.35F)
-                    GL11.glTranslatef(0.3F, -0.6F, if (armor) -0.15F else 0F)
+                    GL11.glTranslatef(0.3F, -0.6F, -0.15F)
                     ItemRenderer.renderItemIn2D(Tessellator.instance, wireIcon.maxU, wireIcon.minV, wireIcon.minU, wireIcon.maxV, wireIcon.iconWidth, wireIcon.iconHeight, 1F / 32F)
+                } else if (name == "Tristaric") {
+                    // Render the Ezic Star
+                    Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture)
+                    IBaubleRender.Helper.translateToHeadLevel(event.entityPlayer)
+                    faceTranslate()
+                    var armor = event.entityPlayer.getCurrentArmor(3) != null
+                    scale(0.25F)
+                    GL11.glTranslatef(0.725F, -0.505F, if (armor) -0.215F else 0F)
+                    ItemRenderer.renderItemIn2D(Tessellator.instance, trisIcon.maxU, trisIcon.minV, trisIcon.minU, trisIcon.maxV, trisIcon.iconWidth, trisIcon.iconHeight, 1F / 32F)
                 }
             }
         }
@@ -198,17 +208,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
                 ItemRenderer.renderItemIn2D(Tessellator.instance, kitsuneIcon.maxU, kitsuneIcon.minV, kitsuneIcon.minU, kitsuneIcon.maxV, kitsuneIcon.iconWidth, kitsuneIcon.iconHeight, 1F / 32F)
                 GL11.glTranslatef(0F, 0F, 0.025F)
                 ItemRenderer.renderItemIn2D(Tessellator.instance, kitsuneIcon.maxU, kitsuneIcon.minV, kitsuneIcon.minU, kitsuneIcon.maxV, kitsuneIcon.iconWidth, kitsuneIcon.iconHeight, 1F / 32F)
-            } else if (name == "Tristaric") {
-                // Render a cloak
-                Minecraft.getMinecraft().renderEngine.bindTexture(cloakTexture)
-                var armor = event.entityPlayer.getCurrentArmor(2) != null
-                GL11.glTranslatef(0F, if (armor) -0.07F else -0.01F, 0F)
-                if (armor) scale(1.005F)
-
-                scale(0.1F)
-
-                ModelBiped().bipedBody.render(1F)
-            } else if (name == "yrsegal" && name != "theLorist") {
+            } else if (name != "yrsegal" && name != "theLorist" && name != "Tristaric") {
                 // Render the Holy Symbol
                 var armor = event.entityPlayer.getCurrentArmor(2) != null
                 GL11.glRotatef(180F, 1F, 0F, 0F)
