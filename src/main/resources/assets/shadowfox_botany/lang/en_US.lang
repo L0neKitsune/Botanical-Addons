@@ -86,7 +86,7 @@ tile.shadowfox_botany:livingwoodFunnel.name=Livingwood Funnel
 
 item.shadowfox_botany:coatOfArms0.name=Chilean Shield
 item.shadowfox_botany:coatOfArms1.name=French Shield
-item.shadowfox_botany:coatOfArms2.name=Parisian Shield
+item.shadowfox_botany:coatOfArms2.name=Japanese Shield
 item.shadowfox_botany:coatOfArms3.name=Germanic Shield
 item.shadowfox_botany:coatOfArms4.name=Greek Shield
 item.shadowfox_botany:coatOfArms5.name=Icelandic Shield
@@ -101,6 +101,7 @@ item.shadowfox_botany:coatOfArms13.name=Texan Shield
 item.shadowfox_botany:coatOfArms14.name=Ukranian Shield
 item.shadowfox_botany:coatOfArms15.name=American Shield
 item.shadowfox_botany:coatOfArms16.name=Fabulous Shield
+item.shadowfox_botany:coatOfArms17.name=Parisian Shield
 
 item.shadowfox_botany:colorOverride.name=Clerical Colorizer
 

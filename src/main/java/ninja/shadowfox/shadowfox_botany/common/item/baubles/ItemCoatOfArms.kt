@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.client.renderer.texture.TextureMap
 import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -31,13 +32,14 @@ import cpw.mods.fml.common.registry.GameRegistry
 
 class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorOverride {
 
-    val TYPES = 16
-    var icons: Array<IIcon?> = arrayOfNulls(TYPES+1)
+    val TYPES = 18
+    var icons: Array<IIcon?> = arrayOfNulls(TYPES)
     val colorMap: IntArray = intArrayOf(
-        0x00137F, 0x0043FF, 0x0043FF, 0xFFD800,
+        0x00137F, 0x0043FF, 0xFF0037, 0xFFD800,
         0x002EFF, 0x001A8E, 0x009944, 0x003BFF,
         0x00FF3B, 0xFF003B, 0x603A20, 0xFFFF00,
-        0xFF0015, 0x0048FF, 0xFFD400, 0xFFFFFF
+        0xFF0015, 0x0048FF, 0xFFD400, 0xFFFFFF,
+        0xFF0037
     )
 
     init {
@@ -46,27 +48,35 @@ class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorO
     }
 
     override fun registerIcons(par1IconRegister: IIconRegister) {
-        for(i in 0..TYPES)
+        for(i in 0..TYPES-1)
             icons[i] = IconHelper.forItem(par1IconRegister, this, i, "coatofarms")
     }
 
     override fun colorOverride(stack: ItemStack?): Int? {
         if (stack != null) {
-            if (stack.itemDamage < TYPES && stack.itemDamage >= 0)
+            if (stack.itemDamage < TYPES-1 && stack.itemDamage >= 0)
                 return colorMap[stack.itemDamage]
-            else if (stack.itemDamage == TYPES)
+            else if (stack.itemDamage == TYPES-1)
                 return ItemIridescent.rainbowColor()
         }
         return null
     }
 
     override fun getSubItems(item: Item, tab: CreativeTabs?, list: MutableList<Any?>) {
-        for(i in 0..TYPES)
+        for(i in 0..TYPES-1)
             list.add(ItemStack(item, 1, i))
     }
 
     override fun getIconFromDamage(dmg: Int): IIcon? {
-        return icons[Math.min(TYPES, dmg)]
+        return icons[Math.min(TYPES-1, dmg)]
+    }
+
+    override fun onEquipped(stack: ItemStack, player: EntityLivingBase) {
+        super.onEquipped(stack, player)
+        if (stack.itemDamage == 1 && "paris".toRegex().find(stack.displayName.toLowerCase()) != null) {
+            stack.setItemDamage(17)
+            stack.getTagCompound().removeTag("display")
+        }
     }
 
     override fun getUnlocalizedNameInefficiently(par1ItemStack: ItemStack): String {
