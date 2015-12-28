@@ -191,7 +191,14 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
                     var armor = event.entityPlayer.getCurrentArmor(3) != null
                     scale(0.25F)
                     GL11.glTranslatef(0.725F, -0.505F, if (armor) -0.215F else 0F)
+                    GL11.glEnable(GL11.GL_BLEND)
+                    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
+                    GL11.glAlphaFunc(GL11.GL_EQUAL, 1F)
+                    ShaderHelper.useShader(ShaderHelper.halo)
                     ItemRenderer.renderItemIn2D(Tessellator.instance, trisIcon.maxU, trisIcon.minV, trisIcon.minU, trisIcon.maxV, trisIcon.iconWidth, trisIcon.iconHeight, 1F / 32F)
+                    ShaderHelper.releaseShader()
+                    GL11.glAlphaFunc(GL11.GL_ALWAYS, 1F)
+                    GL11.glDisable(GL11.GL_BLEND)
                 }
             }
         }
