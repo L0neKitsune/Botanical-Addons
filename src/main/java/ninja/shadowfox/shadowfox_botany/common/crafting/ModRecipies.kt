@@ -153,11 +153,10 @@ public object ModRecipes {
 
         addOreDictRecipe(ItemStack(ShadowFoxItems.lightningRod, 1),
                 " EW",
-                " DT",
+                " SD",
                 "S  ",
                 'E', "woodSplintersLightning",
-                'T', LibOreDict.TERRA_STEEL,
-                'D', LibOreDict.DREAM_WOOD,
+                'D', LibOreDict.DRAGONSTONE,
                 'S', "twigThunderwood",
                 'W', LibOreDict.RUNE[13]) // Wrath
 
@@ -404,8 +403,8 @@ public object ModRecipes {
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood3, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.rainbowWood, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.lightningWood, ItemStack(Items.coal, 1, 1), 0.15F)
-        GameRegistry.addSmelting(ShadowFoxBlocks.lightningPlanks, ItemStack(ShadowFoxItems.resource, 2, 1), 0.15F) // Thunderous Splinters
-        GameRegistry.addSmelting(ShadowFoxBlocks.netherPlanks, ItemStack(ShadowFoxItems.resource, 2, 3), 0.15F) // Infernal Splinters
+        GameRegistry.addSmelting(ShadowFoxBlocks.lightningPlanks, ItemStack(ShadowFoxItems.resource, 2, 1), 0.1F) // Thunderous Splinters
+        GameRegistry.addSmelting(ShadowFoxBlocks.netherPlanks, ItemStack(ShadowFoxItems.resource, 2, 3), 0.1F) // Infernal Splinters
         GameRegistry.addSmelting(ShadowFoxBlocks.netherWood, ItemStack(ShadowFoxItems.resource, 1, 4), 0.15F) // Flame-Laced Coal
 
     }

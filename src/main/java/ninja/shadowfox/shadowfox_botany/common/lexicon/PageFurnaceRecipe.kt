@@ -43,6 +43,7 @@ public class PageFurnaceRecipe: PageRecipe {
     private var recipes: MutableList<StackPair>
     var ticksElapsed = 0
     var renderTicksElapsed = 0
+    var rTPS = 50
     var recipeAt = 0
 
     constructor(unlocalizedName:String, inputs:MutableList<ItemStack>) : super(unlocalizedName) {
@@ -79,8 +80,8 @@ public class PageFurnaceRecipe: PageRecipe {
         val flameCornerX = gui.getLeft() + gui.getWidth()/2 - 8
         val flameCornerY = gui.getTop() + gui.getHeight()/2 + 5
         (gui as GuiScreen).drawTexturedModalRect(flameCornerX, flameCornerY, 0, 0, 16, 16)
-        var progress = renderTicksElapsed * 13 / 50
-        (gui as GuiScreen).drawTexturedModalRect(flameCornerX, flameCornerY + progress, 16, progress, 16, 16 - progress)
+        var progress = Math.max(Math.min(renderTicksElapsed * 13 / rTPS, 13), 0)
+        gui.drawTexturedModalRect(flameCornerX, flameCornerY + progress, 16, progress, 16, 16 - progress)
         
         render.bindTexture(manaInfusionOverlay)
         GL11.glEnable(GL11.GL_BLEND)
@@ -94,6 +95,7 @@ public class PageFurnaceRecipe: PageRecipe {
     override fun updateScreen() {
         if(ticksElapsed % 20 == 0) {
             recipeAt++
+            rTPS = renderTicksElapsed
             renderTicksElapsed = 0
 
             if(recipeAt == recipes.size)
