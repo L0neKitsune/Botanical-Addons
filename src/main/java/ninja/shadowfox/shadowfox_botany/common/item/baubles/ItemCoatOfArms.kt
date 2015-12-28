@@ -25,6 +25,7 @@ import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 
 import vazkii.botania.api.item.ICosmeticBauble
 import vazkii.botania.api.item.IBaubleRender
+import vazkii.botania.client.core.helper.ShaderHelper
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
 import vazkii.botania.common.lib.LibItemNames
 import baubles.api.BaubleType
@@ -34,12 +35,12 @@ class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorO
 
     val TYPES = 18
     var icons: Array<IIcon?> = arrayOfNulls(TYPES)
-    val colorMap: IntArray = intArrayOf(
+    val colorMap = intArrayOf(
         0x00137F, 0x0043FF, 0xFF0037, 0xFFD800,
         0x002EFF, 0x001A8E, 0x009944, 0x003BFF,
         0x00FF3B, 0xFF003B, 0x603A20, 0xFFFF00,
         0xFF0015, 0x0048FF, 0xFFD400, 0xFFFFFF,
-        0xFF0037
+        0xFFFFFF, 0xFF0037
     )
 
     init {
@@ -54,9 +55,9 @@ class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorO
 
     override fun colorOverride(stack: ItemStack?): Int? {
         if (stack != null) {
-            if (stack.itemDamage < TYPES-1 && stack.itemDamage >= 0)
+            if (stack.itemDamage < TYPES-1 && stack.itemDamage >= 0 && stack.itemDamage != 16)
                 return colorMap[stack.itemDamage]
-            else if (stack.itemDamage == TYPES-1)
+            else if (stack.itemDamage == 16)
                 return ItemIridescent.rainbowColor()
         }
         return null
@@ -104,7 +105,18 @@ class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorO
             scale(0.8F)
             GL11.glTranslatef(0.2F, -0.2F, -0.35F)
             GL11.glRotatef(10F, 0F, 0F, 1F)
+            if (stack.itemDamage == 16) {
+                GL11.glEnable(GL11.GL_BLEND)
+                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
+                GL11.glAlphaFunc(GL11.GL_EQUAL, 1F)
+                ShaderHelper.useShader(ShaderHelper.halo)
+            }
             renderIcon(stack.itemDamage)
+            if (stack.itemDamage == 16) {
+                ShaderHelper.releaseShader()
+                GL11.glAlphaFunc(GL11.GL_ALWAYS, 1F)
+                GL11.glDisable(GL11.GL_BLEND)
+            }
         }
     }
 
