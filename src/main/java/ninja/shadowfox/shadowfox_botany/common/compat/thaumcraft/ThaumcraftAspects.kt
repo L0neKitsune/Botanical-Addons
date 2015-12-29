@@ -159,8 +159,8 @@ object ThaumcraftAspects {
         if (forbidden) list.add(WRATH, 2)
         ThaumcraftApi.registerEntityTag("shadowfox_botany:voidCreeper", list)
 
-        list = AspectList().add(Aspect.ENTROPY, 16) // don't fool around with these guys
-        if (forbidden) list.add(WRATH, 8)           // they will mess. you. up.
+        list = AspectList().add(Aspect.ENTROPY, 16).add(Aspect.PLANT, 2) // don't fool around with these guys
+        if (forbidden) list.add(WRATH, 8)                                // they will mess. you. up.
         ThaumcraftApi.registerEntityTag("shadowfox_botany:grieferCreeper", list)
     }
 }
