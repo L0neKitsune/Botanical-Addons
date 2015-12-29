@@ -53,7 +53,7 @@ class BlockAltLeaves(): ShadowFoxLeaves() {
 
     override fun getIcon(side: Int, meta: Int): IIcon {
         this.setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics)
-        return if (this.field_150121_P) icon_norm[meta] else icon_opaque[meta]
+        return if (this.field_150121_P) icon_norm[meta and decayBit().inv()] else icon_opaque[meta and decayBit().inv()]
     }
 
     override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item {
