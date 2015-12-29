@@ -35,6 +35,7 @@ public object LexiconRegistry {
     val itemDisplay: LexiconEntry
     val lightningSapling: LexiconEntry
     val livingwoodFunnel: LexiconEntry
+    val netherSapling: LexiconEntry
 
     init {
 
@@ -120,7 +121,18 @@ public object LexiconRegistry {
                 PageCraftingRecipe("2", ModRecipes.recipesThunderousPlanks),
                 PageCraftingRecipe("3", ModRecipes.recipesThunderousSlabs),
                 PageCraftingRecipe("4", ModRecipes.recipesThunderousStairsR),
-                PageCraftingRecipe("5", ModRecipes.recipesThunderousTwig))
+                PageCraftingRecipe("5", ModRecipes.recipesThunderousTwig),
+                PageFurnaceRecipe("6", ItemStack(ShadowFoxBlocks.lightningPlanks)))
+
+        netherSapling = ShadowfoxLexiconEntry("infernalSapling", dendrology, ShadowFoxBlocks.netherSapling)
+        netherSapling.setLexiconPages(PageText("0"),
+                PageTreeCrafting("1", ModRecipes.recipesInfernalTree),
+                PageCraftingRecipe("2", ModRecipes.recipesInfernalPlanks),
+                PageCraftingRecipe("3", ModRecipes.recipesInfernalSlabs),
+                PageCraftingRecipe("4", ModRecipes.recipesInfernalStairsR),
+                PageCraftingRecipe("5", ModRecipes.recipesInfernalTwig),
+                PageFurnaceRecipe("6", ItemStack(ShadowFoxBlocks.netherWood)),
+                PageFurnaceRecipe("7", ItemStack(ShadowFoxBlocks.netherPlanks)))
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
