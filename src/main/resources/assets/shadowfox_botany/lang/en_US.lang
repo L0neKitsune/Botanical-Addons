@@ -195,8 +195,9 @@ shadowfox_botany.page.irisSapling3=Stairs
 shadowfox_botany.page.irisSapling4=And back again
 shadowfox_botany.page.irisSapling5=Grinding them down
 
-shadowfox_botany.page.treeCrafting0=Affecting life is much harder than making or destroying it. The &1Iridescent Tree&0 has a natural lack of regular life, which lends itself to making beautiful spectrums of wood. It seems possible to re-add this life, by drawing mana into a &4Dendric Suffuser&0. This machine, of &1Obsidian&0 and materials of &4Iridesence&0, will suffuse the purified tree with life, creating interesting new varieties of life.
-shadowfox_botany.page.treeCrafting1=The Dendric Suffuser
+shadowfox_botany.page.treeCrafting0=Affecting life is much harder than making or destroying it. The &1Iridescent Tree&0 has a natural lack of regular life, which lends itself to making beautiful spectrums of wood. It seems possible to re-add this life, by drawing mana into a &4Dendric Suffuser&0. This structure, of &1Obsidian&0 and materials of &4Iridesence&0, will suffuse the purified tree with life, creating interesting new varieties of life.
+shadowfox_botany.page.treeCrafting1=When a &1Wand of the Forest&0 is used on the apex plank of the structure, it will complete it. For a tree to be made, you must plant a lifeless &1Iridescent Sapling&0 on the dirt below, and pump &4Mana&0 into the apex block. The components must be placed on the &1Item Platforms&0, and the crafting will begin on its own.
+shadowfox_botany.page.treeCrafting2=The Dendric Suffuser
 
 shadowfox_botany.page.irisSeeds0=If &1Bone Meal&0 is used on &1Iridescent Dirt&0, it will grow &1Iridescent Grass&0 instead of &1Tall Grass&0. When this &1Iridescent Grass&0 is thrown into a &4Mana Pool&0, you get out something quite like the &1Pasture Seed&0. It will transmute &1Grass&0 and &1Dirt&0 into &1Iridescent Dirt&0, with a simple right click.
 shadowfox_botany.page.irisSeeds1=/etc/sudoers
