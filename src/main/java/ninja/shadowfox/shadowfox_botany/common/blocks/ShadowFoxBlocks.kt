@@ -78,7 +78,6 @@ public object ShadowFoxBlocks {
     public var invisibleFlame: Block
     public var rainbowFlame: Block
     public var livingwoodFunnel: Block
-    public var schemaBlock: Block
 
     public var netherSapling: Block
     public var netherWood: Block
@@ -99,7 +98,9 @@ public object ShadowFoxBlocks {
     public var barrier: Block
 
     public var kindling: Block
-    public var markerBlock: Block
+
+//    public var markerBlock: Block
+//    public var schemaBlock: Block
 
     public var iridescentTree0: IIridescentSaplingVariant
     public var iridescentTree1: IIridescentSaplingVariant
@@ -180,8 +181,8 @@ public object ShadowFoxBlocks {
         barrier = BlockBarrier()
 
         kindling = BlockKindling()
-        schemaBlock = BlockSchema()
-        markerBlock = BlockMarker()
+//        schemaBlock = BlockSchema()
+//        markerBlock = BlockMarker()
 
         register()
         initOreDict()
