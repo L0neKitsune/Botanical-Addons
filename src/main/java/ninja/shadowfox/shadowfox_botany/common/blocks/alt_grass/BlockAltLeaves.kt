@@ -17,7 +17,7 @@ import net.minecraft.world.World
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemUniqueSubtypedBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.lib.ALT_TYPES
@@ -43,7 +43,7 @@ class BlockAltLeaves(): ShadowFoxLeaves() {
     @SideOnly(Side.CLIENT) override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int = 0xFFFFFF
 
     override fun register(name: String) {
-        GameRegistry.registerBlock(this, ItemBlockMod::class.java, name)
+        GameRegistry.registerBlock(this, ItemUniqueSubtypedBlockMod::class.java, name)
     }
 
     override fun registerBlockIcons(iconRegister: IIconRegister) {
@@ -53,7 +53,7 @@ class BlockAltLeaves(): ShadowFoxLeaves() {
 
     override fun getIcon(side: Int, meta: Int): IIcon {
         this.setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics)
-        return if (this.field_150121_P) icon_norm[meta] else icon_opaque[meta]
+        return if (this.field_150121_P) icon_norm[meta and decayBit().inv()] else icon_opaque[meta and decayBit().inv()]
     }
 
     override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item {

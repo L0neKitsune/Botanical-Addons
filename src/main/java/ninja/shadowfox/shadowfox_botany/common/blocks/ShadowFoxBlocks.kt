@@ -269,6 +269,14 @@ public object ShadowFoxBlocks {
 
         (netherSlabs as ShadowFoxSlabs).register()
         (netherSlabsFull as ShadowFoxSlabs).register()
+
+        for (i in altSlabs) {
+            (i as ShadowFoxSlabs).register()
+        }
+
+        for (i in altSlabsFull) {
+            (i as ShadowFoxSlabs).register()
+        }
     }
 
     private fun initOreDict() {

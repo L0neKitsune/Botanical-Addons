@@ -29,3 +29,10 @@ open class ItemSlabMod(val par1: Block) : ItemSlab(par1, (par1 as ShadowFoxSlabs
         return field_150939_a.unlocalizedName.replace("tile.".toRegex(), "tile.shadowfox_botany:").replace("\\d+$".toRegex(), "")
     }
 }
+
+open class ItemRegularSlabMod(val par1: Block) : ItemSlab(par1, (par1 as ShadowFoxSlabs).getSingleBlock(), par1.getFullBlock(), false) {
+
+    override fun getUnlocalizedName(par1ItemStack: ItemStack): String {
+        return field_150939_a.unlocalizedName.replace("tile.".toRegex(), "tile.shadowfox_botany:")
+    }
+}

@@ -85,7 +85,8 @@ public object LexiconRegistry {
 
         treeCrafting = ShadowfoxLexiconEntry("treeCrafting", dendrology, ShadowFoxBlocks.treeCrafterBlockRB)
         treeCrafting.setPriority().setLexiconPages(PageText("0"),
-                PageMultiblock("1", ShadowFoxBlocks.treeCrafter))
+                PageText("1"),
+                PageMultiblock("2", ShadowFoxBlocks.treeCrafter))
 
         attribution = ShadowfoxLexiconEntry("attribution", BotaniaAPI.categoryBaubles, ShadowFoxItems.attributionBauble)
         attribution.setLexiconPages(PageText("0"),

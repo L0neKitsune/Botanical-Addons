@@ -8,10 +8,11 @@ import net.minecraft.block.BlockSlab
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.util.IIcon
 import net.minecraft.world.World
 
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemSlabMod
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemRegularSlabMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxSlabs
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxStairs
@@ -22,15 +23,19 @@ class BlockAltWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks
         ShadowFoxSlabs(full, meta, source, source.unlocalizedName.replace("tile.".toRegex(), "") + "Slab" + (if (full) "Full" else "") + meta), ILexiconable, IFuelHandler {
 
     override fun getFullBlock(): BlockSlab {
-        return ShadowFoxBlocks.netherSlabsFull as BlockSlab
+        return ShadowFoxBlocks.altSlabsFull[meta] as BlockSlab
+    }
+
+    override fun getIcon(side: Int, blockMeta: Int): IIcon {
+        return source.getIcon(side, meta)
     }
 
     override fun register() {
-        GameRegistry.registerBlock(this, ItemSlabMod::class.java, name)
+        GameRegistry.registerBlock(this, ItemRegularSlabMod::class.java, name)
     }
 
     override fun getSingleBlock(): BlockSlab {
-        return ShadowFoxBlocks.netherSlabs as BlockSlab
+        return ShadowFoxBlocks.altSlabs[meta] as BlockSlab
     }
 
     override fun getBurnTime(fuel: ItemStack): Int {

@@ -17,7 +17,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxRotatedPillar
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemUniqueSubtypedBlockMod
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.lib.ALT_TYPES
@@ -62,7 +62,7 @@ public class BlockAltWood(val set: Int) : ShadowFoxRotatedPillar(Material.wood),
     override fun quantityDropped(random: Random): Int = 1
 
     override fun register(par1Str: String) {
-        GameRegistry.registerBlock(this, ItemBlockMod::class.java, par1Str)
+        GameRegistry.registerBlock(this, ItemUniqueSubtypedBlockMod::class.java, par1Str)
     }
 
     override fun getTopIcon(meta: Int): IIcon {

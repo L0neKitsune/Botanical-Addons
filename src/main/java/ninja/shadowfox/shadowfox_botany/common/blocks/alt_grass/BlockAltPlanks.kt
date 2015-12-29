@@ -18,7 +18,7 @@ import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.material.MaterialCustomSmeltingWood
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemUniqueSubtypedBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.lib.ALT_TYPES
@@ -84,8 +84,7 @@ public class BlockAltPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.mate
     override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean { return true }
 
     internal fun register(name: String) {
-        GameRegistry.registerBlock(this, ItemBlockMod::class.java, name)
-        Blocks.netherrack
+        GameRegistry.registerBlock(this, ItemUniqueSubtypedBlockMod::class.java, name)
     }
 
     override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {
