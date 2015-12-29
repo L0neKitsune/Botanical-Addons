@@ -131,6 +131,49 @@ tile.shadowfox_botany:netherWood.name=Infernal Log
 tile.shadowfox_botany:netherLeaves.name=Infernal Leaves
 tile.shadowfox_botany:netherPlanks.name=Infernal Planks
 
+tile.shadowfox_botany:altLeaves0.name=Dry Leaves
+tile.shadowfox_botany:altLeaves1.name=Golden Leaves
+tile.shadowfox_botany:altLeaves2.name=Vivid Leaves
+tile.shadowfox_botany:altLeaves3.name=Scorched Leaves
+tile.shadowfox_botany:altLeaves4.name=Infused Leaves
+tile.shadowfox_botany:altLeaves5.name=Mutated Leaves
+
+tile.shadowfox_botany:altPlanks0.name=Dry Planks
+tile.shadowfox_botany:altPlanks1.name=Golden Planks
+tile.shadowfox_botany:altPlanks2.name=Vivid Planks
+tile.shadowfox_botany:altPlanks3.name=Scorched Planks
+tile.shadowfox_botany:altPlanks4.name=Infused Planks
+tile.shadowfox_botany:altPlanks5.name=Mutated Planks
+
+tile.shadowfox_botany:altWood00.name=Dry Wood
+tile.shadowfox_botany:altWood01.name=Golden Wood
+tile.shadowfox_botany:altWood02.name=Vivid Wood
+tile.shadowfox_botany:altWood03.name=Scorched Wood
+tile.shadowfox_botany:altWood10.name=Infused Wood
+tile.shadowfox_botany:altWood11.name=Mutated Wood
+
+tile.shadowfox_botany:altPlanksSlab0.name=Dry Planks Slab
+tile.shadowfox_botany:altPlanksSlab1.name=Golden Planks Slab
+tile.shadowfox_botany:altPlanksSlab2.name=Vivid Planks Slab
+tile.shadowfox_botany:altPlanksSlab3.name=Scorched Planks Slab
+tile.shadowfox_botany:altPlanksSlab4.name=Infused Planks Slab
+tile.shadowfox_botany:altPlanksSlab5.name=Mutated Planks Slab
+
+tile.shadowfox_botany:altPlanksSlabFull0.name=Dry Planks Slab
+tile.shadowfox_botany:altPlanksSlabFull1.name=Golden Planks Slab
+tile.shadowfox_botany:altPlanksSlabFull2.name=Vivid Planks Slab
+tile.shadowfox_botany:altPlanksSlabFull3.name=Scorched Planks Slab
+tile.shadowfox_botany:altPlanksSlabFull4.name=Infused Planks Slab
+tile.shadowfox_botany:altPlanksSlabFull5.name=Mutated Planks Slab
+
+tile.shadowfox_botany:altPlanksStairs0.name=Dry Planks Stairs
+tile.shadowfox_botany:altPlanksStairs1.name=Golden Planks Stairs
+tile.shadowfox_botany:altPlanksStairs2.name=Vivid Planks Stairs
+tile.shadowfox_botany:altPlanksStairs3.name=Scorched Planks Stairs
+tile.shadowfox_botany:altPlanksStairs4.name=Infused Planks Stairs
+tile.shadowfox_botany:altPlanksStairs5.name=Mutated Planks Stairs
+
+
 shadowfox_botany.potion.manaVoid=Manatide Storm
 
 shadowfox_botany.entry.coloredDirt=Iridescent Dirt

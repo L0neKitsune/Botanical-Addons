@@ -12,7 +12,7 @@ import net.minecraft.util.IIcon
 import net.minecraft.world.World
 
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemSlabMod
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemRegularSlabMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxSlabs
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxStairs
@@ -31,7 +31,7 @@ class BlockAltWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks
     }
 
     override fun register() {
-        GameRegistry.registerBlock(this, ItemSlabMod::class.java, name)
+        GameRegistry.registerBlock(this, ItemRegularSlabMod::class.java, name)
     }
 
     override fun getSingleBlock(): BlockSlab {
