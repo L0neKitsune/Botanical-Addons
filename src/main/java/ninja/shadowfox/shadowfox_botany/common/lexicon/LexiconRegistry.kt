@@ -150,8 +150,8 @@ public object LexiconRegistry {
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.wiltedLotus, 1, 0), sealCreepers, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.wiltedLotus, 1, 1), sealCreepers, 1)
 
-        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.treeCrafterBlock), treeCrafting, 1)
-        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.treeCrafterBlockRB), treeCrafting, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.treeCrafterBlock), treeCrafting, 2)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.treeCrafterBlockRB), treeCrafting, 2)
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.lightningSapling), lightningSapling, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.lightningWood), lightningSapling, 1)
@@ -160,6 +160,17 @@ public object LexiconRegistry {
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.lightningSlabs), lightningSapling, 3)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.lightningStairs), lightningSapling, 4)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.resource, 1, 0), lightningSapling, 5)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.resource, 1, 1), lightningSapling, 6)
+
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.netherSapling), netherSapling, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.netherWood), netherSapling, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.netherLeaves), netherSapling, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.netherPlanks), netherSapling, 2)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.netherSlabs), netherSapling, 3)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.netherStairs), netherSapling, 4)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.resource, 1, 2), netherSapling, 5)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.resource, 1, 3), netherSapling, 6)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.resource, 1, 4), netherSapling, 7)
 
         for (i in 0..2)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.itemDisplay, 1, i), itemDisplay, 1)
@@ -169,7 +180,10 @@ public object LexiconRegistry {
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood1, 1, i), irisSapling, 1)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood2, 1, i), irisSapling, 1)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood3, 1, i), irisSapling, 1)
+            LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.altWood0, 1, i), irisSapling, 1)
         }
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.altWood1, 1, 0), irisSapling, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.altWood1, 1, 1), irisSapling, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.rainbowWood), irisSapling, 1)
         for (i in 0..15) {
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i), irisSapling, 1)
@@ -177,6 +191,11 @@ public object LexiconRegistry {
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.coloredStairs[i], 1), irisSapling, 3)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.coloredDirtBlock, 1, i), coloredDirt, 1)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisGrass, 1, i), pastoralSeeds, 0)
+        }
+        for (i in 0..5) {
+            LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.altPlanks, 1, i), irisSapling, 1)
+            LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.altSlabs[i], 1), irisSapling, 2)
+            LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.altStairs[i], 1), irisSapling, 3)
         }
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.rainbowLeaves), irisSapling, 5)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.rainbowPlanks), irisSapling, 1)
