@@ -129,12 +129,12 @@ class TileSchema() : ShadowFoxTile() {
 
                             var block = worldObj.getBlock(x, y, z)
 
-                            if (block === ShadowFoxBlocks.markerBlock) {
-                                setPos(getType(dir), Pos(x, y, z, dir))
-                                validDir.remove(dir)
-                                validDir.remove(dir.opposite)
-                                continue@loop
-                            }
+//                            if (block === ShadowFoxBlocks.markerBlock) {
+//                                setPos(getType(dir), Pos(x, y, z, dir))
+//                                validDir.remove(dir)
+//                                validDir.remove(dir.opposite)
+//                                continue@loop
+//                            }
                         }
                     }
                 }
@@ -149,12 +149,12 @@ class TileSchema() : ShadowFoxTile() {
         if (pos != null) {
             var block = worldObj.getBlock(pos.x, pos.y, pos.z)
 
-            if (block !== ShadowFoxBlocks.markerBlock) {
-                validDir.add(pos.dir)
-                validDir.add(pos.dir.opposite)
-                clearInferred()
-                setPos(i, null)
-            }
+//            if (block !== ShadowFoxBlocks.markerBlock) {
+//                validDir.add(pos.dir)
+//                validDir.add(pos.dir.opposite)
+//                clearInferred()
+//                setPos(i, null)
+//            }
         }
     }
 
