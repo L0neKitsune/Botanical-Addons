@@ -24,6 +24,8 @@ misc.shadowfox_botany.color.14=Red
 misc.shadowfox_botany.color.15=Black
 misc.shadowfox_botany.color.16=Bifrost
 
+tc.aspect.tincturem=Color, Iridescence
+
 misc.shadowfox_botany.creative=Creative
 
 item.shadowfox_botany:wiltedLotus0.name=Wilted Lotus
