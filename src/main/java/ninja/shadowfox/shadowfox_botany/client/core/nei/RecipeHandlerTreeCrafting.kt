@@ -1,16 +1,20 @@
 package ninja.shadowfox.shadowfox_botany.client.core.nei
 
-import codechicken.nei.NEIServerUtils
 import net.minecraft.item.ItemStack
 import net.minecraft.util.StatCollector
 
 import vazkii.botania.client.core.handler.HUDHandler
+import vazkii.botania.client.lib.LibResources
 import vazkii.botania.common.block.tile.mana.TilePool
 
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
 import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 
+import org.lwjgl.opengl.GL11
+
+import codechicken.lib.gui.GuiDraw
+import codechicken.nei.NEIServerUtils
 import codechicken.nei.PositionedStack
 import codechicken.nei.recipe.TemplateRecipeHandler
 import net.minecraft.init.Items
@@ -25,6 +29,10 @@ open class RecipeHandlerTreeCrafting : TemplateRecipeHandler() {
 
     override fun drawBackground(recipe: Int) {
         super.drawBackground(recipe)
+        GL11.glEnable(GL11.GL_BLEND)
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F)
+        GuiDraw.changeTexture(LibResources.GUI_PETAL_OVERLAY)
+        GuiDraw.drawTexturedModalRect(45, 10, 38, 7, 92, 92)
         HUDHandler.renderManaBar(32, 113, 0x0000FF, 0.75F, (arecipes.get(recipe) as RecipeHandlerTreeCrafting.CachedTreeRecipe).manaUsage, TilePool.MAX_MANA / 10)
     }
 
@@ -32,7 +40,7 @@ open class RecipeHandlerTreeCrafting : TemplateRecipeHandler() {
         get() = "shadowfox_botany.treeCrafter"
 
     override fun getGuiTexture(): String {
-        return "botania:textures/gui/neiBlank.png"
+        return LibResources.GUI_NEI_BLANK
     }
 
     override fun loadTransferRects() {
@@ -88,11 +96,9 @@ open class RecipeHandlerTreeCrafting : TemplateRecipeHandler() {
         val var2 = this.recipes.iterator()
 
         while (var2.hasNext()) {
-            if (var2.next() != null) {
-                val crecipe = this.getCachedRecipe(var2.next())
-                if (crecipe.contains(crecipe.inputs, ingredient) && var2.next().output.item !== Items.skull) {
-                    this.arecipes.add(crecipe)
-                }
+            val crecipe = this.getCachedRecipe(var2.next())
+            if (crecipe.contains(crecipe.inputs, ingredient)) {
+                this.arecipes.add(crecipe)
             }
         }
 

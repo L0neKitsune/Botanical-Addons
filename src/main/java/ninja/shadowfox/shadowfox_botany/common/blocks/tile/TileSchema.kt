@@ -325,3 +325,4 @@ class TileSchema() : ShadowFoxTile() {
     override fun readCustomNBT(nbttagcompound: NBTTagCompound) {
     }
 }
+

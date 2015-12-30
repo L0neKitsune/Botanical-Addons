@@ -26,6 +26,7 @@ public open class CommonProxy {
         ShadowFoxEntity
         ShadowFoxPotions
         LexiconRegistry
+        if (Loader.isModLoaded("Thaumcraft")) ThaumcraftAspects.initAspects()
     }
 
     open fun init(event: FMLInitializationEvent) {
@@ -34,6 +35,6 @@ public open class CommonProxy {
 
     open fun postInit(event: FMLPostInitializationEvent){
         ConfigHandler.loadPostInit()
-        if (Loader.isModLoaded("Thaumcraft")) ThaumcraftAspects
+        if (Loader.isModLoaded("Thaumcraft")) ThaumcraftAspects.addAspects()
     }
 }

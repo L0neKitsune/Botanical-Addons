@@ -59,6 +59,11 @@ public object ModRecipes {
     val recipesInfernalTwig: IRecipe
     val recipesSixTorches: IRecipe
 
+    val recipesAltPlanks: List<IRecipe>
+    val recipesAltSlabs: List<IRecipe>
+    val recipesAltStairsR: List<IRecipe>
+    val recipesAltStairsL: List<IRecipe>
+
     val recipesPastoralSeeds: List<RecipeManaInfusion>
 
     val recipesPlainDirt: RecipePureDaisy
@@ -321,27 +326,27 @@ public object ModRecipes {
         recipesThunderousPlanks = BotaniaAPI.getLatestAddedRecipe()
 
         GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.lightningSlabs, 6),
-            "QQQ",
-            'Q', ItemStack(ShadowFoxBlocks.lightningPlanks))
+                "QQQ",
+                'Q', ItemStack(ShadowFoxBlocks.lightningPlanks))
 
         recipesThunderousSlabs = BotaniaAPI.getLatestAddedRecipe()
 
         GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.lightningStairs, 4),
-                    "Q  ", "QQ ", "QQQ",
-                    'Q', ItemStack(ShadowFoxBlocks.lightningPlanks))
+                "Q  ", "QQ ", "QQQ",
+                'Q', ItemStack(ShadowFoxBlocks.lightningPlanks))
 
         recipesThunderousStairsL = BotaniaAPI.getLatestAddedRecipe()
 
         GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.lightningStairs, 4),
-                    "  Q", " QQ", "QQQ",
-                    'Q', ItemStack(ShadowFoxBlocks.lightningPlanks))
+                "  Q", " QQ", "QQQ",
+                'Q', ItemStack(ShadowFoxBlocks.lightningPlanks))
 
         recipesThunderousStairsR = BotaniaAPI.getLatestAddedRecipe()
 
         GameRegistry.addRecipe(ItemStack(ShadowFoxItems.resource, 1, 0), // Thunderous Twig
-                    "Q", 
-                    "Q",
-                    'Q', ItemStack(ShadowFoxBlocks.lightningWood))
+                "Q", 
+                "Q",
+                'Q', ItemStack(ShadowFoxBlocks.lightningWood))
 
         recipesThunderousTwig = BotaniaAPI.getLatestAddedRecipe()
 
@@ -365,8 +370,8 @@ public object ModRecipes {
         recipesInfernalPlanks = BotaniaAPI.getLatestAddedRecipe()
 
         GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.netherSlabs, 6),
-            "QQQ",
-            'Q', ItemStack(ShadowFoxBlocks.netherPlanks))
+                "QQQ",
+                'Q', ItemStack(ShadowFoxBlocks.netherPlanks))
 
         recipesInfernalSlabs = BotaniaAPI.getLatestAddedRecipe()
 
@@ -397,12 +402,43 @@ public object ModRecipes {
 
         recipesSixTorches = BotaniaAPI.getLatestAddedRecipe()
 
+        for (i in 0..3)
+            addShapelessOreDictRecipe(ItemStack(ShadowFoxBlocks.altPlanks, 4, i), ItemStack(ShadowFoxBlocks.altWood0, 1, i))
+        addShapelessOreDictRecipe(ItemStack(ShadowFoxBlocks.altPlanks, 4, 4), ItemStack(ShadowFoxBlocks.altWood1, 1, 0))
+        addShapelessOreDictRecipe(ItemStack(ShadowFoxBlocks.altPlanks, 4, 5), ItemStack(ShadowFoxBlocks.altWood1, 1, 1))
+
+        recipesAltPlanks = BotaniaAPI.getLatestAddedRecipes(6)
+
+        for (i in 0..5)
+            GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.altSlabs[i], 6),
+                "QQQ",
+                'Q', ItemStack(ShadowFoxBlocks.altPlanks, 1, i))
+
+        recipesAltSlabs = BotaniaAPI.getLatestAddedRecipes(6)
+
+        for (i in 0..5)
+            GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.altStairs[i], 4),
+                    "  Q", " QQ", "QQQ",
+                    'Q', ItemStack(ShadowFoxBlocks.altPlanks, 1, i))
+
+        recipesAltStairsR = BotaniaAPI.getLatestAddedRecipes(6)
+
+        for (i in 0..5)
+            GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.altStairs[i], 4),
+                    "Q  ", "QQ ", "QQQ",
+                    'Q', ItemStack(ShadowFoxBlocks.altPlanks, 1, i))
+
+        recipesAltStairsL = BotaniaAPI.getLatestAddedRecipes(6)
+
+
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood1, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood2, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood3, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.rainbowWood, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.lightningWood, ItemStack(Items.coal, 1, 1), 0.15F)
+        GameRegistry.addSmelting(ShadowFoxBlocks.altWood0, ItemStack(Items.coal, 1, 1), 0.15F)
+        GameRegistry.addSmelting(ShadowFoxBlocks.altWood1, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.lightningPlanks, ItemStack(ShadowFoxItems.resource, 2, 1), 0.1F) // Thunderous Splinters
         GameRegistry.addSmelting(ShadowFoxBlocks.netherPlanks, ItemStack(ShadowFoxItems.resource, 2, 3), 0.1F) // Infernal Splinters
         GameRegistry.addSmelting(ShadowFoxBlocks.netherWood, ItemStack(ShadowFoxItems.resource, 1, 4), 0.15F) // Flame-Laced Coal
