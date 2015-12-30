@@ -58,7 +58,7 @@ public class BlockAltWood(val set: Int) : ShadowFoxRotatedPillar(Material.wood),
         super.breakBlock(world, x, y, z, block, fortune)
     }
 
-    override fun damageDropped(meta: Int): Int = 0
+    override fun damageDropped(meta: Int): Int = meta and 3
     override fun quantityDropped(random: Random): Int = 1
 
     override fun register(par1Str: String) {
@@ -94,6 +94,6 @@ public class BlockAltWood(val set: Int) : ShadowFoxRotatedPillar(Material.wood),
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
-        return LexiconRegistry.lightningSapling
+        return LexiconRegistry.irisSapling
     }
 }

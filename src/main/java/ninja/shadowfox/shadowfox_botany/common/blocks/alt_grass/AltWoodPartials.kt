@@ -16,6 +16,7 @@ import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemRegularSlabMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxSlabs
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxStairs
+import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 
@@ -43,7 +44,7 @@ class BlockAltWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
-        return null
+        return LexiconRegistry.irisSapling
     }
 }
 
@@ -54,6 +55,6 @@ class BlockAltWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.altPlanks):
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
-        return null
+        return LexiconRegistry.irisSapling
     }
 }

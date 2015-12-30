@@ -100,10 +100,10 @@ public class BlockAltPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.mate
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
-        return LexiconRegistry.lightningSapling
+        return LexiconRegistry.irisSapling
     }
 
     override fun getBurnTime(fuel: ItemStack): Int {
-        return if (fuel.item == Item.getItemFromBlock(this)) 600 else 0
+        return if (fuel.item == Item.getItemFromBlock(this)) 300 else 0
     }
 }

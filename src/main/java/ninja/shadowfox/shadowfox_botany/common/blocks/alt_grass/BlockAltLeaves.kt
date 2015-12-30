@@ -36,8 +36,6 @@ class BlockAltLeaves(): ShadowFoxLeaves() {
             MinecraftForge.EVENT_BUS.register(this)
     }
 
-    override fun isFlammable(world: IBlockAccess?, x: Int, y: Int, z: Int, face: ForgeDirection?): Boolean = false
-
     @SideOnly(Side.CLIENT) override fun getBlockColor(): Int = 0xFFFFFF
     @SideOnly(Side.CLIENT) override fun getRenderColor(meta: Int): Int = 0xFFFFFF
     @SideOnly(Side.CLIENT) override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int = 0xFFFFFF
@@ -57,7 +55,7 @@ class BlockAltLeaves(): ShadowFoxLeaves() {
     }
 
     override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item {
-        return Item.getItemFromBlock(ShadowFoxBlocks.lightningSapling)
+        return Item.getItemFromBlock(ShadowFoxBlocks.irisSapling)
     }
 
     override fun quantityDropped(random: Random): Int {
@@ -78,6 +76,6 @@ class BlockAltLeaves(): ShadowFoxLeaves() {
     override fun decayBit(): Int = 0x8
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
-        return LexiconRegistry.lightningSapling
+        return LexiconRegistry.irisSapling
     }
 }
