@@ -55,7 +55,7 @@ object ThaumcraftAspects {
         var colorAspect = Aspect.SENSES
 
         if (ConfigHandler.addTincturemAspect) colorAspect = COLOR
-        
+
         if (Loader.isModLoaded("ForbiddenMagic")) {
             NETHER = Aspect.aspects.get("infernus")
             PRIDE = Aspect.aspects.get("superbia")
@@ -147,7 +147,7 @@ object ThaumcraftAspects {
             list = AspectList().add(Aspect.ELDRITCH, 5).add(Aspect.AIR, 16)
         ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxItems.emblem, 1, 2), list)
 
-        list = AspectList().add(Aspect.CLOTH, 4)
+        list = AspectList().add(Aspect.CLOTH, 4).add(colorAspect, 2)
         ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxItems.coatOfArms), list)
 
         list = AspectList().add(colorAspect, 8).add(Aspect.METAL, 4)
