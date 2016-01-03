@@ -3,7 +3,13 @@ package ninja.shadowfox.shadowfox_botany.common.blocks.tile
 import codechicken.core.CommonUtils
 import codechicken.nei.NEIClientConfig
 import codechicken.nei.NEIClientUtils
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
+import cpw.mods.fml.common.registry.GameData
+import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.FMLLaunchHandler
+import net.minecraft.block.Block
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.ChatComponentText
 import net.minecraftforge.common.util.ForgeDirection
@@ -20,6 +26,7 @@ import java.util.*
 class TileSchema() : ShadowFoxTile() {
 
     private var ticksAlive: Int = 0
+    private var lastDump: Int = 0
 
     var pos_x: Pos? = null
     var pos_y: Pos? = null
@@ -42,38 +49,59 @@ class TileSchema() : ShadowFoxTile() {
             for (v in arrayOf(1, 2, 3)) {
                 isPosValid(v)
             }
+
+            if (mark_x != null) {
+                var block = worldObj.getBlock(mark_x!!.x, mark_x!!.y, mark_x!!.z)
+                if (block !== ShadowFoxBlocks.markerBlock) {
+                    mark_x == null
+                }
+            }
+
+            if (mark_z != null) {
+                var block = worldObj.getBlock(mark_z!!.x, mark_z!!.y, mark_z!!.z)
+                if (block !== ShadowFoxBlocks.markerBlock) {
+                    mark_z == null
+                }
+            }
         }
 
         if (pos_x != null && pos_y != null && pos_z != null) {
             if (pos_xoz == null && pos_xyx == null && pos_zyz == null && pos_xyz == null) {
-                pos_xoz = Pos(pos_x!!.x, yCoord,    pos_z!!.z, ForgeDirection.UNKNOWN)
+                pos_xoz = Pos(pos_x!!.x, yCoord, pos_z!!.z, ForgeDirection.UNKNOWN)
                 pos_xyz = Pos(pos_x!!.x, pos_y!!.y, pos_z!!.z, ForgeDirection.UNKNOWN)
                 pos_xyx = Pos(pos_x!!.x, pos_y!!.y, pos_x!!.z, ForgeDirection.UNKNOWN)
                 pos_zyz = Pos(pos_z!!.x, pos_y!!.y, pos_z!!.z, ForgeDirection.UNKNOWN)
 
             } else {
-//                20.tickDelay {
-//                    if (mark_x == null) {
-//                        for(x in xCoord..pos_x!!.x) {
-//                            for (y in yCoord..pos_y!!.y) {
-//                                val block = worldObj.getBlock(x, y, zCoord)
-//
-//                                if (block === ShadowFoxBlocks.markerBlock)
-//                                    mark_x = Pos(x, y, zCoord, ForgeDirection.UNKNOWN)
-//                            }
-//                        }
-//                    }
-//                    if (mark_z == null) {
-//                        for(z in zCoord..pos_z!!.z) {
-//                            for (y in yCoord..pos_y!!.y) {
-//                                val block = worldObj.getBlock(xCoord, y, z)
-//
-//                                if (block === ShadowFoxBlocks.markerBlock)
-//                                    mark_z = Pos(xCoord, y, z, ForgeDirection.UNKNOWN)
-//                            }
-//                        }
-//                    }
-//                }
+                20.tickDelay {
+                    if (mark_x == null) {
+                        for (x in xCoord re pos_x!!.x) {
+                            for (y in yCoord re pos_y!!.y) {
+                                val block = worldObj.getBlock(x, y, zCoord)
+
+                                if (block === ShadowFoxBlocks.markerBlock) {
+                                    if (mark_z == null || y == mark_z!!.y) {
+                                        mark_x = Pos(x, y, zCoord, ForgeDirection.UNKNOWN)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (mark_z == null) {
+                        for (z in zCoord re pos_z!!.z) {
+                            for (y in yCoord re pos_y!!.y) {
+                                val block = worldObj.getBlock(xCoord, y, z)
+
+                                if (block === ShadowFoxBlocks.markerBlock) {
+                                    if (mark_x == null || y == mark_x!!.y) {
+                                        mark_z = Pos(xCoord, y, z, ForgeDirection.UNKNOWN)
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
 
                 10.tickDelay {
                     drawBoundingLine(null, pos_x!!)
@@ -93,12 +121,12 @@ class TileSchema() : ShadowFoxTile() {
                     drawBoundingLine(pos_xoz!!, pos_xyz!!)
                     drawBoundingLine(pos_zyz!!, pos_xyz!!)
 
-//                    if (mark_x != null) {
-//                        drawBoundingLine(mark_x, Pos(mark_x!!.x, mark_x!!.y, pos_z!!.z, ForgeDirection.UNKNOWN))
-//                    }
-//                    if (mark_z != null) {
-//                        drawBoundingLine(mark_z, Pos(pos_x!!.x, mark_z!!.y, mark_z!!.z, ForgeDirection.UNKNOWN))
-//                    }
+                    if (mark_x != null) {
+                        drawBoundingLine(mark_x, Pos(mark_x!!.x, mark_x!!.y, pos_z!!.z, ForgeDirection.UNKNOWN))
+                    }
+                    if (mark_z != null) {
+                        drawBoundingLine(mark_z, Pos(pos_x!!.x, mark_z!!.y, mark_z!!.z, ForgeDirection.UNKNOWN))
+                    }
                 }
             }
         } else {
@@ -129,12 +157,12 @@ class TileSchema() : ShadowFoxTile() {
 
                             var block = worldObj.getBlock(x, y, z)
 
-//                            if (block === ShadowFoxBlocks.markerBlock) {
-//                                setPos(getType(dir), Pos(x, y, z, dir))
-//                                validDir.remove(dir)
-//                                validDir.remove(dir.opposite)
-//                                continue@loop
-//                            }
+                            if (block === ShadowFoxBlocks.markerBlock) {
+                                setPos(getType(dir), Pos(x, y, z, dir))
+                                validDir.remove(dir)
+                                validDir.remove(dir.opposite)
+                                continue@loop
+                            }
                         }
                     }
                 }
@@ -144,17 +172,29 @@ class TileSchema() : ShadowFoxTile() {
         ticksAlive++
     }
 
+    private infix fun Int.re(to: Int): IntRange {
+        var f: Int = this
+        var t: Int = to
+
+        if (f > t) {
+            f = to
+            t = this
+        }
+
+        return (f + 1)..(t - 1)
+    }
+
     private fun isPosValid(i: Int) {
         val pos = getPos(i)
         if (pos != null) {
             var block = worldObj.getBlock(pos.x, pos.y, pos.z)
 
-//            if (block !== ShadowFoxBlocks.markerBlock) {
-//                validDir.add(pos.dir)
-//                validDir.add(pos.dir.opposite)
-//                clearInferred()
-//                setPos(i, null)
-//            }
+            if (block !== ShadowFoxBlocks.markerBlock) {
+                validDir.add(pos.dir)
+                validDir.add(pos.dir.opposite)
+                clearInferred()
+                setPos(i, null)
+            }
         }
     }
 
@@ -167,7 +207,10 @@ class TileSchema() : ShadowFoxTile() {
         }
     }
 
-    private fun getPos(i :Int): Pos? {
+    private fun Int.dif(i: Int): Int = Math.abs(this - i) * if (this < i) 1 else -1
+
+
+    private fun getPos(i: Int): Pos? {
         when (i) {
             1 -> return pos_x
             2 -> return pos_y
@@ -175,7 +218,7 @@ class TileSchema() : ShadowFoxTile() {
         }
     }
 
-    private fun setPos(i :Int, pos: Pos?) {
+    private fun setPos(i: Int, pos: Pos?) {
         when (i) {
             1 -> pos_x = pos
             2 -> pos_y = pos
@@ -183,7 +226,7 @@ class TileSchema() : ShadowFoxTile() {
         }
     }
 
-    private fun clearInferred(){
+    private fun clearInferred() {
         pos_xoz = null
         pos_xyx = null
         pos_zyz = null
@@ -266,8 +309,15 @@ class TileSchema() : ShadowFoxTile() {
         return Color.HSBtoRGB(time * 0.005F, 1F, 1F)
     }
 
-    public fun blockActivated() {
-        if (ticksAlive > 60) dumpFile()
+    public fun blockActivated(p0: EntityPlayer?) {
+        if (ticksAlive - lastDump > 60) {
+            lastDump = ticksAlive
+            if (pos_x != null && pos_y != null && pos_z != null && mark_x != null && mark_z != null) {
+                dumpFile()
+            } else {
+                p0?.addChatMessage(ChatComponentText("Missing Markers"))
+            }
+        }
     }
 
     fun dumpFile() {
@@ -277,21 +327,16 @@ class TileSchema() : ShadowFoxTile() {
 
             NEIClientUtils.printChatMessage(ChatComponentText("Schema dumped to: ${e.path}"))
         } catch (var2: Exception) {
-            NEIClientConfig.logger.error("Error dumping schema", var2)
+            NEIClientConfig.logger.error("Error dumping schema_0.txt", var2)
         }
     }
 
     fun getNewFile(file: Int = 0): File {
         val e = File(CommonUtils.getMinecraftDir(), "dumps/" + getFileName("schema_dump_$file"))
-        if (!e.parentFile.exists()) {
-            e.parentFile.mkdirs()
-        }
+        if (!e.parentFile.exists()) e.parentFile.mkdirs()
 
-        if (!e.exists()) {
-            e.createNewFile()
-        } else {
-            return getNewFile(file + 1)
-        }
+        if (!e.exists()) e.createNewFile()
+        else return getNewFile(file + 1)
 
         return e
     }
@@ -306,11 +351,50 @@ class TileSchema() : ShadowFoxTile() {
 
     @Throws(IOException::class)
     fun dumpTo(file: File) {
-        val w = PrintWriter(file)
-        w.println("Stuff should be here")
+        class LocationElement(val x: Int, val y: Int, val z: Int, val meta: Int) {
+            fun getJson(): JsonObject = JsonObject().apply {
+                addProperty("x", x)
+                addProperty("y", y)
+                addProperty("z", z)
+                addProperty("meta", meta)
+            }
+        }
 
+        val w = PrintWriter(file)
+        var map: HashMap<String, MutableList<LocationElement>> = HashMap()
+
+        for (x in xCoord re pos_x!!.x) {
+            for (y in yCoord re pos_y!!.y) {
+                for (z in zCoord re pos_z!!.z) {
+                    val meta = worldObj.getBlockMetadata(x, y, z)
+                    val key = getUniqueName(worldObj.getBlock(x, y, z))
+
+                    if (map.containsKey(key))
+                        map[key]?.add(LocationElement(mark_x!!.x.dif(x), mark_x!!.y.dif(y), mark_z!!.z.dif(z), meta))
+                    else map.put(key, arrayListOf(LocationElement(mark_x!!.x.dif(x), mark_x!!.y.dif(y), mark_z!!.z.dif(z), meta)))
+                }
+            }
+        }
+
+        w.print(JsonArray().apply {
+            for (k in map.keys) {
+                if(!k.equals("shadowfox_botany:fillerBlock")) {
+                    add(JsonObject().apply {
+                        addProperty("block", "$k")
+                        add("location", JsonArray().apply { for (v in map[k].orEmpty()) add(v.getJson()) })
+                    })
+                }
+            }
+        })
 
         w.close()
+    }
+
+    internal fun getUniqueName(block: Block): String {
+        val name = GameData.getBlockRegistry().getNameForObject(block)
+        val ui = GameRegistry.UniqueIdentifier(name)
+
+        return "${ui.modId}:${ui.name}"
     }
 
     fun Int.tickDelay(lambda: () -> Any) {

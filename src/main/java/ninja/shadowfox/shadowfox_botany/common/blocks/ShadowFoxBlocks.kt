@@ -99,8 +99,10 @@ public object ShadowFoxBlocks {
 
     public var kindling: Block
 
-//    public var markerBlock: Block
-//    public var schemaBlock: Block
+    public var markerBlock: Block
+    public var schemaBlock: Block
+    public var schemaGenBlock: Block
+    public var fillerBlock: Block
 
     public var iridescentTree0: IIridescentSaplingVariant
     public var iridescentTree1: IIridescentSaplingVariant
@@ -181,8 +183,10 @@ public object ShadowFoxBlocks {
         barrier = BlockBarrier()
 
         kindling = BlockKindling()
-//        schemaBlock = BlockSchema()
-//        markerBlock = BlockMarker()
+        schemaBlock = BlockSchema()
+        markerBlock = BlockMarker()
+        schemaGenBlock = BlockSchemaGen()
+        fillerBlock = BlockFiller()
 
         register()
         initOreDict()
