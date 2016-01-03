@@ -46,23 +46,22 @@ object ThaumcraftAspects {
             COLOR = RainbowAspect("tincturem", arrayOf<Aspect>(Aspect.LIGHT, Aspect.ORDER), ResourceLocation("shadowfox_botany", "textures/aspects/tincturem.png"), 771)
     }
 
-    fun addAspects() {
-        var forbidden = false
-        var NETHER: Aspect? = null
-        var PRIDE: Aspect? = null
-        var WRATH: Aspect? = null
-        var hellAspect = Aspect.FIRE
-        var colorAspect = Aspect.SENSES
-
-        if (ConfigHandler.addTincturemAspect) colorAspect = COLOR
-
-        if (Loader.isModLoaded("ForbiddenMagic")) {
-            NETHER = Aspect.aspects.get("infernus")
-            PRIDE = Aspect.aspects.get("superbia")
-            WRATH = Aspect.aspects.get("ira")
-            forbidden = true
-            hellAspect = NETHER
+    fun getAspect(mod: String, tag: String): Aspect? {
+        if (Loader.isModLoaded(mod)) {
+            try {
+                return Aspect.getAspect(tag)
+            } catch (e: Exception) {}
         }
+        return null
+    }
+
+    fun addAspects() {
+        val NETHER: Aspect? = getAspect("ForbiddenMagic", "infernus")
+        val PRIDE: Aspect? = getAspect("ForbiddenMagic", "superbia")
+        val WRATH: Aspect? = getAspect("ForbiddenMagic", "ira")
+        val forbidden = Loader.isModLoaded("ForbiddenMagic")
+        val hellAspect = if (forbidden) NETHER else Aspect.FIRE
+        val colorAspect = if (ConfigHandler.addTincturemAspect) COLOR else Aspect.SENSES
 
         val splinterlist = AspectList().add(Aspect.TREE, 1).add(Aspect.ENTROPY, 1)
 

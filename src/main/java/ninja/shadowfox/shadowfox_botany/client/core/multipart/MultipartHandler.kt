@@ -22,19 +22,27 @@ public object MultipartHandler {
         registerAllColoredMultiparts(ShadowFoxBlocks.irisWood2)
         registerAllColoredMultiparts(ShadowFoxBlocks.irisWood3)
         registerAllMultiparts(ShadowFoxBlocks.rainbowWood)
+        registerAllColoredMultiparts(ShadowFoxBlocks.altWood0)
+        registerAllColoredMultiparts(ShadowFoxBlocks.altWood1)
 
         registerAllColoredMultiparts(ShadowFoxBlocks.coloredPlanks)
         registerAllColoredMultiparts(ShadowFoxBlocks.rainbowPlanks)
+        registerAllColoredMultiparts(ShadowFoxBlocks.altPlanks)
 
         registerAllMultiparts(ShadowFoxBlocks.kindling)
 
         registerAllMultiparts(ShadowFoxBlocks.lightningWood)
         registerAllMultiparts(ShadowFoxBlocks.lightningPlanks)
 
+        registerAllMultiparts(ShadowFoxBlocks.netherWood)
+        registerAllMultiparts(ShadowFoxBlocks.netherPlanks)
+
         registerAllColoredMultiparts(ShadowFoxBlocks.irisLeaves0)
         registerAllColoredMultiparts(ShadowFoxBlocks.irisLeaves1)
         registerAllMultiparts(ShadowFoxBlocks.rainbowLeaves)
+        registerAllMultiparts(ShadowFoxBlocks.altLeaves)
         registerAllMultiparts(ShadowFoxBlocks.lightningLeaves)
+        registerAllMultiparts(ShadowFoxBlocks.netherLeaves)
     }
 
     fun registerAllMultiparts(block: Block) {

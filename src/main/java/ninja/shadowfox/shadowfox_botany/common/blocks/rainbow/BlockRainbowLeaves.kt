@@ -61,19 +61,19 @@ public class BlockRainbowLeaves(): ShadowFoxLeaves() {
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
         if(event.map.textureType == 0) {
+            var success = true
             var icon = InterpolatedIcon("shadowfox_botany:rainbowLeaves")
-            if(event.map.setTextureEntry("shadowfox_botany:rainbowLeaves", icon))
-                this.blockIcon = icon
+            if(!event.map.setTextureEntry("shadowfox_botany:rainbowLeaves", icon))
+                success = false
+            var iconOpaque = InterpolatedIcon("shadowfox_botany:rainbowLeaves_opaque")
+            if(!event.map.setTextureEntry("shadowfox_botany:rainbowLeaves_opaque", iconOpaque))
+                success = false
+            if (success) icons = arrayOf(icon, iconOpaque)
         }
     }
 
     @SideOnly(Side.CLIENT)
     override fun registerBlockIcons(iconRegister: IIconRegister) {}
-
-    @SideOnly(Side.CLIENT)
-    override fun getIcon(side: Int, meta: Int): IIcon {
-        return this.blockIcon
-    }
 
     override fun decayBit(): Int = 0x1
 
