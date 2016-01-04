@@ -16,7 +16,7 @@ import net.minecraft.util.MathHelper
 import net.minecraft.util.StatCollector
 import net.minecraftforge.client.event.RenderPlayerEvent
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.item.IPriestColorOverride
+import ninja.shadowfox.shadowfox_botany.api.item.IPriestColorOverride
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import org.lwjgl.opengl.GL11
 import vazkii.botania.api.item.IBaubleRender

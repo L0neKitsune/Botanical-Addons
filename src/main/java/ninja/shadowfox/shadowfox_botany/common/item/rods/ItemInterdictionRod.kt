@@ -18,7 +18,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
-import ninja.shadowfox.shadowfox_botany.common.item.IPriestColorOverride
+import ninja.shadowfox.shadowfox_botany.api.item.IPriestColorOverride
 import ninja.shadowfox.shadowfox_botany.common.item.ItemMod
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemPriestEmblem
 import vazkii.botania.api.internal.IManaBurst

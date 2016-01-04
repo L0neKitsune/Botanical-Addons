@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.item
+package ninja.shadowfox.shadowfox_botany.api.item
 
 import baubles.common.lib.PlayerHandler
 import net.minecraft.entity.player.EntityPlayer
