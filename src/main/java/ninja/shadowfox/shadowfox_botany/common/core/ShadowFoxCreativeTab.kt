@@ -8,7 +8,7 @@ import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 object ShadowFoxCreativeTab : CreativeTabs("shadowfox_botany") {
 
     override fun getIconItemStack(): ItemStack {
-        return ItemStack(ShadowFoxItems.colorfulSkyDirtRod, 1, 10)
+        return ItemStack(ShadowFoxItems.colorfulSkyDirtRod, 1, 16)
     }
 
     override fun getTabIconItem(): Item {

@@ -5,7 +5,7 @@ import net.minecraft.block.material.Material
 
 class MaterialCustomSmeltingWood: Material(MapColor.woodColor) {
     companion object {
-        val material = MaterialCustomSmeltingWood()
+        val instance = MaterialCustomSmeltingWood()
     }
 
     init {

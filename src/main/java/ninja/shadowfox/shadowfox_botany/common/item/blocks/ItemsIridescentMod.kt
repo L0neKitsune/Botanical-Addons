@@ -6,6 +6,9 @@ import net.minecraft.item.ItemBlockWithMetadata
 import net.minecraft.item.ItemStack
 import net.minecraft.util.StatCollector
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
+import kotlin.text.replace
+import kotlin.text.toInt
+import kotlin.text.toRegex
 
 open class ItemIridescentBlockMod(par2Block: Block) : ItemBlockWithMetadata(par2Block, par2Block) {
 

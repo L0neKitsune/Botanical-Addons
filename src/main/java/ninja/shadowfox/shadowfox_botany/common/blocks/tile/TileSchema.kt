@@ -21,6 +21,9 @@ import java.io.File
 import java.io.IOException
 import java.io.PrintWriter
 import java.util.*
+import kotlin.collections.arrayListOf
+import kotlin.collections.orEmpty
+import kotlin.collections.toArrayList
 
 
 class TileSchema() : ShadowFoxTile() {

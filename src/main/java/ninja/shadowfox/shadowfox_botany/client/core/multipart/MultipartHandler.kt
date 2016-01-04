@@ -19,12 +19,12 @@ public object MultipartHandler {
         registerAllColoredMultiparts(ShadowFoxBlocks.irisWood2)
         registerAllColoredMultiparts(ShadowFoxBlocks.irisWood3)
         registerAllMultiparts(ShadowFoxBlocks.rainbowWood)
-        registerAllColoredMultiparts(ShadowFoxBlocks.altWood0)
-        registerAllColoredMultiparts(ShadowFoxBlocks.altWood1)
+        registerAllMultiparts(ShadowFoxBlocks.altWood0)
+        registerAllMultiparts(ShadowFoxBlocks.altWood1)
 
         registerAllColoredMultiparts(ShadowFoxBlocks.coloredPlanks)
-        registerAllColoredMultiparts(ShadowFoxBlocks.rainbowPlanks)
-        registerAllColoredMultiparts(ShadowFoxBlocks.altPlanks)
+        registerAllMultiparts(ShadowFoxBlocks.rainbowPlanks)
+        registerAllMultiparts(ShadowFoxBlocks.altPlanks)
 
         registerAllMultiparts(ShadowFoxBlocks.kindling)
 

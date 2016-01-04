@@ -4,6 +4,7 @@ import net.minecraft.block.Block
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
+import kotlin.text.replace
 
 open class ItemBlockMod(block: Block) : ItemBlock(block){
 

@@ -8,6 +8,8 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxStairs
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
+import kotlin.text.replace
+import kotlin.text.toRegex
 
 
 open class BlockRainbowWoodStairs(source: Block = ShadowFoxBlocks.rainbowPlanks) : ShadowFoxStairs(source, 0, source.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs"), ILexiconable {
@@ -18,7 +20,7 @@ open class BlockRainbowWoodStairs(source: Block = ShadowFoxBlocks.rainbowPlanks)
     }
 
     override fun isToolEffective(type: String?, metadata: Int): Boolean {
-        return (type != null && type.equals("axe", true))
+        return (type != null && type.equals("axe"))
     }
 
     override fun getHarvestTool(metadata : Int): String {

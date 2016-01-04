@@ -31,7 +31,7 @@ import java.util.*
 import kotlin.properties.Delegates
 
 
-public class BlockRainbowPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.material), ILexiconable, IFuelHandler, IWandable {
+public class BlockRainbowPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.instance), ILexiconable, IFuelHandler, IWandable {
 
     private val name = "rainbowPlanks"
     protected var icons : IIcon by Delegates.notNull()
@@ -71,7 +71,7 @@ public class BlockRainbowPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.
     }
 
     override fun isToolEffective(type: String?, metadata: Int): Boolean {
-        return (type != null && type.equals("axe", true))
+        return (type != null && type.equals("axe"))
     }
 
     override fun getHarvestTool(metadata : Int): String {

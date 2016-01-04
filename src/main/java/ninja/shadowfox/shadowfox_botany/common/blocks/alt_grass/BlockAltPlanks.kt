@@ -26,7 +26,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 
-public class BlockAltPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.material), ILexiconable, IFuelHandler {
+public class BlockAltPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.instance), ILexiconable, IFuelHandler {
 
     private val name = "altPlanks"
     protected var icons: Array<IIcon> = emptyArray()
@@ -51,7 +51,7 @@ public class BlockAltPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.mate
     }
 
     override fun isToolEffective(type: String?, metadata: Int): Boolean {
-        return (type != null && type.equals("axe", true))
+        return (type != null && type.equals("axe"))
     }
 
     override fun getHarvestTool(metadata : Int): String {

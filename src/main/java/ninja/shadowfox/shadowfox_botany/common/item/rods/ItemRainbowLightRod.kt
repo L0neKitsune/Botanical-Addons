@@ -25,6 +25,8 @@ import vazkii.botania.api.mana.ManaItemHandler
 import vazkii.botania.common.core.helper.ItemNBTHelper
 
 import kotlin.properties.Delegates
+import kotlin.text.replace
+import kotlin.text.toRegex
 
 class ItemRainbowLightRod : ItemMod("rainbowLightRod"), IManaUsingItem, IPhantomInkable {
 

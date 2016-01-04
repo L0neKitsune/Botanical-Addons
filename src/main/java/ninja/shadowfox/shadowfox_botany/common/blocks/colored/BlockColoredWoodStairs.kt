@@ -15,6 +15,8 @@ import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
+import kotlin.text.replace
+import kotlin.text.toRegex
 
 
 class BlockColoredWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.coloredPlanks) : ShadowFoxStairs(source, meta, source.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs" + meta), ILexiconable {
@@ -30,7 +32,7 @@ class BlockColoredWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.coloredP
     }
 
     override fun isToolEffective(type: String?, metadata: Int): Boolean {
-        return (type != null && type.equals("axe", true))
+        return (type != null && type.equals("axe"))
     }
 
     override fun getHarvestTool(metadata : Int): String {

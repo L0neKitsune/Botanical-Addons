@@ -8,6 +8,8 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import kotlin.text.replace
+import kotlin.text.toRegex
 
 
 open class ItemMod(name: String) : Item() {

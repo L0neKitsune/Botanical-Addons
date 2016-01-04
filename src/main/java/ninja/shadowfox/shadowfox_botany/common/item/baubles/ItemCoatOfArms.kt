@@ -23,6 +23,9 @@ import vazkii.botania.api.item.IBaubleRender
 import vazkii.botania.api.item.ICosmeticBauble
 import vazkii.botania.client.core.helper.ShaderHelper
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
+import kotlin.text.replace
+import kotlin.text.toLowerCase
+import kotlin.text.toRegex
 
 class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorOverride {
 
@@ -68,8 +71,8 @@ class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorO
     override fun onEquipped(stack: ItemStack, player: EntityLivingBase) {
         super.onEquipped(stack, player)
         if (stack.itemDamage == 1 && "paris".toRegex().find(stack.displayName.toLowerCase()) != null) {
-            stack.setItemDamage(17)
-            stack.getTagCompound().removeTag("display")
+            stack.itemDamage = 17
+            stack.tagCompound.removeTag("display")
         }
     }
 

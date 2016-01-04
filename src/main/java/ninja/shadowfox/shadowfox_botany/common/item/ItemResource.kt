@@ -26,7 +26,7 @@ class ItemResource(): ItemMod("resource"), IFuelHandler {
     }
 
     val TYPES = 5
-    val INTERP = 0x11
+    val INTERP = 0b10001
 
     var icons: Array<IIcon?> = arrayOfNulls(TYPES)
 
@@ -70,7 +70,7 @@ class ItemResource(): ItemMod("resource"), IFuelHandler {
         if (fuel.item == ShadowFoxItems.resource) {
             when (fuel.itemDamage) {
                 1,3 -> return 100 // Splinters smelt half an item.
-                4 -> return 2400 // Flame-Laced Coal smelts 12 items
+                4 -> return 2400 // Flame-Laced Coal smelts 12 items.
             }
         }
         return 0

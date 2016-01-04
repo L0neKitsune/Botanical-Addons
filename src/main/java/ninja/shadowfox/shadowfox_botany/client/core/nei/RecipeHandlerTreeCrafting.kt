@@ -29,7 +29,7 @@ open class RecipeHandlerTreeCrafting : TemplateRecipeHandler() {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F)
         GuiDraw.changeTexture(LibResources.GUI_PETAL_OVERLAY)
         GuiDraw.drawTexturedModalRect(45, 10, 38, 7, 92, 92)
-        HUDHandler.renderManaBar(32, 113, 0x0000FF, 0.75F, (arecipes.get(recipe) as RecipeHandlerTreeCrafting.CachedTreeRecipe).manaUsage, TilePool.MAX_MANA / 10)
+        HUDHandler.renderManaBar(32, 113, 0x0000FF, 0.75F, (arecipes[recipe] as RecipeHandlerTreeCrafting.CachedTreeRecipe).manaUsage, TilePool.MAX_MANA / 10)
     }
 
     open val recipeID: String

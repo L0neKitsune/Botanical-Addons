@@ -35,6 +35,8 @@ import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.core.helper.Vector3
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
 import java.awt.Color
+import kotlin.text.replace
+import kotlin.text.toRegex
 
 class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsingItem {
 

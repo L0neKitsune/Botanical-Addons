@@ -17,6 +17,8 @@ import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.common.Botania
 import java.awt.Color
 import kotlin.properties.Delegates
+import kotlin.text.replace
+import kotlin.text.toRegex
 
 open class ItemIridescent(name: String) : Item() {
 

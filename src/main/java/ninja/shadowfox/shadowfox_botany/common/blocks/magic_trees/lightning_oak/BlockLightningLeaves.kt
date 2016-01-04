@@ -25,7 +25,7 @@ import java.util.*
 class BlockLightningLeaves(): ShadowFoxLeaves() {
     init {
         setBlockName("lightningLeaves")
-        if (FMLLaunchHandler.side().isClient())
+        if (FMLLaunchHandler.side().isClient)
             MinecraftForge.EVENT_BUS.register(this)
     }
 

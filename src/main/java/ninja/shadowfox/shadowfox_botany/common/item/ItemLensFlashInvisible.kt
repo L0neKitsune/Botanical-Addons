@@ -26,6 +26,9 @@ import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.crafting.recipe.LensDyeingRecipe
 import vazkii.botania.common.item.lens.ItemLens
 import java.awt.Color
+import kotlin.text.format
+import kotlin.text.replace
+import kotlin.text.toRegex
 
 
 class ItemLensFlashInvisible() : ItemMod("lensPhantomLight"), ICompositableLens {
@@ -137,14 +140,12 @@ class ItemLensFlashInvisible() : ItemMod("lensPhantomLight"), ICompositableLens 
     }
 
     override fun getItemStackDisplayName(stack: ItemStack): String {
-        var compositeLens = getCompositeLens(stack)
-        if(compositeLens == null)
-            return StatCollector.translateToLocal("item.botania:lensLight.name")
+        var compositeLens = getCompositeLens(stack) ?: return StatCollector.translateToLocal("item.botania:lensLight.name")
         return StatCollector.translateToLocal("item.botania:compositeLens.name").format(getItemShortTermName(stack), getItemShortTermName(compositeLens))
     }
 
     fun getItemShortTermName(stack: ItemStack): String {
-        return StatCollector.translateToLocal(stack.getUnlocalizedName().replace("item\\.".toRegex(), "item.botania:") + ".short")
+        return StatCollector.translateToLocal(stack.unlocalizedName.replace("item\\.".toRegex(), "item.botania:") + ".short")
     }
 
     override fun getColorFromItemStack(par1ItemStack: ItemStack, par2: Int): Int {

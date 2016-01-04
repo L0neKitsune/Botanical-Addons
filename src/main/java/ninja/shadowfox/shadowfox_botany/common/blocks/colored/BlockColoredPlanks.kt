@@ -29,7 +29,7 @@ import java.awt.Color
 import java.util.*
 import kotlin.properties.Delegates
 
-class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.material), ILexiconable, IFuelHandler, IWandable {
+class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.instance), ILexiconable, IFuelHandler, IWandable {
 
     private val name = "irisPlanks"
     private val TYPES = 16

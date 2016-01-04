@@ -10,6 +10,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.api.lexicon.LexiconRecipeMappings
 import vazkii.botania.common.lexicon.LexiconData
 import vazkii.botania.common.lexicon.page.*
+import kotlin.collections.plus
 
 public object LexiconRegistry {
 

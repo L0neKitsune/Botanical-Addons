@@ -28,6 +28,8 @@ import vazkii.botania.common.core.helper.Vector3
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
 import java.awt.Color
 import kotlin.properties.Delegates
+import kotlin.text.replace
+import kotlin.text.toRegex
 
 class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingItem {
 

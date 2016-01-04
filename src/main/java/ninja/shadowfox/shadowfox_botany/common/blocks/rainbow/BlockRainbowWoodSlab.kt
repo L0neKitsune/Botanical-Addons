@@ -12,6 +12,8 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxSlabs
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
+import kotlin.text.replace
+import kotlin.text.toRegex
 
 
 open class BlockRainbowWoodSlab(full: Boolean, source: Block = ShadowFoxBlocks.rainbowPlanks): ShadowFoxSlabs(full, 0, source, source.unlocalizedName.replace("tile.".toRegex(), "") + "Slab" + (if (full) "Full" else "")), IFuelHandler {
@@ -22,7 +24,7 @@ open class BlockRainbowWoodSlab(full: Boolean, source: Block = ShadowFoxBlocks.r
     }
 
     override fun isToolEffective(type: String?, metadata: Int): Boolean {
-        return (type != null && type.equals("axe", true))
+        return (type != null && type.equals("axe"))
     }
 
     override fun getHarvestTool(metadata : Int): String {

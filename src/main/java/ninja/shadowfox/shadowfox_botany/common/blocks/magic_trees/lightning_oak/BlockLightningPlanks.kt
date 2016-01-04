@@ -28,7 +28,7 @@ import java.util.*
 import kotlin.properties.Delegates
 
 
-public class BlockLightningPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.material), ILexiconable, IFuelHandler {
+public class BlockLightningPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.instance), ILexiconable, IFuelHandler {
 
     private val name = "lightningPlanks"
     protected var icons : IIcon by Delegates.notNull()

@@ -32,6 +32,7 @@ import vazkii.botania.common.Botania
 import vazkii.botania.common.entity.EntityDoppleganger
 import java.awt.Color
 import kotlin.properties.Delegates
+import kotlin.ranges.step
 
 public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMod(name), IManaUsingItem, IAvatarWieldable {
     private val avatarOverlay = ResourceLocation("shadowfox_botany:textures/model/avatarInterdiction.png")

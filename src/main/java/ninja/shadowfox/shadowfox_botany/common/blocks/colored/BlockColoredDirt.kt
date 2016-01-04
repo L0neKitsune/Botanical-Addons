@@ -88,7 +88,7 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     }
 
     override fun isToolEffective(type: String?, metadata: Int): Boolean {
-        return (type != null && type.equals("shovel", true))
+        return (type != null && type.equals("shovel"))
     }
 
     override fun getHarvestTool(metadata : Int): String {

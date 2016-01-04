@@ -18,9 +18,7 @@ object ThaumcraftAspects {
 
     class RainbowAspect(name: String, components: Array<Aspect>, texture: ResourceLocation, blend: Int): Aspect(name, 0xFFFFFF, components, texture, blend) {
 
-        override fun getColor(): Int {
-            return ItemIridescent.rainbowColor()
-        }
+        override fun getColor(): Int = ItemIridescent.rainbowColor()
     }
 
     fun WildStack(i: Block): ItemStack = ItemStack(i, 1, OreDictionary.WILDCARD_VALUE)

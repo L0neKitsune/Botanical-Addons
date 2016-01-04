@@ -4,7 +4,8 @@ import net.minecraft.block.Block
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.item.Item
 import net.minecraft.util.IIcon
-
+import kotlin.text.replace
+import kotlin.text.toRegex
 
 object IconHelper {
 
