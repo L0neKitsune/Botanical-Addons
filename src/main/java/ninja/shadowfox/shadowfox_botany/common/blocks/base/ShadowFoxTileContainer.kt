@@ -10,8 +10,8 @@ import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import vazkii.botania.client.core.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
+import vazkii.botania.client.core.helper.IconHelper
 
 
 abstract class ShadowFoxTileContainer<T: TileEntity>(material: Material): BlockContainer(material) {

@@ -1,9 +1,9 @@
 package ninja.shadowfox.shadowfox_botany.common.item
 
-import java.awt.Color
-import java.util.ArrayList
-import java.util.HashMap
-import java.util.Random
+import cpw.mods.fml.common.FMLCommonHandler
+import cpw.mods.fml.common.eventhandler.SubscribeEvent
+import cpw.mods.fml.common.gameevent.TickEvent
+import cpw.mods.fml.common.gameevent.TickEvent.Phase
 import net.minecraft.block.Block
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
@@ -12,12 +12,10 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ChunkCoordinates
 import net.minecraft.world.World
-import vazkii.botania.common.Botania
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import cpw.mods.fml.common.FMLCommonHandler
-import cpw.mods.fml.common.eventhandler.SubscribeEvent
-import cpw.mods.fml.common.gameevent.TickEvent
-import cpw.mods.fml.common.gameevent.TickEvent.Phase
+import vazkii.botania.common.Botania
+import java.awt.Color
+import java.util.*
 
 class ItemColorSeeds() : ItemIridescent("irisSeeds") {
     private val blockSwappers = HashMap<Int, MutableList<BlockSwapper?>>()

@@ -10,8 +10,8 @@ import net.minecraft.world.gen.feature.WorldGenerator
 import net.minecraftforge.event.terraingen.TerrainGen
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.BlockColoredSapling
-import ninja.shadowfox.shadowfox_botany.common.world.HeartWoodTreeGen
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import ninja.shadowfox.shadowfox_botany.common.world.HeartWoodTreeGen
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 

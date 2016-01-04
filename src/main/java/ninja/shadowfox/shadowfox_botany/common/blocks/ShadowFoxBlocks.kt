@@ -1,19 +1,19 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks
 
 import cpw.mods.fml.common.registry.GameRegistry
-import net.minecraft.init.Blocks
 import net.minecraft.block.Block
+import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
-import ninja.shadowfox.shadowfox_botany.common.blocks.alt_grass.*
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
 import ninja.shadowfox.shadowfox_botany.api.trees.IIridescentSaplingVariant
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.*
+import ninja.shadowfox.shadowfox_botany.common.blocks.alt_grass.*
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockManaFlame
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxSlabs
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.lightning_oak.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.nether_oak.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.*
-
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.*
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.multiblock.MultiblockSet

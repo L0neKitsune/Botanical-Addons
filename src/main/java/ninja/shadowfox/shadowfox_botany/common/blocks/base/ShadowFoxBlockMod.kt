@@ -6,9 +6,9 @@ import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 
 
 open class ShadowFoxBlockMod(par2Material: Material) : Block(par2Material) {

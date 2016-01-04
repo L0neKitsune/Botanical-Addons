@@ -1,8 +1,8 @@
 package ninja.shadowfox.shadowfox_botany.client.core.nei
 
-import ninja.shadowfox.shadowfox_botany.lib.Constants
 import codechicken.nei.api.API
 import codechicken.nei.api.IConfigureNEI
+import ninja.shadowfox.shadowfox_botany.lib.Constants
 
 public class NEIConfig: IConfigureNEI {
 

@@ -13,10 +13,7 @@ import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.wand.IWandable
-import java.io.BufferedReader
 import java.io.File
-import java.io.FileNotFoundException
-import java.io.FileReader
 
 
 class BlockSchemaGen() : ShadowFoxBlockMod(Material.wood), IWandable {

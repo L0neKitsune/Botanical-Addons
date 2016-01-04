@@ -6,7 +6,6 @@ import net.minecraft.item.ItemSlab
 import net.minecraft.item.ItemStack
 import net.minecraft.util.StatCollector
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxSlabs
-import ninja.shadowfox.shadowfox_botany.common.blocks.colored.BlockColoredWoodSlab
 
 
 open class ItemColoredSlabMod(par1: Block) : ItemSlabMod(par1) {

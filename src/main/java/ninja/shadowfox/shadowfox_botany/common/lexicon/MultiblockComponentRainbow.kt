@@ -1,17 +1,14 @@
 package ninja.shadowfox.shadowfox_botany.common.lexicon
 
+import cpw.mods.fml.relauncher.FMLLaunchHandler
 import net.minecraft.block.Block
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ChunkCoordinates
 import net.minecraft.world.World
-
-import cpw.mods.fml.relauncher.FMLLaunchHandler
-
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.multiblock.component.MultiblockComponent
-
-import java.util.ArrayList
+import java.util.*
 
 class MultiblockComponentRainbow(relPos: ChunkCoordinates, default: Block, vararg blocks: Block):
       MultiblockComponent(relPos, default, -1) {

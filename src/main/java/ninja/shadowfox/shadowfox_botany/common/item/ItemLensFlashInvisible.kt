@@ -1,8 +1,8 @@
 package ninja.shadowfox.shadowfox_botany.common.item
 
+import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
-import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.passive.EntitySheep
 import net.minecraft.entity.player.EntityPlayer
@@ -22,9 +22,9 @@ import vazkii.botania.api.mana.BurstProperties
 import vazkii.botania.api.mana.ICompositableLens
 import vazkii.botania.common.Botania
 import vazkii.botania.common.block.ModBlocks
-import vazkii.botania.common.item.lens.ItemLens
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.crafting.recipe.LensDyeingRecipe
+import vazkii.botania.common.item.lens.ItemLens
 import java.awt.Color
 
 

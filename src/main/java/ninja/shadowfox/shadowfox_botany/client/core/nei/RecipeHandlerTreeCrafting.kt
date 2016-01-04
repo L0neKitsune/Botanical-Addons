@@ -1,24 +1,20 @@
 package ninja.shadowfox.shadowfox_botany.client.core.nei
 
-import net.minecraft.item.ItemStack
-import net.minecraft.util.StatCollector
-
-import vazkii.botania.client.core.handler.HUDHandler
-import vazkii.botania.client.lib.LibResources
-import vazkii.botania.common.block.tile.mana.TilePool
-
-import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
-import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting
-import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-
-import org.lwjgl.opengl.GL11
-
 import codechicken.lib.gui.GuiDraw
 import codechicken.nei.NEIServerUtils
 import codechicken.nei.PositionedStack
 import codechicken.nei.recipe.TemplateRecipeHandler
 import net.minecraft.init.Items
+import net.minecraft.item.ItemStack
+import net.minecraft.util.StatCollector
 import net.minecraftforge.oredict.OreDictionary
+import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
+import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import org.lwjgl.opengl.GL11
+import vazkii.botania.client.core.handler.HUDHandler
+import vazkii.botania.client.lib.LibResources
+import vazkii.botania.common.block.tile.mana.TilePool
 import java.awt.Rectangle
 import java.util.*
 

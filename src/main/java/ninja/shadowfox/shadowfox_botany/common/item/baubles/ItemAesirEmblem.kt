@@ -1,29 +1,24 @@
 package ninja.shadowfox.shadowfox_botany.common.item.baubles
 
-import java.awt.Color
-
-import ninja.shadowfox.shadowfox_botany.common.item.IPriestColorOverride
-import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
-
+import baubles.api.BaubleType
+import cpw.mods.fml.relauncher.Side
+import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.ItemRenderer
 import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.client.renderer.texture.TextureMap
-import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.util.MathHelper
 import net.minecraft.util.StatCollector
 import net.minecraftforge.client.event.RenderPlayerEvent
-
+import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
+import ninja.shadowfox.shadowfox_botany.common.item.IPriestColorOverride
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import org.lwjgl.opengl.GL11
-
-import vazkii.botania.api.item.ICosmeticAttachable
 import vazkii.botania.api.item.IBaubleRender
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
@@ -31,13 +26,7 @@ import vazkii.botania.common.Botania
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.core.helper.Vector3
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
-
-import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.relauncher.Side
-import cpw.mods.fml.relauncher.SideOnly
-
-import baubles.api.BaubleType
-
+import java.awt.Color
 import kotlin.properties.Delegates
 
 class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingItem {

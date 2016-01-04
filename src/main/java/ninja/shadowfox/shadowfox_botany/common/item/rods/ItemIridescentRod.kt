@@ -1,29 +1,29 @@
 package ninja.shadowfox.shadowfox_botany.common.item.rods
 
-import java.awt.Color
+import net.minecraft.block.Block
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
-import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
-import net.minecraft.util.StatCollector
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.MathHelper
 import net.minecraft.util.ResourceLocation
+import net.minecraft.util.StatCollector
 import net.minecraft.world.World
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemPriestEmblem
-import vazkii.botania.client.core.handler.ItemsRemainingRenderHandler
 import vazkii.botania.api.item.IAvatarTile
 import vazkii.botania.api.item.IAvatarWieldable
 import vazkii.botania.api.item.IBlockProvider
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
+import vazkii.botania.client.core.handler.ItemsRemainingRenderHandler
 import vazkii.botania.common.Botania
 import vazkii.botania.common.core.helper.Vector3
+import java.awt.Color
 
 
 class ItemIridescentRod(name: String = "colorfulSkyDirtRod") : ItemIridescent(name), IAvatarWieldable, IManaUsingItem, IBlockProvider {

@@ -1,18 +1,16 @@
 package vazkii.botania.common.lexicon.page
 
-import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.FontRenderer
-import net.minecraft.item.ItemStack
-import net.minecraft.util.StatCollector
-import org.lwjgl.opengl.GL11
-import vazkii.botania.api.internal.IGuiLexiconEntry
-import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting
-import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import vazkii.botania.client.core.handler.HUDHandler
-import vazkii.botania.common.block.ModBlocks
-import vazkii.botania.common.block.tile.mana.TilePool
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
+import net.minecraft.client.Minecraft
+import net.minecraft.item.ItemStack
+import net.minecraft.util.StatCollector
+import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import org.lwjgl.opengl.GL11
+import vazkii.botania.api.internal.IGuiLexiconEntry
+import vazkii.botania.client.core.handler.HUDHandler
+import vazkii.botania.common.block.tile.mana.TilePool
 
 public class PageTreeCrafting: PagePetalRecipe<RecipeTreeCrafting> {
     constructor(unlocalizedName:String, recipes:List<RecipeTreeCrafting>) : super(unlocalizedName, recipes) {}

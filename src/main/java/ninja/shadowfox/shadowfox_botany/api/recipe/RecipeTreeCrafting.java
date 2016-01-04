@@ -3,9 +3,11 @@ package ninja.shadowfox.shadowfox_botany.api.recipe;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import java.util.*;
-
 import vazkii.botania.api.recipe.RecipePetals;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class RecipeTreeCrafting extends RecipePetals {
 

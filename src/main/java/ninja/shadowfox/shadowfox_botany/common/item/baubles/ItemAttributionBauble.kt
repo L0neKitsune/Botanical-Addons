@@ -1,10 +1,11 @@
 package ninja.shadowfox.shadowfox_botany.common.item.baubles
 
-import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
-
+import baubles.api.BaubleType
+import cpw.mods.fml.common.eventhandler.SubscribeEvent
+import cpw.mods.fml.relauncher.FMLLaunchHandler
+import cpw.mods.fml.relauncher.Side
+import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.client.Minecraft
-import net.minecraft.client.model.ModelBiped
 import net.minecraft.client.renderer.ItemRenderer
 import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.texture.IIconRegister
@@ -15,30 +16,20 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.StatCollector
-
 import net.minecraftforge.client.event.RenderPlayerEvent
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
-
+import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import org.lwjgl.opengl.GL11
-
-import vazkii.botania.client.core.proxy.ClientProxy
-import vazkii.botania.client.model.ModelTinyPotato
-import vazkii.botania.client.lib.LibResources
 import vazkii.botania.api.item.IBaubleRender
 import vazkii.botania.api.item.ICosmeticBauble
-import vazkii.botania.common.item.equipment.bauble.ItemBauble
-import vazkii.botania.client.render.block.InterpolatedIcon
-
-import cpw.mods.fml.relauncher.Side
-import cpw.mods.fml.relauncher.SideOnly
-import cpw.mods.fml.relauncher.FMLLaunchHandler
-import cpw.mods.fml.common.eventhandler.SubscribeEvent
-
-import baubles.api.BaubleType
-import net.minecraft.client.renderer.OpenGlHelper
 import vazkii.botania.client.core.helper.ShaderHelper
-
+import vazkii.botania.client.core.proxy.ClientProxy
+import vazkii.botania.client.lib.LibResources
+import vazkii.botania.client.model.ModelTinyPotato
+import vazkii.botania.client.render.block.InterpolatedIcon
+import vazkii.botania.common.item.equipment.bauble.ItemBauble
 import kotlin.properties.Delegates
 
 class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble {

@@ -1,17 +1,12 @@
 package ninja.shadowfox.shadowfox_botany.client.render.tile
 
-import net.minecraft.block.Block
-import net.minecraft.world.IBlockAccess
-
-import ninja.shadowfox.shadowfox_botany.lib.Constants
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.IMultipassRenderer
-
-import net.minecraft.client.renderer.Tessellator
-import net.minecraft.client.renderer.RenderBlocks
-import net.minecraft.client.renderer.EntityRenderer
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler
-
+import net.minecraft.block.Block
+import net.minecraft.client.renderer.RenderBlocks
+import net.minecraft.client.renderer.Tessellator
+import net.minecraft.world.IBlockAccess
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.IMultipassRenderer
+import ninja.shadowfox.shadowfox_botany.lib.Constants
 import org.lwjgl.opengl.GL11
 
 class MultipassRenderer: ISimpleBlockRenderingHandler {

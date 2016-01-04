@@ -2,7 +2,6 @@ package ninja.shadowfox.shadowfox_botany.common.entity
 
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.entity.projectile.EntityPotion
 import net.minecraft.entity.projectile.EntityThrowable
 import net.minecraft.potion.Potion
 import net.minecraft.potion.PotionEffect

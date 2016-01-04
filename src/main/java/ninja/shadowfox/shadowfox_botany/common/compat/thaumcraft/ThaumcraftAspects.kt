@@ -1,25 +1,18 @@
 package ninja.shadowfox.shadowfox_botany.common.compat.thaumcraft
 
 import cpw.mods.fml.common.Loader
-
 import net.minecraft.block.Block
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
-
 import net.minecraftforge.oredict.OreDictionary
-
-import thaumcraft.api.ThaumcraftApi
-import thaumcraft.api.ThaumcraftApiHelper
-import thaumcraft.api.aspects.Aspect
-import thaumcraft.api.aspects.AspectList
-
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
-import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
-
-import kotlin.properties.Delegates
+import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
+import thaumcraft.api.ThaumcraftApi
+import thaumcraft.api.aspects.Aspect
+import thaumcraft.api.aspects.AspectList
 
 object ThaumcraftAspects {
 

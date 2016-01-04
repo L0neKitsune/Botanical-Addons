@@ -4,7 +4,10 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.*
-import ninja.shadowfox.shadowfox_botany.common.item.rods.*
+import ninja.shadowfox.shadowfox_botany.common.item.rods.ItemInterdictionRod
+import ninja.shadowfox.shadowfox_botany.common.item.rods.ItemIridescentRod
+import ninja.shadowfox.shadowfox_botany.common.item.rods.ItemLightningRod
+import ninja.shadowfox.shadowfox_botany.common.item.rods.ItemRainbowLightRod
 
 object ShadowFoxItems {
     val irisSeeds: Item

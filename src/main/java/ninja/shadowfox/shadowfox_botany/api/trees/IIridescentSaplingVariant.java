@@ -1,6 +1,7 @@
 package ninja.shadowfox.shadowfox_botany.api.trees;
 
 import net.minecraft.block.Block;
+
 import java.util.List;
 
 public interface IIridescentSaplingVariant {

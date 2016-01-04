@@ -1,9 +1,9 @@
 package ninja.shadowfox.shadowfox_botany.common.item
 
-import net.minecraft.item.ItemStack
-import net.minecraft.entity.player.EntityPlayer
-import vazkii.botania.api.item.ICosmeticAttachable
 import baubles.common.lib.PlayerHandler
+import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.item.ItemStack
+import vazkii.botania.api.item.ICosmeticAttachable
 
 interface IPriestColorOverride {
     companion object {

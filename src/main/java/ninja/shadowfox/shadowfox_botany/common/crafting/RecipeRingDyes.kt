@@ -1,16 +1,13 @@
 package ninja.shadowfox.shadowfox_botany.common.crafting
 
-import net.minecraft.block.BlockColored
 import net.minecraft.entity.passive.EntitySheep
-import net.minecraft.init.Items
 import net.minecraft.inventory.InventoryCrafting
 import net.minecraft.item.ItemStack
-import net.minecraft.world.World
 import net.minecraft.item.crafting.IRecipe
-import vazkii.botania.common.item.ModItems as BotaniaItems
-import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
+import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemColorOverride
 import java.awt.Color
+import vazkii.botania.common.item.ModItems as BotaniaItems
 
 class RecipeRingDyes: IRecipe {
     /**

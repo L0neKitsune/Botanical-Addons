@@ -10,13 +10,13 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import ninja.shadowfox.shadowfox_botany.lib.Constants
 import ninja.shadowfox.shadowfox_botany.client.render.tile.MultipassRenderer
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.IMultipassRenderer
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxTileContainer
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import ninja.shadowfox.shadowfox_botany.lib.Constants
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.api.wand.IWandHUD

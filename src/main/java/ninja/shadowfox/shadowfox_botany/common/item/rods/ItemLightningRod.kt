@@ -1,12 +1,10 @@
 package ninja.shadowfox.shadowfox_botany.common.item.rods
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
-import cpw.mods.fml.common.eventhandler.SubscribeEvent
-import net.minecraftforge.client.event.TextureStitchEvent
-import net.minecraftforge.common.MinecraftForge
-import net.minecraft.command.IEntitySelector
 import net.minecraft.client.renderer.texture.IIconRegister
+import net.minecraft.command.IEntitySelector
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityCreature
 import net.minecraft.entity.EntityLivingBase
@@ -17,12 +15,10 @@ import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.EnumAction
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
-import net.minecraft.util.IIcon
-import net.minecraft.util.MathHelper
-import net.minecraft.util.AxisAlignedBB
-import net.minecraft.util.DamageSource
-import net.minecraft.util.ResourceLocation
+import net.minecraft.util.*
 import net.minecraft.world.World
+import net.minecraftforge.client.event.TextureStitchEvent
+import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.item.IPriestColorOverride
 import ninja.shadowfox.shadowfox_botany.common.item.ItemMod
@@ -32,11 +28,11 @@ import vazkii.botania.api.item.IAvatarWieldable
 import vazkii.botania.api.item.IManaProficiencyArmor
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
+import vazkii.botania.client.render.block.InterpolatedIcon
 import vazkii.botania.common.Botania
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.core.helper.Vector3
 import vazkii.botania.common.entity.EntityDoppleganger
-import vazkii.botania.client.render.block.InterpolatedIcon
 import java.awt.Color
 import java.util.*
 import kotlin.properties.Delegates

@@ -4,7 +4,9 @@ import net.minecraft.block.Block;
 import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting;
 import ninja.shadowfox.shadowfox_botany.api.trees.IIridescentSaplingVariant;
 import ninja.shadowfox.shadowfox_botany.api.trees.IridescentSaplingBaseVariant;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShadowFoxAPI {
     public static List<RecipeTreeCrafting> treeRecipes = new ArrayList();

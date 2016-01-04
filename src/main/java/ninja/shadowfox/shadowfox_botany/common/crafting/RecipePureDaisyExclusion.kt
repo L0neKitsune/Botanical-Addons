@@ -3,7 +3,6 @@ package ninja.shadowfox.shadowfox_botany.common.crafting
 import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraft.world.World
-import net.minecraftforge.oredict.OreDictionary
 import vazkii.botania.api.recipe.RecipePureDaisy
 import vazkii.botania.api.subtile.SubTileEntity
 

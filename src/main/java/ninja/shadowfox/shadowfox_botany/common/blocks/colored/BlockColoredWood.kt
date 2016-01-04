@@ -1,6 +1,5 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.colored
 
-import cpw.mods.fml.common.FMLLog
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
@@ -14,16 +13,11 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentWoodMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxRotatedPillar
-import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentWoodMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
-import org.apache.logging.log4j.Level
-import vazkii.botania.api.lexicon.ILexiconable
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.lexicon.LexiconEntry
-import vazkii.botania.api.wand.IWandable
 import java.awt.Color
 
 

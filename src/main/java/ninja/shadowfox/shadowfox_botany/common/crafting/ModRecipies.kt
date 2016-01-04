@@ -1,11 +1,12 @@
 package ninja.shadowfox.shadowfox_botany.common.crafting
 
-import java.util.ArrayList
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.IRecipe
+import net.minecraftforge.oredict.RecipeSorter
+import net.minecraftforge.oredict.RecipeSorter.Category
 import net.minecraftforge.oredict.ShapedOreRecipe
 import net.minecraftforge.oredict.ShapelessOreRecipe
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
@@ -13,11 +14,10 @@ import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import vazkii.botania.api.BotaniaAPI
-import vazkii.botania.api.recipe.RecipePureDaisy
 import vazkii.botania.api.recipe.RecipeManaInfusion
+import vazkii.botania.api.recipe.RecipePureDaisy
 import vazkii.botania.common.lib.LibOreDict
-import net.minecraftforge.oredict.RecipeSorter
-import net.minecraftforge.oredict.RecipeSorter.Category
+import java.util.*
 import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
 import vazkii.botania.common.block.ModFluffBlocks as BotaniaDecorBlocks
 import vazkii.botania.common.item.ModItems as BotaniaItems

@@ -1,39 +1,22 @@
 package ninja.shadowfox.shadowfox_botany.common.item.baubles
 
+import baubles.api.BaubleType
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
-import cpw.mods.fml.common.registry.GameRegistry
-
-import net.minecraft.client.Minecraft
-import net.minecraft.client.renderer.ItemRenderer
-import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.texture.IIconRegister
-import net.minecraft.client.renderer.texture.TextureMap
-import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.IIcon
 import net.minecraft.util.StatCollector
 import net.minecraftforge.client.event.RenderPlayerEvent
-import net.minecraftforge.oredict.RecipeSorter
-import net.minecraftforge.oredict.RecipeSorter.Category
-
-import org.lwjgl.opengl.GL11
-
-import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
+import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.IPriestColorOverride
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
-import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-
-import vazkii.botania.api.item.ICosmeticBauble
 import vazkii.botania.api.item.IBaubleRender
+import vazkii.botania.api.item.ICosmeticBauble
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
-import vazkii.botania.common.lib.LibItemNames
-import baubles.api.BaubleType
-
 import kotlin.properties.Delegates
 
 class ItemColorOverride(): ItemBauble("colorOverride"), ICosmeticBauble, IPriestColorOverride {

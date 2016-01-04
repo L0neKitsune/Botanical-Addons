@@ -1,7 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.world
 
 import net.minecraft.block.Block
-import net.minecraft.block.material.Material
 import net.minecraft.world.World
 import net.minecraft.world.gen.feature.WorldGenAbstractTree
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI

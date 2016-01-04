@@ -1,9 +1,8 @@
 package ninja.shadowfox.shadowfox_botany.common.lexicon
 
+import net.minecraft.util.ResourceLocation
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.LexiconCategory
-
-import net.minecraft.util.ResourceLocation
 
 class ShadowFoxLexiconCategory(unlocalizedName: String, priority: Int) : LexiconCategory("shadowfox_botany.category." + unlocalizedName) {
 

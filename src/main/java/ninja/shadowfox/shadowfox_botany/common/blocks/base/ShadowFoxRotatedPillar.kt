@@ -11,10 +11,9 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.World
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.*
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentBlockMod
 import vazkii.botania.api.lexicon.ILexiconable
 import java.util.*
-
 
 
 abstract class ShadowFoxRotatedPillar(mat: Material) : ShadowFoxBlockMod(mat), ILexiconable {

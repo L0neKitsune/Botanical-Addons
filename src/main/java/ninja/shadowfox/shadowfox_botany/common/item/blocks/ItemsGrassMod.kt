@@ -2,15 +2,15 @@ package ninja.shadowfox.shadowfox_botany.common.item.blocks
 
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
-import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.BlockRainbowDoubleGrass
-import net.minecraft.client.renderer.texture.IIconRegister
-import net.minecraft.util.IIcon
 import net.minecraft.block.Block
-import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.passive.EntitySheep
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
+import net.minecraft.util.IIcon
 import net.minecraft.util.StatCollector
+import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.BlockRainbowDoubleGrass
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import java.awt.Color
 import kotlin.properties.Delegates
 

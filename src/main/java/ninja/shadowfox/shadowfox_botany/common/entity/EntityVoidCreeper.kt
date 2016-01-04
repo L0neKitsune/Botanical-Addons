@@ -10,11 +10,9 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.potion.PotionEffect
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.world.World
-
-import vazkii.botania.common.item.ModItems
-
-import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.brew.ShadowFoxPotions
+import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
+import vazkii.botania.common.item.ModItems
 
 /**
  * All the mana is mine mahhhaahahha

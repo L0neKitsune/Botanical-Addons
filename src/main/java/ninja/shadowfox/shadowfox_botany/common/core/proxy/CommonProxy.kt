@@ -4,12 +4,10 @@ import cpw.mods.fml.common.Loader
 import cpw.mods.fml.common.event.FMLInitializationEvent
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
-import cpw.mods.fml.client.registry.RenderingRegistry
-import ninja.shadowfox.shadowfox_botany.lib.Constants
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.brew.ShadowFoxPotions
-import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.compat.thaumcraft.ThaumcraftAspects
+import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.crafting.ModRecipes
 import ninja.shadowfox.shadowfox_botany.common.entity.ShadowFoxEntity
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems

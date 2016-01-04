@@ -3,19 +3,19 @@ package ninja.shadowfox.shadowfox_botany.common.item
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
-import java.awt.Color
-import net.minecraft.entity.passive.EntitySheep
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.ItemStack
-import net.minecraft.item.Item
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.texture.IIconRegister
+import net.minecraft.entity.passive.EntitySheep
+import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.util.StatCollector
-import vazkii.botania.common.Botania
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import vazkii.botania.common.Botania
+import java.awt.Color
 import kotlin.properties.Delegates
 
 open class ItemIridescent(name: String) : Item() {

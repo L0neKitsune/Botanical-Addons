@@ -5,7 +5,7 @@ import net.minecraft.nbt.NBTTagCompound
 import vazkii.botania.client.core.handler.ClientTickHandler
 import vazkii.botania.common.Botania
 import java.awt.Color
-import java.util.Random
+import java.util.*
 
 class TileRainbowManaFlame : TileManaFlame() {
     private val TAG_INVISIBLE = "invisible"
