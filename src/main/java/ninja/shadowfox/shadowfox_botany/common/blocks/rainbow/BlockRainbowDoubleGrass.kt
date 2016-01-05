@@ -47,13 +47,13 @@ public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 0) {
+        if (event.map.textureType == 0) {
             var localTopIcon = InterpolatedIcon("shadowfox_botany:rainbowDoubleGrassTop")
-            if(event.map.setTextureEntry("shadowfox_botany:rainbowDoubleGrassTop", localTopIcon)) {
+            if (event.map.setTextureEntry("shadowfox_botany:rainbowDoubleGrassTop", localTopIcon)) {
                 this.topIcon = localTopIcon
             }
             var localBottomIcon = InterpolatedIcon("shadowfox_botany:rainbowDoubleGrass")
-            if(event.map.setTextureEntry("shadowfox_botany:rainbowDoubleGrass", localBottomIcon)) {
+            if (event.map.setTextureEntry("shadowfox_botany:rainbowDoubleGrass", localBottomIcon)) {
                 this.bottomIcon = localBottomIcon
             }
         }
@@ -63,7 +63,8 @@ public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
         return false
     }
 
-    override fun func_149853_b(world: World, random: Random, x: Int, y: Int, z: Int) {}
+    override fun func_149853_b(world: World, random: Random, x: Int, y: Int, z: Int) {
+    }
 
     fun isTop(meta: Int): Boolean {
         return (meta and 8) != 0
@@ -78,7 +79,9 @@ public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
         return super.setBlockName(par1Str)
     }
 
-    override fun setBlockName(par1Str: String): Block? {return null}
+    override fun setBlockName(par1Str: String): Block? {
+        return null
+    }
 
     @SideOnly(Side.CLIENT)
     override fun getBlockColor(): Int {
@@ -90,10 +93,11 @@ public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(iconRegister: IIconRegister) {}
+    override fun registerBlockIcons(iconRegister: IIconRegister) {
+    }
 
     @SideOnly(Side.CLIENT)
-    override fun getIcon(side : Int, meta : Int) : IIcon {
+    override fun getIcon(side: Int, meta: Int): IIcon {
         return this.topIcon
     }
 
@@ -105,8 +109,7 @@ public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
     fun dropBlock(world: World, x: Int, y: Int, z: Int, meta: Int, player: EntityPlayer): Boolean {
         if (isTop(meta)) {
             return false
-        }
-        else {
+        } else {
             player.addStat(StatList.mineBlockStatArray[Block.getIdFromBlock(this)], 1)
             this.dropBlockAsItem(world, x, y, z, ItemStack(ShadowFoxBlocks.rainbowGrass, 2, meta))
             return true

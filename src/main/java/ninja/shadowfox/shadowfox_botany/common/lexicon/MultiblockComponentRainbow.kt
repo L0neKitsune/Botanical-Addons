@@ -10,8 +10,8 @@ import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.multiblock.component.MultiblockComponent
 import java.util.*
 
-class MultiblockComponentRainbow(relPos: ChunkCoordinates, default: Block, vararg blocks: Block):
-      MultiblockComponent(relPos, default, -1) {
+class MultiblockComponentRainbow(relPos: ChunkCoordinates, default: Block, vararg blocks: Block) :
+        MultiblockComponent(relPos, default, -1) {
 
     private val blockpairs: MutableList<BlockPair> = ArrayList()
     val secondaryBlocks: Array<out Block>
@@ -28,8 +28,8 @@ class MultiblockComponentRainbow(relPos: ChunkCoordinates, default: Block, varar
         var item = Item.getItemFromBlock(block)
         block.getSubBlocks(item, block.creativeTabToDisplayOn, stacks)
 
-        for(stack in stacks)
-            if(stack.item == item)
+        for (stack in stacks)
+            if (stack.item == item)
                 pairs.add(BlockPair(block, stack.itemDamage))
     }
 
@@ -43,7 +43,7 @@ class MultiblockComponentRainbow(relPos: ChunkCoordinates, default: Block, varar
 
     override fun matches(world: World, x: Int, y: Int, z: Int): Boolean {
         for (pair in blockpairs)
-            if (world.getBlock(x, y, z) == pair.block) 
+            if (world.getBlock(x, y, z) == pair.block)
                 return true
         return false
     }

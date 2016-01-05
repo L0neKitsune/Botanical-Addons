@@ -31,10 +31,10 @@ import java.util.*
 import kotlin.properties.Delegates
 
 
-public class BlockRainbowPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.instance), ILexiconable, IFuelHandler, IWandable {
+public class BlockRainbowPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.instance), ILexiconable, IFuelHandler, IWandable {
 
     private val name = "rainbowPlanks"
-    protected var icons : IIcon by Delegates.notNull()
+    protected var icons: IIcon by Delegates.notNull()
 
     init {
         blockHardness = 2F
@@ -50,9 +50,9 @@ public class BlockRainbowPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 0) {
+        if (event.map.textureType == 0) {
             var icon = InterpolatedIcon("shadowfox_botany:rainbowPlanks")
-            if(event.map.setTextureEntry("shadowfox_botany:rainbowPlanks", icon))
+            if (event.map.setTextureEntry("shadowfox_botany:rainbowPlanks", icon))
                 this.icons = icon
         }
     }
@@ -74,7 +74,7 @@ public class BlockRainbowPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.
         return (type != null && type.equals("axe"))
     }
 
-    override fun getHarvestTool(metadata : Int): String {
+    override fun getHarvestTool(metadata: Int): String {
         return "axe"
     }
 
@@ -91,7 +91,9 @@ public class BlockRainbowPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.
         return super.setBlockName(par1Str)
     }
 
-    override fun quantityDropped(random: Random): Int { return 1 }
+    override fun quantityDropped(random: Random): Int {
+        return 1
+    }
 
     override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item {
         return Item.getItemFromBlock(this)
@@ -103,7 +105,9 @@ public class BlockRainbowPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.
         return icons
     }
 
-    override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean { return true }
+    override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean {
+        return true
+    }
 
     internal fun register(name: String) {
         GameRegistry.registerBlock(this, ItemIridescentBlockMod::class.java, name)
@@ -115,7 +119,8 @@ public class BlockRainbowPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.
         return ItemStack(this, 1, meta)
     }
 
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
+    }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return LexiconRegistry.irisSapling

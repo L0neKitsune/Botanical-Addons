@@ -32,7 +32,8 @@ class BlockManaFlame(name: String, val Tile: Class<out TileManaFlame>) : ShadowF
         return this.Tile.cast(world.getTileEntity(x, y, z)).getLightColor()
     }
 
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
+    }
 
     override fun getRenderType(): Int = -1
 

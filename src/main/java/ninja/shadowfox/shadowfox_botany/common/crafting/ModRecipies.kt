@@ -71,7 +71,7 @@ public object ModRecipes {
 
     val recipesLightningTree: RecipeTreeCrafting
     val recipesInfernalTree: RecipeTreeCrafting
-    
+
 
     init {
 
@@ -102,11 +102,11 @@ public object ModRecipes {
 
         for (i in 0..15)
             GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.coloredSlabs[i], 6, i),
-                "QQQ",
-                'Q', ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i))
+                    "QQQ",
+                    'Q', ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i))
         GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.rainbowSlabs, 6),
-            "QQQ",
-            'Q', ItemStack(ShadowFoxBlocks.rainbowPlanks))
+                "QQQ",
+                'Q', ItemStack(ShadowFoxBlocks.rainbowPlanks))
 
         recipesSlabs = BotaniaAPI.getLatestAddedRecipes(17)
 
@@ -132,9 +132,9 @@ public object ModRecipes {
 
         for (i in 0..15)
             GameRegistry.addShapelessRecipe(ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i),
-                ItemStack(ShadowFoxBlocks.coloredSlabs[i], 1), ItemStack(ShadowFoxBlocks.coloredSlabs[i], 1))
+                    ItemStack(ShadowFoxBlocks.coloredSlabs[i], 1), ItemStack(ShadowFoxBlocks.coloredSlabs[i], 1))
         GameRegistry.addShapelessRecipe(ItemStack(ShadowFoxBlocks.rainbowPlanks),
-            ItemStack(ShadowFoxBlocks.rainbowSlabs), ItemStack(ShadowFoxBlocks.rainbowSlabs))
+                ItemStack(ShadowFoxBlocks.rainbowSlabs), ItemStack(ShadowFoxBlocks.rainbowSlabs))
 
         recipesSlabsFull = BotaniaAPI.getLatestAddedRecipes(17)
 
@@ -319,7 +319,7 @@ public object ModRecipes {
                 LibOreDict.MANA_STEEL, LibOreDict.MANA_STEEL, LibOreDict.MANA_STEEL,
                 LibOreDict.RUNE[13], // Wrath
                 ShadowFoxBlocks.LEAVES[10], ShadowFoxBlocks.LEAVES[10], ShadowFoxBlocks.LEAVES[10], // Purple
-                ItemStack(BotaniaBlocks.teruTeruBozu)) 
+                ItemStack(BotaniaBlocks.teruTeruBozu))
 
         addShapelessOreDictRecipe(ItemStack(ShadowFoxBlocks.lightningPlanks, 4), ShadowFoxBlocks.lightningWood)
 
@@ -344,7 +344,7 @@ public object ModRecipes {
         recipesThunderousStairsR = BotaniaAPI.getLatestAddedRecipe()
 
         GameRegistry.addRecipe(ItemStack(ShadowFoxItems.resource, 1, 0), // Thunderous Twig
-                "Q", 
+                "Q",
                 "Q",
                 'Q', ItemStack(ShadowFoxBlocks.lightningWood))
 
@@ -363,7 +363,7 @@ public object ModRecipes {
                 "ingotBrickNether", "ingotBrickNether", "ingotBrickNether",
                 LibOreDict.RUNE[1], // Fire
                 ShadowFoxBlocks.LEAVES[14], ShadowFoxBlocks.LEAVES[14], ShadowFoxBlocks.LEAVES[14], // Red
-                LibOreDict.BLAZE_BLOCK) 
+                LibOreDict.BLAZE_BLOCK)
 
         addShapelessOreDictRecipe(ItemStack(ShadowFoxBlocks.netherPlanks, 4), ShadowFoxBlocks.netherWood)
 
@@ -376,29 +376,29 @@ public object ModRecipes {
         recipesInfernalSlabs = BotaniaAPI.getLatestAddedRecipe()
 
         GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.netherStairs, 4),
-                    "Q  ", "QQ ", "QQQ",
-                    'Q', ItemStack(ShadowFoxBlocks.netherPlanks))
+                "Q  ", "QQ ", "QQQ",
+                'Q', ItemStack(ShadowFoxBlocks.netherPlanks))
 
         recipesInfernalStairsL = BotaniaAPI.getLatestAddedRecipe()
 
         GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.netherStairs, 4),
-                    "  Q", " QQ", "QQQ",
-                    'Q', ItemStack(ShadowFoxBlocks.netherPlanks))
+                "  Q", " QQ", "QQQ",
+                'Q', ItemStack(ShadowFoxBlocks.netherPlanks))
 
         recipesInfernalStairsR = BotaniaAPI.getLatestAddedRecipe()
 
         GameRegistry.addRecipe(ItemStack(ShadowFoxItems.resource, 1, 2), // Infernal Twig
-                    "Q", 
-                    "Q",
-                    'Q', ItemStack(ShadowFoxBlocks.netherWood))
+                "Q",
+                "Q",
+                'Q', ItemStack(ShadowFoxBlocks.netherWood))
 
         recipesInfernalTwig = BotaniaAPI.getLatestAddedRecipe()
 
         GameRegistry.addRecipe(ItemStack(Blocks.torch, 6),
-                    "C", 
-                    "S",
-                    'C', ItemStack(ShadowFoxItems.resource, 1, 4), // Flame-Laced Coal
-                    'S', ItemStack(Items.stick)) 
+                "C",
+                "S",
+                'C', ItemStack(ShadowFoxItems.resource, 1, 4), // Flame-Laced Coal
+                'S', ItemStack(Items.stick))
 
         recipesSixTorches = BotaniaAPI.getLatestAddedRecipe()
 
@@ -411,8 +411,8 @@ public object ModRecipes {
 
         for (i in 0..5)
             GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.altSlabs[i], 6),
-                "QQQ",
-                'Q', ItemStack(ShadowFoxBlocks.altPlanks, 1, i))
+                    "QQQ",
+                    'Q', ItemStack(ShadowFoxBlocks.altPlanks, 1, i))
 
         recipesAltSlabs = BotaniaAPI.getLatestAddedRecipes(6)
 

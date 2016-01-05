@@ -19,7 +19,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 
-class BlockNetherLeaves(): ShadowFoxLeaves() {
+class BlockNetherLeaves() : ShadowFoxLeaves() {
     init {
         setBlockName("netherLeaves")
         if (FMLLaunchHandler.side().isClient)

@@ -63,9 +63,17 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : BlockS
         icon = IconHelper.forBlock(par1IconRegister, this)
     }
 
-    override fun isOpaqueCube(): Boolean { return false }
-    override fun renderAsNormalBlock() : Boolean { return false }
-    override fun getRenderType() : Int { return 1 }
+    override fun isOpaqueCube(): Boolean {
+        return false
+    }
+
+    override fun renderAsNormalBlock(): Boolean {
+        return false
+    }
+
+    override fun getRenderType(): Int {
+        return 1
+    }
 
     override fun getPlant(world: IBlockAccess?, x: Int, y: Int, z: Int): Block? {
         return this
@@ -101,7 +109,7 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : BlockS
         checkAndDropBlock(world, x, y, z)
     }
 
-    override fun checkAndDropBlock(world: World?, x: Int, y: Int, z: Int){
+    override fun checkAndDropBlock(world: World?, x: Int, y: Int, z: Int) {
         if (world != null && !this.canBlockStay(world, x, y, z)) {
             this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0)
             world.setBlock(x, y, z, Block.getBlockById(0), 0, 2)
@@ -112,8 +120,8 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : BlockS
         return world.getBlock(x, y - 1, z).canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this) || canGrowHere(world.getBlock(x, y - 1, z))
     }
 
-    override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {
-        if(list != null && item != null)
+    override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {
+        if (list != null && item != null)
             list.add(ItemStack(this))
     }
 
@@ -130,12 +138,12 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : BlockS
     }
 
     public open fun growTree(world: World?, x: Int, y: Int, z: Int, random: Random?) {
-        if(world != null) {
+        if (world != null) {
             if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(world, random, x, y, z)) return
 
             val plantedOn: Block = world.getBlock(x, y - 1, z)
 
-            if(canGrowHere(plantedOn)) {
+            if (canGrowHere(plantedOn)) {
                 val l = world.getBlockMetadata(x, y, z)
 
                 val obj: WorldGenerator = SimpleTreeGen(5)

@@ -36,7 +36,7 @@ public class BlockRainbowWood() : ShadowFoxRotatedPillar(Material.wood), ILexico
         setBlockName(name)
     }
 
-    override fun register(par1Str: String){
+    override fun register(par1Str: String) {
         GameRegistry.registerBlock(this, ItemIridescentBlockMod::class.java, par1Str)
     }
 
@@ -61,19 +61,20 @@ public class BlockRainbowWood() : ShadowFoxRotatedPillar(Material.wood), ILexico
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 0) {
+        if (event.map.textureType == 0) {
             var iconSide = InterpolatedIcon("shadowfox_botany:rainbowWoodSide")
-            if(event.map.setTextureEntry("shadowfox_botany:rainbowWoodSide", iconSide))
+            if (event.map.setTextureEntry("shadowfox_botany:rainbowWoodSide", iconSide))
                 this.iconSide = iconSide
 
             var iconTop = InterpolatedIcon("shadowfox_botany:rainbowWoodTop")
-            if(event.map.setTextureEntry("shadowfox_botany:rainbowWoodTop", iconTop))
+            if (event.map.setTextureEntry("shadowfox_botany:rainbowWoodTop", iconTop))
                 this.iconTop = iconTop
         }
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
+    }
 
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {

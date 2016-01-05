@@ -381,7 +381,7 @@ class TileSchema() : ShadowFoxTile() {
 
         w.print(JsonArray().apply {
             for (k in map.keys) {
-                if(!k.equals("shadowfox_botany:fillerBlock")) {
+                if (!k.equals("shadowfox_botany:fillerBlock")) {
                     add(JsonObject().apply {
                         addProperty("block", "$k")
                         add("location", JsonArray().apply { for (v in map[k].orEmpty()) add(v.getJson()) })

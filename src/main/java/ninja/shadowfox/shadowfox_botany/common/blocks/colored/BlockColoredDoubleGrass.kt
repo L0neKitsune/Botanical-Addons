@@ -51,7 +51,8 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
         return false
     }
 
-    override fun func_149853_b(world: World, random: Random, x: Int, y: Int, z: Int) {}
+    override fun func_149853_b(world: World, random: Random, x: Int, y: Int, z: Int) {
+    }
 
     fun isTop(meta: Int): Boolean {
         return (meta and 8) != 0
@@ -69,7 +70,9 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
         return super.setBlockName(par1Str)
     }
 
-    override fun setBlockName(par1Str: String): Block? {return null}
+    override fun setBlockName(par1Str: String): Block? {
+        return null
+    }
 
     @SideOnly(Side.CLIENT)
     override fun getBlockColor(): Int {
@@ -84,7 +87,7 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
         if (meta >= TYPES)
             return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[meta+TYPES*colorSet]
+        var color = EntitySheep.fleeceColorTable[meta + TYPES * colorSet]
         return Color(color[0], color[1], color[2]).rgb
     }
 
@@ -94,7 +97,7 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
         if (meta >= TYPES)
             return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[meta+TYPES*colorSet]
+        var color = EntitySheep.fleeceColorTable[meta + TYPES * colorSet]
         return Color(color[0], color[1], color[2]).rgb
     }
 
@@ -112,7 +115,7 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
     }
 
     @SideOnly(Side.CLIENT)
-    override fun getIcon(side : Int, meta : Int) : IIcon {
+    override fun getIcon(side: Int, meta: Int): IIcon {
         return this.topIcon
     }
 
@@ -128,8 +131,7 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
     fun dropBlock(world: World, x: Int, y: Int, z: Int, meta: Int, player: EntityPlayer): Boolean {
         if (isTop(meta)) {
             return false
-        }
-        else {
+        } else {
             player.addStat(StatList.mineBlockStatArray[Block.getIdFromBlock(this)], 1)
             var b0 = TYPES * colorSet + meta
             this.dropBlockAsItem(world, x, y, z, ItemStack(ShadowFoxBlocks.irisGrass, 2, b0))
@@ -160,21 +162,24 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
         return !isTop(meta)
     }
 
-    public class ColoredDoublePlantRenderer: ISimpleBlockRenderingHandler {
+    public class ColoredDoublePlantRenderer : ISimpleBlockRenderingHandler {
         public override fun getRenderId(): Int {
             return Constants.doubleFlowerRenderID
         }
 
-        public override fun shouldRender3DInInventory(modelId: Int): Boolean {return false}
+        public override fun shouldRender3DInInventory(modelId: Int): Boolean {
+            return false
+        }
 
-        public override fun renderInventoryBlock(block: Block, metadata: Int, modelID: Int, renderer: RenderBlocks){}
+        public override fun renderInventoryBlock(block: Block, metadata: Int, modelID: Int, renderer: RenderBlocks) {
+        }
 
         public override fun renderWorldBlock(world: IBlockAccess, x: Int, y: Int, z: Int, block: Block, modelId: Int, renderer: RenderBlocks): Boolean {
             val tessellator = Tessellator.instance
             tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z))
             var l: Int
             if ((world.getBlockMetadata(x, y, z) and 8) != 0) {
-                l = block.colorMultiplier(world, x, y-1, z)
+                l = block.colorMultiplier(world, x, y - 1, z)
             } else {
                 l = block.colorMultiplier(world, x, y, z)
             }

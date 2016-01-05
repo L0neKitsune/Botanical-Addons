@@ -27,16 +27,16 @@ import kotlin.text.replace
 import kotlin.text.toLowerCase
 import kotlin.text.toRegex
 
-class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorOverride {
+class ItemCoatOfArms() : ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorOverride {
 
     val TYPES = 18
     var icons: Array<IIcon?> = arrayOfNulls(TYPES)
     val colorMap = intArrayOf(
-        0x00137F, 0x0043FF, 0xFF0037, 0xFFD800,
-        0x002EFF, 0x001A8E, 0x009944, 0x003BFF,
-        0x00FF3B, 0xFF003B, 0x603A20, 0xFFFF00,
-        0xFF0015, 0x0048FF, 0xFFD400, 0xFFFFFF,
-        0xFFFFFF, 0xFF0037
+            0x00137F, 0x0043FF, 0xFF0037, 0xFFD800,
+            0x002EFF, 0x001A8E, 0x009944, 0x003BFF,
+            0x00FF3B, 0xFF003B, 0x603A20, 0xFFFF00,
+            0xFF0015, 0x0048FF, 0xFFD400, 0xFFFFFF,
+            0xFFFFFF, 0xFF0037
     )
 
     init {
@@ -45,13 +45,13 @@ class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorO
     }
 
     override fun registerIcons(par1IconRegister: IIconRegister) {
-        for(i in 0..TYPES-1)
+        for (i in 0..TYPES - 1)
             icons[i] = IconHelper.forItem(par1IconRegister, this, i, "coatofarms")
     }
 
     override fun colorOverride(stack: ItemStack?): Int {
         if (stack != null) {
-            if (stack.itemDamage < TYPES-1 && stack.itemDamage >= 0 && stack.itemDamage != 16)
+            if (stack.itemDamage < TYPES - 1 && stack.itemDamage >= 0 && stack.itemDamage != 16)
                 return colorMap[stack.itemDamage]
             else if (stack.itemDamage == 16)
                 return ItemIridescent.rainbowColor()
@@ -60,12 +60,12 @@ class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorO
     }
 
     override fun getSubItems(item: Item, tab: CreativeTabs?, list: MutableList<Any?>) {
-        for(i in 0..TYPES-1)
+        for (i in 0..TYPES - 1)
             list.add(ItemStack(item, 1, i))
     }
 
     override fun getIconFromDamage(dmg: Int): IIcon? {
-        return icons[Math.min(TYPES-1, dmg)]
+        return icons[Math.min(TYPES - 1, dmg)]
     }
 
     override fun onEquipped(stack: ItemStack, player: EntityLivingBase) {
@@ -85,7 +85,7 @@ class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorO
         super.addHiddenTooltip(par1ItemStack, par2EntityPlayer, par3List, par4)
     }
 
-    fun addStringToTooltip(s : String, tooltip : MutableList<Any?>?) {
+    fun addStringToTooltip(s: String, tooltip: MutableList<Any?>?) {
         tooltip!!.add(s.replace("&".toRegex(), "\u00a7"))
     }
 
@@ -94,7 +94,7 @@ class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorO
     }
 
     override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {
-        if(type == IBaubleRender.RenderType.BODY) {
+        if (type == IBaubleRender.RenderType.BODY) {
             Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture)
             IBaubleRender.Helper.rotateIfSneaking(event.entityPlayer)
             chestTranslate()

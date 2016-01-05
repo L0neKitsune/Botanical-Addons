@@ -20,7 +20,8 @@ import kotlin.text.toRegex
 
 
 class BlockColoredWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.coloredPlanks) : ShadowFoxStairs(source, meta, source.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs" + meta), ILexiconable {
-    init {}
+    init {
+    }
 
     @SideOnly(Side.CLIENT)
     override fun getRenderColor(m: Int): Int {
@@ -35,7 +36,7 @@ class BlockColoredWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.coloredP
         return (type != null && type.equals("axe"))
     }
 
-    override fun getHarvestTool(metadata : Int): String {
+    override fun getHarvestTool(metadata: Int): String {
         return "axe"
     }
 

@@ -21,7 +21,7 @@ import kotlin.properties.Delegates
 import kotlin.text.replace
 import kotlin.text.toRegex
 
-class ItemColorOverride(): ItemBauble("colorOverride"), ICosmeticBauble, IPriestColorOverride {
+class ItemColorOverride() : ItemBauble("colorOverride"), ICosmeticBauble, IPriestColorOverride {
 
     var overlayIcon: IIcon by Delegates.notNull()
 
@@ -98,7 +98,7 @@ class ItemColorOverride(): ItemBauble("colorOverride"), ICosmeticBauble, IPriest
     override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>, par4: Boolean) {
         if (par1ItemStack == null) return
         if (this.hasColor(par1ItemStack))
-            addStringToTooltip("&7"+StatCollector.translateToLocal("item.dyed")+"&r", par3List)
+            addStringToTooltip("&7" + StatCollector.translateToLocal("item.dyed") + "&r", par3List)
         super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4)
     }
 
@@ -107,7 +107,7 @@ class ItemColorOverride(): ItemBauble("colorOverride"), ICosmeticBauble, IPriest
         super.addHiddenTooltip(par1ItemStack, par2EntityPlayer, par3List, par4)
     }
 
-    fun addStringToTooltip(s : String, tooltip : MutableList<Any?>?) {
+    fun addStringToTooltip(s: String, tooltip: MutableList<Any?>?) {
         tooltip!!.add(s.replace("&".toRegex(), "\u00a7"))
     }
 
@@ -115,5 +115,6 @@ class ItemColorOverride(): ItemBauble("colorOverride"), ICosmeticBauble, IPriest
         return BaubleType.RING
     }
 
-    override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {}
+    override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {
+    }
 }

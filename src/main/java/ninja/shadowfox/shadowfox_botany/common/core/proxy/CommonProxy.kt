@@ -14,7 +14,7 @@ import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 
 public open class CommonProxy {
-    open fun preInit(event: FMLPreInitializationEvent){
+    open fun preInit(event: FMLPreInitializationEvent) {
 
         ConfigHandler.loadConfig(event.suggestedConfigurationFile)
 
@@ -31,7 +31,7 @@ public open class CommonProxy {
         ShadowFoxBlocks.registerBurnables()
     }
 
-    open fun postInit(event: FMLPostInitializationEvent){
+    open fun postInit(event: FMLPostInitializationEvent) {
         ConfigHandler.loadPostInit()
         if (Loader.isModLoaded("Thaumcraft")) ThaumcraftAspects.addAspects()
     }

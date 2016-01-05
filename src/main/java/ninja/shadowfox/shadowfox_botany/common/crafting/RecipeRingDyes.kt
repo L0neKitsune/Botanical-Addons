@@ -9,7 +9,7 @@ import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemColorOverride
 import java.awt.Color
 import vazkii.botania.common.item.ModItems as BotaniaItems
 
-class RecipeRingDyes: IRecipe {
+class RecipeRingDyes : IRecipe {
     /**
      * Used to check if a recipe matches current crafting inventory
      */
@@ -18,7 +18,7 @@ class RecipeRingDyes: IRecipe {
 
         var colors = 0
 
-        for (i in 0..(inventory.sizeInventory-1)) {
+        for (i in 0..(inventory.sizeInventory - 1)) {
             var tempstack = inventory.getStackInSlot(i)
 
             if (tempstack != null) {
@@ -27,8 +27,7 @@ class RecipeRingDyes: IRecipe {
                         return false
                     itemstack = tempstack
                     if ((itemstack.item as ItemColorOverride).hasColor(tempstack)) colors++
-                }
-                else if (tempstack.item == BotaniaItems.dye)
+                } else if (tempstack.item == BotaniaItems.dye)
                     colors++
                 else
                     return false
@@ -51,7 +50,7 @@ class RecipeRingDyes: IRecipe {
         var g = 0
         var b = 0
 
-        for (k in 0..(inventory.sizeInventory-1)) {
+        for (k in 0..(inventory.sizeInventory - 1)) {
             var tempstack = inventory.getStackInSlot(k)
 
             if (tempstack != null) {
@@ -71,8 +70,7 @@ class RecipeRingDyes: IRecipe {
                         g += color.green
                         b += color.blue
                     }
-                }
-                else {
+                } else {
                     if (tempstack.getItem() != BotaniaItems.dye)
                         return null
 
@@ -90,7 +88,7 @@ class RecipeRingDyes: IRecipe {
             if (resetcolor)
                 colorOverride.removeColor(itemstack)
             else {
-                var color = Color(r.toFloat()/colors.toFloat()/255f, g.toFloat()/colors.toFloat()/255f, b.toFloat()/colors.toFloat()/255f).rgb and 0xFFFFFF
+                var color = Color(r.toFloat() / colors.toFloat() / 255f, g.toFloat() / colors.toFloat() / 255f, b.toFloat() / colors.toFloat() / 255f).rgb and 0xFFFFFF
                 colorOverride.setColor(itemstack, color)
             }
             return itemstack

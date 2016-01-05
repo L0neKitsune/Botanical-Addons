@@ -93,8 +93,8 @@ class BlockColoredWood(val colorSet: Int) : ShadowFoxRotatedPillar(Material.wood
         iconSide = IconHelper.forName(par1IconRegister, "irisWood")
     }
 
-    override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {
-        if(list != null && item != null) {
+    override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {
+        if (list != null && item != null) {
             list.add(ItemStack(this, 1, 0))
             list.add(ItemStack(this, 1, 1))
             list.add(ItemStack(this, 1, 2))

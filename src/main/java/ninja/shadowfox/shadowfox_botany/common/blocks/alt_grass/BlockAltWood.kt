@@ -26,8 +26,8 @@ import java.util.*
 
 public class BlockAltWood(val set: Int) : ShadowFoxRotatedPillar(Material.wood), ILexiconable {
 
-    lateinit protected var iconsTop : Array<IIcon>
-    lateinit protected var iconsSide : Array<IIcon>
+    lateinit protected var iconsTop: Array<IIcon>
+    lateinit protected var iconsSide: Array<IIcon>
 
     init {
         setBlockName("altWood$set")
@@ -72,8 +72,8 @@ public class BlockAltWood(val set: Int) : ShadowFoxRotatedPillar(Material.wood),
         return iconsSide[meta]
     }
 
-    override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {
-        if(list != null && item != null) {
+    override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {
+        if (list != null && item != null) {
             if (set == 0) {
                 list.add(ItemStack(this, 1, 0))
                 list.add(ItemStack(this, 1, 1))
@@ -88,8 +88,8 @@ public class BlockAltWood(val set: Int) : ShadowFoxRotatedPillar(Material.wood),
 
     @SideOnly(Side.CLIENT)
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        iconsTop = Array(if (set == 0 ) 4 else 2, { i -> IconHelper.forName(par1IconRegister, "altOak${ALT_TYPES[(set * 4) + i]}_top")})
-        iconsSide = Array(if (set == 0 ) 4 else 2, { i -> IconHelper.forName(par1IconRegister, "altOak${ALT_TYPES[(set * 4) + i]}")})
+        iconsTop = Array(if (set == 0 ) 4 else 2, { i -> IconHelper.forName(par1IconRegister, "altOak${ALT_TYPES[(set * 4) + i]}_top") })
+        iconsSide = Array(if (set == 0 ) 4 else 2, { i -> IconHelper.forName(par1IconRegister, "altOak${ALT_TYPES[(set * 4) + i]}") })
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {

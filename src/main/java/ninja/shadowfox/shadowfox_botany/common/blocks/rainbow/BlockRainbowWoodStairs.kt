@@ -13,7 +13,8 @@ import kotlin.text.toRegex
 
 
 open class BlockRainbowWoodStairs(source: Block = ShadowFoxBlocks.rainbowPlanks) : ShadowFoxStairs(source, 0, source.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs"), ILexiconable {
-    init {}
+    init {
+    }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return (source as ILexiconable).getEntry(p0, p1, p2, p3, p4, p5)
@@ -23,7 +24,7 @@ open class BlockRainbowWoodStairs(source: Block = ShadowFoxBlocks.rainbowPlanks)
         return (type != null && type.equals("axe"))
     }
 
-    override fun getHarvestTool(metadata : Int): String {
+    override fun getHarvestTool(metadata: Int): String {
         return "axe"
     }
 }

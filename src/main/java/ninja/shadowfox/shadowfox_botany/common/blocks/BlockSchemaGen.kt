@@ -51,8 +51,8 @@ class BlockSchemaGen() : ShadowFoxBlockMod(Material.wood), IWandable {
 
                 var arr = Gson().fromJson<List<BlockElement>>(schemaText, type)
 
-                for(ele in arr) {
-                    for(loc in ele.location) {
+                for (ele in arr) {
+                    for (loc in ele.location) {
                         p2.setBlock(p3 + loc.x, p4 + loc.y, p5 + loc.z, Block.getBlockFromName(ele.block), loc.meta, 3)
                     }
                 }
@@ -69,9 +69,8 @@ class BlockSchemaGen() : ShadowFoxBlockMod(Material.wood), IWandable {
         if (!e.parentFile.exists()) e.parentFile.mkdirs()
 
         if (e.exists()) {
-            return  e.readText()
-        }
-        else return null
+            return e.readText()
+        } else return null
     }
 
     class BlockElement(val block: String, val location: List<LocationElement>)

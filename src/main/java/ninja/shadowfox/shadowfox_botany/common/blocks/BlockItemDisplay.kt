@@ -44,7 +44,7 @@ class BlockItemDisplay() : ShadowFoxBlockMod(Material.wood), ILexiconable, ITile
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F)
     }
 
-    override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {
+    override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {
         if (list != null && item != null)
             for (i in 0..(TYPES - 1)) {
                 list.add(ItemStack(item, 1, i))
@@ -71,15 +71,15 @@ class BlockItemDisplay() : ShadowFoxBlockMod(Material.wood), ILexiconable, ITile
         GameRegistry.registerBlock(this, ItemUniqueSubtypedBlockMod::class.java, name)
     }
 
-    override fun addCollisionBoxesToList(world:World, x:Int, y:Int, z:Int, axis:AxisAlignedBB, bounds:MutableList<Any?>, entity:Entity?) {
+    override fun addCollisionBoxesToList(world: World, x: Int, y: Int, z: Int, axis: AxisAlignedBB, bounds: MutableList<Any?>, entity: Entity?) {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F)
         super.addCollisionBoxesToList(world, x, y, z, axis, bounds, entity)
     }
 
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        for (i in 0..(TYPES-1)) {
+        for (i in 0..(TYPES - 1)) {
             icons[i] = IconHelper.forBlock(par1IconRegister, this, i)
-            sideIcons[i] = IconHelper.forBlock(par1IconRegister, this, "Side"+i)
+            sideIcons[i] = IconHelper.forBlock(par1IconRegister, this, "Side" + i)
         }
 
     }
@@ -90,7 +90,7 @@ class BlockItemDisplay() : ShadowFoxBlockMod(Material.wood), ILexiconable, ITile
 
     @SideOnly(Side.CLIENT)
     override fun getIcon(side: Int, meta: Int): IIcon {
-        return if (side == 1 || side == 0) icons[Math.min(meta, TYPES-1)]!! else sideIcons[Math.min(meta, TYPES-1)]!!
+        return if (side == 1 || side == 0) icons[Math.min(meta, TYPES - 1)]!! else sideIcons[Math.min(meta, TYPES - 1)]!!
     }
 
     override fun onBlockActivated(world: World?, x: Int, y: Int, z: Int, player: EntityPlayer?, meta: Int, hitX: Float, hitY: Float, hitZ: Float): Boolean {

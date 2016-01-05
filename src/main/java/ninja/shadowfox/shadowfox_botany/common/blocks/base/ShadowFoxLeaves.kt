@@ -20,7 +20,7 @@ import vazkii.botania.api.lexicon.ILexiconable
 import java.util.*
 
 
-abstract class ShadowFoxLeaves(): BlockLeaves(), IShearable, ILexiconable {
+abstract class ShadowFoxLeaves() : BlockLeaves(), IShearable, ILexiconable {
 
     internal var field_150128_a: IntArray? = null
     protected var icons: Array<IIcon> = emptyArray()
@@ -71,7 +71,8 @@ abstract class ShadowFoxLeaves(): BlockLeaves(), IShearable, ILexiconable {
         return ret
     }
 
-    override fun beginLeavesDecay(world: World?, x: Int, y: Int, z: Int) {}
+    override fun beginLeavesDecay(world: World?, x: Int, y: Int, z: Int) {
+    }
 
     override fun updateTick(world: World?, x: Int, y: Int, z: Int, random: Random?) {
         if (!world!!.isRemote) {
@@ -161,8 +162,8 @@ abstract class ShadowFoxLeaves(): BlockLeaves(), IShearable, ILexiconable {
 
             l1 = field_150128_a!![k1 * j1 + k1 * b1 + k1]
 
-            if (l1 >= 0) { }
-            else removeLeaves(world, x, y, z)
+            if (l1 >= 0) {
+            } else removeLeaves(world, x, y, z)
 
         }
     }

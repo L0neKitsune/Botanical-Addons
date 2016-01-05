@@ -42,7 +42,7 @@ class BlockColoredWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBl
         return (type != null && type.equals("axe"))
     }
 
-    override fun getHarvestTool(metadata : Int): String {
+    override fun getHarvestTool(metadata: Int): String {
         return "axe"
     }
 

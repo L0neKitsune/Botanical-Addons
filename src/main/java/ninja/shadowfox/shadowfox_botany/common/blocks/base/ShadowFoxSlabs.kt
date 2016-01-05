@@ -56,7 +56,8 @@ abstract class ShadowFoxSlabs(val full: Boolean, val meta: Int, val source: Bloc
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
+    }
 
     open fun register() {
         GameRegistry.registerBlock(this, ItemColoredSlabMod::class.java, name)

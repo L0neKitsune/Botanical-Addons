@@ -18,10 +18,11 @@ import java.util.*
 
 abstract class ShadowFoxRotatedPillar(mat: Material) : ShadowFoxBlockMod(mat), ILexiconable {
 
-    lateinit protected var iconTop : IIcon
-    lateinit protected var iconSide : IIcon
+    lateinit protected var iconTop: IIcon
+    lateinit protected var iconSide: IIcon
 
-    init { }
+    init {
+    }
 
     override fun setBlockName(par1Str: String): Block {
         register(par1Str)

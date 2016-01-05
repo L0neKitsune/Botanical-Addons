@@ -9,15 +9,16 @@ import java.util.*
 class HeartWoodTreeGen(val minTreeHeight: Int, val regWood: Block, val regMeta: Int,
                        val heartWood: Block, val heartMeta: Int, val leaves: Block, val leavesMeta: Int) : WorldGenAbstractTree(true) {
 
-    init {}
+    init {
+    }
 
     override fun generate(world: World?, random: Random?, x: Int, y: Int, z: Int): Boolean {
         val l: Int = random!!.nextInt(3) + minTreeHeight
         var flag: Boolean = true
 
         if (y >= 1 && y + l + 1 <= 256) {
-            var b0 : Byte
-            var block : Block
+            var b0: Byte
+            var block: Block
 
             isGen@ for (i1 in y..(y + 1 + l)) {
                 b0 = 1
@@ -35,8 +36,7 @@ class HeartWoodTreeGen(val minTreeHeight: Int, val regWood: Block, val regMeta: 
                                 flag = false
                                 break@isGen
                             }
-                        }
-                        else {
+                        } else {
                             flag = false
                             break@isGen
                         }
@@ -45,7 +45,6 @@ class HeartWoodTreeGen(val minTreeHeight: Int, val regWood: Block, val regMeta: 
             }
 
             if (!flag) return false
-
             else {
                 var block2: Block = world!!.getBlock(x, y - 1, z)
 
@@ -82,7 +81,7 @@ class HeartWoodTreeGen(val minTreeHeight: Int, val regWood: Block, val regMeta: 
                         block = world.getBlock(x, y + k1, z)
 
                         if (block.isAir(world, x, y + k1, z) || block.isLeaves(world, x, y + k1, z)) {
-                            if (k1 == l-1){
+                            if (k1 == l - 1) {
                                 setBlockAndNotifyAdequately(world, x, y + k1, z, heartWood, heartMeta)
                             } else {
                                 setBlockAndNotifyAdequately(world, x, y + k1, z, regWood, regMeta)
@@ -90,11 +89,9 @@ class HeartWoodTreeGen(val minTreeHeight: Int, val regWood: Block, val regMeta: 
                         }
                     }
                     return true
-                }
-                else return false
+                } else return false
             }
-        }
-        else return false
+        } else return false
 
     }
 }

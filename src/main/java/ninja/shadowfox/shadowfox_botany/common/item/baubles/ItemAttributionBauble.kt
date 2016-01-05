@@ -54,9 +54,9 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 1) {
+        if (event.map.textureType == 1) {
             var icon = InterpolatedIcon("shadowfox_botany:attributionBauble-WireSegal")
-            if(event.map.setTextureEntry("shadowfox_botany:attributionBauble-WireSegal", icon))
+            if (event.map.setTextureEntry("shadowfox_botany:attributionBauble-WireSegal", icon))
                 this.wireIcon = icon
         }
     }
@@ -81,7 +81,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
         super.addHiddenTooltip(par1ItemStack, par2EntityPlayer, par3List, par4)
     }
 
-    fun addStringToTooltip(s : String, tooltip : MutableList<Any?>?) {
+    fun addStringToTooltip(s: String, tooltip: MutableList<Any?>?) {
         tooltip!!.add(s.replace("&".toRegex(), "\u00a7"))
     }
 
@@ -89,7 +89,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
         return itemIcon
     }
 
-    override fun getBaubleType(stack: ItemStack) : BaubleType {
+    override fun getBaubleType(stack: ItemStack): BaubleType {
         return BaubleType.AMULET
     }
 
@@ -120,46 +120,46 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
         }
     }
 
-//    @SideOnly(Side.CLIENT)
-//    fun renderTail(event: RenderPlayerEvent) {
-//        GL11.glEnable(GL11.GL_BLEND)
-//        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
-//        GL11.glShadeModel(GL11.GL_SMOOTH)
-//        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240f, 240f)
-//        GL11.glDisable(GL11.GL_LIGHTING)
-//        GL11.glDisable(GL11.GL_CULL_FACE)
-//
-//        Minecraft.getMinecraft().renderEngine.bindTexture(kitsuneTexture)
-//
-//        IBaubleRender.Helper.rotateIfSneaking(event.entityPlayer)
-//        chestTranslate()
-//
-//        GL11.glRotatef(-90F, 1F, 0F, 0F)
-//
-//        //        GL11.glTranslatef(-1F, -0.2F, -.50F)
-////        GL11.glRotatef(180F, 0F, 1F, 1F)
-////        GL11.glRotatef(-90F, 0F, 1F, 0F)
-//        //        GL11.glScalef(1F, 1F, 1F)
-//
-//        val tes = Tessellator.instance
-//        ShaderHelper.useShader(ShaderHelper.halo)
-//        tes.startDrawingQuads()
-//        tes.addVertexWithUV(-0.75, 0.0, -0.75, 0.0, 0.0)
-//        tes.addVertexWithUV(-0.75, 0.0, 0.75, 0.0, 1.0)
-//        tes.addVertexWithUV(0.75, 0.0, 0.75, 1.0, 1.0)
-//        tes.addVertexWithUV(0.75, 0.0, -0.75, 1.0, 0.0)
-//        tes.draw()
-//        ShaderHelper.releaseShader()
-//
-//        GL11.glEnable(GL11.GL_LIGHTING)
-//        GL11.glShadeModel(GL11.GL_FLAT)
-//        GL11.glEnable(GL11.GL_CULL_FACE)
-//    }
+    //    @SideOnly(Side.CLIENT)
+    //    fun renderTail(event: RenderPlayerEvent) {
+    //        GL11.glEnable(GL11.GL_BLEND)
+    //        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
+    //        GL11.glShadeModel(GL11.GL_SMOOTH)
+    //        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240f, 240f)
+    //        GL11.glDisable(GL11.GL_LIGHTING)
+    //        GL11.glDisable(GL11.GL_CULL_FACE)
+    //
+    //        Minecraft.getMinecraft().renderEngine.bindTexture(kitsuneTexture)
+    //
+    //        IBaubleRender.Helper.rotateIfSneaking(event.entityPlayer)
+    //        chestTranslate()
+    //
+    //        GL11.glRotatef(-90F, 1F, 0F, 0F)
+    //
+    //        //        GL11.glTranslatef(-1F, -0.2F, -.50F)
+    ////        GL11.glRotatef(180F, 0F, 1F, 1F)
+    ////        GL11.glRotatef(-90F, 0F, 1F, 0F)
+    //        //        GL11.glScalef(1F, 1F, 1F)
+    //
+    //        val tes = Tessellator.instance
+    //        ShaderHelper.useShader(ShaderHelper.halo)
+    //        tes.startDrawingQuads()
+    //        tes.addVertexWithUV(-0.75, 0.0, -0.75, 0.0, 0.0)
+    //        tes.addVertexWithUV(-0.75, 0.0, 0.75, 0.0, 1.0)
+    //        tes.addVertexWithUV(0.75, 0.0, 0.75, 1.0, 1.0)
+    //        tes.addVertexWithUV(0.75, 0.0, -0.75, 1.0, 0.0)
+    //        tes.draw()
+    //        ShaderHelper.releaseShader()
+    //
+    //        GL11.glEnable(GL11.GL_LIGHTING)
+    //        GL11.glShadeModel(GL11.GL_FLAT)
+    //        GL11.glEnable(GL11.GL_CULL_FACE)
+    //    }
 
     @SideOnly(Side.CLIENT)
     override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {
         var name = event.entityPlayer.commandSenderName
-        if(type == IBaubleRender.RenderType.HEAD) {
+        if (type == IBaubleRender.RenderType.HEAD) {
             if (stack.itemDamage != 0) {
                 // Render the Tiny Potato on your head... a tiny headtato, if you will.
                 Minecraft.getMinecraft().renderEngine.bindTexture(potatoTexture)
@@ -194,28 +194,27 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
                     GL11.glDisable(GL11.GL_BLEND)
                 }
             }
-        }
-        else
-        if (type == IBaubleRender.RenderType.BODY && stack.itemDamage == 0) {
-            Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture)
-            IBaubleRender.Helper.rotateIfSneaking(event.entityPlayer)
-            if (name == "l0nekitsune") {
-                // Render a fox tail
-                chestTranslate()
-                GL11.glRotatef(-90F, 0F, 1F, 0F)
-                GL11.glScalef(1F, 1F, 1F)
-                GL11.glTranslatef(-1F, -0.2F, -.50F)
-                ItemRenderer.renderItemIn2D(Tessellator.instance, kitsuneIcon.maxU, kitsuneIcon.minV, kitsuneIcon.minU, kitsuneIcon.maxV, kitsuneIcon.iconWidth, kitsuneIcon.iconHeight, 1F / 32F)
-                GL11.glTranslatef(0F, 0F, 0.025F)
-                ItemRenderer.renderItemIn2D(Tessellator.instance, kitsuneIcon.maxU, kitsuneIcon.minV, kitsuneIcon.minU, kitsuneIcon.maxV, kitsuneIcon.iconWidth, kitsuneIcon.iconHeight, 1F / 32F)
-            } else if (name != "yrsegal" && name != "theLorist" && name != "Tristaric") {
-                // Render the Holy Symbol
-                var armor = event.entityPlayer.getCurrentArmor(2) != null
-                GL11.glRotatef(180F, 1F, 0F, 0F)
-                GL11.glTranslatef(-0.26F, -0.4F, if (armor) 0.21F else 0.15F)
-                scale(0.5F)
-                ItemRenderer.renderItemIn2D(Tessellator.instance, defaultIcon.maxU, defaultIcon.minV, defaultIcon.minU, defaultIcon.maxV, defaultIcon.iconWidth, defaultIcon.iconHeight, 1F / 32F)
+        } else
+            if (type == IBaubleRender.RenderType.BODY && stack.itemDamage == 0) {
+                Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture)
+                IBaubleRender.Helper.rotateIfSneaking(event.entityPlayer)
+                if (name == "l0nekitsune") {
+                    // Render a fox tail
+                    chestTranslate()
+                    GL11.glRotatef(-90F, 0F, 1F, 0F)
+                    GL11.glScalef(1F, 1F, 1F)
+                    GL11.glTranslatef(-1F, -0.2F, -.50F)
+                    ItemRenderer.renderItemIn2D(Tessellator.instance, kitsuneIcon.maxU, kitsuneIcon.minV, kitsuneIcon.minU, kitsuneIcon.maxV, kitsuneIcon.iconWidth, kitsuneIcon.iconHeight, 1F / 32F)
+                    GL11.glTranslatef(0F, 0F, 0.025F)
+                    ItemRenderer.renderItemIn2D(Tessellator.instance, kitsuneIcon.maxU, kitsuneIcon.minV, kitsuneIcon.minU, kitsuneIcon.maxV, kitsuneIcon.iconWidth, kitsuneIcon.iconHeight, 1F / 32F)
+                } else if (name != "yrsegal" && name != "theLorist" && name != "Tristaric") {
+                    // Render the Holy Symbol
+                    var armor = event.entityPlayer.getCurrentArmor(2) != null
+                    GL11.glRotatef(180F, 1F, 0F, 0F)
+                    GL11.glTranslatef(-0.26F, -0.4F, if (armor) 0.21F else 0.15F)
+                    scale(0.5F)
+                    ItemRenderer.renderItemIn2D(Tessellator.instance, defaultIcon.maxU, defaultIcon.minV, defaultIcon.minU, defaultIcon.maxV, defaultIcon.iconWidth, defaultIcon.iconHeight, 1F / 32F)
+                }
             }
-        }
     }
 }

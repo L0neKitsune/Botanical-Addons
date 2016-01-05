@@ -14,17 +14,17 @@ import kotlin.collections.plus
 
 public object LexiconRegistry {
 
-    val coloredDirt : LexiconEntry
-    val irisSapling : LexiconEntry
-    val technicolor : LexiconEntry
-    val lightningRod : LexiconEntry
-    val interdictionRod : LexiconEntry
-    val pastoralSeeds : LexiconEntry
-    val coatOfArms : LexiconEntry
-    val colorOverride : LexiconEntry
-    val treeCrafting : LexiconEntry
+    val coloredDirt: LexiconEntry
+    val irisSapling: LexiconEntry
+    val technicolor: LexiconEntry
+    val lightningRod: LexiconEntry
+    val interdictionRod: LexiconEntry
+    val pastoralSeeds: LexiconEntry
+    val coatOfArms: LexiconEntry
+    val colorOverride: LexiconEntry
+    val treeCrafting: LexiconEntry
     val dendrology: ShadowFoxLexiconCategory
-    val attribution : LexiconEntry
+    val attribution: LexiconEntry
     val sealCreepers: LexiconEntry
     val kindling: LexiconEntry
     val waveRod: LexiconEntry
@@ -171,7 +171,7 @@ public object LexiconRegistry {
         for (i in 0..2)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.itemDisplay, 1, i), itemDisplay, 1)
 
-        for (i in 0..3){
+        for (i in 0..3) {
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood0, 1, i), irisSapling, 1)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood1, 1, i), irisSapling, 1)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood2, 1, i), irisSapling, 1)

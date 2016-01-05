@@ -23,7 +23,7 @@ import vazkii.botania.api.wand.IWandHUD
 import java.util.*
 
 
-open class BlockTreeCrafter(name: String = "treeCrafter"): ShadowFoxTileContainer<TileTreeCrafter>(Material.wood), IWandHUD, ILexiconable, IMultipassRenderer {
+open class BlockTreeCrafter(name: String = "treeCrafter") : ShadowFoxTileContainer<TileTreeCrafter>(Material.wood), IWandHUD, ILexiconable, IMultipassRenderer {
     internal var random: Random
     override val registerInCreative: Boolean = false
 
@@ -68,11 +68,13 @@ open class BlockTreeCrafter(name: String = "treeCrafter"): ShadowFoxTileContaine
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return LexiconRegistry.treeCrafting
     }
+
     override fun renderAsNormalBlock(): Boolean = false
     override fun canRenderInPass(pass: Int): Boolean {
         MultipassRenderer.pass = pass
         return true
     }
+
     override fun getRenderBlockPass(): Int = 1
     override fun getRenderType(): Int = Constants.multipassRenderingID
 

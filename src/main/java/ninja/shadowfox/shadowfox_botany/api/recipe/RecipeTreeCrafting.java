@@ -30,7 +30,7 @@ public class RecipeTreeCrafting extends RecipePetals {
         for (ItemStack i : items) {
             for (int j = 0; j < inputsMissing.size(); j++) {
                 Object inp = inputsMissing.get(j);
-                if(inp instanceof ItemStack && ((ItemStack) inp).getItemDamage() == 32767)
+                if (inp instanceof ItemStack && ((ItemStack) inp).getItemDamage() == 32767)
                     ((ItemStack) inp).setItemDamage(i.getItemDamage());
                 if (itemEquals(i, inp)) {
                     inputsMissing.remove(j);

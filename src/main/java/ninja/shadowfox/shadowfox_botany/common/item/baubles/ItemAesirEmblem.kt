@@ -33,7 +33,7 @@ import kotlin.text.toRegex
 
 class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingItem {
 
-    val COST = 2*ItemPriestEmblem.TYPES
+    val COST = 2 * ItemPriestEmblem.TYPES
     var baubleIcon: IIcon by Delegates.notNull()
 
     init {
@@ -42,12 +42,12 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
     }
 
     override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>?, par4: Boolean) {
-        if(par1ItemStack == null) return
-        this.addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.creative")+"&r", par3List)
+        if (par1ItemStack == null) return
+        this.addStringToTooltip("&7" + StatCollector.translateToLocal("misc.shadowfox_botany.creative") + "&r", par3List)
         super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4)
     }
 
-    fun addStringToTooltip(s : String, tooltip : MutableList<Any?>?) {
+    fun addStringToTooltip(s: String, tooltip: MutableList<Any?>?) {
         tooltip!!.add(s.replace("&".toRegex(), "\u00a7"))
     }
 
@@ -65,21 +65,21 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
         baubleIcon = IconHelper.forItem(par1IconRegister, this, "Render")
     }
 
-    override fun getBaubleType(stack: ItemStack) : BaubleType {
+    override fun getBaubleType(stack: ItemStack): BaubleType {
         return BaubleType.AMULET
     }
 
     fun getHeadOrientation(entity: EntityLivingBase): Vector3 {
         val f1 = MathHelper.cos(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat())
         val f2 = MathHelper.sin(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat())
-        val f3 = -MathHelper.cos(-(entity.rotationPitch-90) * 0.017453292F)
-        val f4 = MathHelper.sin(-(entity.rotationPitch-90) * 0.017453292F)
+        val f3 = -MathHelper.cos(-(entity.rotationPitch - 90) * 0.017453292F)
+        val f4 = MathHelper.sin(-(entity.rotationPitch - 90) * 0.017453292F)
         return Vector3((f2 * f3).toDouble(), f4.toDouble(), (f1 * f3).toDouble())
     }
 
     override fun onWornTick(stack: ItemStack, player: EntityLivingBase) {
         if (player.ticksExisted % 10 == 0) {
-            if(player is EntityPlayer) {
+            if (player is EntityPlayer) {
                 if (ManaItemHandler.requestManaExact(stack, player, COST, true)) ItemNBTHelper.setByte(stack, "active", 1.toByte())
                 else ItemNBTHelper.setByte(stack, "active", 0.toByte())
             }
@@ -92,7 +92,7 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
 
     @SideOnly(Side.CLIENT)
     override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {
-        if(type == IBaubleRender.RenderType.BODY) {
+        if (type == IBaubleRender.RenderType.BODY) {
             val player = event.entityPlayer
             if (player.ticksExisted % 10 == 0) {
                 val shift = getHeadOrientation(player)

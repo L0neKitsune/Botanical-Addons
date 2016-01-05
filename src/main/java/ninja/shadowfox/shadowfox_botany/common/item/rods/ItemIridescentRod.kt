@@ -40,9 +40,9 @@ class ItemIridescentRod(name: String = "colorfulSkyDirtRod") : ItemIridescent(na
             if (ManaItemHandler.requestManaExactForTool(par1ItemStack, par2EntityPlayer, cost, false)) {
                 val dir = ForgeDirection.getOrientation(par7)
 
-                val aabb =  AxisAlignedBB.getBoundingBox((par4 + dir.offsetX).toDouble(),
-                        (par5+dir.offsetY).toDouble(), (par6+dir.offsetZ).toDouble(),
-                        (par4+dir.offsetX+1).toDouble(), (par5+dir.offsetY+1).toDouble(), (par6+dir.offsetZ+1).toDouble())
+                val aabb = AxisAlignedBB.getBoundingBox((par4 + dir.offsetX).toDouble(),
+                        (par5 + dir.offsetY).toDouble(), (par6 + dir.offsetZ).toDouble(),
+                        (par4 + dir.offsetX + 1).toDouble(), (par5 + dir.offsetY + 1).toDouble(), (par6 + dir.offsetZ + 1).toDouble())
                 val entities = par3World.getEntitiesWithinAABB(EntityLivingBase::class.java, aabb).size
 
                 if (entities == 0) {
@@ -64,12 +64,12 @@ class ItemIridescentRod(name: String = "colorfulSkyDirtRod") : ItemIridescent(na
         setMaxStackSize(1)
     }
 
-    override fun onItemUse(par1ItemStack : ItemStack, par2EntityPlayer : EntityPlayer, par3World : World,
-                           par4 : Int, par5 : Int, par6 : Int, par7 : Int, par8 : Float, par9 : Float, par10 : Float) : Boolean{
+    override fun onItemUse(par1ItemStack: ItemStack, par2EntityPlayer: EntityPlayer, par3World: World,
+                           par4: Int, par5: Int, par6: Int, par7: Int, par8: Float, par9: Float, par10: Float): Boolean {
         return place(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7, par8, par9, par10, ItemIridescent.dirtStack(par1ItemStack.itemDamage), COST, 0.35F, 0.2F, 0.05F)
     }
 
-    override fun onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer) : ItemStack {
+    override fun onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer): ItemStack {
         var blockstack = ItemIridescent.dirtStack(stack.itemDamage)
         if (player.isSneaking) {
             var damage = stack.itemDamage
@@ -81,9 +81,7 @@ class ItemIridescentRod(name: String = "colorfulSkyDirtRod") : ItemIridescent(na
             blockstack = ItemIridescent.dirtStack(damage)
             blockstack!!.setStackDisplayName(StatCollector.translateToLocal("misc.shadowfox_botany.color." + damage))
             ItemsRemainingRenderHandler.set(blockstack, -2)
-        }
-
-        else if (!world.isRemote && ManaItemHandler.requestManaExactForTool(stack, player, COST * 2, false)) {
+        } else if (!world.isRemote && ManaItemHandler.requestManaExactForTool(stack, player, COST * 2, false)) {
 
             val color = Color(getColorFromItemStack(stack, 0))
             val r = color.red / 255F
@@ -94,7 +92,7 @@ class ItemIridescentRod(name: String = "colorfulSkyDirtRod") : ItemIridescent(na
             var basePlayerRange = 5.0
             if (player is EntityPlayerMP)
                 basePlayerRange = player.theItemInWorldManager.blockReachDistance
-            val distmultiplier = if (sif) basePlayerRange-1 else 3.0
+            val distmultiplier = if (sif) basePlayerRange - 1 else 3.0
 
             val playerVec = Vector3.fromEntityCenter(player)
             val lookVec = Vector3(player.lookVec).multiply(distmultiplier)
@@ -119,7 +117,7 @@ class ItemIridescentRod(name: String = "colorfulSkyDirtRod") : ItemIridescent(na
                 }
             }
         }
-        if(world.isRemote)
+        if (world.isRemote)
             player.swingItem()
 
         return stack
@@ -142,23 +140,23 @@ class ItemIridescentRod(name: String = "colorfulSkyDirtRod") : ItemIridescent(na
             3 -> xl = 2
         }
 
-        val block = world.getBlock(x+xl, y, z+zl)
+        val block = world.getBlock(x + xl, y, z + zl)
 
         val color = Color(getColorFromItemStack(stack, 0))
         val r = color.red / 255F
         val g = color.green / 255F
         val b = color.blue / 255F
 
-        if (tile.currentMana >= COST && block.isAir(world, x+xl, y, z+zl) && tile.elapsedFunctionalTicks % 50 == 0 && tile.isEnabled) {
-            world.setBlock(x+xl, y, z+zl, ItemIridescent.dirtFromMeta(stack.itemDamage), stack.itemDamage, 1 or 2)
+        if (tile.currentMana >= COST && block.isAir(world, x + xl, y, z + zl) && tile.elapsedFunctionalTicks % 50 == 0 && tile.isEnabled) {
+            world.setBlock(x + xl, y, z + zl, ItemIridescent.dirtFromMeta(stack.itemDamage), stack.itemDamage, 1 or 2)
             tile.recieveMana(-COST)
             for (i in 0..6)
-                Botania.proxy.sparkleFX(world, x+xl + Math.random(), y + Math.random(), z+zl + Math.random(),
+                Botania.proxy.sparkleFX(world, x + xl + Math.random(), y + Math.random(), z + zl + Math.random(),
                         r, g, b, 1F, 5)
             if (stack.itemDamage == TYPES)
-                world.playAuxSFX(2001, x+xl, y, z+zl, Block.getIdFromBlock(ShadowFoxBlocks.rainbowDirtBlock))
+                world.playAuxSFX(2001, x + xl, y, z + zl, Block.getIdFromBlock(ShadowFoxBlocks.rainbowDirtBlock))
             else
-                world.playAuxSFX(2001, x+xl, y, z+zl, Block.getIdFromBlock(ShadowFoxBlocks.coloredDirtBlock) + (stack.itemDamage shl 12))
+                world.playAuxSFX(2001, x + xl, y, z + zl, Block.getIdFromBlock(ShadowFoxBlocks.coloredDirtBlock) + (stack.itemDamage shl 12))
 
         }
     }
@@ -167,22 +165,22 @@ class ItemIridescentRod(name: String = "colorfulSkyDirtRod") : ItemIridescent(na
         return avatarOverlay
     }
 
-    override fun isFull3D() : Boolean {
+    override fun isFull3D(): Boolean {
         return true
     }
 
-    override fun usesMana(stack : ItemStack) : Boolean {
+    override fun usesMana(stack: ItemStack): Boolean {
         return true
     }
 
-    override fun provideBlock(player : EntityPlayer, requestor : ItemStack, stack: ItemStack, block: Block, meta: Int, doit: Boolean) : Boolean{
-        if(block == ShadowFoxBlocks.coloredDirtBlock || block == ShadowFoxBlocks.rainbowDirtBlock)
+    override fun provideBlock(player: EntityPlayer, requestor: ItemStack, stack: ItemStack, block: Block, meta: Int, doit: Boolean): Boolean {
+        if (block == ShadowFoxBlocks.coloredDirtBlock || block == ShadowFoxBlocks.rainbowDirtBlock)
             return !doit || ManaItemHandler.requestManaExactForTool(requestor, player, COST, true)
         return false
     }
 
-    override fun getBlockCount(player: EntityPlayer, requestor: ItemStack, stack: ItemStack, block: Block, meta: Int) : Int {
-        if(block == ShadowFoxBlocks.coloredDirtBlock || block == ShadowFoxBlocks.rainbowDirtBlock)
+    override fun getBlockCount(player: EntityPlayer, requestor: ItemStack, stack: ItemStack, block: Block, meta: Int): Int {
+        if (block == ShadowFoxBlocks.coloredDirtBlock || block == ShadowFoxBlocks.rainbowDirtBlock)
             return -1
         return 0
     }

@@ -58,7 +58,7 @@ class PotionManaVoid : PotionMod(ConfigHandler.potionIDManaVoid, "manaVoid", tru
                         }
                     }
                 }
-                for (slot in 0..invSize-1) {
+                for (slot in 0..invSize - 1) {
                     val stackInSlot = mainInv.getStackInSlot(slot)
                     if (stackInSlot != null && stackInSlot.item == ModItems.blackLotus) {
                         var wiltStack = ItemStack(ShadowFoxItems.wiltedLotus, stackInSlot.stackSize, stackInSlot.itemDamage)

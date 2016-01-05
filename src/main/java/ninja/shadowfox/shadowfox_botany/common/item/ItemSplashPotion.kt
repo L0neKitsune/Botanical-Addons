@@ -97,9 +97,9 @@ public class ItemSplashPotion() : ItemMod("splashPotion"), IBrewItem, IBrewConta
     }
 
     override fun getItemForBrew(brew: Brew, stack: ItemStack): ItemStack? {
-            val brewStack = ItemStack(this)
-            setBrew(brewStack, brew)
-            return brewStack
+        val brewStack = ItemStack(this)
+        setBrew(brewStack, brew)
+        return brewStack
 
     }
 

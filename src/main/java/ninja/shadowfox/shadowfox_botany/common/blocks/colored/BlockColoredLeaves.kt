@@ -24,7 +24,9 @@ public class BlockColoredLeaves(val colorSet: Int) : ShadowFoxLeaves() {
 
     val TYPES: Int = 8
 
-    init { setBlockName("irisLeaves$colorSet") }
+    init {
+        setBlockName("irisLeaves$colorSet")
+    }
 
     override fun quantityDropped(random: Random): Int {
         return if (random.nextInt(20) == 0) 1 else 0
@@ -75,7 +77,7 @@ public class BlockColoredLeaves(val colorSet: Int) : ShadowFoxLeaves() {
     }
 
     override fun registerBlockIcons(iconRegister: IIconRegister) {
-        icons = Array(2, { i -> IconHelper.forName(iconRegister, "irisLeaves"+if (i == 0) "" else "_opaque") })
+        icons = Array(2, { i -> IconHelper.forName(iconRegister, "irisLeaves" + if (i == 0) "" else "_opaque") })
     }
 
     override fun decayBit(): Int = 0x8

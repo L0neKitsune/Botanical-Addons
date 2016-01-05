@@ -37,11 +37,11 @@ public class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
 
     }
 
-    override fun func_149851_a(world: World, x:Int, y:Int, z:Int, remote: Boolean): Boolean {
+    override fun func_149851_a(world: World, x: Int, y: Int, z: Int, remote: Boolean): Boolean {
         return true
     }
 
-    override fun func_149853_b(world: World, random: Random, x:Int, y:Int, z:Int) {
+    override fun func_149853_b(world: World, random: Random, x: Int, y: Int, z: Int) {
         if (ShadowFoxBlocks.rainbowTallGrass.canPlaceBlockAt(world, x, y, z)) {
             world.setBlock(x, y, z, ShadowFoxBlocks.rainbowTallGrass, 0, 2)
             world.setBlock(x, y + 1, z, ShadowFoxBlocks.rainbowTallGrass, 8, 2)
@@ -68,7 +68,8 @@ public class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(iconRegister: IIconRegister) {}
+    override fun registerBlockIcons(iconRegister: IIconRegister) {
+    }
 
     @SideOnly(Side.CLIENT)
     override fun getIcon(meta: Int, pass: Int): IIcon {
@@ -78,9 +79,9 @@ public class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 0) {
+        if (event.map.textureType == 0) {
             var icon = InterpolatedIcon("shadowfox_botany:rainbowGrass")
-            if(event.map.setTextureEntry("shadowfox_botany:rainbowGrass", icon))
+            if (event.map.setTextureEntry("shadowfox_botany:rainbowGrass", icon))
                 this.blockIcon = icon
         }
     }

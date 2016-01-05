@@ -12,7 +12,8 @@ public class ColorOverrideHelper {
             IInventory baubles = PlayerHandler.getPlayerBaubles(player);
             for (int i = 0; i < 4; i++) {
                 ItemStack stack = baubles.getStackInSlot(i);
-                if (stack != null && stack.getItem() instanceof IPriestColorOverride) return ((IPriestColorOverride) stack.getItem()).colorOverride(stack);
+                if (stack != null && stack.getItem() instanceof IPriestColorOverride)
+                    return ((IPriestColorOverride) stack.getItem()).colorOverride(stack);
                 else if (stack != null && stack.getItem() instanceof ICosmeticAttachable && ((ICosmeticAttachable) stack.getItem()).getCosmeticItem(stack) != null) {
                     ItemStack cosmeticStack = ((ICosmeticAttachable) stack.getItem()).getCosmeticItem(stack);
                     if (cosmeticStack != null && cosmeticStack.getItem() instanceof IPriestColorOverride)
@@ -22,6 +23,7 @@ public class ColorOverrideHelper {
         }
         return -1;
     }
+
     public static int getColor(EntityPlayer player, int fallback) {
         int color = getColor(player);
         if (color == -1)

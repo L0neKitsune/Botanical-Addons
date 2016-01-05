@@ -9,7 +9,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.BlockRainbowWoodSt
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemSlabMod
 
-class BlockLightningWoodSlab(full: Boolean, source: Block = ShadowFoxBlocks.lightningPlanks): BlockRainbowWoodSlab(full, source) {
+class BlockLightningWoodSlab(full: Boolean, source: Block = ShadowFoxBlocks.lightningPlanks) : BlockRainbowWoodSlab(full, source) {
     override fun getFullBlock(): BlockSlab {
         return ShadowFoxBlocks.lightningSlabsFull as BlockSlab
     }
@@ -23,7 +23,7 @@ class BlockLightningWoodSlab(full: Boolean, source: Block = ShadowFoxBlocks.ligh
     }
 }
 
-class BlockLightningWoodStairs(source: Block = ShadowFoxBlocks.lightningPlanks): BlockRainbowWoodStairs(source) {
+class BlockLightningWoodStairs(source: Block = ShadowFoxBlocks.lightningPlanks) : BlockRainbowWoodStairs(source) {
     override fun register() {
         GameRegistry.registerBlock(this, ItemBlockMod::class.java, name)
     }

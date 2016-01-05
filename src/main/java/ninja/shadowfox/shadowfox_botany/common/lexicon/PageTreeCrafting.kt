@@ -13,16 +13,19 @@ import vazkii.botania.client.core.handler.HUDHandler
 import vazkii.botania.common.block.tile.mana.TilePool
 import kotlin.text.format
 
-public class PageTreeCrafting: PagePetalRecipe<RecipeTreeCrafting> {
-    constructor(unlocalizedName:String, recipes:List<RecipeTreeCrafting>) : super(unlocalizedName, recipes) {}
-    constructor(unlocalizedName:String, recipes:RecipeTreeCrafting) : super(unlocalizedName, recipes) {}
+public class PageTreeCrafting : PagePetalRecipe<RecipeTreeCrafting> {
+    constructor(unlocalizedName: String, recipes: List<RecipeTreeCrafting>) : super(unlocalizedName, recipes) {
+    }
+
+    constructor(unlocalizedName: String, recipes: RecipeTreeCrafting) : super(unlocalizedName, recipes) {
+    }
 
     override fun getMiddleStack(): ItemStack {
         return ItemStack(ShadowFoxBlocks.treeCrafterBlockRB)
     }
 
     @SideOnly(Side.CLIENT)
-    override fun renderManaBar(gui:IGuiLexiconEntry, recipe:RecipeTreeCrafting, mx:Int, my:Int) {
+    override fun renderManaBar(gui: IGuiLexiconEntry, recipe: RecipeTreeCrafting, mx: Int, my: Int) {
         val font = Minecraft.getMinecraft().fontRenderer
         GL11.glEnable(GL11.GL_BLEND)
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)

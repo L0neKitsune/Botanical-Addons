@@ -45,14 +45,15 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerIcons(par1IconRegister: IIconRegister) {}
+    override fun registerIcons(par1IconRegister: IIconRegister) {
+    }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 1) {
+        if (event.map.textureType == 1) {
             var localIcon = InterpolatedIcon("shadowfox_botany:interdictionRod")
-            if(event.map.setTextureEntry("shadowfox_botany:interdictionRod", localIcon)) {
+            if (event.map.setTextureEntry("shadowfox_botany:interdictionRod", localIcon)) {
                 this.icon = localIcon
             }
         }
@@ -99,6 +100,7 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
     fun particleRing(world: World, x: Int, y: Int, z: Int, range: Int, r: Float, g: Float, b: Float) {
         particleRing(world, x.toDouble(), y.toDouble(), z.toDouble(), range, r, g, b)
     }
+
     fun particleRing(world: World, x: Double, y: Double, z: Double, range: Int, r: Float, g: Float, b: Float) {
         val m = 0.15F
         val mv = 0.35F
@@ -111,9 +113,11 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
             Botania.proxy.wispFX(world, dispx, dispy, dispz, r, g, b, 0.2F, (Math.random() - 0.5).toFloat() * m, (Math.random() - 0.5).toFloat() * mv, (Math.random() - 0.5F).toFloat() * m)
         }
     }
+
     fun pushEntities(x: Int, y: Int, z: Int, range: Int, velocity: Double, entities: List<Any?>): Boolean {
         return pushEntities(x.toDouble(), y.toDouble(), z.toDouble(), range, velocity, entities)
     }
+
     fun pushEntities(x: Double, y: Double, z: Double, range: Int, velocity: Double, entities: List<Any?>): Boolean {
         var flag = false
         for (entityLiving in entities) {
@@ -121,7 +125,7 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
                 var xDif = entityLiving.posX - x
                 var yDif = entityLiving.posY - (y + 1)
                 var zDif = entityLiving.posZ - z
-                var dist = Math.sqrt(xDif*xDif+yDif*yDif+zDif*zDif)
+                var dist = Math.sqrt(xDif * xDif + yDif * yDif + zDif * zDif)
                 if (dist <= range) {
                     entityLiving.motionX = velocity * xDif
                     entityLiving.motionY = velocity * yDif
@@ -157,8 +161,8 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
 
                 val exclude: EntityLivingBase = player
                 val entities = world.getEntitiesWithinAABBExcludingEntity(exclude,
-                    AxisAlignedBB.getBoundingBox(x - range, y - range, z - range,
-                        x + range, y + range, z + range), PLAYER_SELECTOR)
+                        AxisAlignedBB.getBoundingBox(x - range, y - range, z - range,
+                                x + range, y + range, z + range), PLAYER_SELECTOR)
 
                 if (pushEntities(x, y, z, range, velocity, entities)) {
                     if (count % 3 == 0) world.playSoundAtEntity(player, "shadowfox_botany:wind", 0.4F, 1F)
@@ -167,6 +171,7 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
             }
         }
     }
+
     val COST = 5
     val PROWESS_COST = -1
     val PRIEST_COST = 2
@@ -182,12 +187,14 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
     fun getCost(prowess: Boolean, priest: Boolean): Int {
         return COST + if (prowess) PROWESS_COST else 0 + if (priest) PRIEST_COST else 0
     }
+
     fun getVelocity(prowess: Boolean, priest: Boolean): Double {
         var vel = VELOCITY
         if (prowess) vel += PROWESS_VELOCTY
         if (priest) vel += PRIEST_VELOCITY
         return vel
     }
+
     fun getRange(prowess: Boolean, priest: Boolean): Int {
         return RANGE + if (prowess) PROWESS_RANGE else 0 + if (priest) PRIEST_RANGE else 0
     }
@@ -203,8 +210,8 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
             if (tile.elapsedFunctionalTicks % 5 == 0) particleRing(world, x, y, z, RANGE, 0f, 0f, 1f)
 
             val entities = world.selectEntitiesWithinAABB(EntityLivingBase::class.java,
-                AxisAlignedBB.getBoundingBox(x - RANGE, y - RANGE, z - RANGE,
-                    x + RANGE, y + RANGE, z + RANGE), AVATAR_SELECTOR)
+                    AxisAlignedBB.getBoundingBox(x - RANGE, y - RANGE, z - RANGE,
+                            x + RANGE, y + RANGE, z + RANGE), AVATAR_SELECTOR)
 
             if (pushEntities(x, y, z, RANGE, VELOCITY, entities)) {
                 if (tile.elapsedFunctionalTicks % 3 == 0) world.playSoundEffect(x.toDouble(), y.toDouble(), z.toDouble(), "shadowfox_botany:wind", 0.4F, 1F)

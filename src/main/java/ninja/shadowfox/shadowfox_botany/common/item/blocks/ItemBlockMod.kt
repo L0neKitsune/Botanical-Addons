@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
 import kotlin.text.replace
 
-open class ItemBlockMod(block: Block) : ItemBlock(block){
+open class ItemBlockMod(block: Block) : ItemBlock(block) {
 
     override fun getMetadata(meta: Int): Int {
         if (field_150939_a is ShadowFoxLeaves) return meta or field_150939_a.decayBit()

@@ -13,7 +13,7 @@ class ItemWiltedLotus : ItemMod("wiltedLotus") {
     }
 
     override fun getSubItems(item: Item, tab: CreativeTabs?, list: MutableList<Any?>) {
-        for(i in 0..1)
+        for (i in 0..1)
             list.add(ItemStack(item, 1, i))
     }
 

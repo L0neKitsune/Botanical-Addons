@@ -24,7 +24,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 
-class BlockAltLeaves(): ShadowFoxLeaves() {
+class BlockAltLeaves() : ShadowFoxLeaves() {
 
     protected var icon_norm: Array<IIcon> = emptyArray()
     protected var icon_opaque: Array<IIcon> = emptyArray()

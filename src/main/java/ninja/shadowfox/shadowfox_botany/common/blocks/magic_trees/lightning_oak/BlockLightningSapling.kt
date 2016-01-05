@@ -18,12 +18,12 @@ import java.util.*
 
 class BlockLightningSapling() : BlockColoredSapling(name = "lightningSapling") {
     override fun growTree(world: World?, x: Int, y: Int, z: Int, random: Random?) {
-        if(world != null) {
+        if (world != null) {
 
             if (!TerrainGen.saplingGrowTree(world, random, x, y, z)) return
             val plantedOn: Block = world.getBlock(x, y - 1, z)
 
-            if(canGrowHere(plantedOn)) {
+            if (canGrowHere(plantedOn)) {
                 val l = world.getBlockMetadata(x, y, z)
 
                 val obj: WorldGenerator = HeartWoodTreeGen(5, ShadowFoxBlocks.lightningWood, 0,

@@ -17,7 +17,7 @@ fun TileEntity.boundingBox(range: Int = 1): AxisAlignedBB {
             (this.xCoord + range).toDouble(), (this.yCoord + range).toDouble(), (this.zCoord + range).toDouble())
 }
 
-fun Entity.playSoundAtEntity(sound: String, volume: Float, duration: Float){
+fun Entity.playSoundAtEntity(sound: String, volume: Float, duration: Float) {
     this.worldObj.playSoundEffect(this.posX.toDouble(), this.posY.toDouble(), this.posZ.toDouble(), sound, volume, duration)
 }
 

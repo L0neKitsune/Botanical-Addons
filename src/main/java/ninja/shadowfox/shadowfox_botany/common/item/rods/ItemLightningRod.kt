@@ -75,14 +75,15 @@ public open class ItemLightningRod(name: String = "lightningRod") : ItemMod(name
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerIcons(par1IconRegister: IIconRegister) {}
+    override fun registerIcons(par1IconRegister: IIconRegister) {
+    }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 1) {
+        if (event.map.textureType == 1) {
             var localIcon = InterpolatedIcon("shadowfox_botany:lightningRod")
-            if(event.map.setTextureEntry("shadowfox_botany:lightningRod", localIcon)) {
+            if (event.map.setTextureEntry("shadowfox_botany:lightningRod", localIcon)) {
                 this.icon = localIcon
             }
         }
@@ -158,15 +159,19 @@ public open class ItemLightningRod(name: String = "lightningRod") : ItemMod(name
     fun getCost(thor: Boolean, prowess: Boolean, priest: Boolean): Int {
         return COST + (if (thor) THOR_COST else 0) + (if (prowess) PROWESS_COST else 0) + (if (priest) PRIEST_COST else 0)
     }
+
     fun getSpeed(thor: Boolean, prowess: Boolean, priest: Boolean): Int {
         return SPEED - (if (thor) THOR_SPEEDUP else 0) - (if (prowess) PROWESS_SPEEDUP else 0) - (if (priest) PRIEST_SPEEDUP else 0)
     }
+
     fun getDamage(thor: Boolean, prowess: Boolean, priest: Boolean): Float {
         return DAMAGE + (if (thor) THOR_POWERUP else 0f) + (if (prowess) PROWESS_POWERUP else 0f) + (if (priest) PRIEST_POWERUP else 0f)
     }
+
     fun getRange(thor: Boolean, prowess: Boolean, priest: Boolean): Float {
         return CHAINRANGE + (if (thor) THOR_RANGEUP else 0f) + (if (prowess) PROWESS_RANGEUP else 0f) + (if (priest) PRIEST_RANGEUP else 0f)
     }
+
     fun getTargetCap(thor: Boolean, prowess: Boolean, priest: Boolean): Int {
         return TARGETS + (if (thor) THOR_TARGETS else 0) + (if (prowess) PROWESS_TARGETS else 0) + (if (priest) PRIEST_TARGETS else 0)
     }
@@ -258,8 +263,8 @@ public open class ItemLightningRod(name: String = "lightningRod") : ItemMod(name
     fun getHeadOrientation(entity: EntityLivingBase): Vector3 {
         val f1 = MathHelper.cos(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat())
         val f2 = MathHelper.sin(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat())
-        val f3 = -MathHelper.cos(-(entity.rotationPitch-90) * 0.017453292F)
-        val f4 = MathHelper.sin(-(entity.rotationPitch-90) * 0.017453292F)
+        val f3 = -MathHelper.cos(-(entity.rotationPitch - 90) * 0.017453292F)
+        val f4 = MathHelper.sin(-(entity.rotationPitch - 90) * 0.017453292F)
         return Vector3((f2 * f3).toDouble(), f4.toDouble(), (f1 * f3).toDouble())
     }
 

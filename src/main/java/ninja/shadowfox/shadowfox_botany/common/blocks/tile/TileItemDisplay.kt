@@ -102,8 +102,11 @@ class TileItemDisplay() : ShadowFoxTile(), ISidedInventory {
         nbttagcompound.setTag("Items", nbttaglist)
     }
 
-    override fun openInventory() {}
-    override fun closeInventory() {}
+    override fun openInventory() {
+    }
+
+    override fun closeInventory() {
+    }
 
     override fun getInventoryStackLimit(): Int = 1
 

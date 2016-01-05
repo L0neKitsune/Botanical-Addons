@@ -22,7 +22,7 @@ import vazkii.botania.client.render.block.InterpolatedIcon
 import java.util.*
 
 
-class BlockLightningLeaves(): ShadowFoxLeaves() {
+class BlockLightningLeaves() : ShadowFoxLeaves() {
     init {
         setBlockName("lightningLeaves")
         if (FMLLaunchHandler.side().isClient)
@@ -30,18 +30,19 @@ class BlockLightningLeaves(): ShadowFoxLeaves() {
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(iconRegister: IIconRegister) {}
+    override fun registerBlockIcons(iconRegister: IIconRegister) {
+    }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 0) {
+        if (event.map.textureType == 0) {
             var success = true
             var icon = InterpolatedIcon("shadowfox_botany:lightningLeaves")
-            if(!event.map.setTextureEntry("shadowfox_botany:lightningLeaves", icon))
+            if (!event.map.setTextureEntry("shadowfox_botany:lightningLeaves", icon))
                 success = false
             var iconOpaque = InterpolatedIcon("shadowfox_botany:lightningLeaves_opaque")
-            if(!event.map.setTextureEntry("shadowfox_botany:lightningLeaves_opaque", iconOpaque))
+            if (!event.map.setTextureEntry("shadowfox_botany:lightningLeaves_opaque", iconOpaque))
                 success = false
             if (success) icons = arrayOf(icon, iconOpaque)
         }

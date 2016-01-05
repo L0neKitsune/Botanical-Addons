@@ -66,7 +66,7 @@ public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITile
         return TileLightningRod()
     }
 
-    public fun isHeartWood(meta:Int) : Boolean {
+    public fun isHeartWood(meta: Int): Boolean {
         return meta and 3 == 1
     }
 
@@ -81,17 +81,18 @@ public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITile
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
+    }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 0) {
+        if (event.map.textureType == 0) {
             var icon = InterpolatedIcon("shadowfox_botany:lightningWood")
-            if(event.map.setTextureEntry("shadowfox_botany:lightningWood", icon))
+            if (event.map.setTextureEntry("shadowfox_botany:lightningWood", icon))
                 this.iconSide = icon
             var iconTop = InterpolatedIcon("shadowfox_botany:lightningWood_top")
-            if(event.map.setTextureEntry("shadowfox_botany:lightningWood_top", iconTop))
+            if (event.map.setTextureEntry("shadowfox_botany:lightningWood_top", iconTop))
                 this.iconTop = iconTop
         }
     }

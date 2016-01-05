@@ -20,7 +20,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import kotlin.text.replace
 import kotlin.text.toRegex
 
-class BlockAltWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks.altPlanks):
+class BlockAltWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks.altPlanks) :
         ShadowFoxSlabs(full, meta, source, source.unlocalizedName.replace("tile.".toRegex(), "") + "Slab" + (if (full) "Full" else "") + meta), ILexiconable, IFuelHandler {
 
     override fun getFullBlock(): BlockSlab {
@@ -48,7 +48,7 @@ class BlockAltWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks
     }
 }
 
-class BlockAltWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.altPlanks):
+class BlockAltWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.altPlanks) :
         ShadowFoxStairs(source, meta, source.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs" + meta) {
     override fun register() {
         GameRegistry.registerBlock(this, ItemBlockMod::class.java, name)

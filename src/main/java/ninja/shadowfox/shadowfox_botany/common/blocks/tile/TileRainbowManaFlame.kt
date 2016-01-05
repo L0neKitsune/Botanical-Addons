@@ -25,5 +25,6 @@ class TileRainbowManaFlame : TileManaFlame() {
         time += Random((this.xCoord xor this.yCoord xor this.zCoord).toLong()).nextInt(100000)
         return Color.HSBtoRGB(time * 0.005F, 1F, 1F)
     }
+
     override fun shouldRender(): Boolean = Botania.proxy.isClientPlayerWearingMonocle || !this.invisible
 }

@@ -21,7 +21,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 
-public class BlockNetherPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.instance), ILexiconable {
+public class BlockNetherPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.instance), ILexiconable {
 
     private val name = "netherPlanks"
 
@@ -39,7 +39,7 @@ public class BlockNetherPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.i
         return (type != null && type.equals("axe"))
     }
 
-    override fun getHarvestTool(metadata : Int): String {
+    override fun getHarvestTool(metadata: Int): String {
         return "axe"
     }
 
@@ -56,7 +56,9 @@ public class BlockNetherPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.i
         return super.setBlockName(par1Str)
     }
 
-    override fun quantityDropped(random: Random): Int { return 1 }
+    override fun quantityDropped(random: Random): Int {
+        return 1
+    }
 
     override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item {
         return Item.getItemFromBlock(this)
@@ -65,7 +67,9 @@ public class BlockNetherPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.i
     override fun isFlammable(world: IBlockAccess?, x: Int, y: Int, z: Int, face: ForgeDirection?): Boolean = false
     override fun getFireSpreadSpeed(world: IBlockAccess?, x: Int, y: Int, z: Int, face: ForgeDirection?): Int = 0
 
-    override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean { return true }
+    override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean {
+        return true
+    }
 
     internal fun register(name: String) {
         GameRegistry.registerBlock(this, ItemBlockMod::class.java, name)

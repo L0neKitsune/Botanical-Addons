@@ -47,8 +47,8 @@ public object MultipartHandler {
         var item = Item.getItemFromBlock(block)
         block.getSubBlocks(item, block.creativeTabToDisplayOn, stacks)
 
-        for(stack in stacks)
-            if(stack.item == item)
+        for (stack in stacks)
+            if (stack.item == item)
                 registerMultipart(block, stack.itemDamage)
     }
 
@@ -57,8 +57,8 @@ public object MultipartHandler {
         var item = Item.getItemFromBlock(block)
         block.getSubBlocks(item, block.creativeTabToDisplayOn, stacks)
 
-        for(stack in stacks)
-            if(stack.item == item)
+        for (stack in stacks)
+            if (stack.item == item)
                 registerOverlaidMultipart(block, stack.itemDamage)
     }
 

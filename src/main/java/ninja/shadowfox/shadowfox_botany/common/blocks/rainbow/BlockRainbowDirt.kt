@@ -42,6 +42,7 @@ class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     override fun func_149851_a(world: World, x: Int, y: Int, z: Int, remote: Boolean): Boolean {
         return true
     }
+
     override fun func_149852_a(world: World, random: Random, x: Int, y: Int, z: Int): Boolean {
         return true
     }
@@ -65,15 +66,13 @@ class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
                         ++l1
                         continue
                     }
-                }
-                else if (world.getBlock(i1, j1, k1).isAir(world, i1, j1, k1)) {
+                } else if (world.getBlock(i1, j1, k1).isAir(world, i1, j1, k1)) {
                     if (random.nextInt(8) != 0) {
                         if (ShadowFoxBlocks.rainbowGrass.canBlockStay(world, i1, j1, k1)) {
-                            var meta = world.getBlockMetadata(i1, j1-1, k1)
+                            var meta = world.getBlockMetadata(i1, j1 - 1, k1)
                             world.setBlock(i1, j1, k1, ShadowFoxBlocks.rainbowGrass, meta, 3)
                         }
-                    }
-                    else {
+                    } else {
                         world.getBiomeGenForCoords(i1, k1).plantFlower(world, random, i1, j1, k1)
                     }
                 }
@@ -88,7 +87,7 @@ class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
         return (type != null && type.equals("shovel"))
     }
 
-    override fun getHarvestTool(metadata : Int): String {
+    override fun getHarvestTool(metadata: Int): String {
         return "shovel"
     }
 
@@ -112,15 +111,16 @@ class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 0) {
+        if (event.map.textureType == 0) {
             var icon = InterpolatedIcon("shadowfox_botany:rainbowDirt")
-            if(event.map.setTextureEntry("shadowfox_botany:rainbowDirt", icon))
+            if (event.map.setTextureEntry("shadowfox_botany:rainbowDirt", icon))
                 this.blockIcon = icon
         }
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
+    }
 
     override fun canSustainPlant(world: IBlockAccess?, x: Int, y: Int, z: Int, direction: ForgeDirection?, plantable: IPlantable?): Boolean {
         return true

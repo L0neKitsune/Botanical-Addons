@@ -22,7 +22,7 @@ import vazkii.botania.client.render.block.InterpolatedIcon
 import java.util.*
 
 
-public class BlockRainbowLeaves(): ShadowFoxLeaves() {
+public class BlockRainbowLeaves() : ShadowFoxLeaves() {
 
     init {
         setBlockName("rainbowLeaves")
@@ -59,20 +59,21 @@ public class BlockRainbowLeaves(): ShadowFoxLeaves() {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 0) {
+        if (event.map.textureType == 0) {
             var success = true
             var icon = InterpolatedIcon("shadowfox_botany:rainbowLeaves")
-            if(!event.map.setTextureEntry("shadowfox_botany:rainbowLeaves", icon))
+            if (!event.map.setTextureEntry("shadowfox_botany:rainbowLeaves", icon))
                 success = false
             var iconOpaque = InterpolatedIcon("shadowfox_botany:rainbowLeaves_opaque")
-            if(!event.map.setTextureEntry("shadowfox_botany:rainbowLeaves_opaque", iconOpaque))
+            if (!event.map.setTextureEntry("shadowfox_botany:rainbowLeaves_opaque", iconOpaque))
                 success = false
             if (success) icons = arrayOf(icon, iconOpaque)
         }
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(iconRegister: IIconRegister) {}
+    override fun registerBlockIcons(iconRegister: IIconRegister) {
+    }
 
     override fun decayBit(): Int = 0x1
 

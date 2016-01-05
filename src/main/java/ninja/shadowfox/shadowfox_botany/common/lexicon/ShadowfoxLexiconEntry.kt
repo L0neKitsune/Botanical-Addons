@@ -25,6 +25,7 @@ public class ShadowfoxLexiconEntry(unlocalizedName: String, category: LexiconCat
 
         return super.setLexiconPages(*pages)
     }
+
     override fun getUnlocalizedName(): String {
         return "shadowfox_botany.entry." + super.getUnlocalizedName()
     }

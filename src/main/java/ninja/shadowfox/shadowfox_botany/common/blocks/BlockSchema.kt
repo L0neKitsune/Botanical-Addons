@@ -38,20 +38,20 @@ class BlockSchema() : ShadowFoxBlockMod(Material.wood), IWandable, ITileEntityPr
         return true
     }
 
-    override fun createNewTileEntity(p_149915_1_: World?, p_149915_2_: Int): TileEntity? {
+    override fun createNewTileEntity(world: World?, meta: Int): TileEntity? {
         return TileSchema()
     }
 
 
-    override fun breakBlock(p_149749_1_: World, p_149749_2_: Int, p_149749_3_: Int, p_149749_4_: Int, p_149749_5_: Block?, p_149749_6_: Int) {
-        super.breakBlock(p_149749_1_, p_149749_2_, p_149749_3_, p_149749_4_, p_149749_5_, p_149749_6_)
-        p_149749_1_.removeTileEntity(p_149749_2_, p_149749_3_, p_149749_4_)
+    override fun breakBlock(world: World, x: Int, y: Int, z: Int, block: Block?, meta: Int) {
+        super.breakBlock(world, x, y, z, block, meta)
+        world.removeTileEntity(x, y, z)
     }
 
-    override fun onBlockEventReceived(p_149696_1_: World?, p_149696_2_: Int, p_149696_3_: Int, p_149696_4_: Int, p_149696_5_: Int, p_149696_6_: Int): Boolean {
-        super.onBlockEventReceived(p_149696_1_, p_149696_2_, p_149696_3_, p_149696_4_, p_149696_5_, p_149696_6_)
-        val tileentity = p_149696_1_!!.getTileEntity(p_149696_2_, p_149696_3_, p_149696_4_)
-        return if (tileentity != null) tileentity.receiveClientEvent(p_149696_5_, p_149696_6_) else false
+    override fun onBlockEventReceived(world: World?, x: Int, y: Int, z: Int, eventID: Int, eventArgs: Int): Boolean {
+        super.onBlockEventReceived(world, x, y, z, eventID, eventArgs)
+        val tileentity = world!!.getTileEntity(x, y, z)
+        return if (tileentity != null) tileentity.receiveClientEvent(eventID, eventArgs) else false
     }
 
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {

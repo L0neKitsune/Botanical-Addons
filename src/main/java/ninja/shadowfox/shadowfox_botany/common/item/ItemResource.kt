@@ -16,7 +16,7 @@ import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.client.render.block.InterpolatedIcon
 
-class ItemResource(): ItemMod("resource"), IFuelHandler {
+class ItemResource() : ItemMod("resource"), IFuelHandler {
 
     init {
         setHasSubtypes(true)
@@ -32,7 +32,7 @@ class ItemResource(): ItemMod("resource"), IFuelHandler {
 
     @SideOnly(Side.CLIENT)
     override fun registerIcons(par1IconRegister: IIconRegister) {
-        for(i in 0..(TYPES - 1)) {
+        for (i in 0..(TYPES - 1)) {
             if ((1 shr i) and INTERP == 0) {
                 icons[i] = IconHelper.forItem(par1IconRegister, this, i)
             }
@@ -42,11 +42,11 @@ class ItemResource(): ItemMod("resource"), IFuelHandler {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 1) {
-            for(i in 0..(TYPES - 1)) {
+        if (event.map.textureType == 1) {
+            for (i in 0..(TYPES - 1)) {
                 if ((1 shr i) and INTERP != 0) {
-                    var localIcon = InterpolatedIcon("shadowfox_botany:resource"+i)
-                    if(event.map.setTextureEntry("shadowfox_botany:resource"+i, localIcon)) {
+                    var localIcon = InterpolatedIcon("shadowfox_botany:resource" + i)
+                    if (event.map.setTextureEntry("shadowfox_botany:resource" + i, localIcon)) {
                         icons[i] = localIcon
                     }
                 }
@@ -55,21 +55,22 @@ class ItemResource(): ItemMod("resource"), IFuelHandler {
     }
 
     override fun getSubItems(item: Item, tab: CreativeTabs?, list: MutableList<Any?>) {
-        for(i in 0..(TYPES - 1))
+        for (i in 0..(TYPES - 1))
             list.add(ItemStack(item, 1, i))
     }
 
     override fun getUnlocalizedName(par1ItemStack: ItemStack): String {
-      return super.getUnlocalizedName(par1ItemStack) + par1ItemStack.itemDamage
+        return super.getUnlocalizedName(par1ItemStack) + par1ItemStack.itemDamage
     }
 
     override fun getIconFromDamage(dmg: Int): IIcon? {
         return icons[Math.min(TYPES - 1, dmg)]
     }
+
     override fun getBurnTime(fuel: ItemStack): Int {
         if (fuel.item == ShadowFoxItems.resource) {
             when (fuel.itemDamage) {
-                1,3 -> return 100 // Splinters smelt half an item.
+                1, 3 -> return 100 // Splinters smelt half an item.
                 4 -> return 2400 // Flame-Laced Coal smelts 12 items.
             }
         }

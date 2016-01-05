@@ -45,6 +45,7 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     override fun func_149851_a(world: World, x: Int, y: Int, z: Int, remote: Boolean): Boolean {
         return true
     }
+
     override fun func_149852_a(world: World, random: Random, x: Int, y: Int, z: Int): Boolean {
         return true
     }
@@ -68,15 +69,13 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
                         ++l1
                         continue
                     }
-                }
-                else if (world.getBlock(i1, j1, k1).isAir(world, i1, j1, k1)) {
+                } else if (world.getBlock(i1, j1, k1).isAir(world, i1, j1, k1)) {
                     if (random.nextInt(8) != 0) {
                         if (ShadowFoxBlocks.irisGrass.canBlockStay(world, i1, j1, k1)) {
-                            var meta = world.getBlockMetadata(i1, j1-1, k1)
+                            var meta = world.getBlockMetadata(i1, j1 - 1, k1)
                             world.setBlock(i1, j1, k1, ShadowFoxBlocks.irisGrass, meta, 3)
                         }
-                    }
-                    else {
+                    } else {
                         world.getBiomeGenForCoords(i1, k1).plantFlower(world, random, i1, j1, k1)
                     }
                 }
@@ -91,7 +90,7 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
         return (type != null && type.equals("shovel"))
     }
 
-    override fun getHarvestTool(metadata : Int): String {
+    override fun getHarvestTool(metadata: Int): String {
         return "shovel"
     }
 
@@ -137,7 +136,7 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     }
 
     @SideOnly(Side.CLIENT)
-    override fun getIcon(side : Int, meta : Int) : IIcon {
+    override fun getIcon(side: Int, meta: Int): IIcon {
         return icons
     }
 
@@ -156,7 +155,7 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
         icons = IconHelper.forBlock(par1IconRegister, this)
     }
 
-    override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {
+    override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {
         if (list != null && item != null)
             for (i in 0..(TYPES - 1)) {
                 list.add(ItemStack(item, 1, i))

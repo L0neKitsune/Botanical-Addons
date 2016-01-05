@@ -53,7 +53,7 @@ class ItemLensFlashInvisible() : ItemMod("lensPhantomLight"), ICompositableLens 
             burst.color = this.getLensColor(stack)
         }
         val compositeLens = getCompositeLens(stack)
-        if(compositeLens != null && compositeLens.item is ICompositableLens)
+        if (compositeLens != null && compositeLens.item is ICompositableLens)
             (compositeLens.item as ICompositableLens).updateBurst(burst, compositeLens)
     }
 
@@ -78,16 +78,16 @@ class ItemLensFlashInvisible() : ItemMod("lensPhantomLight"), ICompositableLens 
         return stack
     }
 
-    fun addStringToTooltip(s : String, tooltip : MutableList<Any?>) {
+    fun addStringToTooltip(s: String, tooltip: MutableList<Any?>) {
         tooltip.add(s.replace("&".toRegex(), "\u00a7"))
     }
 
     override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>, par4: Boolean) {
-        if(par1ItemStack == null) return
+        if (par1ItemStack == null) return
 
         var storedColor = getStoredColor(par1ItemStack)
         var compositeLens = getCompositeLens(par1ItemStack)
-        if(storedColor != -1)
+        if (storedColor != -1)
             addStringToTooltip(StatCollector.translateToLocal("botaniamisc.color").format(StatCollector.translateToLocal("botania.color" + storedColor)), par3List)
         if (compositeLens == null)
             addStringToTooltip(StatCollector.translateToLocal("botaniamisc.hasPhantomInk"), par3List)
@@ -96,7 +96,7 @@ class ItemLensFlashInvisible() : ItemMod("lensPhantomLight"), ICompositableLens 
     override fun collideBurst(burst: IManaBurst?, pos: MovingObjectPosition?, isManaBlock: Boolean, dead: Boolean, p4: ItemStack?): Boolean {
         val entity: EntityThrowable? = burst as EntityThrowable
 
-        if(pos != null && entity != null) {
+        if (pos != null && entity != null) {
             val coords = burst.burstSourceChunkCoordinates
 
             if ((coords.posX != pos.blockX || coords.posY != pos.blockY || coords.posZ != pos.blockZ) && !burst.isFake && !isManaBlock) {
@@ -122,7 +122,7 @@ class ItemLensFlashInvisible() : ItemMod("lensPhantomLight"), ICompositableLens 
             }
         }
         val compositeLens = getCompositeLens(p4)
-        if(compositeLens != null && compositeLens.item is ICompositableLens)
+        if (compositeLens != null && compositeLens.item is ICompositableLens)
             return (compositeLens.item as ICompositableLens).collideBurst(burst, pos, isManaBlock, dead, compositeLens)
         return dead
     }
@@ -134,7 +134,7 @@ class ItemLensFlashInvisible() : ItemMod("lensPhantomLight"), ICompositableLens 
                 p1.color = this.getLensColor(p0)
             }
             val compositeLens = getCompositeLens(p0)
-            if(compositeLens != null && compositeLens.item is ICompositableLens)
+            if (compositeLens != null && compositeLens.item is ICompositableLens)
                 (compositeLens.item as ICompositableLens).apply(compositeLens, p1)
         }
     }
@@ -176,13 +176,13 @@ class ItemLensFlashInvisible() : ItemMod("lensPhantomLight"), ICompositableLens 
     override fun canCombineLenses(sourceLens: ItemStack, compositeLens: ItemStack): Boolean {
         val sourceItem = sourceLens.item as ICompositableLens
         val compositeItem = compositeLens.item as ICompositableLens
-        if(sourceItem == compositeItem && sourceLens.itemDamage == compositeLens.itemDamage)
+        if (sourceItem == compositeItem && sourceLens.itemDamage == compositeLens.itemDamage)
             return false
 
-        if(!sourceItem.isCombinable(sourceLens) || !compositeItem.isCombinable(compositeLens))
+        if (!sourceItem.isCombinable(sourceLens) || !compositeItem.isCombinable(compositeLens))
             return false
 
-        if(ItemLens.isBlacklisted(sourceLens, compositeLens))
+        if (ItemLens.isBlacklisted(sourceLens, compositeLens))
             return false
 
         return true
