@@ -92,12 +92,7 @@ public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
     @SideOnly(Side.CLIENT)
     override fun colorMultiplier(access: IBlockAccess?, x: Int, y: Int, z: Int): Int {
         val meta = access!!.getBlockMetadata(x, y, z)
-
-        if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF
-
-        var color = EntitySheep.fleeceColorTable[meta]
-        return Color(color[0], color[1], color[2]).rgb
+        return getRenderColor(meta)
     }
 
     override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {

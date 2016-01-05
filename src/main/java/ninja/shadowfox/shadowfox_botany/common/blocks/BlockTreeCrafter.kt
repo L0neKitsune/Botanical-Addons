@@ -31,7 +31,7 @@ open class BlockTreeCrafter(name: String = "treeCrafter") : ShadowFoxTileContain
         setHardness(3.0f)
         setResistance(5.0f)
         setLightLevel(1.0f)
-        setStepSound(Block.soundTypeStone)
+        setStepSound(Block.soundTypeWood)
         setBlockName(name)
         random = Random()
     }
@@ -70,6 +70,7 @@ open class BlockTreeCrafter(name: String = "treeCrafter") : ShadowFoxTileContain
     }
 
     override fun renderAsNormalBlock(): Boolean = false
+
     override fun canRenderInPass(pass: Int): Boolean {
         MultipassRenderer.pass = pass
         return true

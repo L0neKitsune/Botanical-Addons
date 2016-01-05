@@ -50,7 +50,7 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.instan
     }
 
     override fun isToolEffective(type: String?, metadata: Int): Boolean {
-        return (type != null && type.equals("axe", true))
+        return (type != null && type.equals("axe"))
     }
 
     override fun getHarvestTool(metadata: Int): String {
@@ -86,12 +86,7 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.instan
     @SideOnly(Side.CLIENT)
     override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int {
         val meta = world!!.getBlockMetadata(x, y, z)
-
-        if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF
-
-        var color = EntitySheep.fleeceColorTable[meta]
-        return Color(color[0], color[1], color[2]).rgb
+        return getRenderColor(meta)
     }
 
 

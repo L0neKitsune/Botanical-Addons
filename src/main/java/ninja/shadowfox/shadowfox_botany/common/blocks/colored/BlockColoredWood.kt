@@ -77,12 +77,7 @@ class BlockColoredWood(val colorSet: Int) : ShadowFoxRotatedPillar(Material.wood
     @SideOnly(Side.CLIENT)
     override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int {
         val meta = world!!.getBlockMetadata(x, y, z)
-
-        if (colorMeta(meta and 3) >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF
-
-        var color = EntitySheep.fleeceColorTable[colorMeta(meta and 3)]
-        return Color(color[0], color[1], color[2]).rgb
+        return getRenderColor(meta)
     }
 
     override fun canSustainLeaves(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean = true

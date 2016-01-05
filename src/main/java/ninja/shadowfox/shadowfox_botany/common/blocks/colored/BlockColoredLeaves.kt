@@ -52,13 +52,7 @@ public class BlockColoredLeaves(val colorSet: Int) : ShadowFoxLeaves() {
     @SideOnly(Side.CLIENT)
     override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int {
         val meta = world!!.getBlockMetadata(x, y, z)
-
-        var shiftedMeta = meta % TYPES + colorSet * TYPES
-        if (shiftedMeta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF
-
-        var color = EntitySheep.fleeceColorTable[shiftedMeta]
-        return Color(color[0], color[1], color[2]).rgb
+        return getRenderColor(meta)
     }
 
     override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {

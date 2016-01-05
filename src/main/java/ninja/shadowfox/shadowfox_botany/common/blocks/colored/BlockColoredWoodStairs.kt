@@ -42,11 +42,7 @@ class BlockColoredWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.coloredP
 
     @SideOnly(Side.CLIENT)
     override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int {
-        if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF
-
-        var color = EntitySheep.fleeceColorTable[meta]
-        return Color(color[0], color[1], color[2]).rgb
+        return getRenderColor(meta)
 
     }
 
