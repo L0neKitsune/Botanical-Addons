@@ -1,6 +1,8 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.base
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.common.registry.GameRegistry
+import cpw.mods.fml.relauncher.FMLLaunchHandler
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
@@ -12,10 +14,13 @@ import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.IShearable
+import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemSubtypedBlockMod
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 import vazkii.botania.api.lexicon.ILexiconable
 import java.util.*
 
@@ -23,13 +28,15 @@ import java.util.*
 abstract class ShadowFoxLeaves() : BlockLeaves(), IShearable, ILexiconable {
 
     internal var field_150128_a: IntArray? = null
-    protected var icons: Array<IIcon> = emptyArray()
+    protected var icons: Array<IIcon?> = emptyArray()
 
     init {
         setHardness(0.2f)
         setCreativeTab(ShadowFoxCreativeTab)
         setLightOpacity(1)
         setStepSound(Block.soundTypeGrass)
+        if (FMLLaunchHandler.side().isClient && this.isInterpolated())
+            MinecraftForge.EVENT_BUS.register(this)
     }
 
     override fun setBlockName(par1Str: String): Block {
@@ -45,7 +52,7 @@ abstract class ShadowFoxLeaves() : BlockLeaves(), IShearable, ILexiconable {
 
 
     @SideOnly(Side.CLIENT)
-    override fun getIcon(side: Int, meta: Int): IIcon {
+    override fun getIcon(side: Int, meta: Int): IIcon? {
         this.setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics)
         return icons[if (this.field_150121_P) 0 else 1]
     }
@@ -56,7 +63,17 @@ abstract class ShadowFoxLeaves() : BlockLeaves(), IShearable, ILexiconable {
     }
 
     override fun registerBlockIcons(iconRegister: IIconRegister) {
-        icons = Array(2, { i -> IconHelper.forBlock(iconRegister, this, if (i == 0) "" else "_opaque") })
+        if (!this.isInterpolated())
+            icons = Array(2, { i -> IconHelper.forBlock(iconRegister, this, if (i == 0) "" else "_opaque") })
+    }
+
+    open fun isInterpolated(): Boolean = false
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    open fun loadTextures(event: TextureStitchEvent.Pre) {
+        if (event.map.textureType == 0 && this.isInterpolated())
+            icons = Array(2, { i -> InterpolatedIconHelper.forBlock(event.map, this, if (i == 0) "" else "_opaque") })
     }
 
     override fun isLeaves(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean = true

@@ -15,7 +15,10 @@ import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.EnumAction
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
-import net.minecraft.util.*
+import net.minecraft.util.AxisAlignedBB
+import net.minecraft.util.DamageSource
+import net.minecraft.util.MathHelper
+import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
@@ -23,25 +26,22 @@ import ninja.shadowfox.shadowfox_botany.api.item.ColorOverrideHelper
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.item.ItemMod
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemPriestEmblem
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 import vazkii.botania.api.item.IAvatarTile
 import vazkii.botania.api.item.IAvatarWieldable
 import vazkii.botania.api.item.IManaProficiencyArmor
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
-import vazkii.botania.client.render.block.InterpolatedIcon
 import vazkii.botania.common.Botania
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.core.helper.Vector3
 import vazkii.botania.common.entity.EntityDoppleganger
 import java.awt.Color
 import java.util.*
-import kotlin.properties.Delegates
 
 public open class ItemLightningRod(name: String = "lightningRod") : ItemMod(name), IManaUsingItem, IAvatarWieldable {
     private val avatarOverlay = ResourceLocation("shadowfox_botany:textures/model/avatarLightning.png")
     private val COST_AVATAR = 150
-
-    var icon: IIcon by Delegates.notNull()
 
     val COST = 300
     val PRIEST_COST = 200
@@ -82,16 +82,8 @@ public open class ItemLightningRod(name: String = "lightningRod") : ItemMod(name
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
         if (event.map.textureType == 1) {
-            var localIcon = InterpolatedIcon("shadowfox_botany:lightningRod")
-            if (event.map.setTextureEntry("shadowfox_botany:lightningRod", localIcon)) {
-                this.icon = localIcon
-            }
+            this.itemIcon = InterpolatedIconHelper.forItem(event.map, this)
         }
-    }
-
-    @SideOnly(Side.CLIENT)
-    override fun getIconFromDamage(meta: Int): IIcon {
-        return this.icon
     }
 
     override fun getItemUseAction(par1ItemStack: ItemStack?): EnumAction {

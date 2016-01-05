@@ -1,22 +1,16 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.nether_oak
 
 import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.relauncher.FMLLaunchHandler
-import cpw.mods.fml.relauncher.Side
-import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
-import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxRotatedPillar
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
@@ -26,10 +20,9 @@ public class BlockNetherWood() : ShadowFoxRotatedPillar(Material.wood), ILexicon
     init {
         setBlockName("netherWood")
         blockHardness = 2f
-
-        if (FMLLaunchHandler.side().isClient)
-            MinecraftForge.EVENT_BUS.register(this)
     }
+
+    override fun isInterpolated(): Boolean = true
 
     override fun canSustainLeaves(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean = true
     override fun isWood(world: IBlockAccess?, x: Int, y: Int, z: Int): Boolean = true
@@ -63,12 +56,6 @@ public class BlockNetherWood() : ShadowFoxRotatedPillar(Material.wood), ILexicon
 
     override fun register(par1Str: String) {
         GameRegistry.registerBlock(this, ItemBlockMod::class.java, par1Str)
-    }
-
-    @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        iconTop = IconHelper.forName(par1IconRegister, "netherOak_top")
-        iconSide = IconHelper.forName(par1IconRegister, "netherOak")
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {

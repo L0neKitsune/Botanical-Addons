@@ -1,7 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.alt_grass
 
 import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.relauncher.FMLLaunchHandler
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.client.Minecraft
@@ -13,7 +12,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemUniqueSubtypedBlockMod
@@ -31,8 +29,6 @@ class BlockAltLeaves() : ShadowFoxLeaves() {
 
     init {
         setBlockName("altLeaves")
-        if (FMLLaunchHandler.side().isClient)
-            MinecraftForge.EVENT_BUS.register(this)
     }
 
     @SideOnly(Side.CLIENT) override fun getBlockColor(): Int = 0xFFFFFF

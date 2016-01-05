@@ -13,7 +13,6 @@ import net.minecraft.item.EnumAction
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.AxisAlignedBB
-import net.minecraft.util.IIcon
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import net.minecraftforge.client.event.TextureStitchEvent
@@ -21,23 +20,20 @@ import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.api.item.ColorOverrideHelper
 import ninja.shadowfox.shadowfox_botany.common.item.ItemMod
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemPriestEmblem
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 import vazkii.botania.api.internal.IManaBurst
 import vazkii.botania.api.item.IAvatarTile
 import vazkii.botania.api.item.IAvatarWieldable
 import vazkii.botania.api.item.IManaProficiencyArmor
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
-import vazkii.botania.client.render.block.InterpolatedIcon
 import vazkii.botania.common.Botania
 import vazkii.botania.common.entity.EntityDoppleganger
 import java.awt.Color
-import kotlin.properties.Delegates
 import kotlin.ranges.step
 
 public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMod(name), IManaUsingItem, IAvatarWieldable {
     private val avatarOverlay = ResourceLocation("shadowfox_botany:textures/model/avatarInterdiction.png")
-
-    var icon: IIcon by Delegates.notNull()
 
     init {
         setMaxStackSize(1)
@@ -52,16 +48,8 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
         if (event.map.textureType == 1) {
-            var localIcon = InterpolatedIcon("shadowfox_botany:interdictionRod")
-            if (event.map.setTextureEntry("shadowfox_botany:interdictionRod", localIcon)) {
-                this.icon = localIcon
-            }
+            this.itemIcon = InterpolatedIconHelper.forItem(event.map, this)
         }
-    }
-
-    @SideOnly(Side.CLIENT)
-    override fun getIconFromDamage(meta: Int): IIcon {
-        return this.icon
     }
 
     override fun getItemUseAction(par1ItemStack: ItemStack?): EnumAction {

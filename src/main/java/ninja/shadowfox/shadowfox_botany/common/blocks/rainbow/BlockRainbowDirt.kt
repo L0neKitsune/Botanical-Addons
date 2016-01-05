@@ -1,21 +1,14 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.rainbow
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.relauncher.FMLLaunchHandler
-import cpw.mods.fml.relauncher.Side
-import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.block.IGrowable
 import net.minecraft.block.material.Material
-import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.IPlantable
-import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
@@ -23,7 +16,6 @@ import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentBlockMo
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
-import vazkii.botania.client.render.block.InterpolatedIcon
 import java.util.*
 
 class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable {
@@ -34,8 +26,6 @@ class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
         blockHardness = 0.5F
         setLightLevel(0f)
         stepSound = Block.soundTypeGravel
-        if (FMLLaunchHandler.side().isClient())
-            MinecraftForge.EVENT_BUS.register(this)
         setBlockName(this.name)
     }
 
@@ -108,19 +98,7 @@ class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
         GameRegistry.registerBlock(this, ItemIridescentBlockMod::class.java, name)
     }
 
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    fun loadTextures(event: TextureStitchEvent.Pre) {
-        if (event.map.textureType == 0) {
-            var icon = InterpolatedIcon("shadowfox_botany:rainbowDirt")
-            if (event.map.setTextureEntry("shadowfox_botany:rainbowDirt", icon))
-                this.blockIcon = icon
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-    }
+    override fun isInterpolated(): Boolean = true
 
     override fun canSustainPlant(world: IBlockAccess?, x: Int, y: Int, z: Int, direction: ForgeDirection?, plantable: IPlantable?): Boolean {
         return true

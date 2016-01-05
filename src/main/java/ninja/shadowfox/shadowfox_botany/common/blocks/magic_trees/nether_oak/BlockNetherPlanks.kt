@@ -1,7 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.nether_oak
 
 import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.relauncher.FMLLaunchHandler
 import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
@@ -10,7 +9,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.material.MaterialCustomSmeltingWood
@@ -31,9 +29,9 @@ public class BlockNetherPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.
         stepSound = soundTypeWood
 
         setBlockName(this.name)
-        if (FMLLaunchHandler.side().isClient)
-            MinecraftForge.EVENT_BUS.register(this)
     }
+
+    override fun isInterpolated(): Boolean = true
 
     override fun isToolEffective(type: String?, metadata: Int): Boolean {
         return (type != null && type.equals("axe"))

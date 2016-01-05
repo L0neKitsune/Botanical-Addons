@@ -6,13 +6,11 @@ import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.block.IGrowable
 import net.minecraft.block.material.Material
-import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.passive.EntitySheep
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
@@ -22,18 +20,15 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemSubtypedBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
 import java.util.*
-import kotlin.properties.Delegates
 
 class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable {
 
     private val name = "coloredDirt"
     private val TYPES = 16
-    internal var icons: IIcon by Delegates.notNull()
 
     init {
         blockHardness = 0.5F
@@ -130,11 +125,6 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
         return super.setBlockName(par1Str)
     }
 
-    @SideOnly(Side.CLIENT)
-    override fun getIcon(side: Int, meta: Int): IIcon {
-        return icons
-    }
-
     internal fun register(name: String) {
         GameRegistry.registerBlock(this, ItemSubtypedBlockMod::class.java, name)
     }
@@ -145,10 +135,6 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
         return ItemStack(this, 1, meta)
     }
 
-    @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        icons = IconHelper.forBlock(par1IconRegister, this)
-    }
 
     override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {
         if (list != null && item != null)

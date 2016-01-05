@@ -28,11 +28,8 @@ import ninja.shadowfox.shadowfox_botany.common.world.SimpleTreeGen
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
-import kotlin.properties.Delegates
 
 public open class BlockColoredSapling(val name: String = "irisSapling") : BlockSapling(), ILexiconable, IFuelHandler {
-
-    internal var icon: IIcon by Delegates.notNull()
 
     init {
         this.setTickRandomly(true)
@@ -49,18 +46,8 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : BlockS
         return super.setBlockName(par1Str)
     }
 
-    @SideOnly(Side.CLIENT)
-    override fun getIcon(pass: Int, meta: Int): IIcon {
-        return icon
-    }
-
     override fun getCollisionBoundingBoxFromPool(world: World?, x: Int, y: Int, z: Int): AxisAlignedBB? {
         return null
-    }
-
-    @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        icon = IconHelper.forBlock(par1IconRegister, this)
     }
 
     override fun isOpaqueCube(): Boolean {
@@ -190,5 +177,15 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : BlockS
 
     override fun getBurnTime(fuel: ItemStack): Int {
         return if (fuel.item == Item.getItemFromBlock(this)) 100 else 0
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
+        blockIcon = IconHelper.forBlock(par1IconRegister, this)
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun getIcon(side: Int, meta: Int): IIcon {
+        return blockIcon
     }
 }

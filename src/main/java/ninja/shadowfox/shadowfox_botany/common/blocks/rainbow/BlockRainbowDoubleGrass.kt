@@ -22,10 +22,10 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemRainbowDoubleGrassMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 import ninja.shadowfox.shadowfox_botany.lib.Constants
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
-import vazkii.botania.client.render.block.InterpolatedIcon
 import java.util.*
 import kotlin.properties.Delegates
 
@@ -48,14 +48,8 @@ public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
         if (event.map.textureType == 0) {
-            var localTopIcon = InterpolatedIcon("shadowfox_botany:rainbowDoubleGrassTop")
-            if (event.map.setTextureEntry("shadowfox_botany:rainbowDoubleGrassTop", localTopIcon)) {
-                this.topIcon = localTopIcon
-            }
-            var localBottomIcon = InterpolatedIcon("shadowfox_botany:rainbowDoubleGrass")
-            if (event.map.setTextureEntry("shadowfox_botany:rainbowDoubleGrass", localBottomIcon)) {
-                this.bottomIcon = localBottomIcon
-            }
+            this.topIcon = InterpolatedIconHelper.forBlock(event.map, this, "Top")!!
+            this.bottomIcon = InterpolatedIconHelper.forBlock(event.map, this)!!
         }
     }
 

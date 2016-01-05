@@ -28,8 +28,6 @@ import kotlin.properties.Delegates
 public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
 
     val TYPES: Int = 16
-    internal var field_150128_a: IntArray? = null
-    protected var icons: IIcon by Delegates.notNull()
 
     init {
         setCreativeTab(ShadowFoxCreativeTab)
@@ -104,12 +102,12 @@ public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
 
     @SideOnly(Side.CLIENT)
     override fun registerBlockIcons(iconRegister: IIconRegister) {
-        icons = IconHelper.forBlock(iconRegister, this)
+        blockIcon = IconHelper.forBlock(iconRegister, this)
     }
 
     @SideOnly(Side.CLIENT)
     override fun getIcon(side: Int, meta: Int): IIcon {
-        return icons
+        return blockIcon
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {

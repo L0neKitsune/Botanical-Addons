@@ -14,13 +14,13 @@ import net.minecraft.util.IIcon
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
-import vazkii.botania.client.render.block.InterpolatedIcon
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 
 class ItemResource() : ItemMod("resource"), IFuelHandler {
 
     init {
         setHasSubtypes(true)
-        if (FMLLaunchHandler.side().isClient())
+        if (FMLLaunchHandler.side().isClient)
             MinecraftForge.EVENT_BUS.register(this)
         GameRegistry.registerFuelHandler(this)
     }
@@ -30,10 +30,12 @@ class ItemResource() : ItemMod("resource"), IFuelHandler {
 
     var icons: Array<IIcon?> = arrayOfNulls(TYPES)
 
+    private fun isInterpolated(meta: Int): Boolean = (1 shr meta) and INTERP == 0
+
     @SideOnly(Side.CLIENT)
     override fun registerIcons(par1IconRegister: IIconRegister) {
         for (i in 0..(TYPES - 1)) {
-            if ((1 shr i) and INTERP == 0) {
+            if (isInterpolated(i)) {
                 icons[i] = IconHelper.forItem(par1IconRegister, this, i)
             }
         }
@@ -44,11 +46,8 @@ class ItemResource() : ItemMod("resource"), IFuelHandler {
     fun loadTextures(event: TextureStitchEvent.Pre) {
         if (event.map.textureType == 1) {
             for (i in 0..(TYPES - 1)) {
-                if ((1 shr i) and INTERP != 0) {
-                    var localIcon = InterpolatedIcon("shadowfox_botany:resource" + i)
-                    if (event.map.setTextureEntry("shadowfox_botany:resource" + i, localIcon)) {
-                        icons[i] = localIcon
-                    }
+                if (isInterpolated(i)) {
+                    icons[i] = InterpolatedIconHelper.forItem(event.map, this, i)
                 }
             }
         }

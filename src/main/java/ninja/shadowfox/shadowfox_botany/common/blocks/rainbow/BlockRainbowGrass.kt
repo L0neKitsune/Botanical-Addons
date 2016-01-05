@@ -21,9 +21,9 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
-import vazkii.botania.client.render.block.InterpolatedIcon
 import java.util.*
 
 public class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
@@ -71,19 +71,17 @@ public class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
     override fun registerBlockIcons(iconRegister: IIconRegister) {
     }
 
-    @SideOnly(Side.CLIENT)
-    override fun getIcon(meta: Int, pass: Int): IIcon {
-        return this.blockIcon
-    }
-
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
         if (event.map.textureType == 0) {
-            var icon = InterpolatedIcon("shadowfox_botany:rainbowGrass")
-            if (event.map.setTextureEntry("shadowfox_botany:rainbowGrass", icon))
-                this.blockIcon = icon
+            this.blockIcon = InterpolatedIconHelper.forBlock(event.map, this)
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun getIcon(side: Int, meta: Int): IIcon {
+        return blockIcon
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {

@@ -4,7 +4,6 @@ import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.ScaledResolution
-import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -15,7 +14,6 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.base.IMultipassRenderer
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxTileContainer
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.lib.Constants
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
@@ -38,10 +36,6 @@ open class BlockTreeCrafter(name: String = "treeCrafter") : ShadowFoxTileContain
 
     override fun isOpaqueCube(): Boolean {
         return false
-    }
-
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        this.blockIcon = IconHelper.forName(par1IconRegister, "treeCrafter")
     }
 
     override fun createNewTileEntity(var1: World, var2: Int): TileTreeCrafter {

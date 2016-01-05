@@ -3,7 +3,6 @@ package ninja.shadowfox.shadowfox_botany.common.blocks.colored
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
-import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.passive.EntitySheep
 import net.minecraft.entity.player.EntityPlayer
@@ -15,7 +14,6 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentLeavesMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
 import java.util.*
@@ -68,10 +66,6 @@ public class BlockColoredLeaves(val colorSet: Int) : ShadowFoxLeaves() {
 
     override fun func_150125_e(): Array<String> {
         return arrayOf("ColoredLeaves")
-    }
-
-    override fun registerBlockIcons(iconRegister: IIconRegister) {
-        icons = Array(2, { i -> IconHelper.forName(iconRegister, "irisLeaves" + if (i == 0) "" else "_opaque") })
     }
 
     override fun decayBit(): Int = 0x8

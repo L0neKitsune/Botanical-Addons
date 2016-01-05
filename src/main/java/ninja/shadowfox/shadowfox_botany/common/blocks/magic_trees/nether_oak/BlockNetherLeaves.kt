@@ -1,7 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.nether_oak
 
 import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.relauncher.FMLLaunchHandler
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.entity.player.EntityPlayer
@@ -9,7 +8,6 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
@@ -22,8 +20,6 @@ import java.util.*
 class BlockNetherLeaves() : ShadowFoxLeaves() {
     init {
         setBlockName("netherLeaves")
-        if (FMLLaunchHandler.side().isClient)
-            MinecraftForge.EVENT_BUS.register(this)
     }
 
     override fun isFlammable(world: IBlockAccess?, x: Int, y: Int, z: Int, face: ForgeDirection?): Boolean = false
@@ -31,6 +27,8 @@ class BlockNetherLeaves() : ShadowFoxLeaves() {
     @SideOnly(Side.CLIENT) override fun getBlockColor(): Int = 0xFFFFFF
     @SideOnly(Side.CLIENT) override fun getRenderColor(meta: Int): Int = 0xFFFFFF
     @SideOnly(Side.CLIENT) override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int = 0xFFFFFF
+
+    override fun isInterpolated(): Boolean = true
 
     override fun register(name: String) {
         GameRegistry.registerBlock(this, ItemBlockMod::class.java, name)

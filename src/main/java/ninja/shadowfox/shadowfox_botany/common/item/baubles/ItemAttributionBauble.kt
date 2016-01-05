@@ -21,6 +21,7 @@ import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 import org.lwjgl.opengl.GL11
 import vazkii.botania.api.item.IBaubleRender
 import vazkii.botania.api.item.ICosmeticBauble
@@ -28,7 +29,6 @@ import vazkii.botania.client.core.helper.ShaderHelper
 import vazkii.botania.client.core.proxy.ClientProxy
 import vazkii.botania.client.lib.LibResources
 import vazkii.botania.client.model.ModelTinyPotato
-import vazkii.botania.client.render.block.InterpolatedIcon
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
 import kotlin.properties.Delegates
 import kotlin.text.replace
@@ -39,7 +39,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
     private val potatoTexture: ResourceLocation
 
     var defaultIcon: IIcon by Delegates.notNull()
-    var wireIcon: IIcon by Delegates.notNull()
+    var wireIcon: IIcon? = null
     var kitsuneIcon: IIcon by Delegates.notNull()
     var trisIcon: IIcon by Delegates.notNull()
 
@@ -55,9 +55,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
         if (event.map.textureType == 1) {
-            var icon = InterpolatedIcon("shadowfox_botany:attributionBauble-WireSegal")
-            if (event.map.setTextureEntry("shadowfox_botany:attributionBauble-WireSegal", icon))
-                this.wireIcon = icon
+            this.wireIcon = InterpolatedIconHelper.forItem(event.map, this, "-WireSegal")
         }
     }
 
@@ -175,7 +173,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
                     faceTranslate()
                     scale(0.35F)
                     GL11.glTranslatef(0.3F, -0.6F, -0.15F)
-                    ItemRenderer.renderItemIn2D(Tessellator.instance, wireIcon.maxU, wireIcon.minV, wireIcon.minU, wireIcon.maxV, wireIcon.iconWidth, wireIcon.iconHeight, 1F / 32F)
+                    ItemRenderer.renderItemIn2D(Tessellator.instance, wireIcon!!.maxU, wireIcon!!.minV, wireIcon!!.minU, wireIcon!!.maxV, wireIcon!!.iconWidth, wireIcon!!.iconHeight, 1F / 32F)
                 } else if (name == "Tristaric") {
                     // Render the Ezic Star
                     Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture)

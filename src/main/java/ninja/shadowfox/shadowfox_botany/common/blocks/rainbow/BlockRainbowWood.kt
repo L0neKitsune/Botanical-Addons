@@ -1,25 +1,17 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.rainbow
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.relauncher.FMLLaunchHandler
-import cpw.mods.fml.relauncher.Side
-import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
-import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import net.minecraftforge.client.event.TextureStitchEvent
-import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxRotatedPillar
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
-import vazkii.botania.client.render.block.InterpolatedIcon
 
 
 public class BlockRainbowWood() : ShadowFoxRotatedPillar(Material.wood), ILexiconable {
@@ -31,8 +23,6 @@ public class BlockRainbowWood() : ShadowFoxRotatedPillar(Material.wood), ILexico
         setLightLevel(0f)
         stepSound = Block.soundTypeWood
 
-        if (FMLLaunchHandler.side().isClient())
-            MinecraftForge.EVENT_BUS.register(this)
         setBlockName(name)
     }
 
@@ -58,23 +48,7 @@ public class BlockRainbowWood() : ShadowFoxRotatedPillar(Material.wood), ILexico
     override fun canSustainLeaves(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean = true
     override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean = true
 
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    fun loadTextures(event: TextureStitchEvent.Pre) {
-        if (event.map.textureType == 0) {
-            var iconSide = InterpolatedIcon("shadowfox_botany:rainbowWoodSide")
-            if (event.map.setTextureEntry("shadowfox_botany:rainbowWoodSide", iconSide))
-                this.iconSide = iconSide
-
-            var iconTop = InterpolatedIcon("shadowfox_botany:rainbowWoodTop")
-            if (event.map.setTextureEntry("shadowfox_botany:rainbowWoodTop", iconTop))
-                this.iconTop = iconTop
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-    }
+    override fun isInterpolated(): Boolean = true
 
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {

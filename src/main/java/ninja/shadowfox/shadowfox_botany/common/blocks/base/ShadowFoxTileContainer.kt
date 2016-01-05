@@ -1,6 +1,8 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.base
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.common.registry.GameRegistry
+import cpw.mods.fml.relauncher.FMLLaunchHandler
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
@@ -9,9 +11,12 @@ import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.world.World
+import net.minecraftforge.client.event.TextureStitchEvent
+import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
-import vazkii.botania.client.core.helper.IconHelper
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 
 
 abstract class ShadowFoxTileContainer<T : TileEntity>(material: Material) : BlockContainer(material) {
@@ -22,7 +27,8 @@ abstract class ShadowFoxTileContainer<T : TileEntity>(material: Material) : Bloc
         if (registerInCreative) {
             setCreativeTab(ShadowFoxCreativeTab)
         }
-
+        if (FMLLaunchHandler.side().isClient && this.isInterpolated())
+            MinecraftForge.EVENT_BUS.register(this)
     }
 
     override fun setBlockName(par1Str: String): Block {
@@ -44,7 +50,17 @@ abstract class ShadowFoxTileContainer<T : TileEntity>(material: Material) : Bloc
 
     @SideOnly(Side.CLIENT)
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        this.blockIcon = IconHelper.forBlock(par1IconRegister, this)
+        if (!isInterpolated())
+            blockIcon = IconHelper.forBlock(par1IconRegister, this)
+    }
+
+    open fun isInterpolated(): Boolean = false
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    open fun loadTextures(event: TextureStitchEvent.Pre) {
+        if (event.map.textureType == 0 && this.isInterpolated())
+            blockIcon = InterpolatedIconHelper.forBlock(event.map, this)
     }
 
     abstract override fun createNewTileEntity(var1: World, var2: Int): T

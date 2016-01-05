@@ -2,7 +2,6 @@ package ninja.shadowfox.shadowfox_botany.common.blocks.alt_grass
 
 import cpw.mods.fml.common.IFuelHandler
 import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.relauncher.FMLLaunchHandler
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
@@ -13,7 +12,6 @@ import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.material.MaterialCustomSmeltingWood
@@ -37,8 +35,6 @@ public class BlockAltPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.ins
         stepSound = soundTypeWood
 
         setBlockName(this.name)
-        if (FMLLaunchHandler.side().isClient)
-            MinecraftForge.EVENT_BUS.register(this)
         GameRegistry.registerFuelHandler(this)
     }
 

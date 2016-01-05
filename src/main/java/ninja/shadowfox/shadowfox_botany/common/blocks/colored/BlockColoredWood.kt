@@ -5,7 +5,6 @@ import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
-import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.passive.EntitySheep
 import net.minecraft.entity.player.EntityPlayer
@@ -16,7 +15,6 @@ import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxRotatedPillar
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentWoodMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
 
@@ -82,11 +80,6 @@ class BlockColoredWood(val colorSet: Int) : ShadowFoxRotatedPillar(Material.wood
 
     override fun canSustainLeaves(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean = true
     override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean = true
-
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        iconTop = IconHelper.forName(par1IconRegister, "irisWood_top")
-        iconSide = IconHelper.forName(par1IconRegister, "irisWood")
-    }
 
     override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {
         if (list != null && item != null) {

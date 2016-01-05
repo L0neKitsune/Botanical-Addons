@@ -1,7 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.alt_grass
 
 import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.relauncher.FMLLaunchHandler
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
@@ -14,7 +13,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxRotatedPillar
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemUniqueSubtypedBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
@@ -33,9 +31,6 @@ public class BlockAltWood(val set: Int) : ShadowFoxRotatedPillar(Material.wood),
         setBlockName("altWood$set")
         isBlockContainer = true
         blockHardness = 2F
-
-        if (FMLLaunchHandler.side().isClient)
-            MinecraftForge.EVENT_BUS.register(this)
     }
 
     override fun canSustainLeaves(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean = true
@@ -88,8 +83,8 @@ public class BlockAltWood(val set: Int) : ShadowFoxRotatedPillar(Material.wood),
 
     @SideOnly(Side.CLIENT)
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        iconsTop = Array(if (set == 0 ) 4 else 2, { i -> IconHelper.forName(par1IconRegister, "altOak${ALT_TYPES[(set * 4) + i]}_top") })
-        iconsSide = Array(if (set == 0 ) 4 else 2, { i -> IconHelper.forName(par1IconRegister, "altOak${ALT_TYPES[(set * 4) + i]}") })
+        iconsTop = Array(if (set == 0 ) 4 else 2, { i -> IconHelper.forName(par1IconRegister, "altOak${ALT_TYPES[(set * 4) + i]}Top") })
+        iconsSide = Array(if (set == 0 ) 4 else 2, { i -> IconHelper.forName(par1IconRegister, "altOak${ALT_TYPES[(set * 4) + i]}Side") })
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
