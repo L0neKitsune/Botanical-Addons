@@ -14,8 +14,8 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.util.StatCollector
 import net.minecraftforge.client.event.RenderPlayerEvent
-import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.api.item.IPriestColorOverride
+import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import org.lwjgl.opengl.GL11
@@ -49,14 +49,14 @@ class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorO
             icons[i] = IconHelper.forItem(par1IconRegister, this, i, "coatofarms")
     }
 
-    override fun colorOverride(stack: ItemStack?): Int? {
+    override fun colorOverride(stack: ItemStack?): Int {
         if (stack != null) {
             if (stack.itemDamage < TYPES-1 && stack.itemDamage >= 0 && stack.itemDamage != 16)
                 return colorMap[stack.itemDamage]
             else if (stack.itemDamage == 16)
                 return ItemIridescent.rainbowColor()
         }
-        return null
+        return -1
     }
 
     override fun getSubItems(item: Item, tab: CreativeTabs?, list: MutableList<Any?>) {

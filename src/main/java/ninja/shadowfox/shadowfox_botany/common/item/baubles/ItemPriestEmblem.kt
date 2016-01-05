@@ -22,8 +22,8 @@ import net.minecraft.util.IIcon
 import net.minecraft.util.MathHelper
 import net.minecraft.util.StatCollector
 import net.minecraftforge.client.event.RenderPlayerEvent
+import ninja.shadowfox.shadowfox_botany.api.item.ColorOverrideHelper
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.api.item.IPriestColorOverride
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import org.lwjgl.opengl.GL11
@@ -187,7 +187,7 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
                     0 -> {
                         var playerHead = Vector3.fromEntityCenter(player).add(0.0, 0.75, 0.0)
                         val playerShift = playerHead.copy().add(getHeadOrientation(player))
-                        val color = Color(IPriestColorOverride.getColor(player, 0x0079C4))
+                        val color = Color(ColorOverrideHelper.getColor(player, 0x0079C4))
                         val innerColor = Color(color.rgb).brighter().brighter()
                         Botania.proxy.lightningFX(player.worldObj, playerHead, playerShift, 2.0f, color.rgb, innerColor.rgb)
                     }
@@ -196,7 +196,7 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
                             var xmotion = (Math.random()-0.5).toFloat() * 0.15f
                             var zmotion = (Math.random()-0.5).toFloat() * 0.15f
                             // 964B00 is brown
-                            val color = Color(IPriestColorOverride.getColor(player, 0x964B00))
+                            val color = Color(ColorOverrideHelper.getColor(player, 0x964B00))
                             val r = color.red.toFloat() / 255F
                             val g = color.green.toFloat() / 255F
                             val b = color.blue.toFloat() / 255F
@@ -206,7 +206,7 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
                     2 -> {
                         for (i in 0..6) {
                             val vec = getHeadOrientation(player).multiply(0.52)
-                            val color = Color(IPriestColorOverride.getColor(player, 0x0000FF))
+                            val color = Color(ColorOverrideHelper.getColor(player, 0x0000FF))
                             val r = color.red.toFloat() / 255F
                             val g = color.green.toFloat() / 255F
                             val b = color.blue.toFloat() / 255F

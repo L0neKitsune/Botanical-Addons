@@ -18,7 +18,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
-import ninja.shadowfox.shadowfox_botany.api.item.IPriestColorOverride
+import ninja.shadowfox.shadowfox_botany.api.item.ColorOverrideHelper
 import ninja.shadowfox.shadowfox_botany.common.item.ItemMod
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemPriestEmblem
 import vazkii.botania.api.internal.IManaBurst
@@ -149,7 +149,7 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
             val velocity = getVelocity(prowess, priest)
 
             if (ManaItemHandler.requestManaExactForTool(stack, player, cost, false)) {
-                val color = Color(IPriestColorOverride.getColor(player, 0x0000FF))
+                val color = Color(ColorOverrideHelper.getColor(player, 0x0000FF))
                 val r = color.red.toFloat() / 255f
                 val g = color.green.toFloat() / 255f
                 val b = color.blue.toFloat() / 255f

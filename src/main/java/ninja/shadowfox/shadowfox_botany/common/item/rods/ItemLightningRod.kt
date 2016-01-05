@@ -19,8 +19,8 @@ import net.minecraft.util.*
 import net.minecraft.world.World
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
+import ninja.shadowfox.shadowfox_botany.api.item.ColorOverrideHelper
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
-import ninja.shadowfox.shadowfox_botany.api.item.IPriestColorOverride
 import ninja.shadowfox.shadowfox_botany.common.item.ItemMod
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemPriestEmblem
 import vazkii.botania.api.item.IAvatarTile
@@ -113,7 +113,7 @@ public open class ItemLightningRod(name: String = "lightningRod") : ItemMod(name
             var priest = (ItemPriestEmblem.getEmblem(0, player) != null)
             var prowess = IManaProficiencyArmor.Helper.hasProficiency(player)
 
-            val color = IPriestColorOverride.getColor(player, 0x0079C4)
+            val color = ColorOverrideHelper.getColor(player, 0x0079C4)
             val innerColor = Color(color).brighter().brighter().rgb
 
             if (ManaItemHandler.requestManaExactForTool(stack, player, getCost(thor, prowess, priest), false)) {

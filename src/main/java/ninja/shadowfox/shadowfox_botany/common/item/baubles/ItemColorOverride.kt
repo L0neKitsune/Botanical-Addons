@@ -10,8 +10,8 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.IIcon
 import net.minecraft.util.StatCollector
 import net.minecraftforge.client.event.RenderPlayerEvent
-import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.api.item.IPriestColorOverride
+import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.item.IBaubleRender
 import vazkii.botania.api.item.ICosmeticBauble
@@ -35,13 +35,13 @@ class ItemColorOverride(): ItemBauble("colorOverride"), ICosmeticBauble, IPriest
         this.overlayIcon = IconHelper.forItem(par1IconRegister, this, "Overlay")
     }
 
-    override fun colorOverride(stack: ItemStack?): Int? {
+    override fun colorOverride(stack: ItemStack?): Int {
         if (ItemNBTHelper.detectNBT(stack)) {
             var comp = ItemNBTHelper.getCompound(stack, "display", false)
             if (comp.hasKey("color", 3))
                 return comp.getInteger("color")
         }
-        return null
+        return -1
     }
 
     @SideOnly(Side.CLIENT)

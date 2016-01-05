@@ -15,8 +15,8 @@ import net.minecraft.util.IIcon
 import net.minecraft.util.MathHelper
 import net.minecraft.util.StatCollector
 import net.minecraftforge.client.event.RenderPlayerEvent
+import ninja.shadowfox.shadowfox_botany.api.item.ColorOverrideHelper
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.api.item.IPriestColorOverride
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import org.lwjgl.opengl.GL11
 import vazkii.botania.api.item.IBaubleRender
@@ -102,7 +102,7 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
                 val xmotion = shift.x.toFloat() * 0.025f
                 val ymotion = shift.y.toFloat() * 0.025f
                 val zmotion = shift.z.toFloat() * 0.025f
-                val color = Color(IPriestColorOverride.getColor(player, 0xFFFFFF))
+                val color = Color(ColorOverrideHelper.getColor(player, 0xFFFFFF))
                 val r = color.red.toFloat() / 255f
                 val g = color.green.toFloat() / 255f
                 val b = color.blue.toFloat() / 255f
