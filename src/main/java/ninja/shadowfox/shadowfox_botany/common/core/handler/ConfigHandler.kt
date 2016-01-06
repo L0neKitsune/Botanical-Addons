@@ -32,6 +32,9 @@ public class ConfigHandler {
         var blackLotusDropRate = 0.05
         var addTincturemAspect = true
         var potionIDManaVoid = 110
+        var schemaArray: IntArray = IntArray(17, { i: Int -> -1 + i} )
+
+
         private var potionArrayLimit = 0
         private var verifiedPotionArray = false
 
@@ -57,6 +60,9 @@ public class ConfigHandler {
 
             desc = "Rate of black loti dropping from Manaseal Creepers"
             blackLotusDropRate = loadPropDouble("voidCreepers.dropRate", desc, blackLotusDropRate)
+
+            desc = "Which schemas are allowed to be generated"
+            schemaArray = loadPropIntArray("schemas.enabled", desc, schemaArray)
 
             potionIDManaVoid = loadPropPotionId("manaVoid", potionIDManaVoid)
 
@@ -107,6 +113,12 @@ public class ConfigHandler {
             val prop = config.get("general", propName, default_)
             prop.comment = desc
             return prop.getDouble(default_)
+        }
+
+        fun loadPropIntArray(propName: String, desc: String, default_: IntArray): IntArray {
+            val prop = config.get("general", propName, default_)
+            prop.comment = desc
+            return prop.intList
         }
 
         fun loadPropBool(propName: String, desc: String, default_: Boolean): Boolean {

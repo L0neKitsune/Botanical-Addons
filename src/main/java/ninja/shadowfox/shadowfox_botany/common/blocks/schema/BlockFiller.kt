@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks.schema
 
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister

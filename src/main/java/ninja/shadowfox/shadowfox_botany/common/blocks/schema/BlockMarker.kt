@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks.schema
 
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
@@ -26,6 +26,6 @@ class BlockMarker() : ShadowFoxBlockMod(Material.wood) {
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
 
     override fun getIcon(side: Int, meta: Int): IIcon? {
-        return BotaniaBlocks.manaBeacon.getIcon(side, meta)
+        return vazkii.botania.common.block.ModBlocks.manaBeacon.getIcon(side, meta)
     }
 }

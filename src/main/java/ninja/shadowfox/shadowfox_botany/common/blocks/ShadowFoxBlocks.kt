@@ -13,6 +13,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.colored.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.lightning_oak.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.nether_oak.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.*
+import ninja.shadowfox.shadowfox_botany.common.blocks.schema.*
 
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.*
 import vazkii.botania.api.BotaniaAPI
@@ -103,6 +104,7 @@ public object ShadowFoxBlocks {
     public var schemaBlock: Block
     public var schemaGenBlock: Block
     public var fillerBlock: Block
+    public var annihilatorBlock: Block
 
     public var iridescentTree0: IIridescentSaplingVariant
     public var iridescentTree1: IIridescentSaplingVariant
@@ -185,8 +187,9 @@ public object ShadowFoxBlocks {
         kindling = BlockKindling()
         schemaBlock = BlockSchema()
         markerBlock = BlockMarker()
-        schemaGenBlock = BlockSchemaGen()
+        schemaGenBlock = BlockSchematicOak()
         fillerBlock = BlockFiller()
+        annihilatorBlock = BlockSchematicAnnihilator()
 
         register()
         initOreDict()

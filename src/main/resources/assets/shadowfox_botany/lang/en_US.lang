@@ -270,6 +270,9 @@ shadowfox_botany.page.livingwoodFunnel1=One at a time, please
 shadowfox_botany.page.waveRod0=One particularly frustrating property of the &1Mana Lens: Flash&0 is its tendency to lock the color of a &1Mana Flash&0 immidiately upon making it. Even if you want to make a rainbow &1Flash&0, you'll get one color. By using the power of the &1Rod of the Prismatic Lake&0, you can make the rainbow you've been searching for.<br>It can be tinged with &1Phantom Ink&0.
 shadowfox_botany.page.waveRod1=All the colors of the wind
 
+shadowfox_botany.page.schemaOak0=A &1Schematic Oak&0, when grown, can form a living treehouse.  Growing &1Schematic Oak&0 of special dirt can change the final form it takes to allow for many designs.
+shadowfox_botany.page.schemaOak1=Treehouses Galore
+
 shadowfox_botany.page.itemDisplay0=The &1Item Platform&0 is a neat way to display an item without having it despawn. Giving it an item via right click or hopper will show it floating above the platform. It's a neat way to show off your piles of resources.
 shadowfox_botany.page.itemDisplay1=Terrasteel makes you look rich
 

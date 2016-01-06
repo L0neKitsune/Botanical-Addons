@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.blocks
+package ninja.shadowfox.shadowfox_botany.common.blocks.schema
 
 import net.minecraft.block.Block
 import net.minecraft.block.ITileEntityProvider
@@ -10,19 +10,20 @@ import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.IIcon
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
-import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileSchema
-// import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileSchema
+import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileSchematicAnnihilator
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.wand.IWandable
 
-
-class BlockSchema() : ShadowFoxBlockMod(Material.wood), IWandable, ITileEntityProvider {
+/**
+ * Created by l0nekitsune on 1/3/16.
+ */
+class BlockSchematicAnnihilator() : ShadowFoxBlockMod(Material.wood), IWandable, ITileEntityProvider {
     lateinit var icon1: IIcon
     lateinit var icon2: IIcon
     lateinit var icon3: IIcon
 
     init {
-        setBlockName("schemaBlock")
+        setBlockName("schematicAnnihilator")
         isBlockContainer = true
     }
 
@@ -39,7 +40,7 @@ class BlockSchema() : ShadowFoxBlockMod(Material.wood), IWandable, ITileEntityPr
     }
 
     override fun createNewTileEntity(p_149915_1_: World?, p_149915_2_: Int): TileEntity? {
-        return TileSchema()
+        return TileSchematicAnnihilator()
     }
 
 
@@ -66,7 +67,7 @@ class BlockSchema() : ShadowFoxBlockMod(Material.wood), IWandable, ITileEntityPr
 
             val tile: TileEntity? = p2.getTileEntity(p3, p4, p5)
 
-            if (tile is TileSchema) {
+            if (tile is TileSchematicAnnihilator) {
                 tile.blockActivated(p0)
             }
         }

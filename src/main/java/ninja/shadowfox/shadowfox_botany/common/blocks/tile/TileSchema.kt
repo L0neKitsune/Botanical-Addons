@@ -23,7 +23,7 @@ import java.io.PrintWriter
 import java.util.*
 
 
-class TileSchema() : ShadowFoxTile() {
+open class TileSchema() : ShadowFoxTile() {
 
     private var ticksAlive: Int = 0
     private var lastDump: Int = 0
@@ -39,6 +39,7 @@ class TileSchema() : ShadowFoxTile() {
     var pos_xyx: Pos? = null
     var pos_zyz: Pos? = null
     var pos_xyz: Pos? = null
+    var range: Int = 64
 
     var validDir: MutableList<ForgeDirection> = ForgeDirection.VALID_DIRECTIONS.toArrayList()
 
@@ -150,7 +151,7 @@ class TileSchema() : ShadowFoxTile() {
             30.tickDelay {
                 loop@for (dir in ForgeDirection.VALID_DIRECTIONS) {
                     if (dir in validDir) {
-                        for (i in 1..65) {
+                        for (i in 1..range) {
                             var x = xCoord + (dir.offsetX * i)
                             var y = yCoord + (dir.offsetY * i)
                             var z = zCoord + (dir.offsetZ * i)
@@ -172,7 +173,7 @@ class TileSchema() : ShadowFoxTile() {
         ticksAlive++
     }
 
-    private infix fun Int.re(to: Int): IntRange {
+    protected infix fun Int.re(to: Int): IntRange {
         var f: Int = this
         var t: Int = to
 
@@ -309,7 +310,7 @@ class TileSchema() : ShadowFoxTile() {
         return Color.HSBtoRGB(time * 0.005F, 1F, 1F)
     }
 
-    public fun blockActivated(p0: EntityPlayer?) {
+    public open fun blockActivated(p0: EntityPlayer?) {
         if (ticksAlive - lastDump > 60) {
             lastDump = ticksAlive
             if (pos_x != null && pos_y != null && pos_z != null && mark_x != null && mark_z != null) {
