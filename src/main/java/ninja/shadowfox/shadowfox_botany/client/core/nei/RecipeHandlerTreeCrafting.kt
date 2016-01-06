@@ -110,7 +110,7 @@ open class RecipeHandlerTreeCrafting : TemplateRecipeHandler() {
             this.setIngredients(recipe.inputs)
             this.output = PositionedStack(recipe.output, 111, 21)
 
-            manaUsage = recipe.mana
+            manaUsage = recipe.manaUsage
 
             inputs.add(PositionedStack(ItemStack(ShadowFoxBlocks.irisSapling), 73, 55))
 

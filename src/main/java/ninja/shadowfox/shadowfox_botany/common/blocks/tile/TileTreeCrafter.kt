@@ -187,7 +187,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
                 signal = 0
                 forRecipe {
                     mana = 0
-                    manaRequired = it.mana
+                    manaRequired = it.manaUsage
                     advanceStage()
                 }
             }
@@ -380,7 +380,13 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
     override fun canAttachSpark(p0: ItemStack?): Boolean = true
 
     override fun areIncomingTranfersDone(): Boolean = stage != 1
-    override fun getAvailableSpaceForMana(): Int = Math.max(0, manaRequired - mana)
+    override fun getAvailableSpaceForMana(): Int {
+        val recipe = getRecipe()
+        val space = Math.max(0, manaRequired - mana)
+        if (recipe != null && recipe.throttle > 0)
+            return Math.min(recipe.throttle, space)
+        return space
+    }
     override fun isFull(): Boolean = (mana >= manaRequired)
     override fun canRecieveManaFromBursts(): Boolean = manaRequired > 0
     override fun getCurrentMana(): Int = mana

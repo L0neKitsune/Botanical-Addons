@@ -9,12 +9,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * A recipe for the Dendric Suffuser.
+ */
 public class RecipeTreeCrafting extends RecipePetals {
 
-    public int mana;
-    public Block outputBlock;
-    public int meta;
-    public List inputs;
+    private Block outputBlock;
+    private List inputs;
+    private int meta;
+    private int throttle = -1;
+    private int mana;
 
     public RecipeTreeCrafting(int mana, Block outputBlock, int meta, Object... inputs) {
         super(new ItemStack(outputBlock, 1, meta), inputs);
@@ -22,6 +26,11 @@ public class RecipeTreeCrafting extends RecipePetals {
         this.outputBlock = outputBlock;
         this.meta = meta;
         this.inputs = new ArrayList(Arrays.asList(inputs));
+    }
+
+    public RecipeTreeCrafting(int mana, Block outputBlock, int meta, int throttle, Object... inputs) {
+        this(mana, outputBlock, meta, inputs);
+        this.throttle = throttle;
     }
 
     public boolean matches(List<ItemStack> items) {
@@ -41,8 +50,24 @@ public class RecipeTreeCrafting extends RecipePetals {
         return inputsMissing.isEmpty();
     }
 
+    public Block getOutputBlock() {
+        return this.outputBlock;
+    }
+
+    public List getInputs() {
+        return this.inputs;
+    }
+
+    public int getMeta() {
+        return this.meta;
+    }
+
     public int getManaUsage() {
         return this.mana;
+    }
+
+    public int getThrottle() {
+        return this.throttle;
     }
 
     private boolean itemEquals(ItemStack stack, Object stack2) {

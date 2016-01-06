@@ -316,6 +316,7 @@ public object ModRecipes {
 
         recipesLightningTree = ShadowFoxAPI.addTreeRecipe(50000,
                 ShadowFoxBlocks.lightningSapling, 0,
+                350,
                 LibOreDict.MANA_STEEL, LibOreDict.MANA_STEEL, LibOreDict.MANA_STEEL,
                 LibOreDict.RUNE[13], // Wrath
                 ShadowFoxBlocks.LEAVES[10], ShadowFoxBlocks.LEAVES[10], ShadowFoxBlocks.LEAVES[10], // Purple
@@ -360,6 +361,7 @@ public object ModRecipes {
 
         recipesInfernalTree = ShadowFoxAPI.addTreeRecipe(10000,
                 ShadowFoxBlocks.netherSapling, 0,
+                70,
                 "ingotBrickNether", "ingotBrickNether", "ingotBrickNether",
                 LibOreDict.RUNE[1], // Fire
                 ShadowFoxBlocks.LEAVES[14], ShadowFoxBlocks.LEAVES[14], ShadowFoxBlocks.LEAVES[14], // Red
