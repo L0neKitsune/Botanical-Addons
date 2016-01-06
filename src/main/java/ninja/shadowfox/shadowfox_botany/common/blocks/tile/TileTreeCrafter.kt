@@ -11,17 +11,16 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.util.*
+import net.minecraft.util.AxisAlignedBB
+import net.minecraft.util.ChunkCoordinates
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
 import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.lexicon.MultiblockComponentRainbow
 import ninja.shadowfox.shadowfox_botany.common.utils.itemEquals
-
 import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL12
-
 import vazkii.botania.api.internal.VanillaPacketDispatcher
 import vazkii.botania.api.lexicon.multiblock.Multiblock
 import vazkii.botania.api.lexicon.multiblock.MultiblockSet
@@ -29,8 +28,8 @@ import vazkii.botania.api.mana.IManaPool
 import vazkii.botania.api.mana.spark.ISparkAttachable
 import vazkii.botania.api.mana.spark.ISparkEntity
 import vazkii.botania.api.mana.spark.SparkHelper
-import vazkii.botania.client.core.helper.RenderHelper
 import vazkii.botania.client.core.handler.HUDHandler
+import vazkii.botania.client.core.helper.RenderHelper
 import vazkii.botania.common.Botania
 import vazkii.botania.common.block.ModBlocks
 import java.util.*
@@ -97,7 +96,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
 
             if (world.getBlock(x, y0 + 4, z) !== ShadowFoxBlocks.treeCrafterBlock &&
                     world.getBlock(x, y0 + 4, z) !== ShadowFoxBlocks.treeCrafterBlockRB &&
-                    world.getBlock(x, y0 + 4, z) !== ShadowFoxBlocks.coloredPlanks && 
+                    world.getBlock(x, y0 + 4, z) !== ShadowFoxBlocks.coloredPlanks &&
                     world.getBlock(x, y0 + 4, z) !== ShadowFoxBlocks.rainbowPlanks) {
                 // FMLLog.log(Level.INFO, "Core Block")
                 return false
@@ -128,14 +127,14 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
     private var manaRequired: Int = 0
     private var stage: Int = 0
     private var stageTicks: Int = 0
-    public  var signal = 0
+    public var signal = 0
 
     override fun updateEntity() {
         if (!canEnchanterExist(this.worldObj, this.xCoord, this.yCoord, this.zCoord, this.blockMetadata, null)) {
             val block = worldObj.getBlock(xCoord, yCoord, zCoord)
             val meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord)
 
-            if(block === ShadowFoxBlocks.treeCrafterBlock)
+            if (block === ShadowFoxBlocks.treeCrafterBlock)
                 worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, ShadowFoxBlocks.coloredPlanks, meta, 3)
             else worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, ShadowFoxBlocks.rainbowPlanks, 0, 3)
 
@@ -162,15 +161,15 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
 
                 val s = 0.2f + Math.random().toFloat() * 0.1f
                 val m = 0.03f + Math.random().toFloat() * 0.015f
-                
+
                 for (rItem in recipeItems) {
                     if (rItem != null)
                         if (stack.itemEquals(rItem)) {
-                            if (mana > 0) { 
-                                if (stack.item is ItemBlock) worldObj.spawnParticle("blockcrack_${Item.getIdFromItem(stack.item)}_${stack.itemDamage}", it.xCoord.toDouble() + .5,  it.yCoord + 1.0, it.zCoord.toDouble() + .5, (this.xCoord.toDouble()-it.xCoord.toDouble())*8.0, 0.1, (this.zCoord.toDouble()-it.zCoord.toDouble())*8.0)
-                                else worldObj.spawnParticle("iconcrack_${Item.getIdFromItem(stack.item)}_${stack.itemDamage}", it.xCoord.toDouble() + .5,  it.yCoord + 1.0, it.zCoord.toDouble() + .5, (this.xCoord.toDouble()-it.xCoord.toDouble())/8.0, 0.1, (this.zCoord.toDouble()-it.zCoord.toDouble())/8.0)
+                            if (mana > 0) {
+                                if (stack.item is ItemBlock) worldObj.spawnParticle("blockcrack_${Item.getIdFromItem(stack.item)}_${stack.itemDamage}", it.xCoord.toDouble() + .5, it.yCoord + 1.0, it.zCoord.toDouble() + .5, (this.xCoord.toDouble() - it.xCoord.toDouble()) * 8.0, 0.1, (this.zCoord.toDouble() - it.zCoord.toDouble()) * 8.0)
+                                else worldObj.spawnParticle("iconcrack_${Item.getIdFromItem(stack.item)}_${stack.itemDamage}", it.xCoord.toDouble() + .5, it.yCoord + 1.0, it.zCoord.toDouble() + .5, (this.xCoord.toDouble() - it.xCoord.toDouble()) / 8.0, 0.1, (this.zCoord.toDouble() - it.zCoord.toDouble()) / 8.0)
                                 Botania.proxy.wispFX(this.worldObj, it.xCoord.toDouble() + .5, it.yCoord + 3.toDouble() + .5, it.zCoord.toDouble() + .5, 1.0f, 1.0f, 1.0f, s, -m)
-                            }  
+                            }
                             recipeItems.remove(rItem)
                             break
                         }
@@ -179,14 +178,16 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         }
 
         if (getValidRecipe() == null) stage = 0
-        if (stage == 0) {manaRequired = 0 ; mana = 0}
+        if (stage == 0) {
+            manaRequired = 0 ; mana = 0
+        }
 
         when (stage) {
             0 -> {
                 signal = 0
                 forRecipe {
                     mana = 0
-                    manaRequired = it.mana
+                    manaRequired = it.manaUsage
                     advanceStage()
                 }
             }
@@ -218,7 +219,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         ticksAlive++
     }
 
-    fun workingFanciness(){
+    fun workingFanciness() {
         10.tickDelay {
             for (i in 0..359) {
                 val radian = (i.toDouble() * 3.141592653589793 / 180.0).toFloat()
@@ -229,22 +230,22 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         }
     }
 
-    fun getValidRecipe() : RecipeTreeCrafting? {
+    fun getValidRecipe(): RecipeTreeCrafting? {
         if (worldObj.getBlock(xCoord, yCoord - 3, zCoord) === ShadowFoxBlocks.irisSapling) {
             return getRecipe()
         }
         return null
     }
 
-    fun getRecipe() : RecipeTreeCrafting? {
+    fun getRecipe(): RecipeTreeCrafting? {
         for (recipe in ShadowFoxAPI.treeRecipes)
             if (recipe.matches(getRecipeInputs())) return recipe
         return null
     }
 
-    fun forRecipe(action: (RecipeTreeCrafting) -> Unit){
+    fun forRecipe(action: (RecipeTreeCrafting) -> Unit) {
         val recipe = getValidRecipe()
-        if (recipe != null){
+        if (recipe != null) {
             action.invoke(recipe)
         }
     }
@@ -264,7 +265,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         }
     }
 
-    fun renderHUD(mc:Minecraft, res:ScaledResolution) {
+    fun renderHUD(mc: Minecraft, res: ScaledResolution) {
         val xc = res.scaledWidth / 2
         val yc = res.scaledHeight / 2
         var angle = -90f
@@ -343,7 +344,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
     fun craftingFanciness(recipe: RecipeTreeCrafting) {
         stage = 0
 
-        worldObj.setBlockToAir(xCoord, yCoord - 3 , zCoord)
+        worldObj.setBlockToAir(xCoord, yCoord - 3, zCoord)
         worldObj.setBlock(xCoord, yCoord - 3, zCoord, recipe.outputBlock, recipe.meta, 3)
 
         this.worldObj.playSoundEffect(this.xCoord.toDouble(), this.yCoord.toDouble(), this.zCoord.toDouble(), "botania:enchanterEnchant", 1.0f, 1.0f)
@@ -358,7 +359,7 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
         var recipeItems = ArrayList(recipe.inputs)
 
         itemDisplays {
-            for(rItem: Any? in recipeItems) {
+            for (rItem: Any? in recipeItems) {
                 if (rItem != null)
                     if (it.getStackInSlot(0)?.itemEquals(rItem) ?: false) {
                         it.apply {
@@ -379,7 +380,13 @@ class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
     override fun canAttachSpark(p0: ItemStack?): Boolean = true
 
     override fun areIncomingTranfersDone(): Boolean = stage != 1
-    override fun getAvailableSpaceForMana(): Int = Math.max(0, manaRequired - mana)
+    override fun getAvailableSpaceForMana(): Int {
+        val recipe = getRecipe()
+        val space = Math.max(0, manaRequired - mana)
+        if (recipe != null && recipe.throttle > 0)
+            return Math.min(recipe.throttle, space)
+        return space
+    }
     override fun isFull(): Boolean = (mana >= manaRequired)
     override fun canRecieveManaFromBursts(): Boolean = manaRequired > 0
     override fun getCurrentMana(): Int = mana

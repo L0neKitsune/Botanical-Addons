@@ -1,20 +1,17 @@
 package ninja.shadowfox.shadowfox_botany.common.lexicon
 
+import cpw.mods.fml.relauncher.FMLLaunchHandler
 import net.minecraft.block.Block
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ChunkCoordinates
 import net.minecraft.world.World
-
-import cpw.mods.fml.relauncher.FMLLaunchHandler
-
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.multiblock.component.MultiblockComponent
+import java.util.*
 
-import java.util.ArrayList
-
-class MultiblockComponentRainbow(relPos: ChunkCoordinates, default: Block, vararg blocks: Block):
-      MultiblockComponent(relPos, default, -1) {
+class MultiblockComponentRainbow(relPos: ChunkCoordinates, default: Block, vararg blocks: Block) :
+        MultiblockComponent(relPos, default, -1) {
 
     private val blockpairs: MutableList<BlockPair> = ArrayList()
     val secondaryBlocks: Array<out Block>
@@ -26,13 +23,13 @@ class MultiblockComponentRainbow(relPos: ChunkCoordinates, default: Block, varar
     }
 
     private fun populatePairs(block: Block, pairs: MutableList<BlockPair>) {
-        if (FMLLaunchHandler.side().isServer()) return
+        if (FMLLaunchHandler.side().isServer) return
         var stacks = ArrayList<ItemStack>()
         var item = Item.getItemFromBlock(block)
         block.getSubBlocks(item, block.creativeTabToDisplayOn, stacks)
 
-        for(stack in stacks)
-            if(stack.item == item)
+        for (stack in stacks)
+            if (stack.item == item)
                 pairs.add(BlockPair(block, stack.itemDamage))
     }
 
@@ -46,7 +43,7 @@ class MultiblockComponentRainbow(relPos: ChunkCoordinates, default: Block, varar
 
     override fun matches(world: World, x: Int, y: Int, z: Int): Boolean {
         for (pair in blockpairs)
-            if (world.getBlock(x, y, z) == pair.block) 
+            if (world.getBlock(x, y, z) == pair.block)
                 return true
         return false
     }

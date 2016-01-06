@@ -2,7 +2,6 @@ package ninja.shadowfox.shadowfox_botany.common.blocks.alt_grass
 
 import cpw.mods.fml.common.IFuelHandler
 import cpw.mods.fml.common.registry.GameRegistry
-
 import net.minecraft.block.Block
 import net.minecraft.block.BlockSlab
 import net.minecraft.entity.player.EntityPlayer
@@ -10,17 +9,18 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.world.World
-
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemRegularSlabMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxSlabs
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxStairs
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemRegularSlabMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
+import kotlin.text.replace
+import kotlin.text.toRegex
 
-class BlockAltWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks.altPlanks):
+class BlockAltWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks.altPlanks) :
         ShadowFoxSlabs(full, meta, source, source.unlocalizedName.replace("tile.".toRegex(), "") + "Slab" + (if (full) "Full" else "") + meta), ILexiconable, IFuelHandler {
 
     override fun getFullBlock(): BlockSlab {
@@ -48,7 +48,7 @@ class BlockAltWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks
     }
 }
 
-class BlockAltWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.altPlanks):
+class BlockAltWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.altPlanks) :
         ShadowFoxStairs(source, meta, source.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs" + meta) {
     override fun register() {
         GameRegistry.registerBlock(this, ItemBlockMod::class.java, name)

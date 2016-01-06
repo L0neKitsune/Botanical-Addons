@@ -1,7 +1,7 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.rainbow
 
-import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
+import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.FMLLaunchHandler
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
@@ -9,30 +9,23 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockDoublePlant
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
-import net.minecraft.entity.passive.EntitySheep
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.stats.StatList
 import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import net.minecraft.stats.StatList
-import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.client.event.TextureStitchEvent
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler
+import net.minecraftforge.common.MinecraftForge
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemRainbowDoubleGrassMod
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 import ninja.shadowfox.shadowfox_botany.lib.Constants
-import vazkii.botania.client.render.block.InterpolatedIcon
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
-import net.minecraft.client.renderer.RenderBlocks
-import net.minecraft.client.renderer.Tessellator
-import net.minecraft.client.renderer.EntityRenderer
-import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import java.awt.Color
 import java.util.*
 import kotlin.properties.Delegates
 
@@ -54,15 +47,9 @@ public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 0) {
-            var localTopIcon = InterpolatedIcon("shadowfox_botany:rainbowDoubleGrassTop")
-            if(event.map.setTextureEntry("shadowfox_botany:rainbowDoubleGrassTop", localTopIcon)) {
-                this.topIcon = localTopIcon
-            }
-            var localBottomIcon = InterpolatedIcon("shadowfox_botany:rainbowDoubleGrass")
-            if(event.map.setTextureEntry("shadowfox_botany:rainbowDoubleGrass", localBottomIcon)) {
-                this.bottomIcon = localBottomIcon
-            }
+        if (event.map.textureType == 0) {
+            this.topIcon = InterpolatedIconHelper.forBlock(event.map, this, "Top")!!
+            this.bottomIcon = InterpolatedIconHelper.forBlock(event.map, this)!!
         }
     }
 
@@ -70,7 +57,8 @@ public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
         return false
     }
 
-    override fun func_149853_b(world: World, random: Random, x: Int, y: Int, z: Int) {}
+    override fun func_149853_b(world: World, random: Random, x: Int, y: Int, z: Int) {
+    }
 
     fun isTop(meta: Int): Boolean {
         return (meta and 8) != 0
@@ -85,7 +73,9 @@ public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
         return super.setBlockName(par1Str)
     }
 
-    override fun setBlockName(par1Str: String): Block? {return null}
+    override fun setBlockName(par1Str: String): Block? {
+        return null
+    }
 
     @SideOnly(Side.CLIENT)
     override fun getBlockColor(): Int {
@@ -97,10 +87,11 @@ public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(iconRegister: IIconRegister) {}
+    override fun registerBlockIcons(iconRegister: IIconRegister) {
+    }
 
     @SideOnly(Side.CLIENT)
-    override fun getIcon(side : Int, meta : Int) : IIcon {
+    override fun getIcon(side: Int, meta: Int): IIcon {
         return this.topIcon
     }
 
@@ -112,8 +103,7 @@ public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
     fun dropBlock(world: World, x: Int, y: Int, z: Int, meta: Int, player: EntityPlayer): Boolean {
         if (isTop(meta)) {
             return false
-        }
-        else {
+        } else {
             player.addStat(StatList.mineBlockStatArray[Block.getIdFromBlock(this)], 1)
             this.dropBlockAsItem(world, x, y, z, ItemStack(ShadowFoxBlocks.rainbowGrass, 2, meta))
             return true

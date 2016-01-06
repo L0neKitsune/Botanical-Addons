@@ -6,8 +6,6 @@ import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.block.BlockSapling
-import net.minecraft.block.IGrowable
-import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
@@ -24,17 +22,14 @@ import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
+import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.world.SimpleTreeGen
-import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
-import kotlin.properties.Delegates
 
 public open class BlockColoredSapling(val name: String = "irisSapling") : BlockSapling(), ILexiconable, IFuelHandler {
-
-    internal var icon: IIcon by Delegates.notNull()
 
     init {
         this.setTickRandomly(true)
@@ -51,23 +46,21 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : BlockS
         return super.setBlockName(par1Str)
     }
 
-    @SideOnly(Side.CLIENT)
-    override fun getIcon(pass: Int, meta: Int): IIcon {
-        return icon
-    }
-
     override fun getCollisionBoundingBoxFromPool(world: World?, x: Int, y: Int, z: Int): AxisAlignedBB? {
         return null
     }
 
-    @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        icon = IconHelper.forBlock(par1IconRegister, this)
+    override fun isOpaqueCube(): Boolean {
+        return false
     }
 
-    override fun isOpaqueCube(): Boolean { return false }
-    override fun renderAsNormalBlock() : Boolean { return false }
-    override fun getRenderType() : Int { return 1 }
+    override fun renderAsNormalBlock(): Boolean {
+        return false
+    }
+
+    override fun getRenderType(): Int {
+        return 1
+    }
 
     override fun getPlant(world: IBlockAccess?, x: Int, y: Int, z: Int): Block? {
         return this
@@ -103,7 +96,7 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : BlockS
         checkAndDropBlock(world, x, y, z)
     }
 
-    override fun checkAndDropBlock(world: World?, x: Int, y: Int, z: Int){
+    override fun checkAndDropBlock(world: World?, x: Int, y: Int, z: Int) {
         if (world != null && !this.canBlockStay(world, x, y, z)) {
             this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0)
             world.setBlock(x, y, z, Block.getBlockById(0), 0, 2)
@@ -114,8 +107,8 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : BlockS
         return world.getBlock(x, y - 1, z).canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this) || canGrowHere(world.getBlock(x, y - 1, z))
     }
 
-    override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {
-        if(list != null && item != null)
+    override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {
+        if (list != null && item != null)
             list.add(ItemStack(this))
     }
 
@@ -132,12 +125,12 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : BlockS
     }
 
     public open fun growTree(world: World?, x: Int, y: Int, z: Int, random: Random?) {
-        if(world != null) {
+        if (world != null) {
             if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(world, random, x, y, z)) return
 
             val plantedOn: Block = world.getBlock(x, y - 1, z)
 
-            if(canGrowHere(plantedOn)) {
+            if (canGrowHere(plantedOn)) {
                 val l = world.getBlockMetadata(x, y, z)
 
                 val obj: WorldGenerator = SimpleTreeGen(5)
@@ -184,5 +177,15 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : BlockS
 
     override fun getBurnTime(fuel: ItemStack): Int {
         return if (fuel.item == Item.getItemFromBlock(this)) 100 else 0
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
+        blockIcon = IconHelper.forBlock(par1IconRegister, this)
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun getIcon(side: Int, meta: Int): IIcon {
+        return blockIcon
     }
 }

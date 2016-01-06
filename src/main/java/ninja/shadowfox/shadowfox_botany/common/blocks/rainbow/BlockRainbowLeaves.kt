@@ -1,34 +1,25 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.rainbow
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.relauncher.FMLLaunchHandler
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
-import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import net.minecraftforge.client.event.TextureStitchEvent
-import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.LexiconEntry
-import vazkii.botania.client.render.block.InterpolatedIcon
 import java.util.*
 
 
-public class BlockRainbowLeaves(): ShadowFoxLeaves() {
+public class BlockRainbowLeaves() : ShadowFoxLeaves() {
 
     init {
         setBlockName("rainbowLeaves")
-        if (FMLLaunchHandler.side().isClient())
-            MinecraftForge.EVENT_BUS.register(this)
     }
 
     override fun register(name: String) {
@@ -57,23 +48,7 @@ public class BlockRainbowLeaves(): ShadowFoxLeaves() {
         return 0xFFFFFF
     }
 
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 0) {
-            var success = true
-            var icon = InterpolatedIcon("shadowfox_botany:rainbowLeaves")
-            if(!event.map.setTextureEntry("shadowfox_botany:rainbowLeaves", icon))
-                success = false
-            var iconOpaque = InterpolatedIcon("shadowfox_botany:rainbowLeaves_opaque")
-            if(!event.map.setTextureEntry("shadowfox_botany:rainbowLeaves_opaque", iconOpaque))
-                success = false
-            if (success) icons = arrayOf(icon, iconOpaque)
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(iconRegister: IIconRegister) {}
+    override fun isInterpolated(): Boolean = true
 
     override fun decayBit(): Int = 0x1
 

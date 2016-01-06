@@ -1,42 +1,27 @@
 package ninja.shadowfox.shadowfox_botany.common.item.baubles
 
+import baubles.api.BaubleType
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
-import cpw.mods.fml.common.registry.GameRegistry
-
-import net.minecraft.client.Minecraft
-import net.minecraft.client.renderer.ItemRenderer
-import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.texture.IIconRegister
-import net.minecraft.client.renderer.texture.TextureMap
-import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.IIcon
 import net.minecraft.util.StatCollector
 import net.minecraftforge.client.event.RenderPlayerEvent
-import net.minecraftforge.oredict.RecipeSorter
-import net.minecraftforge.oredict.RecipeSorter.Category
-
-import org.lwjgl.opengl.GL11
-
-import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
-import ninja.shadowfox.shadowfox_botany.common.item.IPriestColorOverride
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import ninja.shadowfox.shadowfox_botany.api.item.IPriestColorOverride
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-
-import vazkii.botania.api.item.ICosmeticBauble
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.item.IBaubleRender
+import vazkii.botania.api.item.ICosmeticBauble
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
-import vazkii.botania.common.lib.LibItemNames
-import baubles.api.BaubleType
-
 import kotlin.properties.Delegates
+import kotlin.text.replace
+import kotlin.text.toRegex
 
-class ItemColorOverride(): ItemBauble("colorOverride"), ICosmeticBauble, IPriestColorOverride {
+class ItemColorOverride() : ItemBauble("colorOverride"), ICosmeticBauble, IPriestColorOverride {
 
     var overlayIcon: IIcon by Delegates.notNull()
 
@@ -50,13 +35,13 @@ class ItemColorOverride(): ItemBauble("colorOverride"), ICosmeticBauble, IPriest
         this.overlayIcon = IconHelper.forItem(par1IconRegister, this, "Overlay")
     }
 
-    override fun colorOverride(stack: ItemStack?): Int? {
+    override fun colorOverride(stack: ItemStack?): Int {
         if (ItemNBTHelper.detectNBT(stack)) {
             var comp = ItemNBTHelper.getCompound(stack, "display", false)
             if (comp.hasKey("color", 3))
                 return comp.getInteger("color")
         }
-        return null
+        return -1
     }
 
     @SideOnly(Side.CLIENT)
@@ -113,7 +98,7 @@ class ItemColorOverride(): ItemBauble("colorOverride"), ICosmeticBauble, IPriest
     override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>, par4: Boolean) {
         if (par1ItemStack == null) return
         if (this.hasColor(par1ItemStack))
-            addStringToTooltip("&7"+StatCollector.translateToLocal("item.dyed")+"&r", par3List)
+            addStringToTooltip("&7" + StatCollector.translateToLocal("item.dyed") + "&r", par3List)
         super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4)
     }
 
@@ -122,7 +107,7 @@ class ItemColorOverride(): ItemBauble("colorOverride"), ICosmeticBauble, IPriest
         super.addHiddenTooltip(par1ItemStack, par2EntityPlayer, par3List, par4)
     }
 
-    fun addStringToTooltip(s : String, tooltip : MutableList<Any?>?) {
+    fun addStringToTooltip(s: String, tooltip: MutableList<Any?>?) {
         tooltip!!.add(s.replace("&".toRegex(), "\u00a7"))
     }
 
@@ -130,5 +115,6 @@ class ItemColorOverride(): ItemBauble("colorOverride"), ICosmeticBauble, IPriest
         return BaubleType.RING
     }
 
-    override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {}
+    override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {
+    }
 }

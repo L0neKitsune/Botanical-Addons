@@ -1,53 +1,39 @@
 package ninja.shadowfox.shadowfox_botany.common.item.rods
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
-import cpw.mods.fml.common.eventhandler.SubscribeEvent
-import net.minecraftforge.client.event.TextureStitchEvent
-import net.minecraftforge.common.MinecraftForge
-import net.minecraft.command.IEntitySelector
 import net.minecraft.client.renderer.texture.IIconRegister
+import net.minecraft.command.IEntitySelector
 import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityCreature
 import net.minecraft.entity.EntityLivingBase
-import net.minecraft.entity.effect.EntityLightningBolt
-import net.minecraft.entity.monster.EntitySlime
-import net.minecraft.entity.monster.IMob
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.entity.IProjectile
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.EnumAction
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
-import net.minecraft.util.IIcon
-import net.minecraft.util.MathHelper
 import net.minecraft.util.AxisAlignedBB
-import net.minecraft.util.DamageSource
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
-import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
-import ninja.shadowfox.shadowfox_botany.common.item.IPriestColorOverride
+import net.minecraftforge.client.event.TextureStitchEvent
+import net.minecraftforge.common.MinecraftForge
+import ninja.shadowfox.shadowfox_botany.api.item.ColorOverrideHelper
 import ninja.shadowfox.shadowfox_botany.common.item.ItemMod
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemPriestEmblem
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
+import vazkii.botania.api.internal.IManaBurst
 import vazkii.botania.api.item.IAvatarTile
 import vazkii.botania.api.item.IAvatarWieldable
 import vazkii.botania.api.item.IManaProficiencyArmor
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
-import vazkii.botania.api.internal.IManaBurst
 import vazkii.botania.common.Botania
-import vazkii.botania.common.core.helper.ItemNBTHelper
-import vazkii.botania.common.core.helper.Vector3
 import vazkii.botania.common.entity.EntityDoppleganger
-import vazkii.botania.client.render.block.InterpolatedIcon
 import java.awt.Color
-import java.util.*
-import kotlin.properties.Delegates
+import kotlin.ranges.step
 
 public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMod(name), IManaUsingItem, IAvatarWieldable {
     private val avatarOverlay = ResourceLocation("shadowfox_botany:textures/model/avatarInterdiction.png")
-
-    var icon: IIcon by Delegates.notNull()
 
     init {
         setMaxStackSize(1)
@@ -55,22 +41,15 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerIcons(par1IconRegister: IIconRegister) {}
+    override fun registerIcons(par1IconRegister: IIconRegister) {
+    }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 1) {
-            var localIcon = InterpolatedIcon("shadowfox_botany:interdictionRod")
-            if(event.map.setTextureEntry("shadowfox_botany:interdictionRod", localIcon)) {
-                this.icon = localIcon
-            }
+        if (event.map.textureType == 1) {
+            this.itemIcon = InterpolatedIconHelper.forItem(event.map, this)
         }
-    }
-
-    @SideOnly(Side.CLIENT)
-    override fun getIconFromDamage(meta: Int): IIcon {
-        return this.icon
     }
 
     override fun getItemUseAction(par1ItemStack: ItemStack?): EnumAction {
@@ -109,6 +88,7 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
     fun particleRing(world: World, x: Int, y: Int, z: Int, range: Int, r: Float, g: Float, b: Float) {
         particleRing(world, x.toDouble(), y.toDouble(), z.toDouble(), range, r, g, b)
     }
+
     fun particleRing(world: World, x: Double, y: Double, z: Double, range: Int, r: Float, g: Float, b: Float) {
         val m = 0.15F
         val mv = 0.35F
@@ -121,9 +101,11 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
             Botania.proxy.wispFX(world, dispx, dispy, dispz, r, g, b, 0.2F, (Math.random() - 0.5).toFloat() * m, (Math.random() - 0.5).toFloat() * mv, (Math.random() - 0.5F).toFloat() * m)
         }
     }
+
     fun pushEntities(x: Int, y: Int, z: Int, range: Int, velocity: Double, entities: List<Any?>): Boolean {
         return pushEntities(x.toDouble(), y.toDouble(), z.toDouble(), range, velocity, entities)
     }
+
     fun pushEntities(x: Double, y: Double, z: Double, range: Int, velocity: Double, entities: List<Any?>): Boolean {
         var flag = false
         for (entityLiving in entities) {
@@ -131,7 +113,7 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
                 var xDif = entityLiving.posX - x
                 var yDif = entityLiving.posY - (y + 1)
                 var zDif = entityLiving.posZ - z
-                var dist = Math.sqrt(xDif*xDif+yDif*yDif+zDif*zDif)
+                var dist = Math.sqrt(xDif * xDif + yDif * yDif + zDif * zDif)
                 if (dist <= range) {
                     entityLiving.motionX = velocity * xDif
                     entityLiving.motionY = velocity * yDif
@@ -159,7 +141,7 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
             val velocity = getVelocity(prowess, priest)
 
             if (ManaItemHandler.requestManaExactForTool(stack, player, cost, false)) {
-                val color = Color(IPriestColorOverride.getColor(player, 0x0000FF))
+                val color = Color(ColorOverrideHelper.getColor(player, 0x0000FF))
                 val r = color.red.toFloat() / 255f
                 val g = color.green.toFloat() / 255f
                 val b = color.blue.toFloat() / 255f
@@ -167,8 +149,8 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
 
                 val exclude: EntityLivingBase = player
                 val entities = world.getEntitiesWithinAABBExcludingEntity(exclude,
-                    AxisAlignedBB.getBoundingBox(x - range, y - range, z - range,
-                        x + range, y + range, z + range), PLAYER_SELECTOR)
+                        AxisAlignedBB.getBoundingBox(x - range, y - range, z - range,
+                                x + range, y + range, z + range), PLAYER_SELECTOR)
 
                 if (pushEntities(x, y, z, range, velocity, entities)) {
                     if (count % 3 == 0) world.playSoundAtEntity(player, "shadowfox_botany:wind", 0.4F, 1F)
@@ -177,6 +159,7 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
             }
         }
     }
+
     val COST = 5
     val PROWESS_COST = -1
     val PRIEST_COST = 2
@@ -192,12 +175,14 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
     fun getCost(prowess: Boolean, priest: Boolean): Int {
         return COST + if (prowess) PROWESS_COST else 0 + if (priest) PRIEST_COST else 0
     }
+
     fun getVelocity(prowess: Boolean, priest: Boolean): Double {
         var vel = VELOCITY
         if (prowess) vel += PROWESS_VELOCTY
         if (priest) vel += PRIEST_VELOCITY
         return vel
     }
+
     fun getRange(prowess: Boolean, priest: Boolean): Int {
         return RANGE + if (prowess) PROWESS_RANGE else 0 + if (priest) PRIEST_RANGE else 0
     }
@@ -213,8 +198,8 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
             if (tile.elapsedFunctionalTicks % 5 == 0) particleRing(world, x, y, z, RANGE, 0f, 0f, 1f)
 
             val entities = world.selectEntitiesWithinAABB(EntityLivingBase::class.java,
-                AxisAlignedBB.getBoundingBox(x - RANGE, y - RANGE, z - RANGE,
-                    x + RANGE, y + RANGE, z + RANGE), AVATAR_SELECTOR)
+                    AxisAlignedBB.getBoundingBox(x - RANGE, y - RANGE, z - RANGE,
+                            x + RANGE, y + RANGE, z + RANGE), AVATAR_SELECTOR)
 
             if (pushEntities(x, y, z, RANGE, VELOCITY, entities)) {
                 if (tile.elapsedFunctionalTicks % 3 == 0) world.playSoundEffect(x.toDouble(), y.toDouble(), z.toDouble(), "shadowfox_botany:wind", 0.4F, 1F)

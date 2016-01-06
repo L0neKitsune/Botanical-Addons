@@ -1,14 +1,15 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks
 
 import cpw.mods.fml.common.registry.GameRegistry
-import net.minecraft.init.Blocks
 import net.minecraft.block.Block
+import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
-import ninja.shadowfox.shadowfox_botany.common.blocks.alt_grass.*
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
 import ninja.shadowfox.shadowfox_botany.api.trees.IIridescentSaplingVariant
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.*
+import ninja.shadowfox.shadowfox_botany.common.blocks.alt_grass.*
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockManaFlame
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxSlabs
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.lightning_oak.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.nether_oak.*
@@ -25,6 +26,7 @@ public object ShadowFoxBlocks {
     fun setBurnable(block: Block, encouragement: Int, flammablility: Int) {
         Blocks.fire.setFireInfo(block, encouragement, flammablility)
     }
+
     fun setBurnable(blocks: Array<Block>, encouragement: Int, flammablility: Int) {
         for (i in blocks)
             if (Block.getIdFromBlock(i) != -1)
@@ -139,9 +141,9 @@ public object ShadowFoxBlocks {
         coloredPlanks = BlockColoredPlanks()
         rainbowPlanks = BlockRainbowPlanks()
 
-        coloredSlabs = Array<Block>(16 , {i -> BlockColoredWoodSlab(false, i) })
-        coloredSlabsFull = Array<Block>(16 , {i -> BlockColoredWoodSlab(true, i) })
-        coloredStairs = Array<Block>(16 , {i -> BlockColoredWoodStairs(i) })
+        coloredSlabs = Array<Block>(16, { i -> BlockColoredWoodSlab(false, i) })
+        coloredSlabsFull = Array<Block>(16, { i -> BlockColoredWoodSlab(true, i) })
+        coloredStairs = Array<Block>(16, { i -> BlockColoredWoodStairs(i) })
 
         rainbowSlabsFull = BlockRainbowWoodSlab(true)
         rainbowSlabs = BlockRainbowWoodSlab(false)
@@ -178,9 +180,9 @@ public object ShadowFoxBlocks {
         altLeaves = BlockAltLeaves()
         altPlanks = BlockAltPlanks()
 
-        altSlabs = Array<Block>(6 , {i -> BlockAltWoodSlab(false, i) })
-        altSlabsFull = Array<Block>(6 , {i -> BlockAltWoodSlab(true, i) })
-        altStairs = Array<Block>(6 , {i -> BlockAltWoodStairs(i) })
+        altSlabs = Array<Block>(6, { i -> BlockAltWoodSlab(false, i) })
+        altSlabsFull = Array<Block>(6, { i -> BlockAltWoodSlab(true, i) })
+        altStairs = Array<Block>(6, { i -> BlockAltWoodStairs(i) })
 
         barrier = BlockBarrier()
 
@@ -259,7 +261,7 @@ public object ShadowFoxBlocks {
     /**
      * Mainly for slabs since they can't be registred till both full and half slabs are created
      */
-    private fun register(){
+    private fun register() {
         for (i in coloredSlabs) {
             (i as ShadowFoxSlabs).register()
         }
@@ -310,18 +312,18 @@ public object ShadowFoxBlocks {
         OreDictionary.registerOre("slabWood", ItemStack(netherSlabs))
         OreDictionary.registerOre("stairWood", ItemStack(netherStairs))
 
-        for (i in 0..3){
+        for (i in 0..3) {
             t = ItemStack(irisWood0, 1, i)
             OreDictionary.registerOre(WOOD[i], t)
 
             t = ItemStack(irisWood1, 1, i)
-            OreDictionary.registerOre(WOOD[i+4], t)
+            OreDictionary.registerOre(WOOD[i + 4], t)
 
             t = ItemStack(irisWood2, 1, i)
-            OreDictionary.registerOre(WOOD[i+8], t)
+            OreDictionary.registerOre(WOOD[i + 8], t)
 
             t = ItemStack(irisWood3, 1, i)
-            OreDictionary.registerOre(WOOD[i+12], t)
+            OreDictionary.registerOre(WOOD[i + 12], t)
         }
 
         for (i in 0..7) {
@@ -329,7 +331,7 @@ public object ShadowFoxBlocks {
             OreDictionary.registerOre(LEAVES[i], t)
 
             t = ItemStack(irisLeaves1, 1, i)
-            OreDictionary.registerOre(LEAVES[i+8], t)
+            OreDictionary.registerOre(LEAVES[i + 8], t)
         }
 
         for (i in 0..5) {

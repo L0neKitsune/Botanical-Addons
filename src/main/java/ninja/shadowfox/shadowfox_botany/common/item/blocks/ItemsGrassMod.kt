@@ -2,22 +2,22 @@ package ninja.shadowfox.shadowfox_botany.common.item.blocks
 
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
-import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.BlockRainbowDoubleGrass
-import net.minecraft.client.renderer.texture.IIconRegister
-import net.minecraft.util.IIcon
 import net.minecraft.block.Block
-import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.passive.EntitySheep
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
+import net.minecraft.util.IIcon
 import net.minecraft.util.StatCollector
+import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.BlockRainbowDoubleGrass
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import java.awt.Color
 import kotlin.properties.Delegates
 
 
 class ItemIridescentGrassMod(par2Block: Block) : ItemSubtypedBlockMod(par2Block) {
-    override fun getColorFromItemStack(par1ItemStack : ItemStack, pass : Int) : Int {
-        if(par1ItemStack.itemDamage >= EntitySheep.fleeceColorTable.size)
+    override fun getColorFromItemStack(par1ItemStack: ItemStack, pass: Int): Int {
+        if (par1ItemStack.itemDamage >= EntitySheep.fleeceColorTable.size)
             return 0xFFFFFF
 
         var color = EntitySheep.fleeceColorTable[par1ItemStack.itemDamage]
@@ -39,16 +39,17 @@ open class ItemIridescentTallGrassMod0(par2Block: Block) : ItemSubtypedBlockMod(
         return this.topIcon
     }
 
-    override fun getColorFromItemStack(par1ItemStack : ItemStack, pass : Int) : Int {
-        if(par1ItemStack.itemDamage >= EntitySheep.fleeceColorTable.size)
+    override fun getColorFromItemStack(par1ItemStack: ItemStack, pass: Int): Int {
+        if (par1ItemStack.itemDamage >= EntitySheep.fleeceColorTable.size)
             return 0xFFFFFF
 
-        var color = EntitySheep.fleeceColorTable[par1ItemStack.itemDamage+colorSet*8]
+        var color = EntitySheep.fleeceColorTable[par1ItemStack.itemDamage + colorSet * 8]
         return Color(color[0], color[1], color[2]).rgb
     }
+
     override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>?, par4: Boolean) {
-        if(par1ItemStack == null) return
-        addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.color." + (par1ItemStack.itemDamage+(colorSet*8)))+"&r", par3List)
+        if (par1ItemStack == null) return
+        addStringToTooltip("&7" + StatCollector.translateToLocal("misc.shadowfox_botany.color." + (par1ItemStack.itemDamage + (colorSet * 8))) + "&r", par3List)
     }
 }
 

@@ -1,5 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.item.baubles
 
+import baubles.api.BaubleType
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.ItemRenderer
 import net.minecraft.client.renderer.Tessellator
@@ -13,34 +14,29 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.util.StatCollector
 import net.minecraftforge.client.event.RenderPlayerEvent
-import net.minecraftforge.oredict.RecipeSorter
-import net.minecraftforge.oredict.RecipeSorter.Category
-
-import org.lwjgl.opengl.GL11
-
-import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
-import ninja.shadowfox.shadowfox_botany.common.item.IPriestColorOverride
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import ninja.shadowfox.shadowfox_botany.api.item.IPriestColorOverride
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-
-import vazkii.botania.api.item.ICosmeticBauble
+import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import org.lwjgl.opengl.GL11
 import vazkii.botania.api.item.IBaubleRender
+import vazkii.botania.api.item.ICosmeticBauble
 import vazkii.botania.client.core.helper.ShaderHelper
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
-import vazkii.botania.common.lib.LibItemNames
-import baubles.api.BaubleType
-import cpw.mods.fml.common.registry.GameRegistry
+import kotlin.text.replace
+import kotlin.text.toLowerCase
+import kotlin.text.toRegex
 
-class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorOverride {
+class ItemCoatOfArms() : ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorOverride {
 
     val TYPES = 18
     var icons: Array<IIcon?> = arrayOfNulls(TYPES)
     val colorMap = intArrayOf(
-        0x00137F, 0x0043FF, 0xFF0037, 0xFFD800,
-        0x002EFF, 0x001A8E, 0x009944, 0x003BFF,
-        0x00FF3B, 0xFF003B, 0x603A20, 0xFFFF00,
-        0xFF0015, 0x0048FF, 0xFFD400, 0xFFFFFF,
-        0xFFFFFF, 0xFF0037
+            0x00137F, 0x0043FF, 0xFF0037, 0xFFD800,
+            0x002EFF, 0x001A8E, 0x009944, 0x003BFF,
+            0x00FF3B, 0xFF003B, 0x603A20, 0xFFFF00,
+            0xFF0015, 0x0048FF, 0xFFD400, 0xFFFFFF,
+            0xFFFFFF, 0xFF0037
     )
 
     init {
@@ -49,34 +45,34 @@ class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorO
     }
 
     override fun registerIcons(par1IconRegister: IIconRegister) {
-        for(i in 0..TYPES-1)
+        for (i in 0..TYPES - 1)
             icons[i] = IconHelper.forItem(par1IconRegister, this, i, "coatofarms")
     }
 
-    override fun colorOverride(stack: ItemStack?): Int? {
+    override fun colorOverride(stack: ItemStack?): Int {
         if (stack != null) {
-            if (stack.itemDamage < TYPES-1 && stack.itemDamage >= 0 && stack.itemDamage != 16)
+            if (stack.itemDamage < TYPES - 1 && stack.itemDamage >= 0 && stack.itemDamage != 16)
                 return colorMap[stack.itemDamage]
             else if (stack.itemDamage == 16)
                 return ItemIridescent.rainbowColor()
         }
-        return null
+        return -1
     }
 
     override fun getSubItems(item: Item, tab: CreativeTabs?, list: MutableList<Any?>) {
-        for(i in 0..TYPES-1)
+        for (i in 0..TYPES - 1)
             list.add(ItemStack(item, 1, i))
     }
 
     override fun getIconFromDamage(dmg: Int): IIcon? {
-        return icons[Math.min(TYPES-1, dmg)]
+        return icons[Math.min(TYPES - 1, dmg)]
     }
 
     override fun onEquipped(stack: ItemStack, player: EntityLivingBase) {
         super.onEquipped(stack, player)
         if (stack.itemDamage == 1 && "paris".toRegex().find(stack.displayName.toLowerCase()) != null) {
-            stack.setItemDamage(17)
-            stack.getTagCompound().removeTag("display")
+            stack.itemDamage = 17
+            stack.tagCompound.removeTag("display")
         }
     }
 
@@ -89,7 +85,7 @@ class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorO
         super.addHiddenTooltip(par1ItemStack, par2EntityPlayer, par3List, par4)
     }
 
-    fun addStringToTooltip(s : String, tooltip : MutableList<Any?>?) {
+    fun addStringToTooltip(s: String, tooltip: MutableList<Any?>?) {
         tooltip!!.add(s.replace("&".toRegex(), "\u00a7"))
     }
 
@@ -98,7 +94,7 @@ class ItemCoatOfArms(): ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorO
     }
 
     override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {
-        if(type == IBaubleRender.RenderType.BODY) {
+        if (type == IBaubleRender.RenderType.BODY) {
             Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture)
             IBaubleRender.Helper.rotateIfSneaking(event.entityPlayer)
             chestTranslate()

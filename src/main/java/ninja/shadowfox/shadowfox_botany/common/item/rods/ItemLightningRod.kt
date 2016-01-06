@@ -1,12 +1,10 @@
 package ninja.shadowfox.shadowfox_botany.common.item.rods
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
-import cpw.mods.fml.common.eventhandler.SubscribeEvent
-import net.minecraftforge.client.event.TextureStitchEvent
-import net.minecraftforge.common.MinecraftForge
-import net.minecraft.command.IEntitySelector
 import net.minecraft.client.renderer.texture.IIconRegister
+import net.minecraft.command.IEntitySelector
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityCreature
 import net.minecraft.entity.EntityLivingBase
@@ -17,16 +15,18 @@ import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.EnumAction
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
-import net.minecraft.util.IIcon
-import net.minecraft.util.MathHelper
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.DamageSource
+import net.minecraft.util.MathHelper
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
+import net.minecraftforge.client.event.TextureStitchEvent
+import net.minecraftforge.common.MinecraftForge
+import ninja.shadowfox.shadowfox_botany.api.item.ColorOverrideHelper
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
-import ninja.shadowfox.shadowfox_botany.common.item.IPriestColorOverride
 import ninja.shadowfox.shadowfox_botany.common.item.ItemMod
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemPriestEmblem
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 import vazkii.botania.api.item.IAvatarTile
 import vazkii.botania.api.item.IAvatarWieldable
 import vazkii.botania.api.item.IManaProficiencyArmor
@@ -36,16 +36,12 @@ import vazkii.botania.common.Botania
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.core.helper.Vector3
 import vazkii.botania.common.entity.EntityDoppleganger
-import vazkii.botania.client.render.block.InterpolatedIcon
 import java.awt.Color
 import java.util.*
-import kotlin.properties.Delegates
 
 public open class ItemLightningRod(name: String = "lightningRod") : ItemMod(name), IManaUsingItem, IAvatarWieldable {
     private val avatarOverlay = ResourceLocation("shadowfox_botany:textures/model/avatarLightning.png")
     private val COST_AVATAR = 150
-
-    var icon: IIcon by Delegates.notNull()
 
     val COST = 300
     val PRIEST_COST = 200
@@ -79,22 +75,15 @@ public open class ItemLightningRod(name: String = "lightningRod") : ItemMod(name
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerIcons(par1IconRegister: IIconRegister) {}
+    override fun registerIcons(par1IconRegister: IIconRegister) {
+    }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 1) {
-            var localIcon = InterpolatedIcon("shadowfox_botany:lightningRod")
-            if(event.map.setTextureEntry("shadowfox_botany:lightningRod", localIcon)) {
-                this.icon = localIcon
-            }
+        if (event.map.textureType == 1) {
+            this.itemIcon = InterpolatedIconHelper.forItem(event.map, this)
         }
-    }
-
-    @SideOnly(Side.CLIENT)
-    override fun getIconFromDamage(meta: Int): IIcon {
-        return this.icon
     }
 
     override fun getItemUseAction(par1ItemStack: ItemStack?): EnumAction {
@@ -117,7 +106,7 @@ public open class ItemLightningRod(name: String = "lightningRod") : ItemMod(name
             var priest = (ItemPriestEmblem.getEmblem(0, player) != null)
             var prowess = IManaProficiencyArmor.Helper.hasProficiency(player)
 
-            val color = IPriestColorOverride.getColor(player, 0x0079C4)
+            val color = ColorOverrideHelper.getColor(player, 0x0079C4)
             val innerColor = Color(color).brighter().brighter().rgb
 
             if (ManaItemHandler.requestManaExactForTool(stack, player, getCost(thor, prowess, priest), false)) {
@@ -162,15 +151,19 @@ public open class ItemLightningRod(name: String = "lightningRod") : ItemMod(name
     fun getCost(thor: Boolean, prowess: Boolean, priest: Boolean): Int {
         return COST + (if (thor) THOR_COST else 0) + (if (prowess) PROWESS_COST else 0) + (if (priest) PRIEST_COST else 0)
     }
+
     fun getSpeed(thor: Boolean, prowess: Boolean, priest: Boolean): Int {
         return SPEED - (if (thor) THOR_SPEEDUP else 0) - (if (prowess) PROWESS_SPEEDUP else 0) - (if (priest) PRIEST_SPEEDUP else 0)
     }
+
     fun getDamage(thor: Boolean, prowess: Boolean, priest: Boolean): Float {
         return DAMAGE + (if (thor) THOR_POWERUP else 0f) + (if (prowess) PROWESS_POWERUP else 0f) + (if (priest) PRIEST_POWERUP else 0f)
     }
+
     fun getRange(thor: Boolean, prowess: Boolean, priest: Boolean): Float {
         return CHAINRANGE + (if (thor) THOR_RANGEUP else 0f) + (if (prowess) PROWESS_RANGEUP else 0f) + (if (priest) PRIEST_RANGEUP else 0f)
     }
+
     fun getTargetCap(thor: Boolean, prowess: Boolean, priest: Boolean): Int {
         return TARGETS + (if (thor) THOR_TARGETS else 0) + (if (prowess) PROWESS_TARGETS else 0) + (if (priest) PRIEST_TARGETS else 0)
     }
@@ -262,8 +255,8 @@ public open class ItemLightningRod(name: String = "lightningRod") : ItemMod(name
     fun getHeadOrientation(entity: EntityLivingBase): Vector3 {
         val f1 = MathHelper.cos(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat())
         val f2 = MathHelper.sin(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat())
-        val f3 = -MathHelper.cos(-(entity.rotationPitch-90) * 0.017453292F)
-        val f4 = MathHelper.sin(-(entity.rotationPitch-90) * 0.017453292F)
+        val f3 = -MathHelper.cos(-(entity.rotationPitch - 90) * 0.017453292F)
+        val f4 = MathHelper.sin(-(entity.rotationPitch - 90) * 0.017453292F)
         return Vector3((f2 * f3).toDouble(), f4.toDouble(), (f1 * f3).toDouble())
     }
 

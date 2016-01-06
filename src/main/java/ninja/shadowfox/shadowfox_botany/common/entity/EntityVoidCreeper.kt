@@ -10,16 +10,14 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.potion.PotionEffect
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.world.World
-
-import vazkii.botania.common.item.ModItems
-
-import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.brew.ShadowFoxPotions
+import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
+import vazkii.botania.common.item.ModItems
 
 /**
  * All the mana is mine mahhhaahahha
  */
-class EntityVoidCreeper(world: World): EntityCreeper(world) {
+class EntityVoidCreeper(world: World) : EntityCreeper(world) {
     private var lastActiveTime: Int = 0
     private var timeSinceIgnited: Int = 0
     private var range: Int = 3
@@ -54,11 +52,11 @@ class EntityVoidCreeper(world: World): EntityCreeper(world) {
     }
 
     override fun dropFewItems(par1: Boolean, par2: Int) {
-      if (par1) {
-        if (Math.random() < ConfigHandler.blackLotusDropRate) {
-            this.entityDropItem(ItemStack(ModItems.blackLotus), 1F)
+        if (par1) {
+            if (Math.random() < ConfigHandler.blackLotusDropRate) {
+                this.entityDropItem(ItemStack(ModItems.blackLotus), 1F)
+            }
         }
-      }
     }
 
     override fun onUpdate() {
@@ -100,13 +98,13 @@ class EntityVoidCreeper(world: World): EntityCreeper(world) {
 
     private fun creeperGoBoom() {
         if (!this.worldObj.isRemote) {
-            val r = range * if(powered) 2 else 1
+            val r = range * if (powered) 2 else 1
 
             var potential = this.worldObj.getEntitiesWithinAABB(EntityLivingBase::class.java, AxisAlignedBB.getBoundingBox(this.posX - r, this.posY - r, this.posZ - r, this.posX + r, this.posY + r, this.posZ + r))
 
-            for(p in potential){
-                if(p is EntityPlayer){
-                    p.addPotionEffect(PotionEffect(ShadowFoxPotions.manaVoid.id, if(powered) 1200 else 120, 0))
+            for (p in potential) {
+                if (p is EntityPlayer) {
+                    p.addPotionEffect(PotionEffect(ShadowFoxPotions.manaVoid.id, if (powered) 1200 else 120, 0))
                 }
             }
 

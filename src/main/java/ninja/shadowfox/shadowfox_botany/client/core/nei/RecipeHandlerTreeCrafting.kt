@@ -1,24 +1,20 @@
 package ninja.shadowfox.shadowfox_botany.client.core.nei
 
-import net.minecraft.item.ItemStack
-import net.minecraft.util.StatCollector
-
-import vazkii.botania.client.core.handler.HUDHandler
-import vazkii.botania.client.lib.LibResources
-import vazkii.botania.common.block.tile.mana.TilePool
-
-import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
-import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting
-import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-
-import org.lwjgl.opengl.GL11
-
 import codechicken.lib.gui.GuiDraw
 import codechicken.nei.NEIServerUtils
 import codechicken.nei.PositionedStack
 import codechicken.nei.recipe.TemplateRecipeHandler
 import net.minecraft.init.Items
+import net.minecraft.item.ItemStack
+import net.minecraft.util.StatCollector
 import net.minecraftforge.oredict.OreDictionary
+import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
+import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import org.lwjgl.opengl.GL11
+import vazkii.botania.client.core.handler.HUDHandler
+import vazkii.botania.client.lib.LibResources
+import vazkii.botania.common.block.tile.mana.TilePool
 import java.awt.Rectangle
 import java.util.*
 
@@ -33,7 +29,7 @@ open class RecipeHandlerTreeCrafting : TemplateRecipeHandler() {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F)
         GuiDraw.changeTexture(LibResources.GUI_PETAL_OVERLAY)
         GuiDraw.drawTexturedModalRect(45, 10, 38, 7, 92, 92)
-        HUDHandler.renderManaBar(32, 113, 0x0000FF, 0.75F, (arecipes.get(recipe) as RecipeHandlerTreeCrafting.CachedTreeRecipe).manaUsage, TilePool.MAX_MANA / 10)
+        HUDHandler.renderManaBar(32, 113, 0x0000FF, 0.75F, (arecipes[recipe] as RecipeHandlerTreeCrafting.CachedTreeRecipe).manaUsage, TilePool.MAX_MANA / 10)
     }
 
     open val recipeID: String
@@ -114,7 +110,7 @@ open class RecipeHandlerTreeCrafting : TemplateRecipeHandler() {
             this.setIngredients(recipe.inputs)
             this.output = PositionedStack(recipe.output, 111, 21)
 
-            manaUsage = recipe.mana
+            manaUsage = recipe.manaUsage
 
             inputs.add(PositionedStack(ItemStack(ShadowFoxBlocks.irisSapling), 73, 55))
 

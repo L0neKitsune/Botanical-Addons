@@ -1,16 +1,9 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.lightning_oak
 
 import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.common.eventhandler.SubscribeEvent
-import cpw.mods.fml.relauncher.Side
-import cpw.mods.fml.relauncher.SideOnly
-import cpw.mods.fml.relauncher.FMLLaunchHandler
-import net.minecraftforge.common.MinecraftForge
-import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraft.block.Block
 import net.minecraft.block.ITileEntityProvider
 import net.minecraft.block.material.Material
-import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
@@ -20,7 +13,6 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxRotatedPilla
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileLightningRod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
-import vazkii.botania.client.render.block.InterpolatedIcon
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
@@ -31,10 +23,9 @@ public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITile
         setBlockName("lightningWood")
         isBlockContainer = true
         blockHardness = 2f
-
-        if (FMLLaunchHandler.side().isClient)
-            MinecraftForge.EVENT_BUS.register(this)
     }
+
+    override fun isInterpolated(): Boolean = true
 
     override fun canSustainLeaves(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean = true
     override fun isWood(world: IBlockAccess?, x: Int, y: Int, z: Int): Boolean = true
@@ -66,7 +57,7 @@ public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITile
         return TileLightningRod()
     }
 
-    public fun isHeartWood(meta:Int) : Boolean {
+    public fun isHeartWood(meta: Int): Boolean {
         return meta and 3 == 1
     }
 
@@ -78,22 +69,6 @@ public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITile
 
     override fun register(par1Str: String) {
         GameRegistry.registerBlock(this, ItemBlockMod::class.java, par1Str)
-    }
-
-    @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
-
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 0) {
-            var icon = InterpolatedIcon("shadowfox_botany:lightningWood")
-            if(event.map.setTextureEntry("shadowfox_botany:lightningWood", icon))
-                this.iconSide = icon
-            var iconTop = InterpolatedIcon("shadowfox_botany:lightningWood_top")
-            if(event.map.setTextureEntry("shadowfox_botany:lightningWood_top", iconTop))
-                this.iconTop = iconTop
-        }
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {

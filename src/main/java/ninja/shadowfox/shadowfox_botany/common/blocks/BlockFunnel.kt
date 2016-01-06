@@ -1,11 +1,15 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.ScaledResolution
+import net.minecraft.client.renderer.EntityRenderer
+import net.minecraft.client.renderer.RenderBlocks
+import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.Entity
 import net.minecraft.entity.item.EntityItem
@@ -18,22 +22,17 @@ import net.minecraft.util.Facing
 import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import ninja.shadowfox.shadowfox_botany.lib.Constants
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxTileContainer
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileLivingwoodFunnel
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
-import vazkii.botania.api.wand.IWandHUD
-import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
+import ninja.shadowfox.shadowfox_botany.lib.Constants
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
+import vazkii.botania.api.wand.IWandHUD
 import java.util.*
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler
-import net.minecraft.client.renderer.RenderBlocks
-import net.minecraft.client.renderer.Tessellator
-import net.minecraft.client.renderer.EntityRenderer
+import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
 
 
 class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood), IWandHUD, ILexiconable {

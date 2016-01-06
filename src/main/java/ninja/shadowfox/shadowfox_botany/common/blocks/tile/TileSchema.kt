@@ -21,6 +21,9 @@ import java.io.File
 import java.io.IOException
 import java.io.PrintWriter
 import java.util.*
+import kotlin.collections.arrayListOf
+import kotlin.collections.orEmpty
+import kotlin.collections.toArrayList
 
 
 open class TileSchema() : ShadowFoxTile() {
@@ -379,7 +382,7 @@ open class TileSchema() : ShadowFoxTile() {
 
         w.print(JsonArray().apply {
             for (k in map.keys) {
-                if(!k.equals("shadowfox_botany:fillerBlock")) {
+                if (!k.equals("shadowfox_botany:fillerBlock")) {
                     add(JsonObject().apply {
                         addProperty("block", "$k")
                         add("location", JsonArray().apply { for (v in map[k].orEmpty()) add(v.getJson()) })

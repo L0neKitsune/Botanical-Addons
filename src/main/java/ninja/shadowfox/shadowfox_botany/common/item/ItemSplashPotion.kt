@@ -6,12 +6,10 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.potion.Potion
-import net.minecraft.potion.PotionEffect
 import net.minecraft.util.EnumChatFormatting
 import net.minecraft.util.IIcon
 import net.minecraft.util.StatCollector
 import net.minecraft.world.World
-import ninja.shadowfox.shadowfox_botany.common.brew.ShadowFoxPotions
 import ninja.shadowfox.shadowfox_botany.common.entity.EntityThrownPotion
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.brew.Brew
@@ -21,6 +19,8 @@ import vazkii.botania.client.core.handler.ClientTickHandler
 import vazkii.botania.client.core.helper.IconHelper
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import java.awt.Color
+import kotlin.text.replace
+import kotlin.text.toRegex
 
 
 public class ItemSplashPotion() : ItemMod("splashPotion"), IBrewItem, IBrewContainer {
@@ -63,7 +63,7 @@ public class ItemSplashPotion() : ItemMod("splashPotion"), IBrewItem, IBrewConta
     override fun getColorFromItemStack(stack: ItemStack?, pass: Int): Int {
         if (stack != null) {
             if (pass == 0) {
-                return 16777215
+                return 0xFFFFFF
             } else {
                 val color = Color(this.getBrew(stack).getColor(stack))
                 val add = (Math.sin(ClientTickHandler.ticksInGame.toDouble() * 0.1) * 16.0).toInt()
@@ -74,7 +74,7 @@ public class ItemSplashPotion() : ItemMod("splashPotion"), IBrewItem, IBrewConta
             }
         }
 
-        return 16777215
+        return 0xFFFFFF
     }
 
     override fun registerIcons(par1IconRegister: IIconRegister) {
@@ -97,9 +97,9 @@ public class ItemSplashPotion() : ItemMod("splashPotion"), IBrewItem, IBrewConta
     }
 
     override fun getItemForBrew(brew: Brew, stack: ItemStack): ItemStack? {
-            val brewStack = ItemStack(this)
-            setBrew(brewStack, brew)
-            return brewStack
+        val brewStack = ItemStack(this)
+        setBrew(brewStack, brew)
+        return brewStack
 
     }
 

@@ -5,35 +5,30 @@ import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
-import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.passive.EntitySheep
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.blocks.material.MaterialCustomSmeltingWood
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
+import ninja.shadowfox.shadowfox_botany.common.blocks.material.MaterialCustomSmeltingWood
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemSubtypedBlockMod
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.api.wand.IWandable
 import java.awt.Color
 import java.util.*
-import kotlin.properties.Delegates
 
-class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.material), ILexiconable, IFuelHandler, IWandable {
+class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.instance), ILexiconable, IFuelHandler, IWandable {
 
     private val name = "irisPlanks"
     private val TYPES = 16
-    protected var icons: IIcon by Delegates.notNull()
 
     init {
         blockHardness = 2F
@@ -50,7 +45,7 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.materi
     }
 
     override fun isToolEffective(type: String?, metadata: Int): Boolean {
-        return (type != null && type.equals("axe", true))
+        return (type != null && type.equals("axe"))
     }
 
     override fun getHarvestTool(metadata: Int): String {
@@ -86,12 +81,7 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.materi
     @SideOnly(Side.CLIENT)
     override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int {
         val meta = world!!.getBlockMetadata(x, y, z)
-
-        if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF
-
-        var color = EntitySheep.fleeceColorTable[meta]
-        return Color(color[0], color[1], color[2]).rgb
+        return getRenderColor(meta)
     }
 
 
@@ -116,12 +106,6 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.materi
         return Item.getItemFromBlock(this)
     }
 
-
-    @SideOnly(Side.CLIENT)
-    override fun getIcon(side: Int, meta: Int): IIcon {
-        return icons
-    }
-
     override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean {
         return true
     }
@@ -136,10 +120,6 @@ class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.materi
         return ItemStack(this, 1, meta)
     }
 
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        icons = IconHelper.forBlock(par1IconRegister, this)
-
-    }
 
     override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {
         if (list != null && item != null)

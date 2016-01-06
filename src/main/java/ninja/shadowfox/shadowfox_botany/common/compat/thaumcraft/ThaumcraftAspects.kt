@@ -1,33 +1,24 @@
 package ninja.shadowfox.shadowfox_botany.common.compat.thaumcraft
 
 import cpw.mods.fml.common.Loader
-
 import net.minecraft.block.Block
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
-
 import net.minecraftforge.oredict.OreDictionary
-
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
+import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
+import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import thaumcraft.api.ThaumcraftApi
-import thaumcraft.api.ThaumcraftApiHelper
 import thaumcraft.api.aspects.Aspect
 import thaumcraft.api.aspects.AspectList
 
-import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
-import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
-import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
-
-import kotlin.properties.Delegates
-
 object ThaumcraftAspects {
 
-    class RainbowAspect(name: String, components: Array<Aspect>, texture: ResourceLocation, blend: Int): Aspect(name, 0xFFFFFF, components, texture, blend) {
+    class RainbowAspect(name: String, components: Array<Aspect>, texture: ResourceLocation, blend: Int) : Aspect(name, 0xFFFFFF, components, texture, blend) {
 
-        override fun getColor(): Int {
-            return ItemIridescent.rainbowColor()
-        }
+        override fun getColor(): Int = ItemIridescent.rainbowColor()
     }
 
     fun WildStack(i: Block): ItemStack = ItemStack(i, 1, OreDictionary.WILDCARD_VALUE)
@@ -50,7 +41,8 @@ object ThaumcraftAspects {
         if (Loader.isModLoaded(mod)) {
             try {
                 return Aspect.getAspect(tag)
-            } catch (e: Exception) {}
+            } catch (e: Exception) {
+            }
         }
         return null
     }
@@ -71,28 +63,28 @@ object ThaumcraftAspects {
 
         list = AspectList().add(Aspect.PLANT, 2).add(Aspect.TREE, 1).add(colorAspect, 1)
         ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.irisSapling), list)
-        
+
         list = AspectList().add(Aspect.PLANT, 1).add(Aspect.AIR, 1).add(colorAspect, 1)
         ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxBlocks.irisGrass), list)
         ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxBlocks.rainbowGrass), list)
         ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxBlocks.irisTallGrass0), list)
         ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxBlocks.irisTallGrass1), list)
         ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxBlocks.rainbowTallGrass), list)
-        
+
         list = AspectList().add(Aspect.TREE, 4).add(colorAspect, 1)
         forMeta(4,
-            {ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.irisWood0, 1, it), list)})
+                { ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.irisWood0, 1, it), list) })
         forMeta(4,
-            {ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.irisWood1, 1, it), list)})
+                { ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.irisWood1, 1, it), list) })
         forMeta(4,
-            {ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.irisWood2, 1, it), list)})
+                { ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.irisWood2, 1, it), list) })
         forMeta(4,
-            {ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.irisWood3, 1, it), list)})
+                { ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.irisWood3, 1, it), list) })
         ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.rainbowWood), list)
         forMeta(4,
-            {ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.altWood0, 1, it), list)})
+                { ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.altWood0, 1, it), list) })
         forMeta(2,
-            {ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.altWood1, 1, it), list)})
+                { ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.altWood1, 1, it), list) })
 
         list = AspectList().add(Aspect.TREE, 1).add(Aspect.METAL, 1)
         ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxBlocks.itemDisplay), list)
@@ -130,7 +122,7 @@ object ThaumcraftAspects {
         list = AspectList().add(Aspect.TOOL, 8).add(Aspect.WEATHER, 8).add(Aspect.MAGIC, 4)
         ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxItems.lightningRod), list)
 
-        if (forbidden) 
+        if (forbidden)
             list = AspectList().add(Aspect.TOOL, 8).add(Aspect.AIR, 4).add(Aspect.WEATHER, 2).add(PRIDE, 2).add(Aspect.MAGIC, 4)
         else
             list = AspectList().add(Aspect.TOOL, 8).add(Aspect.AIR, 6).add(Aspect.WEATHER, 2).add(Aspect.MAGIC, 4)

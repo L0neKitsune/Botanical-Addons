@@ -1,34 +1,30 @@
 package ninja.shadowfox.shadowfox_botany.common.lexicon
 
-import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
-import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
-import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
-import ninja.shadowfox.shadowfox_botany.common.crafting.ModRecipes
-import vazkii.botania.common.lexicon.page.PageTreeCrafting
 import net.minecraft.item.ItemStack
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
+import ninja.shadowfox.shadowfox_botany.common.crafting.ModRecipes
+import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import vazkii.botania.api.BotaniaAPI
-import vazkii.botania.common.lexicon.LexiconData
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.api.lexicon.LexiconRecipeMappings
-import vazkii.botania.common.lexicon.page.PageCraftingRecipe
-import vazkii.botania.common.lexicon.page.PageManaInfusionRecipe
-import vazkii.botania.common.lexicon.page.PageMultiblock
-import vazkii.botania.common.lexicon.page.PageText
+import vazkii.botania.common.lexicon.LexiconData
+import vazkii.botania.common.lexicon.page.*
+import kotlin.collections.plus
 
 public object LexiconRegistry {
 
-    val coloredDirt : LexiconEntry
-    val irisSapling : LexiconEntry
-    val technicolor : LexiconEntry
-    val lightningRod : LexiconEntry
-    val interdictionRod : LexiconEntry
-    val pastoralSeeds : LexiconEntry
-    val coatOfArms : LexiconEntry
-    val colorOverride : LexiconEntry
-    val treeCrafting : LexiconEntry
+    val coloredDirt: LexiconEntry
+    val irisSapling: LexiconEntry
+    val technicolor: LexiconEntry
+    val lightningRod: LexiconEntry
+    val interdictionRod: LexiconEntry
+    val pastoralSeeds: LexiconEntry
+    val coatOfArms: LexiconEntry
+    val colorOverride: LexiconEntry
+    val treeCrafting: LexiconEntry
     val dendrology: ShadowFoxLexiconCategory
-    val attribution : LexiconEntry
+    val attribution: LexiconEntry
     val sealCreepers: LexiconEntry
     val kindling: LexiconEntry
     val waveRod: LexiconEntry
@@ -175,7 +171,7 @@ public object LexiconRegistry {
         for (i in 0..2)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.itemDisplay, 1, i), itemDisplay, 1)
 
-        for (i in 0..3){
+        for (i in 0..3) {
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood0, 1, i), irisSapling, 1)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood1, 1, i), irisSapling, 1)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisWood2, 1, i), irisSapling, 1)

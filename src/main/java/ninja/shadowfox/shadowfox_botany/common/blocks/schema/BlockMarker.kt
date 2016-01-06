@@ -23,7 +23,8 @@ class BlockMarker() : ShadowFoxBlockMod(Material.wood) {
         return false
     }
 
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
+    }
 
     override fun getIcon(side: Int, meta: Int): IIcon? {
         return vazkii.botania.common.block.ModBlocks.manaBeacon.getIcon(side, meta)

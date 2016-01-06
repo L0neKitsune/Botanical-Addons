@@ -23,6 +23,8 @@ import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.BlockFunnel
 import org.lwjgl.opengl.GL11
 import vazkii.botania.common.lib.LibMisc
+import kotlin.collections.arrayListOf
+import kotlin.collections.indices
 
 class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
     private var inventory = arrayOfNulls<ItemStack>(1)
@@ -116,8 +118,8 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
     }
 
 
-    fun getInventoryAbove(p_145884_0_: IHopper): IInventory? {
-        return getInventoryAt(p_145884_0_.worldObj, p_145884_0_.xPos, p_145884_0_.yPos + 1.0, p_145884_0_.zPos)
+    fun getInventoryAbove(hopper: IHopper): IInventory? {
+        return getInventoryAt(hopper.worldObj, hopper.xPos, hopper.yPos + 1.0, hopper.zPos)
     }
 
 
@@ -444,7 +446,7 @@ class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
     }
 
     override fun getInventoryName(): String = "container.livingwoodHopper"
-    override fun isUseableByPlayer(p_70300_1_: EntityPlayer?): Boolean = true
+    override fun isUseableByPlayer(player: EntityPlayer?): Boolean = true
     override fun hasCustomInventoryName(): Boolean = false
 
     override fun readCustomNBT(nbttagcompound: NBTTagCompound) {

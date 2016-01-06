@@ -1,7 +1,7 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.rainbow
 
-import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
+import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.FMLLaunchHandler
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
@@ -15,15 +15,15 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.client.event.TextureStitchEvent
+import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
-import vazkii.botania.client.render.block.InterpolatedIcon
 import java.util.*
 
 public class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
@@ -37,11 +37,11 @@ public class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
 
     }
 
-    override fun func_149851_a(world: World, x:Int, y:Int, z:Int, remote: Boolean): Boolean {
+    override fun func_149851_a(world: World, x: Int, y: Int, z: Int, remote: Boolean): Boolean {
         return true
     }
 
-    override fun func_149853_b(world: World, random: Random, x:Int, y:Int, z:Int) {
+    override fun func_149853_b(world: World, random: Random, x: Int, y: Int, z: Int) {
         if (ShadowFoxBlocks.rainbowTallGrass.canPlaceBlockAt(world, x, y, z)) {
             world.setBlock(x, y, z, ShadowFoxBlocks.rainbowTallGrass, 0, 2)
             world.setBlock(x, y + 1, z, ShadowFoxBlocks.rainbowTallGrass, 8, 2)
@@ -68,21 +68,20 @@ public class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
     }
 
     @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(iconRegister: IIconRegister) {}
-
-    @SideOnly(Side.CLIENT)
-    override fun getIcon(meta: Int, pass: Int): IIcon {
-        return this.blockIcon
+    override fun registerBlockIcons(iconRegister: IIconRegister) {
     }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     fun loadTextures(event: TextureStitchEvent.Pre) {
-        if(event.map.textureType == 0) {
-            var icon = InterpolatedIcon("shadowfox_botany:rainbowGrass")
-            if(event.map.setTextureEntry("shadowfox_botany:rainbowGrass", icon))
-                this.blockIcon = icon
+        if (event.map.textureType == 0) {
+            this.blockIcon = InterpolatedIconHelper.forBlock(event.map, this)
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun getIcon(side: Int, meta: Int): IIcon {
+        return blockIcon
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {

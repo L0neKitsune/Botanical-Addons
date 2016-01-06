@@ -18,5 +18,6 @@ class TileInvisibleManaFlame : TileManaFlame() {
     override fun getColor(): Int {
         return this.flameColor
     }
+
     override fun shouldRender(): Boolean = Botania.proxy.isClientPlayerWearingMonocle
 }

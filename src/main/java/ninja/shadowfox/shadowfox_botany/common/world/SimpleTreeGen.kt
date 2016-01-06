@@ -1,7 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.world
 
 import net.minecraft.block.Block
-import net.minecraft.block.material.Material
 import net.minecraft.world.World
 import net.minecraft.world.gen.feature.WorldGenAbstractTree
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
@@ -10,21 +9,22 @@ import java.util.*
 
 class SimpleTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
 
-    init {}
+    init {
+    }
 
     override fun generate(world: World?, random: Random?, x: Int, y: Int, z: Int): Boolean {
         if (world != null) {
             val l: Int = random!!.nextInt(3) + minTreeHeight
             var flag: Boolean = true
 
-            var variant = ShadowFoxAPI.getTreeVariant(world.getBlock(x, y-1, z), world.getBlockMetadata(x, y - 1, z))
+            var variant = ShadowFoxAPI.getTreeVariant(world.getBlock(x, y - 1, z), world.getBlockMetadata(x, y - 1, z))
             if (variant != null) {
-                val wood = variant.getWood(world.getBlock(x, y-1, z), world.getBlockMetadata(x, y - 1, z))
-                val leaves = variant.getLeaves(world.getBlock(x, y-1, z), world.getBlockMetadata(x, y - 1, z))
+                val wood = variant.getWood(world.getBlock(x, y - 1, z), world.getBlockMetadata(x, y - 1, z))
+                val leaves = variant.getLeaves(world.getBlock(x, y - 1, z), world.getBlockMetadata(x, y - 1, z))
 
                 if (y >= 1 && y + l + 1 <= 256) {
-                    var b0 : Byte
-                    var block : Block
+                    var b0: Byte
+                    var block: Block
 
                     isGen@ for (i1 in y..(y + 1 + l)) {
                         b0 = 1
@@ -42,8 +42,7 @@ class SimpleTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
                                         flag = false
                                         break@isGen
                                     }
-                                }
-                                else {
+                                } else {
                                     flag = false
                                     break@isGen
                                 }
@@ -52,7 +51,6 @@ class SimpleTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
                     }
 
                     if (!flag) return false
-
                     else {
                         var block2: Block = world.getBlock(x, y - 1, z)
                         val soilMeta = world.getBlockMetadata(x, y - 1, z)
@@ -94,8 +92,7 @@ class SimpleTreeGen(val minTreeHeight: Int) : WorldGenAbstractTree(true) {
                                 }
                             }
                             return true
-                        }
-                        else return false
+                        } else return false
                     }
                 }
             }

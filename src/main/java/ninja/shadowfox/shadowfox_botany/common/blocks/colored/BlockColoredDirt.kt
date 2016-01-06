@@ -6,33 +6,29 @@ import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.block.IGrowable
 import net.minecraft.block.material.Material
-import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.passive.EntitySheep
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.common.IPlantable
 import net.minecraftforge.common.util.ForgeDirection
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemSubtypedBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
-import java.util.Random
-import net.minecraft.util.*
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
-import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import kotlin.properties.Delegates
+import java.util.*
 
 class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable {
 
     private val name = "coloredDirt"
     private val TYPES = 16
-    internal var icons: IIcon by Delegates.notNull()
 
     init {
         blockHardness = 0.5F
@@ -44,6 +40,7 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     override fun func_149851_a(world: World, x: Int, y: Int, z: Int, remote: Boolean): Boolean {
         return true
     }
+
     override fun func_149852_a(world: World, random: Random, x: Int, y: Int, z: Int): Boolean {
         return true
     }
@@ -67,15 +64,13 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
                         ++l1
                         continue
                     }
-                }
-                else if (world.getBlock(i1, j1, k1).isAir(world, i1, j1, k1)) {
+                } else if (world.getBlock(i1, j1, k1).isAir(world, i1, j1, k1)) {
                     if (random.nextInt(8) != 0) {
                         if (ShadowFoxBlocks.irisGrass.canBlockStay(world, i1, j1, k1)) {
-                            var meta = world.getBlockMetadata(i1, j1-1, k1)
+                            var meta = world.getBlockMetadata(i1, j1 - 1, k1)
                             world.setBlock(i1, j1, k1, ShadowFoxBlocks.irisGrass, meta, 3)
                         }
-                    }
-                    else {
+                    } else {
                         world.getBiomeGenForCoords(i1, k1).plantFlower(world, random, i1, j1, k1)
                     }
                 }
@@ -87,10 +82,10 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     }
 
     override fun isToolEffective(type: String?, metadata: Int): Boolean {
-        return (type != null && type.equals("shovel", true))
+        return (type != null && type.equals("shovel"))
     }
 
-    override fun getHarvestTool(metadata : Int): String {
+    override fun getHarvestTool(metadata: Int): String {
         return "shovel"
     }
 
@@ -114,12 +109,7 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
     @SideOnly(Side.CLIENT)
     override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int {
         val meta = world!!.getBlockMetadata(x, y, z)
-
-        if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF
-
-        var color = EntitySheep.fleeceColorTable[meta]
-        return Color(color[0], color[1], color[2]).rgb
+        return getRenderColor(meta)
     }
 
     override fun shouldRegisterInNameSet(): Boolean {
@@ -135,11 +125,6 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
         return super.setBlockName(par1Str)
     }
 
-    @SideOnly(Side.CLIENT)
-    override fun getIcon(side : Int, meta : Int) : IIcon {
-        return icons
-    }
-
     internal fun register(name: String) {
         GameRegistry.registerBlock(this, ItemSubtypedBlockMod::class.java, name)
     }
@@ -150,12 +135,8 @@ class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexic
         return ItemStack(this, 1, meta)
     }
 
-    @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        icons = IconHelper.forBlock(par1IconRegister, this)
-    }
 
-    override fun getSubBlocks(item : Item?, tab : CreativeTabs?, list : MutableList<Any?>?) {
+    override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {
         if (list != null && item != null)
             for (i in 0..(TYPES - 1)) {
                 list.add(ItemStack(item, 1, i))

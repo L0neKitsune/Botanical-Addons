@@ -2,8 +2,8 @@ package ninja.shadowfox.shadowfox_botany.common.brew.potion
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.ItemStack
 import net.minecraft.inventory.IInventory
+import net.minecraft.item.ItemStack
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.living.LivingEvent
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
@@ -58,7 +58,7 @@ class PotionManaVoid : PotionMod(ConfigHandler.potionIDManaVoid, "manaVoid", tru
                         }
                     }
                 }
-                for (slot in 0..invSize-1) {
+                for (slot in 0..invSize - 1) {
                     val stackInSlot = mainInv.getStackInSlot(slot)
                     if (stackInSlot != null && stackInSlot.item == ModItems.blackLotus) {
                         var wiltStack = ItemStack(ShadowFoxItems.wiltedLotus, stackInSlot.stackSize, stackInSlot.itemDamage)

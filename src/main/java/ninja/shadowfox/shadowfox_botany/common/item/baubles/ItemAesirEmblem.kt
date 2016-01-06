@@ -1,29 +1,24 @@
 package ninja.shadowfox.shadowfox_botany.common.item.baubles
 
-import java.awt.Color
-
-import ninja.shadowfox.shadowfox_botany.common.item.IPriestColorOverride
-import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
-
+import baubles.api.BaubleType
+import cpw.mods.fml.relauncher.Side
+import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.ItemRenderer
 import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.client.renderer.texture.TextureMap
-import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.util.MathHelper
 import net.minecraft.util.StatCollector
 import net.minecraftforge.client.event.RenderPlayerEvent
-
+import ninja.shadowfox.shadowfox_botany.api.item.ColorOverrideHelper
+import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import org.lwjgl.opengl.GL11
-
-import vazkii.botania.api.item.ICosmeticAttachable
 import vazkii.botania.api.item.IBaubleRender
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
@@ -31,18 +26,14 @@ import vazkii.botania.common.Botania
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.core.helper.Vector3
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
-
-import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.relauncher.Side
-import cpw.mods.fml.relauncher.SideOnly
-
-import baubles.api.BaubleType
-
+import java.awt.Color
 import kotlin.properties.Delegates
+import kotlin.text.replace
+import kotlin.text.toRegex
 
 class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingItem {
 
-    val COST = 2*ItemPriestEmblem.TYPES
+    val COST = 2 * ItemPriestEmblem.TYPES
     var baubleIcon: IIcon by Delegates.notNull()
 
     init {
@@ -51,12 +42,12 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
     }
 
     override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>?, par4: Boolean) {
-        if(par1ItemStack == null) return
-        this.addStringToTooltip("&7"+StatCollector.translateToLocal("misc.shadowfox_botany.creative")+"&r", par3List)
+        if (par1ItemStack == null) return
+        this.addStringToTooltip("&7" + StatCollector.translateToLocal("misc.shadowfox_botany.creative") + "&r", par3List)
         super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4)
     }
 
-    fun addStringToTooltip(s : String, tooltip : MutableList<Any?>?) {
+    fun addStringToTooltip(s: String, tooltip: MutableList<Any?>?) {
         tooltip!!.add(s.replace("&".toRegex(), "\u00a7"))
     }
 
@@ -74,21 +65,21 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
         baubleIcon = IconHelper.forItem(par1IconRegister, this, "Render")
     }
 
-    override fun getBaubleType(stack: ItemStack) : BaubleType {
+    override fun getBaubleType(stack: ItemStack): BaubleType {
         return BaubleType.AMULET
     }
 
     fun getHeadOrientation(entity: EntityLivingBase): Vector3 {
         val f1 = MathHelper.cos(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat())
         val f2 = MathHelper.sin(-entity.rotationYaw * 0.017453292F - Math.PI.toFloat())
-        val f3 = -MathHelper.cos(-(entity.rotationPitch-90) * 0.017453292F)
-        val f4 = MathHelper.sin(-(entity.rotationPitch-90) * 0.017453292F)
+        val f3 = -MathHelper.cos(-(entity.rotationPitch - 90) * 0.017453292F)
+        val f4 = MathHelper.sin(-(entity.rotationPitch - 90) * 0.017453292F)
         return Vector3((f2 * f3).toDouble(), f4.toDouble(), (f1 * f3).toDouble())
     }
 
     override fun onWornTick(stack: ItemStack, player: EntityLivingBase) {
         if (player.ticksExisted % 10 == 0) {
-            if(player is EntityPlayer) {
+            if (player is EntityPlayer) {
                 if (ManaItemHandler.requestManaExact(stack, player, COST, true)) ItemNBTHelper.setByte(stack, "active", 1.toByte())
                 else ItemNBTHelper.setByte(stack, "active", 0.toByte())
             }
@@ -101,7 +92,7 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
 
     @SideOnly(Side.CLIENT)
     override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {
-        if(type == IBaubleRender.RenderType.BODY) {
+        if (type == IBaubleRender.RenderType.BODY) {
             val player = event.entityPlayer
             if (player.ticksExisted % 10 == 0) {
                 val shift = getHeadOrientation(player)
@@ -111,7 +102,7 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
                 val xmotion = shift.x.toFloat() * 0.025f
                 val ymotion = shift.y.toFloat() * 0.025f
                 val zmotion = shift.z.toFloat() * 0.025f
-                val color = Color(IPriestColorOverride.getColor(player, 0xFFFFFF))
+                val color = Color(ColorOverrideHelper.getColor(player, 0xFFFFFF))
                 val r = color.red.toFloat() / 255f
                 val g = color.green.toFloat() / 255f
                 val b = color.blue.toFloat() / 255f

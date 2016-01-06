@@ -2,22 +2,19 @@ package ninja.shadowfox.shadowfox_botany.common.blocks.alt_grass
 
 import cpw.mods.fml.common.IFuelHandler
 import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.relauncher.FMLLaunchHandler
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init.Blocks
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.util.ForgeDirection
-import ninja.shadowfox.shadowfox_botany.common.blocks.material.MaterialCustomSmeltingWood
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
+import ninja.shadowfox.shadowfox_botany.common.blocks.material.MaterialCustomSmeltingWood
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemUniqueSubtypedBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
@@ -27,7 +24,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 
-public class BlockAltPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.material), ILexiconable, IFuelHandler {
+public class BlockAltPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.instance), ILexiconable, IFuelHandler {
 
     private val name = "altPlanks"
     protected var icons: Array<IIcon> = emptyArray()
@@ -38,8 +35,6 @@ public class BlockAltPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.mate
         stepSound = soundTypeWood
 
         setBlockName(this.name)
-        if (FMLLaunchHandler.side().isClient)
-            MinecraftForge.EVENT_BUS.register(this)
         GameRegistry.registerFuelHandler(this)
     }
 
@@ -52,10 +47,10 @@ public class BlockAltPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.mate
     }
 
     override fun isToolEffective(type: String?, metadata: Int): Boolean {
-        return (type != null && type.equals("axe", true))
+        return (type != null && type.equals("axe"))
     }
 
-    override fun getHarvestTool(metadata : Int): String {
+    override fun getHarvestTool(metadata: Int): String {
         return "axe"
     }
 
@@ -72,7 +67,9 @@ public class BlockAltPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.mate
         return super.setBlockName(par1Str)
     }
 
-    override fun quantityDropped(random: Random): Int { return 1 }
+    override fun quantityDropped(random: Random): Int {
+        return 1
+    }
 
     override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item {
         return Item.getItemFromBlock(this)
@@ -81,7 +78,9 @@ public class BlockAltPlanks(): ShadowFoxBlockMod(MaterialCustomSmeltingWood.mate
     override fun isFlammable(world: IBlockAccess?, x: Int, y: Int, z: Int, face: ForgeDirection?): Boolean = false
     override fun getFireSpreadSpeed(world: IBlockAccess?, x: Int, y: Int, z: Int, face: ForgeDirection?): Int = 0
 
-    override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean { return true }
+    override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean {
+        return true
+    }
 
     internal fun register(name: String) {
         GameRegistry.registerBlock(this, ItemUniqueSubtypedBlockMod::class.java, name)

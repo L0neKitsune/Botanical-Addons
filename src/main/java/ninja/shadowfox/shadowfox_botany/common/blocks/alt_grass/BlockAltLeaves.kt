@@ -3,9 +3,7 @@ package ninja.shadowfox.shadowfox_botany.common.blocks.alt_grass
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
-import cpw.mods.fml.relauncher.FMLLaunchHandler
 import net.minecraft.client.Minecraft
-import net.minecraftforge.common.MinecraftForge
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
@@ -14,7 +12,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemUniqueSubtypedBlockMod
@@ -25,15 +22,13 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 
-class BlockAltLeaves(): ShadowFoxLeaves() {
+class BlockAltLeaves() : ShadowFoxLeaves() {
 
     protected var icon_norm: Array<IIcon> = emptyArray()
     protected var icon_opaque: Array<IIcon> = emptyArray()
 
     init {
         setBlockName("altLeaves")
-        if (FMLLaunchHandler.side().isClient)
-            MinecraftForge.EVENT_BUS.register(this)
     }
 
     @SideOnly(Side.CLIENT) override fun getBlockColor(): Int = 0xFFFFFF

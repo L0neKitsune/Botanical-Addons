@@ -5,6 +5,7 @@ import net.minecraft.inventory.ISidedInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.nbt.NBTTagList
+import kotlin.collections.indices
 
 class TileItemDisplay() : ShadowFoxTile(), ISidedInventory {
     private val slots = intArrayOf(0)
@@ -101,8 +102,11 @@ class TileItemDisplay() : ShadowFoxTile(), ISidedInventory {
         nbttagcompound.setTag("Items", nbttaglist)
     }
 
-    override fun openInventory() {}
-    override fun closeInventory() {}
+    override fun openInventory() {
+    }
+
+    override fun closeInventory() {
+    }
 
     override fun getInventoryStackLimit(): Int = 1
 

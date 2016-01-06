@@ -17,8 +17,8 @@ import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentGrassMod
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
@@ -28,8 +28,6 @@ import kotlin.properties.Delegates
 public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
 
     val TYPES: Int = 16
-    internal var field_150128_a: IntArray? = null
-    protected var icons: IIcon by Delegates.notNull()
 
     init {
         setCreativeTab(ShadowFoxCreativeTab)
@@ -38,11 +36,11 @@ public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
 
     }
 
-    override fun func_149851_a(world: World, x:Int, y:Int, z:Int, remote: Boolean): Boolean {
+    override fun func_149851_a(world: World, x: Int, y: Int, z: Int, remote: Boolean): Boolean {
         return true
     }
 
-    override fun func_149853_b(world: World, random: Random, x:Int, y:Int, z:Int) {
+    override fun func_149853_b(world: World, random: Random, x: Int, y: Int, z: Int) {
         var l = world.getBlockMetadata(x, y, z)
         var b0 = l % 8
 
@@ -50,8 +48,7 @@ public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
             if (l < 8) {
                 world.setBlock(x, y, z, ShadowFoxBlocks.irisTallGrass0, b0, 2)
                 world.setBlock(x, y + 1, z, ShadowFoxBlocks.irisTallGrass0, 8, 2)
-            }
-            else {
+            } else {
                 world.setBlock(x, y, z, ShadowFoxBlocks.irisTallGrass1, b0, 2)
                 world.setBlock(x, y + 1, z, ShadowFoxBlocks.irisTallGrass1, 8, 2)
             }
@@ -93,12 +90,7 @@ public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
     @SideOnly(Side.CLIENT)
     override fun colorMultiplier(access: IBlockAccess?, x: Int, y: Int, z: Int): Int {
         val meta = access!!.getBlockMetadata(x, y, z)
-
-        if (meta >= EntitySheep.fleeceColorTable.size)
-            return 0xFFFFFF
-
-        var color = EntitySheep.fleeceColorTable[meta]
-        return Color(color[0], color[1], color[2]).rgb
+        return getRenderColor(meta)
     }
 
     override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {
@@ -110,12 +102,12 @@ public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
 
     @SideOnly(Side.CLIENT)
     override fun registerBlockIcons(iconRegister: IIconRegister) {
-        icons = IconHelper.forBlock(iconRegister, this)
+        blockIcon = IconHelper.forBlock(iconRegister, this)
     }
 
     @SideOnly(Side.CLIENT)
-    override fun getIcon(side : Int, meta : Int) : IIcon {
-        return icons
+    override fun getIcon(side: Int, meta: Int): IIcon {
+        return blockIcon
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {

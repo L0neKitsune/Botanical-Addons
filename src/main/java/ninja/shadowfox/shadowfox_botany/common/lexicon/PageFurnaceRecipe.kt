@@ -1,39 +1,23 @@
 package ninja.shadowfox.shadowfox_botany.common.lexicon
 
-import java.util.ArrayList
-import java.util.Arrays
-
+import cpw.mods.fml.relauncher.Side
+import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.FontRenderer
 import net.minecraft.client.gui.GuiScreen
-import net.minecraft.client.renderer.texture.TextureManager
 import net.minecraft.init.Blocks
-import net.minecraft.item.crafting.FurnaceRecipes
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.util.EnumChatFormatting
+import net.minecraft.item.crafting.FurnaceRecipes
 import net.minecraft.util.ResourceLocation
-import net.minecraft.util.StatCollector
-import net.minecraftforge.oredict.OreDictionary
-
 import org.lwjgl.opengl.GL11
-
 import vazkii.botania.api.internal.IGuiLexiconEntry
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.api.lexicon.LexiconRecipeMappings
-import vazkii.botania.api.recipe.RecipeManaInfusion
-import vazkii.botania.client.core.handler.HUDHandler
-import vazkii.botania.client.core.handler.ClientTickHandler
-import vazkii.botania.client.core.helper.RenderHelper
 import vazkii.botania.client.lib.LibResources
-import vazkii.botania.client.render.tile.RenderTilePool
-import vazkii.botania.common.block.ModBlocks
-import vazkii.botania.common.block.tile.mana.TilePool
 import vazkii.botania.common.lexicon.page.PageRecipe
-import cpw.mods.fml.relauncher.Side
-import cpw.mods.fml.relauncher.SideOnly
+import java.util.*
+import kotlin.collections.arrayListOf
 
-public class PageFurnaceRecipe: PageRecipe {
+public class PageFurnaceRecipe : PageRecipe {
 
     private class StackPair(val input: ItemStack, val output: ItemStack) {}
 
@@ -46,28 +30,27 @@ public class PageFurnaceRecipe: PageRecipe {
     var rTPS = 50
     var recipeAt = 0
 
-    constructor(unlocalizedName:String, inputs:MutableList<ItemStack>) : super(unlocalizedName) {
+    constructor(unlocalizedName: String, inputs: MutableList<ItemStack>) : super(unlocalizedName) {
         recipes = ArrayList()
         for (inp in inputs) {
-            val output = FurnaceRecipes.smelting().getSmeltingResult(inp)
-            if (output == null) throw IllegalArgumentException("Invalid input")
+            val output = FurnaceRecipes.smelting().getSmeltingResult(inp) ?: throw IllegalArgumentException("Invalid input")
             recipes.add(StackPair(inp, output))
         }
     }
-    constructor(unlocalizedName:String, input:ItemStack) : super(unlocalizedName) {
-        val output = FurnaceRecipes.smelting().getSmeltingResult(input)
-        if (output == null) throw IllegalArgumentException("Invalid input")
+
+    constructor(unlocalizedName: String, input: ItemStack) : super(unlocalizedName) {
+        val output = FurnaceRecipes.smelting().getSmeltingResult(input) ?: throw IllegalArgumentException("Invalid input")
         recipes = arrayListOf(StackPair(input, output))
     }
 
     override fun onPageAdded(entry: LexiconEntry, index: Int) {
-        for(recipe in recipes)
+        for (recipe in recipes)
             LexiconRecipeMappings.map(recipe.output, entry, index)
     }
 
     @SideOnly(Side.CLIENT)
     override fun renderRecipe(gui: IGuiLexiconEntry, mx: Int, my: Int) {
-        val recipe = recipes.get(recipeAt)
+        val recipe = recipes[recipeAt]
         val render = Minecraft.getMinecraft().renderEngine
 
         renderItemAtGridPos(gui, 1, 1, recipe.input, false)
@@ -77,31 +60,31 @@ public class PageFurnaceRecipe: PageRecipe {
         renderTicksElapsed++
 
         render.bindTexture(furnaceFlame)
-        val flameCornerX = gui.getLeft() + gui.getWidth()/2 - 8
-        val flameCornerY = gui.getTop() + gui.getHeight()/2 + 5
+        val flameCornerX = gui.left + gui.width / 2 - 8
+        val flameCornerY = gui.top + gui.height / 2 + 5
         GL11.glEnable(GL11.GL_BLEND)
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
         (gui as GuiScreen).drawTexturedModalRect(flameCornerX, flameCornerY, 0, 0, 16, 16)
         var progress = Math.max(Math.min(renderTicksElapsed * 13 / rTPS, 13), 0)
         gui.drawTexturedModalRect(flameCornerX, flameCornerY + progress, 16, progress, 16, 16 - progress)
         GL11.glDisable(GL11.GL_BLEND)
-        
+
         render.bindTexture(manaInfusionOverlay)
         GL11.glEnable(GL11.GL_BLEND)
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
         GL11.glColor4f(1F, 1F, 1F, 1F)
-        gui.drawTexturedModalRect(gui.getLeft(), gui.getTop(), 0, 0, gui.getWidth(), gui.getHeight())
+        gui.drawTexturedModalRect(gui.left, gui.top, 0, 0, gui.getWidth(), gui.getHeight())
         GL11.glDisable(GL11.GL_BLEND)
     }
 
     @SideOnly(Side.CLIENT)
     override fun updateScreen() {
-        if(ticksElapsed % 20 == 0) {
+        if (ticksElapsed % 20 == 0) {
             recipeAt++
             if (renderTicksElapsed != 0) rTPS = renderTicksElapsed * 1
             renderTicksElapsed = 0
 
-            if(recipeAt == recipes.size)
+            if (recipeAt == recipes.size)
                 recipeAt = 0
         }
         ++ticksElapsed

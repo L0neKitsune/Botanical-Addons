@@ -1,20 +1,15 @@
 package ninja.shadowfox.shadowfox_botany.client.render.tile
 
-import net.minecraft.block.Block
-import net.minecraft.world.IBlockAccess
-
-import ninja.shadowfox.shadowfox_botany.lib.Constants
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.IMultipassRenderer
-
-import net.minecraft.client.renderer.Tessellator
-import net.minecraft.client.renderer.RenderBlocks
-import net.minecraft.client.renderer.EntityRenderer
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler
-
+import net.minecraft.block.Block
+import net.minecraft.client.renderer.RenderBlocks
+import net.minecraft.client.renderer.Tessellator
+import net.minecraft.world.IBlockAccess
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.IMultipassRenderer
+import ninja.shadowfox.shadowfox_botany.lib.Constants
 import org.lwjgl.opengl.GL11
 
-class MultipassRenderer: ISimpleBlockRenderingHandler {
+class MultipassRenderer : ISimpleBlockRenderingHandler {
 
     companion object {
         var pass = 0
@@ -24,7 +19,9 @@ class MultipassRenderer: ISimpleBlockRenderingHandler {
         return Constants.multipassRenderingID
     }
 
-    public override fun shouldRender3DInInventory(modelId: Int): Boolean {return true}
+    public override fun shouldRender3DInInventory(modelId: Int): Boolean {
+        return true
+    }
 
     public override fun renderInventoryBlock(block: Block, metadata: Int, modelID: Int, renderer: RenderBlocks) {
         if (block is IMultipassRenderer) {
@@ -35,8 +32,8 @@ class MultipassRenderer: ISimpleBlockRenderingHandler {
 
     public override fun renderWorldBlock(world: IBlockAccess, x: Int, y: Int, z: Int, block: Block, modelId: Int, renderer: RenderBlocks): Boolean {
         if (block is IMultipassRenderer) {
-            if (pass == 1) renderer.renderStandardBlock(block, x, y, z) 
-            else           renderer.renderStandardBlock(block.innerBlock(world, x, y, z), x, y, z)
+            if (pass == 1) renderer.renderStandardBlock(block, x, y, z)
+            else renderer.renderStandardBlock(block.innerBlock(world, x, y, z), x, y, z)
         }
         return true
     }
@@ -58,9 +55,9 @@ class MultipassRenderer: ISimpleBlockRenderingHandler {
         GL11.glRotatef(90.0f, 0.0f, 1.0f, 0.0f)
         GL11.glTranslatef(-0.5f, -0.5f, -0.5f)
 
-        val zf = stage.toFloat()/200f
+        val zf = stage.toFloat() / 200f
         GL11.glTranslatef(-zf, -zf, -zf)
-        GL11.glScalef(1f+zf*2f, 1f+zf*2f, 1f+zf*2f)
+        GL11.glScalef(1f + zf * 2f, 1f + zf * 2f, 1f + zf * 2f)
         tessellator.startDrawingQuads()
         tessellator.setNormal(0.0f, -1.0f, 0.0f)
         renderer.renderFaceYNeg(block, 0.0, 0.0, 0.0, renderer.getBlockIconFromSideAndMetadata(block, 0, meta))
@@ -85,7 +82,7 @@ class MultipassRenderer: ISimpleBlockRenderingHandler {
         tessellator.setNormal(1.0f, 0.0f, 0.0f)
         renderer.renderFaceXPos(block, 0.0, 0.0, 0.0, renderer.getBlockIconFromSideAndMetadata(block, 5, meta))
         tessellator.draw()
-        GL11.glTranslatef(0.5f+zf, 0.5f+zf, 0.5f+zf)
+        GL11.glTranslatef(0.5f + zf, 0.5f + zf, 0.5f + zf)
         GL11.glPopMatrix()
     }
 }

@@ -2,15 +2,14 @@ package ninja.shadowfox.shadowfox_botany.common.blocks
 
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
-import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.init.Blocks
 import net.minecraft.util.IIcon
 import net.minecraft.world.World
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
 
-class BlockBarrier: ShadowFoxBlockMod(Material.cake) {
+class BlockBarrier : ShadowFoxBlockMod(Material.cake) {
 
     override val registerInCreative = false
 
@@ -31,10 +30,12 @@ class BlockBarrier: ShadowFoxBlockMod(Material.cake) {
 
     override fun isOpaqueCube(): Boolean = false
 
-    override fun registerBlockIcons(par1IconRegister: IIconRegister) {}
+    override fun registerBlockIcons(par1IconRegister: IIconRegister) {
+    }
 
     @SideOnly(Side.CLIENT)
     override fun getAmbientOcclusionLightValue(): Float = 1.0F
 
-    override fun dropBlockAsItemWithChance(worldIn: World, x: Int, y: Int, z: Int, meta: Int, chance: Float, fortune: Int) {}
+    override fun dropBlockAsItemWithChance(worldIn: World, x: Int, y: Int, z: Int, meta: Int, chance: Float, fortune: Int) {
+    }
 }

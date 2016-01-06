@@ -1,15 +1,12 @@
 package ninja.shadowfox.shadowfox_botany.client.core.multipart
 
-import java.util.ArrayList
-
-import cpw.mods.fml.relauncher.FMLLaunchHandler
+import codechicken.microblock.BlockMicroMaterial
+import codechicken.microblock.MicroMaterialRegistry
 import net.minecraft.block.Block
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import codechicken.microblock.BlockMicroMaterial
-import codechicken.microblock.TopMicroMaterial
-import codechicken.microblock.MicroMaterialRegistry
+import java.util.*
 
 public object MultipartHandler {
 
@@ -22,12 +19,12 @@ public object MultipartHandler {
         registerAllColoredMultiparts(ShadowFoxBlocks.irisWood2)
         registerAllColoredMultiparts(ShadowFoxBlocks.irisWood3)
         registerAllMultiparts(ShadowFoxBlocks.rainbowWood)
-        registerAllColoredMultiparts(ShadowFoxBlocks.altWood0)
-        registerAllColoredMultiparts(ShadowFoxBlocks.altWood1)
+        registerAllMultiparts(ShadowFoxBlocks.altWood0)
+        registerAllMultiparts(ShadowFoxBlocks.altWood1)
 
         registerAllColoredMultiparts(ShadowFoxBlocks.coloredPlanks)
-        registerAllColoredMultiparts(ShadowFoxBlocks.rainbowPlanks)
-        registerAllColoredMultiparts(ShadowFoxBlocks.altPlanks)
+        registerAllMultiparts(ShadowFoxBlocks.rainbowPlanks)
+        registerAllMultiparts(ShadowFoxBlocks.altPlanks)
 
         registerAllMultiparts(ShadowFoxBlocks.kindling)
 
@@ -50,8 +47,8 @@ public object MultipartHandler {
         var item = Item.getItemFromBlock(block)
         block.getSubBlocks(item, block.creativeTabToDisplayOn, stacks)
 
-        for(stack in stacks)
-            if(stack.item == item)
+        for (stack in stacks)
+            if (stack.item == item)
                 registerMultipart(block, stack.itemDamage)
     }
 
@@ -60,8 +57,8 @@ public object MultipartHandler {
         var item = Item.getItemFromBlock(block)
         block.getSubBlocks(item, block.creativeTabToDisplayOn, stacks)
 
-        for(stack in stacks)
-            if(stack.item == item)
+        for (stack in stacks)
+            if (stack.item == item)
                 registerOverlaidMultipart(block, stack.itemDamage)
     }
 
