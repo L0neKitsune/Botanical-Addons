@@ -10,7 +10,7 @@ import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.material.MaterialCustomSmeltingWood
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentBlockMod
@@ -21,7 +21,7 @@ import vazkii.botania.api.wand.IWandable
 import java.util.*
 
 
-public class BlockRainbowPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.instance), ILexiconable, IFuelHandler, IWandable {
+public class BlockRainbowPlanks() : BlockMod(MaterialCustomSmeltingWood.instance), ILexiconable, IFuelHandler, IWandable {
 
     private val name = "rainbowPlanks"
 

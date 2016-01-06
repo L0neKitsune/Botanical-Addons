@@ -26,7 +26,7 @@ import kotlin.collections.orEmpty
 import kotlin.collections.toArrayList
 
 
-open class TileSchema() : ShadowFoxTile() {
+open class TileSchema() : TileMod() {
 
     private var ticksAlive: Int = 0
     private var lastDump: Int = 0

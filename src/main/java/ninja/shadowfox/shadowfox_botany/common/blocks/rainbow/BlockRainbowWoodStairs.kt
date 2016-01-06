@@ -5,14 +5,14 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxStairs
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockStairsMod
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import kotlin.text.replace
 import kotlin.text.toRegex
 
 
-open class BlockRainbowWoodStairs(source: Block = ShadowFoxBlocks.rainbowPlanks) : ShadowFoxStairs(source, 0, source.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs"), ILexiconable {
+open class BlockRainbowWoodStairs(source: Block = ShadowFoxBlocks.rainbowPlanks) : BlockStairsMod(source, 0, source.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs"), ILexiconable {
     init {
     }
 

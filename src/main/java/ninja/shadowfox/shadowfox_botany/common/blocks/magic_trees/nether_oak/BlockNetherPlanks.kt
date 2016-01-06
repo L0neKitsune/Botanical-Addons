@@ -10,7 +10,7 @@ import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.common.util.ForgeDirection
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.material.MaterialCustomSmeltingWood
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
@@ -19,7 +19,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 
-public class BlockNetherPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.instance), ILexiconable {
+public class BlockNetherPlanks() : BlockMod(MaterialCustomSmeltingWood.instance), ILexiconable {
 
     private val name = "netherPlanks"
 

@@ -26,7 +26,7 @@ import vazkii.botania.common.lib.LibMisc
 import kotlin.collections.arrayListOf
 import kotlin.collections.indices
 
-class TileLivingwoodFunnel() : ShadowFoxTile(), IHopper {
+class TileLivingwoodFunnel() : TileMod(), IHopper {
     private var inventory = arrayOfNulls<ItemStack>(1)
     private var transferCooldown = -1
 

@@ -22,7 +22,7 @@ import net.minecraft.util.Facing
 import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxTileContainer
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockContainerMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileLivingwoodFunnel
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
@@ -35,7 +35,7 @@ import java.util.*
 import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
 
 
-class BlockFunnel() : ShadowFoxTileContainer<TileLivingwoodFunnel>(Material.wood), IWandHUD, ILexiconable {
+class BlockFunnel() : BlockContainerMod<TileLivingwoodFunnel>(Material.wood), IWandHUD, ILexiconable {
     private val random = Random()
     public lateinit var top_icon: IIcon
     public lateinit var inside_icon: IIcon

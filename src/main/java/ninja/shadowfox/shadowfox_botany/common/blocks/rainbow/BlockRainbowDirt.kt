@@ -11,14 +11,14 @@ import net.minecraft.world.World
 import net.minecraftforge.common.IPlantable
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockMod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
-class BlockRainbowDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable {
+class BlockRainbowDirt() : BlockMod(Material.ground), IGrowable, ILexiconable {
 
     private val name = "rainbowDirt"
 

@@ -17,7 +17,7 @@ import net.minecraft.world.World
 import net.minecraftforge.common.IPlantable
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockMod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemSubtypedBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
@@ -25,7 +25,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
 import java.util.*
 
-class BlockColoredDirt() : ShadowFoxBlockMod(Material.ground), IGrowable, ILexiconable {
+class BlockColoredDirt() : BlockMod(Material.ground), IGrowable, ILexiconable {
 
     private val name = "coloredDirt"
     private val TYPES = 16

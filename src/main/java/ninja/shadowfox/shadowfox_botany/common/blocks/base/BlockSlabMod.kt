@@ -17,7 +17,7 @@ import vazkii.botania.api.lexicon.ILexiconable
 import java.util.*
 
 
-abstract class ShadowFoxSlabs(val full: Boolean, val meta: Int, val source: Block, val name: String) :
+abstract class BlockSlabMod(val full: Boolean, val meta: Int, val source: Block, val name: String) :
         BlockSlab(full, source.material), ILexiconable {
 
     init {

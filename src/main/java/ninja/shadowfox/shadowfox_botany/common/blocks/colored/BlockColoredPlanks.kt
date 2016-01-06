@@ -14,7 +14,7 @@ import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.material.MaterialCustomSmeltingWood
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemSubtypedBlockMod
@@ -25,7 +25,7 @@ import vazkii.botania.api.wand.IWandable
 import java.awt.Color
 import java.util.*
 
-class BlockColoredPlanks() : ShadowFoxBlockMod(MaterialCustomSmeltingWood.instance), ILexiconable, IFuelHandler, IWandable {
+class BlockColoredPlanks() : BlockMod(MaterialCustomSmeltingWood.instance), ILexiconable, IFuelHandler, IWandable {
 
     private val name = "irisPlanks"
     private val TYPES = 16

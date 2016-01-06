@@ -20,7 +20,7 @@ import vazkii.botania.api.lexicon.ILexiconable
 import java.util.*
 
 
-abstract class ShadowFoxRotatedPillar(mat: Material) : ShadowFoxBlockMod(mat), ILexiconable {
+abstract class ShadowFoxRotatedPillar(mat: Material) : BlockMod(mat), ILexiconable {
 
     protected var iconTop: IIcon? = null
     protected var iconSide: IIcon? = null

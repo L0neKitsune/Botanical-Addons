@@ -9,14 +9,14 @@ import net.minecraft.item.ItemStack
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockLeavesMod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 
-public class BlockRainbowLeaves() : ShadowFoxLeaves() {
+public class BlockRainbowLeaves() : BlockLeavesMod() {
 
     init {
         setBlockName("rainbowLeaves")

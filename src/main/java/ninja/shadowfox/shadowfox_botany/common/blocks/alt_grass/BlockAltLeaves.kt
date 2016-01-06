@@ -13,7 +13,7 @@ import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockLeavesMod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemUniqueSubtypedBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
@@ -22,7 +22,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 
-class BlockAltLeaves() : ShadowFoxLeaves() {
+class BlockAltLeaves() : BlockLeavesMod() {
 
     protected var icon_norm: Array<IIcon> = emptyArray()
     protected var icon_opaque: Array<IIcon> = emptyArray()

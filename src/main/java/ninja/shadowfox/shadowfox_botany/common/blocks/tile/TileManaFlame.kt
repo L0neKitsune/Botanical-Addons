@@ -7,7 +7,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity
 import vazkii.botania.common.Botania
 import vazkii.botania.common.integration.coloredlights.ColoredLightHelper
 
-abstract class TileManaFlame : ShadowFoxTile() {
+abstract class TileManaFlame : TileMod() {
 
     abstract fun getColor(): Int
 

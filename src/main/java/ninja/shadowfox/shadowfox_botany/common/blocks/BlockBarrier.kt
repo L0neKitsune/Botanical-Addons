@@ -7,9 +7,9 @@ import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.init.Blocks
 import net.minecraft.util.IIcon
 import net.minecraft.world.World
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockMod
 
-class BlockBarrier : ShadowFoxBlockMod(Material.cake) {
+class BlockBarrier : BlockMod(Material.cake) {
 
     override val registerInCreative = false
 

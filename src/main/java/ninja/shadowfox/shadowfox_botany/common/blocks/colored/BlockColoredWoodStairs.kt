@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxStairs
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockStairsMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
@@ -19,7 +19,7 @@ import kotlin.text.replace
 import kotlin.text.toRegex
 
 
-class BlockColoredWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.coloredPlanks) : ShadowFoxStairs(source, meta, source.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs" + meta), ILexiconable {
+class BlockColoredWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.coloredPlanks) : BlockStairsMod(source, meta, source.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs" + meta), ILexiconable {
     init {
     }
 

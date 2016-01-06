@@ -20,7 +20,7 @@ import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.World
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileItemDisplay
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemUniqueSubtypedBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
@@ -30,7 +30,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 
-class BlockItemDisplay() : ShadowFoxBlockMod(Material.wood), ILexiconable, ITileEntityProvider {
+class BlockItemDisplay() : BlockMod(Material.wood), ILexiconable, ITileEntityProvider {
 
     val TYPES = 3
     var icons: Array<IIcon?> = arrayOfNulls(TYPES)

@@ -25,7 +25,7 @@ import vazkii.botania.api.lexicon.ILexiconable
 import java.util.*
 
 
-abstract class ShadowFoxLeaves() : BlockLeaves(), IShearable, ILexiconable {
+abstract class BlockLeavesMod() : BlockLeaves(), IShearable, ILexiconable {
 
     internal var field_150128_a: IntArray? = null
     protected var icons: Array<IIcon?> = emptyArray()

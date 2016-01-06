@@ -10,8 +10,8 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxSlabs
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxStairs
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockSlabMod
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockStairsMod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemRegularSlabMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
@@ -21,7 +21,7 @@ import kotlin.text.replace
 import kotlin.text.toRegex
 
 class BlockAltWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks.altPlanks) :
-        ShadowFoxSlabs(full, meta, source, source.unlocalizedName.replace("tile.".toRegex(), "") + "Slab" + (if (full) "Full" else "") + meta), ILexiconable, IFuelHandler {
+        BlockSlabMod(full, meta, source, source.unlocalizedName.replace("tile.".toRegex(), "") + "Slab" + (if (full) "Full" else "") + meta), ILexiconable, IFuelHandler {
 
     override fun getFullBlock(): BlockSlab {
         return ShadowFoxBlocks.altSlabsFull[meta] as BlockSlab
@@ -49,7 +49,7 @@ class BlockAltWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks
 }
 
 class BlockAltWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.altPlanks) :
-        ShadowFoxStairs(source, meta, source.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs" + meta) {
+        BlockStairsMod(source, meta, source.unlocalizedName.replace("tile.".toRegex(), "") + "Stairs" + meta) {
     override fun register() {
         GameRegistry.registerBlock(this, ItemBlockMod::class.java, name)
     }

@@ -11,12 +11,12 @@ import net.minecraft.item.ItemStack
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.common.util.ForgeDirection
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 
-class BlockKindling() : ShadowFoxBlockMod(Material.cloth), IFuelHandler, ILexiconable {
+class BlockKindling() : BlockMod(Material.cloth), IFuelHandler, ILexiconable {
 
     init {
         this.setBlockName("kindling")

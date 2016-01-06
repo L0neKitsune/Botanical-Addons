@@ -9,14 +9,14 @@ import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.IIcon
 import net.minecraft.world.World
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxBlockMod
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileSchema
 // import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileSchema
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.wand.IWandable
 
 
-class BlockSchema() : ShadowFoxBlockMod(Material.wood), IWandable, ITileEntityProvider {
+class BlockSchema() : BlockMod(Material.wood), IWandable, ITileEntityProvider {
     lateinit var icon1: IIcon
     lateinit var icon2: IIcon
     lateinit var icon3: IIcon

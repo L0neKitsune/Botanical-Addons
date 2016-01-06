@@ -15,7 +15,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileManaFlame
 import java.util.*
 
 
-class BlockManaFlame(name: String, val Tile: Class<out TileManaFlame>) : ShadowFoxBlockMod(Material.cloth) {
+class BlockManaFlame(name: String, val Tile: Class<out TileManaFlame>) : BlockMod(Material.cloth) {
 
     override val registerInCreative = false
 

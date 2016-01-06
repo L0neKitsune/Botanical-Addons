@@ -7,7 +7,7 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.nbt.NBTTagList
 import kotlin.collections.indices
 
-class TileItemDisplay() : ShadowFoxTile(), ISidedInventory {
+class TileItemDisplay() : TileMod(), ISidedInventory {
     private val slots = intArrayOf(0)
     private var inventory = arrayOfNulls<ItemStack>(1)
 

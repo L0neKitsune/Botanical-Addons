@@ -5,14 +5,14 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemBlockWithMetadata
 import net.minecraft.item.ItemStack
 import net.minecraft.util.StatCollector
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxLeaves
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockLeavesMod
 import kotlin.text.replace
 import kotlin.text.toRegex
 
 open class ItemSubtypedBlockMod(par2Block: Block) : ItemBlockWithMetadata(par2Block, par2Block) {
 
     override fun getMetadata(meta: Int): Int {
-        if (field_150939_a is ShadowFoxLeaves) return meta or field_150939_a.decayBit()
+        if (field_150939_a is BlockLeavesMod) return meta or field_150939_a.decayBit()
         return meta
     }
 
@@ -36,7 +36,7 @@ open class ItemSubtypedBlockMod(par2Block: Block) : ItemBlockWithMetadata(par2Bl
 
 class ItemUniqueSubtypedBlockMod(par2Block: Block) : ItemBlockWithMetadata(par2Block, par2Block) {
     override fun getMetadata(meta: Int): Int {
-        if (field_150939_a is ShadowFoxLeaves) return meta or field_150939_a.decayBit()
+        if (field_150939_a is BlockLeavesMod) return meta or field_150939_a.decayBit()
         return meta
     }
 

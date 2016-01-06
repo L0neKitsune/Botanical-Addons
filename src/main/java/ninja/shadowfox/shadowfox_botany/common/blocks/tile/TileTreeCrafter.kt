@@ -35,7 +35,7 @@ import vazkii.botania.common.block.ModBlocks
 import java.util.*
 
 
-class TileTreeCrafter() : ShadowFoxTile(), ISparkAttachable {
+class TileTreeCrafter() : TileMod(), ISparkAttachable {
 
     companion object {
         public val ITEMDISPLAY_LOCATIONS = arrayOf(Pos(-3, 1, 3), Pos(-4, 1, 0), Pos(0, 1, 4), Pos(-3, 1, -3), Pos(0, 1, -4), Pos(3, 1, -3), Pos(4, 1, 0), Pos(3, 1, 3))

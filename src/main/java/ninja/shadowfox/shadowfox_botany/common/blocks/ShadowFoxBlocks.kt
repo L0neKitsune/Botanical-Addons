@@ -9,7 +9,7 @@ import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
 import ninja.shadowfox.shadowfox_botany.api.trees.IIridescentSaplingVariant
 import ninja.shadowfox.shadowfox_botany.common.blocks.alt_grass.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockManaFlame
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxSlabs
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockSlabMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.lightning_oak.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.nether_oak.*
@@ -263,28 +263,28 @@ public object ShadowFoxBlocks {
      */
     private fun register() {
         for (i in coloredSlabs) {
-            (i as ShadowFoxSlabs).register()
+            (i as BlockSlabMod).register()
         }
 
         for (i in coloredSlabsFull) {
-            (i as ShadowFoxSlabs).register()
+            (i as BlockSlabMod).register()
         }
 
-        (rainbowSlabs as ShadowFoxSlabs).register()
-        (rainbowSlabsFull as ShadowFoxSlabs).register()
+        (rainbowSlabs as BlockSlabMod).register()
+        (rainbowSlabsFull as BlockSlabMod).register()
 
-        (lightningSlabs as ShadowFoxSlabs).register()
-        (lightningSlabsFull as ShadowFoxSlabs).register()
+        (lightningSlabs as BlockSlabMod).register()
+        (lightningSlabsFull as BlockSlabMod).register()
 
-        (netherSlabs as ShadowFoxSlabs).register()
-        (netherSlabsFull as ShadowFoxSlabs).register()
+        (netherSlabs as BlockSlabMod).register()
+        (netherSlabsFull as BlockSlabMod).register()
 
         for (i in altSlabs) {
-            (i as ShadowFoxSlabs).register()
+            (i as BlockSlabMod).register()
         }
 
         for (i in altSlabsFull) {
-            (i as ShadowFoxSlabs).register()
+            (i as BlockSlabMod).register()
         }
     }
 

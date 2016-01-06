@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity
 /**
  * Created by l0nekitsune on 11/21/15.
  */
-abstract class ShadowFoxTile() : TileEntity() {
+abstract class TileMod() : TileEntity() {
     abstract fun writeCustomNBT(nbttagcompound: NBTTagCompound)
     abstract fun readCustomNBT(nbttagcompound: NBTTagCompound)
 

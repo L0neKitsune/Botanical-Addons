@@ -9,14 +9,14 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxSlabs
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockSlabMod
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import kotlin.text.replace
 import kotlin.text.toRegex
 
 
-open class BlockRainbowWoodSlab(full: Boolean, source: Block = ShadowFoxBlocks.rainbowPlanks) : ShadowFoxSlabs(full, 0, source, source.unlocalizedName.replace("tile.".toRegex(), "") + "Slab" + (if (full) "Full" else "")), IFuelHandler {
+open class BlockRainbowWoodSlab(full: Boolean, source: Block = ShadowFoxBlocks.rainbowPlanks) : BlockSlabMod(full, 0, source, source.unlocalizedName.replace("tile.".toRegex(), "") + "Slab" + (if (full) "Full" else "")), IFuelHandler {
     init {
         this.setHardness(1.5f)
         this.setResistance(10.0f)

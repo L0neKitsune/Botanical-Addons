@@ -6,8 +6,11 @@ import cpw.mods.fml.relauncher.FMLLaunchHandler
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
+import net.minecraft.block.BlockContainer
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
+import net.minecraft.tileentity.TileEntity
+import net.minecraft.world.World
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
@@ -16,9 +19,8 @@ import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 
 
-open class ShadowFoxBlockMod(par2Material: Material) : Block(par2Material) {
+abstract class BlockContainerMod<T : TileEntity>(material: Material) : BlockContainer(material) {
     var originalLight: Int = 0
-
     open val registerInCreative: Boolean = true
 
     init {
@@ -30,21 +32,21 @@ open class ShadowFoxBlockMod(par2Material: Material) : Block(par2Material) {
     }
 
     override fun setBlockName(par1Str: String): Block {
-        if (shouldRegisterInNameSet())
+        if (this.shouldRegisterInNameSet()) {
             GameRegistry.registerBlock(this, ItemBlockMod::class.java, par1Str)
+        }
+
         return super.setBlockName(par1Str)
     }
 
-    protected open fun shouldRegisterInNameSet(): Boolean {
+    protected fun shouldRegisterInNameSet(): Boolean {
         return true
     }
 
-    override fun setLightLevel(level: Float): Block {
-        originalLight = (level * 15).toInt()
-        return super.setLightLevel(level)
+    override fun setLightLevel(light: Float): Block {
+        this.originalLight = (light * 15.0f).toInt()
+        return super.setLightLevel(light)
     }
-
-    open fun isInterpolated(): Boolean = false
 
     @SideOnly(Side.CLIENT)
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {
@@ -52,10 +54,14 @@ open class ShadowFoxBlockMod(par2Material: Material) : Block(par2Material) {
             blockIcon = IconHelper.forBlock(par1IconRegister, this)
     }
 
+    open fun isInterpolated(): Boolean = false
+
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     open fun loadTextures(event: TextureStitchEvent.Pre) {
         if (event.map.textureType == 0 && this.isInterpolated())
             blockIcon = InterpolatedIconHelper.forBlock(event.map, this)
     }
+
+    abstract override fun createNewTileEntity(var1: World, var2: Int): T
 }
