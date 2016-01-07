@@ -362,7 +362,7 @@ public object ModRecipes {
         recipesInfernalTree = ShadowFoxAPI.addTreeRecipe(10000,
                 ShadowFoxBlocks.netherSapling, 0,
                 70,
-                "ingotBrickNether", "ingotBrickNether", "ingotBrickNether",
+                "ingotBrickNether", Items.ghast_tear, "ingotBrickNether",
                 LibOreDict.RUNE[1], // Fire
                 ShadowFoxBlocks.LEAVES[14], ShadowFoxBlocks.LEAVES[14], ShadowFoxBlocks.LEAVES[14], // Red
                 LibOreDict.BLAZE_BLOCK)
