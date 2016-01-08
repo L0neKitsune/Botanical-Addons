@@ -23,6 +23,10 @@ import kotlin.text.toRegex
 class BlockAltWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks.altPlanks) :
         BlockSlabMod(full, meta, source, source.unlocalizedName.replace("tile.".toRegex(), "") + "Slab" + (if (full) "Full" else "") + meta), ILexiconable, IFuelHandler {
 
+    init {
+        GameRegistry.registerFuelHandler(this)
+    }
+
     override fun getFullBlock(): BlockSlab {
         return ShadowFoxBlocks.altSlabsFull[meta] as BlockSlab
     }
