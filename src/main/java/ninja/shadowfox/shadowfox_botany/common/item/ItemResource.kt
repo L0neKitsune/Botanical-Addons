@@ -26,16 +26,16 @@ class ItemResource() : ItemMod("resource"), IFuelHandler {
     }
 
     val TYPES = 5
-    val INTERP = 0b10001
+    val INTERP = 0b11
 
     var icons: Array<IIcon?> = arrayOfNulls(TYPES)
 
-    private fun isInterpolated(meta: Int): Boolean = (1 shr meta) and INTERP == 0
+    private fun isInterpolated(meta: Int): Boolean = (1 shr meta) and INTERP != 0
 
     @SideOnly(Side.CLIENT)
     override fun registerIcons(par1IconRegister: IIconRegister) {
         for (i in 0..(TYPES - 1)) {
-            if (isInterpolated(i)) {
+            if (!isInterpolated(i)) {
                 icons[i] = IconHelper.forItem(par1IconRegister, this, i)
             }
         }

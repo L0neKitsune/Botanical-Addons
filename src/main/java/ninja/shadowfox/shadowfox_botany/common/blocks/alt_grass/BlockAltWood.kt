@@ -1,6 +1,8 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.alt_grass
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.common.registry.GameRegistry
+import cpw.mods.fml.relauncher.FMLLaunchHandler
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
@@ -13,10 +15,13 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import net.minecraftforge.client.event.TextureStitchEvent
+import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.ShadowFoxRotatedPillar
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemUniqueSubtypedBlockMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 import ninja.shadowfox.shadowfox_botany.lib.ALT_TYPES
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
@@ -24,13 +29,15 @@ import java.util.*
 
 public class BlockAltWood(val set: Int) : ShadowFoxRotatedPillar(Material.wood), ILexiconable {
 
-    lateinit protected var iconsTop: Array<IIcon>
-    lateinit protected var iconsSide: Array<IIcon>
+    lateinit protected var iconsTop: Array<IIcon?>
+    lateinit protected var iconsSide: Array<IIcon?>
 
     init {
         setBlockName("altWood$set")
         isBlockContainer = true
         blockHardness = 2F
+        if (FMLLaunchHandler.side().isClient)
+            MinecraftForge.EVENT_BUS.register(this)
     }
 
     override fun canSustainLeaves(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean = true
@@ -59,11 +66,11 @@ public class BlockAltWood(val set: Int) : ShadowFoxRotatedPillar(Material.wood),
         GameRegistry.registerBlock(this, ItemUniqueSubtypedBlockMod::class.java, par1Str)
     }
 
-    override fun getTopIcon(meta: Int): IIcon {
+    override fun getTopIcon(meta: Int): IIcon? {
         return iconsTop[meta]
     }
 
-    override fun getSideIcon(meta: Int): IIcon {
+    override fun getSideIcon(meta: Int): IIcon? {
         return iconsSide[meta]
     }
 
@@ -83,8 +90,21 @@ public class BlockAltWood(val set: Int) : ShadowFoxRotatedPillar(Material.wood),
 
     @SideOnly(Side.CLIENT)
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {
-        iconsTop = Array(if (set == 0 ) 4 else 2, { i -> IconHelper.forName(par1IconRegister, "altOak${ALT_TYPES[(set * 4) + i]}Top") })
-        iconsSide = Array(if (set == 0 ) 4 else 2, { i -> IconHelper.forName(par1IconRegister, "altOak${ALT_TYPES[(set * 4) + i]}Side") })
+        iconsTop = Array(if (set == 0 ) 4 else 2, {
+            i -> if (set == 0 && i == 3) null else IconHelper.forName(par1IconRegister, "altOak${ALT_TYPES[(set * 4) + i]}Top")
+        })
+        iconsSide = Array(if (set == 0 ) 4 else 2, {
+            i -> if (set == 0 && i == 3) null else IconHelper.forName(par1IconRegister, "altOak${ALT_TYPES[(set * 4) + i]}Side")
+        })
+    }
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    override fun loadTextures(event: TextureStitchEvent.Pre) {
+        if (event.map.textureType == 0 && set == 0) {
+            iconsTop[3] = InterpolatedIconHelper.forName(event.map, "altOak${ALT_TYPES[3]}Top")
+            iconsSide[3] = InterpolatedIconHelper.forName(event.map, "altOak${ALT_TYPES[3]}Side")
+        }
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
