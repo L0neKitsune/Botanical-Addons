@@ -27,7 +27,7 @@ class BlockNetherSapling() : BlockColoredSapling(name = "netherSapling") {
                 val l = world.getBlockMetadata(x, y, z)
 
                 val obj: WorldGenerator = HeartWoodTreeGen(5, ShadowFoxBlocks.netherWood, 0,
-                        ShadowFoxBlocks.netherWood, 0, ShadowFoxBlocks.netherLeaves, 0)
+                        Blocks.fire, 0, ShadowFoxBlocks.netherLeaves, 0)
 
                 world.setBlock(x, y, z, Blocks.air, 0, 4)
 
