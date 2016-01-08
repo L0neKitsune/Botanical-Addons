@@ -62,7 +62,7 @@ public class BlockAltPlanks() : BlockMod(MaterialCustomSmeltingWood.instance), I
     }
 
     override fun getIcon(side: Int, meta: Int): IIcon? {
-        return icons[meta]
+        return icons[meta % 6]
     }
 
     override fun isToolEffective(type: String?, metadata: Int): Boolean {

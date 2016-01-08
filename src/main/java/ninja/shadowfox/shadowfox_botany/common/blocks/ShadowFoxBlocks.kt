@@ -388,9 +388,6 @@ public object ShadowFoxBlocks {
             OreDictionary.registerOre("treeLeaves", t)
             OreDictionary.registerOre("irisLeaves", t)
 
-            t = ItemStack(altLeaves, 1, i)
-            OreDictionary.registerOre("treeLeaves", t)
-
             t = ItemStack(coloredPlanks, 1, i)
             OreDictionary.registerOre("plankWood", t)
             OreDictionary.registerOre("irisPlanks", t)
