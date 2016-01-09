@@ -23,7 +23,6 @@ import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
 import java.util.*
-import kotlin.properties.Delegates
 
 public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
 

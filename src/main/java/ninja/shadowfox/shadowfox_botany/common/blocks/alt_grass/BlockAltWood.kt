@@ -91,10 +91,12 @@ public class BlockAltWood(val set: Int) : ShadowFoxRotatedPillar(Material.wood),
     @SideOnly(Side.CLIENT)
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {
         iconsTop = Array(if (set == 0 ) 4 else 2, {
-            i -> if (set == 0 && i == 3) null else IconHelper.forName(par1IconRegister, "altOak${ALT_TYPES[(set * 4) + i]}Top")
+            i ->
+            if (set == 0 && i == 3) null else IconHelper.forName(par1IconRegister, "altOak${ALT_TYPES[(set * 4) + i]}Top")
         })
         iconsSide = Array(if (set == 0 ) 4 else 2, {
-            i -> if (set == 0 && i == 3) null else IconHelper.forName(par1IconRegister, "altOak${ALT_TYPES[(set * 4) + i]}Side")
+            i ->
+            if (set == 0 && i == 3) null else IconHelper.forName(par1IconRegister, "altOak${ALT_TYPES[(set * 4) + i]}Side")
         })
     }
 

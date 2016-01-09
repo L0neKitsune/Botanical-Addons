@@ -142,7 +142,13 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
     override fun onSheared(item: ItemStack, world: IBlockAccess, x: Int, y: Int, z: Int, fortune: Int): ArrayList<ItemStack> {
         var ret = ArrayList<ItemStack>()
         var meta = world.getBlockMetadata(x, y, z)
-        if (!isTop(meta)) {
+        if (isTop(meta)) {
+            if (y > 0 && world.getBlock(x, y - 1, z) == this) {
+                var downMeta = world.getBlockMetadata(x, y - 1, z)
+                var b0 = TYPES * colorSet + downMeta
+                ret.add(ItemStack(ShadowFoxBlocks.irisGrass, 2, b0))
+            }
+        } else {
             var b0 = TYPES * colorSet + meta
             ret.add(ItemStack(ShadowFoxBlocks.irisGrass, 2, b0))
         }

@@ -49,7 +49,8 @@ public class BlockAltPlanks() : BlockMod(MaterialCustomSmeltingWood.instance), I
 
     override fun registerBlockIcons(par1IconRegister: IIconRegister) {
         icons = Array(6, {
-            i -> if (i == 3) null else IconHelper.forBlock(par1IconRegister, this, "${ALT_TYPES[i]}")
+            i ->
+            if (i == 3) null else IconHelper.forBlock(par1IconRegister, this, "${ALT_TYPES[i]}")
         })
     }
 

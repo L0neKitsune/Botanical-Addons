@@ -10,8 +10,8 @@ import net.minecraft.item.ItemStack
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.client.render.tile.MultipassRenderer
-import ninja.shadowfox.shadowfox_botany.common.blocks.base.IMultipassRenderer
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockContainerMod
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.IMultipassRenderer
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileTreeCrafter
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.lib.Constants

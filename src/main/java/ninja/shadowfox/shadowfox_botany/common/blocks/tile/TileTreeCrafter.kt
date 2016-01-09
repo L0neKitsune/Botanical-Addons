@@ -387,6 +387,7 @@ class TileTreeCrafter() : TileMod(), ISparkAttachable {
             return Math.min(recipe.throttle, space)
         return space
     }
+
     override fun isFull(): Boolean = (mana >= manaRequired)
     override fun canRecieveManaFromBursts(): Boolean = manaRequired > 0
     override fun getCurrentMana(): Int = mana

@@ -32,7 +32,7 @@ public class ConfigHandler {
         var blackLotusDropRate = 0.05
         var addTincturemAspect = true
         var potionIDManaVoid = 110
-        var schemaArray: IntArray = IntArray(17, { i: Int -> -1 + i} )
+        var schemaArray: IntArray = IntArray(17, { i: Int -> -1 + i })
 
 
         private var potionArrayLimit = 0
