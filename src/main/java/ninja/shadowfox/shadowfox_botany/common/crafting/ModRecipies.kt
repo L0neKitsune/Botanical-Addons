@@ -3,6 +3,7 @@ package ninja.shadowfox.shadowfox_botany.common.crafting
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.IRecipe
 import net.minecraftforge.oredict.RecipeSorter
@@ -437,18 +438,9 @@ public object ModRecipes {
         recipesAltStairsL = BotaniaAPI.getLatestAddedRecipes(6)
 
         recipesAttributionHeads = ArrayList<RecipePetals>()
-
-        var stack = skullStack("yrsegal")
-        var inputs = Array(16, {ItemStack(ShadowFoxItems.irisSeeds, 1, 16)}) // Bifrost seeds
-        recipesAttributionHeads.add(BotaniaAPI.registerPetalRecipe(stack, *inputs))
-
-        stack = skullStack("l0nekitsune")
-        inputs = Array(16, {ItemStack(ShadowFoxItems.resource, 1, 3)}) // Infernal Splinters
-        recipesAttributionHeads.add(BotaniaAPI.registerPetalRecipe(stack, *inputs))
-
-        stack = skullStack("Tristaric")
-        inputs = Array(16, {ItemStack(ShadowFoxItems.resource, 1, 1)}) // Thunderous Splinters
-        recipesAttributionHeads.add(BotaniaAPI.registerPetalRecipe(stack, *inputs))
+        recipesAttributionHeads.add(attributionSkull("yrsegal", ShadowFoxItems.irisSeeds, 16)) // Bifrost Seeds
+        recipesAttributionHeads.add(attributionSkull("l0nekitsune", ShadowFoxItems.resource, 3)) // Infernal Splinters
+        recipesAttributionHeads.add(attributionSkull("Tristaric", ShadowFoxItems.resource, 1)) // Thunderous Splinters
 
 
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F)
@@ -469,6 +461,10 @@ public object ModRecipes {
         val stack = ItemStack(Items.skull, 1, 3)
         ItemNBTHelper.setString(stack, "SkullOwner", name)
         return stack
+    }
+
+    private fun attributionSkull(name: String, item: Item, meta: Int): RecipePetals {
+        return BotaniaAPI.registerPetalRecipe(skullStack(name), *Array(16, {ItemStack(item, 1, meta)}))
     }
 
     private fun addOreDictRecipe(output: ItemStack, vararg recipe: Any) {
