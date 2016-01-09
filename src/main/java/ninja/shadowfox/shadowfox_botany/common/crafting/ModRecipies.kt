@@ -15,7 +15,9 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.recipe.RecipeManaInfusion
+import vazkii.botania.api.recipe.RecipePetals
 import vazkii.botania.api.recipe.RecipePureDaisy
+import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.lib.LibOreDict
 import java.util.*
 import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
@@ -65,6 +67,8 @@ public object ModRecipes {
     val recipesAltStairsL: List<IRecipe>
 
     val recipesPastoralSeeds: List<RecipeManaInfusion>
+
+    val recipesAttributionHeads: List<RecipePetals>
 
     val recipesPlainDirt: RecipePureDaisy
     val recipesIrisSapling: RecipePureDaisyExclusion
@@ -432,6 +436,20 @@ public object ModRecipes {
 
         recipesAltStairsL = BotaniaAPI.getLatestAddedRecipes(6)
 
+        recipesAttributionHeads = ArrayList<RecipePetals>()
+
+        var stack = skullStack("yrsegal")
+        var inputs = Array(16, {ItemStack(ShadowFoxItems.irisSeeds, 1, 16)}) // Bifrost seeds
+        recipesAttributionHeads.add(BotaniaAPI.registerPetalRecipe(stack, *inputs))
+
+        stack = skullStack("l0nekitsune")
+        inputs = Array(16, {ItemStack(ShadowFoxItems.resource, 1, 3)}) // Infernal Splinters
+        recipesAttributionHeads.add(BotaniaAPI.registerPetalRecipe(stack, *inputs))
+
+        stack = skullStack("Tristaric")
+        inputs = Array(16, {ItemStack(ShadowFoxItems.resource, 1, 1)}) // Thunderous Splinters
+        recipesAttributionHeads.add(BotaniaAPI.registerPetalRecipe(stack, *inputs))
+
 
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood1, ItemStack(Items.coal, 1, 1), 0.15F)
@@ -445,6 +463,12 @@ public object ModRecipes {
         GameRegistry.addSmelting(ShadowFoxBlocks.netherPlanks, ItemStack(ShadowFoxItems.resource, 2, 3), 0.1F) // Infernal Splinters
         GameRegistry.addSmelting(ShadowFoxBlocks.netherWood, ItemStack(ShadowFoxItems.resource, 1, 4), 0.15F) // Flame-Laced Coal
 
+    }
+
+    private fun skullStack(name: String): ItemStack {
+        val stack = ItemStack(Items.skull, 1, 3)
+        ItemNBTHelper.setString(stack, "SkullOwner", name)
+        return stack
     }
 
     private fun addOreDictRecipe(output: ItemStack, vararg recipe: Any) {

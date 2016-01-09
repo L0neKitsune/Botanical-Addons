@@ -8,20 +8,30 @@ import net.minecraft.block.Block
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
+import net.minecraft.inventory.IInventory
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ChunkCoordinates
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import vazkii.botania.api.recipe.IFlowerComponent
 import vazkii.botania.common.Botania
 import java.awt.Color
 import java.util.*
 
-class ItemColorSeeds() : ItemIridescent("irisSeeds") {
+class ItemColorSeeds() : ItemIridescent("irisSeeds"), IFlowerComponent {
     private val blockSwappers = HashMap<Int, MutableList<BlockSwapper?>>()
 
     init {
         FMLCommonHandler.instance().bus().register(this)
+    }
+
+    override fun canFit(stack: ItemStack, inventory: IInventory): Boolean {
+        return stack.itemDamage == 16
+    }
+
+    override fun getParticleColor(stack: ItemStack): Int {
+        return ItemIridescent.rainbowColor()
     }
 
     override fun getSubItems(par1: Item, par2: CreativeTabs?, par3: MutableList<Any?>) {

@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.inventory.IInventory
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
@@ -15,8 +16,9 @@ import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
+import vazkii.botania.api.recipe.IFlowerComponent
 
-class ItemResource() : ItemMod("resource"), IFuelHandler {
+class ItemResource() : ItemMod("resource"), IFlowerComponent, IFuelHandler {
 
     init {
         setHasSubtypes(true)
@@ -26,11 +28,13 @@ class ItemResource() : ItemMod("resource"), IFuelHandler {
     }
 
     val TYPES = 5
-    val INTERP = 0b11
+    val INTERP = 0x11
+    val COMPONENT = 0xA
 
     var icons: Array<IIcon?> = arrayOfNulls(TYPES)
 
     private fun isInterpolated(meta: Int): Boolean = (1 shr meta) and INTERP != 0
+    private fun isFlowerComponent(meta: Int): Boolean = (1 shr meta) and COMPONENT != 0
 
     @SideOnly(Side.CLIENT)
     override fun registerIcons(par1IconRegister: IIconRegister) {
@@ -39,6 +43,18 @@ class ItemResource() : ItemMod("resource"), IFuelHandler {
                 icons[i] = IconHelper.forItem(par1IconRegister, this, i)
             }
         }
+    }
+
+    override fun canFit(stack: ItemStack, inventory: IInventory): Boolean {
+        return isFlowerComponent(stack.itemDamage);
+    }
+
+    override fun getParticleColor(stack: ItemStack): Int {
+        when (stack.itemDamage) {
+            1 -> return 0xF7AFF3 // Light pink
+            2 -> return 0x701C16 // Deep brown-ish red
+        }
+        return 0xFFFFFF
     }
 
     @SubscribeEvent
