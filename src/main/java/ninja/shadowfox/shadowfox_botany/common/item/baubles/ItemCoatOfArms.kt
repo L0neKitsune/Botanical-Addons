@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.TextureMap
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.inventory.IInventory
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
@@ -21,13 +22,14 @@ import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import org.lwjgl.opengl.GL11
 import vazkii.botania.api.item.IBaubleRender
 import vazkii.botania.api.item.ICosmeticBauble
+import vazkii.botania.api.recipe.IFlowerComponent
 import vazkii.botania.client.core.helper.ShaderHelper
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
 import kotlin.text.replace
 import kotlin.text.toLowerCase
 import kotlin.text.toRegex
 
-class ItemCoatOfArms() : ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorOverride {
+class ItemCoatOfArms() : ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorOverride, IFlowerComponent {
 
     val TYPES = 18
     var icons: Array<IIcon?> = arrayOfNulls(TYPES)
@@ -42,6 +44,14 @@ class ItemCoatOfArms() : ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColor
     init {
         setHasSubtypes(true)
         setCreativeTab(ShadowFoxCreativeTab)
+    }
+
+    override fun canFit(stack: ItemStack, inventory: IInventory): Boolean {
+        return stack.itemDamage == 6
+    }
+
+    override fun getParticleColor(stack: ItemStack): Int {
+        return colorMap[stack.itemDamage]
     }
 
     override fun registerIcons(par1IconRegister: IIconRegister) {

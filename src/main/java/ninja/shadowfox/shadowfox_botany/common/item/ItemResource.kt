@@ -28,8 +28,8 @@ class ItemResource() : ItemMod("resource"), IFlowerComponent, IFuelHandler {
     }
 
     val TYPES = 5
-    val INTERP = 0x11
-    val COMPONENT = 0xA
+    val INTERP = 1 shr 0 and 1 shr 4
+    val COMPONENT = 1 shr 4
 
     var icons: Array<IIcon?> = arrayOfNulls(TYPES)
 
@@ -46,15 +46,14 @@ class ItemResource() : ItemMod("resource"), IFlowerComponent, IFuelHandler {
     }
 
     override fun canFit(stack: ItemStack, inventory: IInventory): Boolean {
-        return isFlowerComponent(stack.itemDamage);
+        return isFlowerComponent(stack.itemDamage)
     }
 
     override fun getParticleColor(stack: ItemStack): Int {
-        when (stack.itemDamage) {
-            1 -> return 0xF7AFF3 // Light pink
-            2 -> return 0x701C16 // Deep brown-ish red
+        return when (stack.itemDamage) {
+            4 -> 0x6B2406
+            else -> 0xFFFFFF
         }
-        return 0xFFFFFF
     }
 
     @SubscribeEvent

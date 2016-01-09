@@ -439,8 +439,11 @@ public object ModRecipes {
 
         recipesAttributionHeads = ArrayList<RecipePetals>()
         recipesAttributionHeads.add(attributionSkull("yrsegal", ShadowFoxItems.irisSeeds, 16)) // Bifrost Seeds
-        recipesAttributionHeads.add(attributionSkull("l0nekitsune", ShadowFoxItems.resource, 3)) // Infernal Splinters
-        recipesAttributionHeads.add(attributionSkull("Tristaric", ShadowFoxItems.resource, 1)) // Thunderous Splinters
+        // Wire - I just love rainbows, what can I say?
+        recipesAttributionHeads.add(attributionSkull("l0nekitsune", ShadowFoxItems.resource, 4)) // Flame-Laced coal
+        // L0ne - "hot stuff" (because I'm classy like that)
+        recipesAttributionHeads.add(attributionSkull("Tristaric", ShadowFoxItems.coatOfArms, 6)) // Irish Shield
+        // Tris - The only item that remotely fits me.
 
 
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F)
