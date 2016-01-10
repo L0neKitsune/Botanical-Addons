@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.client.Minecraft
+import net.minecraft.client.model.ModelBiped
 import net.minecraft.client.renderer.ItemRenderer
 import net.minecraft.client.renderer.RenderBlocks
 import net.minecraft.client.renderer.Tessellator
@@ -21,11 +22,13 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumChatFormatting
 import net.minecraft.util.MathHelper
 import net.minecraft.util.ResourceLocation
+import net.minecraftforge.client.event.RenderPlayerEvent
 import net.minecraftforge.client.event.RenderWorldLastEvent
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.player.PlayerInteractEvent
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import org.lwjgl.opengl.GL11
+import vazkii.botania.api.item.IBaubleRender
 import vazkii.botania.api.item.IBlockProvider
 import vazkii.botania.client.core.handler.ClientTickHandler
 import vazkii.botania.common.core.helper.ItemNBTHelper
@@ -35,9 +38,13 @@ import java.util.*
 import kotlin.text.replace
 import kotlin.text.toRegex
 
-class ItemToolbelt() : ItemBauble("toolbelt"), IBlockProvider {
+class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
     companion object {
         val glowTexture = ResourceLocation("shadowfox_botany:textures/misc/toolbelt.png")
+        val beltTexture = ResourceLocation("shadowfox_botany:textures/model/toolbelt.png")
+
+        @SideOnly(Side.CLIENT)
+        var model: ModelBiped? = null
 
         val SEGMENTS = 12
 
@@ -348,4 +355,20 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBlockProvider {
 
     @SideOnly(Side.CLIENT)
     fun getGlowResource(): ResourceLocation = glowTexture
+
+    @SideOnly(Side.CLIENT)
+    override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {
+        if(type == IBaubleRender.RenderType.BODY) {
+            Minecraft.getMinecraft().renderEngine.bindTexture(beltTexture)
+            IBaubleRender.Helper.rotateIfSneaking(event.entityPlayer)
+            GL11.glTranslatef(0F, 0.2F, 0F)
+
+            val s = 1.05F / 16F
+            GL11.glScalef(s, s, s)
+            if(model == null)
+                model = ModelBiped()
+            else
+                model!!.bipedBody.render(1F)
+        }
+    }
 }
