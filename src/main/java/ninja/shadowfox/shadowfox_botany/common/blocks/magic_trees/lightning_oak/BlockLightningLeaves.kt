@@ -22,10 +22,6 @@ class BlockLightningLeaves() : BlockLeavesMod() {
         setBlockName("lightningLeaves")
     }
 
-    @SideOnly(Side.CLIENT)
-    override fun registerBlockIcons(iconRegister: IIconRegister) {
-    }
-
     override fun isInterpolated(): Boolean = true
 
     @SideOnly(Side.CLIENT) override fun getBlockColor(): Int = 0xFFFFFF

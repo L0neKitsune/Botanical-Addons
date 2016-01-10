@@ -17,8 +17,10 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.schema.*
 
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.*
+import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.multiblock.MultiblockSet
+import vazkii.botania.common.lexicon.LexiconData
 import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
 
 public object ShadowFoxBlocks {
@@ -129,8 +131,8 @@ public object ShadowFoxBlocks {
         rainbowLeaves = BlockRainbowLeaves()
         irisGrass = BlockColoredGrass()
         rainbowGrass = BlockRainbowGrass()
-        invisibleFlame = BlockManaFlame("invisibleFlame", TileInvisibleManaFlame::class.java)
-        rainbowFlame = BlockManaFlame("rainbowFlame", TileRainbowManaFlame::class.java)
+        invisibleFlame = BlockManaFlame("invisibleFlame", TileInvisibleManaFlame::class.java, LexiconData.lenses)
+        rainbowFlame = BlockManaFlame("rainbowFlame", TileRainbowManaFlame::class.java, LexiconRegistry.waveRod)
 
         irisWood0 = BlockColoredWood(0)
         irisWood1 = BlockColoredWood(1)

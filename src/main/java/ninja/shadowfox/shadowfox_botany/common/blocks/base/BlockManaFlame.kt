@@ -4,6 +4,7 @@ import cpw.mods.fml.common.Optional
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
@@ -12,10 +13,12 @@ import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileManaFlame
+import vazkii.botania.api.lexicon.ILexiconable
+import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 
-class BlockManaFlame(name: String, val Tile: Class<out TileManaFlame>) : BlockMod(Material.cloth) {
+class BlockManaFlame(name: String, val Tile: Class<out TileManaFlame>, val entry: LexiconEntry) : BlockMod(Material.cloth), ILexiconable {
 
     override val registerInCreative = false
 
@@ -55,5 +58,9 @@ class BlockManaFlame(name: String, val Tile: Class<out TileManaFlame>) : BlockMo
 
     override fun createTileEntity(world: World?, meta: Int): TileEntity? {
         return this.Tile.newInstance()
+    }
+
+    override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
+        return entry
     }
 }
