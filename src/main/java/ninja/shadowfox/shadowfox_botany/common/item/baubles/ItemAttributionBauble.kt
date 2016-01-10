@@ -36,7 +36,7 @@ import kotlin.text.toRegex
 
 class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble {
     private val kitsuneTexture = ResourceLocation("shadowfox_botany:textures/items/kitsunesTail.png")
-    private val potatoTexture: ResourceLocation
+    private lateinit var potatoTexture: ResourceLocation
 
     var defaultIcon: IIcon by Delegates.notNull()
     var wireIcon: IIcon? = null
@@ -44,11 +44,12 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
     var trisIcon: IIcon by Delegates.notNull()
 
     init {
-        potatoTexture = ResourceLocation(if (ClientProxy.dootDoot) LibResources.MODEL_TINY_POTATO_HALLOWEEN else LibResources.MODEL_TINY_POTATO)
         setHasSubtypes(true)
         setCreativeTab(ShadowFoxCreativeTab)
-        if (FMLLaunchHandler.side().isClient())
+        if (FMLLaunchHandler.side().isClient()) {
             MinecraftForge.EVENT_BUS.register(this)
+            potatoTexture = ResourceLocation(if (ClientProxy.dootDoot) LibResources.MODEL_TINY_POTATO_HALLOWEEN else LibResources.MODEL_TINY_POTATO)
+        }
     }
 
     @SubscribeEvent
