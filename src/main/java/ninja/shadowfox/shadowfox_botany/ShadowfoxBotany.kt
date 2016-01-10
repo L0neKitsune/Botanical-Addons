@@ -24,6 +24,7 @@ public class ShadowfoxBotany {
     @Mod.EventHandler
     fun preInit(event: FMLPreInitializationEvent) {
 
+        instance = this
         thaumcraftLoaded = Loader.isModLoaded("Thaumcraft")
 
         proxy.preInit(event)

@@ -21,8 +21,8 @@ public open class CommonProxy {
         ShadowFoxBlocks
         ShadowFoxItems
         ModRecipes
-        ShadowFoxEntity
         ShadowFoxPotions
+        ShadowFoxEntity
         LexiconRegistry
         if (Loader.isModLoaded("Thaumcraft")) ThaumcraftAspects.initAspects()
     }

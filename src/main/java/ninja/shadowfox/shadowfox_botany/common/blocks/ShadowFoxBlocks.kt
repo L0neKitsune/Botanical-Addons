@@ -203,6 +203,9 @@ public object ShadowFoxBlocks {
         GameRegistry.registerTileEntity(TileItemDisplay::class.java, "shadowfox_botany:itemDisplay")
         GameRegistry.registerTileEntity(TileTreeCrafter::class.java, "shadowfox_botany:treeCrafter")
         GameRegistry.registerTileEntity(TileLivingwoodFunnel::class.java, "shadowfox_botany:livingwoodFunnel")
+        GameRegistry.registerTileEntity(TileLightningRod::class.java, "shadowfox_botany:lightningRod")
+        GameRegistry.registerTileEntity(TileSchema::class.java, "shadowfox_botany:schema")
+        GameRegistry.registerTileEntity(TileSchematicAnnihilator::class.java, "shadowfox_botany:schematicAnnihilator")
 
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
 
