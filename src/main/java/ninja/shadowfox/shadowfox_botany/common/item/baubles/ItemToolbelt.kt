@@ -18,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.util.EnumChatFormatting
 import net.minecraft.util.MathHelper
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.event.RenderWorldLastEvent
@@ -29,6 +30,7 @@ import vazkii.botania.client.core.handler.ClientTickHandler
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
 import java.awt.Color
+import java.util.*
 import kotlin.text.replace
 import kotlin.text.toRegex
 
@@ -122,7 +124,7 @@ class ItemToolbelt() : ItemBauble("toolbelt") {
             if (event.action === PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
                 val segment = getSegmentLookedAt(beltStack, player)
                 val toolStack = getItemForSlot(beltStack, segment)
-                if (toolStack == null && heldItem != null) {
+                if (toolStack == null && heldItem != null && heldItem.item != this) {
                     setItem(beltStack, heldItem.copy(), segment)
                     player.setCurrentItemOrArmor(0, null)
                 } else if (toolStack != null) {
@@ -136,6 +138,28 @@ class ItemToolbelt() : ItemBauble("toolbelt") {
                 event.isCanceled = true
             }
         }
+    }
+
+    override fun addHiddenTooltip(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>, par4: Boolean) {
+        if (par1ItemStack != null) {
+            val map = HashMap<String, Int>()
+            for (segment in 0..SEGMENTS - 1) {
+                val slotStack = getItemForSlot(par1ItemStack, segment)
+                if (slotStack != null) {
+                    var base = 0
+                    val name = slotStack.displayName
+                    val node = map[name]
+                    if (node != null) base = node
+                    map.put(name, base+slotStack.stackSize)
+                }
+            }
+            if (map.size > 0)
+                par3List.add("${EnumChatFormatting.AQUA}Contains:")
+            for (key in map.keys) {
+                par3List.add("${map[key]}x $key")
+            }
+        }
+        super.addHiddenTooltip(par1ItemStack, par2EntityPlayer, par3List, par4)
     }
 
     override fun getBaubleType(stack: ItemStack): BaubleType {
