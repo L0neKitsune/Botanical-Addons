@@ -23,6 +23,7 @@ object ShadowFoxItems {
     val attributionBauble: Item
     val wiltedLotus: Item
     val resource: Item
+    val toolbelt: Item
 
     // val splashPotion: Item
 
@@ -40,6 +41,7 @@ object ShadowFoxItems {
         attributionBauble = ItemAttributionBauble()
         wiltedLotus = ItemWiltedLotus()
         resource = ItemResource()
+        toolbelt = ItemToolbelt()
 
         // splashPotion = ItemSplashPotion()
         initOreDict()
