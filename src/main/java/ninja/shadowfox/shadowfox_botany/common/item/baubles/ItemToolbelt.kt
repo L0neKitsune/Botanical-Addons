@@ -129,7 +129,11 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
                 val slotItem = slotStack.item
                 if (slotItem is IBlockProvider) {
                     val count = slotItem.getBlockCount(p0, p1, slotStack, p3, p4)
+                    setItem(p2, slotStack, segment)
+                    if (count == -1) return -1
                     total += count
+                } else if (slotItem is ItemBlock && Block.getBlockFromItem(slotItem) == p3 && slotStack.itemDamage == p4) {
+                    total += slotStack.stackSize
                 }
             }
         }
@@ -143,7 +147,14 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
                 val slotItem = slotStack.item
                 if (slotItem is IBlockProvider) {
                     val provided = slotItem.provideBlock(p0, p1, slotStack, p3, p4, p5)
+                    setItem(p2, slotStack, segment)
                     if (provided) return true
+                } else if (slotItem is ItemBlock && Block.getBlockFromItem(slotItem) == p3 && slotStack.itemDamage == p4) {
+                    if (p5) slotStack.stackSize--
+
+                    if (slotStack.stackSize == 0) setItem(p2, null, segment)
+                    else setItem(p2, slotStack, segment)
+                    return true
                 }
             }
         }

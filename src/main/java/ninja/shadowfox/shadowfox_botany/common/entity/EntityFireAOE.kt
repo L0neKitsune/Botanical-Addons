@@ -5,7 +5,6 @@ import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.projectile.EntityThrowable
 import net.minecraft.init.Blocks
-import net.minecraft.item.ItemExpBottle
 import net.minecraft.util.MathHelper
 import net.minecraft.util.MovingObjectPosition
 
