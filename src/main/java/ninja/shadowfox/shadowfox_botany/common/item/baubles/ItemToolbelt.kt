@@ -119,7 +119,7 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
 
     override fun getBlockCount(p0: EntityPlayer?, p1: ItemStack, p2: ItemStack, p3: Block, p4: Int): Int {
         var total = 0
-        for (segment in 0..SEGMENTS-1) {
+        for (segment in 0..SEGMENTS - 1) {
             val slotStack = getItemForSlot(p2, segment)
             if (slotStack != null) {
                 val slotItem = slotStack.item
@@ -137,7 +137,7 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
     }
 
     override fun provideBlock(p0: EntityPlayer?, p1: ItemStack, p2: ItemStack, p3: Block, p4: Int, p5: Boolean): Boolean {
-        for (segment in 0..SEGMENTS-1) {
+        for (segment in 0..SEGMENTS - 1) {
             val slotStack = getItemForSlot(p2, segment)
             if (slotStack != null) {
                 val slotItem = slotStack.item
@@ -199,7 +199,7 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
                     val name = slotStack.displayName
                     val node = map[name]
                     if (node != null) base = node
-                    map.put(name, base+slotStack.stackSize)
+                    map.put(name, base + slotStack.stackSize)
                 }
             }
             if (map.size > 0) par3List.add("${EnumChatFormatting.AQUA}" + StatCollector.translateToLocal("misc.shadowfox_botany.contains"))
@@ -370,14 +370,14 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
 
     @SideOnly(Side.CLIENT)
     override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {
-        if(type == IBaubleRender.RenderType.BODY) {
+        if (type == IBaubleRender.RenderType.BODY) {
             Minecraft.getMinecraft().renderEngine.bindTexture(beltTexture)
             IBaubleRender.Helper.rotateIfSneaking(event.entityPlayer)
             GL11.glTranslatef(0F, 0.2F, 0F)
 
             val s = 1.05F / 16F
             GL11.glScalef(s, s, s)
-            if(model == null)
+            if (model == null)
                 model = ModelBiped()
             else
                 model!!.bipedBody.render(1F)

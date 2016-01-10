@@ -467,7 +467,7 @@ public object ModRecipes {
     }
 
     private fun attributionSkull(name: String, item: Item, meta: Int): RecipePetals {
-        return BotaniaAPI.registerPetalRecipe(skullStack(name), *Array(16, {ItemStack(item, 1, meta)}))
+        return BotaniaAPI.registerPetalRecipe(skullStack(name), *Array(16, { ItemStack(item, 1, meta) }))
     }
 
     private fun addOreDictRecipe(output: ItemStack, vararg recipe: Any) {

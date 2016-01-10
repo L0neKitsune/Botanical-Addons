@@ -15,12 +15,9 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.lightning_oak.
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.nether_oak.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.schema.*
-
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.*
-import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.multiblock.MultiblockSet
-import vazkii.botania.common.lexicon.LexiconData
 import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
 
 public object ShadowFoxBlocks {
