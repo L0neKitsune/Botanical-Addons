@@ -26,6 +26,7 @@ import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.player.PlayerInteractEvent
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import org.lwjgl.opengl.GL11
+import vazkii.botania.api.item.IBlockProvider
 import vazkii.botania.client.core.handler.ClientTickHandler
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
@@ -34,7 +35,7 @@ import java.util.*
 import kotlin.text.replace
 import kotlin.text.toRegex
 
-class ItemToolbelt() : ItemBauble("toolbelt") {
+class ItemToolbelt() : ItemBauble("toolbelt"), IBlockProvider {
     companion object {
         val glowTexture = ResourceLocation("shadowfox_botany:textures/misc/toolbelt.png")
 
@@ -106,6 +107,35 @@ class ItemToolbelt() : ItemBauble("toolbelt") {
         FMLCommonHandler.instance().bus().register(this)
         setHasSubtypes(true)
         setCreativeTab(ShadowFoxCreativeTab)
+    }
+
+    override fun getBlockCount(p0: EntityPlayer?, p1: ItemStack, p2: ItemStack, p3: Block, p4: Int): Int {
+        var total = 0
+        for (segment in 0..SEGMENTS-1) {
+            val slotStack = getItemForSlot(p2, segment)
+            if (slotStack != null) {
+                val slotItem = slotStack.item
+                if (slotItem is IBlockProvider) {
+                    val count = slotItem.getBlockCount(p0, p1, slotStack, p3, p4)
+                    total += count
+                }
+            }
+        }
+        return total
+    }
+
+    override fun provideBlock(p0: EntityPlayer?, p1: ItemStack, p2: ItemStack, p3: Block, p4: Int, p5: Boolean): Boolean {
+        for (segment in 0..SEGMENTS-1) {
+            val slotStack = getItemForSlot(p2, segment)
+            if (slotStack != null) {
+                val slotItem = slotStack.item
+                if (slotItem is IBlockProvider) {
+                    val provided = slotItem.provideBlock(p0, p1, slotStack, p3, p4, p5)
+                    if (provided) return true
+                }
+            }
+        }
+        return false
     }
 
     @SubscribeEvent
