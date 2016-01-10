@@ -14,8 +14,11 @@ import net.minecraft.client.renderer.RenderBlocks
 import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.entity.RenderManager
 import net.minecraft.client.renderer.texture.TextureMap
+import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
+import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
@@ -23,6 +26,7 @@ import net.minecraft.util.EnumChatFormatting
 import net.minecraft.util.MathHelper
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.StatCollector
+import net.minecraft.world.World
 import net.minecraftforge.client.event.RenderPlayerEvent
 import net.minecraftforge.client.event.RenderWorldLastEvent
 import net.minecraftforge.common.MinecraftForge
@@ -119,7 +123,7 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
 
     override fun getBlockCount(p0: EntityPlayer?, p1: ItemStack, p2: ItemStack, p3: Block, p4: Int): Int {
         var total = 0
-        for (segment in 0..SEGMENTS-1) {
+        for (segment in 0..SEGMENTS - 1) {
             val slotStack = getItemForSlot(p2, segment)
             if (slotStack != null) {
                 val slotItem = slotStack.item
@@ -133,7 +137,7 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
     }
 
     override fun provideBlock(p0: EntityPlayer?, p1: ItemStack, p2: ItemStack, p3: Block, p4: Int, p5: Boolean): Boolean {
-        for (segment in 0..SEGMENTS-1) {
+        for (segment in 0..SEGMENTS - 1) {
             val slotStack = getItemForSlot(p2, segment)
             if (slotStack != null) {
                 val slotItem = slotStack.item
@@ -162,18 +166,31 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
             if (event.action === PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
                 val segment = getSegmentLookedAt(beltStack, player)
                 val toolStack = getItemForSlot(beltStack, segment)
+
+
                 if (toolStack == null && heldItem != null && heldItem.item != this) {
-                    setItem(beltStack, heldItem.copy(), segment)
-                    player.setCurrentItemOrArmor(0, null)
+                    if (!event.world.isRemote) {
+                        val item = heldItem.copy()
+
+                        setItem(beltStack, item, segment)
+
+                        player.inventory.decrStackSize(player.inventory.currentItem, 64)
+                        player.inventory.markDirty()
+
+                        event.isCanceled = true
+                    }
                 } else if (toolStack != null) {
                     if (heldItem == null) {
                         player.setCurrentItemOrArmor(0, toolStack.copy())
                     } else if (!player.inventory.addItemStackToInventory(toolStack.copy())) {
                         player.dropPlayerItemWithRandomChoice(toolStack.copy(), false)
                     }
+
+
                     setItem(beltStack, null, segment)
+                    event.isCanceled = true
+
                 }
-                event.isCanceled = true
             }
         }
     }
@@ -188,7 +205,7 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
                     val name = slotStack.displayName
                     val node = map[name]
                     if (node != null) base = node
-                    map.put(name, base+slotStack.stackSize)
+                    map.put(name, base + slotStack.stackSize)
                 }
             }
             if (map.size > 0) par3List.add("${EnumChatFormatting.AQUA}" + StatCollector.translateToLocal("misc.shadowfox_botany.contains"))
@@ -359,14 +376,14 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
 
     @SideOnly(Side.CLIENT)
     override fun onPlayerBaubleRender(stack: ItemStack, event: RenderPlayerEvent, type: IBaubleRender.RenderType) {
-        if(type == IBaubleRender.RenderType.BODY) {
+        if (type == IBaubleRender.RenderType.BODY) {
             Minecraft.getMinecraft().renderEngine.bindTexture(beltTexture)
             IBaubleRender.Helper.rotateIfSneaking(event.entityPlayer)
             GL11.glTranslatef(0F, 0.2F, 0F)
 
             val s = 1.05F / 16F
             GL11.glScalef(s, s, s)
-            if(model == null)
+            if (model == null)
                 model = ModelBiped()
             else
                 model!!.bipedBody.render(1F)
