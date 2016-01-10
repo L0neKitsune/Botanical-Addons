@@ -131,8 +131,8 @@ public object ShadowFoxBlocks {
         rainbowLeaves = BlockRainbowLeaves()
         irisGrass = BlockColoredGrass()
         rainbowGrass = BlockRainbowGrass()
-        invisibleFlame = BlockManaFlame("invisibleFlame", TileInvisibleManaFlame::class.java, LexiconData.lenses)
-        rainbowFlame = BlockManaFlame("rainbowFlame", TileRainbowManaFlame::class.java, LexiconRegistry.waveRod)
+        invisibleFlame = BlockManaFlame("invisibleFlame", TileInvisibleManaFlame::class.java)
+        rainbowFlame = BlockManaFlame("rainbowFlame", TileRainbowManaFlame::class.java)
 
         irisWood0 = BlockColoredWood(0)
         irisWood1 = BlockColoredWood(1)

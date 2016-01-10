@@ -22,6 +22,7 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumChatFormatting
 import net.minecraft.util.MathHelper
 import net.minecraft.util.ResourceLocation
+import net.minecraft.util.StatCollector
 import net.minecraftforge.client.event.RenderPlayerEvent
 import net.minecraftforge.client.event.RenderWorldLastEvent
 import net.minecraftforge.common.MinecraftForge
@@ -190,10 +191,10 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
                     map.put(name, base+slotStack.stackSize)
                 }
             }
-            if (map.size > 0)
-                par3List.add("${EnumChatFormatting.AQUA}Contains:")
+            if (map.size > 0) par3List.add("${EnumChatFormatting.AQUA}" + StatCollector.translateToLocal("misc.shadowfox_botany.contains"))
+            else par3List.add("${EnumChatFormatting.AQUA}" + StatCollector.translateToLocal("misc.shadowfox_botany.containsNothing"))
             for (key in map.keys) {
-                par3List.add("${map[key]}x $key")
+                par3List.add("${map[key]}x ${EnumChatFormatting.WHITE}$key")
             }
         }
         super.addHiddenTooltip(par1ItemStack, par2EntityPlayer, par3List, par4)
@@ -291,7 +292,7 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
                     GL11.glRotatef(180F, 0F, 1F, 0F)
                     GL11.glTranslatef(if (seg == 0) 0.5F else 0F, if (seg == 0) -0.1F else 0.6F, 0F)
 
-                    RenderBlocks.getInstance().renderBlockAsItem(Block.getBlockFromItem(slotStack.getItem()), slotStack.getItemDamage(), 1F)
+                    RenderBlocks.getInstance().renderBlockAsItem(Block.getBlockFromItem(slotStack.item), slotStack.itemDamage, 1F)
                 } else {
                     GL11.glScalef(0.75F, 0.75F, 0.75F)
                     GL11.glTranslatef(0F, 0F, 0.5F)

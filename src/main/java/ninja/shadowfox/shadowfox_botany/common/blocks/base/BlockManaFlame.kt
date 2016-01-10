@@ -13,12 +13,14 @@ import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileManaFlame
+import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
+import vazkii.botania.common.lexicon.LexiconData
 import java.util.*
 
 
-class BlockManaFlame(name: String, val Tile: Class<out TileManaFlame>, val entry: LexiconEntry) : BlockMod(Material.cloth), ILexiconable {
+class BlockManaFlame(val name: String, val Tile: Class<out TileManaFlame>) : BlockMod(Material.cloth), ILexiconable {
 
     override val registerInCreative = false
 
@@ -61,6 +63,10 @@ class BlockManaFlame(name: String, val Tile: Class<out TileManaFlame>, val entry
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
-        return entry
+        return when (name) {
+            "invisibleFlame" -> LexiconData.lenses
+            "rainbowFlame" -> LexiconRegistry.waveRod
+            else -> null
+        }
     }
 }

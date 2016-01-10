@@ -27,6 +27,8 @@ misc.shadowfox_botany.color.16=Bifrost
 tc.aspect.tincturem=Color, Iridescence
 
 misc.shadowfox_botany.creative=Creative
+misc.shadowfox_botany.contains=Contains:
+misc.shadowfox_botany.containsNothing=Empty
 
 item.shadowfox_botany:wiltedLotus0.name=Wilted Lotus
 item.shadowfox_botany:wiltedLotus1.name=Deathly Lotus
@@ -50,6 +52,8 @@ item.shadowfox_botany:resource1.name=Thunderous Splinters
 item.shadowfox_botany:resource2.name=Infernal Twig
 item.shadowfox_botany:resource3.name=Infernal Splinters
 item.shadowfox_botany:resource4.name=Flame-Laced Charcoal
+
+item.shadowfox_botany:toolbelt.name=Botanist's Toolbelt
 
 entity.shadowfox_botany:voidCreeper.name=Manaseal Creeper
 
