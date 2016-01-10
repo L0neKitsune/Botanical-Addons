@@ -34,7 +34,7 @@ object ThaumcraftAspects {
 
     fun initAspects() {
         if (ConfigHandler.addTincturemAspect)
-            COLOR = RainbowAspect("tincturem", arrayOf<Aspect>(Aspect.LIGHT, Aspect.ORDER), ResourceLocation("shadowfox_botany", "textures/aspects/tincturem.png"), 771)
+            COLOR = RainbowAspect("tincturem", arrayOf<Aspect>(Aspect.LIGHT, Aspect.ORDER), ResourceLocation("shadowfox_botany", "textures/misc/tincturem.png"), 771)
     }
 
     fun getAspect(mod: String, tag: String): Aspect? {

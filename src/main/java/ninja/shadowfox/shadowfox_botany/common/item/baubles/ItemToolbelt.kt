@@ -26,7 +26,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import org.lwjgl.opengl.GL11
 import vazkii.botania.client.core.handler.ClientTickHandler
-import vazkii.botania.client.lib.LibResources
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
 import java.awt.Color
@@ -35,7 +34,7 @@ import kotlin.text.toRegex
 
 class ItemToolbelt() : ItemBauble("toolbelt") {
     companion object {
-        val glowTexture = ResourceLocation(LibResources.MISC_GLOW_GREEN)
+        val glowTexture = ResourceLocation("shadowfox_botany:textures/misc/toolbelt.png")
 
         val SEGMENTS = 12
 
@@ -120,18 +119,18 @@ class ItemToolbelt() : ItemBauble("toolbelt") {
         }
         var heldItem = player.currentEquippedItem
         if (beltStack != null && isEquipped(beltStack)) {
-            if (event.action === PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK || event.action === PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
+            if (event.action === PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
                 val segment = getSegmentLookedAt(beltStack, player)
                 val toolStack = getItemForSlot(beltStack, segment)
                 if (toolStack == null && heldItem != null) {
                     setItem(beltStack, heldItem.copy(), segment)
                     player.setCurrentItemOrArmor(0, null)
-                    println("added " + heldItem.toString())
                 } else if (toolStack != null) {
-                    if (!player.inventory.addItemStackToInventory(toolStack.copy())) {
+                    if (heldItem == null) {
+                        player.setCurrentItemOrArmor(0, toolStack.copy())
+                    } else if (!player.inventory.addItemStackToInventory(toolStack.copy())) {
                         player.dropPlayerItemWithRandomChoice(toolStack.copy(), false)
                     }
-                    println("removed " + toolStack.toString())
                     setItem(beltStack, null, segment)
                 }
                 event.isCanceled = true
