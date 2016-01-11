@@ -14,11 +14,8 @@ import net.minecraft.client.renderer.RenderBlocks
 import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.entity.RenderManager
 import net.minecraft.client.renderer.texture.TextureMap
-import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
-import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
@@ -26,7 +23,6 @@ import net.minecraft.util.EnumChatFormatting
 import net.minecraft.util.MathHelper
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.StatCollector
-import net.minecraft.world.World
 import net.minecraftforge.client.event.RenderPlayerEvent
 import net.minecraftforge.client.event.RenderWorldLastEvent
 import net.minecraftforge.common.MinecraftForge
@@ -44,6 +40,7 @@ import kotlin.text.replace
 import kotlin.text.toRegex
 
 class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
+    // ItemToolbelt will not become an IManaItem. That's... a bit excessivly OP, imo. Store those in your Bauble Case.
     companion object {
         val glowTexture = ResourceLocation("shadowfox_botany:textures/misc/toolbelt.png")
         val beltTexture = ResourceLocation("shadowfox_botany:textures/model/toolbelt.png")
@@ -173,34 +170,36 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
             }
         }
         var heldItem = player.currentEquippedItem
+        println("Belt: $beltStack") //DEBUG
+        println("in hand: $heldItem") //DEBUG
+        println("Remote? ${if (event.world.isRemote) "yes" else "no"}") //DEBUG
         if (beltStack != null && isEquipped(beltStack)) {
+            println("got here") //DEBUG
             if (event.action === PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
                 val segment = getSegmentLookedAt(beltStack, player)
                 val toolStack = getItemForSlot(beltStack, segment)
-
-
-                if (toolStack == null && heldItem != null && heldItem.item != this) {
-                    if (!event.world.isRemote) {
+                println("got here") //DEBUG
+                if (!event.world.isRemote) {
+                    println("in segment: $toolStack") //DEBUG
+                    if (toolStack == null && heldItem != null && heldItem.item != this) {
                         val item = heldItem.copy()
 
                         setItem(beltStack, item, segment)
 
                         player.inventory.decrStackSize(player.inventory.currentItem, 64)
                         player.inventory.markDirty()
+                        event.isCanceled = true
+                    } else if (toolStack != null) {
+                        if (heldItem == null) {
+                            player.setCurrentItemOrArmor(0, toolStack.copy())
+                            player.inventory.markDirty()
+                        } else if (!player.inventory.addItemStackToInventory(toolStack.copy())) {
+                            player.dropPlayerItemWithRandomChoice(toolStack.copy(), false)
+                        }
 
+                        setItem(beltStack, null, segment)
                         event.isCanceled = true
                     }
-                } else if (toolStack != null) {
-                    if (heldItem == null) {
-                        player.setCurrentItemOrArmor(0, toolStack.copy())
-                    } else if (!player.inventory.addItemStackToInventory(toolStack.copy())) {
-                        player.dropPlayerItemWithRandomChoice(toolStack.copy(), false)
-                    }
-
-
-                    setItem(beltStack, null, segment)
-                    event.isCanceled = true
-
                 }
             }
         }
@@ -318,7 +317,7 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
                 if (slotStack.item is ItemBlock && RenderBlocks.renderItemIn3d(Block.getBlockFromItem(slotStack.item).renderType)) {
                     GL11.glScalef(0.6F, 0.6F, 0.6F)
                     GL11.glRotatef(180F, 0F, 1F, 0F)
-                    GL11.glTranslatef(if (seg == 0) 0.5F else 0F, if (seg == 0) -0.1F else 0.6F, 0F)
+                    GL11.glTranslatef(0F, 0.6F, 0F)
 
                     RenderBlocks.getInstance().renderBlockAsItem(Block.getBlockFromItem(slotStack.item), slotStack.itemDamage, 1F)
                 } else {
