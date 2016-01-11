@@ -9,7 +9,7 @@ import io.netty.buffer.ByteBuf
 import net.minecraft.item.ItemStack
 
 
-class PlayerItemMessage(var item : ItemStack? = null) : IMessage {
+class PlayerItemMessage(var item: ItemStack? = null) : IMessage {
     override fun fromBytes(buf: ByteBuf?) {
         buf?.let {
             item = ByteBufUtils.readItemStack(buf)
@@ -24,7 +24,7 @@ class PlayerItemMessage(var item : ItemStack? = null) : IMessage {
 class PlayerItemMessageHandler() : IMessageHandler<PlayerItemMessage, IMessage> {
 
     override fun onMessage(message: PlayerItemMessage?, ctx: MessageContext?): IMessage? {
-        if(ctx != null && message != null && message.item != null && ctx.side == Side.SERVER) {
+        if (ctx != null && message != null && message.item != null && ctx.side.isServer) {
             val player = ctx.serverHandler.playerEntity
 
             var heldItem = player.currentEquippedItem

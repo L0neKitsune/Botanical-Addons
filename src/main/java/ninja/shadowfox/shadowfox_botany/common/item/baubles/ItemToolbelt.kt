@@ -8,7 +8,6 @@ import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.client.Minecraft
-import net.minecraft.client.entity.EntityClientPlayerMP
 import net.minecraft.client.model.ModelBiped
 import net.minecraft.client.renderer.ItemRenderer
 import net.minecraft.client.renderer.RenderBlocks
@@ -17,13 +16,9 @@ import net.minecraft.client.renderer.entity.RenderManager
 import net.minecraft.client.renderer.texture.TextureMap
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
-
-import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.network.play.server.S2CPacketSpawnGlobalEntity
-import net.minecraft.network.play.server.S2FPacketSetSlot
 import net.minecraft.util.EnumChatFormatting
 import net.minecraft.util.MathHelper
 import net.minecraft.util.ResourceLocation
@@ -177,18 +172,12 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
             }
         }
         var heldItem = player.currentEquippedItem
-        println("Belt: $beltStack") //DEBUG
-        println("in hand: $heldItem") //DEBUG
-        println("Remote? ${if (event.world.isRemote) "yes" else "no"}") //DEBUG
         if (beltStack != null && isEquipped(beltStack)) {
-            println("got here") //DEBUG
             if (event.action === PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
                 val segment = getSegmentLookedAt(beltStack, player)
                 val toolStack = getItemForSlot(beltStack, segment)
-                println("got here") //DEBUG
-                if (!event.world.isRemote) {
-                    println("in segment: $toolStack") //DEBUG
-                    if (toolStack == null && heldItem != null && heldItem.item != this) {
+                if (toolStack == null && heldItem != null && heldItem.item != this) {
+                    if (!event.world.isRemote) {
                         val item = heldItem.copy()
 
                         setItem(beltStack, item, segment)
@@ -196,16 +185,13 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
                         player.inventory.decrStackSize(player.inventory.currentItem, 64)
                         player.inventory.markDirty()
                         event.isCanceled = true
-                    } else {
-                        if (toolStack != null) {
-                            ShadowfoxBotany.network.sendToServer(PlayerItemMessage(toolStack))
-
-                            setItem(beltStack, null, segment)
-                            event.isCanceled = true
-                        }
                     }
-                }
+                } else if (toolStack != null) {
+                    ShadowfoxBotany.network.sendToServer(PlayerItemMessage(toolStack))
 
+                    setItem(beltStack, null, segment)
+                    event.isCanceled = true
+                }
             }
         }
     }
