@@ -6,7 +6,11 @@ import cpw.mods.fml.common.SidedProxy
 import cpw.mods.fml.common.event.FMLInitializationEvent
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
+import cpw.mods.fml.relauncher.Side
 import ninja.shadowfox.shadowfox_botany.common.core.proxy.CommonProxy
+import ninja.shadowfox.shadowfox_botany.common.network.PlayerItemMessage
+import ninja.shadowfox.shadowfox_botany.common.network.PlayerItemMessageHandler
 import ninja.shadowfox.shadowfox_botany.lib.Constants
 
 @Mod(modid = Constants.MODID, version = Constants.VERSION, name = Constants.MODNAME, dependencies = Constants.DEPENDENCIES)
@@ -14,6 +18,7 @@ public class ShadowfoxBotany {
 
     companion object {
         var thaumcraftLoaded = false
+        lateinit var network: SimpleNetworkWrapper
 
         @field:Mod.Instance("ShadowfoxBotany") lateinit var instance: ShadowfoxBotany
 
@@ -26,7 +31,9 @@ public class ShadowfoxBotany {
 
         instance = this
         thaumcraftLoaded = Loader.isModLoaded("Thaumcraft")
+        network = SimpleNetworkWrapper(Constants.MODID)
 
+        network.registerMessage(PlayerItemMessageHandler::class.java, PlayerItemMessage::class.java, 0, Side.SERVER)
         proxy.preInit(event)
     }
 

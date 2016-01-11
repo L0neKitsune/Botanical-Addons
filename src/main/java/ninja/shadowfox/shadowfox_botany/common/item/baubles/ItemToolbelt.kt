@@ -8,30 +8,33 @@ import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.client.Minecraft
+import net.minecraft.client.entity.EntityClientPlayerMP
 import net.minecraft.client.model.ModelBiped
 import net.minecraft.client.renderer.ItemRenderer
 import net.minecraft.client.renderer.RenderBlocks
 import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.entity.RenderManager
 import net.minecraft.client.renderer.texture.TextureMap
-import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.inventory.IInventory
+import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.network.play.server.S2CPacketSpawnGlobalEntity
+import net.minecraft.network.play.server.S2FPacketSetSlot
 import net.minecraft.util.EnumChatFormatting
 import net.minecraft.util.MathHelper
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.StatCollector
-import net.minecraft.world.World
 import net.minecraftforge.client.event.RenderPlayerEvent
 import net.minecraftforge.client.event.RenderWorldLastEvent
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.player.PlayerInteractEvent
+import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
+import ninja.shadowfox.shadowfox_botany.common.network.PlayerItemMessage
 import org.lwjgl.opengl.GL11
 import vazkii.botania.api.item.IBaubleRender
 import vazkii.botania.api.item.IBlockProvider
@@ -191,15 +194,12 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
                         event.isCanceled = true
                     }
                 } else if (toolStack != null) {
-                    if (heldItem == null) {
-                        player.setCurrentItemOrArmor(0, toolStack.copy())
-                    } else if (!player.inventory.addItemStackToInventory(toolStack.copy())) {
-                        player.dropPlayerItemWithRandomChoice(toolStack.copy(), false)
-                    }
 
-
+                    ShadowfoxBotany.network.sendToServer(PlayerItemMessage(toolStack))
                     setItem(beltStack, null, segment)
                     event.isCanceled = true
+
+                } else {
 
                 }
             }
