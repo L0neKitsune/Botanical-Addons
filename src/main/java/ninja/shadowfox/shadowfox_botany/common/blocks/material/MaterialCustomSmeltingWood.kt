@@ -10,12 +10,12 @@ class MaterialCustomSmeltingWood : Material(MapColor.woodColor) {
         val instance = MaterialCustomSmeltingWood()
 
         init {
-            ToolCommons.materialsAxe.append(instance)
+            ToolCommons.materialsAxe = append(ToolCommons.materialsAxe, instance)
         }
 
-        fun <T> Array<T>.append(element: T): Array<T> {
-            val N = this.size
-            val newarr = Arrays.copyOf(this, N + 1)
+        fun <T> append(arr: Array<T>, element: T): Array<T> {
+            val N = arr.size
+            val newarr = Arrays.copyOf(arr, N + 1)
             newarr[N] = element
             return newarr
         }
