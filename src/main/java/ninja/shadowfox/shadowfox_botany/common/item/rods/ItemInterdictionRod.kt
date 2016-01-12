@@ -75,13 +75,13 @@ public open class ItemInterdictionRod(name: String = "interdictionRod") : ItemMo
 
     object PLAYER_SELECTOR : IEntitySelector {
         override fun isEntityApplicable(e: Entity): Boolean {
-            return (e is EntityLivingBase && !(e is EntityDoppleganger)) || (e is IProjectile && !(e is IManaBurst))
+            return (e is EntityLivingBase && e !is EntityDoppleganger) || (e is IProjectile && e !is IManaBurst)
         }
     }
 
     object AVATAR_SELECTOR : IEntitySelector {
         override fun isEntityApplicable(e: Entity): Boolean {
-            return e is EntityLivingBase && !(e is EntityPlayer) && !(e is EntityDoppleganger)
+            return e is EntityLivingBase && e !is EntityPlayer && e !is EntityDoppleganger
         }
     }
 

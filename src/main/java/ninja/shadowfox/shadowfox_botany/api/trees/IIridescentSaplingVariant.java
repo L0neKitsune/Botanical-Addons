@@ -5,13 +5,13 @@ import net.minecraft.block.Block;
 import java.util.List;
 
 public interface IIridescentSaplingVariant {
-    public int getMeta(Block soil, int meta, Block toPlace);
+    int getMeta(Block soil, int meta, Block toPlace);
 
-    public List<Block> getAcceptableSoils();
+    List<Block> getAcceptableSoils();
 
-    public boolean matchesSoil(Block soil, int meta);
+    boolean matchesSoil(Block soil, int meta);
 
-    public Block getLeaves(Block soil, int meta);
+    Block getLeaves(Block soil, int meta);
 
-    public Block getWood(Block soil, int meta);
+    Block getWood(Block soil, int meta);
 }

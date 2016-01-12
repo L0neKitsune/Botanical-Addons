@@ -8,11 +8,11 @@ class TileInvisibleManaFlame : TileManaFlame() {
     public var flameColor = 0x20FF20
 
     override fun writeCustomNBT(nbttagcompound: NBTTagCompound) {
-        nbttagcompound.setInteger("color", this.flameColor)
+        nbttagcompound.setInteger(TAG_COLOR, this.flameColor)
     }
 
     override fun readCustomNBT(nbttagcompound: NBTTagCompound) {
-        this.flameColor = nbttagcompound.getInteger("color")
+        this.flameColor = nbttagcompound.getInteger(TAG_COLOR)
     }
 
     override fun getColor(): Int {

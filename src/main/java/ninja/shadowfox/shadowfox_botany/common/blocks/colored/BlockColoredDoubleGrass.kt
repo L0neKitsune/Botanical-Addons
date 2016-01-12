@@ -37,7 +37,6 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
 
     val name = "irisDoubleGrass$colorSet"
     val TYPES: Int = 8
-    internal var field_150128_a: IntArray? = null
     var topIcon: IIcon by Delegates.notNull()
     var bottomIcon: IIcon by Delegates.notNull()
 

@@ -64,7 +64,7 @@ class TileTreeCrafter() : TileMod(), ISparkAttachable {
             return mb.makeSet()
         }
 
-        fun canEnchanterExist(world: World, x: Int, y: Int, z: Int, meta: Int, player: EntityPlayer?): Boolean {
+        fun canEnchanterExist(world: World, x: Int, y: Int, z: Int): Boolean {
 
             val y0 = y - 4
 
@@ -130,7 +130,7 @@ class TileTreeCrafter() : TileMod(), ISparkAttachable {
     public var signal = 0
 
     override fun updateEntity() {
-        if (!canEnchanterExist(this.worldObj, this.xCoord, this.yCoord, this.zCoord, this.blockMetadata, null)) {
+        if (!canEnchanterExist(this.worldObj, this.xCoord, this.yCoord, this.zCoord)) {
             val block = worldObj.getBlock(xCoord, yCoord, zCoord)
             val meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord)
 

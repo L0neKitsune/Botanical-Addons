@@ -35,7 +35,7 @@ import kotlin.text.replace
 import kotlin.text.toRegex
 
 class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble {
-    private val kitsuneTexture = ResourceLocation("shadowfox_botany:textures/items/kitsunesTail.png")
+    // private val kitsuneTexture = ResourceLocation("shadowfox_botany:textures/items/kitsunesTail.png")
     private lateinit var potatoTexture: ResourceLocation
 
     var defaultIcon: IIcon by Delegates.notNull()
@@ -46,7 +46,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
     init {
         setHasSubtypes(true)
         setCreativeTab(ShadowFoxCreativeTab)
-        if (FMLLaunchHandler.side().isClient()) {
+        if (FMLLaunchHandler.side().isClient) {
             MinecraftForge.EVENT_BUS.register(this)
             potatoTexture = ResourceLocation(if (ClientProxy.dootDoot) LibResources.MODEL_TINY_POTATO_HALLOWEEN else LibResources.MODEL_TINY_POTATO)
         }
@@ -114,8 +114,8 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
     override fun onEquipped(stack: ItemStack, player: EntityLivingBase) {
         super.onEquipped(stack, player)
         if (stack.itemDamage !== 1 && stack.displayName.equals("vazkii is bae")) {
-            stack.setItemDamage(1)
-            stack.getTagCompound().removeTag("display")
+            stack.itemDamage = 1
+            stack.tagCompound.removeTag("display")
         }
     }
 

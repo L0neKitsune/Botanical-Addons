@@ -31,8 +31,8 @@ class BlockAltWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks
         return ShadowFoxBlocks.altSlabsFull[meta] as BlockSlab
     }
 
-    override fun getIcon(side: Int, blockMeta: Int): IIcon {
-        return source.getIcon(side, meta)
+    override fun getIcon(par1: Int, par2: Int): IIcon {
+        return source.getIcon(par1, meta)
     }
 
     override fun register() {

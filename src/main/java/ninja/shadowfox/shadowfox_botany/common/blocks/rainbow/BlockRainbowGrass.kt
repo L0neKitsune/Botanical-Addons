@@ -31,7 +31,7 @@ public class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
     init {
         setCreativeTab(ShadowFoxCreativeTab)
         setStepSound(Block.soundTypeGrass)
-        if (FMLLaunchHandler.side().isClient())
+        if (FMLLaunchHandler.side().isClient)
             MinecraftForge.EVENT_BUS.register(this)
         setBlockName("rainbowGrass")
 

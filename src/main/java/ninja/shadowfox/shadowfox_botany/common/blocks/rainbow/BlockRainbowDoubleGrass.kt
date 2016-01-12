@@ -32,14 +32,13 @@ import kotlin.properties.Delegates
 public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
 
     val name = "rainbowDoubleGrass"
-    internal var field_150128_a: IntArray? = null
     var topIcon: IIcon by Delegates.notNull()
     var bottomIcon: IIcon by Delegates.notNull()
 
     init {
         setCreativeTab(ShadowFoxCreativeTab)
         setStepSound(Block.soundTypeGrass)
-        if (FMLLaunchHandler.side().isClient())
+        if (FMLLaunchHandler.side().isClient)
             MinecraftForge.EVENT_BUS.register(this)
         setBlockNameSafe(name)
     }

@@ -71,7 +71,7 @@ class RecipeRingDyes : IRecipe {
                         b += color.blue
                     }
                 } else {
-                    if (tempstack.getItem() != BotaniaItems.dye)
+                    if (tempstack.item != BotaniaItems.dye)
                         return null
 
                     var dyecolortable = EntitySheep.fleeceColorTable[tempstack.itemDamage]

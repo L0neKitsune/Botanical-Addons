@@ -43,10 +43,6 @@ public class BlockNetherWood() : ShadowFoxRotatedPillar(Material.wood), ILexicon
         super.breakBlock(world, x, y, z, block, fortune)
     }
 
-    public fun isHeartWood(meta: Int): Boolean {
-        return meta and 3 == 1
-    }
-
     override fun isFireSource(world: World?, x: Int, y: Int, z: Int, side: ForgeDirection?): Boolean = true
     override fun isFlammable(world: IBlockAccess?, x: Int, y: Int, z: Int, face: ForgeDirection?): Boolean = false
     override fun getFireSpreadSpeed(world: IBlockAccess?, x: Int, y: Int, z: Int, face: ForgeDirection?): Int = 0

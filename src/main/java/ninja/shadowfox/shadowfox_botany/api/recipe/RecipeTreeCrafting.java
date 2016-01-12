@@ -80,8 +80,7 @@ public class RecipeTreeCrafting extends RecipePetals {
                 if (stack.isItemEqual(cstack)) return true;
             }
 
-        } else if (stack2 instanceof ItemStack && simpleAreStacksEqual(stack, (ItemStack) stack2)) return true;
-        else return false;
+        } else return stack2 instanceof ItemStack && simpleAreStacksEqual(stack, (ItemStack) stack2);
         return false;
     }
 

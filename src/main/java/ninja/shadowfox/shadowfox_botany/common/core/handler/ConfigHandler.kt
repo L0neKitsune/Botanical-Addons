@@ -25,7 +25,6 @@ public class ConfigHandler {
 
     public companion object {
         var config: Configuration by Delegates.notNull()
-        private val CATEGORY_POTIONS = "potions"
         var realLightning = false
         var uberCreepers = false
         var passiveLightning = true

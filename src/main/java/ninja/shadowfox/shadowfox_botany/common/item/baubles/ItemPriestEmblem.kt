@@ -45,7 +45,7 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
         public fun getEmblem(meta: Int, player: EntityPlayer?): ItemStack? {
             var baubles = PlayerHandler.getPlayerBaubles(player)
             var stack = baubles.getStackInSlot(0)
-            return if (stack != null && ((stack.item == ShadowFoxItems.emblem && stack.getItemDamage() == meta) || stack.item == ShadowFoxItems.aesirEmblem) && isActive(stack)) stack else null
+            return if (stack != null && ((stack.item == ShadowFoxItems.emblem && stack.itemDamage == meta) || stack.item == ShadowFoxItems.aesirEmblem) && isActive(stack)) stack else null
         }
 
         public fun isActive(stack: ItemStack): Boolean {

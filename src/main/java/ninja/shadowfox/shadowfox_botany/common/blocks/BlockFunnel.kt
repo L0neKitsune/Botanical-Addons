@@ -313,20 +313,20 @@ class BlockFunnel() : BlockContainerMod<TileLivingwoodFunnel>(Material.wood), IW
             if (!flag) {
                 tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z))
                 val j1 = block.colorMultiplier(renderer.blockAccess, x, y, z)
-                var f = (j1 shr 16 and 255).toFloat() / 255.0f
+                var g = (j1 shr 16 and 255).toFloat() / 255.0f
                 f1 = (j1 shr 8 and 255).toFloat() / 255.0f
-                var f2 = (j1 and 255).toFloat() / 255.0f
+                var g1 = (j1 and 255).toFloat() / 255.0f
 
                 if (EntityRenderer.anaglyphEnable) {
-                    val f3 = (f * 30.0f + f1 * 59.0f + f2 * 11.0f) / 100.0f
-                    val f4 = (f * 30.0f + f1 * 70.0f) / 100.0f
-                    val f5 = (f * 30.0f + f2 * 70.0f) / 100.0f
-                    f = f3
+                    val f3 = (g * 30.0f + f1 * 59.0f + g1 * 11.0f) / 100.0f
+                    val f4 = (g * 30.0f + f1 * 70.0f) / 100.0f
+                    val f5 = (g * 30.0f + g1 * 70.0f) / 100.0f
+                    g = f3
                     f1 = f4
-                    f2 = f5
+                    g1 = f5
                 }
 
-                tessellator.setColorOpaque_F(f, f1, f2)
+                tessellator.setColorOpaque_F(g, f1, g1)
             }
 
             val iicon = BlockFunnel.getHopperIcon("funnel_outside")
