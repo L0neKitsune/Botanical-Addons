@@ -107,6 +107,8 @@ public object ShadowFoxBlocks {
     public var fillerBlock: Block
     public var annihilatorBlock: Block
 
+    public var irisLamp: Block
+
     public var iridescentTree0: IIridescentSaplingVariant
     public var iridescentTree1: IIridescentSaplingVariant
     public var iridescentTree2: IIridescentSaplingVariant
@@ -191,6 +193,8 @@ public object ShadowFoxBlocks {
         schemaGenBlock = BlockSchematicOak()
         fillerBlock = BlockFiller()
         annihilatorBlock = BlockSchematicAnnihilator()
+
+        irisLamp = BlockColoredLamp()
 
         register()
         initOreDict()
