@@ -28,13 +28,11 @@ class ItemResource() : ItemMod("resource"), IFlowerComponent, IFuelHandler {
     }
 
     val TYPES = 5
-    val INTERP = 1 shr 0 and 1 shr 4
-    val COMPONENT = 1 shr 4
 
     var icons: Array<IIcon?> = arrayOfNulls(TYPES)
 
-    private fun isInterpolated(meta: Int): Boolean = (1 shr meta) and INTERP != 0
-    private fun isFlowerComponent(meta: Int): Boolean = (1 shr meta) and COMPONENT != 0
+    private fun isInterpolated(meta: Int): Boolean = meta == 0 || meta == 4
+    private fun isFlowerComponent(meta: Int): Boolean = meta == 4
 
     @SideOnly(Side.CLIENT)
     override fun registerIcons(par1IconRegister: IIconRegister) {

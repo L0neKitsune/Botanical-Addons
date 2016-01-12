@@ -32,6 +32,7 @@ public object LexiconRegistry {
     val lightningSapling: LexiconEntry
     val livingwoodFunnel: LexiconEntry
     val netherSapling: LexiconEntry
+    val toolbelt: LexiconEntry
 
     init {
 
@@ -131,6 +132,10 @@ public object LexiconRegistry {
                 PageFurnaceRecipe("6", ItemStack(ShadowFoxBlocks.netherWood)),
                 PageFurnaceRecipe("7", ItemStack(ShadowFoxBlocks.netherPlanks)))
 
+        toolbelt = ShadowfoxLexiconEntry("toolbelt", BotaniaAPI.categoryBaubles, ShadowFoxItems.toolbelt).setKnowledgeType(BotaniaAPI.elvenKnowledge)
+        toolbelt.setLexiconPages(PageText("0"),
+                PageCraftingRecipe("1", ModRecipes.recipesToolbelt))
+
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.interdictionRod), interdictionRod, 1)
@@ -167,6 +172,8 @@ public object LexiconRegistry {
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.resource, 1, 2), netherSapling, 5)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.resource, 1, 3), netherSapling, 6)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.resource, 1, 4), netherSapling, 7)
+
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.toolbelt), toolbelt, 1)
 
         for (i in 0..2)
             LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.itemDisplay, 1, i), itemDisplay, 1)

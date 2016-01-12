@@ -15,6 +15,7 @@ import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemPriestEmblem
+import ninja.shadowfox.shadowfox_botany.common.item.baubles.ItemToolbelt
 import vazkii.botania.api.item.IAvatarTile
 import vazkii.botania.api.item.IAvatarWieldable
 import vazkii.botania.api.item.IBlockProvider
@@ -71,6 +72,11 @@ class ItemIridescentRod(name: String = "colorfulSkyDirtRod") : ItemIridescent(na
 
     override fun onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer): ItemStack {
         var blockstack = ItemIridescent.dirtStack(stack.itemDamage)
+
+        val beltStack = ItemToolbelt.getEquippedBelt(player)
+        if (beltStack != null && ItemToolbelt.isEquipped(beltStack))
+            return stack
+
         if (player.isSneaking) {
             var damage = stack.itemDamage
             if (!world.isRemote) {

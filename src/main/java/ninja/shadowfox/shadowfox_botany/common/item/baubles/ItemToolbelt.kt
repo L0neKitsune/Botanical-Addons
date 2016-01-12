@@ -28,7 +28,9 @@ import net.minecraftforge.client.event.RenderWorldLastEvent
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.player.PlayerInteractEvent
 import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
+import ninja.shadowfox.shadowfox_botany.api.item.IToolbeltBlacklisted
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
+import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import ninja.shadowfox.shadowfox_botany.common.network.PlayerItemMessage
 import org.lwjgl.opengl.GL11
 import vazkii.botania.api.item.IBaubleRender
@@ -41,8 +43,8 @@ import java.util.*
 import kotlin.text.replace
 import kotlin.text.toRegex
 
-class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
-    // ItemToolbelt will not become an IManaItem. That's... a bit excessivly OP, imo. Store those in your Bauble Case.
+class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider, IToolbeltBlacklisted {
+    // ItemToolbelt will not become an IManaItem. That's... a bit excessivly OP, imo. Store those in your Bauble Case, or keep them in your inventory.
     companion object {
         val glowTexture = ResourceLocation("shadowfox_botany:textures/misc/toolbelt.png")
         val beltTexture = ResourceLocation("shadowfox_botany:textures/model/toolbelt.png")
@@ -111,6 +113,18 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
                 ItemNBTHelper.setCompound(beltStack, TAG_ITEM_PREFIX + pos, tag)
             }
         }
+
+        fun getEquippedBelt(player: EntityPlayer): ItemStack? {
+            val inv = PlayerHandler.getPlayerBaubles(player)
+            var beltStack: ItemStack? = null
+            for (i in 0..inv.sizeInventory) {
+                var stack = inv.getStackInSlot(i)
+                if (stack != null && stack.item is ItemToolbelt) {
+                    beltStack = stack
+                }
+            }
+            return beltStack
+        }
     }
 
     init {
@@ -163,28 +177,25 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
     @SubscribeEvent
     fun onPlayerInteract(event: PlayerInteractEvent) {
         val player = event.entityPlayer
-        val inv = PlayerHandler.getPlayerBaubles(player)
-        var beltStack: ItemStack? = null
-        for (i in 0..inv.sizeInventory) {
-            var stack = inv.getStackInSlot(i)
-            if (stack != null && stack.item == this) {
-                beltStack = stack
-            }
-        }
+        val beltStack = getEquippedBelt(player)
+
         var heldItem = player.currentEquippedItem
         if (beltStack != null && isEquipped(beltStack)) {
             if (event.action === PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
                 val segment = getSegmentLookedAt(beltStack, player)
                 val toolStack = getItemForSlot(beltStack, segment)
-                if (toolStack == null && heldItem != null && heldItem.item != this) {
-                    if (!event.world.isRemote) {
-                        val item = heldItem.copy()
+                if (toolStack == null && heldItem != null) {
+                    val heldItemObject = heldItem.item
+                    if (!(heldItemObject is IToolbeltBlacklisted && !heldItemObject.allowedInToolbelt(heldItem))) {
+                        if (!event.world.isRemote) {
+                            val item = heldItem.copy()
 
-                        setItem(beltStack, item, segment)
+                            setItem(beltStack, item, segment)
 
-                        player.inventory.decrStackSize(player.inventory.currentItem, 64)
-                        player.inventory.markDirty()
-                        event.isCanceled = true
+                            player.inventory.decrStackSize(player.inventory.currentItem, 64)
+                            player.inventory.markDirty()
+                            event.isCanceled = true
+                        }
                     }
                 } else if (toolStack != null) {
                     ShadowfoxBotany.network.sendToServer(PlayerItemMessage(toolStack))
@@ -195,6 +206,8 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
             }
         }
     }
+
+    override fun allowedInToolbelt(stack: ItemStack): Boolean = false
 
     override fun addHiddenTooltip(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>, par4: Boolean) {
         if (par1ItemStack != null) {
@@ -211,7 +224,9 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
             }
             if (map.size > 0) par3List.add("${EnumChatFormatting.AQUA}" + StatCollector.translateToLocal("misc.shadowfox_botany.contains"))
             else par3List.add("${EnumChatFormatting.AQUA}" + StatCollector.translateToLocal("misc.shadowfox_botany.containsNothing"))
-            for (key in map.keys) {
+            val keys = ArrayList<String>(map.keys)
+            Collections.sort(keys)
+            for (key in keys) {
                 par3List.add("${map[key]}x ${EnumChatFormatting.WHITE}$key")
             }
         }
@@ -246,14 +261,7 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider {
     @SubscribeEvent
     fun onRenderWorldLast(event: RenderWorldLastEvent) {
         val player = Minecraft.getMinecraft().thePlayer
-        val inv = PlayerHandler.getPlayerBaubles(player)
-        var beltStack: ItemStack? = null
-        for (i in 0..inv.sizeInventory) {
-            var stack = inv.getStackInSlot(i)
-            if (stack != null && stack.item == this) {
-                beltStack = stack
-            }
-        }
+        var beltStack = getEquippedBelt(player)
         if (beltStack != null && isEquipped(beltStack))
             render(beltStack, player, event.partialTicks)
     }

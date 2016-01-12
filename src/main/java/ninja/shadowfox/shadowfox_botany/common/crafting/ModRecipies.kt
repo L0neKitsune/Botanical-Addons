@@ -66,6 +66,7 @@ public object ModRecipes {
     val recipesAltSlabs: List<IRecipe>
     val recipesAltStairsR: List<IRecipe>
     val recipesAltStairsL: List<IRecipe>
+    val recipesToolbelt: IRecipe
 
     val recipesPastoralSeeds: List<RecipeManaInfusion>
 
@@ -436,6 +437,17 @@ public object ModRecipes {
                     'Q', ItemStack(ShadowFoxBlocks.altPlanks, 1, i))
 
         recipesAltStairsL = BotaniaAPI.getLatestAddedRecipes(6)
+
+        addOreDictRecipe(ItemStack(ShadowFoxItems.toolbelt),
+                "CL ",
+                "L L",
+                "PLS",
+                'P', LibOreDict.PIXIE_DUST,
+                'L', ItemStack(Items.leather),
+                'C', ItemStack(Blocks.chest),
+                'S', LibOreDict.RUNE[12]) // Sloth
+
+        recipesToolbelt = BotaniaAPI.getLatestAddedRecipe()
 
         recipesAttributionHeads = ArrayList<RecipePetals>()
         recipesAttributionHeads.add(attributionSkull("yrsegal", ShadowFoxItems.irisSeeds, 16)) // Bifrost Seeds

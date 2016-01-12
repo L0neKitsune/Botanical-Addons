@@ -216,6 +216,8 @@ shadowfox_botany.entry.infernalSapling=Infernal Oak
 shadowfox_botany.tagline.infernalSapling=A fireproof tree
 shadowfox_botany.entry.livingwoodFunnel=Livingwood Funnel
 shadowfox_botany.tagline.livingwoodFunnel=A filterable hopper that only carries one item
+shadowfox_botany.entry.toolbelt=Botanist's Toolbelt
+shadowfox_botany.tagline.toolbelt=12 stacks of at-the-ready storage
 
 shadowfox_botany.category.dendrology=Dendrology
 
@@ -228,7 +230,7 @@ shadowfox_botany.page.technicolorRod2=It appears that connecting your soul to th
 shadowfox_botany.page.technicolorRod3=Welcome now, and take the crystal cup
 
 shadowfox_botany.page.lightningRod0=The &1Rod of the Thundering Peaks&0, much like its sword cousin, the &1Thundercaller&0, can summon lightning to strike your enemies. It will leap from enemy to enemy, killing them all in turn.<br>A &1Livingwood Avatar&0 can also wield this rod.
-shadowfox_botany.page.lightningRod1=Not quite a blessed blade
+shadowfox_botany.page.lightningRod1=The experimental results are shocking
 shadowfox_botany.page.lightningRod2=It appears that connecting your soul to the ancient god of lightning, &4Thor&0, can increase your proficiency with the power of thunder. By donning the &1Priestly Emblem: Thor&0, this can be achieved. It seems that &4Manatide Prowess&0 has a similar effect upon the rod.<br>There appear to be even further power trapped within the rod, but it would take a god to get it out.
 shadowfox_botany.page.lightningRod3=In anger smite the earth
 
@@ -296,3 +298,6 @@ shadowfox_botany.page.infernalSapling4=Stairs
 shadowfox_botany.page.infernalSapling5=Twigs
 shadowfox_botany.page.infernalSapling6=Coal
 shadowfox_botany.page.infernalSapling7=And splinters
+
+shadowfox_botany.page.toolbelt0=The &1Botanist's Toolbelt&0 is an easy-access extra inventory. By sneaking, you gain access to 12 extra stacks of storage, which can be used by interacting with the air around where they appear. Any items or blocks in it will provide for the &1Rod of the Shifting Crust&0.
+shadowfox_botany.page.toolbelt1=Not quite hammerspace
