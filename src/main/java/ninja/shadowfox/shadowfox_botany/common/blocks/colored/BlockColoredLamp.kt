@@ -1,16 +1,21 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.colored
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler
+import cpw.mods.fml.common.eventhandler.SubscribeEvent
+import cpw.mods.fml.relauncher.FMLLaunchHandler
+import cpw.mods.fml.relauncher.Side
+import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
-import net.minecraft.client.Minecraft
-import net.minecraft.client.renderer.EntityRenderer
-import net.minecraft.client.renderer.RenderBlocks
-import net.minecraft.client.renderer.Tessellator
+import net.minecraft.item.ItemStack
+import net.minecraft.util.IIcon
+import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
+import net.minecraft.world.World
+import net.minecraftforge.client.event.TextureStitchEvent
+import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockMod
-import ninja.shadowfox.shadowfox_botany.lib.Constants
-import org.lwjgl.opengl.GL11
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 import java.awt.Color
 
 /**
@@ -19,14 +24,38 @@ import java.awt.Color
  */
 class BlockColoredLamp : BlockMod(Material.redstoneLight) {
 
+    var rainbowIcon: IIcon? = null
+
     init {
         this.setBlockName("irisLamp")
         this.setStepSound(Block.soundTypeGlass)
         this.blockHardness = 1F
+        if (FMLLaunchHandler.side().isClient)
+            MinecraftForge.EVENT_BUS.register(this)
+
+    }
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    override fun loadTextures(event: TextureStitchEvent.Pre) {
+        if (event.map.textureType == 0)
+            rainbowIcon = InterpolatedIconHelper.forBlock(event.map, this, "RB")
+    }
+
+    override fun getIcon(side: Int, meta: Int): IIcon? {
+        return if (meta > 14) rainbowIcon else blockIcon
     }
 
     companion object {
         fun powerLevel(world: IBlockAccess, x: Int, y: Int, z: Int): Int {
+            var ret = getBlockPowerLevel(world, x, y, z)
+            for (dir in ForgeDirection.VALID_DIRECTIONS) {
+                val power = getBlockPowerLevel(world, x+dir.offsetX, y+dir.offsetY, z+dir.offsetZ)
+                ret = Math.max(ret, power)
+            }
+            return ret
+        }
+        fun getBlockPowerLevel(world: IBlockAccess, x: Int, y: Int, z: Int): Int {
             val block = world.getBlock(x, y, z)
             return if (block.shouldCheckWeakPower(world, x, y, z, 0)) blockProvidingPower(world, x, y, z) else block.isProvidingWeakPower(world, x, y, z, 0)
         }
@@ -65,104 +94,36 @@ class BlockColoredLamp : BlockMod(Material.redstoneLight) {
                 }
             }
         }
-        fun powerColor(power: Int): Int = when (power) { // These are sheep colors
-                0      -> 0x191616 // Black
-                1,  2  -> 0x963430 // Red
-                3,  4  -> 0xDB7D3E // Orange
-                5,  6  -> 0xB1A627 // Yellow
-                7,  8  -> 0x41AE38 // Lime
-                9,  10 -> 0x2E388D // Blue
-                11, 12 -> 0xB350BC // Magenta
-                13, 14 -> 0x7E3DB5 // Purple
-                else ->   0xDDDDDD // White
-            }
+        fun powerColor(power: Int): Int {
+            if (power == 0) return 0x191616
+            else if (power == 15) return 0xFFFFFF
+            return Color.HSBtoRGB((power - 1) / 15F, 1F, 1F)
+        }
     }
+
+    override fun onNeighborBlockChange(world: World, x: Int, y: Int, z: Int, block: Block) {
+        super.onNeighborBlockChange(world, x, y, z, block)
+        val lvl = powerLevel(world, x, y, z)
+        if (world.getBlockMetadata(x, y, z) != lvl)
+            world.setBlockMetadataWithNotify(x, y, z, lvl, 3)
+    }
+
+    override fun onBlockAdded(world: World, x: Int, y: Int, z: Int) {
+        super.onBlockAdded(world, x, y, z)
+        val lvl = powerLevel(world, x, y, z)
+        if (world.getBlockMetadata(x, y, z) != lvl)
+            world.setBlockMetadataWithNotify(x, y, z, lvl, 3)
+    }
+
+    override fun damageDropped(meta: Int): Int = 0
+    override fun getPickBlock(target: MovingObjectPosition?, world: World, x: Int, y: Int, z: Int): ItemStack = ItemStack(this, 1, 0)
+    override fun createStackedBlock(meta: Int): ItemStack = ItemStack(this, 1, 0)
 
     override fun getLightValue() : Int = 15
     override fun getLightValue(world: IBlockAccess, x: Int, y: Int, z: Int): Int {
         return if (powerLevel(world, x, y, z) > 0) 15 else 0
     }
-    override fun canConnectRedstone(world: IBlockAccess?, x: Int, y: Int, z: Int, side: Int): Boolean = true
 
-    override fun getRenderType(): Int {
-        return Constants.lampRenderingID
-    }
-
-    class LampRenderer : ISimpleBlockRenderingHandler {
-
-        public override fun getRenderId(): Int {
-            return Constants.lampRenderingID
-        }
-
-        public override fun shouldRender3DInInventory(modelId: Int): Boolean {
-            return true
-        }
-
-        public override fun renderInventoryBlock(block: Block, meta: Int, modelID: Int, renderer: RenderBlocks) {
-            val tessellator = Tessellator.instance
-            GL11.glPushMatrix()
-            if (renderer.useInventoryTint) {
-                var j = powerColor(0)
-
-                var f1 = (j shr 16 and 255).toFloat() / 255.0F
-                var f2 = (j shr 8 and 255).toFloat() / 255.0F
-                var f3 = (j and 255).toFloat() / 255.0F
-                GL11.glColor4f(f1, f2, f3, 1.0F);
-            }
-
-            block.setBlockBoundsForItemRender()
-            renderer.setRenderBoundsFromBlock(block)
-            GL11.glRotatef(90.0f, 0.0f, 1.0f, 0.0f)
-            GL11.glTranslatef(-0.5f, -0.5f, -0.5f)
-
-            tessellator.startDrawingQuads()
-            tessellator.setNormal(0.0f, -1.0f, 0.0f)
-            renderer.renderFaceYNeg(block, 0.0, 0.0, 0.0, renderer.getBlockIconFromSideAndMetadata(block, 0, meta))
-            tessellator.draw()
-            tessellator.startDrawingQuads()
-            tessellator.setNormal(0.0f, 1.0f, 0.0f)
-            renderer.renderFaceYPos(block, 0.0, 0.0, 0.0, renderer.getBlockIconFromSideAndMetadata(block, 1, meta))
-            tessellator.draw()
-            tessellator.startDrawingQuads()
-            tessellator.setNormal(0.0f, 0.0f, -1.0f)
-            renderer.renderFaceZNeg(block, 0.0, 0.0, 0.0, renderer.getBlockIconFromSideAndMetadata(block, 2, meta))
-            tessellator.draw()
-            tessellator.startDrawingQuads()
-            tessellator.setNormal(0.0f, 0.0f, 1.0f)
-            renderer.renderFaceZPos(block, 0.0, 0.0, 0.0, renderer.getBlockIconFromSideAndMetadata(block, 3, meta))
-            tessellator.draw()
-            tessellator.startDrawingQuads()
-            tessellator.setNormal(-1.0f, 0.0f, 0.0f)
-            renderer.renderFaceXNeg(block, 0.0, 0.0, 0.0, renderer.getBlockIconFromSideAndMetadata(block, 4, meta))
-            tessellator.draw()
-            tessellator.startDrawingQuads()
-            tessellator.setNormal(1.0f, 0.0f, 0.0f)
-            renderer.renderFaceXPos(block, 0.0, 0.0, 0.0, renderer.getBlockIconFromSideAndMetadata(block, 5, meta))
-            tessellator.draw()
-            GL11.glPopMatrix()
-        }
-
-        public override fun renderWorldBlock(world: IBlockAccess, x: Int, y: Int, z: Int, block: Block, modelId: Int, renderer: RenderBlocks): Boolean {
-            val renderColor = Color(powerColor(powerLevel(world, x, y, z)))
-            var f = renderColor.red.toFloat()/255F
-            var f1 = renderColor.green.toFloat()/255F
-            var f2 = renderColor.blue.toFloat()/255F
-            if (EntityRenderer.anaglyphEnable) {
-                val f3 = (f * 30.0f + f1 * 59.0f + f2 * 11.0f) / 100.0f
-                val f4 = (f * 30.0f + f1 * 70.0f) / 100.0f
-                val f5 = (f * 30.0f + f2 * 70.0f) / 100.0f
-                f = f3
-                f1 = f4
-                f2 = f5
-            }
-
-            GL11.glColor3f(f, f1, f2)
-
-            val ret = if (Minecraft.isAmbientOcclusionEnabled() && block.getLightValue() == 0) (if (renderer.partialRenderBounds) renderer.renderStandardBlockWithAmbientOcclusionPartial(block, x, y, z, f, f1, f2) else renderer.renderStandardBlockWithAmbientOcclusion(block, x, y, z, f, f1, f2)) else renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, f, f1, f2)
-
-            GL11.glColor3f(1F, 1F, 1F)
-            return ret
-        }
-    }
-
+    @SideOnly(Side.CLIENT) override fun getRenderColor(meta: Int): Int = powerColor(meta)
+    @SideOnly(Side.CLIENT) override fun colorMultiplier(world: IBlockAccess, x: Int, y: Int, z: Int): Int = getRenderColor(world.getBlockMetadata(x, y, z))
 }

@@ -49,8 +49,6 @@ public class ClientProxy : CommonProxy() {
         RenderingRegistry.registerBlockHandler(MultipassRenderer())
         Constants.hopperRenderingID = RenderingRegistry.getNextAvailableRenderId()
         RenderingRegistry.registerBlockHandler(BlockFunnel.HopperRenderer())
-        Constants.lampRenderingID = RenderingRegistry.getNextAvailableRenderId()
-        RenderingRegistry.registerBlockHandler(BlockColoredLamp.LampRenderer())
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileItemDisplay::class.java, RenderTileItemDisplay())
 

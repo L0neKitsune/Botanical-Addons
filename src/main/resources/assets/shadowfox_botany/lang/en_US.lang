@@ -180,6 +180,7 @@ tile.shadowfox_botany:altPlanksStairs3.name=Scorched Planks Stairs
 tile.shadowfox_botany:altPlanksStairs4.name=Infused Planks Stairs
 tile.shadowfox_botany:altPlanksStairs5.name=Mutated Planks Stairs
 
+tile.shadowfox_botany:irisLamp.name=Iridescent Lantern
 
 shadowfox_botany.potion.manaVoid=Manatide Storm
 
