@@ -13,7 +13,6 @@ import ninja.shadowfox.shadowfox_botany.client.render.tile.MultipassRenderer
 import ninja.shadowfox.shadowfox_botany.client.render.tile.RenderTileItemDisplay
 import ninja.shadowfox.shadowfox_botany.common.blocks.BlockFunnel
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.BlockColoredDoubleGrass
-import ninja.shadowfox.shadowfox_botany.common.blocks.colored.BlockColoredLamp
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileItemDisplay
 import ninja.shadowfox.shadowfox_botany.common.core.proxy.CommonProxy
 import ninja.shadowfox.shadowfox_botany.common.entity.EntityGrieferCreeper

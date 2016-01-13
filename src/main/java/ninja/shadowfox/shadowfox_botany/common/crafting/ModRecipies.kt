@@ -61,12 +61,12 @@ public object ModRecipes {
     val recipesInfernalSlabs: IRecipe
     val recipesInfernalTwig: IRecipe
     val recipesSixTorches: IRecipe
-
     val recipesAltPlanks: List<IRecipe>
     val recipesAltSlabs: List<IRecipe>
     val recipesAltStairsR: List<IRecipe>
     val recipesAltStairsL: List<IRecipe>
     val recipesToolbelt: IRecipe
+    val recipesLamp: IRecipe
 
     val recipesPastoralSeeds: List<RecipeManaInfusion>
 
@@ -448,6 +448,15 @@ public object ModRecipes {
                 'S', LibOreDict.RUNE[12]) // Sloth
 
         recipesToolbelt = BotaniaAPI.getLatestAddedRecipe()
+
+        GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.irisLamp),
+                " B ",
+                "BLB",
+                " B ",
+                'L', ItemStack(Blocks.redstone_lamp),
+                'B', ItemStack(BotaniaBlocks.bifrostPerm))
+
+        recipesLamp = BotaniaAPI.getLatestAddedRecipe()
 
         recipesAttributionHeads = ArrayList<RecipePetals>()
         recipesAttributionHeads.add(attributionSkull("yrsegal", ShadowFoxItems.irisSeeds, 16)) // Bifrost Seeds

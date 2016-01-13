@@ -6,6 +6,7 @@ import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.util.MovingObjectPosition
@@ -15,14 +16,17 @@ import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockMod
+import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
+import vazkii.botania.api.lexicon.ILexiconable
+import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
 
 /**
  * @author WireSegal
  * Created at 4:44 PM on 1/12/16.
  */
-class BlockColoredLamp : BlockMod(Material.redstoneLight) {
+class BlockColoredLamp : BlockMod(Material.redstoneLight), ILexiconable {
 
     var rainbowIcon: IIcon? = null
 
@@ -50,15 +54,17 @@ class BlockColoredLamp : BlockMod(Material.redstoneLight) {
         fun powerLevel(world: IBlockAccess, x: Int, y: Int, z: Int): Int {
             var ret = getBlockPowerLevel(world, x, y, z)
             for (dir in ForgeDirection.VALID_DIRECTIONS) {
-                val power = getBlockPowerLevel(world, x+dir.offsetX, y+dir.offsetY, z+dir.offsetZ)
+                val power = getBlockPowerLevel(world, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ)
                 ret = Math.max(ret, power)
             }
             return ret
         }
+
         fun getBlockPowerLevel(world: IBlockAccess, x: Int, y: Int, z: Int): Int {
             val block = world.getBlock(x, y, z)
             return if (block.shouldCheckWeakPower(world, x, y, z, 0)) blockProvidingPower(world, x, y, z) else block.isProvidingWeakPower(world, x, y, z, 0)
         }
+
         fun blockProvidingPower(world: IBlockAccess, x: Int, y: Int, z: Int): Int {
             val b0 = 0
             var l = Math.max(b0.toInt(), world.isBlockProvidingPowerTo(x, y - 1, z, 0))
@@ -94,6 +100,7 @@ class BlockColoredLamp : BlockMod(Material.redstoneLight) {
                 }
             }
         }
+
         fun powerColor(power: Int): Int {
             if (power == 0) return 0x191616
             else if (power == 15) return 0xFFFFFF
@@ -119,11 +126,15 @@ class BlockColoredLamp : BlockMod(Material.redstoneLight) {
     override fun getPickBlock(target: MovingObjectPosition?, world: World, x: Int, y: Int, z: Int): ItemStack = ItemStack(this, 1, 0)
     override fun createStackedBlock(meta: Int): ItemStack = ItemStack(this, 1, 0)
 
-    override fun getLightValue() : Int = 15
+    override fun getLightValue(): Int = 15
     override fun getLightValue(world: IBlockAccess, x: Int, y: Int, z: Int): Int {
         return if (powerLevel(world, x, y, z) > 0) 15 else 0
     }
 
     @SideOnly(Side.CLIENT) override fun getRenderColor(meta: Int): Int = powerColor(meta)
     @SideOnly(Side.CLIENT) override fun colorMultiplier(world: IBlockAccess, x: Int, y: Int, z: Int): Int = getRenderColor(world.getBlockMetadata(x, y, z))
+
+    override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
+        return LexiconRegistry.lamp
+    }
 }

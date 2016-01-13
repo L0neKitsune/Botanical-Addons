@@ -33,6 +33,7 @@ public object LexiconRegistry {
     val livingwoodFunnel: LexiconEntry
     val netherSapling: LexiconEntry
     val toolbelt: LexiconEntry
+    val lamp: LexiconEntry
 
     init {
 
@@ -136,6 +137,10 @@ public object LexiconRegistry {
         toolbelt.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesToolbelt))
 
+        lamp = ShadowfoxLexiconEntry("lamp", BotaniaAPI.categoryBasics, ShadowFoxBlocks.irisLamp).setKnowledgeType(BotaniaAPI.elvenKnowledge)
+        lamp.setLexiconPages(PageText("0"),
+                PageCraftingRecipe("1", ModRecipes.recipesLamp))
+
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.interdictionRod), interdictionRod, 1)
@@ -144,6 +149,7 @@ public object LexiconRegistry {
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.emblem, 1, 1), technicolor, 3)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.emblem, 1, 2), interdictionRod, 3)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.colorOverride), colorOverride, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisLamp), lamp, 1)
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.attributionBauble, 1, 0), attribution, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.attributionBauble, 1, 1), LexiconData.tinyPotato, 1)

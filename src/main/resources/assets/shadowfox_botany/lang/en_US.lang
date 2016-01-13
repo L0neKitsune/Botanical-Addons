@@ -220,6 +220,8 @@ shadowfox_botany.entry.livingwoodFunnel=Livingwood Funnel
 shadowfox_botany.tagline.livingwoodFunnel=A filterable hopper that only carries one item
 shadowfox_botany.entry.toolbelt=Botanist's Toolbelt
 shadowfox_botany.tagline.toolbelt=12 stacks of at-the-ready storage
+shadowfox_botany.entry.lamp=Iridescent Lamp
+shadowfox_botany.tagline.lamp=A signal-strength tester
 
 shadowfox_botany.category.dendrology=Dendrology
 
@@ -303,3 +305,6 @@ shadowfox_botany.page.infernalSapling7=And splinters
 
 shadowfox_botany.page.toolbelt0=The &1Botanist's Toolbelt&0 is an easy-access extra inventory. By sneaking, you gain access to 12 extra stacks of storage, which can be used by interacting with the air around where they appear. Any items or blocks in it will provide for the &1Rod of the Shifting Crust&0.
 shadowfox_botany.page.toolbelt1=Not quite hammerspace
+
+shadowfox_botany.page.lamp0=The &1Iridescent Lantern&0 glows with all the colors of the rainbow. While black in appearance when first set down, giving it a redstone signal will change its color. The higher the signal, the farther down the rainbow the color becomes.<br>If given a full signal, the &1Iridescent Lantern&0 will glow like the &4Bifrost&0 itself.
+shadowfox_botany.page.lamp1=Left by a Piggah
