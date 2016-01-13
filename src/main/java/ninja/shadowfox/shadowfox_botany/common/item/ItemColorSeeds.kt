@@ -95,7 +95,8 @@ class ItemColorSeeds() : ItemIridescent("irisSeeds"), IFlowerComponent {
                 var swappers = blockSwappers[dim] as ArrayList<BlockSwapper?>
                 var swappersSafe = ArrayList(swappers)
                 for (s in swappersSafe)
-                    s?.tick(swappers)
+                    if (!(s?.tick() ?: false))
+                        swappers.remove(s)
             }
         }
     }
@@ -123,8 +124,15 @@ class ItemColorSeeds() : ItemIridescent("irisSeeds"), IFlowerComponent {
         var rainbow: Boolean
         var metaToSet: Int
 
+        var grassBlock: Block
+        var tallGrassMeta: Int
+        var tallGrassBlock: Block
+
         var startCoords: ChunkCoordinates
         var ticksExisted = 0
+
+        val RANGE = 3
+        val TICK_RANGE = 1
 
         init {
             this.world = world
@@ -134,64 +142,69 @@ class ItemColorSeeds() : ItemIridescent("irisSeeds"), IFlowerComponent {
             var seed = coords.posX xor coords.posY xor coords.posZ
             rand = Random(seed.toLong())
             startCoords = coords
+
+            grassBlock = if (rainbow) ShadowFoxBlocks.rainbowGrass else ShadowFoxBlocks.irisGrass
+            tallGrassMeta = metaToSet % 8
+            tallGrassBlock = if (rainbow) ShadowFoxBlocks.rainbowTallGrass else (if (meta > 8) ShadowFoxBlocks.irisTallGrass1 else ShadowFoxBlocks.irisTallGrass0)
         }
 
-        fun tick(list: MutableList<BlockSwapper?>) {
+        fun tick(): Boolean {
             ticksExisted++
-            if (ticksExisted % 20 === 0) {
-                var range = 3
-                for (i in -range..range) {
-                    for (j in -range..range) {
-                        var x = startCoords.posX + i
-                        var y = startCoords.posY
-                        var z = startCoords.posZ + j
-                        var block: Block = world.getBlock(x, y, z)
-                        var meta: Int = world.getBlockMetadata(x, y, z)
+            for (i in -RANGE..RANGE) {
+                for (j in -RANGE..RANGE) {
+                    var x = startCoords.posX + i
+                    var y = startCoords.posY
+                    var z = startCoords.posZ + j
+                    var block: Block = world.getBlock(x, y, z)
+                    var meta: Int = world.getBlockMetadata(x, y, z)
 
-                        if (block === blockToSet && meta === metaToSet) {
-                            if (ticksExisted % 20 == 0) {
-                                var validCoords = ArrayList<ChunkCoordinates>()
-                                for (k in -1..1)
-                                    for (l in -1..1) {
-                                        var x1 = x + k
-                                        var z1 = z + l
-                                        var block1 = world.getBlock(x1, y, z1)
-                                        var meta1 = world.getBlockMetadata(x1, y, z1)
-                                        if ((block1 == Blocks.dirt || block1 == Blocks.grass) && meta1 == 0) {
-                                            validCoords.add(ChunkCoordinates(x1, y, z1))
-                                        }
-                                    }
-                                if (!validCoords.isEmpty() && !world.isRemote) {
-                                    var coords = validCoords[rand.nextInt(validCoords.size)]
-                                    world.setBlock(coords.posX, coords.posY, coords.posZ, blockToSet, metaToSet, 1 or 2)
-                                    if (world.getBlock(coords.posX, coords.posY + 1, coords.posZ) == Blocks.tallgrass && world.getBlockMetadata(coords.posX, coords.posY + 1, coords.posZ) == 1) {
-                                        if (rainbow)
-                                            world.setBlock(coords.posX, coords.posY + 1, coords.posZ, ShadowFoxBlocks.rainbowGrass, 0, 1 or 2)
-                                        else
-                                            world.setBlock(coords.posX, coords.posY + 1, coords.posZ, ShadowFoxBlocks.irisGrass, metaToSet, 1 or 2)
-                                    } else if (world.getBlock(coords.posX, coords.posY + 1, coords.posZ) == Blocks.double_plant && world.getBlockMetadata(coords.posX, coords.posY + 1, coords.posZ) == 2) {
-                                        if (rainbow) {
-                                            world.setBlock(coords.posX, coords.posY + 1, coords.posZ, ShadowFoxBlocks.rainbowTallGrass, 0, 2)
-                                            world.setBlock(coords.posX, coords.posY + 2, coords.posZ, ShadowFoxBlocks.rainbowTallGrass, 8, 2)
-                                        } else {
-                                            if (metaToSet < 8) {
-                                                world.setBlock(coords.posX, coords.posY + 1, coords.posZ, ShadowFoxBlocks.irisTallGrass0, metaToSet, 2)
-                                                world.setBlock(coords.posX, coords.posY + 2, coords.posZ, ShadowFoxBlocks.irisTallGrass0, 8, 2)
-                                            } else {
-                                                world.setBlock(coords.posX, coords.posY + 1, coords.posZ, ShadowFoxBlocks.irisTallGrass1, metaToSet - 8, 2)
-                                                world.setBlock(coords.posX, coords.posY + 2, coords.posZ, ShadowFoxBlocks.irisTallGrass1, 8, 2)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                    if (block === blockToSet && meta === metaToSet) {
+                        // Only make changes every 20 ticks
+                        if (ticksExisted % 20 != 0) continue
+
+                        tickBlock(x, y, z)
                     }
                 }
             }
 
-            if (ticksExisted >= 80)
-                list.remove(this)
+            return ticksExisted < 80
+        }
+
+        fun tickBlock(x: Int, y: Int, z: Int) {
+            val validCoords = ArrayList<ChunkCoordinates>()
+
+            for (xOffset in -TICK_RANGE..TICK_RANGE) {
+                for (zOffset in -TICK_RANGE..TICK_RANGE) {
+                    if (xOffset == 0 && zOffset == 0) continue
+
+                    if (isValidSwapPosition(x + xOffset, y, z + zOffset))
+                        validCoords.add(ChunkCoordinates(x + xOffset, y, z + zOffset))
+                }
+            }
+            if (!validCoords.isEmpty() && !world.isRemote) {
+                val toSwap = validCoords[rand.nextInt(validCoords.size)]
+                world.setBlock(toSwap.posX, toSwap.posY, toSwap.posZ, blockToSet, metaToSet, 3)
+
+                val blockAbove = world.getBlock(toSwap.posX, toSwap.posY + 1, toSwap.posZ)
+                val metaAbove = world.getBlockMetadata(toSwap.posX, toSwap.posY + 1, toSwap.posZ)
+
+                if (blockAbove == Blocks.tallgrass && metaAbove == 1) {
+                    world.setBlock(toSwap.posX, toSwap.posY + 1, toSwap.posZ, grassBlock, metaToSet, 1 or 2)
+                } else if (blockAbove == Blocks.double_plant && metaAbove == 2) {
+                    world.setBlock(toSwap.posX, toSwap.posY + 1, toSwap.posZ, tallGrassBlock, tallGrassMeta, 2)
+                    world.setBlock(toSwap.posX, toSwap.posY + 2, toSwap.posZ, tallGrassBlock, 8, 2)
+                }
+            }
+        }
+        
+        fun isValidSwapPosition(x: Int, y: Int, z: Int): Boolean {
+            val block = world.getBlock(x, y, z)
+            val meta = world.getBlockMetadata(x, y, z)
+            val aboveBlock = world.getBlock(x, y + 1, z)
+
+            return (block == Blocks.dirt || block == Blocks.grass)
+                    && (meta == 0)
+                    && (aboveBlock.getLightOpacity(world, x, y, z) <= 1);
         }
     }
 }

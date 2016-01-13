@@ -33,7 +33,7 @@ class BlockColoredLamp : BlockMod(Material.redstoneLight), ILexiconable {
     init {
         this.setBlockName("irisLamp")
         this.setStepSound(Block.soundTypeGlass)
-        this.blockHardness = 1F
+        this.blockHardness = 0.3F
         if (FMLLaunchHandler.side().isClient)
             MinecraftForge.EVENT_BUS.register(this)
 
@@ -127,9 +127,7 @@ class BlockColoredLamp : BlockMod(Material.redstoneLight), ILexiconable {
     override fun createStackedBlock(meta: Int): ItemStack = ItemStack(this, 1, 0)
 
     override fun getLightValue(): Int = 15
-    override fun getLightValue(world: IBlockAccess, x: Int, y: Int, z: Int): Int {
-        return if (powerLevel(world, x, y, z) > 0) 15 else 0
-    }
+    override fun getLightValue(world: IBlockAccess, x: Int, y: Int, z: Int): Int = if (powerLevel(world, x, y, z) > 0) 15 else 0
 
     @SideOnly(Side.CLIENT) override fun getRenderColor(meta: Int): Int = powerColor(meta)
     @SideOnly(Side.CLIENT) override fun colorMultiplier(world: IBlockAccess, x: Int, y: Int, z: Int): Int = getRenderColor(world.getBlockMetadata(x, y, z))
