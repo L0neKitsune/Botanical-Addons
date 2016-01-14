@@ -33,16 +33,16 @@ class ItemColorSeeds() : ItemIridescent("irisSeeds"), IFlowerComponent, IFloatin
     companion object {
         val islandTypes: Array<IFloatingFlower.IslandType>
         init {
-            islandTypes = Array(17, {i -> IFloatingFlower.IslandType("IRIDESCENT$i", ResourceLocation("shadowfox_botany", "/textures/model/miniIsland$i.png")) })
+            islandTypes = Array(TYPES, {i -> IFloatingFlower.IslandType("IRIDESCENT$i", ResourceLocation("shadowfox_botany", "/textures/model/miniIsland$i.png")) })
         }
     }
 
-    override fun getIslandType(stack: ItemStack): IFloatingFlower.IslandType {
-        return islandTypes[stack.itemDamage % 18]
+    override fun getIslandType(stack: ItemStack): IFloatingFlower.IslandType? {
+        return if (stack.itemDamage > TYPES) islandTypes[stack.itemDamage] else null
     }
 
     override fun canFit(stack: ItemStack, inventory: IInventory): Boolean {
-        return stack.itemDamage == 16
+        return stack.itemDamage == TYPES
     }
 
     override fun getParticleColor(stack: ItemStack): Int {
