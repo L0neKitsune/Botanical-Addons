@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.ItemRenderer
 import net.minecraft.client.renderer.RenderBlocks
 import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.entity.RenderManager
+import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.client.renderer.texture.TextureMap
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
@@ -31,6 +32,7 @@ import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
 import ninja.shadowfox.shadowfox_botany.api.item.IToolbeltBlacklisted
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.network.PlayerItemMessage
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import org.lwjgl.opengl.GL11
 import vazkii.botania.api.item.IBaubleRender
 import vazkii.botania.api.item.IBlockProvider
@@ -131,6 +133,10 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider, IT
         FMLCommonHandler.instance().bus().register(this)
         setHasSubtypes(true)
         setCreativeTab(ShadowFoxCreativeTab)
+    }
+
+    override fun registerIcons(par1IconRegister: IIconRegister) {
+        itemIcon = IconHelper.forItem(par1IconRegister, this)
     }
 
     override fun getBlockCount(p0: EntityPlayer?, p1: ItemStack, p2: ItemStack, p3: Block, p4: Int): Int {

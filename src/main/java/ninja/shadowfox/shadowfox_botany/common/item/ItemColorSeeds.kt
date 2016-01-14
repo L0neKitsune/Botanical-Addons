@@ -12,18 +12,33 @@ import net.minecraft.inventory.IInventory
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ChunkCoordinates
+import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import vazkii.botania.api.recipe.IFlowerComponent
 import vazkii.botania.common.Botania
+import vazkii.botania.common.block.decor.IFloatingFlower
+import vazkii.botania.common.item.IFloatingFlowerVariant
 import java.awt.Color
 import java.util.*
 
-class ItemColorSeeds() : ItemIridescent("irisSeeds"), IFlowerComponent {
+class ItemColorSeeds() : ItemIridescent("irisSeeds"), IFlowerComponent, IFloatingFlowerVariant {
     private val blockSwappers = HashMap<Int, MutableList<BlockSwapper?>>()
+
 
     init {
         FMLCommonHandler.instance().bus().register(this)
+    }
+
+    companion object {
+        val islandTypes: Array<IFloatingFlower.IslandType>
+        init {
+            islandTypes = Array(17, {i -> IFloatingFlower.IslandType("IRIDESCENT$i", ResourceLocation("shadowfox_botany", "/textures/model/miniIsland$i.png")) })
+        }
+    }
+
+    override fun getIslandType(stack: ItemStack): IFloatingFlower.IslandType {
+        return islandTypes[stack.itemDamage % 18]
     }
 
     override fun canFit(stack: ItemStack, inventory: IInventory): Boolean {
@@ -196,7 +211,7 @@ class ItemColorSeeds() : ItemIridescent("irisSeeds"), IFlowerComponent {
                 }
             }
         }
-        
+
         fun isValidSwapPosition(x: Int, y: Int, z: Int): Boolean {
             val block = world.getBlock(x, y, z)
             val meta = world.getBlockMetadata(x, y, z)
@@ -204,7 +219,7 @@ class ItemColorSeeds() : ItemIridescent("irisSeeds"), IFlowerComponent {
 
             return (block == Blocks.dirt || block == Blocks.grass)
                     && (meta == 0)
-                    && (aboveBlock.getLightOpacity(world, x, y, z) <= 1);
+                    && (aboveBlock.getLightOpacity(world, x, y, z) <= 1)
         }
     }
 }
