@@ -38,7 +38,7 @@ class ItemColorSeeds() : ItemIridescent("irisSeeds"), IFlowerComponent, IFloatin
     }
 
     override fun getIslandType(stack: ItemStack): IFloatingFlower.IslandType? {
-        return if (stack.itemDamage > TYPES) islandTypes[stack.itemDamage] else null
+        return if (stack.itemDamage < TYPES) islandTypes[stack.itemDamage] else null
     }
 
     override fun canFit(stack: ItemStack, inventory: IInventory): Boolean {
