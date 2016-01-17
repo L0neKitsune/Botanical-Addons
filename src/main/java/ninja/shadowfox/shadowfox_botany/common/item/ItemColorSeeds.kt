@@ -1,5 +1,7 @@
 package ninja.shadowfox.shadowfox_botany.common.item
 
+// import vazkii.botania.common.block.decor.IFloatingFlower
+// import vazkii.botania.common.item.IFloatingFlowerVariant
 import cpw.mods.fml.common.FMLCommonHandler
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.common.gameevent.TickEvent
@@ -12,17 +14,14 @@ import net.minecraft.inventory.IInventory
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ChunkCoordinates
-import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import vazkii.botania.api.recipe.IFlowerComponent
 import vazkii.botania.common.Botania
-import vazkii.botania.common.block.decor.IFloatingFlower
-import vazkii.botania.common.item.IFloatingFlowerVariant
 import java.awt.Color
 import java.util.*
 
-class ItemColorSeeds() : ItemIridescent("irisSeeds"), IFlowerComponent, IFloatingFlowerVariant {
+class ItemColorSeeds() : ItemIridescent("irisSeeds"), IFlowerComponent/*, IFloatingFlowerVariant*/ {
     private val blockSwappers = HashMap<Int, MutableList<BlockSwapper?>>()
 
 
@@ -30,16 +29,17 @@ class ItemColorSeeds() : ItemIridescent("irisSeeds"), IFlowerComponent, IFloatin
         FMLCommonHandler.instance().bus().register(this)
     }
 
-    companion object {
-        val islandTypes: Array<IFloatingFlower.IslandType>
-        init {
-            islandTypes = Array(TYPES, {i -> IFloatingFlower.IslandType("IRIDESCENT$i", ResourceLocation("shadowfox_botany", "/textures/model/miniIsland$i.png")) })
-        }
-    }
+    // companion object {
+    //     val islandTypes: Array<IFloatingFlower.IslandType>
+    //
+    //     init {
+    //         islandTypes = Array(TYPES, { i -> IFloatingFlower.IslandType("IRIDESCENT$i", ResourceLocation("shadowfox_botany", "/textures/model/miniIsland$i.png")) })
+    //     }
+    // }
 
-    override fun getIslandType(stack: ItemStack): IFloatingFlower.IslandType? {
-        return if (stack.itemDamage < TYPES) islandTypes[stack.itemDamage] else null
-    }
+    // override fun getIslandType(stack: ItemStack): IFloatingFlower.IslandType? {
+    //     return if (stack.itemDamage < TYPES) islandTypes[stack.itemDamage] else null
+    // }
 
     override fun canFit(stack: ItemStack, inventory: IInventory): Boolean {
         return stack.itemDamage == TYPES
