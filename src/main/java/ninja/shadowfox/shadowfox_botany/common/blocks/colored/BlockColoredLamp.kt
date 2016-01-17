@@ -39,17 +39,6 @@ class BlockColoredLamp : BlockMod(Material.redstoneLight), ILexiconable {
 
     }
 
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    override fun loadTextures(event: TextureStitchEvent.Pre) {
-        if (event.map.textureType == 0)
-            rainbowIcon = InterpolatedIconHelper.forBlock(event.map, this, "RB")
-    }
-
-    override fun getIcon(side: Int, meta: Int): IIcon? {
-        return if (meta > 14) rainbowIcon else blockIcon
-    }
-
     companion object {
         fun powerLevel(world: IBlockAccess, x: Int, y: Int, z: Int): Int {
             var ret = getBlockPowerLevel(world, x, y, z)
@@ -104,8 +93,19 @@ class BlockColoredLamp : BlockMod(Material.redstoneLight), ILexiconable {
         fun powerColor(power: Int): Int {
             if (power == 0) return 0x191616
             else if (power == 15) return 0xFFFFFF
-            return Color.HSBtoRGB((power - 1) / 15F, 1F, 1F)
+            return Color.HSBtoRGB((power - 1) / 16F, 1F, 1F)
         }
+    }
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    override fun loadTextures(event: TextureStitchEvent.Pre) {
+        if (event.map.textureType == 0)
+            rainbowIcon = InterpolatedIconHelper.forBlock(event.map, this, "RB")
+    }
+
+    override fun getIcon(side: Int, meta: Int): IIcon? {
+        return if (meta > 14) rainbowIcon else blockIcon
     }
 
     override fun onNeighborBlockChange(world: World, x: Int, y: Int, z: Int, block: Block) {
