@@ -14,7 +14,6 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.colored.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.lightning_oak.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.nether_oak.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.*
-import ninja.shadowfox.shadowfox_botany.common.blocks.schema.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.*
 import ninja.shadowfox.shadowfox_botany.lib.LibOreDict
 import vazkii.botania.api.BotaniaAPI
@@ -102,11 +101,11 @@ public object ShadowFoxBlocks {
 
     public var kindling: Block
 
-    public var markerBlock: Block
-    public var schemaBlock: Block
-    public var schemaGenBlock: Block
-    public var fillerBlock: Block
-    public var annihilatorBlock: Block
+    //    public var markerBlock: Block
+    //    public var schemaBlock: Block
+    //    public var schemaGenBlock: Block
+    //    public var fillerBlock: Block
+    //    public var annihilatorBlock: Block
 
     public var irisLamp: Block
 
@@ -185,11 +184,12 @@ public object ShadowFoxBlocks {
         barrier = BlockBarrier()
 
         kindling = BlockKindling()
-        schemaBlock = BlockSchema()
-        markerBlock = BlockMarker()
-        schemaGenBlock = BlockSchematicOak()
-        fillerBlock = BlockFiller()
-        annihilatorBlock = BlockSchematicAnnihilator()
+
+        //        schemaBlock = BlockSchema()
+        //        markerBlock = BlockMarker()
+        //        schemaGenBlock = BlockSchematicOak()
+        //        fillerBlock = BlockFiller()
+        //        annihilatorBlock = BlockSchematicAnnihilator()
 
         irisLamp = BlockColoredLamp()
 
@@ -202,8 +202,8 @@ public object ShadowFoxBlocks {
         GameRegistry.registerTileEntity(TileTreeCrafter::class.java, "shadowfox_botany:treeCrafter")
         GameRegistry.registerTileEntity(TileLivingwoodFunnel::class.java, "shadowfox_botany:livingwoodFunnel")
         GameRegistry.registerTileEntity(TileLightningRod::class.java, "shadowfox_botany:lightningRod")
-        GameRegistry.registerTileEntity(TileSchema::class.java, "shadowfox_botany:schema")
-        GameRegistry.registerTileEntity(TileSchematicAnnihilator::class.java, "shadowfox_botany:schematicAnnihilator")
+        //        GameRegistry.registerTileEntity(TileSchema::class.java, "shadowfox_botany:schema")
+        //        GameRegistry.registerTileEntity(TileSchematicAnnihilator::class.java, "shadowfox_botany:schematicAnnihilator")
 
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
 
