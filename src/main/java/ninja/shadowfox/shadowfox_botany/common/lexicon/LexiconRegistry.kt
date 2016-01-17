@@ -141,6 +141,13 @@ public object LexiconRegistry {
         lamp.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesLamp))
 
+        var memes = LexiconData.tinyPotato
+        for (entry in BotaniaAPI.getAllEntries()) {
+            if (entry.getUnlocalizedName() == "botania.entry.wrap") {
+                memes = entry
+            }
+        }
+
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisSapling), irisSapling, 0)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.lightningRod), lightningRod, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.interdictionRod), interdictionRod, 1)
@@ -152,7 +159,7 @@ public object LexiconRegistry {
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisLamp), lamp, 1)
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.attributionBauble, 1, 0), attribution, 1)
-        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.attributionBauble, 1, 1), LexiconData.tinyPotato, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.attributionBauble, 1, 1), memes, 1)
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.wiltedLotus, 1, 0), sealCreepers, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.wiltedLotus, 1, 1), sealCreepers, 1)
