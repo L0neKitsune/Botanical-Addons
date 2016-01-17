@@ -8,6 +8,7 @@ import ninja.shadowfox.shadowfox_botany.common.item.rods.ItemInterdictionRod
 import ninja.shadowfox.shadowfox_botany.common.item.rods.ItemIridescentRod
 import ninja.shadowfox.shadowfox_botany.common.item.rods.ItemLightningRod
 import ninja.shadowfox.shadowfox_botany.common.item.rods.ItemRainbowLightRod
+import ninja.shadowfox.shadowfox_botany.lib.LibOreDict
 
 object ShadowFoxItems {
     val irisSeeds: Item
@@ -51,12 +52,13 @@ object ShadowFoxItems {
 
     fun initOreDict() {
 
-        OreDictionary.registerOre("twigThunderwood", ItemStack(resource, 1, 0))
+        OreDictionary.registerOre(LibOreDict.TWIG_THUNDERWOOD, ItemStack(resource, 1, 0))
+        OreDictionary.registerOre(LibOreDict.SPLINTERS_THUNDERWOOD, ItemStack(resource, 1, 1))
+        OreDictionary.registerOre(LibOreDict.TWIG_NETHERWOOD, ItemStack(resource, 1, 2))
+        OreDictionary.registerOre(LibOreDict.SPLINTERS_NETHERWOOD, ItemStack(resource, 1, 3))
+        OreDictionary.registerOre(LibOreDict.COAL_NETHERWOOD, ItemStack(resource, 1, 4))
 
-        OreDictionary.registerOre("holyPendant", ItemStack(attributionBauble, 1, 0))
-        OreDictionary.registerOre("holyPendant", ItemStack(attributionBauble, 1, 1))
-
-        OreDictionary.registerOre("woodSplintersLightning", ItemStack(resource, 1, 1))
-        OreDictionary.registerOre("woodSplintersNether", ItemStack(resource, 1, 3))
+        OreDictionary.registerOre(LibOreDict.HOLY_PENDANT, ItemStack(attributionBauble, 1, 0))
+        OreDictionary.registerOre(LibOreDict.HOLY_PENDANT, ItemStack(attributionBauble, 1, 1))
     }
 }

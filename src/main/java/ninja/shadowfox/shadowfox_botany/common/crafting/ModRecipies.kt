@@ -14,13 +14,14 @@ import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
 import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
+import ninja.shadowfox.shadowfox_botany.lib.LibOreDict as ShadowFoxOreDict
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.recipe.RecipeManaInfusion
 import vazkii.botania.api.recipe.RecipePetals
 import vazkii.botania.api.recipe.RecipePureDaisy
 import vazkii.botania.common.core.helper.ItemNBTHelper
-import vazkii.botania.common.lib.LibOreDict
 import java.util.*
+import vazkii.botania.common.lib.LibOreDict as BotaniaOreDict
 import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
 import vazkii.botania.common.block.ModFluffBlocks as BotaniaDecorBlocks
 import vazkii.botania.common.item.ModItems as BotaniaItems
@@ -97,11 +98,11 @@ public object ModRecipes {
         recipesColoredDirt = BotaniaAPI.getLatestAddedRecipes(17)
 
         for (i in 0..15)
-            addShapelessOreDictRecipe(ItemStack(BotaniaItems.dye, 1, i), ShadowFoxBlocks.LEAVES[i], "pestleAndMortar")
+            addShapelessOreDictRecipe(ItemStack(BotaniaItems.dye, 1, i), ShadowFoxOreDict.LEAVES[i], BotaniaOreDict.PESTLE_AND_MORTAR)
 
         recipesLeafDyes = BotaniaAPI.getLatestAddedRecipes(16)
         for (i in 0..15)
-            addShapelessOreDictRecipe(ItemStack(ShadowFoxBlocks.coloredPlanks, 4, i), ShadowFoxBlocks.WOOD[i])
+            addShapelessOreDictRecipe(ItemStack(ShadowFoxBlocks.coloredPlanks, 4, i), ShadowFoxOreDict.WOOD[i])
         addShapelessOreDictRecipe(ItemStack(ShadowFoxBlocks.rainbowPlanks, 4), ShadowFoxBlocks.rainbowWood)
 
         recipesWoodPanel = BotaniaAPI.getLatestAddedRecipes(17)
@@ -151,14 +152,16 @@ public object ModRecipes {
                     "S  ",
                     'D', ItemStack(ShadowFoxBlocks.coloredDirtBlock, 1, i),
                     'R', ItemStack(BotaniaItems.skyDirtRod, 1),
-                    'P', LibOreDict.PIXIE_DUST, 'S', LibOreDict.DRAGONSTONE)
+                    'P', BotaniaOreDict.PIXIE_DUST,
+                    'S', BotaniaOreDict.DRAGONSTONE)
         addOreDictRecipe(ItemStack(ShadowFoxItems.colorfulSkyDirtRod, 1, 16),
                 " PD",
                 " RP",
                 "S  ",
                 'D', ItemStack(ShadowFoxBlocks.rainbowDirtBlock),
                 'R', ItemStack(BotaniaItems.skyDirtRod, 1),
-                'P', LibOreDict.PIXIE_DUST, 'S', LibOreDict.DRAGONSTONE)
+                'P', BotaniaOreDict.PIXIE_DUST,
+                'S', BotaniaOreDict.DRAGONSTONE)
 
         recipesColoredSkyDirtRod = BotaniaAPI.getLatestAddedRecipes(16)
 
@@ -166,10 +169,10 @@ public object ModRecipes {
                 " EW",
                 " SD",
                 "S  ",
-                'E', "woodSplintersLightning",
-                'D', LibOreDict.DRAGONSTONE,
-                'S', "twigThunderwood",
-                'W', LibOreDict.RUNE[13]) // Wrath
+                'E', ShadowFoxOreDict.SPLINTERS_THUNDERWOOD,
+                'D', BotaniaOreDict.DRAGONSTONE,
+                'S', ShadowFoxOreDict.TWIG_THUNDERWOOD,
+                'W', BotaniaOreDict.RUNE[13]) // Wrath
 
         recipesLightningRod = BotaniaAPI.getLatestAddedRecipe()
 
@@ -177,11 +180,11 @@ public object ModRecipes {
                 "EGE",
                 "TAT",
                 " W ",
-                'E', LibOreDict.ENDER_AIR_BOTTLE,
-                'T', LibOreDict.TERRASTEEL_NUGGET,
-                'G', LibOreDict.LIFE_ESSENCE,
-                'W', LibOreDict.RUNE[13], // Wrath
-                'A', "holyPendant")
+                'E', BotaniaOreDict.ENDER_AIR_BOTTLE,
+                'T', BotaniaOreDict.TERRASTEEL_NUGGET,
+                'G', BotaniaOreDict.LIFE_ESSENCE,
+                'W', BotaniaOreDict.RUNE[13], // Wrath
+                'A', ShadowFoxOreDict.HOLY_PENDANT)
 
         recipesPriestOfThor = BotaniaAPI.getLatestAddedRecipe()
 
@@ -189,11 +192,11 @@ public object ModRecipes {
                 "DGD",
                 "NAN",
                 " P ",
-                'D', LibOreDict.DRAGONSTONE,
+                'D', BotaniaOreDict.DRAGONSTONE,
                 'N', "nuggetGold",
-                'G', LibOreDict.LIFE_ESSENCE,
-                'P', LibOreDict.RUNE[2], // Earth
-                'A', "holyPendant")
+                'G', BotaniaOreDict.LIFE_ESSENCE,
+                'P', BotaniaOreDict.RUNE[2], // Earth
+                'A', ShadowFoxOreDict.HOLY_PENDANT)
 
         recipesPriestOfSif = BotaniaAPI.getLatestAddedRecipe()
 
@@ -202,14 +205,14 @@ public object ModRecipes {
                     "LLL",
                     "LSL",
                     "LLL",
-                    'L', ShadowFoxBlocks.LEAVES[i],
-                    'S', LibOreDict.MANA_STRING)
+                    'L', ShadowFoxOreDict.LEAVES[i],
+                    'S', BotaniaOreDict.MANA_STRING)
         addOreDictRecipe(ItemStack(ShadowFoxItems.coatOfArms, 1, 16),
                 "LLL",
                 "LSL",
                 "LLL",
                 'L', ItemStack(ShadowFoxBlocks.rainbowLeaves),
-                'S', LibOreDict.MANA_STRING)
+                'S', BotaniaOreDict.MANA_STRING)
 
         recipesCoatOfArms = BotaniaAPI.getLatestAddedRecipes(17)
 
@@ -218,7 +221,7 @@ public object ModRecipes {
                 "E E",
                 " E ",
                 'P', ItemStack(BotaniaItems.lens, 1, 14), // Paintslinger's Lens
-                'E', LibOreDict.ELEMENTIUM)
+                'E', BotaniaOreDict.ELEMENTIUM)
 
         recipesColorOverride = BotaniaAPI.getLatestAddedRecipe()
 
@@ -226,10 +229,10 @@ public object ModRecipes {
                 " AS",
                 " DA",
                 "P  ",
-                'P', LibOreDict.RUNE[15], // Pride
-                'A', LibOreDict.RUNE[3], // Air
+                'P', BotaniaOreDict.RUNE[15], // Pride
+                'A', BotaniaOreDict.RUNE[3], // Air
                 'S', ItemStack(BotaniaItems.tornadoRod),
-                'D', LibOreDict.DREAMWOOD_TWIG)
+                'D', BotaniaOreDict.DREAMWOOD_TWIG)
 
         recipesInterdictionRod = BotaniaAPI.getLatestAddedRecipe()
 
@@ -237,11 +240,11 @@ public object ModRecipes {
                 "RGR",
                 "NAN",
                 " P ",
-                'P', LibOreDict.RUNE[15], // Pride
-                'N', LibOreDict.MANASTEEL_NUGGET,
-                'G', LibOreDict.LIFE_ESSENCE,
-                'R', LibOreDict.RUNE[3], // Air
-                'A', "holyPendant")
+                'P', BotaniaOreDict.RUNE[15], // Pride
+                'N', BotaniaOreDict.MANASTEEL_NUGGET,
+                'G', BotaniaOreDict.LIFE_ESSENCE,
+                'R', BotaniaOreDict.RUNE[3], // Air
+                'A', ShadowFoxOreDict.HOLY_PENDANT)
 
         recipesPriestOfNjord = BotaniaAPI.getLatestAddedRecipe()
 
@@ -251,7 +254,7 @@ public object ModRecipes {
                 " G ",
                 'G', "ingotGold",
                 'Q', "gemQuartz",
-                'S', LibOreDict.MANA_STRING)
+                'S', BotaniaOreDict.MANA_STRING)
 
         recipesAttribution = BotaniaAPI.getLatestAddedRecipe()
 
@@ -260,7 +263,7 @@ public object ModRecipes {
                 "SBS",
                 " S ",
                 'B', "powderBlaze",
-                'S', LibOreDict.MANA_STRING)
+                'S', BotaniaOreDict.MANA_STRING)
 
         recipesKindling = BotaniaAPI.getLatestAddedRecipe()
 
@@ -284,7 +287,7 @@ public object ModRecipes {
             recipesPastoralSeeds.add(BotaniaAPI.registerManaInfusionRecipe(ItemStack(ShadowFoxItems.irisSeeds, 1, i), ItemStack(ShadowFoxBlocks.irisGrass, 1, i), 2500))
         recipesPastoralSeeds.add(BotaniaAPI.registerManaInfusionRecipe(ItemStack(ShadowFoxItems.irisSeeds, 1, 16), ItemStack(ShadowFoxBlocks.rainbowGrass), 2500))
 
-        recipesPlainDirt = BotaniaAPI.registerPureDaisyRecipe("irisDirt", Blocks.dirt, 0)
+        recipesPlainDirt = BotaniaAPI.registerPureDaisyRecipe(ShadowFoxOreDict.IRIS_DIRT, Blocks.dirt, 0)
 
         recipesIrisSapling = RecipePureDaisyExclusion("treeSapling", ShadowFoxBlocks.irisSapling, 0)
         BotaniaAPI.pureDaisyRecipes.add(recipesIrisSapling as RecipePureDaisy)
@@ -295,19 +298,19 @@ public object ModRecipes {
                 "D  ",
                 'G', "glowstone",
                 'B', ItemStack(BotaniaBlocks.bifrostPerm),
-                'D', LibOreDict.DREAMWOOD_TWIG)
+                'D', BotaniaOreDict.DREAMWOOD_TWIG)
 
         recipesRainbowRod = BotaniaAPI.getLatestAddedRecipe()
 
         addOreDictRecipe(ItemStack(ShadowFoxBlocks.itemDisplay),
                 "N",
                 "W",
-                'N', LibOreDict.MANASTEEL_NUGGET,
+                'N', BotaniaOreDict.MANASTEEL_NUGGET,
                 'W', ItemStack(BotaniaDecorBlocks.livingwoodSlab))
         addOreDictRecipe(ItemStack(ShadowFoxBlocks.itemDisplay, 1, 1),
                 "N",
                 "W",
-                'N', LibOreDict.TERRASTEEL_NUGGET,
+                'N', BotaniaOreDict.TERRASTEEL_NUGGET,
                 'W', ItemStack(BotaniaDecorBlocks.livingwoodSlab))
 
         recipesItemDisplay = BotaniaAPI.getLatestAddedRecipes(2)
@@ -315,7 +318,7 @@ public object ModRecipes {
         addOreDictRecipe(ItemStack(ShadowFoxBlocks.itemDisplay, 1, 2),
                 "N",
                 "W",
-                'N', LibOreDict.ELEMENTIUM_NUGGET,
+                'N', BotaniaOreDict.ELEMENTIUM_NUGGET,
                 'W', ItemStack(BotaniaDecorBlocks.dreamwoodSlab))
 
         recipesItemDisplayElven = BotaniaAPI.getLatestAddedRecipe()
@@ -323,9 +326,9 @@ public object ModRecipes {
         recipesLightningTree = ShadowFoxAPI.addTreeRecipe(50000,
                 ShadowFoxBlocks.lightningSapling, 0,
                 350,
-                LibOreDict.MANA_STEEL, LibOreDict.MANA_STEEL, LibOreDict.MANA_STEEL,
-                LibOreDict.RUNE[13], // Wrath
-                ShadowFoxBlocks.LEAVES[10], ShadowFoxBlocks.LEAVES[10], ShadowFoxBlocks.LEAVES[10], // Purple
+                BotaniaOreDict.MANA_STEEL, BotaniaOreDict.MANA_STEEL, BotaniaOreDict.MANA_STEEL,
+                BotaniaOreDict.RUNE[13], // Wrath
+                ShadowFoxOreDict.LEAVES[10], ShadowFoxOreDict.LEAVES[10], ShadowFoxOreDict.LEAVES[10], // Purple
                 ItemStack(BotaniaBlocks.teruTeruBozu))
 
         addShapelessOreDictRecipe(ItemStack(ShadowFoxBlocks.lightningPlanks, 4), ShadowFoxBlocks.lightningWood)
@@ -361,17 +364,17 @@ public object ModRecipes {
                 "L L",
                 "LCL",
                 " L ",
-                'L', LibOreDict.LIVING_WOOD, 'C', ItemStack(Blocks.chest))
+                'L', BotaniaOreDict.LIVING_WOOD, 'C', ItemStack(Blocks.chest))
 
         recipesLivingwoodFunnel = BotaniaAPI.getLatestAddedRecipe()
 
         recipesInfernalTree = ShadowFoxAPI.addTreeRecipe(10000,
                 ShadowFoxBlocks.netherSapling, 0,
                 70,
-                "ingotBrickNether", ItemStack(Items.ghast_tear), "ingotBrickNether",
-                LibOreDict.RUNE[1], // Fire
-                ShadowFoxBlocks.LEAVES[14], ShadowFoxBlocks.LEAVES[14], ShadowFoxBlocks.LEAVES[14], // Red
-                LibOreDict.BLAZE_BLOCK)
+                "ingotBrickNether", "ingotBrickNether", "ingotBrickNether",
+                BotaniaOreDict.RUNE[1], // Fire
+                ShadowFoxOreDict.LEAVES[14], ShadowFoxOreDict.LEAVES[14], ShadowFoxOreDict.LEAVES[14], // Red
+                BotaniaOreDict.BLAZE_BLOCK)
 
         addShapelessOreDictRecipe(ItemStack(ShadowFoxBlocks.netherPlanks, 4), ShadowFoxBlocks.netherWood)
 
@@ -442,10 +445,10 @@ public object ModRecipes {
                 "CL ",
                 "L L",
                 "PLS",
-                'P', LibOreDict.PIXIE_DUST,
+                'P', BotaniaOreDict.PIXIE_DUST,
                 'L', ItemStack(Items.leather),
                 'C', ItemStack(Blocks.chest),
-                'S', LibOreDict.RUNE[12]) // Sloth
+                'S', BotaniaOreDict.RUNE[12]) // Sloth
 
         recipesToolbelt = BotaniaAPI.getLatestAddedRecipe()
 
