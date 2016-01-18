@@ -5,6 +5,7 @@ import net.minecraft.block.Block
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
+import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
 import ninja.shadowfox.shadowfox_botany.api.trees.IIridescentSaplingVariant
 import ninja.shadowfox.shadowfox_botany.common.blocks.alt_grass.*
@@ -14,6 +15,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.colored.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.lightning_oak.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.nether_oak.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.*
+import ninja.shadowfox.shadowfox_botany.common.blocks.schema.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.*
 import ninja.shadowfox.shadowfox_botany.lib.LibOreDict
 import vazkii.botania.api.BotaniaAPI
@@ -101,11 +103,11 @@ public object ShadowFoxBlocks {
 
     public var kindling: Block
 
-    //    public var markerBlock: Block
-    //    public var schemaBlock: Block
-    //    public var schemaGenBlock: Block
-    //    public var fillerBlock: Block
-    //    public var annihilatorBlock: Block
+    public lateinit var markerBlock: Block
+    public lateinit var schemaBlock: Block
+    public lateinit var schemaGenBlock: Block
+    public lateinit var fillerBlock: Block
+    public lateinit var annihilatorBlock: Block
 
     public var irisLamp: Block
 
@@ -185,11 +187,13 @@ public object ShadowFoxBlocks {
 
         kindling = BlockKindling()
 
-        //        schemaBlock = BlockSchema()
-        //        markerBlock = BlockMarker()
-        //        schemaGenBlock = BlockSchematicOak()
-        //        fillerBlock = BlockFiller()
-        //        annihilatorBlock = BlockSchematicAnnihilator()
+        if (ShadowfoxBotany.isDevEnv) {
+            schemaBlock = BlockSchema()
+            markerBlock = BlockMarker()
+            schemaGenBlock = BlockSchematicOak()
+            fillerBlock = BlockFiller()
+            annihilatorBlock = BlockSchematicAnnihilator()
+        }
 
         irisLamp = BlockColoredLamp()
 
@@ -202,8 +206,10 @@ public object ShadowFoxBlocks {
         GameRegistry.registerTileEntity(TileTreeCrafter::class.java, "shadowfox_botany:treeCrafter")
         GameRegistry.registerTileEntity(TileLivingwoodFunnel::class.java, "shadowfox_botany:livingwoodFunnel")
         GameRegistry.registerTileEntity(TileLightningRod::class.java, "shadowfox_botany:lightningRod")
-        //        GameRegistry.registerTileEntity(TileSchema::class.java, "shadowfox_botany:schema")
-        //        GameRegistry.registerTileEntity(TileSchematicAnnihilator::class.java, "shadowfox_botany:schematicAnnihilator")
+        if (ShadowfoxBotany.isDevEnv) {
+                GameRegistry.registerTileEntity(TileSchema::class.java, "shadowfox_botany:schema")
+                GameRegistry.registerTileEntity(TileSchematicAnnihilator::class.java, "shadowfox_botany:schematicAnnihilator")
+        }
 
         BotaniaAPI.registerPaintableBlock(coloredDirtBlock)
 

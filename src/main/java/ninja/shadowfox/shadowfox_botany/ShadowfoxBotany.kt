@@ -8,6 +8,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
 import cpw.mods.fml.relauncher.Side
+import net.minecraft.launchwrapper.Launch
 import ninja.shadowfox.shadowfox_botany.common.core.proxy.CommonProxy
 import ninja.shadowfox.shadowfox_botany.common.network.PlayerItemMessage
 import ninja.shadowfox.shadowfox_botany.common.network.PlayerItemMessageHandler
@@ -17,6 +18,7 @@ import ninja.shadowfox.shadowfox_botany.lib.Constants
 public class ShadowfoxBotany {
 
     companion object {
+        var isDevEnv = false
         var thaumcraftLoaded = false
         lateinit var network: SimpleNetworkWrapper
 
@@ -30,6 +32,7 @@ public class ShadowfoxBotany {
     fun preInit(event: FMLPreInitializationEvent) {
 
         instance = this
+        isDevEnv = Launch.blackboard["fml.deobfuscatedEnvironment"] as Boolean
         thaumcraftLoaded = Loader.isModLoaded("Thaumcraft")
         network = SimpleNetworkWrapper(Constants.MODID)
 
