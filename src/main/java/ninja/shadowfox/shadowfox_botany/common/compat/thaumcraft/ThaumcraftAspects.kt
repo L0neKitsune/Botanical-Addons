@@ -170,6 +170,12 @@ object ThaumcraftAspects {
         if (forbidden) list.add(NETHER, 2)
         ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxItems.resource, 1, 4), list)
 
+        list = AspectList().add(Aspect.TOOL, 3).add(Aspect.VOID, 12).add(Aspect.CLOTH, 4).add(Aspect.GREED, 2)
+        ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxItems.toolbelt), list)
+
+        list = AspectList().add(Aspect.LIGHT, 4).add(Aspect.MECHANISM, 2).add(colorAspect, 4)
+        ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.irisLamp), list)
+
         list = AspectList().add(Aspect.TAINT, 2).add(Aspect.ENTROPY, 2).add(Aspect.PLANT, 2)
         if (forbidden) list.add(WRATH, 2)
         ThaumcraftApi.registerEntityTag("shadowfox_botany:voidCreeper", list)
