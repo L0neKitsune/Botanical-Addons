@@ -13,6 +13,8 @@ import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import thaumcraft.api.ThaumcraftApi
 import thaumcraft.api.aspects.Aspect
 import thaumcraft.api.aspects.AspectList
+import vazkii.botania.common.block.ModBlocks
+import vazkii.botania.common.item.ModItems
 
 object ThaumcraftAspects {
 
@@ -33,6 +35,9 @@ object ThaumcraftAspects {
     var COLOR: Aspect? = null
 
     fun initAspects() {
+        if (ConfigHandler.addAspectsToBotania)
+            BotaniaTCAspects.initAspects()
+
         if (ConfigHandler.addTincturemAspect)
             COLOR = RainbowAspect("tincturem", arrayOf<Aspect>(Aspect.LIGHT, Aspect.ORDER), ResourceLocation("shadowfox_botany", "textures/misc/tincturem.png"), 771)
     }
@@ -48,9 +53,13 @@ object ThaumcraftAspects {
     }
 
     fun addAspects() {
+        if (ConfigHandler.addAspectsToBotania)
+            BotaniaTCAspects.addAspects()
+
         val NETHER: Aspect? = getAspect("ForbiddenMagic", "infernus")
         val PRIDE: Aspect? = getAspect("ForbiddenMagic", "superbia")
         val WRATH: Aspect? = getAspect("ForbiddenMagic", "ira")
+        val SLOTH: Aspect? = getAspect("ForbiddenMagic", "desidia")
         val forbidden = Loader.isModLoaded("ForbiddenMagic")
         val hellAspect = if (forbidden) NETHER else Aspect.FIRE
         val colorAspect = if (ConfigHandler.addTincturemAspect) COLOR else Aspect.SENSES
@@ -171,7 +180,17 @@ object ThaumcraftAspects {
         ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxItems.resource, 1, 4), list)
 
         list = AspectList().add(Aspect.TOOL, 3).add(Aspect.VOID, 12).add(Aspect.CLOTH, 4).add(Aspect.GREED, 2)
+        if (forbidden) list.add(SLOTH, 2)
         ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxItems.toolbelt), list)
+
+        list = AspectList(ItemStack(ModBlocks.manaFlame))
+        ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.rainbowFlame), list)
+
+        list = AspectList(ItemStack(ModBlocks.manaFlame)).add(Aspect.VOID, 1)
+        ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.invisibleFlame), list)
+
+        list = AspectList(ItemStack(ModItems.lens, 1, 17)).add(Aspect.VOID, 1)
+        ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxItems.invisibleFlameLens), list)
 
         list = AspectList().add(Aspect.LIGHT, 4).add(Aspect.MECHANISM, 2).add(colorAspect, 4)
         ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.irisLamp), list)

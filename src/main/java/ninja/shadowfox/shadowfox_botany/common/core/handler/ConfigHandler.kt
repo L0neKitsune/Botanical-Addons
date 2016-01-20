@@ -30,6 +30,7 @@ public class ConfigHandler {
         var passiveLightning = true
         var blackLotusDropRate = 0.05
         var addTincturemAspect = true
+        var addAspectsToBotania = true
         var potionIDManaVoid = 110
         var schemaArray: IntArray = IntArray(17, { i: Int -> -1 + i })
 
@@ -56,6 +57,9 @@ public class ConfigHandler {
 
             desc = "Add a Color aspect to thaumcraft"
             addTincturemAspect = loadPropBool("tincturem.enabled", desc, addTincturemAspect)
+
+            desc = "Add aspects to Botania"
+            addTincturemAspect = loadPropBool("botaniaAspects.enabled", desc, addTincturemAspect)
 
             desc = "Rate of black loti dropping from Manaseal Creepers"
             blackLotusDropRate = loadPropDouble("voidCreepers.dropRate", desc, blackLotusDropRate)
