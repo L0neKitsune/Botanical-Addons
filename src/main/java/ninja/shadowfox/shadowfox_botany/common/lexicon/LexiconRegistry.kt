@@ -1,13 +1,16 @@
 package ninja.shadowfox.shadowfox_botany.common.lexicon
 
 import net.minecraft.item.ItemStack
+import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import ninja.shadowfox.shadowfox_botany.common.compat.thaumcraft.ThaumcraftSuffusionRecipes
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.crafting.ModRecipes
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.api.lexicon.LexiconRecipeMappings
+import vazkii.botania.common.Botania
 import vazkii.botania.common.lexicon.LexiconData
 import vazkii.botania.common.lexicon.page.*
 import kotlin.collections.plus
@@ -34,6 +37,8 @@ public object LexiconRegistry {
     val netherSapling: LexiconEntry
     val toolbelt: LexiconEntry
     val lamp: LexiconEntry
+
+    lateinit var tctrees: LexiconEntry
 
     init {
 
@@ -140,6 +145,21 @@ public object LexiconRegistry {
         lamp = ShadowfoxLexiconEntry("lamp", BotaniaAPI.categoryBasics, ShadowFoxBlocks.irisLamp).setKnowledgeType(BotaniaAPI.elvenKnowledge)
         lamp.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesLamp))
+
+        if (ShadowfoxBotany.thaumcraftLoaded && Botania.gardenOfGlassLoaded && ConfigHandler.addThaumcraftTreeSuffusion) {
+            tctrees = object : ShadowfoxLexiconEntry("tctrees", dendrology, ItemStack(ThaumcraftSuffusionRecipes.saplingBlock)) {
+                override fun getSubtitle(): String {
+                    return "[Botanical Addons x Thaumcraft]"
+                }
+            }.setKnowledgeType(BotaniaAPI.elvenKnowledge)
+            tctrees.setLexiconPages(PageText("0"),
+                    PageTreeCrafting("1", ThaumcraftSuffusionRecipes.greatwoodRecipe),
+                    PageTreeCrafting("2", ThaumcraftSuffusionRecipes.silverwoodRecipe))
+
+            LexiconRecipeMappings.map(ItemStack(ThaumcraftSuffusionRecipes.saplingBlock, 1, 0), tctrees, 1)
+            LexiconRecipeMappings.map(ItemStack(ThaumcraftSuffusionRecipes.saplingBlock, 1, 1), tctrees, 2)
+        }
+
 
         var memes = LexiconData.tinyPotato
         for (entry in BotaniaAPI.getAllEntries()) {

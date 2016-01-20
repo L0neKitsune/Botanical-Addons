@@ -31,6 +31,7 @@ public class ConfigHandler {
         var blackLotusDropRate = 0.05
         var addTincturemAspect = true
         var addAspectsToBotania = true
+        var addThaumcraftTreeSuffusion = true
         var potionIDManaVoid = 110
         var schemaArray: IntArray = IntArray(17, { i: Int -> -1 + i })
 
@@ -59,7 +60,10 @@ public class ConfigHandler {
             addTincturemAspect = loadPropBool("tincturem.enabled", desc, addTincturemAspect)
 
             desc = "Add aspects to Botania"
-            addTincturemAspect = loadPropBool("botaniaAspects.enabled", desc, addTincturemAspect)
+            addAspectsToBotania = loadPropBool("botaniaAspects.enabled", desc, addAspectsToBotania)
+
+            desc = "[TC] [GoG] Add a Dendric Suffusion recipe for Greatwood and Silverwood trees"
+            addThaumcraftTreeSuffusion = loadPropBool("TCTrees.enabled", desc, addThaumcraftTreeSuffusion)
 
             desc = "Rate of black loti dropping from Manaseal Creepers"
             blackLotusDropRate = loadPropDouble("voidCreepers.dropRate", desc, blackLotusDropRate)

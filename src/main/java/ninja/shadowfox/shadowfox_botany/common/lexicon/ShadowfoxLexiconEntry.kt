@@ -6,14 +6,15 @@ import net.minecraft.item.ItemStack
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.*
 
-fun ShadowfoxLexiconEntry(unlocalizedName: String, category: LexiconCategory, block: Block) = ShadowfoxLexiconEntry(unlocalizedName, category, ItemStack(block))
-fun ShadowfoxLexiconEntry(unlocalizedName: String, category: LexiconCategory, item: Item) = ShadowfoxLexiconEntry(unlocalizedName, category, ItemStack(item))
+open class ShadowfoxLexiconEntry : LexiconEntry, IAddonEntry {
 
-public class ShadowfoxLexiconEntry(unlocalizedName: String, category: LexiconCategory, var stack: ItemStack? = null) : LexiconEntry(unlocalizedName, category), IAddonEntry {
-    init {
+    constructor(unlocalizedName: String, category: LexiconCategory, stack: ItemStack?): super(unlocalizedName, category) {
         if (stack != null) icon = stack
         BotaniaAPI.addEntry(this, category)
     }
+    constructor(unlocalizedName: String, category: LexiconCategory, block: Block): this(unlocalizedName, category, ItemStack(block)) {}
+    constructor(unlocalizedName: String, category: LexiconCategory, item: Item): this(unlocalizedName, category, ItemStack(item)) {}
+    constructor(unlocalizedName: String, category: LexiconCategory): this(unlocalizedName, category, null as ItemStack?) {}
 
     override fun setLexiconPages(vararg pages: LexiconPage): LexiconEntry {
         for (page in pages) {

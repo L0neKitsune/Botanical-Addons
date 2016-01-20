@@ -222,6 +222,8 @@ shadowfox_botany.entry.toolbelt=Botanist's Toolbelt
 shadowfox_botany.tagline.toolbelt=12 stacks of at-the-ready storage
 shadowfox_botany.entry.lamp=Iridescent Lamp
 shadowfox_botany.tagline.lamp=A signal-strength tester
+shadowfox_botany.entry.tctrees=Thaumic Suffusion
+shadowfox_botany.tagline.tctrees=Life from the void
 
 shadowfox_botany.category.dendrology=Dendrology
 
@@ -308,3 +310,7 @@ shadowfox_botany.page.toolbelt1=Not quite hammerspace
 
 shadowfox_botany.page.lamp0=The &1Iridescent Lantern&0 glows with all the colors of the rainbow. While black in appearance when first set down, giving it a redstone signal will change its color. The higher the signal, the farther down the rainbow the color becomes.<br>If given a full signal, the &1Iridescent Lantern&0 will glow like the &4Bifrost&0 itself.
 shadowfox_botany.page.lamp1=Left by a Piggah
+
+shadowfox_botany.page.tctrees0=The &2Garden of Glass&0 is truly empty. It's so devoid of life you can't find even a remnant of the trees considered necessary for the &5Thaumic&0 arts. However, it appears that the shards of magic occasionally produced by the &1Orechid&0 might be of use in recreating these trees. By applying these shards of power via &4Dendric Suffusion&0, you can make what you cannot find.
+shadowfox_botany.page.tctrees1=That's what she said
+shadowfox_botany.page.tctrees2=Over 70 rides and attractions
