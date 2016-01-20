@@ -14,6 +14,7 @@ import thaumcraft.api.aspects.AspectList
 import vazkii.botania.common.block.ModBlocks
 import vazkii.botania.common.block.ModFluffBlocks
 import vazkii.botania.common.item.ModItems
+import vazkii.botania.common.lib.LibEntityNames
 
 /**
  * @author WireSegal
@@ -564,7 +565,7 @@ object BotaniaTCAspects {
         list = AspectList().a(VOID, 64)
         ThaumcraftApi.registerObjectTag(WildStack(ModItems.blackHoleTalisman), list)
 
-        list = AspectList().a(SENSES, 4).a(AIR, 4).a(GREED, 4).a(COLOR, 2)
+        list = AspectList().a(SENSES, 4).a(AIR, 4).a(GREED, 4).a(COLOR, 2).a(PRIDE, 4)
         ThaumcraftApi.registerObjectTag(WildStack(ModItems.recordGaia1), list)
         ThaumcraftApi.registerObjectTag(WildStack(ModItems.recordGaia2), list)
 
@@ -584,5 +585,67 @@ object BotaniaTCAspects {
 
         list = AspectList(ItemStack(ModBlocks.gaiaHead))
         ThaumcraftApi.registerObjectTag(WildStack(ModItems.gaiaHead), list)
+
+
+
+
+        /// ENTITIES!
+
+        list = AspectList().a(MAGIC, 3).a(AURA, 3)
+        ThaumcraftApi.registerEntityTag(LibEntityNames.MANA_BURST, list)
+
+        list = AspectList().a(MAGIC, 3).a(LIGHT, 3).a(COLOR, 3)
+        ThaumcraftApi.registerEntityTag(LibEntityNames.SIGNAL_FLARE, list)
+
+        list = AspectList().a(LIGHT, 2).a(FLIGHT, 2).a(ELDRITCH)
+        ThaumcraftApi.registerEntityTag(LibEntityNames.PIXIE, list)
+
+        list = AspectList().a(FIRE, 8)
+        ThaumcraftApi.registerEntityTag(LibEntityNames.FLAME_RING, list)
+
+        list = AspectList().a(PLANT, 7)
+        ThaumcraftApi.registerEntityTag(LibEntityNames.VINE_BALL, list)
+
+        list = AspectList().a(MAN, 16).a(EARTH, 8).a(ELDRITCH, 8).a(DARKNESS, 4)
+        ThaumcraftApi.registerEntityTag(LibEntityNames.DOPPLEGANGER, list)
+
+        list = AspectList().a(MAGIC, 2).a(TRAP, 2).a(POISON, 2)
+        ThaumcraftApi.registerEntityTag(LibEntityNames.MAGIC_LANDMINE, list)
+
+        list = AspectList(ItemStack(ModItems.spark))
+        ThaumcraftApi.registerEntityTag(LibEntityNames.SPARK, list)
+
+        list = AspectList().a(MOTION, 4)
+        ThaumcraftApi.registerEntityTag(LibEntityNames.THROWN_ITEM, list)
+
+        list = AspectList().a(WEAPON, 4).a(ELDRITCH, 2)
+        ThaumcraftApi.registerEntityTag(LibEntityNames.MAGIC_MISSILE, list)
+
+        list = AspectList(ItemStack(ModItems.thornChakram))
+        ThaumcraftApi.registerEntityTag(LibEntityNames.THORN_CHAKRAM, list)
+
+        list = AspectList(ItemStack(ModItems.corporeaSpark))
+        ThaumcraftApi.registerEntityTag(LibEntityNames.CORPOREA_SPARK, list)
+
+        list = AspectList(ItemStack(ModItems.manaResource, 1, 15))
+        ThaumcraftApi.registerEntityTag(LibEntityNames.ENDER_AIR_BOTTLE, list)
+
+        list = AspectList(ItemStack(ModItems.poolMinecart))
+        ThaumcraftApi.registerEntityTag(LibEntityNames.POOL_MINECART, list)
+
+        list = AspectList().a(UNDEAD, 20).a(ORDER, 20).a(FIRE, 15).a(HEAL, 15)
+        ThaumcraftApi.registerEntityTag(LibEntityNames.PINK_WITHER, list)
+
+        list = AspectList().a(MOTION, 4).a(TRAVEL, 4)
+        ThaumcraftApi.registerEntityTag(LibEntityNames.PLAYER_MOVER, list)
+
+        list = AspectList().a(ENTROPY, 32).a(WRATH, 16)
+        ThaumcraftApi.registerEntityTag(LibEntityNames.MANA_STORM, list)
+
+        list = AspectList().a(ELDRITCH, 16).a(WEAPON, 16)
+        ThaumcraftApi.registerEntityTag(LibEntityNames.BABYLON_WEAPON, list)
+
+        list = AspectList().a(ELDRITCH, 8)
+        ThaumcraftApi.registerEntityTag(LibEntityNames.FALLING_STAR, list)
     }
 }
