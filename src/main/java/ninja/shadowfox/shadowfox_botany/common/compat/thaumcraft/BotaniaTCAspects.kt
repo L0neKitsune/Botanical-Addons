@@ -25,6 +25,7 @@ object BotaniaTCAspects {
     fun WildStack(i: Block): ItemStack = ItemStack(i, 1, OreDictionary.WILDCARD_VALUE)
     fun WildStack(i: Item): ItemStack = ItemStack(i, 1, OreDictionary.WILDCARD_VALUE)
 
+
     fun initAspects() {
 
     }
@@ -317,7 +318,8 @@ object BotaniaTCAspects {
         ThaumcraftApi.registerObjectTag(WildStack(ModBlocks.altGrass), list)
 
         list = AspectList(ItemStack(Blocks.quartz_block))
-        ThaumcraftApi.registerObjectTag(WildStack(ModFluffBlocks.darkQuartz), list)
+        if (ModFluffBlocks.darkQuartz != null)
+            ThaumcraftApi.registerObjectTag(WildStack(ModFluffBlocks.darkQuartz), list)
         ThaumcraftApi.registerObjectTag(WildStack(ModFluffBlocks.manaQuartz), list)
         ThaumcraftApi.registerObjectTag(WildStack(ModFluffBlocks.blazeQuartz), list)
         ThaumcraftApi.registerObjectTag(WildStack(ModFluffBlocks.lavenderQuartz), list)
