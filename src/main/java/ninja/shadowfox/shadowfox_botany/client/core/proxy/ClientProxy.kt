@@ -9,6 +9,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.client.MinecraftForgeClient
 import ninja.shadowfox.shadowfox_botany.client.core.multipart.MultipartHandler
 import ninja.shadowfox.shadowfox_botany.client.render.entity.RenderGrieferCreeper
+import ninja.shadowfox.shadowfox_botany.client.render.entity.RenderThrownItem
 import ninja.shadowfox.shadowfox_botany.client.render.tile.MultipassRenderer
 import ninja.shadowfox.shadowfox_botany.client.render.tile.RenderTileItemDisplay
 import ninja.shadowfox.shadowfox_botany.common.blocks.BlockFunnel
@@ -16,6 +17,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.colored.BlockColoredDouble
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileItemDisplay
 import ninja.shadowfox.shadowfox_botany.common.core.proxy.CommonProxy
 import ninja.shadowfox.shadowfox_botany.common.entity.EntityGrieferCreeper
+import ninja.shadowfox.shadowfox_botany.common.entity.EntityThrownItem
 import ninja.shadowfox.shadowfox_botany.common.entity.EntityVoidCreeper
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import ninja.shadowfox.shadowfox_botany.lib.Constants
@@ -51,6 +53,7 @@ public class ClientProxy : CommonProxy() {
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileItemDisplay::class.java, RenderTileItemDisplay())
 
+        RenderingRegistry.registerEntityRenderingHandler(EntityThrownItem::class.java, RenderThrownItem())
         RenderingRegistry.registerEntityRenderingHandler(EntityGrieferCreeper::class.java, RenderGrieferCreeper())
         RenderingRegistry.registerEntityRenderingHandler(EntityVoidCreeper::class.java, RenderGrieferCreeper())
     }

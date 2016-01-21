@@ -63,7 +63,7 @@ class BlockSchematicAnnihilator() : BlockMod(Material.wood), IWandable, ITileEnt
 
     override fun onUsedByWand(p0: EntityPlayer?, p1: ItemStack?, p2: World?, p3: Int, p4: Int, p5: Int, p6: Int): Boolean {
 
-        if (p2 != null) {
+        if (p2 != null && p0 != null) {
 
             val tile: TileEntity? = p2.getTileEntity(p3, p4, p5)
 

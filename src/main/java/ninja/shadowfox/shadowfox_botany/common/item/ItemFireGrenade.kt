@@ -2,26 +2,24 @@ package ninja.shadowfox.shadowfox_botany.common.item
 
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.world.World
-import ninja.shadowfox.shadowfox_botany.common.entity.EntityFireAOE
+import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
+import ninja.shadowfox.shadowfox_botany.common.entity.EntityThrownItem
 import vazkii.botania.client.core.handler.ClientTickHandler
 import vazkii.botania.client.core.helper.IconHelper
 import java.awt.Color
 
 
 class ItemFireGrenade() : ItemMod("fireGrenade") {
-    lateinit var itemIconFluid: IIcon
-
-    init {
-
-    }
+    init {}
 
     override fun onItemRightClick(stack: ItemStack?, world: World?, player: EntityPlayer?): ItemStack? {
         if (stack != null && world != null && player != null) {
             if (!world.isRemote) {
-                val potion = EntityFireAOE(player)
+                val potion = EntityThrownItem(player, ShadowFoxAPI.getThrowableFromKey("shadowfox_firegrenade"))
                 potion.motionX *= 1.6
                 potion.motionY *= 1.6
                 potion.motionZ *= 1.6
@@ -52,13 +50,12 @@ class ItemFireGrenade() : ItemMod("fireGrenade") {
     }
 
     override fun registerIcons(par1IconRegister: IIconRegister) {
-        itemIcon = IconHelper.forName(par1IconRegister, "vial" + "0")
-        itemIconFluid = IconHelper.forName(par1IconRegister, "vial" + "1_0")
+        itemIcon = Items.fire_charge.itemIcon
     }
 
 
     override fun getIcon(stack: ItemStack, pass: Int): IIcon {
-        return if (pass == 0) itemIcon else itemIconFluid
+        return itemIcon
     }
 
 }

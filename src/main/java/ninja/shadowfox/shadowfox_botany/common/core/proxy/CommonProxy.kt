@@ -12,6 +12,7 @@ import ninja.shadowfox.shadowfox_botany.common.crafting.ModRecipes
 import ninja.shadowfox.shadowfox_botany.common.entity.ShadowFoxEntity
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
+import ninja.shadowfox.shadowfox_botany.common.throwables.ShadowFoxThrowables
 
 public open class CommonProxy {
     open fun preInit(event: FMLPreInitializationEvent) {
@@ -24,6 +25,8 @@ public open class CommonProxy {
         ShadowFoxPotions
         ShadowFoxEntity
         LexiconRegistry
+        ShadowFoxThrowables
+
         if (Loader.isModLoaded("Thaumcraft")) ThaumcraftAspects.initAspects()
     }
 

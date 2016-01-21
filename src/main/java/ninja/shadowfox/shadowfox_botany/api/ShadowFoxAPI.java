@@ -1,17 +1,31 @@
 package ninja.shadowfox.shadowfox_botany.api;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.MovingObjectPosition;
+import ninja.shadowfox.shadowfox_botany.api.item.ThrowableCollidingItem;
 import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting;
 import ninja.shadowfox.shadowfox_botany.api.trees.IIridescentSaplingVariant;
 import ninja.shadowfox.shadowfox_botany.api.trees.IridescentSaplingBaseVariant;
+import vazkii.botania.api.brew.Brew;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ShadowFoxAPI {
     public static List<RecipeTreeCrafting> treeRecipes = new ArrayList();
     public static List<IIridescentSaplingVariant> treeVariants = new ArrayList();
+    public static Map<String, ThrowableCollidingItem> collidingItemHashMap = new LinkedHashMap();
+    public static ThrowableCollidingItem fallbackTcl = new ThrowableCollidingItem("shadowfox_fallback", new ItemStack(Items.blaze_rod),
+            new ThrowableCollidingItem.OnImpactEvent() {
+                @Override
+                public void onImpact(EntityThrowable throwable, MovingObjectPosition movingObject) {
 
+                }
+            });
     /**
      * Adds a tree crafting recipe to the registry.
      *
@@ -115,13 +129,22 @@ public class ShadowFoxAPI {
         return addTreeVariant(new IridescentSaplingBaseVariant(soil, wood, leaves, metaMin, metaMax, metaShift));
     }
 
+    public static ThrowableCollidingItem registerThrowable(ThrowableCollidingItem tcl) {
+        collidingItemHashMap.put(tcl.getKey(), tcl);
+        return tcl;
+    }
+
+    public static ThrowableCollidingItem getThrowableFromKey(String key) {
+        return collidingItemHashMap.containsKey(key)?collidingItemHashMap.get(key):fallbackTcl;
+    }
+
     /**
      * Gets a list of all acceptable Iridescent Sapling soils.
      *
      * @return A list of all Iridescent Sapling soils.
      */
     public static List<Block> iridescentSoils() {
-        List<Block> soils = new ArrayList();
+        List<Block> soils = new ArrayList<Block>();
         for (IIridescentSaplingVariant variant : treeVariants) {
             soils.addAll(variant.getAcceptableSoils());
         }
@@ -141,4 +164,5 @@ public class ShadowFoxAPI {
         }
         return null;
     }
+
 }

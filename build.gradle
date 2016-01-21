@@ -37,7 +37,7 @@ ext.config = parseConfig(configFile)
 version = "${config.version}-${config.build_number}"
 group= "ninja.shadowfox.shadowfox_botany" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = config.mod_name
-
+logging.level = LogLevel.DEBUG
 
 configurations {
 
@@ -51,7 +51,6 @@ minecraft {
 }
 
 dependencies {
-
     compile "codechicken:CodeChickenLib:1.7.10-1.1.3.140:dev"
     compile "codechicken:CodeChickenCore:1.7.10-1.0.4.29:dev"
     compile "codechicken:NotEnoughItems:1.7.10-1.0.3.74:dev"
