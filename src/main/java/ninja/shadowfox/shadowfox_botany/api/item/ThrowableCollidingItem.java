@@ -22,6 +22,7 @@ public class ThrowableCollidingItem {
     public String getKey() {
         return this.key;
     }
+
     public ItemStack getItemStack() {
         return this.stack;
     }

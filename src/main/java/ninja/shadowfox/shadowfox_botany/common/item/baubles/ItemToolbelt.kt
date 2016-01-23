@@ -3,18 +3,12 @@ package ninja.shadowfox.shadowfox_botany.common.item.baubles
 import baubles.api.BaubleType
 import baubles.common.lib.PlayerHandler
 import cpw.mods.fml.common.FMLCommonHandler
-import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.client.Minecraft
 import net.minecraft.client.model.ModelBiped
-import net.minecraft.client.renderer.ItemRenderer
-import net.minecraft.client.renderer.RenderBlocks
-import net.minecraft.client.renderer.Tessellator
-import net.minecraft.client.renderer.entity.RenderManager
 import net.minecraft.client.renderer.texture.IIconRegister
-import net.minecraft.client.renderer.texture.TextureMap
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemBlock
@@ -25,24 +19,16 @@ import net.minecraft.util.MathHelper
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.StatCollector
 import net.minecraftforge.client.event.RenderPlayerEvent
-import net.minecraftforge.client.event.RenderWorldLastEvent
 import net.minecraftforge.common.MinecraftForge
-import net.minecraftforge.event.entity.player.PlayerInteractEvent
-import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
 import ninja.shadowfox.shadowfox_botany.api.item.IToolbeltBlacklisted
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.network.PlayerItemMessage
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import org.lwjgl.opengl.GL11
 import vazkii.botania.api.item.IBaubleRender
 import vazkii.botania.api.item.IBlockProvider
-import vazkii.botania.client.core.handler.ClientTickHandler
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
-import java.awt.Color
 import java.util.*
-import kotlin.text.replace
-import kotlin.text.toRegex
 
 class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider, IToolbeltBlacklisted {
     // ItemToolbelt will not become an IManaItem. That's... a bit excessivly OP, imo. Store those in your Bauble Case, or keep them in your inventory.
@@ -180,7 +166,6 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider, IT
         }
         return false
     }
-
 
 
     override fun allowedInToolbelt(stack: ItemStack): Boolean = false

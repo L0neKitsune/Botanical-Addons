@@ -13,7 +13,7 @@ object ShadowFoxThrowables {
                 "shadowfox_fire_grenade",
                 ItemStack(ShadowFoxItems.fireGrenade),
                 ThrowableCollidingItem.OnImpactEvent { throwable, pos ->
-                    if(!throwable.worldObj.isRemote) {
+                    if (!throwable.worldObj.isRemote) {
                         val axisalignedbb = throwable.boundingBox.expand(8.0, 2.0, 8.0)
                         val list1 = throwable.worldObj.getEntitiesWithinAABB(net.minecraft.entity.EntityLivingBase::class.java, axisalignedbb)
 

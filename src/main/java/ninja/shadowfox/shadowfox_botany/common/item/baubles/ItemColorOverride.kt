@@ -18,8 +18,6 @@ import vazkii.botania.api.item.ICosmeticBauble
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
 import kotlin.properties.Delegates
-import kotlin.text.replace
-import kotlin.text.toRegex
 
 class ItemColorOverride() : ItemBauble("colorOverride"), ICosmeticBauble, IPriestColorOverride {
 

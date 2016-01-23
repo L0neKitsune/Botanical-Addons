@@ -25,9 +25,6 @@ import vazkii.botania.api.item.ICosmeticBauble
 import vazkii.botania.api.recipe.IFlowerComponent
 import vazkii.botania.client.core.helper.ShaderHelper
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
-import kotlin.text.replace
-import kotlin.text.toLowerCase
-import kotlin.text.toRegex
 
 class ItemCoatOfArms() : ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColorOverride, IFlowerComponent {
 

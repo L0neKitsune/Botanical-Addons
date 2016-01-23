@@ -1,11 +1,5 @@
 package ninja.shadowfox.shadowfox_botany.common.network
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler
-import java.io.Serializable
-import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KProperty
-
 
 //public class MessageDelegate<T>() : ReadWriteProperty<Any, T> {
 //

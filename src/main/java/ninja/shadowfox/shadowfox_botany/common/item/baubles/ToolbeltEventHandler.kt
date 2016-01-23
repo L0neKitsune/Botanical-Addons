@@ -132,7 +132,7 @@ class ToolbeltEventHandler {
                     GL11.glPushMatrix()
 
                     GL11.glScalef(2F, 2F, 2F)
-//                    GL11.glTranslatef(0F, 0F, 0.188F)
+                    //                    GL11.glTranslatef(0F, 0F, 0.188F)
                     GL11.glRotatef(90F, 0F, 1F, 0F)
 
 

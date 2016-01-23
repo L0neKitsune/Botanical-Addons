@@ -26,9 +26,6 @@ import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.crafting.recipe.LensDyeingRecipe
 import vazkii.botania.common.item.lens.ItemLens
 import java.awt.Color
-import kotlin.text.format
-import kotlin.text.replace
-import kotlin.text.toRegex
 
 
 class ItemLensFlashInvisible() : ItemMod("lensPhantomLight"), ICompositableLens {

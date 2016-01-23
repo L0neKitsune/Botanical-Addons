@@ -17,7 +17,6 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.compat.thaumcraft.ThaumcraftSuffusionRecipes
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
-import ninja.shadowfox.shadowfox_botany.lib.LibOreDict as ShadowFoxOreDict
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.recipe.RecipeManaInfusion
 import vazkii.botania.api.recipe.RecipePetals
@@ -25,10 +24,11 @@ import vazkii.botania.api.recipe.RecipePureDaisy
 import vazkii.botania.common.Botania
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import java.util.*
-import vazkii.botania.common.lib.LibOreDict as BotaniaOreDict
+import ninja.shadowfox.shadowfox_botany.lib.LibOreDict as ShadowFoxOreDict
 import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
 import vazkii.botania.common.block.ModFluffBlocks as BotaniaDecorBlocks
 import vazkii.botania.common.item.ModItems as BotaniaItems
+import vazkii.botania.common.lib.LibOreDict as BotaniaOreDict
 
 public object ModRecipes {
     val recipesColoredDirt: List<IRecipe>

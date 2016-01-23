@@ -11,17 +11,17 @@ object LibOreDict {
 
     val HOLY_PENDANT = "holyPendant"
 
-    val COLORS = arrayOf("White",     "Orange", "Magenta", "LightBlue",
-                         "Yellow",    "Lime",   "Pink",    "Gray",
-                         "LightGray", "Cyan",   "Purple",  "Blue",
-                         "Brown",     "Green",  "Red",     "Black",
-                         "Rainbow")
+    val COLORS = arrayOf("White", "Orange", "Magenta", "LightBlue",
+            "Yellow", "Lime", "Pink", "Gray",
+            "LightGray", "Cyan", "Purple", "Blue",
+            "Brown", "Green", "Red", "Black",
+            "Rainbow")
 
     val IRIS_WOOD = "irisWood"
     val IRIS_LEAVES = "irisLeaves"
     val IRIS_DIRT = "irisDirt"
 
-    val WOOD = Array(COLORS.size, {i -> "$IRIS_WOOD${COLORS[i]}"})
-    val LEAVES = Array(COLORS.size, {i -> "$IRIS_LEAVES${COLORS[i]}"})
-    val DIRT = Array(COLORS.size, {i -> "$IRIS_DIRT${COLORS[i]}"})
+    val WOOD = Array(COLORS.size, { i -> "$IRIS_WOOD${COLORS[i]}" })
+    val LEAVES = Array(COLORS.size, { i -> "$IRIS_LEAVES${COLORS[i]}" })
+    val DIRT = Array(COLORS.size, { i -> "$IRIS_DIRT${COLORS[i]}" })
 }

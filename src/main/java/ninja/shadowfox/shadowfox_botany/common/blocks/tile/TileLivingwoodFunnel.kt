@@ -23,8 +23,6 @@ import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.BlockFunnel
 import org.lwjgl.opengl.GL11
 import vazkii.botania.common.lib.LibMisc
-import kotlin.collections.arrayListOf
-import kotlin.collections.indices
 
 class TileLivingwoodFunnel() : TileMod(), IHopper {
     private var inventory = arrayOfNulls<ItemStack>(1)

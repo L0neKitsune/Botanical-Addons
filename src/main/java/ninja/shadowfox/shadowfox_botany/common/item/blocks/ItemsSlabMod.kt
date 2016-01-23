@@ -6,8 +6,6 @@ import net.minecraft.item.ItemSlab
 import net.minecraft.item.ItemStack
 import net.minecraft.util.StatCollector
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockSlabMod
-import kotlin.text.replace
-import kotlin.text.toRegex
 
 
 open class ItemColoredSlabMod(par1: Block) : ItemSlabMod(par1) {

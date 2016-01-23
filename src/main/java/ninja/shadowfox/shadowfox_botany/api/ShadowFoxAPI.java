@@ -3,17 +3,17 @@ package ninja.shadowfox.shadowfox_botany.api;
 import net.minecraft.block.Block;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MovingObjectPosition;
 import ninja.shadowfox.shadowfox_botany.api.item.ThrowableCollidingItem;
 import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting;
 import ninja.shadowfox.shadowfox_botany.api.trees.IIridescentSaplingVariant;
 import ninja.shadowfox.shadowfox_botany.api.trees.IridescentSaplingBaseVariant;
-import vazkii.botania.api.brew.Brew;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ShadowFoxAPI {
     public static List<RecipeTreeCrafting> treeRecipes = new ArrayList();
@@ -26,6 +26,7 @@ public class ShadowFoxAPI {
 
                 }
             });
+
     /**
      * Adds a tree crafting recipe to the registry.
      *
@@ -135,7 +136,7 @@ public class ShadowFoxAPI {
     }
 
     public static ThrowableCollidingItem getThrowableFromKey(String key) {
-        return collidingItemHashMap.containsKey(key)?collidingItemHashMap.get(key):fallbackTcl;
+        return collidingItemHashMap.containsKey(key) ? collidingItemHashMap.get(key) : fallbackTcl;
     }
 
     /**
