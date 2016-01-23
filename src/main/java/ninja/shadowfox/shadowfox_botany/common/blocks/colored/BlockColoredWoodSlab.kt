@@ -24,7 +24,6 @@ import kotlin.text.toRegex
 class BlockColoredWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks.coloredPlanks) :
         BlockSlabMod(full, meta, source, source.unlocalizedName.replace("tile.".toRegex(), "") + "Slab" + (if (full) "Full" else "") + meta), ILexiconable, IFuelHandler {
     init {
-        this.setHardness(1.5f)
         this.setResistance(10.0f)
         GameRegistry.registerFuelHandler(this)
     }

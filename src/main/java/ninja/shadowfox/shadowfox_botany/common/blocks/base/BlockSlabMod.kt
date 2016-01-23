@@ -30,6 +30,10 @@ abstract class BlockSlabMod(val full: Boolean, val meta: Int, val source: Block,
 
     }
 
+    override fun getBlockHardness(world: World?, x: Int, y: Int, z: Int): Float {
+        return source.getBlockHardness(world, x, y, z)
+    }
+
     override fun setBlockName(name: String?): Block? {
         return super.setBlockName(name)
     }
