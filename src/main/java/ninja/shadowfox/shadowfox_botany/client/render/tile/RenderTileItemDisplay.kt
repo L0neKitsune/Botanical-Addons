@@ -1,5 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.client.render.tile
 
+import cpw.mods.fml.common.FMLLog
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
@@ -7,13 +8,16 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.ItemRenderer
 import net.minecraft.client.renderer.RenderBlocks
 import net.minecraft.client.renderer.Tessellator
+import net.minecraft.client.renderer.entity.RenderManager
 import net.minecraft.client.renderer.texture.TextureMap
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.item.ItemBlock
 import net.minecraft.tileentity.TileEntity
+import net.minecraft.util.MathHelper
 import net.minecraftforge.client.ForgeHooksClient
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileItemDisplay
+import org.apache.logging.log4j.Level
 import org.lwjgl.opengl.GL11
 import vazkii.botania.client.core.handler.ClientTickHandler
 import java.awt.Color
@@ -54,6 +58,23 @@ class RenderTileItemDisplay() : TileEntitySpecialRenderer() {
                         this.renderBlocks.renderBlockAsItem(Block.getBlockFromItem(scale.item), scale.itemDamage, 1.0f)
                         GL11.glTranslatef(-1.0f, -1.1f, 0.0f)
                         GL11.glScalef(2.0f, 2.0f, 2.0f)
+                    } else if (scale.item is ItemBlock && !RenderBlocks.renderItemIn3d(Block.getBlockFromItem(scale.item).renderType)) {
+                        var entityitem: EntityItem? = null
+                        GL11.glPushMatrix()
+
+                        GL11.glScalef(2.0f, 2.0f, 2.0f)
+                        GL11.glTranslatef(.25f, .275f, 0.0f)
+
+
+                        val `is` = scale.copy()
+                        `is`.stackSize = 1
+                        entityitem = EntityItem(display.worldObj, 0.0, 0.0, 0.0, `is`)
+                        entityitem.hoverStart = 0.0f
+                        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0, 0.0, 0.0, 0.0f, 0.0f)
+
+                        GL11.glTranslatef(-.25f, -.275f, 0.0f)
+
+                        GL11.glPopMatrix()
                     } else {
                         var renderPass = 0
 

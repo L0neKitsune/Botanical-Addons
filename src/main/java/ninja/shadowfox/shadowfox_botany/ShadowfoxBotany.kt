@@ -13,6 +13,7 @@ import ninja.shadowfox.shadowfox_botany.common.core.proxy.CommonProxy
 import ninja.shadowfox.shadowfox_botany.common.network.PlayerItemMessage
 import ninja.shadowfox.shadowfox_botany.common.network.PlayerItemMessageHandler
 import ninja.shadowfox.shadowfox_botany.lib.Constants
+import vazkii.botania.common.Botania
 
 @Mod(modid = Constants.MODID, version = Constants.VERSION, name = Constants.MODNAME, dependencies = Constants.DEPENDENCIES)
 public class ShadowfoxBotany {
@@ -22,7 +23,8 @@ public class ShadowfoxBotany {
         var thaumcraftLoaded = false
         lateinit var network: SimpleNetworkWrapper
 
-        @field:Mod.Instance("ShadowfoxBotany") lateinit var instance: ShadowfoxBotany
+        @Mod.Instance("ShadowfoxBotany")
+        lateinit var instance: ShadowfoxBotany
 
         @field:SidedProxy(serverSide = "ninja.shadowfox.shadowfox_botany.common.core.proxy.CommonProxy",
                 clientSide = "ninja.shadowfox.shadowfox_botany.client.core.proxy.ClientProxy") lateinit var proxy: CommonProxy
@@ -30,7 +32,6 @@ public class ShadowfoxBotany {
 
     @Mod.EventHandler
     fun preInit(event: FMLPreInitializationEvent) {
-
         instance = this
         isDevEnv = Launch.blackboard["fml.deobfuscatedEnvironment"] as Boolean
         thaumcraftLoaded = Loader.isModLoaded("Thaumcraft")

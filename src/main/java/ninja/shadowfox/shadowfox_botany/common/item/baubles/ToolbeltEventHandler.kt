@@ -1,5 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.item.baubles
 
+import cpw.mods.fml.common.FMLLog
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
@@ -10,6 +11,7 @@ import net.minecraft.client.renderer.RenderBlocks
 import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.entity.RenderManager
 import net.minecraft.client.renderer.texture.TextureMap
+import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
@@ -18,6 +20,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent
 import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
 import ninja.shadowfox.shadowfox_botany.api.item.IToolbeltBlacklisted
 import ninja.shadowfox.shadowfox_botany.common.network.PlayerItemMessage
+import org.apache.logging.log4j.Level
 import org.lwjgl.opengl.GL11
 import vazkii.botania.client.core.handler.ClientTickHandler
 import java.awt.Color
@@ -117,17 +120,38 @@ class ToolbeltEventHandler {
                 mc.renderEngine.bindTexture(if (slotStack.item is ItemBlock) TextureMap.locationBlocksTexture else TextureMap.locationItemsTexture)
 
                 if (slotStack.item is ItemBlock && RenderBlocks.renderItemIn3d(Block.getBlockFromItem(slotStack.item).renderType)) {
+                    FMLLog.log(Level.ERROR, "1")
+
                     GL11.glScalef(0.6F, 0.6F, 0.6F)
                     GL11.glRotatef(180F, 0F, 1F, 0F)
                     GL11.glTranslatef(0F, 0.6F, 0F)
 
                     RenderBlocks.getInstance().renderBlockAsItem(Block.getBlockFromItem(slotStack.item), slotStack.itemDamage, 1F)
+                } else if (slotStack.item is ItemBlock && !RenderBlocks.renderItemIn3d(Block.getBlockFromItem(slotStack.item).renderType)) {
+                    var entityitem: EntityItem? = null
+                    GL11.glPushMatrix()
+
+                    GL11.glScalef(2F, 2F, 2F)
+//                    GL11.glTranslatef(0F, 0F, 0.188F)
+                    GL11.glRotatef(90F, 0F, 1F, 0F)
+
+
+                    val `is` = slotStack.copy()
+                    `is`.stackSize = 1
+                    entityitem = EntityItem(player.worldObj, 0.0, 0.0, 0.0, `is`)
+                    entityitem.hoverStart = 0.0f
+                    RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0, 0.0, 0.0, 0.0f, 0.0f)
+
+                    GL11.glPopMatrix()
                 } else {
+                    FMLLog.log(Level.ERROR, "3")
+
                     GL11.glScalef(0.75F, 0.75F, 0.75F)
                     GL11.glTranslatef(0F, 0F, 0.5F)
                     GL11.glRotatef(90F, 0F, 1F, 0F)
                     var renderPass = 0
-                    while (renderPass < slotStack.item.getRenderPasses(slotStack.itemDamage)) {
+
+                    do {
                         val icon = slotStack.item.getIcon(slotStack, renderPass)
                         if (icon != null) {
                             val color = Color(slotStack.item.getColorFromItemStack(slotStack, renderPass))
@@ -136,11 +160,12 @@ class ToolbeltEventHandler {
                             val f1 = icon.maxU
                             val f2 = icon.minV
                             val f3 = icon.maxV
-                            ItemRenderer.renderItemIn2D(Tessellator.instance, f1, f2, f, f3, icon.iconWidth, icon.iconHeight, 1F / 16F)
-                            GL11.glColor3f(1F, 1F, 1F)
+                            ItemRenderer.renderItemIn2D(Tessellator.instance, f1, f2, f, f3, icon.iconWidth, icon.iconHeight, 0.0625f)
+                            GL11.glColor3f(1.0f, 1.0f, 1.0f)
                         }
-                        renderPass++
-                    }
+
+                        ++renderPass
+                    } while (renderPass < slotStack.item.getRenderPasses(slotStack.itemDamage))
                 }
             }
             GL11.glPopMatrix()
