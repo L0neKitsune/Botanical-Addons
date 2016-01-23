@@ -18,7 +18,6 @@ import kotlin.text.toRegex
 
 open class BlockRainbowWoodSlab(full: Boolean, source: Block = ShadowFoxBlocks.rainbowPlanks) : BlockSlabMod(full, 0, source, source.unlocalizedName.replace("tile.".toRegex(), "") + "Slab" + (if (full) "Full" else "")), IFuelHandler {
     init {
-        this.setHardness(1.5f)
         this.setResistance(10.0f)
         GameRegistry.registerFuelHandler(this)
     }
