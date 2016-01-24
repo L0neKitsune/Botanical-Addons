@@ -14,8 +14,7 @@ class ItemFireGrenade() : ItemMod("fireGrenade") {
     override fun onItemRightClick(stack: ItemStack?, world: World?, player: EntityPlayer?): ItemStack? {
         if (stack != null && world != null && player != null) {
             if (!world.isRemote) {
-                val potion = EntityThrowableItem(player)
-                //                potion.event = ShadowFoxAPI.getThrowableFromKey("shadowfox_fire_grenade")
+                val potion = EntityThrowableItem(player, "shadowfox_fire_grenade")
                 potion.motionX *= 1.6
                 potion.motionY *= 1.6
                 potion.motionZ *= 1.6

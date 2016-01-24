@@ -22,7 +22,7 @@ public class ShadowfoxBotany {
         var thaumcraftLoaded = false
         lateinit var network: SimpleNetworkWrapper
 
-        @Mod.Instance(Constants.MODID)
+        @field:Mod.Instance(Constants.MODID)
         lateinit var instance: ShadowfoxBotany
 
         @field:SidedProxy(serverSide = "ninja.shadowfox.shadowfox_botany.common.core.proxy.CommonProxy",

@@ -1,58 +1,52 @@
 package ninja.shadowfox.shadowfox_botany.common.entity
 
+import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.projectile.EntityThrowable
 import net.minecraft.init.Blocks
+import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.MathHelper
 import net.minecraft.util.MovingObjectPosition
+import net.minecraft.world.World
+import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
+import ninja.shadowfox.shadowfox_botany.api.item.ImpactEventAction
+import ninja.shadowfox.shadowfox_botany.api.item.ThrowableCollidingItem
 
 
-class EntityThrowableItem(player: EntityPlayer) : EntityThrowable(player.worldObj, player) {
+class EntityThrowableItem : EntityThrowable
+{
+    constructor(world: World) : super(world) {}
 
+    constructor(player: EntityPlayer, effect_key: String) : super(player.worldObj, player) {
+        event = ShadowFoxAPI.getThrowableFromKey(effect_key)
+    }
+
+    var event: ThrowableCollidingItem? = null
 
     override fun onImpact(movingObject: MovingObjectPosition?) {
         if (!this.worldObj.isRemote && movingObject != null) {
-            val axisalignedbb = this.boundingBox.expand(8.0, 2.0, 8.0)
-            val list1 = this.worldObj.getEntitiesWithinAABB(EntityLivingBase::class.java, axisalignedbb)
-
-            if (list1 != null && !list1.isEmpty()) {
-                val iterator = list1.iterator()
-
-                while (iterator.hasNext()) {
-                    val entitylivingbase = iterator.next() as EntityLivingBase
-                    val d0 = this.getDistanceSqToEntity(entitylivingbase)
-
-                    if (d0 < 16.0) {
-                        entitylivingbase.setFire(10)
-                    }
-                }
-            }
-
-            var i = MathHelper.floor_double(posX)
-            var j = MathHelper.floor_double(posY)
-            var k = MathHelper.floor_double(posZ)
-
-            if (worldObj.getBlock(i, j, k).material === Material.air &&
-                    Blocks.fire.canPlaceBlockAt(worldObj, i, j, k)) {
-                worldObj.setBlock(i, j, k, Blocks.fire)
-            }
-
-            for (n in 0..36) {
-                j = MathHelper.floor_double(posX) + this.rand.nextInt(6) - 1
-                k = MathHelper.floor_double(posY) + this.rand.nextInt(6) - 1
-                val l = MathHelper.floor_double(posZ) + this.rand.nextInt(6) - 1
-
-                if (worldObj.getBlock(j, k, l).material === Material.air && Blocks.fire.canPlaceBlockAt(worldObj, j, k, l)) {
-                    worldObj.setBlock(j, k, l, Blocks.fire)
-                }
-            }
-
-
+            event?.onImpact(this, movingObject)
         }
 
         worldObj.playAuxSFX(2002, Math.round(posX).toInt(), Math.round(posY).toInt(), Math.round(posZ).toInt(), 0)
         setDead()
+    }
+
+    /**
+     * (abstract) Protected helper method to write subclass entity data to NBT.
+     */
+    override fun writeEntityToNBT(p_70014_1_: NBTTagCompound) {
+        event?.let {
+            p_70014_1_.setString("effect_key", it.key)
+        }
+    }
+
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+    override fun readEntityFromNBT(p_70037_1_: NBTTagCompound) {
+        event = ShadowFoxAPI.getThrowableFromKey(p_70037_1_.getString("effect_key"))
     }
 }
