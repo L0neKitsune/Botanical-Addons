@@ -5,8 +5,6 @@ import net.minecraft.client.renderer.texture.TextureMap
 import net.minecraft.item.Item
 import net.minecraft.util.IIcon
 import vazkii.botania.client.render.block.InterpolatedIcon
-import kotlin.text.replace
-import kotlin.text.toRegex
 
 object InterpolatedIconHelper {
 

@@ -13,7 +13,6 @@ import ninja.shadowfox.shadowfox_botany.common.core.proxy.CommonProxy
 import ninja.shadowfox.shadowfox_botany.common.network.PlayerItemMessage
 import ninja.shadowfox.shadowfox_botany.common.network.PlayerItemMessageHandler
 import ninja.shadowfox.shadowfox_botany.lib.Constants
-import vazkii.botania.common.Botania
 
 @Mod(modid = Constants.MODID, version = Constants.VERSION, name = Constants.MODNAME, dependencies = Constants.DEPENDENCIES)
 public class ShadowfoxBotany {

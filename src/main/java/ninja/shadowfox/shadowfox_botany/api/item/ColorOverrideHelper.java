@@ -23,8 +23,7 @@ public class ColorOverrideHelper {
                         else
                             color = mixColors(color, new Color(stackColor));
                     }
-                }
-                else if (stack != null && stack.getItem() instanceof ICosmeticAttachable && ((ICosmeticAttachable) stack.getItem()).getCosmeticItem(stack) != null) {
+                } else if (stack != null && stack.getItem() instanceof ICosmeticAttachable && ((ICosmeticAttachable) stack.getItem()).getCosmeticItem(stack) != null) {
                     ItemStack cosmeticStack = ((ICosmeticAttachable) stack.getItem()).getCosmeticItem(stack);
                     if (cosmeticStack != null && cosmeticStack.getItem() instanceof IPriestColorOverride) {
                         int stackColor = ((IPriestColorOverride) cosmeticStack.getItem()).colorOverride(cosmeticStack);

@@ -11,7 +11,6 @@ import org.lwjgl.opengl.GL11
 import vazkii.botania.api.internal.IGuiLexiconEntry
 import vazkii.botania.client.core.handler.HUDHandler
 import vazkii.botania.common.block.tile.mana.TilePool
-import kotlin.text.format
 
 public class PageTreeCrafting : PagePetalRecipe<RecipeTreeCrafting> {
     constructor(unlocalizedName: String, recipes: List<RecipeTreeCrafting>) : super(unlocalizedName, recipes) {

@@ -11,7 +11,6 @@ import net.minecraftforge.client.MinecraftForgeClient
 import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
 import ninja.shadowfox.shadowfox_botany.client.core.multipart.MultipartHandler
 import ninja.shadowfox.shadowfox_botany.client.render.entity.RenderGrieferCreeper
-import ninja.shadowfox.shadowfox_botany.client.render.entity.RenderThrownItem
 import ninja.shadowfox.shadowfox_botany.client.render.tile.MultipassRenderer
 import ninja.shadowfox.shadowfox_botany.client.render.tile.RenderTileItemDisplay
 import ninja.shadowfox.shadowfox_botany.common.blocks.BlockFunnel

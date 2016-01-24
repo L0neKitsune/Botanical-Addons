@@ -31,8 +31,6 @@ import vazkii.botania.client.lib.LibResources
 import vazkii.botania.client.model.ModelTinyPotato
 import vazkii.botania.common.item.equipment.bauble.ItemBauble
 import kotlin.properties.Delegates
-import kotlin.text.replace
-import kotlin.text.toRegex
 
 class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble {
     // private val kitsuneTexture = ResourceLocation("shadowfox_botany:textures/items/kitsunesTail.png")

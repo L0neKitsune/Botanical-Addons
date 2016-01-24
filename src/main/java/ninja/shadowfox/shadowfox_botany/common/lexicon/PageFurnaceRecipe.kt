@@ -15,7 +15,6 @@ import vazkii.botania.api.lexicon.LexiconRecipeMappings
 import vazkii.botania.client.lib.LibResources
 import vazkii.botania.common.lexicon.page.PageRecipe
 import java.util.*
-import kotlin.collections.arrayListOf
 
 public class PageFurnaceRecipe : PageRecipe {
 

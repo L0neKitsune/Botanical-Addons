@@ -1,6 +1,5 @@
 package ninja.shadowfox.shadowfox_botany.client.render.tile
 
-import cpw.mods.fml.common.FMLLog
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
@@ -14,10 +13,8 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.item.ItemBlock
 import net.minecraft.tileentity.TileEntity
-import net.minecraft.util.MathHelper
 import net.minecraftforge.client.ForgeHooksClient
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileItemDisplay
-import org.apache.logging.log4j.Level
 import org.lwjgl.opengl.GL11
 import vazkii.botania.client.core.handler.ClientTickHandler
 import java.awt.Color

@@ -9,7 +9,6 @@ import net.minecraft.util.AxisAlignedBB
 import net.minecraft.world.World
 import net.minecraftforge.event.ForgeEventFactory
 import java.util.*
-import kotlin.collections.indices
 
 
 class TileLightningRod() : TileEntity() {

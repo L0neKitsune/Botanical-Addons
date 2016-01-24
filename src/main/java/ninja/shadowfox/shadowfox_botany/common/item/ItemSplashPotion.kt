@@ -19,8 +19,6 @@ import vazkii.botania.client.core.handler.ClientTickHandler
 import vazkii.botania.client.core.helper.IconHelper
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import java.awt.Color
-import kotlin.text.replace
-import kotlin.text.toRegex
 
 
 public class ItemSplashPotion() : ItemMod("splashPotion"), IBrewItem, IBrewContainer {

@@ -5,7 +5,6 @@ import net.minecraft.inventory.ISidedInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.nbt.NBTTagList
-import kotlin.collections.indices
 
 class TileItemDisplay() : TileMod(), ISidedInventory {
     private val slots = intArrayOf(0)

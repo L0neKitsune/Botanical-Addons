@@ -1,9 +1,5 @@
 package ninja.shadowfox.shadowfox_botany.common.item
 
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.ItemStack
-import net.minecraft.world.World
-
 /**
  * Created by l0nekitsune on 1/11/16.
  */

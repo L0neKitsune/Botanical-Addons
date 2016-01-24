@@ -2,7 +2,6 @@ package ninja.shadowfox.shadowfox_botany.common.item.rods
 
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
-
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
@@ -10,23 +9,17 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.util.StatCollector
 import net.minecraft.world.World
-
 import net.minecraftforge.common.util.ForgeDirection
-
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileRainbowManaFlame
 import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
 import ninja.shadowfox.shadowfox_botany.common.item.ItemMod
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
-
 import vazkii.botania.api.item.IPhantomInkable
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
 import vazkii.botania.common.core.helper.ItemNBTHelper
-
 import kotlin.properties.Delegates
-import kotlin.text.replace
-import kotlin.text.toRegex
 
 class ItemRainbowLightRod : ItemMod("rainbowLightRod"), IManaUsingItem, IPhantomInkable {
 

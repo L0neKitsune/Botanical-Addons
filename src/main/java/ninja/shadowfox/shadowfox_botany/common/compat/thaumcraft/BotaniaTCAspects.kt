@@ -433,30 +433,30 @@ object BotaniaTCAspects {
         ThaumcraftApi.registerObjectTag(ItemStack(ModItems.rune, 1, 8), list) // Rune of Mana
 
         if (forbidden) list = AspectList().a(LUST, 16)
-        else           list = AspectList().a(FLESH, 16)
+        else list = AspectList().a(FLESH, 16)
         ThaumcraftApi.registerObjectTag(ItemStack(ModItems.rune, 1, 9), list) // Rune of Lust
 
         if (forbidden) list = AspectList().a(GLUTTONY, 16)
-        else           list = AspectList().a(HUNGER, 16)
+        else list = AspectList().a(HUNGER, 16)
         ThaumcraftApi.registerObjectTag(ItemStack(ModItems.rune, 1, 10), list) // Rune of Gluttony
 
         list = AspectList().a(GREED, 16)
         ThaumcraftApi.registerObjectTag(ItemStack(ModItems.rune, 1, 11), list) // Rune of Greed
 
         if (forbidden) list = AspectList().a(SLOTH, 16)
-        else           list = AspectList().a(CLOTH, 16)
+        else list = AspectList().a(CLOTH, 16)
         ThaumcraftApi.registerObjectTag(ItemStack(ModItems.rune, 1, 12), list) // Rune of Sloth
 
         if (forbidden) list = AspectList().a(WRATH, 16)
-        else           list = AspectList().a(WEAPON, 16)
+        else list = AspectList().a(WEAPON, 16)
         ThaumcraftApi.registerObjectTag(ItemStack(ModItems.rune, 1, 13), list) // Rune of Wrath
 
         if (forbidden) list = AspectList().a(ENVY, 16)
-        else           list = AspectList().a(TRAP, 16)
+        else list = AspectList().a(TRAP, 16)
         ThaumcraftApi.registerObjectTag(ItemStack(ModItems.rune, 1, 14), list) // Rune of Envy
 
         if (forbidden) list = AspectList().a(PRIDE, 16)
-        else           list = AspectList().a(COLOR, 16)
+        else list = AspectList().a(COLOR, 16)
         ThaumcraftApi.registerObjectTag(ItemStack(ModItems.rune, 1, 15), list) // Rune of Pride
 
         list = AspectList().a(VOID, 2).a(MAGIC, 8)
