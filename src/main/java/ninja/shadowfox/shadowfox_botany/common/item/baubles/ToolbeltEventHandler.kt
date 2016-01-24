@@ -186,6 +186,9 @@ class ToolbeltEventHandler {
 
             GL11.glDisable(GL11.GL_CULL_FACE)
             val item = stack.item as ItemToolbelt
+            GL11.glAlphaFunc(GL11.GL_ALWAYS, 1F)
+            GL11.glEnable(GL11.GL_BLEND)
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
             mc.renderEngine.bindTexture(item.getGlowResource())
             tess.startDrawingQuads()
             for (i in 0..segAngles - 1) {
@@ -204,6 +207,7 @@ class ToolbeltEventHandler {
             }
             y0 = 0.0
             tess.draw()
+            GL11.glDisable(GL11.GL_BLEND)
             GL11.glEnable(GL11.GL_CULL_FACE)
             GL11.glPopMatrix()
         }
