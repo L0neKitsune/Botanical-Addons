@@ -15,6 +15,7 @@ import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
+import net.minecraftforge.client.IItemRenderer
 import net.minecraftforge.client.event.RenderWorldLastEvent
 import net.minecraftforge.event.entity.player.PlayerInteractEvent
 import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
@@ -120,19 +121,20 @@ class ToolbeltEventHandler {
                 mc.renderEngine.bindTexture(if (slotStack.item is ItemBlock) TextureMap.locationBlocksTexture else TextureMap.locationItemsTexture)
 
                 if (slotStack.item is ItemBlock && RenderBlocks.renderItemIn3d(Block.getBlockFromItem(slotStack.item).renderType)) {
-                    FMLLog.log(Level.ERROR, "1")
-
                     GL11.glScalef(0.6F, 0.6F, 0.6F)
                     GL11.glRotatef(180F, 0F, 1F, 0F)
                     GL11.glTranslatef(0F, 0.6F, 0F)
 
                     RenderBlocks.getInstance().renderBlockAsItem(Block.getBlockFromItem(slotStack.item), slotStack.itemDamage, 1F)
-                } else if (slotStack.item is ItemBlock && !RenderBlocks.renderItemIn3d(Block.getBlockFromItem(slotStack.item).renderType)) {
+                } else if (slotStack.item is ItemBlock || slotStack.item.isFull3D) {
                     var entityitem: EntityItem? = null
                     GL11.glPushMatrix()
 
-                    GL11.glScalef(2F, 2F, 2F)
-//                    GL11.glTranslatef(0F, 0F, 0.188F)
+                    if(slotStack.item is ItemBlock) {
+                        GL11.glScalef(1F, 1F, 1F)
+                    } else {
+                        GL11.glScalef(.75F, .75F, .75F)
+                    }
                     GL11.glRotatef(90F, 0F, 1F, 0F)
 
 
@@ -144,7 +146,6 @@ class ToolbeltEventHandler {
 
                     GL11.glPopMatrix()
                 } else {
-                    FMLLog.log(Level.ERROR, "3")
 
                     GL11.glScalef(0.75F, 0.75F, 0.75F)
                     GL11.glTranslatef(0F, 0F, 0.5F)
@@ -160,6 +161,7 @@ class ToolbeltEventHandler {
                             val f1 = icon.maxU
                             val f2 = icon.minV
                             val f3 = icon.maxV
+
                             ItemRenderer.renderItemIn2D(Tessellator.instance, f1, f2, f, f3, icon.iconWidth, icon.iconHeight, 0.0625f)
                             GL11.glColor3f(1.0f, 1.0f, 1.0f)
                         }

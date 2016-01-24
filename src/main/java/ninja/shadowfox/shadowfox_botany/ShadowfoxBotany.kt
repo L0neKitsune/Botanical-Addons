@@ -23,7 +23,7 @@ public class ShadowfoxBotany {
         var thaumcraftLoaded = false
         lateinit var network: SimpleNetworkWrapper
 
-        @Mod.Instance("ShadowfoxBotany")
+        @Mod.Instance(Constants.MODID)
         lateinit var instance: ShadowfoxBotany
 
         @field:SidedProxy(serverSide = "ninja.shadowfox.shadowfox_botany.common.core.proxy.CommonProxy",
@@ -32,7 +32,6 @@ public class ShadowfoxBotany {
 
     @Mod.EventHandler
     fun preInit(event: FMLPreInitializationEvent) {
-        instance = this
         isDevEnv = Launch.blackboard["fml.deobfuscatedEnvironment"] as Boolean
         thaumcraftLoaded = Loader.isModLoaded("Thaumcraft")
         network = SimpleNetworkWrapper(Constants.MODID)

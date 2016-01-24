@@ -54,7 +54,7 @@ public class ClientProxy : CommonProxy() {
         RenderingRegistry.registerBlockHandler(BlockFunnel.HopperRenderer())
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileItemDisplay::class.java, RenderTileItemDisplay())
-        EntityRegistry.registerModEntity(EntityThrowableItem::class.java, "shadowfox_botany:thrownItem", 0, ShadowfoxBotany.instance, 64, 10, true)
+//        EntityRegistry.registerModEntity(EntityThrowableItem::class.java, "shadowfox_botany:thrownItem", 0, ShadowfoxBotany.instance, 64, 10, true)
 
 
         //        RenderingRegistry.registerEntityRenderingHandler(EntityThrowableItem::class.java, RenderThrownItem())
