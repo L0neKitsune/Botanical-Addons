@@ -4,6 +4,7 @@ import cpw.mods.fml.common.Loader
 import cpw.mods.fml.common.event.FMLInitializationEvent
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
+import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.brew.ShadowFoxPotions
 import ninja.shadowfox.shadowfox_botany.common.compat.thaumcraft.ThaumcraftAspects
@@ -27,7 +28,7 @@ public open class CommonProxy {
         LexiconRegistry
         ShadowFoxThrowables
 
-        if (Loader.isModLoaded("Thaumcraft")) ThaumcraftAspects.initAspects()
+        if (ShadowfoxBotany.thaumcraftLoaded) ThaumcraftAspects.initAspects()
     }
 
     open fun init(event: FMLInitializationEvent) {
@@ -36,6 +37,6 @@ public open class CommonProxy {
 
     open fun postInit(event: FMLPostInitializationEvent) {
         ConfigHandler.loadPostInit()
-        if (Loader.isModLoaded("Thaumcraft")) ThaumcraftAspects.addAspects()
+        if (ShadowfoxBotany.thaumcraftLoaded) ThaumcraftAspects.addAspects()
     }
 }
