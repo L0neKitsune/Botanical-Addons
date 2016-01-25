@@ -14,6 +14,8 @@ import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
+import net.minecraftforge.client.IItemRenderer
+import net.minecraftforge.client.MinecraftForgeClient
 import net.minecraftforge.client.event.RenderWorldLastEvent
 import net.minecraftforge.event.entity.player.PlayerInteractEvent
 import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
@@ -28,6 +30,12 @@ import java.awt.Color
  * Created at 2:59 PM on 1/23/16.
  */
 class ToolbeltEventHandler {
+
+    @SideOnly(Side.CLIENT)
+    private fun shouldRenderAsEntity(stack: ItemStack) =
+            MinecraftForgeClient.getItemRenderer(stack, IItemRenderer.ItemRenderType.ENTITY) != null
+
+
     @SubscribeEvent
     fun onPlayerInteract(event: PlayerInteractEvent) {
         val player = event.entityPlayer
@@ -124,14 +132,15 @@ class ToolbeltEventHandler {
                     GL11.glTranslatef(0F, 0.6F, 0F)
 
                     RenderBlocks.getInstance().renderBlockAsItem(Block.getBlockFromItem(slotStack.item), slotStack.itemDamage, 1F)
-                } else if (slotStack.item is ItemBlock || slotStack.item.isFull3D) {
+                } else if (slotStack.item is ItemBlock || shouldRenderAsEntity(slotStack)) {
                     var entityitem: EntityItem?
                     GL11.glPushMatrix()
 
                     if(slotStack.item is ItemBlock) {
                         GL11.glScalef(1F, 1F, 1F)
                     } else {
-                        GL11.glScalef(.75F, .75F, .75F)
+                        GL11.glScalef(1.5F, 1.5F, 1.5F)
+                        GL11.glTranslatef(0F, -0.125F, 0F)
                     }
                     GL11.glRotatef(90F, 0F, 1F, 0F)
 
@@ -208,8 +217,11 @@ class ToolbeltEventHandler {
             }
             y0 = 0.0
             tess.draw()
+
+            GL11.glColor4f(1f, 1f, 1f, 1f)
             GL11.glDisable(GL11.GL_BLEND)
             GL11.glEnable(GL11.GL_CULL_FACE)
+
             GL11.glPopMatrix()
         }
         GL11.glPopMatrix()
