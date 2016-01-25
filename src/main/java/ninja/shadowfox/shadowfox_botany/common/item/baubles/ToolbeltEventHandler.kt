@@ -104,6 +104,7 @@ class ToolbeltEventHandler {
         val segmentLookedAt = ItemToolbelt.getSegmentLookedAt(stack, player)
 
         for (seg in 0..ItemToolbelt.SEGMENTS - 1) {
+
             var inside = false
             var rotationAngle = (seg + 0.5F) * segAngles + shift
             GL11.glPushMatrix()
@@ -139,7 +140,11 @@ class ToolbeltEventHandler {
                     `is`.stackSize = 1
                     entityitem = EntityItem(player.worldObj, 0.0, 0.0, 0.0, `is`)
                     entityitem.hoverStart = 0.0f
+
+                    GL11.glEnable(GL11.GL_BLEND)
+                    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
                     RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0, 0.0, 0.0, 0.0f, 0.0f)
+                    GL11.glDisable(GL11.GL_BLEND)
 
                     GL11.glPopMatrix()
                 } else {
@@ -183,7 +188,6 @@ class ToolbeltEventHandler {
 
             GL11.glDisable(GL11.GL_CULL_FACE)
             val item = stack.item as ItemToolbelt
-            GL11.glAlphaFunc(GL11.GL_ALWAYS, 1F)
             GL11.glEnable(GL11.GL_BLEND)
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
             mc.renderEngine.bindTexture(item.getGlowResource())
