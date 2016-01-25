@@ -47,7 +47,9 @@ class RenderTileItemDisplay() : TileEntitySpecialRenderer() {
             if (scale != null) {
                 seed.renderEngine.bindTexture(if (scale.item is ItemBlock) TextureMap.locationBlocksTexture else TextureMap.locationItemsTexture)
                 GL11.glScalef(2.0f, 2.0f, 2.0f)
+                GL11.glTranslatef(0.25f, 0f, 0f)
                 if (!ForgeHooksClient.renderEntityItem(EntityItem(display.worldObj, display.xCoord.toDouble(), display.yCoord.toDouble(), display.zCoord.toDouble(), scale), scale, 0.0f, 0.0f, display.worldObj.rand, seed.renderEngine, this.renderBlocks, 1)) {
+                    GL11.glTranslatef(-0.25f, 0f, 0f)
                     GL11.glScalef(0.5f, 0.5f, 0.5f)
                     if (scale.item is ItemBlock && RenderBlocks.renderItemIn3d(Block.getBlockFromItem(scale.item).renderType)) {
                         GL11.glScalef(0.5f, 0.5f, 0.5f)
