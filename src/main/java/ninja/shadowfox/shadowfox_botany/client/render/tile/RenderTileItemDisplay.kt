@@ -56,7 +56,7 @@ class RenderTileItemDisplay() : TileEntitySpecialRenderer() {
                         GL11.glTranslatef(-1.0f, -1.1f, 0.0f)
                         GL11.glScalef(2.0f, 2.0f, 2.0f)
                     } else if (scale.item is ItemBlock && !RenderBlocks.renderItemIn3d(Block.getBlockFromItem(scale.item).renderType)) {
-                        var entityitem: EntityItem? = null
+                        var entityitem: EntityItem?
                         GL11.glPushMatrix()
 
                         GL11.glScalef(2.0f, 2.0f, 2.0f)

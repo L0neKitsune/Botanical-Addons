@@ -83,6 +83,12 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider, IT
             return angle
         }
 
+        fun isLookingAtSegment(player: EntityLivingBase): Boolean {
+            val pitch = player.rotationPitch
+
+            return pitch > -33.75 && pitch < 45
+        }
+
         fun getItemForSlot(stack: ItemStack, slot: Int): ItemStack? {
             if (slot >= SEGMENTS) return null
             else {
@@ -201,11 +207,11 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider, IT
     override fun onWornTick(stack: ItemStack, player: EntityLivingBase) {
         if (player is EntityPlayer) {
             val eqLastTick = isEquipped(stack)
-            val sneak = player.isSneaking
-            if (eqLastTick != sneak)
-                setEquipped(stack, sneak)
+            val eq = player.isSneaking && isLookingAtSegment(player)
+            if (eqLastTick != eq)
+                setEquipped(stack, eq)
 
-            if (!sneak) {
+            if (!player.isSneaking) {
                 val angles = 360
                 val segAngles = angles / SEGMENTS
                 val shift = segAngles / 2
