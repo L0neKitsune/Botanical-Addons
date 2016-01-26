@@ -1,6 +1,5 @@
 package ninja.shadowfox.shadowfox_botany.common.core.proxy
 
-import cpw.mods.fml.common.Loader
 import cpw.mods.fml.common.event.FMLInitializationEvent
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent

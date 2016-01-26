@@ -465,7 +465,7 @@ public object ModRecipes {
 
         recipesLamp = BotaniaAPI.getLatestAddedRecipe()
 
-        if (ShadowfoxBotany.thaumcraftLoaded && Botania.gardenOfGlassLoaded && ConfigHandler.addThaumcraftTreeSuffusion) {
+        if (ShadowfoxBotany.thaumcraftLoaded && (Botania.gardenOfGlassLoaded || ShadowfoxBotany.isDevEnv) && ConfigHandler.addThaumcraftTreeSuffusion) {
             ThaumcraftSuffusionRecipes.initRecipes()
         }
 

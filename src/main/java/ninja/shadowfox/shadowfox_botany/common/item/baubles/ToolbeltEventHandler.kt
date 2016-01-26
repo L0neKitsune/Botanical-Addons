@@ -136,7 +136,7 @@ class ToolbeltEventHandler {
                     var entityitem: EntityItem?
                     GL11.glPushMatrix()
 
-                    if(slotStack.item is ItemBlock) {
+                    if (slotStack.item is ItemBlock) {
                         GL11.glScalef(1F, 1F, 1F)
                     } else {
                         GL11.glScalef(1.5F, 1.5F, 1.5F)

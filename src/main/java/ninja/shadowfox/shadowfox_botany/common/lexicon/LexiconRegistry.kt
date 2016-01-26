@@ -145,18 +145,25 @@ public object LexiconRegistry {
         lamp.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesLamp))
 
-        if (ShadowfoxBotany.thaumcraftLoaded && Botania.gardenOfGlassLoaded && ConfigHandler.addThaumcraftTreeSuffusion) {
-            tctrees = object : ShadowfoxLexiconEntry("tctrees", dendrology, ItemStack(ThaumcraftSuffusionRecipes.saplingBlock)) {
+        if (ThaumcraftSuffusionRecipes.recipesLoaded) {
+            tctrees = object : ShadowfoxLexiconEntry("tctrees", dendrology, ItemStack(ThaumcraftSuffusionRecipes.plantBlock)) {
                 override fun getSubtitle(): String {
                     return "[Botanical Addons x Thaumcraft]"
                 }
             }.setKnowledgeType(BotaniaAPI.elvenKnowledge)
             tctrees.setLexiconPages(PageText("0"),
                     PageTreeCrafting("1", ThaumcraftSuffusionRecipes.greatwoodRecipe),
-                    PageTreeCrafting("2", ThaumcraftSuffusionRecipes.silverwoodRecipe))
+                    PageTreeCrafting("2", ThaumcraftSuffusionRecipes.silverwoodRecipe),
+                    PageText("3"),
+                    PageTreeCrafting("4", ThaumcraftSuffusionRecipes.shimmerleafRecipe),
+                    PageTreeCrafting("5", ThaumcraftSuffusionRecipes.cinderpearlRecipe),
+                    PageTreeCrafting("6", ThaumcraftSuffusionRecipes.vishroomRecipe))
 
-            LexiconRecipeMappings.map(ItemStack(ThaumcraftSuffusionRecipes.saplingBlock, 1, 0), tctrees, 1)
-            LexiconRecipeMappings.map(ItemStack(ThaumcraftSuffusionRecipes.saplingBlock, 1, 1), tctrees, 2)
+            LexiconRecipeMappings.map(ItemStack(ThaumcraftSuffusionRecipes.plantBlock, 1, 0), tctrees, 1)
+            LexiconRecipeMappings.map(ItemStack(ThaumcraftSuffusionRecipes.plantBlock, 1, 1), tctrees, 2)
+            LexiconRecipeMappings.map(ItemStack(ThaumcraftSuffusionRecipes.plantBlock, 1, 2), tctrees, 4)
+            LexiconRecipeMappings.map(ItemStack(ThaumcraftSuffusionRecipes.plantBlock, 1, 3), tctrees, 5)
+            LexiconRecipeMappings.map(ItemStack(ThaumcraftSuffusionRecipes.plantBlock, 1, 5), tctrees, 6)
         }
 
 
