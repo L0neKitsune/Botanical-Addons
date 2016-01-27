@@ -122,11 +122,16 @@ tile.shadowfox_botany:lightningPlanksSlab.name=Thunderous Slab
 tile.shadowfox_botany:lightningPlanksSlabFull.name=Thunderous Slab
 tile.shadowfox_botany:netherPlanksSlab.name=Infernal Slab
 tile.shadowfox_botany:netherPlanksSlabFull.name=Infernal Slab
+tile.shadowfox_botany:sealingPlanksSlab.name=Sealing Slab
+tile.shadowfox_botany:sealingPlanksSlabFull.name=Sealing Slab
+
+tile.shadowfox_botany:amplifier.name=Sonic Amplifier
 
 tile.shadowfox_botany:rainbowPlanksStairs.name=Iridescent Stairs
 tile.shadowfox_botany:irisPlanksStairs.name=Iridescent Stairs
 tile.shadowfox_botany:lightningPlanksStairs.name=Thunderous Stairs
 tile.shadowfox_botany:netherPlanksStairs.name=Infernal Stairs
+tile.shadowfox_botany:sealingPlanksStairs.name=Sealing Stairs
 
 tile.shadowfox_botany:lightningSapling.name=Thunderous Oak Sapling
 tile.shadowfox_botany:lightningWood.name=Thunderous Log
@@ -137,6 +142,11 @@ tile.shadowfox_botany:netherSapling.name=Infernal Oak Sapling
 tile.shadowfox_botany:netherWood.name=Infernal Log
 tile.shadowfox_botany:netherLeaves.name=Infernal Leaves
 tile.shadowfox_botany:netherPlanks.name=Infernal Planks
+
+tile.shadowfox_botany:sealingSapling.name=Sealing Oak Sapling
+tile.shadowfox_botany:sealingWood.name=Sealing Log
+tile.shadowfox_botany:sealingLeaves.name=Sealing Leaves
+tile.shadowfox_botany:sealingPlanks.name=Sealing Planks
 
 tile.shadowfox_botany:altLeaves0.name=Dry Leaves
 tile.shadowfox_botany:altLeaves1.name=Golden Leaves
@@ -224,6 +234,10 @@ shadowfox_botany.entry.lamp=Iridescent Lamp
 shadowfox_botany.tagline.lamp=A signal-strength tester
 shadowfox_botany.entry.tctrees=Thaumic Suffusion
 shadowfox_botany.tagline.tctrees=Life from the void
+shadowfox_botany.entry.silencer=Sealing Oak
+shadowfox_botany.tagline.silencer=Softer sounds
+shadowfox_botany.entry.amp=Sonic Amplifier
+shadowfox_botany.tagline.amp=Louder sounds
 
 shadowfox_botany.category.dendrology=Dendrology
 
@@ -318,3 +332,12 @@ shadowfox_botany.page.tctrees3=Forgoing the natural pattern of ingots, leaves, a
 shadowfox_botany.page.tctrees4=Version control with added snakes
 shadowfox_botany.page.tctrees5=Burn, baby, burn
 shadowfox_botany.page.tctrees6=Don't do drugs, kids
+
+shadowfox_botany.page.silencer0=The &1Sealing Oak&0 has a strange dampening effect on the air around it. Any sounds within eight blocks of any &4Sealing&0 wood block will sound half as loud as it would have otherwise.
+shadowfox_botany.page.silencer1=An extra utility
+shadowfox_botany.page.silencer2=Planks
+shadowfox_botany.page.silencer3=Slabs
+shadowfox_botany.page.silencer4=Stairs
+
+shadowfox_botany.page.amp0=By dampening the air within &1Note Blocks&0, the &1Sonic Amplifier&0 reverberates sound, making sounds within a block or two sound far louder. The more you have, the louder the sound.
+shadowfox_botany.page.amp1=Great for parties

@@ -284,6 +284,16 @@ public object ShadowFoxBlocks {
         setBurnable(lightningSlabsFull, 5, 20)
         setBurnable(lightningStairs, 5, 20)
 
+        setBurnable(sealingLeaves, 30, 60)
+        setBurnable(sealingWood, 5, 5)
+        setBurnable(sealingPlanks, 5, 20)
+
+        setBurnable(sealingSlabs, 5, 20)
+        setBurnable(sealingSlabsFull, 5, 20)
+        setBurnable(sealingStairs, 5, 20)
+
+        setBurnable(amp, 5, 20)
+
         setBurnable(rainbowGrass, 60, 100)
         setBurnable(rainbowTallGrass, 60, 100)
     }
@@ -346,6 +356,13 @@ public object ShadowFoxBlocks {
         OreDictionary.registerOre("slabWood", ItemStack(netherSlabs))
         OreDictionary.registerOre("stairWood", ItemStack(netherStairs))
 
+        OreDictionary.registerOre("treeLeaves", ItemStack(sealingLeaves))
+        OreDictionary.registerOre("plankWood", ItemStack(sealingPlanks))
+        OreDictionary.registerOre("treeSapling", ItemStack(sealingSapling))
+
+        OreDictionary.registerOre("slabWood", ItemStack(sealingSlabs))
+        OreDictionary.registerOre("stairWood", ItemStack(sealingStairs))
+
         for (i in 0..3) {
             t = ItemStack(irisWood0, 1, i)
             OreDictionary.registerOre(LibOreDict.WOOD[i], t)
@@ -388,6 +405,7 @@ public object ShadowFoxBlocks {
 
             OreDictionary.registerOre("logWood", ItemStack(lightningWood, 1, i))
             OreDictionary.registerOre("logWood", ItemStack(netherWood, 1, i))
+            OreDictionary.registerOre("logWood", ItemStack(sealingWood, 1, i))
 
             t = ItemStack(rainbowWood, 1, i)
             OreDictionary.registerOre("logWood", t)

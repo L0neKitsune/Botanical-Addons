@@ -36,6 +36,8 @@ public object LexiconRegistry {
     val netherSapling: LexiconEntry
     val toolbelt: LexiconEntry
     val lamp: LexiconEntry
+    val silencer: LexiconEntry
+    val amp: LexiconEntry
 
     lateinit var tctrees: LexiconEntry
 
@@ -141,9 +143,20 @@ public object LexiconRegistry {
         toolbelt.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesToolbelt))
 
-        lamp = ShadowfoxLexiconEntry("lamp", BotaniaAPI.categoryBasics, ShadowFoxBlocks.irisLamp).setKnowledgeType(BotaniaAPI.elvenKnowledge)
+        lamp = ShadowfoxLexiconEntry("lamp", BotaniaAPI.categoryMisc, ShadowFoxBlocks.irisLamp).setKnowledgeType(BotaniaAPI.elvenKnowledge)
         lamp.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesLamp))
+
+        silencer = ShadowfoxLexiconEntry("silencer", dendrology, ShadowFoxBlocks.sealingSapling).setKnowledgeType(BotaniaAPI.elvenKnowledge)
+        silencer.setLexiconPages(PageText("0"),
+                PageTreeCrafting("1", ModRecipes.recipesSealingTree),
+                PageCraftingRecipe("2", ModRecipes.recipesSealingPlanks),
+                PageCraftingRecipe("3", ModRecipes.recipesSealingSlabs),
+                PageCraftingRecipe("4", ModRecipes.recipesSealingStairsR))
+
+        amp = ShadowfoxLexiconEntry("amp", BotaniaAPI.categoryMisc, ShadowFoxBlocks.amp).setKnowledgeType(BotaniaAPI.elvenKnowledge)
+        amp.setLexiconPages(PageText("0"),
+                PageCraftingRecipe("1", ModRecipes.recipesAmplifier))
 
         if (ThaumcraftSuffusionRecipes.recipesLoaded) {
             tctrees = object : ShadowfoxLexiconEntry("tctrees", dendrology, ItemStack(ThaumcraftSuffusionRecipes.plantBlock)) {
