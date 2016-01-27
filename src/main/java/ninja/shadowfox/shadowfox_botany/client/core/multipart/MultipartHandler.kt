@@ -34,12 +34,18 @@ public object MultipartHandler {
         registerAllMultiparts(ShadowFoxBlocks.netherWood)
         registerAllMultiparts(ShadowFoxBlocks.netherPlanks)
 
+        registerAllMultiparts(ShadowFoxBlocks.sealingWood)
+        registerAllMultiparts(ShadowFoxBlocks.sealingPlanks)
+
+        registerAllMultiparts(ShadowFoxBlocks.amp)
+
         registerAllColoredMultiparts(ShadowFoxBlocks.irisLeaves0)
         registerAllColoredMultiparts(ShadowFoxBlocks.irisLeaves1)
         registerAllMultiparts(ShadowFoxBlocks.rainbowLeaves)
         registerAllMultiparts(ShadowFoxBlocks.altLeaves)
         registerAllMultiparts(ShadowFoxBlocks.lightningLeaves)
         registerAllMultiparts(ShadowFoxBlocks.netherLeaves)
+        registerAllMultiparts(ShadowFoxBlocks.sealingLeaves)
     }
 
     fun registerAllMultiparts(block: Block) {
