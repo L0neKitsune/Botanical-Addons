@@ -1,6 +1,7 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.sealing_oak
 
 import cpw.mods.fml.common.registry.GameRegistry
+import cpw.mods.fml.relauncher.FMLLaunchHandler
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.entity.player.EntityPlayer
@@ -21,7 +22,8 @@ public class BlockSealingWood() : ShadowFoxRotatedPillar(Material.wood), ILexico
     init {
         setBlockName("sealingWood")
         blockHardness = 2f
-        EventHandlerSealingOak.register()
+        if (FMLLaunchHandler.side().isClient)
+            EventHandlerSealingOak.register()
     }
 
     override fun canSilence(world: World, x: Int, y: Int, z: Int, dist: Double, soundEvent: PlaySoundEvent17): Boolean = dist <= 8
