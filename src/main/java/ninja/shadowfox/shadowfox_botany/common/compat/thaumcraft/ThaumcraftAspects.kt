@@ -239,7 +239,7 @@ object ThaumcraftAspects {
 
             for (i in LibOreDict.DYES)
                 replaceAspect(i, Aspect.SENSES, COLOR!!)
-            
+
             replaceAspect("oreLapis", Aspect.SENSES, COLOR!!)
         }
     }

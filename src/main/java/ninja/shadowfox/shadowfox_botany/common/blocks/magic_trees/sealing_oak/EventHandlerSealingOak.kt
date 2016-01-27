@@ -42,7 +42,7 @@ class EventHandlerSealingOak {
                         val block = world.getBlock(dx, dy, dz)
                         if (block is ISoundSilencer) {
                             var distance = dist(dx, dy, dz, x, y, z)
-                            if (block.canSilence(world, dx, dy, dz, distance, event)) {
+                            if (distance <= MAXRANGE && block.canSilence(world, dx, dy, dz, distance, event)) {
                                 volumeMultiplier *= block.getVolumeMultiplier(world, dx, dy, dz, distance, event)
                             }
                         }
@@ -50,14 +50,14 @@ class EventHandlerSealingOak {
                     }
                 }
                 if (volumeMultiplier != 1f) {
-                    event.result = LowVolumeSound(event.result, volumeMultiplier)
+                    event.result = VolumeModSound(event.result, volumeMultiplier)
                 }
             }
         }
 
     }
 
-    inner class LowVolumeSound(val sound: ISound, val volumeMult: Float) : ISound {
+    inner class VolumeModSound(val sound: ISound, val volumeMult: Float) : ISound {
         override fun getPositionedSoundLocation(): ResourceLocation = this.sound.positionedSoundLocation
         override fun canRepeat(): Boolean = this.sound.canRepeat()
         override fun getRepeatDelay(): Int = this.sound.repeatDelay
