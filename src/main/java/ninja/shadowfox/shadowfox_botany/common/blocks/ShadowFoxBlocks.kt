@@ -14,6 +14,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockSlabMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.colored.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.lightning_oak.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.nether_oak.*
+import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.sealing_oak.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.schema.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.*
@@ -111,6 +112,16 @@ public object ShadowFoxBlocks {
 
     public var irisLamp: Block
 
+    public var sealingSapling: Block
+    public var sealingWood: Block
+    public var sealingLeaves: Block
+    public var sealingPlanks: Block
+    public var sealingSlabs: Block
+    public var sealingSlabsFull: Block
+    public var sealingStairs: Block
+
+    public var amp: Block
+
     public var iridescentTree0: IIridescentSaplingVariant
     public var iridescentTree1: IIridescentSaplingVariant
     public var iridescentTree2: IIridescentSaplingVariant
@@ -196,6 +207,16 @@ public object ShadowFoxBlocks {
         }
 
         irisLamp = BlockColoredLamp()
+
+        sealingSapling = BlockSealingSapling()
+        sealingWood = BlockSealingWood()
+        sealingLeaves = BlockSealingLeaves()
+        sealingPlanks = BlockSealingPlanks()
+        sealingSlabs = BlockSealingWoodSlab(false)
+        sealingSlabsFull = BlockSealingWoodSlab(true)
+        sealingStairs = BlockSealingWoodStairs()
+
+        amp = BlockAmp()
 
         register()
         initOreDict()
@@ -295,6 +316,9 @@ public object ShadowFoxBlocks {
         for (i in altSlabsFull) {
             (i as BlockSlabMod).register()
         }
+
+        (sealingSlabs as BlockSlabMod).register()
+        (sealingSlabsFull as BlockSlabMod).register()
     }
 
     private fun initOreDict() {
