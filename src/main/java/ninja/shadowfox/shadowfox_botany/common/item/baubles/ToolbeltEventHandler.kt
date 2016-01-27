@@ -23,6 +23,7 @@ import ninja.shadowfox.shadowfox_botany.api.item.IToolbeltBlacklisted
 import ninja.shadowfox.shadowfox_botany.common.network.PlayerItemMessage
 import org.lwjgl.opengl.GL11
 import vazkii.botania.client.core.handler.ClientTickHandler
+import vazkii.botania.common.item.ItemBaubleBox
 import java.awt.Color
 
 /**
@@ -48,7 +49,7 @@ class ToolbeltEventHandler {
                 val toolStack = ItemToolbelt.getItemForSlot(beltStack, segment)
                 if (toolStack == null && heldItem != null) {
                     val heldItemObject = heldItem.item
-                    if (!(heldItemObject is IToolbeltBlacklisted && !heldItemObject.allowedInToolbelt(heldItem))) {
+                    if (!(heldItemObject is IToolbeltBlacklisted && !heldItemObject.allowedInToolbelt(heldItem)) && heldItemObject !is ItemBaubleBox) {
                         if (!event.world.isRemote) {
                             val item = heldItem.copy()
 
