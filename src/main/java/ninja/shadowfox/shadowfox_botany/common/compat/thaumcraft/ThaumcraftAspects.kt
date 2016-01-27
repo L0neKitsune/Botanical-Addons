@@ -2,6 +2,7 @@ package ninja.shadowfox.shadowfox_botany.common.compat.thaumcraft
 
 import cpw.mods.fml.common.Loader
 import net.minecraft.block.Block
+import net.minecraft.init.Blocks
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
@@ -10,6 +11,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
+import ninja.shadowfox.shadowfox_botany.lib.LibOreDict
 import thaumcraft.api.ThaumcraftApi
 import thaumcraft.api.aspects.Aspect
 import thaumcraft.api.aspects.AspectList
@@ -52,9 +54,27 @@ object ThaumcraftAspects {
         return null
     }
 
+    fun replaceAspect(stack: ItemStack, a1: Aspect, a2: Aspect) {
+        val list = AspectList(stack)
+        val amount = list.getAmount(a1)
+        list.remove(a1)
+        list.add(a2, amount)
+        ThaumcraftApi.registerObjectTag(stack, list)
+    }
+
+    fun replaceAspect(key: String, a1: Aspect, a2: Aspect) {
+        val list = AspectList(OreDictionary.getOres(key)[0])
+        val amount = list.getAmount(a1)
+        list.remove(a1)
+        list.add(a2, amount)
+        ThaumcraftApi.registerObjectTag(key, list)
+    }
+
     fun addAspects() {
         if (ConfigHandler.addAspectsToBotania)
             BotaniaTCAspects.addAspects()
+        if (ConfigHandler.addTincturemAspect)
+            overrideVanillaAspects()
 
         val NETHER: Aspect? = getAspect("ForbiddenMagic", "infernus")
         val PRIDE: Aspect? = getAspect("ForbiddenMagic", "superbia")
@@ -65,6 +85,7 @@ object ThaumcraftAspects {
         val colorAspect = if (ConfigHandler.addTincturemAspect) COLOR else Aspect.SENSES
 
         val splinterlist = AspectList().add(Aspect.TREE, 1).add(Aspect.ENTROPY, 1)
+
 
         var list = AspectList().add(Aspect.EARTH, 2).add(colorAspect, 1)
         ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxBlocks.coloredDirtBlock), list)
@@ -208,5 +229,18 @@ object ThaumcraftAspects {
         list = AspectList().add(Aspect.ENTROPY, 16).add(Aspect.PLANT, 2) // don't fool around with these guys
         if (forbidden) list.add(WRATH, 8)                                // they will mess. you. up.
         ThaumcraftApi.registerEntityTag("shadowfox_botany:grieferCreeper", list)
+    }
+
+    fun overrideVanillaAspects() {
+        if (COLOR != null) {
+            replaceAspect(WildStack(Blocks.stained_hardened_clay), Aspect.SENSES, COLOR!!)
+            replaceAspect(WildStack(Blocks.red_flower), Aspect.SENSES, COLOR!!)
+            replaceAspect(WildStack(Blocks.yellow_flower), Aspect.SENSES, COLOR!!)
+
+            for (i in LibOreDict.DYES)
+                replaceAspect(i, Aspect.SENSES, COLOR!!)
+            
+            replaceAspect("oreLapis", Aspect.SENSES, COLOR!!)
+        }
     }
 }
