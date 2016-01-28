@@ -2,22 +2,20 @@ package ninja.shadowfox.shadowfox_botany.common.throwables
 
 import net.minecraft.block.material.Material
 import net.minecraft.entity.EntityLivingBase
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
-import net.minecraft.item.ItemStack
 import net.minecraft.util.MathHelper
-import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI.*
 import ninja.shadowfox.shadowfox_botany.api.item.ThrowableCollidingItem
-import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
+import ninja.shadowfox.shadowfox_botany.lib.ThrowableKeys
 
 
 object ShadowFoxThrowables {
 
     init {
         registerThrowable(ThrowableCollidingItem(
-                "shadowfox_fire_grenade",
-                ItemStack(ShadowFoxItems.fireGrenade),
-                ThrowableCollidingItem.OnImpactEvent { throwable, pos ->
+                ThrowableKeys.FIRE_GRENADE,
+                ThrowableCollidingItem.OnImpactEvent { throwable, item, pos ->
                     if (!throwable.worldObj.isRemote) {
                         val axisalignedbb = throwable.boundingBox.expand(8.0, 2.0, 8.0)
                         val list1 = throwable.worldObj.getEntitiesWithinAABB(EntityLivingBase::class.java, axisalignedbb)
@@ -53,6 +51,30 @@ object ShadowFoxThrowables {
                                     Blocks.fire.canPlaceBlockAt(throwable.worldObj, j, k, l)) {
                                 throwable.worldObj.setBlock(j, k, l, Blocks.fire)
                             }
+                        }
+                    }
+
+
+                    throwable.worldObj.playAuxSFX(2002, Math.round(throwable.posX).toInt(),
+                            Math.round(throwable.posY).toInt(), Math.round(throwable.posZ).toInt(), 0)
+
+                }
+        ))
+
+        registerThrowable(ThrowableCollidingItem(
+                ThrowableKeys.GRASS_GRENADE,
+                ThrowableCollidingItem.OnImpactEvent { throwable, item, pos ->
+                    if (!throwable.worldObj.isRemote) {
+                        var j : Int
+                        var k : Int
+
+                        for (n in 0..36) {
+                            j = MathHelper.floor_double(throwable.posX) + throwable.worldObj.rand.nextInt(6) - 1
+                            k = MathHelper.floor_double(throwable.posY) + throwable.worldObj.rand.nextInt(6) - 1
+                            val l = MathHelper.floor_double(throwable.posZ) + throwable.worldObj.rand.nextInt(6) - 1
+
+                            item.item.onItemUse(item.copy(), throwable.thrower as EntityPlayer,
+                                    throwable.worldObj, j, k, l, 0, 0f, 0f, 0f)
                         }
                     }
 

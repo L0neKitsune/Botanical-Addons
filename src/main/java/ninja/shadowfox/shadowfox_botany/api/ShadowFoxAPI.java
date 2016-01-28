@@ -19,10 +19,10 @@ public class ShadowFoxAPI {
     public static List<RecipeTreeCrafting> treeRecipes = new ArrayList();
     public static List<IIridescentSaplingVariant> treeVariants = new ArrayList();
     public static Map<String, ThrowableCollidingItem> collidingItemHashMap = new LinkedHashMap();
-    public static ThrowableCollidingItem fallbackTcl = new ThrowableCollidingItem("shadowfox_fallback", new ItemStack(Items.blaze_rod),
+    public static ThrowableCollidingItem fallbackTcl = new ThrowableCollidingItem("shadowfox_fallback",
             new ThrowableCollidingItem.OnImpactEvent() {
                 @Override
-                public void onImpact(EntityThrowable throwable, MovingObjectPosition movingObject) {
+                public void onImpact(EntityThrowable throwable, ItemStack itemStack, MovingObjectPosition movingObject) {
 
                 }
             });

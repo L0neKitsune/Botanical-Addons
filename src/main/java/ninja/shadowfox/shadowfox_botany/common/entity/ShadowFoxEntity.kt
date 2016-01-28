@@ -16,7 +16,7 @@ public object ShadowFoxEntity {
         EntityRegistry.registerGlobalEntityID(EntityVoidCreeper::class.java, "shadowfox_botany:voidCreeper", EntityRegistry.findGlobalUniqueEntityId(), 0xcc11d3, 0xfb9bff)
 
         var id = 0
-        EntityRegistry.registerModEntity(EntityThrowableItem::class.java, "shadowfox_botany:thrownItem", ++id, ShadowfoxBotany.instance, 64, 10, true)
+        EntityRegistry.registerModEntity(EntityThrowableItem::class.java, "shadowfox_botany:thrownItem", ++id, ShadowfoxBotany.instance, 256, 10, true)
 
         for (i in BiomeGenBase.getBiomeGenArray()) {
             if (i != null && i != BiomeGenBase.hell && i != BiomeGenBase.sky && i != BiomeGenBase.mushroomIsland && i != BiomeGenBase.mushroomIslandShore)

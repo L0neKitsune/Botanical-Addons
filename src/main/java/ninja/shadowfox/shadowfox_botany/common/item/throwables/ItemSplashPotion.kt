@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.item
+package ninja.shadowfox.shadowfox_botany.common.item.throwables
 
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
@@ -11,6 +11,7 @@ import net.minecraft.util.IIcon
 import net.minecraft.util.StatCollector
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.entity.EntityThrownPotion
+import ninja.shadowfox.shadowfox_botany.common.item.ItemMod
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.brew.Brew
 import vazkii.botania.api.brew.IBrewContainer
