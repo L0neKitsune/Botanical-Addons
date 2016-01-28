@@ -36,6 +36,8 @@ public object LexiconRegistry {
     val netherSapling: LexiconEntry
     val toolbelt: LexiconEntry
     val lamp: LexiconEntry
+    val silencer: LexiconEntry
+    val amp: LexiconEntry
 
     lateinit var tctrees: LexiconEntry
 
@@ -141,22 +143,40 @@ public object LexiconRegistry {
         toolbelt.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesToolbelt))
 
-        lamp = ShadowfoxLexiconEntry("lamp", BotaniaAPI.categoryBasics, ShadowFoxBlocks.irisLamp).setKnowledgeType(BotaniaAPI.elvenKnowledge)
+        lamp = ShadowfoxLexiconEntry("lamp", BotaniaAPI.categoryMisc, ShadowFoxBlocks.irisLamp).setKnowledgeType(BotaniaAPI.elvenKnowledge)
         lamp.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesLamp))
 
-        if (ShadowfoxBotany.thaumcraftLoaded && Botania.gardenOfGlassLoaded && ConfigHandler.addThaumcraftTreeSuffusion) {
-            tctrees = object : ShadowfoxLexiconEntry("tctrees", dendrology, ItemStack(ThaumcraftSuffusionRecipes.saplingBlock)) {
+        silencer = ShadowfoxLexiconEntry("silencer", dendrology, ShadowFoxBlocks.sealingSapling).setKnowledgeType(BotaniaAPI.elvenKnowledge)
+        silencer.setLexiconPages(PageText("0"),
+                PageTreeCrafting("1", ModRecipes.recipesSealingTree),
+                PageCraftingRecipe("2", ModRecipes.recipesSealingPlanks),
+                PageCraftingRecipe("3", ModRecipes.recipesSealingSlabs),
+                PageCraftingRecipe("4", ModRecipes.recipesSealingStairsR))
+
+        amp = ShadowfoxLexiconEntry("amp", BotaniaAPI.categoryMisc, ShadowFoxBlocks.amp).setKnowledgeType(BotaniaAPI.elvenKnowledge)
+        amp.setLexiconPages(PageText("0"),
+                PageCraftingRecipe("1", ModRecipes.recipesAmplifier))
+
+        if (ThaumcraftSuffusionRecipes.recipesLoaded) {
+            tctrees = object : ShadowfoxLexiconEntry("tctrees", dendrology, ItemStack(ThaumcraftSuffusionRecipes.plantBlock)) {
                 override fun getSubtitle(): String {
                     return "[Botanical Addons x Thaumcraft]"
                 }
             }.setKnowledgeType(BotaniaAPI.elvenKnowledge)
             tctrees.setLexiconPages(PageText("0"),
                     PageTreeCrafting("1", ThaumcraftSuffusionRecipes.greatwoodRecipe),
-                    PageTreeCrafting("2", ThaumcraftSuffusionRecipes.silverwoodRecipe))
+                    PageTreeCrafting("2", ThaumcraftSuffusionRecipes.silverwoodRecipe),
+                    PageText("3"),
+                    PageTreeCrafting("4", ThaumcraftSuffusionRecipes.shimmerleafRecipe),
+                    PageTreeCrafting("5", ThaumcraftSuffusionRecipes.cinderpearlRecipe),
+                    PageTreeCrafting("6", ThaumcraftSuffusionRecipes.vishroomRecipe))
 
-            LexiconRecipeMappings.map(ItemStack(ThaumcraftSuffusionRecipes.saplingBlock, 1, 0), tctrees, 1)
-            LexiconRecipeMappings.map(ItemStack(ThaumcraftSuffusionRecipes.saplingBlock, 1, 1), tctrees, 2)
+            LexiconRecipeMappings.map(ItemStack(ThaumcraftSuffusionRecipes.plantBlock, 1, 0), tctrees, 1)
+            LexiconRecipeMappings.map(ItemStack(ThaumcraftSuffusionRecipes.plantBlock, 1, 1), tctrees, 2)
+            LexiconRecipeMappings.map(ItemStack(ThaumcraftSuffusionRecipes.plantBlock, 1, 2), tctrees, 4)
+            LexiconRecipeMappings.map(ItemStack(ThaumcraftSuffusionRecipes.plantBlock, 1, 3), tctrees, 5)
+            LexiconRecipeMappings.map(ItemStack(ThaumcraftSuffusionRecipes.plantBlock, 1, 5), tctrees, 6)
         }
 
 

@@ -6,6 +6,7 @@ import net.minecraft.init.Items
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.IRecipe
+import net.minecraftforge.oredict.OreDictionary
 import net.minecraftforge.oredict.RecipeSorter
 import net.minecraftforge.oredict.RecipeSorter.Category
 import net.minecraftforge.oredict.ShapedOreRecipe
@@ -72,6 +73,11 @@ public object ModRecipes {
     val recipesAltStairsL: List<IRecipe>
     val recipesToolbelt: IRecipe
     val recipesLamp: IRecipe
+    val recipesSealingPlanks: IRecipe
+    val recipesSealingStairsL: IRecipe
+    val recipesSealingStairsR: IRecipe
+    val recipesSealingSlabs: IRecipe
+    val recipesAmplifier: IRecipe
 
     val recipesPastoralSeeds: List<RecipeManaInfusion>
 
@@ -82,6 +88,7 @@ public object ModRecipes {
 
     val recipesLightningTree: RecipeTreeCrafting
     val recipesInfernalTree: RecipeTreeCrafting
+    val recipesSealingTree: RecipeTreeCrafting
 
 
     init {
@@ -465,9 +472,48 @@ public object ModRecipes {
 
         recipesLamp = BotaniaAPI.getLatestAddedRecipe()
 
-        if (ShadowfoxBotany.thaumcraftLoaded && Botania.gardenOfGlassLoaded && ConfigHandler.addThaumcraftTreeSuffusion) {
+        if (ShadowfoxBotany.thaumcraftLoaded && (Botania.gardenOfGlassLoaded || ShadowfoxBotany.isDevEnv) && ConfigHandler.addThaumcraftTreeSuffusion) {
             ThaumcraftSuffusionRecipes.initRecipes()
         }
+
+        recipesSealingTree = ShadowFoxAPI.addTreeRecipe(50000,
+                ShadowFoxBlocks.sealingSapling, 0,
+                350,
+                BotaniaOreDict.ELEMENTIUM, BotaniaOreDict.ELEMENTIUM, BotaniaOreDict.ELEMENTIUM,
+                BotaniaOreDict.RUNE[7], // Winter
+                ShadowFoxOreDict.LEAVES[0], ShadowFoxOreDict.LEAVES[0], ShadowFoxOreDict.LEAVES[0], // White
+                ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE))
+
+        addShapelessOreDictRecipe(ItemStack(ShadowFoxBlocks.sealingPlanks, 4), ShadowFoxBlocks.sealingWood)
+
+        recipesSealingPlanks = BotaniaAPI.getLatestAddedRecipe()
+
+        GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.sealingSlabs, 6),
+                "QQQ",
+                'Q', ItemStack(ShadowFoxBlocks.sealingPlanks))
+
+        recipesSealingSlabs = BotaniaAPI.getLatestAddedRecipe()
+
+        GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.sealingStairs, 4),
+                "Q  ", "QQ ", "QQQ",
+                'Q', ItemStack(ShadowFoxBlocks.sealingPlanks))
+
+        recipesSealingStairsL = BotaniaAPI.getLatestAddedRecipe()
+
+        GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.sealingStairs, 4),
+                "  Q", " QQ", "QQQ",
+                'Q', ItemStack(ShadowFoxBlocks.sealingPlanks))
+
+        recipesSealingStairsR = BotaniaAPI.getLatestAddedRecipe()
+
+        GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.amp),
+                " N ",
+                "NRN",
+                " N ",
+                'N', ItemStack(Blocks.noteblock),
+                'R', ItemStack(ShadowFoxBlocks.sealingPlanks))
+
+        recipesAmplifier = BotaniaAPI.getLatestAddedRecipe()
 
         recipesAttributionHeads = ArrayList<RecipePetals>()
         recipesAttributionHeads.add(attributionSkull("yrsegal", ShadowFoxItems.irisSeeds, 16)) // Bifrost Seeds
@@ -486,6 +532,7 @@ public object ModRecipes {
         GameRegistry.addSmelting(ShadowFoxBlocks.lightningWood, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.altWood0, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.altWood1, ItemStack(Items.coal, 1, 1), 0.15F)
+        GameRegistry.addSmelting(ShadowFoxBlocks.sealingWood, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.lightningPlanks, ItemStack(ShadowFoxItems.resource, 2, 1), 0.1F) // Thunderous Splinters
         GameRegistry.addSmelting(ShadowFoxBlocks.netherPlanks, ItemStack(ShadowFoxItems.resource, 2, 3), 0.1F) // Infernal Splinters
         GameRegistry.addSmelting(ShadowFoxBlocks.netherWood, ItemStack(ShadowFoxItems.resource, 1, 4), 0.15F) // Flame-Laced Coal

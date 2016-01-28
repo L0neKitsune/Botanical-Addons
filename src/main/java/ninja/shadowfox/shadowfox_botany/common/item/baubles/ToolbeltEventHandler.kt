@@ -14,6 +14,8 @@ import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
+import net.minecraftforge.client.IItemRenderer
+import net.minecraftforge.client.MinecraftForgeClient
 import net.minecraftforge.client.event.RenderWorldLastEvent
 import net.minecraftforge.event.entity.player.PlayerInteractEvent
 import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
@@ -21,6 +23,7 @@ import ninja.shadowfox.shadowfox_botany.api.item.IToolbeltBlacklisted
 import ninja.shadowfox.shadowfox_botany.common.network.PlayerItemMessage
 import org.lwjgl.opengl.GL11
 import vazkii.botania.client.core.handler.ClientTickHandler
+import vazkii.botania.common.item.ItemBaubleBox
 import java.awt.Color
 
 /**
@@ -28,6 +31,12 @@ import java.awt.Color
  * Created at 2:59 PM on 1/23/16.
  */
 class ToolbeltEventHandler {
+
+    @SideOnly(Side.CLIENT)
+    private fun shouldRenderAsEntity(stack: ItemStack) =
+            MinecraftForgeClient.getItemRenderer(stack, IItemRenderer.ItemRenderType.ENTITY) != null
+
+
     @SubscribeEvent
     fun onPlayerInteract(event: PlayerInteractEvent) {
         val player = event.entityPlayer
@@ -40,7 +49,7 @@ class ToolbeltEventHandler {
                 val toolStack = ItemToolbelt.getItemForSlot(beltStack, segment)
                 if (toolStack == null && heldItem != null) {
                     val heldItemObject = heldItem.item
-                    if (!(heldItemObject is IToolbeltBlacklisted && !heldItemObject.allowedInToolbelt(heldItem))) {
+                    if (!(heldItemObject is IToolbeltBlacklisted && !heldItemObject.allowedInToolbelt(heldItem)) && heldItemObject !is ItemBaubleBox) {
                         if (!event.world.isRemote) {
                             val item = heldItem.copy()
 
@@ -104,6 +113,7 @@ class ToolbeltEventHandler {
         val segmentLookedAt = ItemToolbelt.getSegmentLookedAt(stack, player)
 
         for (seg in 0..ItemToolbelt.SEGMENTS - 1) {
+
             var inside = false
             var rotationAngle = (seg + 0.5F) * segAngles + shift
             GL11.glPushMatrix()
@@ -141,6 +151,7 @@ class ToolbeltEventHandler {
                         entityitem = EntityItem(player.worldObj, 0.0, 0.0, 0.0, `is`)
                         entityitem.hoverStart = 0.0f
                         RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0, 0.0, 0.0, 0.0f, 0.0f)
+
 
                         GL11.glPopMatrix()
                     }
@@ -210,8 +221,11 @@ class ToolbeltEventHandler {
             }
             y0 = 0.0
             tess.draw()
+
+            GL11.glColor4f(1f, 1f, 1f, 1f)
             GL11.glDisable(GL11.GL_BLEND)
             GL11.glEnable(GL11.GL_CULL_FACE)
+
             GL11.glPopMatrix()
         }
         GL11.glPopMatrix()

@@ -67,11 +67,11 @@ public class BlockAltWood(val set: Int) : ShadowFoxRotatedPillar(Material.wood),
     }
 
     override fun getTopIcon(meta: Int): IIcon? {
-        return iconsTop[meta]
+        return iconsTop[meta % (if (set == 1) 2 else 4)]
     }
 
     override fun getSideIcon(meta: Int): IIcon? {
-        return iconsSide[meta]
+        return iconsSide[meta % (if (set == 1) 2 else 4)]
     }
 
     override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {

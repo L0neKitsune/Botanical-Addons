@@ -24,4 +24,6 @@ object LibOreDict {
     val WOOD = Array(COLORS.size, { i -> "$IRIS_WOOD${COLORS[i]}" })
     val LEAVES = Array(COLORS.size, { i -> "$IRIS_LEAVES${COLORS[i]}" })
     val DIRT = Array(COLORS.size, { i -> "$IRIS_DIRT${COLORS[i]}" })
+
+    val DYES = Array(COLORS.size-1, { i -> "dye${COLORS[i]}" })
 }
