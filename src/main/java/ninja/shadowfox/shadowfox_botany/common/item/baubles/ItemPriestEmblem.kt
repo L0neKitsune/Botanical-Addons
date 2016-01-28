@@ -39,7 +39,7 @@ import java.awt.Color
 class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsingItem {
 
     companion object {
-        val TYPES = 3
+        val TYPES = 4
         public fun getEmblem(meta: Int, player: EntityPlayer?): ItemStack? {
             var baubles = PlayerHandler.getPlayerBaubles(player)
             var stack = baubles.getStackInSlot(0)
