@@ -111,6 +111,7 @@ public object ShadowFoxBlocks {
     public lateinit var annihilatorBlock: Block
 
     public var irisLamp: Block
+    public var manaBathtub: Block
 
     public var sealingSapling: Block
     public var sealingWood: Block
@@ -207,6 +208,7 @@ public object ShadowFoxBlocks {
         }
 
         irisLamp = BlockColoredLamp()
+        manaBathtub = BlockBathtub()
 
         sealingSapling = BlockSealingSapling()
         sealingWood = BlockSealingWood()
@@ -227,6 +229,8 @@ public object ShadowFoxBlocks {
         GameRegistry.registerTileEntity(TileTreeCrafter::class.java, "shadowfox_botany:treeCrafter")
         GameRegistry.registerTileEntity(TileLivingwoodFunnel::class.java, "shadowfox_botany:livingwoodFunnel")
         GameRegistry.registerTileEntity(TileLightningRod::class.java, "shadowfox_botany:lightningRod")
+        GameRegistry.registerTileEntity(TileBathtub::class.java, "shadowfox_botany:bathtubMana")
+
         if (ShadowfoxBotany.isDevEnv) {
             GameRegistry.registerTileEntity(TileSchema::class.java, "shadowfox_botany:schema")
             GameRegistry.registerTileEntity(TileSchematicAnnihilator::class.java, "shadowfox_botany:schematicAnnihilator")

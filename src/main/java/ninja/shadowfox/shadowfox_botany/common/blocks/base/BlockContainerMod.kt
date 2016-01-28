@@ -39,7 +39,7 @@ abstract class BlockContainerMod<T : TileEntity>(material: Material) : BlockCont
         return super.setBlockName(par1Str)
     }
 
-    protected fun shouldRegisterInNameSet(): Boolean {
+    protected open fun shouldRegisterInNameSet(): Boolean {
         return true
     }
 

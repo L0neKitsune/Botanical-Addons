@@ -127,34 +127,36 @@ class ToolbeltEventHandler {
             if (slotStack != null) {
                 mc.renderEngine.bindTexture(if (slotStack.item is ItemBlock) TextureMap.locationBlocksTexture else TextureMap.locationItemsTexture)
 
-                if (slotStack.item is ItemBlock) {
-                    if (RenderBlocks.renderItemIn3d(Block.getBlockFromItem(slotStack.item).renderType)) {
-                        GL11.glScalef(0.6F, 0.6F, 0.6F)
-                        GL11.glRotatef(180F, 0F, 1F, 0F)
-                        GL11.glTranslatef(0F, 0.6F, 0F)
+                if (slotStack.item is ItemBlock && RenderBlocks.renderItemIn3d(Block.getBlockFromItem(slotStack.item).renderType)) {
+                    GL11.glScalef(0.6F, 0.6F, 0.6F)
+                    GL11.glRotatef(180F, 0F, 1F, 0F)
+                    GL11.glTranslatef(0F, 0.6F, 0F)
 
-                        RenderBlocks.getInstance().renderBlockAsItem(Block.getBlockFromItem(slotStack.item), slotStack.itemDamage, 1F)
+                    RenderBlocks.getInstance().renderBlockAsItem(Block.getBlockFromItem(slotStack.item), slotStack.itemDamage, 1F)
+                } else if (slotStack.item is ItemBlock || shouldRenderAsEntity(slotStack)) {
+                    var entityitem: EntityItem?
+                    GL11.glPushMatrix()
+
+                    if (slotStack.item is ItemBlock) {
+                        GL11.glScalef(1F, 1F, 1F)
                     } else {
-                        var entityitem: EntityItem?
-                        GL11.glPushMatrix()
-
-                        if(slotStack.item is ItemBlock) {
-                            GL11.glScalef(1F, 1F, 1F)
-                        } else {
-                            GL11.glScalef(.75F, .75F, .75F)
-                        }
-                        GL11.glRotatef(90F, 0F, 1F, 0F)
-
-
-                        val `is` = slotStack.copy()
-                        `is`.stackSize = 1
-                        entityitem = EntityItem(player.worldObj, 0.0, 0.0, 0.0, `is`)
-                        entityitem.hoverStart = 0.0f
-                        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0, 0.0, 0.0, 0.0f, 0.0f)
-
-
-                        GL11.glPopMatrix()
+                        GL11.glScalef(1.5F, 1.5F, 1.5F)
+                        GL11.glTranslatef(0F, -0.125F, 0F)
                     }
+                    GL11.glRotatef(90F, 0F, 1F, 0F)
+
+
+                    val `is` = slotStack.copy()
+                    `is`.stackSize = 1
+                    entityitem = EntityItem(player.worldObj, 0.0, 0.0, 0.0, `is`)
+                    entityitem.hoverStart = 0.0f
+
+                    GL11.glEnable(GL11.GL_BLEND)
+                    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
+                    RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0, 0.0, 0.0, 0.0f, 0.0f)
+                    GL11.glDisable(GL11.GL_BLEND)
+
+                    GL11.glPopMatrix()
                 } else {
 
                     GL11.glScalef(0.75F, 0.75F, 0.75F)
@@ -196,13 +198,8 @@ class ToolbeltEventHandler {
 
             GL11.glDisable(GL11.GL_CULL_FACE)
             val item = stack.item as ItemToolbelt
-
-            if(slotStack != null && slotStack.item is ItemBlock) {
-                GL11.glAlphaFunc(GL11.GL_ALWAYS, 1F)
-                GL11.glEnable(GL11.GL_BLEND)
-                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
-            }
-
+            GL11.glEnable(GL11.GL_BLEND)
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
             mc.renderEngine.bindTexture(item.getGlowResource())
             tess.startDrawingQuads()
             for (i in 0..segAngles - 1) {
