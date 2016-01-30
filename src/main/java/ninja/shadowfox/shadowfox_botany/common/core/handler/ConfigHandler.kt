@@ -25,15 +25,16 @@ public class ConfigHandler {
 
     public companion object {
         var config: Configuration by Delegates.notNull()
-        var realLightning = false
-        var uberCreepers = false
-        var passiveLightning = true
-        var blackLotusDropRate = 0.05
-        var addTincturemAspect = true
-        var addAspectsToBotania = true
-        var addThaumcraftTreeSuffusion = true
-        var potionIDManaVoid = 110
-        var schemaArray: IntArray = IntArray(17, { i: Int -> -1 + i })
+
+        var realLightning: Boolean by Delegates.notNull()
+        var uberCreepers: Boolean by Delegates.notNull()
+        var passiveLightning: Boolean by Delegates.notNull()
+        var blackLotusDropRate: Double by Delegates.notNull()
+        var addTincturemAspect : Boolean by Delegates.notNull()
+        var addAspectsToBotania: Boolean by Delegates.notNull()
+        var addThaumcraftTreeSuffusion: Boolean by Delegates.notNull()
+        var potionIDManaVoid: Int by Delegates.notNull()
+        var schemaArray: IntArray by Delegates.notNull()
 
 
         private var potionArrayLimit = 0
@@ -48,30 +49,30 @@ public class ConfigHandler {
 
         fun load() {
             var desc = "Lightning rod creates real lightning."
-            realLightning = loadPropBool("realLightning.enabled", desc, realLightning)
+            realLightning = loadPropBool("realLightning.enabled", desc, false)
 
             desc = "Uber Creepers can be spawned by OP or Creative players"
-            uberCreepers = loadPropBool("uberCreepers.enabled", desc, uberCreepers)
+            uberCreepers = loadPropBool("uberCreepers.enabled", desc, false)
 
             desc = "Lightning rod can hit passive mobs"
-            passiveLightning = loadPropBool("passiveLightning.enabled", desc, passiveLightning)
+            passiveLightning = loadPropBool("passiveLightning.enabled", desc, true)
 
             desc = "Add a Color aspect to thaumcraft"
-            addTincturemAspect = loadPropBool("tincturem.enabled", desc, addTincturemAspect)
+            addTincturemAspect = loadPropBool("tincturem.enabled", desc, true)
 
             desc = "Add aspects to Botania"
-            addAspectsToBotania = loadPropBool("botaniaAspects.enabled", desc, addAspectsToBotania)
+            addAspectsToBotania = loadPropBool("botaniaAspects.enabled", desc, true)
 
             desc = "[TC] [GoG] Add a Dendric Suffusion recipe for Greatwood and Silverwood trees"
-            addThaumcraftTreeSuffusion = loadPropBool("TCTrees.enabled", desc, addThaumcraftTreeSuffusion)
+            addThaumcraftTreeSuffusion = loadPropBool("TCTrees.enabled", desc, true)
 
             desc = "Rate of black loti dropping from Manaseal Creepers"
-            blackLotusDropRate = loadPropDouble("voidCreepers.dropRate", desc, blackLotusDropRate)
+            blackLotusDropRate = loadPropDouble("voidCreepers.dropRate", desc, 0.05)
 
             desc = "Which schemas are allowed to be generated"
-            schemaArray = loadPropIntArray("schemas.enabled", desc, schemaArray)
+            schemaArray = loadPropIntArray("schemas.enabled", desc, IntArray(17, { i: Int -> -1 + i }))
 
-            potionIDManaVoid = loadPropPotionId("manaVoid", potionIDManaVoid)
+            potionIDManaVoid = loadPropPotionId("manaVoid", 110)
 
             if (config.hasChanged()) {
                 config.save()
