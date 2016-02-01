@@ -22,6 +22,7 @@ public class BlockSealingWood() : ShadowFoxRotatedPillar(Material.wood), ILexico
     init {
         setBlockName("sealingWood")
         blockHardness = 2f
+        setStepSound(Block.soundTypeCloth)
         if (FMLLaunchHandler.side().isClient)
             EventHandlerSealingOak.register()
     }

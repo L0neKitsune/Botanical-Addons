@@ -12,6 +12,11 @@ import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemSlabMod
 
 class BlockSealingWoodSlab(full: Boolean, source: Block = ShadowFoxBlocks.sealingPlanks) : BlockRainbowWoodSlab(full, source), ISoundSilencer {
+
+    init {
+        setStepSound(Block.soundTypeCloth)
+    }
+
     override fun getFullBlock(): BlockSlab {
         return ShadowFoxBlocks.sealingSlabsFull as BlockSlab
     }
@@ -29,6 +34,11 @@ class BlockSealingWoodSlab(full: Boolean, source: Block = ShadowFoxBlocks.sealin
 }
 
 class BlockSealingWoodStairs(source: Block = ShadowFoxBlocks.sealingPlanks) : BlockRainbowWoodStairs(source), ISoundSilencer {
+
+    init {
+        setStepSound(Block.soundTypeCloth)
+    }
+
     override fun register() {
         GameRegistry.registerBlock(this, ItemBlockMod::class.java, name)
     }
