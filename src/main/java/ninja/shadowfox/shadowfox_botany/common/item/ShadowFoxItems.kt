@@ -23,9 +23,8 @@ object ShadowFoxItems {
     val resource: Item
     val toolbelt: Item
     val flameRod: Item
-
-    //    val fireGrenade: Item
-    // val splashPotion: Item
+//    val fireGrenade: Item
+//    val splashPotion: Item
 
     init {
         irisSeeds = ItemColorSeeds()
@@ -43,9 +42,8 @@ object ShadowFoxItems {
         resource = ItemResource()
         toolbelt = ItemToolbelt()
         flameRod = ItemFlameRod()
-
-        // splashPotion = ItemSplashPotion()
-        //        fireGrenade = ItemFireGrenade()
+//        splashPotion = ItemSplashPotion()
+//        fireGrenade = ItemFireGrenade()
         initOreDict()
     }
 
