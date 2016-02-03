@@ -211,6 +211,9 @@ tile.shadowfox_botany:altPlanksStairs5.name=Mutated Planks Stairs
 
 tile.shadowfox_botany:irisLamp.name=Iridescent Lantern
 
+tile.shadowfox_botany:crysanthermum.name=Crysanthermum
+tile.shadowfox_botany:crysanthermum.lore=Crank up the thermostat
+
 shadowfox_botany.potion.manaVoid=Manatide Storm
 
 shadowfox_botany.entry.coloredDirt=Iridescent Dirt
@@ -257,6 +260,8 @@ shadowfox_botany.entry.silencer=Sealing Oak
 shadowfox_botany.tagline.silencer=Softer sounds
 shadowfox_botany.entry.amp=Sonic Amplifier
 shadowfox_botany.tagline.amp=Louder sounds
+shadowfox_botany.entry.crysanthermum=Crysanthermum
+shadowfox_botany.tagline.crysanthermum=Mana from temperature
 
 shadowfox_botany.category.dendrology=Dendrology
 
@@ -360,3 +365,7 @@ shadowfox_botany.page.silencer4=Stairs
 
 shadowfox_botany.page.amp0=By dampening the air within &1Note Blocks&0, the &1Sonic Amplifier&0 reverberates sound, making sounds within a block or two sound far louder. The more you have, the louder the sound.
 shadowfox_botany.page.amp1=Soaryn + Amp + Cacophonium = Dire rage
+
+shadowfox_botany.page.crysanthermum0=The &1Crysanthermum&0 is a hardy flower that can survive in any climate. However, its mana generation isn't indifferent to the climate. By feeding it &1Metamorphic Stone&0, you change its temperature. The closer its temperature is to the biome you're in, the more mana it will generate. The hotter or colder the biome the stone comes from, the hotter or colder the flower will be after eating that stone.
+shadowfox_botany.page.crysanthermum1=There are, however, a few caveats.<br>Feeding the flower &1Fungal&0 stone can do anything, from cool the flower rapidly to heat it up immensely.<br>If a flower becomes too cold or too hot, it'll stop working - forever.<br>Using a stone that was used within the last eight will give you diminishing returns for the next 8 stones, meaning that you'll occasionally have to course-correct.
+shadowfox_botany.page.crysanthermum2=Left by a Fortanono

@@ -10,9 +10,12 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.AxisAlignedBB
+import net.minecraft.util.IIcon
 import net.minecraft.util.StatCollector
 import net.minecraftforge.common.BiomeDictionary
+import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import org.lwjgl.opengl.GL11
+import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.api.subtile.RadiusDescriptor
 import vazkii.botania.api.subtile.SubTileGenerating
@@ -54,11 +57,6 @@ class SubTileCrysanthermum : SubTileGenerating() {
     }
 
     var temperature: Int = 0
-
-    init {
-        val st = this.supertile
-        setTemp(st.worldObj.getBiomeGenForCoords(st.xCoord, st.zCoord).temperature)
-    }
 
 
     override fun onUpdate() {
@@ -111,7 +109,7 @@ class SubTileCrysanthermum : SubTileGenerating() {
     }
 
     override fun getEntry(): LexiconEntry? {
-        return null
+        return LexiconRegistry.crysanthermum
     }
 
     fun setTemp(temp: Int) {
@@ -146,6 +144,10 @@ class SubTileCrysanthermum : SubTileGenerating() {
     override fun readFromPacketNBT(cmp: NBTTagCompound) {
         super.readFromPacketNBT(cmp)
         temperature = cmp.getInteger(TAG_TEMPERATURE)
+    }
+
+    override fun getIcon(): IIcon? {
+        return BotaniaAPI.getSignatureForName("crysanthermum").getIconForStack(null)
     }
 
 }

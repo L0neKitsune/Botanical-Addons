@@ -38,6 +38,7 @@ public object LexiconRegistry {
     val lamp: LexiconEntry
     val silencer: LexiconEntry
     val amp: LexiconEntry
+    val crysanthermum: LexiconEntry
 
     lateinit var tctrees: LexiconEntry
 
@@ -157,6 +158,11 @@ public object LexiconRegistry {
         amp = ShadowfoxLexiconEntry("amp", BotaniaAPI.categoryMisc, ShadowFoxBlocks.amp).setKnowledgeType(BotaniaAPI.elvenKnowledge)
         amp.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesAmplifier))
+
+        crysanthermum = ShadowfoxLexiconEntry("crysanthermum", BotaniaAPI.categoryGenerationFlowers, BotaniaAPI.internalHandler.getSubTileAsStack("crysanthermum"))
+        crysanthermum.setLexiconPages(PageText("0"),
+                PageText("1"),
+                PagePetalRecipe("2", ModRecipes.recipeCrysanthermum))
 
         if (ThaumcraftSuffusionRecipes.recipesLoaded) {
             tctrees = object : ShadowfoxLexiconEntry("tctrees", dendrology, ItemStack(ThaumcraftSuffusionRecipes.plantBlock)) {
