@@ -45,7 +45,7 @@ class SubTileCrysanthermum : SubTileGenerating() {
          * Map inp from an integer range (x1<->x2) to a second (y1<->y2)
          */
         private fun map(inp: Int, x1: Int, x2: Int, y1: Int, y2: Int): Int {
-            val distance = (inp - x1) / (x2 - x1)
+            val distance = (inp - x1).toFloat() / (x2 - x1).toFloat()
             return (distance * (y2 - y1)).toInt() + y1
         }
 
