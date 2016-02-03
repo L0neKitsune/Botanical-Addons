@@ -31,6 +31,24 @@ misc.shadowfox_botany.creative=Creative
 misc.shadowfox_botany.contains=Contains:
 misc.shadowfox_botany.containsNothing=Empty
 
+misc.shadowfox_botany:temperature.0=Hypothermia Warning
+misc.shadowfox_botany:temperature.1=Hypothermia Warning
+misc.shadowfox_botany:temperature.2=Frosty
+misc.shadowfox_botany:temperature.3=Frosty
+misc.shadowfox_botany:temperature.4=Wintry
+misc.shadowfox_botany:temperature.5=Wintry
+misc.shadowfox_botany:temperature.6=Chilly
+misc.shadowfox_botany:temperature.7=Chilly
+misc.shadowfox_botany:temperature.8=Temperate
+misc.shadowfox_botany:temperature.9=Warm
+misc.shadowfox_botany:temperature.10=Warm
+misc.shadowfox_botany:temperature.11=Hot
+misc.shadowfox_botany:temperature.12=Hot
+misc.shadowfox_botany:temperature.13=Burning
+misc.shadowfox_botany:temperature.14=Burning
+misc.shadowfox_botany:temperature.15=Hotter than the Nether
+misc.shadowfox_botany:temperature.16=Hotter than the Nether
+
 item.shadowfox_botany:wiltedLotus0.name=Wilted Lotus
 item.shadowfox_botany:wiltedLotus1.name=Deathly Lotus
 misc.shadowfox_botany:lotusDesc=It emits discordant magical vibes
