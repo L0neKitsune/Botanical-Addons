@@ -19,6 +19,7 @@ import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.api.subtile.RadiusDescriptor
 import vazkii.botania.api.subtile.SubTileGenerating
+import vazkii.botania.common.Botania
 import vazkii.botania.common.block.ModFluffBlocks
 import java.awt.Color
 import java.util.*
@@ -70,12 +71,17 @@ class SubTileCrysanthermum : SubTileGenerating() {
                         (supertile.xCoord + RANGE + 1).toDouble(), (supertile.yCoord + RANGE + 1).toDouble(), (supertile.zCoord + RANGE + 1).toDouble()))
         val slowdown = slowdownFactor
 
+        if (ticksExisted % 600 == 0) { // 30 seconds
+            if (temperature > 0) temperature--
+            else if (temperature < 0) temperature++
+        }
+
         for (item in items) {
             if (item is EntityItem) {
                 val stack = item.entityItem
                 if (stack != null && stack.item === biomeStone && !item.isDead && item.age >= slowdown) {
                     val meta = stack.itemDamage % 8
-                    if (!remote) {
+                    if (!remote && temperature != 8 && temperature != -8) {
                         // TODO mana algorithm
                         setTemp(temperature + getTemp(meta))
                         sync()
@@ -88,36 +94,24 @@ class SubTileCrysanthermum : SubTileGenerating() {
                         val mz = (Math.random() - 0.5).toFloat() * m
                         supertile.worldObj.spawnParticle("blockcrack_" + Item.getIdFromItem(stack.item) + "_" + meta, item.posX, item.posY, item.posZ, mx.toDouble(), my.toDouble(), mz.toDouble())
                     }
-
                     if (!remote)
                         item.setDead()
                 }
             }
         }
+        val c = Color(color)
+        if (ticksExisted % 20 == 0)
+            Botania.proxy.wispFX(supertile.worldObj, supertile.xCoord + 0.5, supertile.yCoord + 0.75, supertile.zCoord + 0.5, c.red/255f, c.green/255f, c.blue/255f, 0.25f, -0.025f)
     }
 
-    override fun getRadius(): RadiusDescriptor {
-        return RadiusDescriptor.Square(toChunkCoordinates(), RANGE)
-    }
-
-    override fun getMaxMana(): Int {
-        return 8000 // TODO decide actual mana value
-    }
-
-    override fun getColor(): Int {
-        return Color.HSBtoRGB(map(temperature, -8, 8, 235, 360)/360f, 1f, 1f)
-    }
-
-    override fun getEntry(): LexiconEntry? {
-        return LexiconRegistry.crysanthermum
-    }
+    override fun getComparatorInputOverride(side: Int): Int = map(temperature, -8, 8, 0, 15)
+    override fun getRadius(): RadiusDescriptor = RadiusDescriptor.Square(toChunkCoordinates(), RANGE)
+    override fun getMaxMana(): Int = 8000 // TODO decide actual mana value
+    override fun getColor(): Int = Color.HSBtoRGB(map(temperature, -8, 8, 235, 360)/360f, 1f, 1f)
+    override fun getEntry(): LexiconEntry = LexiconRegistry.crysanthermum
 
     fun setTemp(temp: Int) {
         temperature = Math.max(Math.min(temp, 8), -8)
-    }
-
-    fun setTemp(temp: Float) {
-        setTemp((temp * 16 - 8f).toInt())
     }
 
     override fun renderHUD(mc: Minecraft, res: ScaledResolution) {
@@ -146,8 +140,6 @@ class SubTileCrysanthermum : SubTileGenerating() {
         temperature = cmp.getInteger(TAG_TEMPERATURE)
     }
 
-    override fun getIcon(): IIcon? {
-        return BotaniaAPI.getSignatureForName("crysanthermum").getIconForStack(null)
-    }
+    override fun getIcon(): IIcon? = BotaniaAPI.getSignatureForName("crysanthermum").getIconForStack(null)
 
 }
