@@ -128,9 +128,9 @@ class ItemWireAxe(val toolMaterial: ToolMaterial = ShadowFoxAPI.RUNEAXE) : ItemM
         val greyitalics = "${EnumChatFormatting.GRAY}${EnumChatFormatting.ITALIC}"
         val grey = EnumChatFormatting.GRAY
         if (GuiScreen.isShiftKeyDown()) {
-            addStringToTooltip("${greyitalics}And the man looked upon a desolate view;", list)
-            addStringToTooltip("${greyitalics}Even while the world fell apart, he imbued.", list)
-            addStringToTooltip("${greyitalics}And in defiance of fate and the gods he yelled!", list)
+            addStringToTooltip("$greyitalics${StatCollector.translateToLocal("misc.shadowfox_botany.line1")}", list)
+            addStringToTooltip("$greyitalics${StatCollector.translateToLocal("misc.shadowfox_botany.line2")}", list)
+            addStringToTooltip("$greyitalics${StatCollector.translateToLocal("misc.shadowfox_botany.line3")}", list)
             addStringToTooltip("${grey}I awaken the ancients within all of you!", list)
             addStringToTooltip("${grey}From my soul's fire the world burns anew!", list)
         } else addStringToTooltip(StatCollector.translateToLocal("botaniamisc.shiftinfo"), list)

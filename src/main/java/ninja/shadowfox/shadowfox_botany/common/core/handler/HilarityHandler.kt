@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.ChatComponentText
 import net.minecraft.util.EnumChatFormatting
+import net.minecraft.util.StatCollector
 import net.minecraft.world.World
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.ServerChatEvent
@@ -46,8 +47,10 @@ class HilarityHandler {
         val player = whatWasIt.player
 
         if (player.commandSenderName == "yrsegal" && msg == "i claim the blade of chaos!") {
-            if (replaceItemInHand(player, ItemStack(ModItems.elementiumAxe, 1, OreDictionary.WILDCARD_VALUE), ItemStack(ShadowFoxItems.wireAxe)))
+            if (replaceItemInHand(player, ItemStack(ModItems.elementiumAxe, 1, OreDictionary.WILDCARD_VALUE), ItemStack(ShadowFoxItems.wireAxe))) {
                 whatWasIt.component.chatStyle.setColor(EnumChatFormatting.DARK_RED)
+                player.worldObj.playSoundEffect(player.posX.toDouble(), player.posY.toDouble(), player.posZ.toDouble(), "ambient.weather.thunder", 100.0f, 0.8f + player.worldObj.rand.nextFloat() * 0.2f)
+            }
         } else if (msg == "i awaken the ancients within all of you! from my soul's fire the world burns anew!"){
             val items = getInfusionPlatforms(player.worldObj, player.posX.toInt(), player.posY.toInt(), player.posZ.toInt())
 
@@ -78,7 +81,7 @@ class HilarityHandler {
                 }
             }
         } else if (msg == "i claim the blade of chaos!") {
-            val chat = ChatComponentText("You are not him.")
+            val chat = ChatComponentText(StatCollector.translateToLocal("misc.shadowfox_botany.youAreNotTheChosenOne"))
             chat.chatStyle.setColor(EnumChatFormatting.DARK_RED)
             player.addChatMessage(chat)
             whatWasIt.isCanceled = true
