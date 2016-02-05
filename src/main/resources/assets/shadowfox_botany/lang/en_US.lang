@@ -31,6 +31,11 @@ misc.shadowfox_botany.creative=Creative
 misc.shadowfox_botany.contains=Contains:
 misc.shadowfox_botany.containsNothing=Empty
 
+misc.shadowfox_botany.wayOfUndoing=&4You feel your soul draining from your body...
+
+
+attribute.name.shadowfox_botany.godSlayingAttackDamage=Cognitive Damage
+
 misc.shadowfox_botany:temperature.0=Hypothermia Warning
 misc.shadowfox_botany:temperature.1=Painfully Cold
 misc.shadowfox_botany:temperature.2=Frosty
@@ -130,6 +135,9 @@ item.shadowfox_botany:coatOfArms16.name=Fabulous Shield
 item.shadowfox_botany:coatOfArms17.name=Parisian Shield
 
 item.shadowfox_botany:colorOverride.name=Clerical Colorizer
+
+
+item.shadowfox_botany:axeRevelation.name=Holy Blade Revelation
 
 tile.shadowfox_botany:kindling.name=Blaze Kindling
 
@@ -263,6 +271,8 @@ shadowfox_botany.entry.amp=Sonic Amplifier
 shadowfox_botany.tagline.amp=Louder sounds
 shadowfox_botany.entry.crysanthermum=Crysanthermum
 shadowfox_botany.tagline.crysanthermum=Mana from temperature
+shadowfox_botany.entry.andmyaxe=Holy Blade Revelation
+shadowfox_botany.tagline.andmyaxe=The weapon of the First Godslayer
 
 shadowfox_botany.category.dendrology=Dendrology
 
@@ -370,3 +380,6 @@ shadowfox_botany.page.amp1=Soaryn + Amp + Cacophonium = Dire rage
 shadowfox_botany.page.crysanthermum0=The &1Crysanthermum&0 is a hardy flower that can survive in any climate. However, its mana generation isn't indifferent to the climate. By feeding it &1Metamorphic Stone&0, you change its temperature. The closer its temperature is to the biome you're in, the more mana it will generate. The hotter or colder the biome the stone comes from, the hotter or colder the flower will be after eating that stone.
 shadowfox_botany.page.crysanthermum1=There are, however, a few caveats.<br>Feeding the flower &1Fungal&0 stone can do anything, from cool the flower rapidly to heat it up immensely.<br>If a flower becomes too cold or too hot, it'll stop working until it gets back to normal temperature.<br>Using a stone that was used within the last eight will give you diminishing returns for the next 8 stones, meaning that you'll occasionally have to course-correct.
 shadowfox_botany.page.crysanthermum2=Left by a Fortanono
+
+shadowfox_botany.page.andmyaxe0=&1Elementium&0 is a highly enchantable substance. So enchantable, in fact, it seems one can enchant it with spells and power outside the normal cycles. By flooding an axe of the stuff with six powers, you have recreated a legendary weapon: the &1Holy Blade Revelation&0. It attacks not the body, but the mind. This has interesting effects when used to attack an immortal.
+shadowfox_botany.page.andmyaxe1=&1Revelation&0 has two main abilities. It can attack like a sword, and mine like an axe. It cannot, however, recieve any enchantments but &4Unbreaking&0. The other ability is its soul-draining power. Drawing it back, like a bow, will drain anyone within a range proportional to time the blade is held of a bit of their mana.

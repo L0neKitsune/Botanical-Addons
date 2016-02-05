@@ -548,7 +548,7 @@ public object ModRecipes {
 
     }
 
-    private fun skullStack(name: String): ItemStack {
+    fun skullStack(name: String): ItemStack {
         val stack = ItemStack(Items.skull, 1, 3)
         ItemNBTHelper.setString(stack, "SkullOwner", name)
         return stack

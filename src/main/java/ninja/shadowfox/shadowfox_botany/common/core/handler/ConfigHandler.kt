@@ -35,6 +35,7 @@ public class ConfigHandler {
         var addThaumcraftTreeSuffusion: Boolean by Delegates.notNull()
         var potionIDManaVoid: Int by Delegates.notNull()
         var schemaArray: IntArray by Delegates.notNull()
+        var grantWireUnlimitedPower: Boolean by Delegates.notNull()
 
 
         private var potionArrayLimit = 0
@@ -66,8 +67,12 @@ public class ConfigHandler {
             desc = "[TC] [GoG] Add a Dendric Suffusion recipe for Greatwood and Silverwood trees"
             addThaumcraftTreeSuffusion = loadPropBool("TCTrees.enabled", desc, true)
 
+            desc = "Allow WireSegal far more power than any one person should have"
+            grantWireUnlimitedPower = loadPropBool("wire.overpowered", desc, true)
+
             desc = "Rate of black loti dropping from Manaseal Creepers"
             blackLotusDropRate = loadPropDouble("voidCreepers.dropRate", desc, 0.05)
+
 
             desc = "Which schemas are allowed to be generated"
             schemaArray = loadPropIntArray("schemas.enabled", desc, IntArray(17, { i: Int -> -1 + i }))
