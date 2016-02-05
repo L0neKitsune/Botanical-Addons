@@ -3,9 +3,13 @@ package ninja.shadowfox.shadowfox_botany.common.item
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
 import com.google.common.collect.Sets
+import cpw.mods.fml.common.registry.GameRegistry
+import cpw.mods.fml.relauncher.Side
+import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.client.gui.GuiScreen
+import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
@@ -14,10 +18,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.entity.ai.attributes.RangedAttribute
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
-import net.minecraft.item.EnumAction
-import net.minecraft.item.EnumRarity
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
+import net.minecraft.item.*
 import net.minecraft.potion.Potion
 import net.minecraft.potion.PotionEffect
 import net.minecraft.util.*
@@ -25,7 +26,9 @@ import net.minecraft.world.World
 import net.minecraftforge.common.ForgeHooks
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
 import ninja.shadowfox.shadowfox_botany.common.brew.ShadowFoxPotions
+import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
+import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
@@ -33,11 +36,12 @@ import vazkii.botania.common.Botania
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.core.helper.Vector3
 import vazkii.botania.common.item.equipment.tool.ToolCommons
+import java.util.*
 
 /**
  * seeeeeecrets
  */
-class ItemWireAxe(val toolMaterial: ToolMaterial = ShadowFoxAPI.RUNEAXE) : ItemMod("axeRevelation"), IManaUsingItem {
+class ItemWireAxe(val name: String = "axeRevelation", val toolMaterial: ToolMaterial = ShadowFoxAPI.RUNEAXE, val slayerDamage: Double = 6.0) : ItemSword(toolMaterial), IManaUsingItem {
 
     companion object {
         class DamageSourceGodslayer(player: EntityLivingBase, creative: Boolean): EntityDamageSource("player", player) {
@@ -54,6 +58,26 @@ class ItemWireAxe(val toolMaterial: ToolMaterial = ShadowFoxAPI.RUNEAXE) : ItemM
     init {
         setMaxStackSize(1)
         setMaxDamage(toolMaterial.maxUses)
+        setCreativeTab(ShadowFoxCreativeTab)
+        setUnlocalizedName(name)
+    }
+
+    override fun setUnlocalizedName(par1Str: String): Item {
+        GameRegistry.registerItem(this, par1Str)
+        return super.setUnlocalizedName(par1Str)
+    }
+
+    override fun getItemStackDisplayName(stack: ItemStack): String {
+        return super.getItemStackDisplayName(stack).replace("&".toRegex(), "\u00a7")
+    }
+
+    override fun getUnlocalizedNameInefficiently(par1ItemStack: ItemStack): String {
+        return super.getUnlocalizedNameInefficiently(par1ItemStack).replace("item\\.".toRegex(), "item.shadowfox_botany:")
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun registerIcons(par1IconRegister: IIconRegister) {
+        this.itemIcon = IconHelper.forItem(par1IconRegister, this)
     }
 
     override fun getRarity(stack: ItemStack): EnumRarity = BotaniaAPI.rarityRelic
@@ -140,27 +164,28 @@ class ItemWireAxe(val toolMaterial: ToolMaterial = ShadowFoxAPI.RUNEAXE) : ItemM
         tooltip.add(s.replace("&", "\u00a7"))
     }
 
+    val godUUID = UUID.fromString("CB3D55D3-645C-4F38-A497-9C13A33DB5CF")
     override fun getItemAttributeModifiers(): Multimap<Any, Any> {
         val multimap = HashMultimap.create<Any, Any>()
         multimap.put(SharedMonsterAttributes.attackDamage.attributeUnlocalizedName, AttributeModifier(Item.field_111210_e, "Weapon modifier", this.toolMaterial.damageVsEntity.toDouble(), 0))
-        multimap.put(godSlayingDamage.attributeUnlocalizedName, AttributeModifier(Item.field_111210_e, "Weapon modifier", this.toolMaterial.damageVsEntity.toDouble()*2, 0))
+        multimap.put(godSlayingDamage.attributeUnlocalizedName, AttributeModifier(godUUID, "Weapon modifier", slayerDamage, 0))
         return multimap
     }
 
-    override fun hitEntity(stack: ItemStack, attacked: EntityLivingBase, attacker: EntityLivingBase): Boolean {
-        stack.damageStack(2, attacker)
+    override fun onLeftClickEntity(stack: ItemStack, player: EntityPlayer, entity: Entity): Boolean {
         val godslaying = stack.attributeModifiers[godSlayingDamage.attributeUnlocalizedName]
         if (godslaying != null) {
             for (attr in godslaying) {
                 if (attr is AttributeModifier)
-                    attackEntity(attacker, attacked, attr.amount, DamageSourceGodslayer(attacker, ConfigHandler.grantWireUnlimitedPower))
+                    attackEntity(player, entity, attr.amount, DamageSourceGodslayer(player, ConfigHandler.grantWireUnlimitedPower))
             }
         }
-        return true
+
+        return super.onLeftClickEntity(stack, player, entity)
     }
 
-    fun attackEntity(player: EntityLivingBase, entity: Entity, f: Double, damageSource: DamageSource) {
-        var f = f
+    fun attackEntity(player: EntityLivingBase, entity: Entity, f0: Double, damageSource: DamageSource) {
+        var f = f0
         var f1 = 0.0f
         if (entity is EntityLivingBase)
             f1 = EnchantmentHelper.getEnchantmentModifierLiving(player, entity)

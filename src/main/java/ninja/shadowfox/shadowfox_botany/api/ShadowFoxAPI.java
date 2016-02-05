@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class ShadowFoxAPI {
 
-    public static Item.ToolMaterial RUNEAXE = EnumHelper.addToolMaterial("RUNEAXE", 4, 1561, 8f, 4f, 15);
+    public static Item.ToolMaterial RUNEAXE = EnumHelper.addToolMaterial("RUNEAXE", 4, 1561, 8f, 2f, 50);
 
     public static List<RecipeTreeCrafting> treeRecipes = new ArrayList();
     public static List<IIridescentSaplingVariant> treeVariants = new ArrayList();
