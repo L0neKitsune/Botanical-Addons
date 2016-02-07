@@ -65,6 +65,9 @@ misc.shadowfox_botany:lotusDesc=It emits discordant magical vibes
 item.shadowfox_botany:attributionBauble0.name=Holy Symbol
 item.shadowfox_botany:attributionBauble1.name=Pendant of Headtato Summoning
 
+item.shadowfox_botany:starPlacer.name=Frozen Star
+tile.shadowfox_botany:star.name=Frozen Star
+
 item.shadowfox_botany:colorfulSkyDirtRod.name=Rod of the Vibrant Plains
 item.shadowfox_botany:lightningRod.name=Rod of the Thundering Peaks
 item.shadowfox_botany:interdictionRod.name=Rod of the Stormy Sea

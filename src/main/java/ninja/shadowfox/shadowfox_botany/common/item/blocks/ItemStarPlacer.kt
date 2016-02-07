@@ -13,6 +13,7 @@ import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileEntityStar
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileRainbowManaFlame
+import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
 import ninja.shadowfox.shadowfox_botany.common.item.ItemMod
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import vazkii.botania.api.mana.ManaItemHandler
@@ -33,8 +34,11 @@ class ItemStarPlacer : ItemMod("starPlacer") {
         val defaultColors = ArrayList<Int>()
 
         init {
-            for (color in EntitySheep.fleeceColorTable.reversed())
-                defaultColors.add(Math.abs(Color(color[0], color[1], color[2]).rgb))
+            for (color in EntitySheep.fleeceColorTable) {
+                var color = Color(color[0], color[1], color[2]).rgb
+                color += 0xFFFFFF + 1
+                defaultColors.add(color)
+            }
             defaultColors.add(-1)
         }
 
@@ -58,12 +62,20 @@ class ItemStarPlacer : ItemMod("starPlacer") {
         val color = getColor(stack)
         if (color in defaultColors)
             list.add(StatCollector.translateToLocal("misc.shadowfox_botany.color.${defaultColors.indexOf(color)}"))
+        else
+            list.add("#${Integer.toHexString(color).toUpperCase()}")
     }
 
     override fun getSubItems(item: Item, tab: CreativeTabs?, list: MutableList<Any?>) {
         for (color in defaultColors) {
             list.add(colorStack(color))
         }
+    }
+
+    override fun getColorFromItemStack(stack: ItemStack, pass: Int): Int {
+        val color = getColor(stack)
+        if (color == -1) return ItemIridescent.rainbowColor()
+        return color
     }
 
     override fun onItemUse(par1ItemStack: ItemStack, par2EntityPlayer: EntityPlayer, par3World: World,
@@ -76,10 +88,9 @@ class ItemStarPlacer : ItemMod("starPlacer") {
             toPlace.tryPlaceItemIntoWorld(par2EntityPlayer, par3World, x, y, z, direction, par8, par9, par10)
             if (toPlace.stackSize == 0) {
                 val tile = par3World.getTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ)
-                println(getColor(par1ItemStack))
-                println(tile)
                 if (tile is TileEntityStar)
                     tile.starColor = getColor(par1ItemStack)
+                if (!par2EntityPlayer.capabilities.isCreativeMode) par1ItemStack.stackSize--
             }
             return true
         }

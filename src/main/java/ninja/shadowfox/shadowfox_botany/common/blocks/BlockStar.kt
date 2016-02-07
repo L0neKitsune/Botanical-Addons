@@ -4,9 +4,11 @@ import cpw.mods.fml.common.Optional
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
+import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.IIcon
@@ -61,7 +63,24 @@ class BlockStar(name: String = "star") : BlockMod(Material.cloth), ILexiconable 
     override fun getCollisionBoundingBoxFromPool(world: World?, x: Int, y: Int, z: Int): AxisAlignedBB? = null
 
     override fun getDrops(world: World, x: Int, y: Int, z: Int, metadata: Int, fortune: Int): ArrayList<ItemStack> {
-        return arrayListOf(ItemStarPlacer.colorStack((world.getTileEntity(x, y, z) as TileEntityStar).getLightColor()))
+        return ArrayList()
+    }
+
+    override fun breakBlock(world: World, x: Int, y: Int, z: Int, block: Block, meta: Int) {
+        val f = 0.5
+
+        val color = (world.getTileEntity(x, y, z) as TileEntityStar).getColor()
+        val stack = ItemStarPlacer.colorStack(color)
+
+        val entityitem = EntityItem(world, (x.toFloat() + f).toDouble(), (y.toFloat() + f).toDouble(), (z.toFloat() + f).toDouble(), stack)
+
+        val f3 = 0.05f
+        entityitem.motionX = (world.rand.nextGaussian().toFloat() * f3).toDouble()
+        entityitem.motionY = (world.rand.nextGaussian().toFloat() * f3 + 0.2f).toDouble()
+        entityitem.motionZ = (world.rand.nextGaussian().toFloat() * f3).toDouble()
+        world.spawnEntityInWorld(entityitem)
+
+        super.breakBlock(world, x, y, z, block, meta)
     }
 
     override fun createTileEntity(world: World?, meta: Int): TileEntity? {
