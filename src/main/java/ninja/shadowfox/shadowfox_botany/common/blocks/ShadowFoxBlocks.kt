@@ -124,6 +124,8 @@ public object ShadowFoxBlocks {
 
     public var amp: Block
 
+    public var star: Block
+
     public var iridescentTree0: IIridescentSaplingVariant
     public var iridescentTree1: IIridescentSaplingVariant
     public var iridescentTree2: IIridescentSaplingVariant
@@ -220,6 +222,8 @@ public object ShadowFoxBlocks {
 
         amp = BlockAmp()
 
+        star = BlockStar()
+
         register()
         initOreDict()
 
@@ -229,6 +233,7 @@ public object ShadowFoxBlocks {
         GameRegistry.registerTileEntity(TileTreeCrafter::class.java, "shadowfox_botany:treeCrafter")
         GameRegistry.registerTileEntity(TileLivingwoodFunnel::class.java, "shadowfox_botany:livingwoodFunnel")
         GameRegistry.registerTileEntity(TileLightningRod::class.java, "shadowfox_botany:lightningRod")
+        GameRegistry.registerTileEntity(TileEntityStar::class.java, "shadowfox_botany:star")
         if (ShadowfoxBotany.isDevEnv) {
             GameRegistry.registerTileEntity(TileSchema::class.java, "shadowfox_botany:schema")
             GameRegistry.registerTileEntity(TileSchematicAnnihilator::class.java, "shadowfox_botany:schematicAnnihilator")
