@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.common.item
+package ninja.shadowfox.shadowfox_botany.common.item.creator
 
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
@@ -24,6 +24,7 @@ import net.minecraft.potion.PotionEffect
 import net.minecraft.util.*
 import net.minecraft.world.World
 import net.minecraftforge.common.ForgeHooks
+import net.minecraftforge.oredict.OreDictionary
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
 import ninja.shadowfox.shadowfox_botany.common.brew.ShadowFoxPotions
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
@@ -112,7 +113,7 @@ class ItemWireAxe(val name: String = "axeRevelation", val toolMaterial: ToolMate
     }
 
     private fun randomVec(length: Int): Vector3 {
-        val vec = Vector3(0.0, Math.random()*length, 0.0)
+        val vec = Vector3(0.0, Math.random() * length, 0.0)
         vec.rotate(Math.random() * Math.PI * 2, Vector3(1.0, 0.0, 0.0))
         vec.rotate(Math.random() * Math.PI * 2, Vector3(0.0, 0.0, 1.0))
         return vec
@@ -143,7 +144,7 @@ class ItemWireAxe(val name: String = "axeRevelation", val toolMaterial: ToolMate
             for (var11 in 0..20) {
                 Botania.proxy.lightningFX(world, Vector3.fromEntityCenter(player), Vector3.fromEntityCenter(player).add(randomVec(range)), range*0.01f, 255 shl 16, 0)
             }
-            player.addPotionEffect(PotionEffect(ShadowFoxPotions.manaVoid.id, 2*count, 0, true))
+            player.addPotionEffect(PotionEffect(ShadowFoxPotions.manaVoid.id, 2 * count, 0, true))
         }
     }
 
@@ -152,9 +153,9 @@ class ItemWireAxe(val name: String = "axeRevelation", val toolMaterial: ToolMate
         val greyitalics = "${EnumChatFormatting.GRAY}${EnumChatFormatting.ITALIC}"
         val grey = EnumChatFormatting.GRAY
         if (GuiScreen.isShiftKeyDown()) {
-            addStringToTooltip("$greyitalics${StatCollector.translateToLocal("misc.shadowfox_botany.line1")}", list)
-            addStringToTooltip("$greyitalics${StatCollector.translateToLocal("misc.shadowfox_botany.line2")}", list)
-            addStringToTooltip("$greyitalics${StatCollector.translateToLocal("misc.shadowfox_botany.line3")}", list)
+            addStringToTooltip("$greyitalics${StatCollector.translateToLocal("misc.shadowfox_botany.wline1")}", list)
+            addStringToTooltip("$greyitalics${StatCollector.translateToLocal("misc.shadowfox_botany.wline2")}", list)
+            addStringToTooltip("$greyitalics${StatCollector.translateToLocal("misc.shadowfox_botany.wline3")}", list)
             addStringToTooltip("${grey}I awaken the ancients within all of you!", list)
             addStringToTooltip("${grey}From my soul's fire the world burns anew!", list)
         } else addStringToTooltip(StatCollector.translateToLocal("botaniamisc.shiftinfo"), list)
@@ -226,7 +227,7 @@ class ItemWireAxe(val name: String = "axeRevelation", val toolMaterial: ToolMate
     fun getEfficiencyOnProperMaterial(): Float = this.toolMaterial.efficiencyOnProperMaterial
     override fun getIsRepairable(stack: ItemStack?, materialstack: ItemStack?): Boolean {
         val mat = this.toolMaterial.repairItemStack
-        if (mat != null && net.minecraftforge.oredict.OreDictionary.itemMatches(mat, materialstack, false)) return true
+        if (mat != null && OreDictionary.itemMatches(mat, materialstack, false)) return true
         return super.getIsRepairable(stack, materialstack)
     }
 

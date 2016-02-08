@@ -5,6 +5,8 @@ import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.*
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemStarPlacer
+import ninja.shadowfox.shadowfox_botany.common.item.creator.ItemTrisDagger
+import ninja.shadowfox.shadowfox_botany.common.item.creator.ItemWireAxe
 import ninja.shadowfox.shadowfox_botany.common.item.rods.*
 import ninja.shadowfox.shadowfox_botany.lib.LibOreDict
 
@@ -26,6 +28,7 @@ object ShadowFoxItems {
     val flameRod: Item
     val wireAxe: Item
     val star: Item
+    val trisDagger: Item
 //    val fireGrenade: Item
 //    val splashPotion: Item
 
@@ -47,6 +50,7 @@ object ShadowFoxItems {
         flameRod = ItemFlameRod()
         wireAxe = ItemWireAxe()
         star = ItemStarPlacer()
+        trisDagger = ItemTrisDagger()
 //        splashPotion = ItemSplashPotion()
 //        fireGrenade = ItemFireGrenade()
         initOreDict()

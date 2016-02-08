@@ -35,11 +35,17 @@ misc.shadowfox_botany.wayOfUndoing=&4You feel your soul draining from your body.
 misc.shadowfox_botany.youAreNotTheChosenOneMale=You are not him.
 misc.shadowfox_botany.youAreNotTheChosenOneFemale=You are not her.
 
-misc.shadowfox_botany.line1=And the man looked upon a desolate view;
-misc.shadowfox_botany.line2=Despite the world falling down he imbued.
-misc.shadowfox_botany.line3=And in defiance of fate and the gods he yelled!
+misc.shadowfox_botany.wline1=And the man looked upon a desolate view;
+misc.shadowfox_botany.wline2=Despite the world falling down he imbued.
+misc.shadowfox_botany.wline3=And in defiance of fate and the gods he yelled!
+
+misc.shadowfox_botany.tline1=And the girl slipped between the crowd;
+misc.shadowfox_botany.tline2=Pretense behind, she held her glowing blade high;
+misc.shadowfox_botany.tline3=And she yelled in defiance of the corruption of men!
 
 attribute.name.shadowfox_botany.godSlayingAttackDamage=Cognitive Damage
+
+death.attack.shadowfox_botany.oculus.player=%1$s was slain by %2$s's perfect resolve
 
 misc.shadowfox_botany:temperature.0=Hypothermia Warning
 misc.shadowfox_botany:temperature.1=Painfully Cold
@@ -144,8 +150,8 @@ item.shadowfox_botany:coatOfArms17.name=Parisian Shield
 
 item.shadowfox_botany:colorOverride.name=Clerical Colorizer
 
-
 item.shadowfox_botany:axeRevelation.name=Holy Blade Revelation
+item.shadowfox_botany:reactionDagger.name=Dagger of the Perfect Soul
 
 tile.shadowfox_botany:kindling.name=Blaze Kindling
 
