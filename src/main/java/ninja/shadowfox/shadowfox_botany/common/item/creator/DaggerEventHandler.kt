@@ -75,6 +75,7 @@ class DaggerEventHandler {
                             val xDif = enemyEntity.posX - player.posX
                             val zDif = enemyEntity.posZ - player.posZ
                             player.worldObj.playSoundAtEntity(enemyEntity, "random.anvil_land", 1f, 0.9f + 0.1f * Math.random().toFloat())
+                            if (enemyEntity is EntityPlayer) enemyEntity.currentEquippedItem.damageItem(30, enemyEntity)
                             enemyEntity.knockBack(player, 1f, -xDif, -zDif)
                             enemyEntity.addPotionEffect(PotionEffect(Potion.weakness.id, 60, 1, true))
                             enemyEntity.addPotionEffect(PotionEffect(Potion.moveSlowdown.id, 60, 2, true))
