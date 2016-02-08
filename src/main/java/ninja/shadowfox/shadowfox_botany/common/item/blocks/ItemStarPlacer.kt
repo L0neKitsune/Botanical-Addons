@@ -78,7 +78,7 @@ class ItemStarPlacer : ItemMod("starPlacer") {
         else
             list.add("#${Integer.toHexString(color).toUpperCase()}")
         if (getSize(stack) != 0.05f)
-            list.add(StatCollector.translateToLocalFormatted("misc.shadowfox_botany.customSize", getSize(stack)/0.05f))
+            list.add(StatCollector.translateToLocalFormatted("misc.shadowfox_botany.customSize", getSize(stack)/0.1f))
     }
 
     override fun getSubItems(item: Item, tab: CreativeTabs?, list: MutableList<Any?>) {
