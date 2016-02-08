@@ -55,6 +55,10 @@ class ItemStarPlacer : ItemMod("starPlacer") {
             setColor(stack, color)
             return stack
         }
+
+        fun forColor(colorVal: Int): ItemStack {
+            return colorStack(defaultColors[colorVal % defaultColors.size])
+        }
     }
 
     override fun addInformation(stack: ItemStack, player: EntityPlayer?, list: MutableList<Any?>, par4: Boolean) {

@@ -281,6 +281,8 @@ shadowfox_botany.entry.crysanthermum=Crysanthermum
 shadowfox_botany.tagline.crysanthermum=Mana from temperature
 shadowfox_botany.entry.andmyaxe=Holy Blade Revelation
 shadowfox_botany.tagline.andmyaxe=The weapon of the First Godslayer
+shadowfox_botany.entry.star=Frozen Stars
+shadowfox_botany.tagline.star=An ender light source
 
 shadowfox_botany.category.dendrology=Dendrology
 
@@ -391,3 +393,6 @@ shadowfox_botany.page.crysanthermum2=Left by a Fortanono
 
 shadowfox_botany.page.andmyaxe0=&1Elementium&0 is a highly enchantable substance. So enchantable, in fact, it seems one can enchant it with spells and power outside the normal cycles. By flooding an axe of the stuff with six powers, you have recreated a legendary weapon: the &1Holy Blade Revelation&0. It attacks not the body, but the mind. This has interesting effects when used to attack an immortal.
 shadowfox_botany.page.andmyaxe1=&1Revelation&0 has two main abilities. It can attack like a sword, and mine like an axe. It cannot, however, recieve any axe enchantments. The other ability is its soul-draining power. Drawing it back, like a bow, will drain a little mana from anyone foolish enough to be within the blade's range. The range increases with time held back.
+
+shadowfox_botany.page.star0=The &1Frozen Star&0 is the light of the stars, trapped upon earth. They are relatively cheap light sources, and give off light with the same strength as &1Glowstone&0. Due to their instability, they can only be harvested by players.
+shadowfox_botany.page.star1=Find Polaris to find your way
