@@ -35,9 +35,9 @@ class ItemStarPlacer : ItemMod("starPlacer") {
 
         init {
             for (color in EntitySheep.fleeceColorTable) {
-                var color = Color(color[0], color[1], color[2]).rgb
-                color += 0xFFFFFF + 1
-                defaultColors.add(color)
+                var colorint = Color(color[0], color[1], color[2]).rgb
+                colorint += 0xFFFFFF + 1
+                defaultColors.add(colorint)
             }
             defaultColors.add(-1)
         }
