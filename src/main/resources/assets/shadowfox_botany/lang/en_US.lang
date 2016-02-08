@@ -291,6 +291,8 @@ shadowfox_botany.entry.andmyaxe=Holy Blade Revelation
 shadowfox_botany.tagline.andmyaxe=The weapon of the First Godslayer
 shadowfox_botany.entry.star=Frozen Stars
 shadowfox_botany.tagline.star=An ender light source
+shadowfox_botany.entry.dagger=Dagger of the Perfect Soul
+shadowfox_botany.tagline.dagger=The weapon of the Gaterender
 
 shadowfox_botany.category.dendrology=Dendrology
 
@@ -404,3 +406,5 @@ shadowfox_botany.page.andmyaxe1=&1Revelation&0 has two main abilities. It can at
 
 shadowfox_botany.page.star0=The &1Frozen Star&0 is the light of the stars, trapped upon earth. They are relatively cheap light sources, and give off light with the same strength as &1Glowstone&0. Due to their instability, they can only be harvested by players.
 shadowfox_botany.page.star1=Find Polaris to find your way
+
+shadowfox_botany.page.dagger0=&1The Dagger of the Perfect Soul&0 is the manifestation of rebellion. It, paradoxically, is stronger when on the defense than on the attack. As a weapon, it's weaker than a sword of wood. When you parry with it, however, if you can block before the blade becomes dun, it will reflect the strength of the attack upon the attacker. It has been said that this blade has freed many from oppression's clutches.

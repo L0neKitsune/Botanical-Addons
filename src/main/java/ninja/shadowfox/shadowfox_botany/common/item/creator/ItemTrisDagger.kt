@@ -49,8 +49,8 @@ class ItemTrisDagger(val name: String = "reactionDagger", val toolMaterial: Tool
     var dunIcon: IIcon? = null
 
     companion object {
-        val minBlockLength = 1
-        val maxBlockLength = 5
+        val minBlockLength = 0
+        val maxBlockLength = 10
     }
 
     init {
