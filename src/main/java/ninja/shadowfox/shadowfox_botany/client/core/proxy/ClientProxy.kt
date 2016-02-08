@@ -6,9 +6,12 @@ import cpw.mods.fml.common.Loader
 import cpw.mods.fml.common.event.FMLInitializationEvent
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
+import cpw.mods.fml.common.registry.EntityRegistry
+import net.minecraft.client.renderer.entity.RenderArrow
 import net.minecraftforge.client.MinecraftForgeClient
 import ninja.shadowfox.shadowfox_botany.client.core.multipart.MultipartHandler
 import ninja.shadowfox.shadowfox_botany.client.render.entity.RenderGrieferCreeper
+import ninja.shadowfox.shadowfox_botany.client.render.entity.RenderThrownItem
 import ninja.shadowfox.shadowfox_botany.client.render.tile.MultipassRenderer
 import ninja.shadowfox.shadowfox_botany.client.render.tile.RenderStar
 import ninja.shadowfox.shadowfox_botany.client.render.tile.RenderTileItemDisplay
@@ -18,12 +21,14 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileEntityStar
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileItemDisplay
 import ninja.shadowfox.shadowfox_botany.common.core.proxy.CommonProxy
 import ninja.shadowfox.shadowfox_botany.common.entity.EntityGrieferCreeper
+import ninja.shadowfox.shadowfox_botany.common.entity.EntityKitsuneArrow
+import ninja.shadowfox.shadowfox_botany.common.entity.EntityThrowableItem
 import ninja.shadowfox.shadowfox_botany.common.entity.EntityVoidCreeper
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import ninja.shadowfox.shadowfox_botany.lib.Constants
 import vazkii.botania.client.render.item.RenderLens
 
-public class ClientProxy : CommonProxy() {
+class ClientProxy : CommonProxy() {
     override fun preInit(event: FMLPreInitializationEvent) {
         super.preInit(event)
     }
@@ -53,9 +58,10 @@ public class ClientProxy : CommonProxy() {
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileItemDisplay::class.java, RenderTileItemDisplay())
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStar::class.java, RenderStar())
-        //        EntityRegistry.registerModEntity(EntityThrowableItem::class.java, "shadowfox_botany:thrownItem", 0, ShadowfoxBotany.instance, 64, 10, true)
 
         RenderingRegistry.registerEntityRenderingHandler(EntityGrieferCreeper::class.java, RenderGrieferCreeper())
         RenderingRegistry.registerEntityRenderingHandler(EntityVoidCreeper::class.java, RenderGrieferCreeper())
+        RenderingRegistry.registerEntityRenderingHandler(EntityThrowableItem::class.java, RenderThrownItem())
+        RenderingRegistry.registerEntityRenderingHandler(EntityKitsuneArrow::class.java, RenderArrow())
     }
 }

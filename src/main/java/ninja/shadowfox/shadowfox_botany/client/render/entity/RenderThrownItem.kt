@@ -10,6 +10,8 @@ import net.minecraft.util.ResourceLocation
 import ninja.shadowfox.shadowfox_botany.common.entity.EntityThrowableItem
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import org.lwjgl.opengl.GL11
+import vazkii.botania.common.entity.EntityThornChakram
+import vazkii.botania.common.item.ModItems
 import java.awt.Color
 
 /**
@@ -22,27 +24,19 @@ class RenderThrownItem : Render() {
         var itemStack = c.item ?: null
 
         if(itemStack != null) {
-            GL11.glScalef(0.75F, 0.75F, 0.75F)
-            GL11.glTranslatef(0F, 0F, 0.5F)
-            GL11.glRotatef(90F, 0F, 1F, 0F)
-            var renderPass = 0
 
-            do {
-                val icon = itemStack.item.getIcon(itemStack, renderPass)
-                if (icon != null) {
-                    val color = Color(itemStack.item.getColorFromItemStack(itemStack, renderPass))
-                    GL11.glColor3ub(color.red.toByte(), color.green.toByte(), color.blue.toByte())
-                    val f = icon.minU
-                    val f1 = icon.maxU
-                    val f2 = icon.minV
-                    val f3 = icon.maxV
-
-                    ItemRenderer.renderItemIn2D(Tessellator.instance, f1, f2, f, f3, icon.iconWidth, icon.iconHeight, 0.0625f)
-                    GL11.glColor3f(1.0f, 1.0f, 1.0f)
-                }
-
-                ++renderPass
-            } while (renderPass < itemStack.item.getRenderPasses(itemStack.itemDamage))
+            val iicon = itemStack.item.getIconIndex(itemStack)
+            if (iicon != null) {
+                GL11.glPushMatrix()
+                GL11.glTranslatef(p_76986_2_.toFloat(), p_76986_4_.toFloat(), p_76986_6_.toFloat())
+                GL11.glEnable('耺'.toInt())
+                GL11.glScalef(0.5f, 0.5f, 0.5f)
+                this.bindEntityTexture(p_76986_1_)
+                val tessellator = Tessellator.instance
+                this.func_77026_a(tessellator, iicon, -1)
+                GL11.glDisable('耺'.toInt())
+                GL11.glPopMatrix()
+            }
         }
 
     }

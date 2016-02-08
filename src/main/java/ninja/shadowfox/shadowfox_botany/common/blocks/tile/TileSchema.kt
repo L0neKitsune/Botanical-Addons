@@ -39,9 +39,9 @@ open class TileSchema() : TileMod() {
     var pos_xyx: Pos? = null
     var pos_zyz: Pos? = null
     var pos_xyz: Pos? = null
-    var range: Int = 64
+    var range: Int = 128
 
-    var validDir: MutableList<ForgeDirection> = ForgeDirection.VALID_DIRECTIONS.toArrayList()
+    var validDir: MutableList<ForgeDirection> = ForgeDirection.VALID_DIRECTIONS.toMutableList()
 
     class Pos(val x: Int, val y: Int, val z: Int, val dir: ForgeDirection)
 
@@ -199,7 +199,7 @@ open class TileSchema() : TileMod() {
         }
     }
 
-    public fun getType(dir: ForgeDirection): Int {
+    fun getType(dir: ForgeDirection): Int {
         when (dir) {
             ForgeDirection.UP, ForgeDirection.DOWN -> return 2
             ForgeDirection.NORTH, ForgeDirection.SOUTH -> return 3
@@ -269,7 +269,7 @@ open class TileSchema() : TileMod() {
         }
     }
 
-    public fun checkPos(x: Double, y: Double, z: Double, x2: Double, y2: Double, z2: Double): Boolean {
+    fun checkPos(x: Double, y: Double, z: Double, x2: Double, y2: Double, z2: Double): Boolean {
         return Math.abs(x) < Math.abs(x2) || Math.abs(y) < Math.abs(y2) || Math.abs(z) < Math.abs(z2)
     }
 
@@ -310,7 +310,7 @@ open class TileSchema() : TileMod() {
         return Color.HSBtoRGB(time * 0.005F, 1F, 1F)
     }
 
-    public open fun blockActivated(p0: EntityPlayer?) {
+    open fun blockActivated(p0: EntityPlayer?) {
         if (ticksAlive - lastDump > 60) {
             lastDump = ticksAlive
             if (pos_x != null && pos_y != null && pos_z != null && mark_x != null && mark_z != null) {

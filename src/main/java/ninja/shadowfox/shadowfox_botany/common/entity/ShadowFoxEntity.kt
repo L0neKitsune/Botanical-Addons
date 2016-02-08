@@ -6,7 +6,7 @@ import net.minecraft.world.biome.BiomeGenBase
 import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 
-public object ShadowFoxEntity {
+object ShadowFoxEntity {
 
     init {
         if (ConfigHandler.uberCreepers) {
@@ -17,6 +17,7 @@ public object ShadowFoxEntity {
 
         var id = 0
         EntityRegistry.registerModEntity(EntityThrowableItem::class.java, "shadowfox_botany:thrownItem", ++id, ShadowfoxBotany.instance, 256, 10, true)
+        EntityRegistry.registerModEntity(EntityKitsuneArrow::class.java, "shadowfox_botany:kitsuneArrow", ++id, ShadowfoxBotany.instance, 500, 10, true)
 
         for (i in BiomeGenBase.getBiomeGenArray()) {
             if (i != null && i != BiomeGenBase.hell && i != BiomeGenBase.sky && i != BiomeGenBase.mushroomIsland && i != BiomeGenBase.mushroomIslandShore)

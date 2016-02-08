@@ -36,6 +36,7 @@ object ShadowFoxItems {
     val flameRod: Item
     val wireAxe: Item
     val star: Item
+    val kitsuneBow: Item
 //    val fireGrenade: Item
 //    val splashPotion: Item
 
@@ -60,6 +61,8 @@ object ShadowFoxItems {
         flameRod = ItemFlameRod()
         wireAxe = ItemWireAxe()
         star = ItemStarPlacer()
+        kitsuneBow = ItemKitsuneBow()
+
         initOreDict()
     }
 
