@@ -3,8 +3,10 @@ package ninja.shadowfox.shadowfox_botany.api;
 import net.minecraft.block.Block;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraftforge.common.util.EnumHelper;
 import ninja.shadowfox.shadowfox_botany.api.item.ThrowableCollidingItem;
 import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting;
 import ninja.shadowfox.shadowfox_botany.api.trees.IIridescentSaplingVariant;
@@ -16,6 +18,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ShadowFoxAPI {
+
+    public static Item.ToolMaterial RUNEAXE = EnumHelper.addToolMaterial("RUNEAXE", 4, 1561, 8f, 2f, 50);
+
     public static List<RecipeTreeCrafting> treeRecipes = new ArrayList();
     public static List<IIridescentSaplingVariant> treeVariants = new ArrayList();
     public static Map<String, ThrowableCollidingItem> collidingItemHashMap = new LinkedHashMap();

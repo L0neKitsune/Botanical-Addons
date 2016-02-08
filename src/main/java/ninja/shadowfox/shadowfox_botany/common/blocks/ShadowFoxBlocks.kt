@@ -17,6 +17,8 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.nether_oak.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.sealing_oak.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.*
 import ninja.shadowfox.shadowfox_botany.common.blocks.schema.*
+import ninja.shadowfox.shadowfox_botany.common.blocks.subtile.ShadowFoxSignature
+import ninja.shadowfox.shadowfox_botany.common.blocks.subtile.SubTileCrysanthermum
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.*
 import ninja.shadowfox.shadowfox_botany.lib.LibOreDict
 import vazkii.botania.api.BotaniaAPI
@@ -123,6 +125,8 @@ public object ShadowFoxBlocks {
 
     public var amp: Block
 
+    public var star: Block
+
     public var iridescentTree0: IIridescentSaplingVariant
     public var iridescentTree1: IIridescentSaplingVariant
     public var iridescentTree2: IIridescentSaplingVariant
@@ -220,6 +224,8 @@ public object ShadowFoxBlocks {
 
         amp = BlockAmp()
 
+        star = BlockStar()
+
         register()
         initOreDict()
 
@@ -230,6 +236,8 @@ public object ShadowFoxBlocks {
         GameRegistry.registerTileEntity(TileLivingwoodFunnel::class.java, "shadowfox_botany:livingwoodFunnel")
         GameRegistry.registerTileEntity(TileLightningRod::class.java, "shadowfox_botany:lightningRod")
         GameRegistry.registerTileEntity(TileBathtub::class.java, "shadowfox_botany:bathtubMana")
+
+        GameRegistry.registerTileEntity(TileEntityStar::class.java, "shadowfox_botany:star")
 
         if (ShadowfoxBotany.isDevEnv) {
             GameRegistry.registerTileEntity(TileSchema::class.java, "shadowfox_botany:schema")
@@ -245,6 +253,11 @@ public object ShadowFoxBlocks {
         bifrostTree = ShadowFoxAPI.addTreeVariant(rainbowDirtBlock, rainbowWood, rainbowLeaves)
         altTree0 = ShadowFoxAPI.addTreeVariant(BotaniaBlocks.altGrass, altWood0, altLeaves, 0, 3)
         altTree1 = ShadowFoxAPI.addTreeVariant(BotaniaBlocks.altGrass, altWood1, altLeaves, 4, 5)
+
+        BotaniaAPI.registerSubTile("crysanthermum", SubTileCrysanthermum::class.java)
+        BotaniaAPI.registerSubTileSignature(SubTileCrysanthermum::class.java, ShadowFoxSignature("crysanthermum"))
+        BotaniaAPI.subTileMods.put("crysanthermum", "Botanical Addons")
+        BotaniaAPI.addSubTileToCreativeMenu("crysanthermum")
     }
 
     fun registerBurnables() {

@@ -1,5 +1,7 @@
 package ninja.shadowfox.shadowfox_botany.common.blocks.colored
 
+import cpw.mods.fml.common.Loader
+import cpw.mods.fml.common.Optional
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.relauncher.FMLLaunchHandler
 import cpw.mods.fml.relauncher.Side
@@ -16,6 +18,7 @@ import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockMod
+import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 import vazkii.botania.api.lexicon.ILexiconable
@@ -127,7 +130,13 @@ class BlockColoredLamp : BlockMod(Material.redstoneLight), ILexiconable {
     override fun createStackedBlock(meta: Int): ItemStack = ItemStack(this, 1, 0)
 
     override fun getLightValue(): Int = 15
-    override fun getLightValue(world: IBlockAccess, x: Int, y: Int, z: Int): Int = if (powerLevel(world, x, y, z) > 0) 15 else 0
+    override fun getLightValue(world: IBlockAccess, x: Int, y: Int, z: Int): Int {
+        val level = powerLevel(world, x, y, z)
+        if (Loader.isModLoaded("easycoloredlights")) {
+            return if (level == 15) 0xFFFFFF else powerColor(level)
+        }
+        return if (level > 0) 15 else 0
+    }
 
     @SideOnly(Side.CLIENT) override fun getRenderColor(meta: Int): Int = powerColor(meta)
     @SideOnly(Side.CLIENT) override fun colorMultiplier(world: IBlockAccess, x: Int, y: Int, z: Int): Int = getRenderColor(world.getBlockMetadata(x, y, z))

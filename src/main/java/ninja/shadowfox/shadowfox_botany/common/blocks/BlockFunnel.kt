@@ -22,6 +22,7 @@ import net.minecraft.util.Facing
 import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockContainerMod
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileLivingwoodFunnel
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
@@ -61,6 +62,10 @@ class BlockFunnel() : BlockContainerMod<TileLivingwoodFunnel>(Material.wood), IW
 
         this.setCreativeTab(ShadowFoxCreativeTab)
         this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f)
+    }
+
+    override fun isSideSolid(world: IBlockAccess?, x: Int, y: Int, z: Int, side: ForgeDirection?): Boolean {
+        return side == ForgeDirection.UP
     }
 
     /**

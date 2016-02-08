@@ -27,7 +27,7 @@ public class BlockSealingPlanks() : BlockMod(MaterialCustomSmeltingWood.instance
     init {
         blockHardness = 2F
         setLightLevel(0f)
-        stepSound = soundTypeWood
+        setStepSound(Block.soundTypeCloth)
 
         setBlockName(this.name)
     }

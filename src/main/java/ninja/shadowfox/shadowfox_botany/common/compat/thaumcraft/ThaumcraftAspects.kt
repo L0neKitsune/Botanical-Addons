@@ -167,6 +167,8 @@ object ThaumcraftAspects {
         else
             list = AspectList().add(Aspect.ELDRITCH, 5).add(Aspect.AIR, 16)
         ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxItems.emblem, 1, 2), list)
+        list = AspectList().add(Aspect.ELDRITCH, 5).add(hellAspect, 16)
+        ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxItems.emblem, 1, 3), list)
 
         list = AspectList().add(Aspect.CLOTH, 4).add(colorAspect, 2)
         ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxItems.coatOfArms), list)
@@ -221,6 +223,16 @@ object ThaumcraftAspects {
 
         list = AspectList().add(Aspect.PLANT, 2).add(Aspect.TREE, 1).add(Aspect.VOID, 1)
         ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxBlocks.sealingSapling), list)
+
+        list = AspectList().add(Aspect.ELDRITCH, 2).add(Aspect.LIGHT, 2).add(COLOR, 2)
+        ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxItems.star), list)
+        ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxBlocks.star), list)
+
+        list = AspectList().add(Aspect.TOOL, 8).add(Aspect.FIRE, 4).add(hellAspect, 4)
+        ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxItems.flameRod), list)
+
+        list = AspectList().add(Aspect.ELDRITCH, 3).add(Aspect.METAL, 9).add(Aspect.MAGIC, 4).add(Aspect.WEAPON, 10).add(Aspect.ENTROPY, 5)
+        ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxItems.wireAxe), list)
 
         list = AspectList().add(Aspect.TAINT, 2).add(Aspect.ENTROPY, 2).add(Aspect.PLANT, 2)
         if (forbidden) list.add(WRATH, 2)

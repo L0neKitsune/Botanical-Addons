@@ -18,6 +18,11 @@ import java.util.*
 
 
 class BlockSealingSapling() : BlockColoredSapling(name = "sealingSapling"), ISoundSilencer {
+
+    init {
+        setStepSound(Block.soundTypeCloth)
+    }
+
     override fun growTree(world: World?, x: Int, y: Int, z: Int, random: Random?) {
         if (world != null) {
 

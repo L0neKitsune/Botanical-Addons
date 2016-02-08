@@ -31,12 +31,42 @@ misc.shadowfox_botany.creative=Creative
 misc.shadowfox_botany.contains=Contains:
 misc.shadowfox_botany.containsNothing=Empty
 
+misc.shadowfox_botany.wayOfUndoing=&4You feel your soul draining from your body...
+misc.shadowfox_botany.youAreNotTheChosenOne=You are not him.
+
+misc.shadowfox_botany.line1=And the man looked upon a desolate view;
+misc.shadowfox_botany.line2=Despite the world falling down he imbued.
+misc.shadowfox_botany.line3=And in defiance of fate and the gods he yelled!
+
+attribute.name.shadowfox_botany.godSlayingAttackDamage=Cognitive Damage
+
+misc.shadowfox_botany:temperature.0=Hypothermia Warning
+misc.shadowfox_botany:temperature.1=Painfully Cold
+misc.shadowfox_botany:temperature.2=Frosty
+misc.shadowfox_botany:temperature.3=Frosty
+misc.shadowfox_botany:temperature.4=Wintry
+misc.shadowfox_botany:temperature.5=Wintry
+misc.shadowfox_botany:temperature.6=Chilly
+misc.shadowfox_botany:temperature.7=Chilly
+misc.shadowfox_botany:temperature.8=Temperate
+misc.shadowfox_botany:temperature.9=Warm
+misc.shadowfox_botany:temperature.10=Warm
+misc.shadowfox_botany:temperature.11=Hot
+misc.shadowfox_botany:temperature.12=Hot
+misc.shadowfox_botany:temperature.13=Burning
+misc.shadowfox_botany:temperature.14=Burning
+misc.shadowfox_botany:temperature.15=Scorching Hot
+misc.shadowfox_botany:temperature.16=Hotter than the Nether
+
 item.shadowfox_botany:wiltedLotus0.name=Wilted Lotus
 item.shadowfox_botany:wiltedLotus1.name=Deathly Lotus
 misc.shadowfox_botany:lotusDesc=It emits discordant magical vibes
 
 item.shadowfox_botany:attributionBauble0.name=Holy Symbol
 item.shadowfox_botany:attributionBauble1.name=Pendant of Headtato Summoning
+
+item.shadowfox_botany:starPlacer.name=Frozen Star
+tile.shadowfox_botany:star.name=Frozen Star
 
 item.shadowfox_botany:colorfulSkyDirtRod.name=Rod of the Vibrant Plains
 item.shadowfox_botany:lightningRod.name=Rod of the Thundering Peaks
@@ -46,6 +76,7 @@ item.shadowfox_botany:rainbowLightRod.name=Rod of the Prismatic Lake
 item.shadowfox_botany:priestEmblem0.name=Priestly Emblem: Thor
 item.shadowfox_botany:priestEmblem1.name=Priestly Emblem: Sif
 item.shadowfox_botany:priestEmblem2.name=Priestly Emblem: Njord
+item.shadowfox_botany:priestEmblem3.name=Priestly Emblem: Loki
 item.shadowfox_botany:aesirEmblem.name=Priestly Emblem: &6Aesir&r
 
 item.shadowfox_botany:resource0.name=Thunderous Twig
@@ -111,6 +142,9 @@ item.shadowfox_botany:coatOfArms16.name=Fabulous Shield
 item.shadowfox_botany:coatOfArms17.name=Parisian Shield
 
 item.shadowfox_botany:colorOverride.name=Clerical Colorizer
+
+
+item.shadowfox_botany:axeRevelation.name=Holy Blade Revelation
 
 tile.shadowfox_botany:kindling.name=Blaze Kindling
 
@@ -192,6 +226,10 @@ tile.shadowfox_botany:altPlanksStairs5.name=Mutated Planks Stairs
 
 tile.shadowfox_botany:irisLamp.name=Iridescent Lantern
 
+tile.shadowfox_botany:crysanthermum.name=Crysanthermum
+tile.botania:flower.crysanthermum.name=Crysanthermum
+tile.shadowfox_botany:crysanthermum.lore=Crank up the thermostat
+
 shadowfox_botany.potion.manaVoid=Manatide Storm
 
 shadowfox_botany.entry.coloredDirt=Iridescent Dirt
@@ -238,6 +276,10 @@ shadowfox_botany.entry.silencer=Sealing Oak
 shadowfox_botany.tagline.silencer=Softer sounds
 shadowfox_botany.entry.amp=Sonic Amplifier
 shadowfox_botany.tagline.amp=Louder sounds
+shadowfox_botany.entry.crysanthermum=Crysanthermum
+shadowfox_botany.tagline.crysanthermum=Mana from temperature
+shadowfox_botany.entry.andmyaxe=Holy Blade Revelation
+shadowfox_botany.tagline.andmyaxe=The weapon of the First Godslayer
 
 shadowfox_botany.category.dendrology=Dendrology
 
@@ -341,3 +383,10 @@ shadowfox_botany.page.silencer4=Stairs
 
 shadowfox_botany.page.amp0=By dampening the air within &1Note Blocks&0, the &1Sonic Amplifier&0 reverberates sound, making sounds within a block or two sound far louder. The more you have, the louder the sound.
 shadowfox_botany.page.amp1=Soaryn + Amp + Cacophonium = Dire rage
+
+shadowfox_botany.page.crysanthermum0=The &1Crysanthermum&0 is a hardy flower that can survive in any climate. However, its mana generation isn't indifferent to the climate. By feeding it &1Metamorphic Stone&0, you change its temperature. The closer its temperature is to the biome you're in, the more mana it will generate. The hotter or colder the biome the stone comes from, the hotter or colder the flower will be after eating that stone.
+shadowfox_botany.page.crysanthermum1=There are, however, a few caveats.<br>Feeding the flower &1Fungal&0 stone can do anything, from cool the flower rapidly to heat it up immensely.<br>If a flower becomes too cold or too hot, it'll stop working until it gets back to normal temperature.<br>Using a stone that was used within the last eight will give you diminishing returns for the next 8 stones, meaning that you'll occasionally have to course-correct.
+shadowfox_botany.page.crysanthermum2=Left by a Fortanono
+
+shadowfox_botany.page.andmyaxe0=&1Elementium&0 is a highly enchantable substance. So enchantable, in fact, it seems one can enchant it with spells and power outside the normal cycles. By flooding an axe of the stuff with six powers, you have recreated a legendary weapon: the &1Holy Blade Revelation&0. It attacks not the body, but the mind. This has interesting effects when used to attack an immortal.
+shadowfox_botany.page.andmyaxe1=&1Revelation&0 has two main abilities. It can attack like a sword, and mine like an axe. It cannot, however, recieve any axe enchantments. The other ability is its soul-draining power. Drawing it back, like a bow, will drain a little mana from anyone foolish enough to be within the blade's range. The range increases with time held back.

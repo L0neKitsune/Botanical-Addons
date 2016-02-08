@@ -3,6 +3,7 @@ package ninja.shadowfox.shadowfox_botany.common.blocks.magic_trees.sealing_oak
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
+import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -20,6 +21,7 @@ import java.util.*
 class BlockSealingLeaves() : BlockLeavesMod(), ISoundSilencer {
     init {
         setBlockName("sealingLeaves")
+        setStepSound(Block.soundTypeCloth)
     }
 
     @SideOnly(Side.CLIENT) override fun getBlockColor(): Int = 0xFFFFFF

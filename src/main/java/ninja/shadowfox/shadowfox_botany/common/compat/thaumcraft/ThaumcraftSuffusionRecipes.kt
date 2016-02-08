@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
 import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting
 import thaumcraft.api.ItemApi
+import kotlin.properties.Delegates
 import ninja.shadowfox.shadowfox_botany.lib.LibOreDict as ShadowFoxOreDict
 import vazkii.botania.common.lib.LibOreDict as BotaniaOreDict
 
@@ -29,8 +30,8 @@ object ThaumcraftSuffusionRecipes {
     lateinit var silverwoodLeaves: ItemStack
 
     fun initRecipes() {
-        plantBlock       = Block.getBlockFromItem(ItemApi.getBlock("blockCustomPlant", 0).item)
-        balanceShard     = ItemApi.getItem("itemShard", 6)
+        plantBlock = Block.getBlockFromItem(ItemApi.getBlock("blockCustomPlant", 0).item)
+        balanceShard = ItemApi.getItem("itemShard", 6)
         silverwoodLeaves = ItemApi.getBlock("blockMagicalLeaves", 1)
 
         recipesLoaded = true

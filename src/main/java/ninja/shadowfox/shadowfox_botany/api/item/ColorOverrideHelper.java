@@ -10,7 +10,10 @@ import java.awt.*;
 
 public class ColorOverrideHelper {
     public static int getColor(EntityPlayer player) {
-        Color color = null;
+        int r = 0;
+        int b = 0;
+        int g = 0;
+        int colors = 0;
         if (player != null) {
             IInventory baubles = PlayerHandler.getPlayerBaubles(player);
             for (int i = 0; i < 4; i++) {
@@ -18,34 +21,28 @@ public class ColorOverrideHelper {
                 if (stack != null && stack.getItem() instanceof IPriestColorOverride) {
                     int stackColor = ((IPriestColorOverride) stack.getItem()).colorOverride(stack);
                     if (stackColor != -1) {
-                        if (color == null)
-                            color = new Color(stackColor);
-                        else
-                            color = mixColors(color, new Color(stackColor));
+                        Color color = new Color(stackColor);
+                        r += color.getRed();
+                        g += color.getGreen();
+                        b += color.getBlue();
+                        colors++;
                     }
                 } else if (stack != null && stack.getItem() instanceof ICosmeticAttachable && ((ICosmeticAttachable) stack.getItem()).getCosmeticItem(stack) != null) {
                     ItemStack cosmeticStack = ((ICosmeticAttachable) stack.getItem()).getCosmeticItem(stack);
                     if (cosmeticStack != null && cosmeticStack.getItem() instanceof IPriestColorOverride) {
                         int stackColor = ((IPriestColorOverride) cosmeticStack.getItem()).colorOverride(cosmeticStack);
                         if (stackColor != -1) {
-                            if (color == null)
-                                color = new Color(stackColor);
-                            else
-                                color = mixColors(color, new Color(stackColor));
+                            Color color = new Color(stackColor);
+                            r += color.getRed();
+                            g += color.getGreen();
+                            b += color.getBlue();
+                            colors++;
                         }
                     }
                 }
             }
         }
-        return color == null ? -1 : color.getRGB();
-    }
-
-    private static Color mixColors(Color c1, Color c2) {
-        int r = (c1.getRed() + c2.getRed()) / 2;
-        int g = (c1.getGreen() + c2.getGreen()) / 2;
-        int b = (c1.getBlue() + c2.getBlue()) / 2;
-
-        return new Color(r, g, b);
+        return colors == 0 ? -1 : new Color(r/colors, g/colors, b/colors).getRGB();
     }
 
     public static int getColor(EntityPlayer player, int fallback) {

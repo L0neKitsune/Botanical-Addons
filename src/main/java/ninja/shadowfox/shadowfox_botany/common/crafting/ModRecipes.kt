@@ -90,6 +90,8 @@ public object ModRecipes {
     val recipesInfernalTree: RecipeTreeCrafting
     val recipesSealingTree: RecipeTreeCrafting
 
+    val recipeCrysanthermum: RecipePetals
+
 
     init {
 
@@ -523,6 +525,13 @@ public object ModRecipes {
         recipesAttributionHeads.add(attributionSkull("Tristaric", ShadowFoxItems.coatOfArms, 6)) // Irish Shield
         // Tris - The only item that remotely fits me.
 
+        recipeCrysanthermum = BotaniaAPI.registerPetalRecipe(BotaniaAPI.internalHandler.getSubTileAsStack("crysanthermum"),
+                BotaniaOreDict.PETAL[5], BotaniaOreDict.PETAL[5], // Lime
+                BotaniaOreDict.PETAL[8], BotaniaOreDict.PETAL[8], // Light Grey
+                BotaniaOreDict.PETAL[0], // White
+                BotaniaOreDict.RUNE[5], // Summer
+                BotaniaOreDict.RUNE[7]) // Winter
+
 
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F)
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood1, ItemStack(Items.coal, 1, 1), 0.15F)
@@ -539,7 +548,7 @@ public object ModRecipes {
 
     }
 
-    private fun skullStack(name: String): ItemStack {
+    fun skullStack(name: String): ItemStack {
         val stack = ItemStack(Items.skull, 1, 3)
         ItemNBTHelper.setString(stack, "SkullOwner", name)
         return stack

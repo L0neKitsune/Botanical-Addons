@@ -10,6 +10,8 @@ import ninja.shadowfox.shadowfox_botany.common.item.rods.ItemLightningRod
 import ninja.shadowfox.shadowfox_botany.common.item.rods.ItemRainbowLightRod
 import ninja.shadowfox.shadowfox_botany.common.item.throwables.ItemFireGrenade
 import ninja.shadowfox.shadowfox_botany.common.item.throwables.ItemGrassCannon
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemStarPlacer
+import ninja.shadowfox.shadowfox_botany.common.item.rods.*
 import ninja.shadowfox.shadowfox_botany.lib.LibOreDict
 
 object ShadowFoxItems {
@@ -31,6 +33,11 @@ object ShadowFoxItems {
     val fireGrenade: Item
     val grassCannon: Item
     // val splashPotion: Item
+    val flameRod: Item
+    val wireAxe: Item
+    val star: Item
+//    val fireGrenade: Item
+//    val splashPotion: Item
 
     init {
         irisSeeds = ItemColorSeeds()
@@ -48,9 +55,11 @@ object ShadowFoxItems {
         resource = ItemResource()
         toolbelt = ItemToolbelt()
 
-        // splashPotion = ItemSplashPotion()
         fireGrenade = ItemFireGrenade()
         grassCannon = ItemGrassCannon()
+        flameRod = ItemFlameRod()
+        wireAxe = ItemWireAxe()
+        star = ItemStarPlacer()
         initOreDict()
     }
 
