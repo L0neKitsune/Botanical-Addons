@@ -24,6 +24,8 @@ misc.shadowfox_botany.color.14=Red
 misc.shadowfox_botany.color.15=Black
 misc.shadowfox_botany.color.16=Bifrost
 
+misc.shadowfox_botany.customSize=Custom Size: %1$s Blocks
+
 tc.aspect.tincturem=Color, Iridescence
 tc.aspect.help.tincturem=rainbow things
 
