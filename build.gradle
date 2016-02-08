@@ -82,6 +82,12 @@ task dependencies << {
 task deobfJar(type: Jar) {
     from(sourceSets.main.output)
     archiveName = "BotanicalAddons-${version}-deobf.jar"
+
+    from {
+        configurations.required.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
 }
 
 artifacts {
