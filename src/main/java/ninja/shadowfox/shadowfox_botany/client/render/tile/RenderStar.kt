@@ -6,15 +6,16 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileEntityStar
 import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
 import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL12
+import vazkii.botania.client.core.handler.ClientTickHandler
 import vazkii.botania.client.core.helper.RenderHelper
+import java.awt.Color
+import java.util.*
 
 /**
  * @author WireSegal
  * Created at 9:43 PM on 2/6/16.
  */
 class RenderStar: TileEntitySpecialRenderer() {
-
-    val SIZE = 0.1f
 
     override fun renderTileEntityAt(tile: TileEntity, x: Double, y: Double, z: Double, partticks: Float) {
         val SIZE = 0.05f
@@ -28,7 +29,11 @@ class RenderStar: TileEntitySpecialRenderer() {
 
             val seed = (tile.xCoord xor tile.yCoord xor tile.zCoord).toLong()
             var color = tile.getColor()
-            if (color == -1) color = ItemIridescent.rainbowColor()
+            if (color == -1) {
+                var time = ClientTickHandler.ticksInGame + ClientTickHandler.partialTicks
+                time += Random(seed).nextInt(100000)
+                color = Color.HSBtoRGB(time * 0.005F, 1F, 1F)
+            }
             RenderHelper.renderStar(color, SIZE, SIZE, SIZE, seed)
 
             GL11.glColor3f(1f, 1f, 1f)

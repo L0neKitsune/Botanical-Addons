@@ -18,6 +18,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.compat.thaumcraft.ThaumcraftSuffusionRecipes
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemStarPlacer
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.recipe.RecipeManaInfusion
 import vazkii.botania.api.recipe.RecipePetals
@@ -78,6 +79,7 @@ public object ModRecipes {
     val recipesSealingStairsR: IRecipe
     val recipesSealingSlabs: IRecipe
     val recipesAmplifier: IRecipe
+    val recipesStar: List<IRecipe>
 
     val recipesPastoralSeeds: List<RecipeManaInfusion>
 
@@ -516,6 +518,29 @@ public object ModRecipes {
                 'R', ItemStack(ShadowFoxBlocks.sealingPlanks))
 
         recipesAmplifier = BotaniaAPI.getLatestAddedRecipe()
+
+        for (i in 0..15) {
+            val stack = ItemStarPlacer.forColor(i)
+            stack.stackSize = 3
+            addOreDictRecipe(stack,
+                    " E ",
+                    "GDG",
+                    " G ",
+                    'E', BotaniaOreDict.ENDER_AIR_BOTTLE,
+                    'G', "dustGlowstone",
+                    'D', ShadowFoxOreDict.DYES[i])
+        }
+        val stack = ItemStarPlacer.forColor(16)
+        stack.stackSize = 3
+        addOreDictRecipe(stack,
+                " E ",
+                "GDG",
+                " G ",
+                'E', BotaniaOreDict.ENDER_AIR_BOTTLE,
+                'G', "dustGlowstone",
+                'D', ItemStack(BotaniaBlocks.bifrostPerm))
+
+        recipesStar = BotaniaAPI.getLatestAddedRecipes(17)
 
         recipesAttributionHeads = ArrayList<RecipePetals>()
         recipesAttributionHeads.add(attributionSkull("yrsegal", ShadowFoxItems.irisSeeds, 16)) // Bifrost Seeds

@@ -7,6 +7,7 @@ import ninja.shadowfox.shadowfox_botany.common.compat.thaumcraft.ThaumcraftSuffu
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.crafting.ModRecipes
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
+import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemStarPlacer
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.api.lexicon.LexiconRecipeMappings
@@ -40,6 +41,7 @@ public object LexiconRegistry {
     val amp: LexiconEntry
     val crysanthermum: LexiconEntry
     val specialAxe: LexiconEntry
+    val frozenStar: LexiconEntry
 
     lateinit var tctrees: LexiconEntry
 
@@ -168,6 +170,10 @@ public object LexiconRegistry {
         specialAxe = ShadowFoxRelicEntry("andmyaxe", BotaniaAPI.categoryAlfhomancy, ShadowFoxItems.wireAxe).setKnowledgeType(BotaniaAPI.relicKnowledge)
         specialAxe.setLexiconPages(PageText("0"),
             PageText("1"))
+
+        frozenStar = ShadowFoxRelicEntry("star", BotaniaAPI.categoryMisc, ItemStarPlacer.forColor(16))
+        frozenStar.setLexiconPages(PageText("0"),
+                PageCraftingRecipe("1", ModRecipes.recipesStar))
 
         if (ThaumcraftSuffusionRecipes.recipesLoaded) {
             tctrees = object : ShadowfoxLexiconEntry("tctrees", dendrology, ItemStack(ThaumcraftSuffusionRecipes.plantBlock)) {

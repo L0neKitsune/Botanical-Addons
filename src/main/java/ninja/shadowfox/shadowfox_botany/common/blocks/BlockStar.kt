@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.IIcon
+import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockMod
@@ -66,21 +67,34 @@ class BlockStar(name: String = "star") : BlockMod(Material.cloth), ILexiconable 
         return ArrayList()
     }
 
-    override fun breakBlock(world: World, x: Int, y: Int, z: Int, block: Block, meta: Int) {
-        val f = 0.5
+    override fun onBlockHarvested(world: World, x: Int, y: Int, z: Int, meta: Int, player: EntityPlayer?) {
+        if (!(player?.capabilities?.isCreativeMode ?: false)) {
+            val te = world.getTileEntity(x, y, z)
+            if (te is TileEntityStar) {
+                val f = 0.5
 
-        val color = (world.getTileEntity(x, y, z) as TileEntityStar).getColor()
-        val stack = ItemStarPlacer.colorStack(color)
+                val color = te.getColor()
+                val stack = ItemStarPlacer.colorStack(color)
 
-        val entityitem = EntityItem(world, (x.toFloat() + f).toDouble(), (y.toFloat() + f).toDouble(), (z.toFloat() + f).toDouble(), stack)
+                val entityitem = EntityItem(world, (x.toFloat() + f).toDouble(), (y.toFloat() + f).toDouble(), (z.toFloat() + f).toDouble(), stack)
 
-        val f3 = 0.05f
-        entityitem.motionX = (world.rand.nextGaussian().toFloat() * f3).toDouble()
-        entityitem.motionY = (world.rand.nextGaussian().toFloat() * f3 + 0.2f).toDouble()
-        entityitem.motionZ = (world.rand.nextGaussian().toFloat() * f3).toDouble()
-        world.spawnEntityInWorld(entityitem)
+                val f3 = 0.05f
+                entityitem.motionX = (world.rand.nextGaussian().toFloat() * f3).toDouble()
+                entityitem.motionY = (world.rand.nextGaussian().toFloat() * f3 + 0.2f).toDouble()
+                entityitem.motionZ = (world.rand.nextGaussian().toFloat() * f3).toDouble()
+                world.spawnEntityInWorld(entityitem)
+            }
+        }
 
-        super.breakBlock(world, x, y, z, block, meta)
+        super.onBlockHarvested(world, x, y, z, meta, player)
+    }
+
+    override fun getPickBlock(target: MovingObjectPosition, world: World, x: Int, y: Int, z: Int, player: EntityPlayer): ItemStack? {
+        val te = world.getTileEntity(x, y, z)
+        if (te is TileEntityStar) {
+            return ItemStarPlacer.colorStack(te.getColor())
+        }
+        return super.getPickBlock(target, world, x, y, z, player)
     }
 
     override fun createTileEntity(world: World?, meta: Int): TileEntity? {
@@ -88,6 +102,6 @@ class BlockStar(name: String = "star") : BlockMod(Material.cloth), ILexiconable 
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
-        return null
+        return LexiconRegistry.frozenStar
     }
 }
