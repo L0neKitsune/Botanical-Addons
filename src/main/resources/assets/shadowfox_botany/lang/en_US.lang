@@ -32,7 +32,8 @@ misc.shadowfox_botany.contains=Contains:
 misc.shadowfox_botany.containsNothing=Empty
 
 misc.shadowfox_botany.wayOfUndoing=&4You feel your soul draining from your body...
-misc.shadowfox_botany.youAreNotTheChosenOne=You are not him.
+misc.shadowfox_botany.youAreNotTheChosenOneMale=You are not him.
+misc.shadowfox_botany.youAreNotTheChosenOneFemale=You are not her.
 
 misc.shadowfox_botany.line1=And the man looked upon a desolate view;
 misc.shadowfox_botany.line2=Despite the world falling down he imbued.
