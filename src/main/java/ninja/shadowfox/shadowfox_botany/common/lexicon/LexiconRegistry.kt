@@ -42,6 +42,7 @@ public object LexiconRegistry {
     val crysanthermum: LexiconEntry
     val specialAxe: LexiconEntry
     val frozenStar: LexiconEntry
+    val dagger: LexiconEntry
 
     lateinit var tctrees: LexiconEntry
 
@@ -171,6 +172,9 @@ public object LexiconRegistry {
         specialAxe.setLexiconPages(PageText("0"),
             PageText("1"))
 
+        dagger = ShadowFoxRelicEntry("dagger", BotaniaAPI.categoryAlfhomancy, ShadowFoxItems.trisDagger).setKnowledgeType(BotaniaAPI.relicKnowledge)
+        dagger.setLexiconPages(PageText("0"))
+
         frozenStar = ShadowFoxRelicEntry("star", BotaniaAPI.categoryMisc, ItemStarPlacer.forColor(16))
         frozenStar.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesStar))
@@ -213,6 +217,8 @@ public object LexiconRegistry {
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.emblem, 1, 2), interdictionRod, 3)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.colorOverride), colorOverride, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.irisLamp), lamp, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.wireAxe), specialAxe, 0)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.trisDagger), dagger, 0)
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.attributionBauble, 1, 0), attribution, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.attributionBauble, 1, 1), memes, 1)
@@ -241,6 +247,14 @@ public object LexiconRegistry {
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.resource, 1, 2), netherSapling, 5)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.resource, 1, 3), netherSapling, 6)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.resource, 1, 4), netherSapling, 7)
+
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.sealingSapling), silencer, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.sealingWood), silencer, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.sealingLeaves), silencer, 1)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.sealingPlanks), silencer, 2)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.sealingSlabs), silencer, 3)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.sealingStairs), silencer, 4)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.amp), amp, 1)
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.toolbelt), toolbelt, 1)
 

@@ -16,14 +16,18 @@ import vazkii.botania.common.integration.coloredlights.ColoredLightHelper
 class TileEntityStar : TileMod() {
 
     private val TAG_COLOR = "color"
+    private val TAG_SIZE = "size"
     public var starColor = -1
+    public var size = 0.05f
 
     override fun writeCustomNBT(nbttagcompound: NBTTagCompound) {
         nbttagcompound.setInteger(TAG_COLOR, this.starColor)
+        nbttagcompound.setFloat(TAG_SIZE, this.size)
     }
 
     override fun readCustomNBT(nbttagcompound: NBTTagCompound) {
         this.starColor = nbttagcompound.getInteger(TAG_COLOR)
+        this.size = nbttagcompound.getFloat(TAG_SIZE)
     }
 
     fun getColor(): Int {

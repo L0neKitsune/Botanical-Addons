@@ -18,7 +18,6 @@ import java.util.*
 class RenderStar: TileEntitySpecialRenderer() {
 
     override fun renderTileEntityAt(tile: TileEntity, x: Double, y: Double, z: Double, partticks: Float) {
-        val SIZE = 0.05f
         if (tile is TileEntityStar) {
             GL11.glPushMatrix()
             GL11.glEnable(GL11.GL_BLEND)
@@ -34,7 +33,8 @@ class RenderStar: TileEntitySpecialRenderer() {
                 time += Random(seed).nextInt(100000)
                 color = Color.HSBtoRGB(time * 0.005F, 1F, 1F)
             }
-            RenderHelper.renderStar(color, SIZE, SIZE, SIZE, seed)
+            val size = tile.size
+            RenderHelper.renderStar(color, size, size, size, seed)
 
             GL11.glColor3f(1f, 1f, 1f)
             GL11.glDisable(GL11.GL_BLEND)

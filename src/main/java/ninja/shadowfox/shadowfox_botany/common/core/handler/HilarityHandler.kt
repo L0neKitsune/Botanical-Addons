@@ -46,8 +46,17 @@ class HilarityHandler {
     val itemsRequiredWire = arrayListOf(
             ItemStack(ModItems.dice),                                         // Dice of Fate            Chaos
             ItemStack(ModItems.manaResource, 1, 5),                           // Gaia Spirit             Divinity
+            ItemStack(ShadowFoxItems.resource, 1, 1),                         // Thunderous Splinters    Lightning
+            ModRecipes.skullStack("Tristaric"),                               // Tris's head             Humanity
+            ItemStack(ModItems.rainbowRod, 1, OreDictionary.WILDCARD_VALUE),  // The Rod of the Bifrost  Order
+            ItemStack(ModItems.manaResource, 1, 4)                            // Terrasteel              Earth
+    )
+
+    val itemsRequiredTris = arrayListOf(
+            ItemStack(ModItems.dice),                                         // Dice of Fate            Chaos
+            ItemStack(ModItems.manaResource, 1, 5),                           // Gaia Spirit             Divinity
             ItemStack(ModItems.rune, 1, 13),                                  // Rune of Wrath           Lightning
-            ModRecipes.skullStack("yrsegal"),                                 // My head                 Humanity
+            ModRecipes.skullStack("yrsegal"),                                 // Wire's head             Humanity
             ItemStack(ModItems.laputaShard, 1, OreDictionary.WILDCARD_VALUE), // The Shard of Laputa     Order
             ItemStack(ModItems.dirtRod)                                       // The Rod of the Lands    Earth
     )
@@ -56,6 +65,9 @@ class HilarityHandler {
         registerHandler("yrsegal", "i claim the blade of chaos!", "Male", EnumChatFormatting.GOLD,
                 itemsRequiredWire, "i awaken the ancients within all of you! from my soul's fire the world burns anew!",
                 ItemStack(ModItems.elementiumAxe, 1, OreDictionary.WILDCARD_VALUE), ItemStack(ShadowFoxItems.wireAxe))
+        registerHandler("Tristaric", "i claim the blade of order!", "Female", EnumChatFormatting.LIGHT_PURPLE,
+                itemsRequiredTris, "my inward eye sees the depths of my soul! i accept both sides, and reject my downfall!",
+                ItemStack(ModItems.elementiumSword, 1, OreDictionary.WILDCARD_VALUE), ItemStack(ShadowFoxItems.trisDagger))
     }
 
 

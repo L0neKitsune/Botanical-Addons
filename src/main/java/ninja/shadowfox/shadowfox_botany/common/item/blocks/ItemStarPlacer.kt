@@ -30,6 +30,7 @@ class ItemStarPlacer : ItemMod("starPlacer") {
 
     companion object {
         val TAG_COLOR = "color"
+        val TAG_SIZE = "size"
 
         val defaultColors = ArrayList<Int>()
 
@@ -50,6 +51,14 @@ class ItemStarPlacer : ItemMod("starPlacer") {
             return ItemNBTHelper.getInt(stack, TAG_COLOR, -1)
         }
 
+        fun setSize(stack: ItemStack, size: Float) {
+            ItemNBTHelper.setFloat(stack, TAG_SIZE, size)
+        }
+
+        fun getSize(stack: ItemStack): Float {
+            return ItemNBTHelper.getFloat(stack, TAG_SIZE, 0.05f)
+        }
+
         fun colorStack(color: Int): ItemStack {
             val stack = ItemStack(ShadowFoxItems.star)
             setColor(stack, color)
@@ -68,6 +77,8 @@ class ItemStarPlacer : ItemMod("starPlacer") {
             list.add(StatCollector.translateToLocal("misc.shadowfox_botany.color.${defaultColors.indexOf(color)}"))
         else
             list.add("#${Integer.toHexString(color).toUpperCase()}")
+        if (getSize(stack) != 0.05f)
+            list.add(StatCollector.translateToLocalFormatted("misc.shadowfox_botany.customSize", getSize(stack)/0.1f))
     }
 
     override fun getSubItems(item: Item, tab: CreativeTabs?, list: MutableList<Any?>) {
@@ -92,8 +103,10 @@ class ItemStarPlacer : ItemMod("starPlacer") {
             toPlace.tryPlaceItemIntoWorld(par2EntityPlayer, par3World, x, y, z, direction, par8, par9, par10)
             if (toPlace.stackSize == 0) {
                 val tile = par3World.getTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ)
-                if (tile is TileEntityStar)
+                if (tile is TileEntityStar) {
                     tile.starColor = getColor(par1ItemStack)
+                    tile.size = getSize(par1ItemStack)
+                }
                 if (!par2EntityPlayer.capabilities.isCreativeMode) par1ItemStack.stackSize--
             }
             return true

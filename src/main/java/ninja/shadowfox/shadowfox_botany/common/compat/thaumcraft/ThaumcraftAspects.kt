@@ -234,6 +234,9 @@ object ThaumcraftAspects {
         list = AspectList().add(Aspect.ELDRITCH, 3).add(Aspect.METAL, 9).add(Aspect.MAGIC, 4).add(Aspect.WEAPON, 10).add(Aspect.ENTROPY, 5)
         ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxItems.wireAxe), list)
 
+        list = AspectList().add(Aspect.ELDRITCH, 3).add(Aspect.METAL, 8).add(Aspect.MAGIC, 4).add(Aspect.ARMOR, 10).add(Aspect.WEAPON, 1).add(Aspect.ORDER, 5)
+        ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxItems.trisDagger), list)
+
         list = AspectList().add(Aspect.TAINT, 2).add(Aspect.ENTROPY, 2).add(Aspect.PLANT, 2)
         if (forbidden) list.add(WRATH, 2)
         ThaumcraftApi.registerEntityTag("shadowfox_botany:voidCreeper", list)

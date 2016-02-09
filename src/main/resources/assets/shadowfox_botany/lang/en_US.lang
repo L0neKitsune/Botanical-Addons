@@ -24,6 +24,8 @@ misc.shadowfox_botany.color.14=Red
 misc.shadowfox_botany.color.15=Black
 misc.shadowfox_botany.color.16=Bifrost
 
+misc.shadowfox_botany.customSize=Radius: %1$s Blocks
+
 tc.aspect.tincturem=Color, Iridescence
 tc.aspect.help.tincturem=rainbow things
 
@@ -35,11 +37,17 @@ misc.shadowfox_botany.wayOfUndoing=&4You feel your soul draining from your body.
 misc.shadowfox_botany.youAreNotTheChosenOneMale=You are not him.
 misc.shadowfox_botany.youAreNotTheChosenOneFemale=You are not her.
 
-misc.shadowfox_botany.line1=And the man looked upon a desolate view;
-misc.shadowfox_botany.line2=Despite the world falling down he imbued.
-misc.shadowfox_botany.line3=And in defiance of fate and the gods he yelled!
+misc.shadowfox_botany.wline1=And the man looked upon a desolate view;
+misc.shadowfox_botany.wline2=Despite the world falling down he imbued.
+misc.shadowfox_botany.wline3=And in defiance of fate and the gods he yelled!
+
+misc.shadowfox_botany.tline1=And the girl slipped between the crowd;
+misc.shadowfox_botany.tline2=Pretense behind, she held her glowing blade high;
+misc.shadowfox_botany.tline3=And she yelled in defiance of the corruption of men!
 
 attribute.name.shadowfox_botany.godSlayingAttackDamage=Cognitive Damage
+
+death.attack.shadowfox_botany.oculus.player=%1$s was slain by %2$s's perfect resolve
 
 misc.shadowfox_botany:temperature.0=Hypothermia Warning
 misc.shadowfox_botany:temperature.1=Painfully Cold
@@ -144,8 +152,8 @@ item.shadowfox_botany:coatOfArms17.name=Parisian Shield
 
 item.shadowfox_botany:colorOverride.name=Clerical Colorizer
 
-
 item.shadowfox_botany:axeRevelation.name=Holy Blade Revelation
+item.shadowfox_botany:reactionDagger.name=Dagger of the Perfect Soul
 
 tile.shadowfox_botany:kindling.name=Blaze Kindling
 
@@ -283,6 +291,8 @@ shadowfox_botany.entry.andmyaxe=Holy Blade Revelation
 shadowfox_botany.tagline.andmyaxe=The weapon of the First Godslayer
 shadowfox_botany.entry.star=Frozen Stars
 shadowfox_botany.tagline.star=An ender light source
+shadowfox_botany.entry.dagger=Dagger of the Perfect Soul
+shadowfox_botany.tagline.dagger=The weapon of the Gaterender
 
 shadowfox_botany.category.dendrology=Dendrology
 
@@ -396,3 +406,5 @@ shadowfox_botany.page.andmyaxe1=&1Revelation&0 has two main abilities. It can at
 
 shadowfox_botany.page.star0=The &1Frozen Star&0 is the light of the stars, trapped upon earth. They are relatively cheap light sources, and give off light with the same strength as &1Glowstone&0. Due to their instability, they can only be harvested by players.
 shadowfox_botany.page.star1=Find Polaris to find your way
+
+shadowfox_botany.page.dagger0=&1The Dagger of the Perfect Soul&0 is the manifestation of rebellion. It, paradoxically, is stronger when on the defense than on the attack. As a weapon, it's weaker than a sword of wood. When you parry with it, however, if you can block before the blade becomes dun, it will reflect the strength of the attack upon the attacker. It has been said that this blade has freed many from oppression's clutches.

@@ -11,6 +11,8 @@ import ninja.shadowfox.shadowfox_botany.common.item.rods.ItemRainbowLightRod
 import ninja.shadowfox.shadowfox_botany.common.item.throwables.ItemFireGrenade
 import ninja.shadowfox.shadowfox_botany.common.item.throwables.ItemGrassCannon
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemStarPlacer
+import ninja.shadowfox.shadowfox_botany.common.item.creator.ItemTrisDagger
+import ninja.shadowfox.shadowfox_botany.common.item.creator.ItemWireAxe
 import ninja.shadowfox.shadowfox_botany.common.item.rods.*
 import ninja.shadowfox.shadowfox_botany.lib.LibOreDict
 
@@ -36,7 +38,9 @@ object ShadowFoxItems {
     val flameRod: Item
     val wireAxe: Item
     val star: Item
+
     val kitsuneBow: Item
+    val trisDagger: Item
 //    val fireGrenade: Item
 //    val splashPotion: Item
 
@@ -62,7 +66,9 @@ object ShadowFoxItems {
         wireAxe = ItemWireAxe()
         star = ItemStarPlacer()
         kitsuneBow = ItemKitsuneBow()
-
+        trisDagger = ItemTrisDagger()
+//        splashPotion = ItemSplashPotion()
+//        fireGrenade = ItemFireGrenade()
         initOreDict()
     }
 
