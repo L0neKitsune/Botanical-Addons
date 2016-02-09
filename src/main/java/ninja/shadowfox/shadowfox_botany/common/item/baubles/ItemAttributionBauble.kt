@@ -50,14 +50,6 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
         }
     }
 
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    fun loadTextures(event: TextureStitchEvent.Pre) {
-        if (event.map.textureType == 1) {
-            this.wireIcon = InterpolatedIconHelper.forItem(event.map, this, "-WireSegal")
-        }
-    }
-
     override fun getUnlocalizedNameInefficiently(par1ItemStack: ItemStack): String {
         return super.getUnlocalizedNameInefficiently(par1ItemStack).replace("item\\.botania:".toRegex(), "item.shadowfox_botany:")
     }
@@ -69,6 +61,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
     override fun registerIcons(par1IconRegister: IIconRegister) {
         this.itemIcon = IconHelper.forItem(par1IconRegister, this)
         this.defaultIcon = IconHelper.forItem(par1IconRegister, this, "Render")
+        this.wireIcon = IconHelper.forItem(par1IconRegister, this, "-WireSegal")
         this.kitsuneIcon = IconHelper.forItem(par1IconRegister, this, "-L0neKitsune")
         this.trisIcon = IconHelper.forItem(par1IconRegister, this, "-Tristaric")
     }
@@ -169,26 +162,25 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
                     // Render the Blueflare
                     Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture)
                     IBaubleRender.Helper.translateToHeadLevel(event.entityPlayer)
+                    GL11.glEnable(GL11.GL_BLEND)
+                    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
+                    GL11.glAlphaFunc(GL11.GL_EQUAL, 1F)
+                    ShaderHelper.useShader(ShaderHelper.halo)
                     faceTranslate()
                     scale(0.35F)
-                    GL11.glTranslatef(0.3F, -0.6F, -0.15F)
+                    GL11.glTranslatef(0.9F, -0.505F, -0.4F)
                     ItemRenderer.renderItemIn2D(Tessellator.instance, wireIcon!!.maxU, wireIcon!!.minV, wireIcon!!.minU, wireIcon!!.maxV, wireIcon!!.iconWidth, wireIcon!!.iconHeight, 1F / 32F)
+                    ShaderHelper.releaseShader()
+                    GL11.glAlphaFunc(GL11.GL_ALWAYS, 1F)
+                    GL11.glDisable(GL11.GL_BLEND)
                 } else if (name == "Tristaric") {
                     // Render the Ezic Star
                     Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture)
                     IBaubleRender.Helper.translateToHeadLevel(event.entityPlayer)
                     faceTranslate()
-                    var armor = event.entityPlayer.getCurrentArmor(3) != null
-                    scale(0.25F)
-                    GL11.glTranslatef(0.725F, -0.505F, if (armor) -0.215F else 0F)
-                    GL11.glEnable(GL11.GL_BLEND)
-                    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
-                    GL11.glAlphaFunc(GL11.GL_EQUAL, 1F)
-                    ShaderHelper.useShader(ShaderHelper.halo)
+                    scale(0.5F)
+                    GL11.glTranslatef(0.3F, -0.45F, 0F)
                     ItemRenderer.renderItemIn2D(Tessellator.instance, trisIcon.maxU, trisIcon.minV, trisIcon.minU, trisIcon.maxV, trisIcon.iconWidth, trisIcon.iconHeight, 1F / 32F)
-                    ShaderHelper.releaseShader()
-                    GL11.glAlphaFunc(GL11.GL_ALWAYS, 1F)
-                    GL11.glDisable(GL11.GL_BLEND)
                 }
             }
         } else
