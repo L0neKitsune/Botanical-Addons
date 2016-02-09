@@ -63,9 +63,10 @@ object ShadowFoxItems {
         fireGrenade = ItemFireGrenade()
         grassCannon = ItemGrassCannon()
         flameRod = ItemFlameRod()
-        wireAxe = ItemWireAxe()
         star = ItemStarPlacer()
-        kitsuneBow = ItemKitsuneBow()
+        wireAxe = ItemWireAxe()
+
+        kitsuneBow = ItemFoxFan()
         trisDagger = ItemTrisDagger()
 //        splashPotion = ItemSplashPotion()
 //        fireGrenade = ItemFireGrenade()

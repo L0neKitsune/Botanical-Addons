@@ -19,7 +19,7 @@ import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.player.ArrowLooseEvent
 import net.minecraftforge.event.entity.player.ArrowNockEvent
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.entity.EntityKitsuneArrow
+import ninja.shadowfox.shadowfox_botany.common.entity.EntityKitsunebi
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
@@ -28,7 +28,7 @@ import vazkii.botania.common.item.ModItems
 import vazkii.botania.common.item.equipment.tool.ToolCommons
 
 
-open class ItemKitsuneBow(name: String = "kitsuneBow") : ItemBow(), IManaUsingItem {
+open class ItemFoxFan(name: String = "kitsuneBow") : ItemBow(), IManaUsingItem {
     internal var pullIcons: Array<IIcon?>
 
     val manaPerDamage = 40
@@ -92,22 +92,22 @@ open class ItemKitsuneBow(name: String = "kitsuneBow") : ItemBow(), IManaUsingIt
                     if (f.toDouble() < 0.1) return
                     if (f > 1.0f) f = 1.0f
 
-                    val entityarrow = this.makeArrow(itemStack, world, player, p_77615_4_, f)
-                    if (f == 1.0f) entityarrow.isCritical = true
+                    val entityarrow = this.makeBolt(world, player)
+//                    if (f == 1.0f) entityarrow.isCritical = true
+//
+//
+//                    val k = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, itemStack)
+//                    if (k > 0) entityarrow.base_damage = entityarrow.base_damage + k.toDouble() * 0.5 + 0.5
+//
+//
+//                    val l = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, itemStack)
+//                    if (l > 0) entityarrow.knockbackStrength = l
 
-
-                    val k = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, itemStack)
-                    if (k > 0) entityarrow.damage = entityarrow.damage + k.toDouble() * 0.5 + 0.5
-
-
-                    val l = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, itemStack)
-                    if (l > 0) entityarrow.knockbackStrength = l
-
-                    if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, itemStack) > 0) {
-                        entityarrow.setFire(120)
-                    } else {
-                        entityarrow.setFire(60)
-                    }
+//                    if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, itemStack) > 0) {
+//                        entityarrow.setFire(120)
+//                    } else {
+//                        entityarrow.setFire(60)
+//                    }
 
                     ToolCommons.damageItem(itemStack, 1, player, 40)
                     world.playSoundAtEntity(player, "random.bow", 1.0f, 1.0f / (Item.itemRand.nextFloat() * 0.4f + 1.2f) + f * 0.5f)
@@ -123,17 +123,14 @@ open class ItemKitsuneBow(name: String = "kitsuneBow") : ItemBow(), IManaUsingIt
         return ManaItemHandler.requestManaExactForTool(p_77615_1_, p_77615_3_, 200 / (infinity + 1), false)
     }
 
-    fun onFire(stack: ItemStack?, world: World?, player: EntityPlayer, p_77615_4_: Int, infinity: Boolean, arrow: EntityKitsuneArrow) {
-        arrow.canBePickedUp = 2
-
-        for(effect in player.activePotionEffects){
-//            effect
-        }
+    fun onFire(stack: ItemStack?, world: World?, player: EntityPlayer, p_77615_4_: Int, infinity: Boolean, bolt: EntityKitsunebi) {
         ManaItemHandler.requestManaExactForTool(stack, player, 200 / if (infinity) 2 else 1, false)
     }
 
-    internal fun makeArrow(p_77615_1_: ItemStack, p_77615_2_: World, p_77615_3_: EntityPlayer, p_77615_4_: Int, f: Float): EntityKitsuneArrow {
-        return EntityKitsuneArrow(p_77615_2_, p_77615_3_, f * 2.0f)
+    internal fun makeBolt(p_77615_2_: World, p_77615_3_: EntityPlayer): EntityKitsunebi {
+        return EntityKitsunebi(p_77615_2_, p_77615_3_.posX, p_77615_3_.posY + p_77615_3_.eyeHeight, p_77615_3_.posZ).apply {
+            shootingEntity = p_77615_3_
+        };
     }
 
     @SideOnly(Side.CLIENT)

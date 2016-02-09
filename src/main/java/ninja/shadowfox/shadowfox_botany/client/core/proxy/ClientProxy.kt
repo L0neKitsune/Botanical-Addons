@@ -21,7 +21,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileEntityStar
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileItemDisplay
 import ninja.shadowfox.shadowfox_botany.common.core.proxy.CommonProxy
 import ninja.shadowfox.shadowfox_botany.common.entity.EntityGrieferCreeper
-import ninja.shadowfox.shadowfox_botany.common.entity.EntityKitsuneArrow
+import ninja.shadowfox.shadowfox_botany.common.entity.EntityKitsunebi
 import ninja.shadowfox.shadowfox_botany.common.entity.EntityThrowableItem
 import ninja.shadowfox.shadowfox_botany.common.entity.EntityVoidCreeper
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
@@ -62,6 +62,5 @@ class ClientProxy : CommonProxy() {
         RenderingRegistry.registerEntityRenderingHandler(EntityGrieferCreeper::class.java, RenderGrieferCreeper())
         RenderingRegistry.registerEntityRenderingHandler(EntityVoidCreeper::class.java, RenderGrieferCreeper())
         RenderingRegistry.registerEntityRenderingHandler(EntityThrowableItem::class.java, RenderThrownItem())
-        RenderingRegistry.registerEntityRenderingHandler(EntityKitsuneArrow::class.java, RenderArrow())
     }
 }
