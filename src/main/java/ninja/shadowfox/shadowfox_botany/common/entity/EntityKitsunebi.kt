@@ -3,9 +3,12 @@ package ninja.shadowfox.shadowfox_botany.common.entity
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
+import net.minecraft.block.BlockTallGrass
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.ai.attributes.RangedAttribute
+import net.minecraft.entity.projectile.EntityArrow
+import net.minecraft.entity.projectile.EntityFireball
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.*
 import net.minecraft.world.World
@@ -25,21 +28,14 @@ class EntityKitsunebi : Entity {
         val kitsuneAttackDamage = RangedAttribute("shadowfox_botany.kitsuneAttackDamage", 0.0, 0.0, Double.MAX_VALUE)
     }
 
-    private var field_145795_e = -1
-    private var field_145793_f = -1
-    private var field_145794_g = -1
-    private var field_145796_h: Block? = null
-    private var inGround: Boolean = false
     var shootingEntity: EntityLivingBase? = null
-    private var ticksAlive: Int = 0
-    private var ticksInAir: Int = 0
+
     var accelerationX: Double = 0.toDouble()
     var accelerationY: Double = 0.toDouble()
     var accelerationZ: Double = 0.toDouble()
 
 
-    override fun entityInit() {
-    }
+    override fun entityInit() {}
 
     @SideOnly(Side.CLIENT)
     override fun isInRangeToRenderDist(p_isInRangeToRenderDist_1_: Double): Boolean {
@@ -49,18 +45,16 @@ class EntityKitsunebi : Entity {
     }
 
     constructor(p_i1760_1_: World): super(p_i1760_1_){
-        setSize(1.0f, 1.0f)
+        this.setSize(0.3125f, 0.3125f)
     }
 
     constructor(p_i1760_1_: World, p_i1760_2_: Double, p_i1760_4_: Double, p_i1760_6_: Double): this(p_i1760_1_) {
-        setSize(1.0f, 1.0f)
         setLocationAndAngles(p_i1760_2_, p_i1760_4_, p_i1760_6_, rotationYaw, rotationPitch)
         setPosition(p_i1760_2_, p_i1760_4_, p_i1760_6_)
     }
 
     constructor(p_i1761_1_: World, p_i1761_2_: EntityLivingBase): this(p_i1761_1_) {
         shootingEntity = p_i1761_2_
-        setSize(1.0f, 1.0f)
         setLocationAndAngles(p_i1761_2_.posX, p_i1761_2_.posY, p_i1761_2_.posZ, p_i1761_2_.rotationYaw, p_i1761_2_.rotationPitch)
         setPosition(posX, posY, posZ)
         yOffset = 0.0f
@@ -72,27 +66,7 @@ class EntityKitsunebi : Entity {
             super.onUpdate()
             setFire(1)
 
-            if (ticksAlive >= 1200) setDead()
-
-            if (inGround) {
-                if (worldObj.getBlock(field_145795_e, field_145793_f, field_145794_g) === field_145796_h) {
-                    ++ticksAlive
-                    if (ticksAlive == 600) {
-                        setDead()
-                    }
-
-                    return
-                }
-
-                inGround = false
-                motionX *= (rand.nextFloat() * 0.2f).toDouble()
-                motionY *= (rand.nextFloat() * 0.2f).toDouble()
-                motionZ *= (rand.nextFloat() * 0.2f).toDouble()
-                ticksAlive = 0
-                ticksInAir = 0
-            } else {
-                ++ticksInAir
-            }
+            if(ticksExisted > 1200) setDead()
 
             var var1 = Vec3.createVectorHelper(posX, posY, posZ)
             var var2 = Vec3.createVectorHelper(posX + motionX, posY + motionY, posZ + motionZ)
@@ -109,7 +83,8 @@ class EntityKitsunebi : Entity {
 
             for (var8 in var5.indices) {
                 val var9 = var5[var8] as Entity
-                if (var9.canBeCollidedWith() && (!var9.isEntityEqual(shootingEntity) || ticksInAir >= 25)) {
+
+                if (var9.canBeCollidedWith() && !var9.isEntityEqual(shootingEntity)) {
                     val var10 = 0.3f
                     val var11 = var9.boundingBox.expand(var10.toDouble(), var10.toDouble(), var10.toDouble())
                     val var12 = var11.calculateIntercept(var1, var2)
@@ -180,34 +155,24 @@ class EntityKitsunebi : Entity {
     }
 
     protected fun getMotionFactor(): Float {
-        return 0.5f
+        return 0.75f
     }
 
     protected fun onImpact(var1: MovingObjectPosition) {
         if (!worldObj.isRemote) {
-            if (var1.entityHit != null) {
+            if (var1.entityHit != null && var1.entityHit != shootingEntity) {
                 var1.entityHit.attackEntityFrom(DSKitsuneBolt(this, shootingEntity ?: this), 6.0f)
+                setDead()
             }
 
-            setDead()
         }
     }
 
     public override fun writeEntityToNBT(p_writeEntityToNBT_1_: NBTTagCompound) {
-        p_writeEntityToNBT_1_.setShort("xTile", field_145795_e.toShort())
-        p_writeEntityToNBT_1_.setShort("yTile", field_145793_f.toShort())
-        p_writeEntityToNBT_1_.setShort("zTile", field_145794_g.toShort())
-        p_writeEntityToNBT_1_.setByte("inTile", Block.getIdFromBlock(field_145796_h).toByte())
-        p_writeEntityToNBT_1_.setByte("inGround", (if (inGround) 1 else 0).toByte())
         p_writeEntityToNBT_1_.setTag("direction", newDoubleNBTList(*doubleArrayOf(motionX, motionY, motionZ)))
     }
 
     public override fun readEntityFromNBT(p_readEntityFromNBT_1_: NBTTagCompound) {
-        field_145795_e = p_readEntityFromNBT_1_.getShort("xTile").toInt()
-        field_145793_f = p_readEntityFromNBT_1_.getShort("yTile").toInt()
-        field_145794_g = p_readEntityFromNBT_1_.getShort("zTile").toInt()
-        field_145796_h = Block.getBlockById(p_readEntityFromNBT_1_.getByte("inTile").toInt() and 255)
-        inGround = p_readEntityFromNBT_1_.getByte("inGround").toInt() == 1
         if (p_readEntityFromNBT_1_.hasKey("direction", 9)) {
             val var2 = p_readEntityFromNBT_1_.getTagList("direction", 6)
             motionX = var2.func_150309_d(0)
