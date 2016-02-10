@@ -1,4 +1,4 @@
-package ninja.shadowfox.shadowfox_botany.client.core.multipart
+package ninja.shadowfox.shadowfox_botany.common.compat.multipart
 
 import codechicken.microblock.BlockMicroMaterial
 import net.minecraft.block.Block

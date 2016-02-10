@@ -7,7 +7,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.client.MinecraftForgeClient
-import ninja.shadowfox.shadowfox_botany.client.core.multipart.MultipartHandler
 import ninja.shadowfox.shadowfox_botany.client.render.entity.RenderGrieferCreeper
 import ninja.shadowfox.shadowfox_botany.client.render.tile.MultipassRenderer
 import ninja.shadowfox.shadowfox_botany.client.render.tile.RenderStar
@@ -32,9 +31,6 @@ public class ClientProxy : CommonProxy() {
         super.init(event)
 
         this.initRenderers()
-
-        if (Loader.isModLoaded("ForgeMultipart"))
-            MultipartHandler
     }
 
     override fun postInit(event: FMLPostInitializationEvent) {
