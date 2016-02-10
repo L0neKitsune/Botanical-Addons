@@ -3,12 +3,15 @@ package ninja.shadowfox.shadowfox_botany.common.item
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
+import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
 import ninja.shadowfox.shadowfox_botany.common.item.baubles.*
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemStarPlacer
 import ninja.shadowfox.shadowfox_botany.common.item.creator.ItemTrisDagger
 import ninja.shadowfox.shadowfox_botany.common.item.creator.ItemWireAxe
 import ninja.shadowfox.shadowfox_botany.common.item.rods.*
 import ninja.shadowfox.shadowfox_botany.lib.LibOreDict
+import vazkii.botania.common.item.block.ItemBlockFloatingSpecialFlower
+import vazkii.botania.common.item.block.ItemBlockSpecialFlower
 
 object ShadowFoxItems {
     val irisSeeds: Item
@@ -54,6 +57,16 @@ object ShadowFoxItems {
 //        splashPotion = ItemSplashPotion()
 //        fireGrenade = ItemFireGrenade()
         initOreDict()
+
+
+
+        if (!ShadowfoxBotany.isDevEnv) {
+            EventHandlerTooltip.register()
+            EventHandlerTooltip.registerStack(ItemStack(flameRod, 1, OreDictionary.WILDCARD_VALUE))
+            EventHandlerTooltip.registerStack(ItemBlockSpecialFlower.ofType("crysanthermum"))
+            EventHandlerTooltip.registerStack(ItemBlockFloatingSpecialFlower.ofType("crysanthermum"))
+            EventHandlerTooltip.registerStack(ItemStack(emblem, 1, 3))
+        }
     }
 
     fun initOreDict() {
