@@ -61,25 +61,27 @@ class DaggerEventHandler {
                     val epsilon = lookVec.dotProduct(targetVec)/(lookVec.mag()*targetVec.mag())
                     if (epsilon > 0.75) {
                         e.isCanceled = true
-                        player.clearItemInUse()
-                        val mainVec = Vector3.fromEntityCenter(player).add(lookVec)
-                        val baseVec = getHeadOrientation(player).crossProduct(lookVec).normalize()
-                        for (i in 0..360 step 15) {
-                            val rotVec = baseVec.copy().rotate(i * 180 / Math.PI, lookVec)
-                            val endVec = mainVec.copy().add(rotVec)
-                            Botania.proxy.lightningFX(player.worldObj, mainVec, endVec, 3f, 0xFF94A1, 0xFBAAB5)
-                        }
-
-                        if (damage !is EntityDamageSourceIndirect) {
-                            enemyEntity.attackEntityFrom(DamageSourceOculus(player), e.ammount * 2f) // dammit cpw, you misspelled amount
-                            val xDif = enemyEntity.posX - player.posX
-                            val zDif = enemyEntity.posZ - player.posZ
-                            player.worldObj.playSoundAtEntity(enemyEntity, "random.anvil_land", 1f, 0.9f + 0.1f * Math.random().toFloat())
-                            if (enemyEntity is EntityPlayer && enemyEntity.currentEquippedItem != null)
-                                enemyEntity.currentEquippedItem.damageItem(30, enemyEntity)
-                            enemyEntity.knockBack(player, 1f, -xDif, -zDif)
-                            enemyEntity.addPotionEffect(PotionEffect(Potion.weakness.id, 60, 1, true))
-                            enemyEntity.addPotionEffect(PotionEffect(Potion.moveSlowdown.id, 60, 2, true))
+                        player.stopUsingItem()
+                        if (!player.worldObj.isRemote) {
+                            if (damage !is EntityDamageSourceIndirect) {
+                                enemyEntity.attackEntityFrom(DamageSourceOculus(player), e.ammount * 2f) // dammit cpw, you misspelled amount
+                                val xDif = enemyEntity.posX - player.posX
+                                val zDif = enemyEntity.posZ - player.posZ
+                                player.worldObj.playSoundAtEntity(enemyEntity, "random.anvil_land", 1f, 0.9f + 0.1f * Math.random().toFloat())
+                                if (enemyEntity is EntityPlayer && enemyEntity.currentEquippedItem != null)
+                                    enemyEntity.currentEquippedItem.damageItem(30, enemyEntity)
+                                enemyEntity.knockBack(player, 1f, -xDif, -zDif)
+                                enemyEntity.addPotionEffect(PotionEffect(Potion.weakness.id, 60, 1, true))
+                                enemyEntity.addPotionEffect(PotionEffect(Potion.moveSlowdown.id, 60, 2, true))
+                            }
+                        } else {
+                            val mainVec = Vector3.fromEntityCenter(player).add(lookVec)
+                            val baseVec = getHeadOrientation(player).crossProduct(lookVec).normalize()
+                            for (i in 0..360 step 15) {
+                                val rotVec = baseVec.copy().rotate(i * 180 / Math.PI, lookVec)
+                                val endVec = mainVec.copy().add(rotVec)
+                                Botania.proxy.lightningFX(player.worldObj, mainVec, endVec, 3f, 0xFF94A1, 0xFBAAB5)
+                            }
                         }
                     }
                 }
