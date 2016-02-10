@@ -123,7 +123,7 @@ public object ModRecipes {
         recipesWoodPanel = BotaniaAPI.getLatestAddedRecipes(17)
 
         for (i in 0..15)
-            GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.coloredSlabs[i], 6, i),
+            GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.coloredSlabs[i], 6),
                     "QQQ",
                     'Q', ItemStack(ShadowFoxBlocks.coloredPlanks, 1, i))
         GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.rainbowSlabs, 6),
