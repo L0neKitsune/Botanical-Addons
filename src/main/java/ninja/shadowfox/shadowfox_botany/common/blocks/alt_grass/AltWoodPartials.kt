@@ -48,6 +48,14 @@ class BlockAltWoodSlab(full: Boolean, meta: Int, source: Block = ShadowFoxBlocks
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return LexiconRegistry.irisSapling
     }
+
+    override fun isToolEffective(type: String?, metadata: Int): Boolean {
+        return (type != null && type.equals("axe"))
+    }
+
+    override fun getHarvestTool(metadata: Int): String {
+        return "axe"
+    }
 }
 
 class BlockAltWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.altPlanks) :
@@ -58,5 +66,13 @@ class BlockAltWoodStairs(meta: Int, source: Block = ShadowFoxBlocks.altPlanks) :
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return LexiconRegistry.irisSapling
+    }
+
+    override fun isToolEffective(type: String?, metadata: Int): Boolean {
+        return (type != null && type.equals("axe"))
+    }
+
+    override fun getHarvestTool(metadata: Int): String {
+        return "axe"
     }
 }
