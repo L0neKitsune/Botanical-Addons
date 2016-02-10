@@ -78,10 +78,6 @@ public class BlockRainbowPlanks() : BlockMod(MaterialCustomSmeltingWood.instance
         return Item.getItemFromBlock(this)
     }
 
-    override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean {
-        return true
-    }
-
     internal fun register(name: String) {
         GameRegistry.registerBlock(this, ItemIridescentBlockMod::class.java, name)
     }

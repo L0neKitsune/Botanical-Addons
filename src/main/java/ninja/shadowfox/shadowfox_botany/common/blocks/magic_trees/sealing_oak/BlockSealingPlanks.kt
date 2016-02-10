@@ -49,10 +49,6 @@ public class BlockSealingPlanks() : BlockMod(MaterialCustomSmeltingWood.instance
         return par1
     }
 
-    override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean {
-        return true
-    }
-
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return LexiconRegistry.silencer
     }

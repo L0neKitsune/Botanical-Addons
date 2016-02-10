@@ -65,10 +65,6 @@ public class BlockNetherPlanks() : BlockMod(MaterialCustomSmeltingWood.instance)
     override fun isFlammable(world: IBlockAccess?, x: Int, y: Int, z: Int, face: ForgeDirection?): Boolean = false
     override fun getFireSpreadSpeed(world: IBlockAccess?, x: Int, y: Int, z: Int, face: ForgeDirection?): Int = 0
 
-    override fun isWood(world: IBlockAccess, x: Int, y: Int, z: Int): Boolean {
-        return true
-    }
-
     internal fun register(name: String) {
         GameRegistry.registerBlock(this, ItemBlockMod::class.java, name)
         Blocks.netherrack
