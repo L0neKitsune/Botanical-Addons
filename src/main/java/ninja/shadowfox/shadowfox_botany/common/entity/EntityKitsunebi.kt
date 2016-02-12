@@ -33,7 +33,7 @@ class EntityKitsunebi : Entity {
 
     var shootingEntity: EntityLivingBase? = null
     var damage: Double = 0.0
-    var following_shooter: Boolean = true
+    var following_shooter: Boolean = false
 
     var offsetIndex: Int = 0
 
@@ -91,7 +91,7 @@ class EntityKitsunebi : Entity {
 
                     val r = 2
 
-                    val radian = (KITSUNEBI_OFFSETS[offsetIndex].toDouble() * 3.141592653589793 / 180.0).toFloat()
+                    val radian = ((shootingEntity!!.rotationYaw + KITSUNEBI_OFFSETS[offsetIndex]).toDouble() * 3.141592653589793 / 180.0).toFloat()
 
                     val X = shootingEntity!!.posX.toDouble() + Math.cos(radian.toDouble()) * r
                     val Z = shootingEntity!!.posZ.toDouble() + Math.sin(radian.toDouble()) * r

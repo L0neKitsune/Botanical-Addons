@@ -150,6 +150,7 @@ open class ItemFoxFan(name: String = "kitsuneFan") : ItemMod(), IManaUsingItem {
 
             return EntityKitsunebi(world, posX, posY, posZ).apply {
                 shootingEntity = player
+                following_shooter = true
                 offsetIndex = index
                 damage = dmg.toDouble()
             }
