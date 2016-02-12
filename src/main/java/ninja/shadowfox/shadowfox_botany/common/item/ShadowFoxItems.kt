@@ -11,6 +11,7 @@ import ninja.shadowfox.shadowfox_botany.common.item.rods.ItemRainbowLightRod
 import ninja.shadowfox.shadowfox_botany.common.item.throwables.ItemFireGrenade
 import ninja.shadowfox.shadowfox_botany.common.item.throwables.ItemGrassCannon
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemStarPlacer
+import ninja.shadowfox.shadowfox_botany.common.item.creator.ItemFoxFan
 import ninja.shadowfox.shadowfox_botany.common.item.creator.ItemTrisDagger
 import ninja.shadowfox.shadowfox_botany.common.item.creator.ItemWireAxe
 import ninja.shadowfox.shadowfox_botany.common.item.rods.*
