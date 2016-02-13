@@ -1,30 +1,23 @@
 package ninja.shadowfox.shadowfox_botany.common.item.creator
 
-import cpw.mods.fml.common.FMLLog
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.command.IEntitySelector
 import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityLivingBase
-import net.minecraft.entity.monster.IMob
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.*
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.IIcon
-import net.minecraft.util.MathHelper
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.api.item.ColorOverrideHelper
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.entity.EntityKitsunebi
-import org.apache.logging.log4j.Level
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
 import vazkii.botania.client.core.helper.IconHelper
-import vazkii.botania.common.core.helper.Vector3
 import vazkii.botania.common.item.ItemMod
 import java.awt.Color
 
@@ -73,11 +66,13 @@ open class ItemFoxFan(name: String = "kitsuneFan") : ItemMod(), IManaUsingItem {
             else {
                 val active = getActiveKitsunebi(world, player)
                 if (active.size > 0) {
-                    val t = active.minBy { (it as EntityKitsunebi).ticksExisted }
-                    (t as EntityKitsunebi).setFlying(player)
+                    (active[0] as EntityKitsunebi).setDead()
+                    var priest = false //(ItemPriestEmblem.getEmblem(0, player) != null)
+                    var prowess = vazkii.botania.api.item.IManaProficiencyArmor.Helper.hasProficiency(player)
+
+                    player.worldObj.spawnEntityInWorld(fireKitsunebi(player.worldObj, player, getDamage(prowess, priest)))
                 }
             }
-
         }
         return p_77659_1_
     }
@@ -106,7 +101,7 @@ open class ItemFoxFan(name: String = "kitsuneFan") : ItemMod(), IManaUsingItem {
                                 for (a in active) {
                                     if ((a as EntityKitsunebi).offsetIndex == i) continue@index
                                 }
-                                var kitsunebi = makeKistsunebi(player.worldObj, player, damage, i)
+                                var kitsunebi = makeKitsunebi(player.worldObj, player, damage, i)
                                 player.worldObj.spawnEntityInWorld(kitsunebi)
                                 break@index
                             }
@@ -140,20 +135,24 @@ open class ItemFoxFan(name: String = "kitsuneFan") : ItemMod(), IManaUsingItem {
         return DAMAGE + (if (prowess) PROWESS_POWERUP else 0f) + (if (priest) PRIEST_POWERUP else 0f)
     }
 
-    internal fun makeKistsunebi(world: World, player: EntityPlayer, dmg: Float, index: Int): EntityKitsunebi {
-        val r = 2
+    internal fun makeKitsunebi(world: World, player: EntityPlayer, dmg: Float, index: Int): EntityKitsunebi {
+        val posX = player.posX.toDouble() + EntityKitsunebi.KITSUNEBI_OFFSETS_X[index]
+        val posZ = player.posZ.toDouble() + EntityKitsunebi.KITSUNEBI_OFFSETS_Y[index]
+        val posY = player.posY + .5
 
-        ((player.rotationYaw + EntityKitsunebi.KITSUNEBI_OFFSETS[index].toDouble()) * 3.141592653589793 / 180.0).toDouble().let {
-            val posX = player.posX.toDouble() + Math.cos(it) * r
-            val posZ = player.posZ.toDouble() + Math.sin(it) * r
-            val posY = player.posY + .5
+        return EntityKitsunebi(world, posX, posY, posZ).apply {
+            shootingEntity = player
+            following_shooter = true
+            offsetIndex = index
+            damage = dmg.toDouble()
+        }
 
-            return EntityKitsunebi(world, posX, posY, posZ).apply {
-                shootingEntity = player
-                following_shooter = true
-                offsetIndex = index
-                damage = dmg.toDouble()
-            }
+    }
+
+    internal fun fireKitsunebi(world: World, player: EntityPlayer, dmg: Float): EntityKitsunebi {
+        return EntityKitsunebi(world, player, player.posX, player.posY + player.eyeHeight, player.posZ).apply {
+            shootingEntity = player
+            damage = dmg.toDouble()
         }
     }
 

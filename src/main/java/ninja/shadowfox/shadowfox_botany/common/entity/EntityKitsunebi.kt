@@ -2,23 +2,21 @@ package ninja.shadowfox.shadowfox_botany.common.entity
 
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
-import net.minecraft.block.Block
-import net.minecraft.block.BlockTallGrass
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.ai.attributes.RangedAttribute
-import net.minecraft.entity.projectile.EntityArrow
+import net.minecraft.entity.monster.EntityBlaze
 import net.minecraft.entity.projectile.EntityFireball
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.*
 import net.minecraft.world.World
-import ninja.shadowfox.shadowfox_botany.common.utils.centerVector
 
 
-class EntityKitsunebi : Entity {
+class EntityKitsunebi : EntityFireball {
 
     companion object {
-        val KITSUNEBI_OFFSETS = arrayOf(18, 54, 90, 126, 162, 198, 234, 270, 302)
+        val KITSUNEBI_OFFSETS_X = arrayOf(2.00, 1.53, 0.35, -1.00, -1.88, -1.88, -1.00, 0.35, 1.53)
+        val KITSUNEBI_OFFSETS_Y = arrayOf(0.00, 1.29, 1.97, 1.73, 0.68, -0.68, -1.73, -1.97, -1.29)
 
         class DSKitsuneBolt(bolt: EntityKitsunebi, player: Entity) : EntityDamageSourceIndirect("kitsuneBolt", bolt, player) {
             init {
@@ -31,15 +29,10 @@ class EntityKitsunebi : Entity {
         val kitsuneAttackDamage = RangedAttribute("shadowfox_botany.kitsuneAttackDamage", 0.0, 0.0, Double.MAX_VALUE)
     }
 
-    var shootingEntity: EntityLivingBase? = null
     var damage: Double = 0.0
     var following_shooter: Boolean = false
 
     var offsetIndex: Int = 0
-
-    var accelerationX: Double = 0.0
-    var accelerationY: Double = 0.0
-    var accelerationZ: Double = 0.0
 
 
     override fun entityInit() {
@@ -61,6 +54,20 @@ class EntityKitsunebi : Entity {
         setPosition(p_i1760_2_, p_i1760_4_, p_i1760_6_)
     }
 
+    constructor(p_i1771_1_: World, p_i1771_2_: EntityLivingBase, p_i1771_3_: Double, p_i1771_5_: Double, p_i1771_7_: Double): super(p_i1771_1_, p_i1771_2_, p_i1771_3_, p_i1771_5_, p_i1771_7_){
+        this.setSize(0.3125f, 0.3125f)
+    }
+
+    constructor(p_i1760_1_: World, p_i1760_2_: Double, p_i1760_4_: Double, p_i1760_6_: Double, p_i1760_8_: Double, p_i1760_10_: Double, p_i1760_12_: Double): this(p_i1760_1_)
+    {
+        this.setLocationAndAngles(p_i1760_2_, p_i1760_4_, p_i1760_6_, this.rotationYaw, this.rotationPitch)
+        this.setPosition(p_i1760_2_, p_i1760_4_, p_i1760_6_)
+        val var14 = MathHelper.sqrt_double(p_i1760_8_ * p_i1760_8_ + p_i1760_10_ * p_i1760_10_ + p_i1760_12_ * p_i1760_12_).toDouble()
+        this.accelerationX = p_i1760_8_ / var14 * 0.1
+        this.accelerationY = p_i1760_10_ / var14 * 0.1
+        this.accelerationZ = p_i1760_12_ / var14 * 0.1
+    }
+
     constructor(p_i1761_1_: World, p_i1761_2_: EntityLivingBase) : this(p_i1761_1_) {
         shootingEntity = p_i1761_2_
         setLocationAndAngles(p_i1761_2_.posX, p_i1761_2_.posY, p_i1761_2_.posZ, p_i1761_2_.rotationYaw, p_i1761_2_.rotationPitch)
@@ -70,57 +77,53 @@ class EntityKitsunebi : Entity {
     }
 
     override fun onUpdate() {
-        if (worldObj.isRemote || (shootingEntity == null || !shootingEntity!!.isDead) && worldObj.blockExists(posX.toInt(), posY.toInt(), posZ.toInt())) {
+        if (worldObj.isRemote || (shootingEntity == null || !shootingEntity!!.isDead)) {
             super.onUpdate()
 
+            setFire(1)
             if (ticksExisted > 1200) setDead()
 
             if (following_shooter) {
 
-                if(shootingEntity != null) {
+                if (shootingEntity != null) {
                     val var5 = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.addCoord(motionX, motionY, motionZ).expand(1.0, 1.0, 1.0))
 
                     for (var8 in var5) {
                         val var9 = var8 as Entity
 
                         if (var9.canBeCollidedWith() && !var9.isEntityEqual(shootingEntity)) {
-                            if (var9.boundingBox.expand(.3,.3,.3).intersectsWith(this.boundingBox.expand(.3,.3,.3)))
+                            if (var9.boundingBox.expand(.3, .3, .3).intersectsWith(this.boundingBox.expand(.3, .3, .3)))
                                 onImpact(MovingObjectPosition(var9))
-                            }
                         }
+                    }
 
-                    val r = 2
-
-                    val radian = ((shootingEntity!!.rotationYaw + KITSUNEBI_OFFSETS[offsetIndex]).toDouble() * 3.141592653589793 / 180.0).toFloat()
-
-                    val X = shootingEntity!!.posX.toDouble() + Math.cos(radian.toDouble()) * r
-                    val Z = shootingEntity!!.posZ.toDouble() + Math.sin(radian.toDouble()) * r
+                    val X = shootingEntity!!.posX.toDouble() + KITSUNEBI_OFFSETS_X[offsetIndex]
+                    val Z = shootingEntity!!.posZ.toDouble() + KITSUNEBI_OFFSETS_Y[offsetIndex]
                     val Y = shootingEntity!!.posY + .5
 
                     setPosition(X, Y, Z)
 
                 } else {
-//                    setDead()
+                    //                    setDead()
                 }
 
             } else {
-                var var1 = Vec3.createVectorHelper(posX, posY, posZ)
-                var var2 = Vec3.createVectorHelper(posX + motionX, posY + motionY, posZ + motionZ)
-                var var3: MovingObjectPosition? = worldObj.rayTraceBlocks(var1, var2)
-                var1 = Vec3.createVectorHelper(posX, posY, posZ)
-                var2 = Vec3.createVectorHelper(posX + motionX, posY + motionY, posZ + motionZ)
+                var var1 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ)
+                var var2 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ)
+                var var3: MovingObjectPosition? = this.worldObj.rayTraceBlocks(var1, var2)
+                var1 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ)
+                var2 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ)
                 if (var3 != null) {
                     var2 = Vec3.createVectorHelper(var3.hitVec.xCoord, var3.hitVec.yCoord, var3.hitVec.zCoord)
                 }
 
                 var var4: Entity? = null
-                val var5 = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.addCoord(motionX, motionY, motionZ).expand(1.0, 1.0, 1.0))
+                val var5 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0, 1.0, 1.0))
                 var var6 = 0.0
 
                 for (var8 in var5.indices) {
                     val var9 = var5[var8] as Entity
-
-                    if (var9.canBeCollidedWith() && !var9.isEntityEqual(shootingEntity)) {
+                    if (var9.canBeCollidedWith() && !var9.isEntityEqual(this.shootingEntity)) {
                         val var10 = 0.3f
                         val var11 = var9.boundingBox.expand(var10.toDouble(), var10.toDouble(), var10.toDouble())
                         val var12 = var11.calculateIntercept(var1, var2)
@@ -139,63 +142,64 @@ class EntityKitsunebi : Entity {
                 }
 
                 if (var3 != null) {
-                    onImpact(var3)
+                    this.onImpact(var3)
                 }
 
-                posX += motionX
-                posY += motionY
-                posZ += motionZ
-                val var15 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ)
-                rotationYaw = (Math.atan2(motionZ, motionX) * 180.0 / 3.1415927410125732).toFloat() + 90.0f
+                this.posX += this.motionX
+                this.posY += this.motionY
+                this.posZ += this.motionZ
+                val var15 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ)
+                this.rotationYaw = (Math.atan2(this.motionZ, this.motionX) * 180.0 / 3.1415927410125732).toFloat() + 90.0f
 
-                rotationPitch = (Math.atan2(var15.toDouble(), motionY) * 180.0 / 3.1415927410125732).toFloat() - 90.0f
-                while (rotationPitch - prevRotationPitch < -180.0f) {
-                    prevRotationPitch -= 360.0f
+                this.rotationPitch = (Math.atan2(var15.toDouble(), this.motionY) * 180.0 / 3.1415927410125732).toFloat() - 90.0f
+                while (this.rotationPitch - this.prevRotationPitch < -180.0f) {
+                    this.prevRotationPitch -= 360.0f
                 }
 
-                while (rotationPitch - prevRotationPitch >= 180.0f) {
-                    prevRotationPitch += 360.0f
+                while (this.rotationPitch - this.prevRotationPitch >= 180.0f) {
+                    this.prevRotationPitch += 360.0f
                 }
 
-                while (rotationYaw - prevRotationYaw < -180.0f) {
-                    prevRotationYaw -= 360.0f
+                while (this.rotationYaw - this.prevRotationYaw < -180.0f) {
+                    this.prevRotationYaw -= 360.0f
                 }
 
-                while (rotationYaw - prevRotationYaw >= 180.0f) {
-                    prevRotationYaw += 360.0f
+                while (this.rotationYaw - this.prevRotationYaw >= 180.0f) {
+                    this.prevRotationYaw += 360.0f
                 }
 
-                rotationPitch = prevRotationPitch + (rotationPitch - prevRotationPitch) * 0.2f
-                rotationYaw = prevRotationYaw + (rotationYaw - prevRotationYaw) * 0.2f
-                var var16 = getMotionFactor()
-                if (isInWater) {
+                this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2f
+                this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2f
+                var var16 = this.getMotionFactor()
+                if (this.isInWater) {
                     for (var17 in 0..3) {
                         val var18 = 0.25f
-                        worldObj.spawnParticle("bubble", posX - motionX * var18.toDouble(), posY - motionY * var18.toDouble(), posZ - motionZ * var18.toDouble(), motionX, motionY, motionZ)
+                        this.worldObj.spawnParticle("bubble", this.posX - this.motionX * var18.toDouble(), this.posY - this.motionY * var18.toDouble(), this.posZ - this.motionZ * var18.toDouble(), this.motionX, this.motionY, this.motionZ)
                     }
 
                     var16 = 0.8f
                 }
 
-                motionX += accelerationX
-                motionY += accelerationY
-                motionZ += accelerationZ
-                motionX *= var16.toDouble()
-                motionY *= var16.toDouble()
-                motionZ *= var16.toDouble()
-                worldObj.spawnParticle("smoke", posX, posY + 0.5, posZ, 0.0, 0.0, 0.0)
-                setPosition(posX, posY, posZ)
+                this.motionX += this.accelerationX
+                this.motionY += this.accelerationY
+                this.motionZ += this.accelerationZ
+                this.motionX *= var16.toDouble()
+                this.motionY *= var16.toDouble()
+                this.motionZ *= var16.toDouble()
+                this.worldObj.spawnParticle("smoke", this.posX, this.posY + 0.5, this.posZ, 0.0, 0.0, 0.0)
+                this.setPosition(this.posX, this.posY, this.posZ)
             }
         } else {
             setDead()
         }
     }
 
-    protected fun getMotionFactor(): Float {
-        return 0.75f
+    override fun getMotionFactor(): Float {
+        return 0.95f
     }
 
-    protected fun onImpact(var1: MovingObjectPosition) {
+
+    override fun onImpact(var1: MovingObjectPosition) {
         if (!worldObj.isRemote) {
             if (var1.entityHit != null && var1.entityHit != shootingEntity) {
                 var1.entityHit.attackEntityFrom(DSKitsuneBolt(this, shootingEntity ?: this), 6.0f)
@@ -232,19 +236,18 @@ class EntityKitsunebi : Entity {
     fun setFlying(entity: Entity) {
         following_shooter = false
 
+        this.setBeenAttacked()
         val var3 = entity.lookVec
         if (var3 != null) {
-            posX = entity.posX
-            posY = entity.posY
-            posZ = entity.posZ
-
-            motionX = var3.xCoord
-            motionY = var3.yCoord
-            motionZ = var3.zCoord
-            accelerationX = motionX * 0.1
-            accelerationY = motionY * 0.1
-            accelerationZ = motionZ * 0.1
+            this.motionX = var3.xCoord
+            this.motionY = var3.yCoord
+            this.motionZ = var3.zCoord
+            this.accelerationX = this.motionX * 0.1
+            this.accelerationY = this.motionY * 0.1
+            this.accelerationZ = this.motionZ * 0.1
         }
+
+
     }
 
     //    override fun attackEntityFrom(p_attackEntityFrom_1_: DamageSource?, p_attackEntityFrom_2_: Float): Boolean {
