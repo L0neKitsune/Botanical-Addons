@@ -108,7 +108,7 @@ class SubTileCrysanthermum : SubTileGenerating() {
     override fun getRadius(): RadiusDescriptor = RadiusDescriptor.Square(toChunkCoordinates(), RANGE)
     override fun getMaxMana(): Int = 8000 // TODO decide actual mana value
     override fun getColor(): Int = Color.HSBtoRGB(map(temperature, -8, 8, 235, 360)/360f, 1f, 1f)
-    override fun getEntry(): LexiconEntry = LexiconRegistry.crysanthermum
+    override fun getEntry(): LexiconEntry = null//LexiconRegistry.crysanthermum
 
     fun setTemp(temp: Int) {
         temperature = Math.max(Math.min(temp, 8), -8)

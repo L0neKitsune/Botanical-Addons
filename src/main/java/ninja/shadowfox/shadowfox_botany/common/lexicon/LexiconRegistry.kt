@@ -39,7 +39,7 @@ public object LexiconRegistry {
     val lamp: LexiconEntry
     val silencer: LexiconEntry
     val amp: LexiconEntry
-    val crysanthermum: LexiconEntry
+//    val crysanthermum: LexiconEntry
     val specialAxe: LexiconEntry
     val frozenStar: LexiconEntry
     val dagger: LexiconEntry
@@ -163,10 +163,10 @@ public object LexiconRegistry {
         amp.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesAmplifier))
 
-        crysanthermum = ShadowfoxLexiconEntry("crysanthermum", BotaniaAPI.categoryGenerationFlowers, BotaniaAPI.internalHandler.getSubTileAsStack("crysanthermum"))
-        crysanthermum.setLexiconPages(PageText("0"),
-                PageText("1"),
-                PagePetalRecipe("2", ModRecipes.recipeCrysanthermum))
+//        crysanthermum = ShadowfoxLexiconEntry("crysanthermum", BotaniaAPI.categoryGenerationFlowers, BotaniaAPI.internalHandler.getSubTileAsStack("crysanthermum"))
+//        crysanthermum.setLexiconPages(PageText("0"),
+//                PageText("1"),
+//                PagePetalRecipe("2", ModRecipes.recipeCrysanthermum))
 
         specialAxe = ShadowFoxRelicEntry("andmyaxe", BotaniaAPI.categoryAlfhomancy, ShadowFoxItems.wireAxe).setKnowledgeType(BotaniaAPI.relicKnowledge)
         specialAxe.setLexiconPages(PageText("0"),
