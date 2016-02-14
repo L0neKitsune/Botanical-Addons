@@ -6,6 +6,7 @@ import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.item.crafting.CraftingManager
 import net.minecraft.item.crafting.IRecipe
 import net.minecraftforge.oredict.OreDictionary
 import net.minecraftforge.oredict.RecipeSorter
@@ -26,6 +27,8 @@ import vazkii.botania.api.recipe.RecipePetals
 import vazkii.botania.api.recipe.RecipePureDaisy
 import vazkii.botania.common.Botania
 import vazkii.botania.common.core.helper.ItemNBTHelper
+import vazkii.botania.common.crafting.ModCraftingRecipes
+import vazkii.botania.common.crafting.ModManaInfusionRecipes
 import java.util.*
 import ninja.shadowfox.shadowfox_botany.lib.LibOreDict as ShadowFoxOreDict
 import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
@@ -104,21 +107,22 @@ public object ModRecipes {
         RecipeSorter.register("shadowfox_botany:ringdye", RecipeRingDyes::class.java, Category.SHAPELESS, "")
 
         for (i in 0..15)
-            GameRegistry.addShapedRecipe(ItemStack(ShadowFoxBlocks.coloredDirtBlock, 8, i),
+            addOreDictRecipe(ItemStack(ShadowFoxBlocks.coloredDirtBlock, 8, i),
                     "DDD",
                     "DPD",
-                    "DDD", 'P', ItemStack(BotaniaBlocks.petalBlock, 1, i), 'D', ItemStack(Blocks.dirt, 1))
-        GameRegistry.addShapedRecipe(ItemStack(ShadowFoxBlocks.rainbowDirtBlock, 8),
+                    "DDD", 'P', ShadowFoxOreDict.DYES[i], 'D', ItemStack(Blocks.dirt, 1))
+        addOreDictRecipe(ItemStack(ShadowFoxBlocks.rainbowDirtBlock, 8),
                 "DDD",
                 "DPD",
-                "DDD", 'P', ItemStack(BotaniaBlocks.bifrostPerm), 'D', ItemStack(Blocks.dirt, 1))
+                "DDD", 'P', ShadowFoxOreDict.DYES[16], 'D', ItemStack(Blocks.dirt, 1))
 
         recipesColoredDirt = BotaniaAPI.getLatestAddedRecipes(17)
 
         for (i in 0..15)
             addShapelessOreDictRecipe(ItemStack(BotaniaItems.dye, 1, i), ShadowFoxOreDict.LEAVES[i], BotaniaOreDict.PESTLE_AND_MORTAR)
+        addShapelessOreDictRecipe(ItemStack(ShadowFoxItems.resource, 1, 6), ShadowFoxOreDict.LEAVES[16], BotaniaOreDict.PESTLE_AND_MORTAR)
 
-        recipesLeafDyes = BotaniaAPI.getLatestAddedRecipes(16)
+        recipesLeafDyes = BotaniaAPI.getLatestAddedRecipes(17)
         for (i in 0..15)
             addShapelessOreDictRecipe(ItemStack(ShadowFoxBlocks.coloredPlanks, 4, i), ShadowFoxOreDict.WOOD[i])
         addShapelessOreDictRecipe(ItemStack(ShadowFoxBlocks.rainbowPlanks, 4), ShadowFoxBlocks.rainbowWood)
@@ -315,7 +319,7 @@ public object ModRecipes {
                 " DG",
                 "D  ",
                 'G', "glowstone",
-                'B', ItemStack(BotaniaBlocks.bifrostPerm),
+                'B', ShadowFoxOreDict.DYES[16],
                 'D', BotaniaOreDict.DREAMWOOD_TWIG)
 
         recipesRainbowRod = BotaniaAPI.getLatestAddedRecipe()
@@ -470,12 +474,12 @@ public object ModRecipes {
 
         recipesToolbelt = BotaniaAPI.getLatestAddedRecipe()
 
-        GameRegistry.addRecipe(ItemStack(ShadowFoxBlocks.irisLamp),
+        addOreDictRecipe(ItemStack(ShadowFoxBlocks.irisLamp),
                 " B ",
                 "BLB",
                 " B ",
                 'L', ItemStack(Blocks.redstone_lamp),
-                'B', ItemStack(BotaniaBlocks.bifrostPerm))
+                'B', ShadowFoxOreDict.DYES[16])
 
         recipesLamp = BotaniaAPI.getLatestAddedRecipe()
 
@@ -541,9 +545,23 @@ public object ModRecipes {
                 " G ",
                 'E', BotaniaOreDict.ENDER_AIR_BOTTLE,
                 'G', "dustGlowstone",
-                'D', ItemStack(BotaniaBlocks.bifrostPerm))
+                'D', ShadowFoxOreDict.DYES[16])
 
         recipesStar = BotaniaAPI.getLatestAddedRecipes(17)
+
+        addShapelessOreDictRecipe(ItemStack(BotaniaItems.fertilizer, if (Botania.gardenOfGlassLoaded) 3 else 1), ItemStack(Items.dye, 1, 15), ShadowFoxOreDict.FLORAL_POWDER, ShadowFoxOreDict.FLORAL_POWDER, ShadowFoxOreDict.FLORAL_POWDER, ShadowFoxOreDict.FLORAL_POWDER)
+        CraftingManager.getInstance().recipeList.remove(ModCraftingRecipes.recipeFerilizerDye)
+        ModCraftingRecipes.recipeFerilizerDye = BotaniaAPI.getLatestAddedRecipe()
+
+        ModManaInfusionRecipes.manaPowderRecipes.add(BotaniaAPI.registerManaInfusionRecipe(ItemStack(BotaniaItems.manaResource, 1, 23), ItemStack(ShadowFoxItems.resource, 1, 6), 400))
+
+        addShapelessOreDictRecipe(ItemStack(BotaniaBlocks.shimmerrock), "livingrock", ShadowFoxOreDict.DYES[16])
+        CraftingManager.getInstance().recipeList.remove(ModCraftingRecipes.recipeShimmerrock)
+        ModCraftingRecipes.recipeShimmerrock = BotaniaAPI.getLatestAddedRecipe()
+
+        addShapelessOreDictRecipe(ItemStack(BotaniaBlocks.shimmerwoodPlanks), ItemStack(BotaniaBlocks.dreamwood, 1, 1), ShadowFoxOreDict.DYES[16])
+        CraftingManager.getInstance().recipeList.remove(ModCraftingRecipes.recipeShimmerwoodPlanks)
+        ModCraftingRecipes.recipeShimmerwoodPlanks = BotaniaAPI.getLatestAddedRecipe()
 
         recipeShimmerQuartz = addQuartzRecipes(ShadowFoxBlocks.shimmerQuartz, ShadowFoxBlocks.shimmerQuartzStairs, ShadowFoxBlocks.shimmerQuartzSlab)
 
@@ -599,7 +617,7 @@ public object ModRecipes {
                 "QCQ",
                 "QQQ",
                 'Q', "gemQuartz",
-                'C', ItemStack(BotaniaBlocks.bifrostPerm)))
+                'C', ShadowFoxOreDict.DYES[16]))
         return BotaniaAPI.getLatestAddedRecipe()
     }
 

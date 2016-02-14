@@ -8,15 +8,18 @@ import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
+import net.minecraft.world.World
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 import vazkii.botania.api.recipe.IFlowerComponent
+import vazkii.botania.common.block.ModBlocks
 
 class ItemResource() : ItemMod("resource"), IFlowerComponent, IFuelHandler {
 
@@ -27,7 +30,7 @@ class ItemResource() : ItemMod("resource"), IFlowerComponent, IFuelHandler {
         GameRegistry.registerFuelHandler(this)
     }
 
-    val TYPES = 6
+    val TYPES = 7
 
     var icons: Array<IIcon?> = arrayOfNulls(TYPES)
 
@@ -41,6 +44,13 @@ class ItemResource() : ItemMod("resource"), IFlowerComponent, IFuelHandler {
                 icons[i] = IconHelper.forItem(par1IconRegister, this, i)
             }
         }
+    }
+
+    override fun getColorFromItemStack(stack: ItemStack, pass: Int): Int {
+        if (stack.itemDamage == 6) {
+            return ItemIridescent.rainbowColor()
+        }
+        return super.getColorFromItemStack(stack, pass)
     }
 
     override fun canFit(stack: ItemStack, inventory: IInventory): Boolean {
@@ -64,6 +74,15 @@ class ItemResource() : ItemMod("resource"), IFlowerComponent, IFuelHandler {
                 }
             }
         }
+    }
+
+    override fun onItemUse(stack: ItemStack, player: EntityPlayer?, world: World, x: Int, y: Int, z: Int, par7: Int, par8: Float, par9: Float, par10: Float): Boolean {
+        if (world.getBlock(x, y, z) == ModBlocks.pool && world.getBlockMetadata(x, y, z) == 0 && stack.itemDamage == 6) {
+            world.setBlockMetadataWithNotify(x, y, z, 3, 2)
+            stack.stackSize--
+            return true
+        }
+        return false
     }
 
     override fun getSubItems(item: Item, tab: CreativeTabs?, list: MutableList<Any?>) {

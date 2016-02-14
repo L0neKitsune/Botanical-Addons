@@ -25,5 +25,6 @@ object LibOreDict {
     val LEAVES = Array(COLORS.size, { i -> "$IRIS_LEAVES${COLORS[i]}" })
     val DIRT = Array(COLORS.size, { i -> "$IRIS_DIRT${COLORS[i]}" })
 
-    val DYES = Array(COLORS.size-1, { i -> "dye${COLORS[i]}" })
+    val DYES = Array(COLORS.size, { i -> "dye${COLORS[i]}" })
+    val FLORAL_POWDER = "dyeFloralPowder"
 }
