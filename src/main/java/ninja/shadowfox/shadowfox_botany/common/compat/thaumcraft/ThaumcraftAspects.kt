@@ -250,6 +250,9 @@ object ThaumcraftAspects {
         list = AspectList(ItemStack(Items.quartz))
         ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxItems.resource, 1, 5), list)
 
+        list = AspectList().add(COLOR, 1)
+        ThaumcraftApi.registerObjectTag(LibOreDict.DYES[16], list)
+
         list = AspectList().add(Aspect.TAINT, 2).add(Aspect.ENTROPY, 2).add(Aspect.PLANT, 2)
         if (forbidden) list.add(WRATH, 2)
         ThaumcraftApi.registerEntityTag("shadowfox_botany:voidCreeper", list)

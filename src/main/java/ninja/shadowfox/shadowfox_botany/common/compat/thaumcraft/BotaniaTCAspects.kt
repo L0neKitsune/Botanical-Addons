@@ -288,7 +288,7 @@ object BotaniaTCAspects {
         ThaumcraftApi.registerObjectTag(WildStack(ModBlocks.bellows), list)
 
         list = AspectList().a(COLOR, 8)
-        ThaumcraftApi.registerObjectTag(WildStack(ModBlocks.bifrostPerm), list)
+        ThaumcraftApi.registerObjectTag(ItemStack(ModBlocks.bifrostPerm), list)
 
         list = AspectList().a(PLANT, 4).a(LIFE, 4)
         ThaumcraftApi.registerObjectTag(WildStack(ModBlocks.cellBlock), list)
