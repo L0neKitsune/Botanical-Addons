@@ -13,6 +13,6 @@ class ShadowFoxSignature(val name: String) : SubTileSignature() {
     }
 
     override fun getIconForStack(item: ItemStack?): IIcon? = icon
-    override fun getUnlocalizedNameForStack(item: ItemStack): String = "tile.shadowfox_botany:$name.name"
+    override fun getUnlocalizedNameForStack(item: ItemStack): String = "tile.shadowfox_botany:$name"
     override fun getUnlocalizedLoreTextForStack(item: ItemStack): String = "tile.shadowfox_botany:$name.lore"
 }

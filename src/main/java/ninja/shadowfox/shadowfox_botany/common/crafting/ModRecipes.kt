@@ -556,9 +556,9 @@ public object ModRecipes {
         // Tris - The only item that remotely fits me.
 
         recipeCrysanthermum = BotaniaAPI.registerPetalRecipe(BotaniaAPI.internalHandler.getSubTileAsStack("crysanthermum"),
-                BotaniaOreDict.PETAL[5], BotaniaOreDict.PETAL[5], // Lime
-                BotaniaOreDict.PETAL[8], BotaniaOreDict.PETAL[8], // Light Grey
-                BotaniaOreDict.PETAL[0], // White
+                BotaniaOreDict.PETAL[1], BotaniaOreDict.PETAL[1], // Orange
+                BotaniaOreDict.PETAL[3], BotaniaOreDict.PETAL[3], // Light Blue
+                BotaniaOreDict.PETAL[15], // Black
                 BotaniaOreDict.RUNE[5], // Summer
                 BotaniaOreDict.RUNE[7]) // Winter
 
