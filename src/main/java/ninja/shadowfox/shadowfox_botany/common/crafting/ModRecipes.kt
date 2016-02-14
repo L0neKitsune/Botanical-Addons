@@ -526,7 +526,7 @@ public object ModRecipes {
 
         recipesAmplifier = BotaniaAPI.getLatestAddedRecipe()
 
-        for (i in 0..15) {
+        for (i in 0..16) {
             val stack = ItemStarPlacer.forColor(i)
             stack.stackSize = 3
             addOreDictRecipe(stack,
@@ -537,15 +537,6 @@ public object ModRecipes {
                     'G', "dustGlowstone",
                     'D', ShadowFoxOreDict.DYES[i])
         }
-        val stack = ItemStarPlacer.forColor(16)
-        stack.stackSize = 3
-        addOreDictRecipe(stack,
-                " E ",
-                "GDG",
-                " G ",
-                'E', BotaniaOreDict.ENDER_AIR_BOTTLE,
-                'G', "dustGlowstone",
-                'D', ShadowFoxOreDict.DYES[16])
 
         recipesStar = BotaniaAPI.getLatestAddedRecipes(17)
 
