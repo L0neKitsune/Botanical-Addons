@@ -3,6 +3,7 @@ package ninja.shadowfox.shadowfox_botany.common.compat.thaumcraft
 import cpw.mods.fml.common.Loader
 import net.minecraft.block.Block
 import net.minecraft.init.Blocks
+import net.minecraft.init.Items
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
@@ -16,6 +17,7 @@ import thaumcraft.api.ThaumcraftApi
 import thaumcraft.api.aspects.Aspect
 import thaumcraft.api.aspects.AspectList
 import vazkii.botania.common.block.ModBlocks
+import vazkii.botania.common.block.ModFluffBlocks
 import vazkii.botania.common.item.ModItems
 
 object ThaumcraftAspects {
@@ -236,6 +238,17 @@ object ThaumcraftAspects {
 
         list = AspectList().add(Aspect.ELDRITCH, 3).add(Aspect.METAL, 8).add(Aspect.MAGIC, 4).add(Aspect.ARMOR, 10).add(Aspect.WEAPON, 1).add(Aspect.ORDER, 5)
         ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxItems.trisDagger), list)
+
+
+        list = AspectList().add(Aspect.ELDRITCH, 3).add(Aspect.METAL, 8).add(Aspect.MAGIC, 4).add(Aspect.ARMOR, 10).add(Aspect.WEAPON, 1).add(Aspect.ORDER, 5)
+        ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxItems.trisDagger), list)
+
+
+        list = AspectList(ItemStack(Blocks.quartz_block))
+        ThaumcraftApi.registerObjectTag(WildStack(ShadowFoxBlocks.shimmerQuartz), list)
+
+        list = AspectList(ItemStack(Items.quartz))
+        ThaumcraftApi.registerObjectTag(ItemStack(ShadowFoxItems.resource, 1, 5), list)
 
         list = AspectList().add(Aspect.TAINT, 2).add(Aspect.ENTROPY, 2).add(Aspect.PLANT, 2)
         if (forbidden) list.add(WRATH, 2)

@@ -2,6 +2,7 @@ package ninja.shadowfox.shadowfox_botany.common.blocks
 
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.block.Block
+import net.minecraft.block.BlockSlab
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
@@ -126,6 +127,11 @@ public object ShadowFoxBlocks {
 
     public var star: Block
 
+    public var shimmerQuartz: BlockShimmerQuartz
+    public var shimmerQuartzSlab: BlockShimmerQuartzSlab
+    public var shimmerQuartzSlabFull: BlockShimmerQuartzSlab
+    public var shimmerQuartzStairs: Block
+
     public var iridescentTree0: IIridescentSaplingVariant
     public var iridescentTree1: IIridescentSaplingVariant
     public var iridescentTree2: IIridescentSaplingVariant
@@ -223,6 +229,11 @@ public object ShadowFoxBlocks {
         amp = BlockAmp()
 
         star = BlockStar()
+
+        shimmerQuartz = BlockShimmerQuartz()
+        shimmerQuartzSlab = BlockShimmerQuartzSlab(shimmerQuartz, false)
+        shimmerQuartzSlabFull = BlockShimmerQuartzSlab(shimmerQuartz, true)
+        shimmerQuartzStairs = BlockShimmerQuartzStairs(shimmerQuartz)
 
         register()
         initOreDict()
@@ -341,6 +352,10 @@ public object ShadowFoxBlocks {
 
         (sealingSlabs as BlockSlabMod).register()
         (sealingSlabsFull as BlockSlabMod).register()
+
+
+        shimmerQuartzSlab.register()
+        shimmerQuartzSlabFull.register()
     }
 
     private fun initOreDict() {

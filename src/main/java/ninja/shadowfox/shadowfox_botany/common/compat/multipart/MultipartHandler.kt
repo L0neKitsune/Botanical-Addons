@@ -46,6 +46,8 @@ public object MultipartHandler {
         registerMultiparts(ShadowFoxBlocks.lightningLeaves)
         registerMultiparts(ShadowFoxBlocks.netherLeaves)
         registerMultiparts(ShadowFoxBlocks.sealingLeaves)
+
+        registerMultiparts(ShadowFoxBlocks.shimmerQuartz, 0..2)
     }
 
     fun registerMultiparts(block: Block, meta: Int = 0) {

@@ -93,6 +93,7 @@ item.shadowfox_botany:resource1.name=Thunderous Splinters
 item.shadowfox_botany:resource2.name=Infernal Twig
 item.shadowfox_botany:resource3.name=Infernal Splinters
 item.shadowfox_botany:resource4.name=Flame-Laced Charcoal
+item.shadowfox_botany:resource5.name=Shimmerquartz
 
 item.shadowfox_botany:toolbelt.name=Botanist's Toolbelt
 
@@ -235,6 +236,13 @@ tile.shadowfox_botany:altPlanksStairs5.name=Mutated Planks Stairs
 
 tile.shadowfox_botany:irisLamp.name=Iridescent Lantern
 
+tile.shadowfox_botany:quartzStairsShimmer.name=Shimmerquartz Stairs
+tile.shadowfox_botany:quartzSlabShimmerHalf.name=Shimmerquartz Slab
+tile.shadowfox_botany:quartzSlabShimmerFull.name=Shimmerquartz Slab
+tile.shadowfox_botany:blockShimmerQuartz.name=Block of Shimmerquartz
+tile.shadowfox_botany:chiseledShimmerQuartz.name=Chiseled Shimmerquartz Block
+tile.shadowfox_botany:pillarShimmerQuartz.name=Pillar Shimmerquartz Block
+
 tile.shadowfox_botany:crysanthermum.name=Crysanthermum
 tile.botania:flower.crysanthermum.name=Crysanthermum
 tile.shadowfox_botany:crysanthermum.lore=Crank up the thermostat
@@ -293,6 +301,8 @@ shadowfox_botany.entry.star=Frozen Stars
 shadowfox_botany.tagline.star=An ender light source
 shadowfox_botany.entry.dagger=Dagger of the Perfect Soul
 shadowfox_botany.tagline.dagger=The weapon of the Gaterender
+shadowfox_botany.entry.shimmer=Shimmerquartz
+shadowfox_botany.tagline.shimmer=Quartz but rainbow
 
 shadowfox_botany.category.dendrology=Dendrology
 
@@ -408,3 +418,6 @@ shadowfox_botany.page.star0=The &1Frozen Star&0 is the light of the stars, trapp
 shadowfox_botany.page.star1=Find Polaris to find your way
 
 shadowfox_botany.page.dagger0=&1The Dagger of the Perfect Soul&0 is the manifestation of rebellion. It, paradoxically, is stronger when on the defense than on the attack. As a weapon, it's weaker than a sword of wood. When you parry with it, however, if you can block before the blade becomes dun, it will reflect the strength of the attack upon the attacker. It has been said that this blade has freed many from oppression's clutches.
+
+shadowfox_botany.page.shimmer0=&1Nether Quartz&0, combined with the energies of the &4Bifrost&0, turns into a variant of quartz displaying all the colors of the rainbow. As with the more mundane quartz varieties, &1Shimmerquartz&0 can be crafted into all its decorative block counterparts just like regular &1Quartz&0 blocks. It cannot be used to make a &1Flügel Tiara&0 variant; something about matrices stops you from doing so.
+shadowfox_botany.page.shimmer1=Wire's scraping the bottom of the barrel here

@@ -43,6 +43,7 @@ public object LexiconRegistry {
     val specialAxe: LexiconEntry
     val frozenStar: LexiconEntry
     val dagger: LexiconEntry
+    val shimmer: LexiconEntry
 
     lateinit var tctrees: LexiconEntry
 
@@ -175,9 +176,14 @@ public object LexiconRegistry {
         dagger = ShadowFoxRelicEntry("dagger", BotaniaAPI.categoryAlfhomancy, ShadowFoxItems.trisDagger).setKnowledgeType(BotaniaAPI.relicKnowledge)
         dagger.setLexiconPages(PageText("0"))
 
-        frozenStar = ShadowFoxRelicEntry("star", BotaniaAPI.categoryMisc, ItemStarPlacer.forColor(16))
+        frozenStar = ShadowfoxLexiconEntry("star", BotaniaAPI.categoryMisc, ItemStarPlacer.forColor(16))
         frozenStar.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesStar))
+
+
+        shimmer = ShadowfoxLexiconEntry("shimmer", BotaniaAPI.categoryMisc, ItemStack(ShadowFoxItems.resource, 1, 5)).setKnowledgeType(BotaniaAPI.elvenKnowledge)
+        shimmer.setLexiconPages(PageText("0"),
+                PageCraftingRecipe("1", ModRecipes.recipeShimmerQuartz))
 
         if (ThaumcraftSuffusionRecipes.recipesLoaded) {
             tctrees = object : ShadowfoxLexiconEntry("tctrees", dendrology, ItemStack(ThaumcraftSuffusionRecipes.plantBlock)) {
@@ -247,6 +253,12 @@ public object LexiconRegistry {
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.resource, 1, 2), netherSapling, 5)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.resource, 1, 3), netherSapling, 6)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.resource, 1, 4), netherSapling, 7)
+
+        for (i in 0..2)
+            LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.shimmerQuartz, 1, i), shimmer, 0)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.shimmerQuartzSlab), shimmer, 0)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.shimmerQuartzStairs), shimmer, 0)
+        LexiconRecipeMappings.map(ItemStack(ShadowFoxItems.resource, 1, 5), shimmer, 1)
 
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.sealingSapling), silencer, 1)
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.sealingWood), silencer, 1)

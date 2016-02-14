@@ -27,11 +27,11 @@ class ItemResource() : ItemMod("resource"), IFlowerComponent, IFuelHandler {
         GameRegistry.registerFuelHandler(this)
     }
 
-    val TYPES = 5
+    val TYPES = 6
 
     var icons: Array<IIcon?> = arrayOfNulls(TYPES)
 
-    private fun isInterpolated(meta: Int): Boolean = meta == 0 || meta == 4
+    private fun isInterpolated(meta: Int): Boolean = meta == 0 || meta == 4 || meta == 5
     private fun isFlowerComponent(meta: Int): Boolean = meta == 4
 
     @SideOnly(Side.CLIENT)

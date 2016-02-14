@@ -1,6 +1,7 @@
 package ninja.shadowfox.shadowfox_botany.common.crafting
 
 import cpw.mods.fml.common.registry.GameRegistry
+import net.minecraft.block.Block
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraft.item.Item
@@ -80,6 +81,8 @@ public object ModRecipes {
     val recipesSealingSlabs: IRecipe
     val recipesAmplifier: IRecipe
     val recipesStar: List<IRecipe>
+
+    val recipeShimmerQuartz: IRecipe
 
     val recipesPastoralSeeds: List<RecipeManaInfusion>
 
@@ -542,6 +545,8 @@ public object ModRecipes {
 
         recipesStar = BotaniaAPI.getLatestAddedRecipes(17)
 
+        recipeShimmerQuartz = addQuartzRecipes(ShadowFoxBlocks.shimmerQuartz, ShadowFoxBlocks.shimmerQuartzStairs, ShadowFoxBlocks.shimmerQuartzSlab)
+
         recipesAttributionHeads = ArrayList<RecipePetals>()
         recipesAttributionHeads.add(attributionSkull("yrsegal", ShadowFoxItems.irisSeeds, 16)) // Bifrost Seeds
         // Wire - I just love rainbows, what can I say?
@@ -571,6 +576,47 @@ public object ModRecipes {
         GameRegistry.addSmelting(ShadowFoxBlocks.netherPlanks, ItemStack(ShadowFoxItems.resource, 2, 3), 0.1F) // Infernal Splinters
         GameRegistry.addSmelting(ShadowFoxBlocks.netherWood, ItemStack(ShadowFoxItems.resource, 1, 4), 0.15F) // Flame-Laced Coal
 
+    }
+
+    private fun addQuartzRecipes(block: Block, stairs: Block, slab: Block): IRecipe {
+        GameRegistry.addRecipe(ItemStack(block),
+                "QQ",
+                "QQ",
+                'Q', ItemStack(ShadowFoxItems.resource, 1, 5))
+        BotaniaAPI.registerManaAlchemyRecipe(ItemStack(ShadowFoxItems.resource, 4, 5), ItemStack(block, 1, 32767), 25)
+        GameRegistry.addRecipe(ItemStack(block, 2, 2),
+                "Q",
+                "Q",
+                'Q', block)
+        GameRegistry.addRecipe(ItemStack(block, 1, 1),
+                "Q",
+                "Q",
+                'Q', slab)
+        addStairsAndSlabs(block, 0, stairs, slab)
+
+        GameRegistry.addRecipe(ShapedOreRecipe(ItemStack(ShadowFoxItems.resource, 8, 5),
+                "QQQ",
+                "QCQ",
+                "QQQ",
+                'Q', "gemQuartz",
+                'C', ItemStack(BotaniaBlocks.bifrostPerm)))
+        return BotaniaAPI.getLatestAddedRecipe()
+    }
+
+    private fun addStairsAndSlabs(block: Block, meta: Int, stairs: Block, slab: Block) {
+        GameRegistry.addRecipe(ItemStack(slab, 6),
+                "QQQ",
+                'Q', ItemStack(block, 1, meta))
+        GameRegistry.addRecipe(ItemStack(stairs, 4),
+                "  Q",
+                " QQ",
+                "QQQ",
+                'Q', ItemStack(block, 1, meta))
+        GameRegistry.addRecipe(ItemStack(stairs, 4),
+                "Q  ",
+                "QQ ",
+                "QQQ",
+                'Q', ItemStack(block, 1, meta))
     }
 
     fun skullStack(name: String): ItemStack {
