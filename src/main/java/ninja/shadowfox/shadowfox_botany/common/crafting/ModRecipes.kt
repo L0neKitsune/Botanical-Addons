@@ -541,8 +541,8 @@ public object ModRecipes {
         recipesStar = BotaniaAPI.getLatestAddedRecipes(17)
 
         addShapelessOreDictRecipe(ItemStack(BotaniaItems.fertilizer, if (Botania.gardenOfGlassLoaded) 3 else 1), ItemStack(Items.dye, 1, 15), ShadowFoxOreDict.FLORAL_POWDER, ShadowFoxOreDict.FLORAL_POWDER, ShadowFoxOreDict.FLORAL_POWDER, ShadowFoxOreDict.FLORAL_POWDER)
-        CraftingManager.getInstance().recipeList.remove(ModCraftingRecipes.recipeFerilizerDye)
-        ModCraftingRecipes.recipeFerilizerDye = BotaniaAPI.getLatestAddedRecipe()
+        CraftingManager.getInstance().recipeList.remove(ModCraftingRecipes.recipeFertilizerPowder)
+        ModCraftingRecipes.recipeFertilizerPowder = BotaniaAPI.getLatestAddedRecipe()
 
         ModManaInfusionRecipes.manaPowderRecipes.add(BotaniaAPI.registerManaInfusionRecipe(ItemStack(BotaniaItems.manaResource, 1, 23), ItemStack(ShadowFoxItems.resource, 1, 6), 400))
 
