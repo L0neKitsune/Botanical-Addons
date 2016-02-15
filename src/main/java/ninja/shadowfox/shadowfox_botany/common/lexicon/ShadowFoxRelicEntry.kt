@@ -4,8 +4,6 @@ import net.minecraft.block.Block
 import net.minecraft.client.Minecraft
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
-import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.LexiconCategory
 
 /**
@@ -15,8 +13,10 @@ import vazkii.botania.api.lexicon.LexiconCategory
 class ShadowFoxRelicEntry : ShadowfoxLexiconEntry {
     constructor(unlocalizedName: String, category: LexiconCategory, stack: ItemStack) : super(unlocalizedName, category, stack) {
     }
+
     constructor(unlocalizedName: String, category: LexiconCategory, block: Block) : super(unlocalizedName, category, block) {
     }
+
     constructor(unlocalizedName: String, category: LexiconCategory, item: Item) : super(unlocalizedName, category, item) {
     }
 

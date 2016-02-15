@@ -22,7 +22,7 @@ import vazkii.botania.common.lib.LibObfuscation
  */
 class DaggerEventHandler {
     companion object {
-        class DamageSourceOculus(entity: EntityLivingBase): EntityDamageSource("shadowfox_botany.oculus", entity) {
+        class DamageSourceOculus(entity: EntityLivingBase) : EntityDamageSource("shadowfox_botany.oculus", entity) {
             init {
                 setDamageBypassesArmor()
                 setMagicDamage()
@@ -54,11 +54,12 @@ class DaggerEventHandler {
                 // Dammit cpw
                 val itemInUse = ReflectionHelper.getPrivateValue<ItemStack, EntityPlayer>(EntityPlayer::class.java, player, *LibObfuscation.ITEM_IN_USE)
                 val itemInUseCount = itemInUse.maxItemUseDuration - ReflectionHelper.getPrivateValue<Int, EntityPlayer>(EntityPlayer::class.java, player, *LibObfuscation.ITEM_IN_USE_COUNT)
-                if (itemInUse.item is ItemTrisDagger && itemInUseCount <= ItemTrisDagger.maxBlockLength && itemInUseCount >= ItemTrisDagger.minBlockLength) { // Perfect timing indeed.
+                if (itemInUse.item is ItemTrisDagger && itemInUseCount <= ItemTrisDagger.maxBlockLength && itemInUseCount >= ItemTrisDagger.minBlockLength) {
+                    // Perfect timing indeed.
 
                     val lookVec = Vector3(player.lookVec)
                     val targetVec = Vector3.fromEntityCenter(enemyEntity).sub(Vector3.fromEntityCenter(player))
-                    val epsilon = lookVec.dotProduct(targetVec)/(lookVec.mag()*targetVec.mag())
+                    val epsilon = lookVec.dotProduct(targetVec) / (lookVec.mag() * targetVec.mag())
                     if (epsilon > 0.75) {
                         e.isCanceled = true
                         player.stopUsingItem()

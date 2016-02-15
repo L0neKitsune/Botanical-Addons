@@ -2,18 +2,12 @@ package ninja.shadowfox.shadowfox_botany.common.blocks.subtile
 
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.ScaledResolution
-import net.minecraft.client.renderer.RenderHelper
-import net.minecraft.client.renderer.entity.RenderItem
 import net.minecraft.entity.item.EntityItem
-import net.minecraft.init.Blocks
 import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.IIcon
 import net.minecraft.util.StatCollector
-import net.minecraftforge.common.BiomeDictionary
-import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import org.lwjgl.opengl.GL11
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.LexiconEntry
@@ -35,14 +29,14 @@ class SubTileCrysanthermum : SubTileGenerating() {
         val RANGE = 1
 
         val TYPES = arrayOf(
-            2, // Forest
-            1, // Plains
-            -3, // Mountain
-            Int.MAX_VALUE, // Mushroom, handled specially
-            -3, // Swamp
-            3, // Desert
-            -4, // Taiga
-            4 // Mesa
+                2, // Forest
+                1, // Plains
+                -3, // Mountain
+                Int.MAX_VALUE, // Mushroom, handled specially
+                -3, // Swamp
+                3, // Desert
+                -4, // Taiga
+                4 // Mesa
         )
 
         /**
@@ -54,7 +48,7 @@ class SubTileCrysanthermum : SubTileGenerating() {
         }
 
         private val rand = Random()
-        fun getTemp(meta: Int): Int = if (meta % 8 == 3) rand.nextInt(9)-4 else TYPES[meta]
+        fun getTemp(meta: Int): Int = if (meta % 8 == 3) rand.nextInt(9) - 4 else TYPES[meta]
     }
 
     var temperature: Int = 0
@@ -71,7 +65,8 @@ class SubTileCrysanthermum : SubTileGenerating() {
                         (supertile.xCoord + RANGE + 1).toDouble(), (supertile.yCoord + RANGE + 1).toDouble(), (supertile.zCoord + RANGE + 1).toDouble()))
         val slowdown = slowdownFactor
 
-        if (ticksExisted % 600 == 0) { // 30 seconds
+        if (ticksExisted % 600 == 0) {
+            // 30 seconds
             if (temperature > 0) temperature--
             else if (temperature < 0) temperature++
         }
@@ -101,13 +96,13 @@ class SubTileCrysanthermum : SubTileGenerating() {
         }
         val c = Color(color)
         if (ticksExisted % 20 == 0)
-            Botania.proxy.wispFX(supertile.worldObj, supertile.xCoord + 0.5, supertile.yCoord + 0.75, supertile.zCoord + 0.5, c.red/255f, c.green/255f, c.blue/255f, 0.25f, -0.025f)
+            Botania.proxy.wispFX(supertile.worldObj, supertile.xCoord + 0.5, supertile.yCoord + 0.75, supertile.zCoord + 0.5, c.red / 255f, c.green / 255f, c.blue / 255f, 0.25f, -0.025f)
     }
 
     override fun getComparatorInputOverride(side: Int): Int = map(temperature, -8, 8, 0, 15)
     override fun getRadius(): RadiusDescriptor = RadiusDescriptor.Square(toChunkCoordinates(), RANGE)
     override fun getMaxMana(): Int = 8000 // TODO decide actual mana value
-    override fun getColor(): Int = Color.HSBtoRGB(map(temperature, -8, 8, 235, 360)/360f, 1f, 1f)
+    override fun getColor(): Int = Color.HSBtoRGB(map(temperature, -8, 8, 235, 360) / 360f, 1f, 1f)
     override fun getEntry(): LexiconEntry? = null//LexiconRegistry.crysanthermum
 
     fun setTemp(temp: Int) {
@@ -119,7 +114,7 @@ class SubTileCrysanthermum : SubTileGenerating() {
 
         GL11.glEnable(GL11.GL_BLEND)
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
-        val name = StatCollector.translateToLocal("misc.shadowfox_botany:temperature.${temperature+8}")
+        val name = StatCollector.translateToLocal("misc.shadowfox_botany:temperature.${temperature + 8}")
         val width = 16 + mc.fontRenderer.getStringWidth(name) / 2
         val x = res.scaledWidth / 2 - width
         val y = res.scaledHeight / 2 + 30

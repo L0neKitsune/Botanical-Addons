@@ -3,20 +3,16 @@ package ninja.shadowfox.shadowfox_botany.common.item.blocks
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.passive.EntitySheep
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init.Blocks
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.util.MathHelper
 import net.minecraft.util.StatCollector
 import net.minecraft.world.World
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileEntityStar
-import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileRainbowManaFlame
 import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
 import ninja.shadowfox.shadowfox_botany.common.item.ItemMod
 import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
-import vazkii.botania.api.mana.ManaItemHandler
 import vazkii.botania.common.core.helper.ItemNBTHelper
 import java.awt.Color
 import java.util.*
@@ -78,7 +74,7 @@ class ItemStarPlacer : ItemMod("starPlacer") {
         else
             list.add("#${Integer.toHexString(color).toUpperCase()}")
         if (getSize(stack) != 0.05f)
-            list.add(StatCollector.translateToLocalFormatted("misc.shadowfox_botany.customSize", getSize(stack)/0.1f))
+            list.add(StatCollector.translateToLocalFormatted("misc.shadowfox_botany.customSize", getSize(stack) / 0.1f))
     }
 
     override fun getSubItems(item: Item, tab: CreativeTabs?, list: MutableList<Any?>) {

@@ -30,7 +30,7 @@ public class ConfigHandler {
         var uberCreepers: Boolean by Delegates.notNull()
         var passiveLightning: Boolean by Delegates.notNull()
         var blackLotusDropRate: Double by Delegates.notNull()
-        var addTincturemAspect : Boolean by Delegates.notNull()
+        var addTincturemAspect: Boolean by Delegates.notNull()
         var addAspectsToBotania: Boolean by Delegates.notNull()
         var addThaumcraftTreeSuffusion: Boolean by Delegates.notNull()
         var potionIDManaVoid: Int by Delegates.notNull()

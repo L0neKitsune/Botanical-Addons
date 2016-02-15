@@ -1,7 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.item.baubles
 
 import baubles.api.BaubleType
-import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.relauncher.FMLLaunchHandler
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
@@ -17,11 +16,9 @@ import net.minecraft.util.IIcon
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.StatCollector
 import net.minecraftforge.client.event.RenderPlayerEvent
-import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 import org.lwjgl.opengl.GL11
 import vazkii.botania.api.item.IBaubleRender
 import vazkii.botania.api.item.ICosmeticBauble

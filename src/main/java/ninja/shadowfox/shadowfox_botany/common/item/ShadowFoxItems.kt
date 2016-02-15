@@ -34,8 +34,8 @@ object ShadowFoxItems {
     val wireAxe: Item
     val star: Item
     val trisDagger: Item
-//    val fireGrenade: Item
-//    val splashPotion: Item
+    //    val fireGrenade: Item
+    //    val splashPotion: Item
 
     init {
         irisSeeds = ItemColorSeeds()
@@ -56,8 +56,8 @@ object ShadowFoxItems {
         wireAxe = ItemWireAxe()
         star = ItemStarPlacer()
         trisDagger = ItemTrisDagger()
-//        splashPotion = ItemSplashPotion()
-//        fireGrenade = ItemFireGrenade()
+        //        splashPotion = ItemSplashPotion()
+        //        fireGrenade = ItemFireGrenade()
         initOreDict()
 
 

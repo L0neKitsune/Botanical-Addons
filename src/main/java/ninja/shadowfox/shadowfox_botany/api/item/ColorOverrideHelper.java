@@ -42,7 +42,7 @@ public class ColorOverrideHelper {
                 }
             }
         }
-        return colors == 0 ? -1 : new Color(r/colors, g/colors, b/colors).getRGB();
+        return colors == 0 ? -1 : new Color(r / colors, g / colors, b / colors).getRGB();
     }
 
     public static int getColor(EntityPlayer player, int fallback) {

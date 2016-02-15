@@ -39,13 +39,13 @@ class EventHandlerSealingOak {
                 for (dx in (x - MAXRANGE).toInt()..(x + MAXRANGE).toInt()) {
                     for (dy in (y - MAXRANGE).toInt()..(y + MAXRANGE).toInt()) {
                         for (dz in (z - MAXRANGE).toInt()..(z + MAXRANGE).toInt()) {
-                        val block = world.getBlock(dx, dy, dz)
-                        if (block is ISoundSilencer) {
-                            var distance = dist(dx, dy, dz, x, y, z)
-                            if (distance <= MAXRANGE && block.canSilence(world, dx, dy, dz, distance, event)) {
-                                volumeMultiplier *= block.getVolumeMultiplier(world, dx, dy, dz, distance, event)
+                            val block = world.getBlock(dx, dy, dz)
+                            if (block is ISoundSilencer) {
+                                var distance = dist(dx, dy, dz, x, y, z)
+                                if (distance <= MAXRANGE && block.canSilence(world, dx, dy, dz, distance, event)) {
+                                    volumeMultiplier *= block.getVolumeMultiplier(world, dx, dy, dz, distance, event)
+                                }
                             }
-                        }
                         }
                     }
                 }

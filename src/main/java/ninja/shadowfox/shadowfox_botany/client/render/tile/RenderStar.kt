@@ -3,7 +3,6 @@ package ninja.shadowfox.shadowfox_botany.client.render.tile
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 import net.minecraft.tileentity.TileEntity
 import ninja.shadowfox.shadowfox_botany.common.blocks.tile.TileEntityStar
-import ninja.shadowfox.shadowfox_botany.common.item.ItemIridescent
 import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL12
 import vazkii.botania.client.core.handler.ClientTickHandler
@@ -15,7 +14,7 @@ import java.util.*
  * @author WireSegal
  * Created at 9:43 PM on 2/6/16.
  */
-class RenderStar: TileEntitySpecialRenderer() {
+class RenderStar : TileEntitySpecialRenderer() {
 
     override fun renderTileEntityAt(tile: TileEntity, x: Double, y: Double, z: Double, partticks: Float) {
         if (tile is TileEntityStar) {
@@ -24,7 +23,7 @@ class RenderStar: TileEntitySpecialRenderer() {
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
             GL11.glEnable(GL12.GL_RESCALE_NORMAL)
             GL11.glColor3f(1f, 1f, 1f)
-            GL11.glTranslated(x+0.5, y+0.5, z+0.5)
+            GL11.glTranslated(x + 0.5, y + 0.5, z + 0.5)
 
             val seed = (tile.xCoord xor tile.yCoord xor tile.zCoord).toLong()
             var color = tile.getColor()

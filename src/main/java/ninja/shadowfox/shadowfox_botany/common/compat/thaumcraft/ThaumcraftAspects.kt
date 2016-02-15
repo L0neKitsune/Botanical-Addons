@@ -17,7 +17,6 @@ import thaumcraft.api.ThaumcraftApi
 import thaumcraft.api.aspects.Aspect
 import thaumcraft.api.aspects.AspectList
 import vazkii.botania.common.block.ModBlocks
-import vazkii.botania.common.block.ModFluffBlocks
 import vazkii.botania.common.item.ModItems
 
 object ThaumcraftAspects {

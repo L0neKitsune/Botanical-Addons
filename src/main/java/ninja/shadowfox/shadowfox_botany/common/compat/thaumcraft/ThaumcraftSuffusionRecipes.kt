@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
 import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting
 import thaumcraft.api.ItemApi
-import kotlin.properties.Delegates
 import ninja.shadowfox.shadowfox_botany.lib.LibOreDict as ShadowFoxOreDict
 import vazkii.botania.common.lib.LibOreDict as BotaniaOreDict
 

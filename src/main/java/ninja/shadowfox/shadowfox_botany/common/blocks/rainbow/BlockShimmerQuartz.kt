@@ -17,9 +17,7 @@ import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemShimmerSlabMod
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemSlabMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
-import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
@@ -100,7 +98,7 @@ class BlockShimmerQuartz : BlockSpecialQuartz("Shimmer") {
     }
 }
 
-class BlockShimmerQuartzSlab(val block: BlockShimmerQuartz, val full: Boolean): BlockSpecialQuartzSlab(block, full) {
+class BlockShimmerQuartzSlab(val block: BlockShimmerQuartz, val full: Boolean) : BlockSpecialQuartzSlab(block, full) {
     override fun getSingleBlock(): BlockSlab? {
         return ShadowFoxBlocks.shimmerQuartzSlab
     }
@@ -118,7 +116,7 @@ class BlockShimmerQuartzSlab(val block: BlockShimmerQuartz, val full: Boolean): 
     }
 }
 
-class BlockShimmerQuartzStairs(val block: BlockShimmerQuartz): BlockSpecialQuartzStairs(block) {
+class BlockShimmerQuartzStairs(val block: BlockShimmerQuartz) : BlockSpecialQuartzStairs(block) {
     lateinit var unlocName: String
 
     override fun setBlockName(par1Str: String): Block? {

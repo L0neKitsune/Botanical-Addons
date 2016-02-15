@@ -1,7 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.lexicon
 
 import net.minecraft.item.ItemStack
-import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.compat.thaumcraft.ThaumcraftSuffusionRecipes
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
@@ -11,7 +10,6 @@ import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemStarPlacer
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.api.lexicon.LexiconRecipeMappings
-import vazkii.botania.common.Botania
 import vazkii.botania.common.lexicon.LexiconData
 import vazkii.botania.common.lexicon.page.*
 
@@ -39,7 +37,7 @@ public object LexiconRegistry {
     val lamp: LexiconEntry
     val silencer: LexiconEntry
     val amp: LexiconEntry
-//    val crysanthermum: LexiconEntry
+    //    val crysanthermum: LexiconEntry
     val specialAxe: LexiconEntry
     val frozenStar: LexiconEntry
     val dagger: LexiconEntry
@@ -164,14 +162,14 @@ public object LexiconRegistry {
         amp.setLexiconPages(PageText("0"),
                 PageCraftingRecipe("1", ModRecipes.recipesAmplifier))
 
-//        crysanthermum = ShadowfoxLexiconEntry("crysanthermum", BotaniaAPI.categoryGenerationFlowers, BotaniaAPI.internalHandler.getSubTileAsStack("crysanthermum"))
-//        crysanthermum.setLexiconPages(PageText("0"),
-//                PageText("1"),
-//                PagePetalRecipe("2", ModRecipes.recipeCrysanthermum))
+        //        crysanthermum = ShadowfoxLexiconEntry("crysanthermum", BotaniaAPI.categoryGenerationFlowers, BotaniaAPI.internalHandler.getSubTileAsStack("crysanthermum"))
+        //        crysanthermum.setLexiconPages(PageText("0"),
+        //                PageText("1"),
+        //                PagePetalRecipe("2", ModRecipes.recipeCrysanthermum))
 
         specialAxe = ShadowFoxRelicEntry("andmyaxe", BotaniaAPI.categoryAlfhomancy, ShadowFoxItems.wireAxe).setKnowledgeType(BotaniaAPI.relicKnowledge)
         specialAxe.setLexiconPages(PageText("0"),
-            PageText("1"))
+                PageText("1"))
 
         dagger = ShadowFoxRelicEntry("dagger", BotaniaAPI.categoryAlfhomancy, ShadowFoxItems.trisDagger).setKnowledgeType(BotaniaAPI.relicKnowledge)
         dagger.setLexiconPages(PageText("0"))

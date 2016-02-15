@@ -1,7 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.core.handler
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
-import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
@@ -71,13 +70,6 @@ class HilarityHandler {
     }
 
 
-
-
-
-
-
-
-
     private class CraftHandler(val playerName: String, val cheatyString: String,
                                val gender: String, val chatColor: EnumChatFormatting,
                                val neededItems: List<ItemStack>, val normalString: String,
@@ -92,7 +84,7 @@ class HilarityHandler {
                     player.worldObj.playSoundAtEntity(player, "ambient.weather.thunder", 100.0f, 0.8f + player.worldObj.rand.nextFloat() * 0.2f)
                     return true
                 }
-            } else if (msg == normalString){
+            } else if (msg == normalString) {
                 val items = getInfusionPlatforms(player.worldObj, player.posX.toInt(), player.posY.toInt(), player.posZ.toInt())
 
                 val itemsMissing = ArrayList(neededItems)
@@ -133,11 +125,13 @@ class HilarityHandler {
         }
 
         private class Pos(val x: Int, val y: Int, val z: Int) {
-            fun getTileAt(world: World, x: Int, y: Int, z: Int): TileEntity? = world.getTileEntity(x+this.x, y+this.y, z+this.z)
+            fun getTileAt(world: World, x: Int, y: Int, z: Int): TileEntity? = world.getTileEntity(x + this.x, y + this.y, z + this.z)
         }
+
         private class PosPair(val pos: Pos, val stack: ItemStack) {
             var flag = false
         }
+
         private val platformPositions = arrayOf(
                 Pos(2, 0, 2),
                 Pos(-2,0, 2),

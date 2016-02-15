@@ -1,8 +1,6 @@
 package ninja.shadowfox.shadowfox_botany.common.item
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
-import net.minecraft.block.Block
-import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.player.ItemTooltipEvent

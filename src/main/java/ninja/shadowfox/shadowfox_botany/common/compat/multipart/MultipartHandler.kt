@@ -3,10 +3,7 @@ package ninja.shadowfox.shadowfox_botany.common.compat.multipart
 import codechicken.microblock.BlockMicroMaterial
 import codechicken.microblock.MicroMaterialRegistry
 import net.minecraft.block.Block
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import java.util.*
 
 public object MultipartHandler {
 

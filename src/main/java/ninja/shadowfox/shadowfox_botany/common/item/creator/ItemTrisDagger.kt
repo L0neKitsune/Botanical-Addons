@@ -2,7 +2,6 @@ package ninja.shadowfox.shadowfox_botany.common.item.creator
 
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
-import com.google.common.collect.Sets
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.FMLLaunchHandler
@@ -11,34 +10,30 @@ import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
 import net.minecraft.client.gui.GuiScreen
 import net.minecraft.client.renderer.texture.IIconRegister
-import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.SharedMonsterAttributes
 import net.minecraft.entity.ai.attributes.AttributeModifier
-import net.minecraft.entity.ai.attributes.RangedAttribute
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.*
-import net.minecraft.potion.Potion
-import net.minecraft.potion.PotionEffect
-import net.minecraft.util.*
+import net.minecraft.item.EnumRarity
+import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
+import net.minecraft.item.ItemSword
+import net.minecraft.util.EnumChatFormatting
+import net.minecraft.util.IIcon
+import net.minecraft.util.StatCollector
 import net.minecraft.world.World
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.oredict.OreDictionary
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
-import ninja.shadowfox.shadowfox_botany.common.brew.ShadowFoxPotions
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
-import vazkii.botania.common.Botania
-import vazkii.botania.common.core.helper.Vector3
 import vazkii.botania.common.item.equipment.tool.ToolCommons
-import java.util.*
 
 /**
  * @author WireSegal

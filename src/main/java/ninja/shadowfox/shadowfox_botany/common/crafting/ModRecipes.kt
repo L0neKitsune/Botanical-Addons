@@ -566,10 +566,10 @@ public object ModRecipes {
 
         recipeCrysanthermum = BotaniaAPI.registerPetalRecipe(BotaniaAPI.internalHandler.getSubTileAsStack("crysanthermum"),
                 BotaniaOreDict.PETAL[1], BotaniaOreDict.PETAL[1], // Orange
-                BotaniaOreDict.PETAL[3], BotaniaOreDict.PETAL[3], // Light Blue
                 BotaniaOreDict.PETAL[15], // Black
-                BotaniaOreDict.RUNE[5], // Summer
-                BotaniaOreDict.RUNE[7]) // Winter
+                BotaniaOreDict.PETAL[3], BotaniaOreDict.PETAL[3], // Light Blue
+                BotaniaOreDict.RUNE[7], // Winter
+                BotaniaOreDict.RUNE[5]) // Summer
 
 
         GameRegistry.addSmelting(ShadowFoxBlocks.irisWood0, ItemStack(Items.coal, 1, 1), 0.15F)

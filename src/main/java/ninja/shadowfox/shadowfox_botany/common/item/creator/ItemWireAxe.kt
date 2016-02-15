@@ -34,7 +34,6 @@ import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.mana.IManaUsingItem
 import vazkii.botania.api.mana.ManaItemHandler
 import vazkii.botania.common.Botania
-import vazkii.botania.common.core.helper.ItemNBTHelper
 import vazkii.botania.common.core.helper.Vector3
 import vazkii.botania.common.item.equipment.tool.ToolCommons
 import java.util.*
@@ -45,7 +44,7 @@ import java.util.*
 class ItemWireAxe(val name: String = "axeRevelation", val toolMaterial: ToolMaterial = ShadowFoxAPI.RUNEAXE, val slayerDamage: Double = 6.0) : ItemSword(toolMaterial), IManaUsingItem {
 
     companion object {
-        class DamageSourceGodslayer(player: EntityLivingBase, creative: Boolean): EntityDamageSource("player", player) {
+        class DamageSourceGodslayer(player: EntityLivingBase, creative: Boolean) : EntityDamageSource("player", player) {
             init {
                 setDamageBypassesArmor()
                 setDamageIsAbsolute()
@@ -53,6 +52,7 @@ class ItemWireAxe(val name: String = "axeRevelation", val toolMaterial: ToolMate
                     setDamageAllowedInCreativeMode()
             }
         }
+
         val godSlayingDamage = RangedAttribute("shadowfox_botany.godSlayingAttackDamage", 0.0, 0.0, Double.MAX_VALUE)
     }
 
@@ -142,7 +142,7 @@ class ItemWireAxe(val name: String = "axeRevelation", val toolMaterial: ToolMate
             if (!world.isRemote) player.addChatMessage(ChatComponentText(StatCollector.translateToLocal("misc.shadowfox_botany.wayOfUndoing").replace('&', '\u00a7')))
             stack.damageStack(5, player)
             for (var11 in 0..20) {
-                Botania.proxy.lightningFX(world, Vector3.fromEntityCenter(player), Vector3.fromEntityCenter(player).add(randomVec(range)), range*0.01f, 255 shl 16, 0)
+                Botania.proxy.lightningFX(world, Vector3.fromEntityCenter(player), Vector3.fromEntityCenter(player).add(randomVec(range)), range * 0.01f, 255 shl 16, 0)
             }
             player.addPotionEffect(PotionEffect(ShadowFoxPotions.manaVoid.id, 2 * count, 0, true))
         }
@@ -242,17 +242,17 @@ class ItemWireAxe(val name: String = "axeRevelation", val toolMaterial: ToolMate
     }
 
     override fun getDigSpeed(stack: ItemStack, block: Block, meta: Int): Float =
-        if (ForgeHooks.isToolEffective(stack, block, meta) ||
-                block.material == Material.wood ||
-                block.material == Material.plants ||
-                block.material == Material.vine ||
-                block.material == Material.coral ||
-                block.material == Material.leaves ||
-                block.material == Material.gourd)
-            this.getEfficiencyOnProperMaterial()
-        else if (block == Blocks.web)
-            15f
-        else
-            1f
+            if (ForgeHooks.isToolEffective(stack, block, meta) ||
+                    block.material == Material.wood ||
+                    block.material == Material.plants ||
+                    block.material == Material.vine ||
+                    block.material == Material.coral ||
+                    block.material == Material.leaves ||
+                    block.material == Material.gourd)
+                this.getEfficiencyOnProperMaterial()
+            else if (block == Blocks.web)
+                15f
+            else
+                1f
 
 }

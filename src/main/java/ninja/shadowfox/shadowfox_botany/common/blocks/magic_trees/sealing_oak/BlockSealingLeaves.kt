@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.client.event.sound.PlaySoundEvent17
-import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockLeavesMod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemBlockMod
