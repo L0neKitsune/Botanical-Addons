@@ -115,9 +115,11 @@ tile.shadowfox_botany:irisWood.name=Iridescent Log
 tile.shadowfox_botany:irisSapling.name=Iridescent Sapling
 tile.shadowfox_botany:rainbowPlanks.name=Iridescent Planks
 tile.shadowfox_botany:irisPlanks.name=Iridescent Planks
-tile.shadowfox_botany:rainbowGrass.name=Iridescent Grass
+tile.shadowfox_botany:rainbowGrass0.name=Iridescent Grass
+tile.shadowfox_botany:rainbowGrass1.name=Mystical Bifrost Flower
 tile.shadowfox_botany:irisGrass.name=Iridescent Grass
-tile.shadowfox_botany:rainbowDoubleGrass.name=Iridescent Double Grass
+tile.shadowfox_botany:rainbowDoubleGrass0.name=Iridescent Double Grass
+tile.shadowfox_botany:rainbowDoubleGrass1.name=Tall Mystical Bifrost Flower
 tile.shadowfox_botany:irisDoubleGrass.name=Iridescent Double Grass
 
 shadowfox_botany.nei.treeCrafter=Dendric Suffuser

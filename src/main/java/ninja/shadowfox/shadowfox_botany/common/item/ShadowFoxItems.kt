@@ -80,10 +80,13 @@ object ShadowFoxItems {
         OreDictionary.registerOre(LibOreDict.COAL_NETHERWOOD, ItemStack(resource, 1, 4))
         OreDictionary.registerOre(LibOreDict.DYES[16], ItemStack(resource, 1, 6))
         OreDictionary.registerOre(LibOreDict.FLORAL_POWDER, ItemStack(resource, 1, 6))
+        OreDictionary.registerOre(LibOreDict.RAINBOW_PETAL, ItemStack(resource, 1, 7))
+        OreDictionary.registerOre(LibOreDict.PETAL, ItemStack(resource, 1, 7))
 
         OreDictionary.registerOre(LibOreDict.HOLY_PENDANT, ItemStack(attributionBauble, 1, OreDictionary.WILDCARD_VALUE))
 
         OreDictionary.registerOre(LibOreDict.DYES[16], ItemStack(ModBlocks.bifrostPerm))
         OreDictionary.registerOre(LibOreDict.FLORAL_POWDER, ItemStack(ModItems.dye, 1, OreDictionary.WILDCARD_VALUE))
+        OreDictionary.registerOre(LibOreDict.PETAL, ItemStack(ModItems.petal, 1, OreDictionary.WILDCARD_VALUE))
     }
 }

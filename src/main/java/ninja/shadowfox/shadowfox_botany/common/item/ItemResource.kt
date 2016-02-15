@@ -30,12 +30,12 @@ class ItemResource() : ItemMod("resource"), IFlowerComponent, IFuelHandler {
         GameRegistry.registerFuelHandler(this)
     }
 
-    val TYPES = 7
+    val TYPES = 8
 
     var icons: Array<IIcon?> = arrayOfNulls(TYPES)
 
     private fun isInterpolated(meta: Int): Boolean = meta == 0 || meta == 4 || meta == 5
-    private fun isFlowerComponent(meta: Int): Boolean = meta == 4
+    private fun isFlowerComponent(meta: Int): Boolean = meta == 4 || meta == 7
 
     @SideOnly(Side.CLIENT)
     override fun registerIcons(par1IconRegister: IIconRegister) {
@@ -47,7 +47,7 @@ class ItemResource() : ItemMod("resource"), IFlowerComponent, IFuelHandler {
     }
 
     override fun getColorFromItemStack(stack: ItemStack, pass: Int): Int {
-        if (stack.itemDamage == 6) {
+        if (stack.itemDamage == 6 || stack.itemDamage == 7) {
             return ItemIridescent.rainbowColor()
         }
         return super.getColorFromItemStack(stack, pass)
@@ -59,7 +59,7 @@ class ItemResource() : ItemMod("resource"), IFlowerComponent, IFuelHandler {
 
     override fun getParticleColor(stack: ItemStack): Int {
         return when (stack.itemDamage) {
-            4 -> 0x6B2406
+            4, 7 -> 0x6B2406
             else -> 0xFFFFFF
         }
     }

@@ -358,6 +358,10 @@ public object ShadowFoxBlocks {
     }
 
     private fun initOreDict() {
+
+        OreDictionary.registerOre(LibOreDict.RAINBOW_FLOWER, ItemStack(rainbowGrass, 1, 1))
+        OreDictionary.registerOre(LibOreDict.RAINBOW_DOUBLE_FLOWER, ItemStack(rainbowTallGrass, 1, 1))
+
         OreDictionary.registerOre("treeSapling", irisSapling)
 
         var t: ItemStack

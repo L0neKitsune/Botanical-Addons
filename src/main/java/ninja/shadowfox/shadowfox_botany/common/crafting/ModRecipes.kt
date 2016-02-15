@@ -87,6 +87,10 @@ public object ModRecipes {
 
     val recipeShimmerQuartz: IRecipe
 
+    val recipeRainbowPetalGrinding: IRecipe
+    val recipeRainbowPetal: IRecipe
+    val recipeRainbowDoublePetal: IRecipe
+
     val recipesPastoralSeeds: List<RecipeManaInfusion>
 
     val recipesAttributionHeads: List<RecipePetals>
@@ -553,6 +557,22 @@ public object ModRecipes {
         addShapelessOreDictRecipe(ItemStack(BotaniaBlocks.shimmerwoodPlanks), ItemStack(BotaniaBlocks.dreamwood, 1, 1), ShadowFoxOreDict.DYES[16])
         CraftingManager.getInstance().recipeList.remove(ModCraftingRecipes.recipeShimmerwoodPlanks)
         ModCraftingRecipes.recipeShimmerwoodPlanks = BotaniaAPI.getLatestAddedRecipe()
+
+        // Todo replace mushroom stew recipe
+
+        addOreDictRecipe(ItemStack(BotaniaItems.flowerBag),"WPW", "W W", " W ", 'P', ShadowFoxOreDict.PETAL, 'W', ItemStack(Blocks.wool, 1, 32767))
+        CraftingManager.getInstance().recipeList.remove(ModCraftingRecipes.recipeFlowerBag)
+        ModCraftingRecipes.recipeFlowerBag = BotaniaAPI.getLatestAddedRecipe()
+
+        addShapelessOreDictRecipe(ItemStack(ShadowFoxItems.resource, 1, 6), ShadowFoxOreDict.RAINBOW_PETAL, BotaniaOreDict.PESTLE_AND_MORTAR)
+        recipeRainbowPetalGrinding = BotaniaAPI.getLatestAddedRecipe()
+
+        addShapelessOreDictRecipe(ItemStack(ShadowFoxItems.resource, 2, 7), ShadowFoxOreDict.RAINBOW_FLOWER)
+        recipeRainbowDoublePetal = BotaniaAPI.getLatestAddedRecipe()
+
+        addShapelessOreDictRecipe(ItemStack(ShadowFoxItems.resource, 4, 7), ShadowFoxOreDict.RAINBOW_DOUBLE_FLOWER)
+        recipeRainbowPetal = BotaniaAPI.getLatestAddedRecipe()
+
 
         recipeShimmerQuartz = addQuartzRecipes(ShadowFoxBlocks.shimmerQuartz, ShadowFoxBlocks.shimmerQuartzStairs, ShadowFoxBlocks.shimmerQuartzSlab)
 

@@ -20,6 +20,7 @@ import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.IDoublePlant
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.BlockRainbowDoubleGrass
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentTallGrassMod0
@@ -33,7 +34,7 @@ import java.awt.Color
 import java.util.*
 import kotlin.properties.Delegates
 
-public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), ILexiconable {
+public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IDoublePlant, ILexiconable {
 
     val name = "irisDoubleGrass$colorSet"
     val TYPES: Int = 8
@@ -163,6 +164,14 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
         return !isTop(meta)
     }
 
+    override fun getBottomIcon(lowerMeta: Int): IIcon? {
+        return bottomIcon
+    }
+
+    override fun getTopIcon(lowerMeta: Int): IIcon? {
+        return topIcon
+    }
+
     public class ColoredDoublePlantRenderer : ISimpleBlockRenderingHandler {
         public override fun getRenderId(): Int {
             return Constants.doubleFlowerRenderID
@@ -209,10 +218,8 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IL
                 return false
             }
             var iicon: IIcon? = null
-            if (block is BlockColoredDoubleGrass)
-                iicon = if ((i1 and 8) != 0) block.topIcon else block.bottomIcon
-            else if (block is BlockRainbowDoubleGrass)
-                iicon = if ((i1 and 8) != 0) block.topIcon else block.bottomIcon
+            if (block is IDoublePlant)
+                iicon = if ((i1 and 8) != 0) block.getTopIcon(world.getBlockMetadata(x, y - 1, z)) else block.getBottomIcon(world.getBlockMetadata(x, y, z))
             renderer.drawCrossedSquares(iicon, d19, d0, d1, 1.0f)
             return true
         }

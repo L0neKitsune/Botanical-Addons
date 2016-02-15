@@ -6,9 +6,11 @@ import net.minecraft.block.Block
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.passive.EntitySheep
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.item.ItemBlockWithMetadata
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.util.StatCollector
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.IDoublePlant
 import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.BlockRainbowDoubleGrass
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import java.awt.Color
@@ -53,10 +55,27 @@ open class ItemIridescentTallGrassMod0(par2Block: Block) : ItemSubtypedBlockMod(
     }
 }
 
-open class ItemRainbowDoubleGrassMod(var par2Block: Block) : ItemIridescentBlockMod(par2Block) {
+open class ItemRainbowGrassMod(var par2Block: Block) : ItemBlockWithMetadata(par2Block, par2Block) {
 
-    override fun getIcon(stack: ItemStack, pass: Int): IIcon {
-        return (par2Block as BlockRainbowDoubleGrass).topIcon
+    override fun getUnlocalizedNameInefficiently(par1ItemStack: ItemStack): String {
+        return super.getUnlocalizedNameInefficiently(par1ItemStack).replace("tile.", "tile.shadowfox_botany:") + par1ItemStack.itemDamage
+    }
+
+    fun addStringToTooltip(s: String, tooltip: MutableList<Any?>?) {
+        tooltip!!.add(s.replace("&".toRegex(), "\u00a7"))
+    }
+
+    override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>?, par4: Boolean) {
+        if (par1ItemStack == null) return
+        if (par1ItemStack.itemDamage == 0)
+            addStringToTooltip("&7" + StatCollector.translateToLocal("misc.shadowfox_botany.color.16") + "&r", par3List)
+    }
+}
+
+open class ItemRainbowDoubleGrassMod(par2Block: Block) : ItemRainbowGrassMod(par2Block) {
+
+    override fun getIcon(stack: ItemStack, pass: Int): IIcon? {
+        return (par2Block as IDoublePlant).getTopIcon(stack.itemDamage)
     }
 }
 

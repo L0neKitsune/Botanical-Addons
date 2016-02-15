@@ -19,6 +19,7 @@ import net.minecraft.world.World
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
+import ninja.shadowfox.shadowfox_botany.common.blocks.base.IDoublePlant
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemRainbowDoubleGrassMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
@@ -29,11 +30,14 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 import kotlin.properties.Delegates
 
-public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
+public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable, IDoublePlant {
 
     val name = "rainbowDoubleGrass"
-    var topIcon: IIcon by Delegates.notNull()
-    var bottomIcon: IIcon by Delegates.notNull()
+    var topIcon: IIcon? = null
+    var bottomIcon: IIcon? = null
+
+    var topFlowerIcon: IIcon? = null
+    var bottomFlowerIcon: IIcon? = null
 
     init {
         setCreativeTab(ShadowFoxCreativeTab)
@@ -49,6 +53,8 @@ public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
         if (event.map.textureType == 0) {
             this.topIcon = InterpolatedIconHelper.forBlock(event.map, this, "Top")!!
             this.bottomIcon = InterpolatedIconHelper.forBlock(event.map, this)!!
+            this.topFlowerIcon = InterpolatedIconHelper.forBlock(event.map, this, "FlowerTop")!!
+            this.bottomFlowerIcon = InterpolatedIconHelper.forBlock(event.map, this, "Flower")!!
         }
     }
 
@@ -81,8 +87,9 @@ public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
         return 0xFFFFFF
     }
 
-    override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>?) {
-        list!!.add(ItemStack(item))
+    override fun getSubBlocks(item: Item?, tab: CreativeTabs?, list: MutableList<Any?>) {
+        list.add(ItemStack(item))
+        list.add(ItemStack(item, 1, 1))
     }
 
     @SideOnly(Side.CLIENT)
@@ -90,23 +97,13 @@ public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
     }
 
     @SideOnly(Side.CLIENT)
-    override fun getIcon(side: Int, meta: Int): IIcon {
-        return this.topIcon
+    override fun getIcon(side: Int, meta: Int): IIcon? {
+        return getTopIcon(meta)
     }
 
     @SideOnly(Side.CLIENT)
-    override fun func_149888_a(top: Boolean, index: Int): IIcon {
-        return if (top) this.topIcon else this.bottomIcon
-    }
-
-    fun dropBlock(world: World, x: Int, y: Int, z: Int, meta: Int, player: EntityPlayer): Boolean {
-        if (isTop(meta)) {
-            return false
-        } else {
-            player.addStat(StatList.mineBlockStatArray[Block.getIdFromBlock(this)], 1)
-            this.dropBlockAsItem(world, x, y, z, ItemStack(ShadowFoxBlocks.rainbowGrass, 2, meta))
-            return true
-        }
+    override fun func_149888_a(top: Boolean, index: Int): IIcon? {
+        return if (top) this.getTopIcon(index) else this.getBottomIcon(index)
     }
 
     override fun getItemDropped(meta: Int, random: Random, fortune: Int): Item? {
@@ -119,10 +116,16 @@ public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
         if (isTop(meta)) {
             if (y > 0 && world.getBlock(x, y - 1, z) == this) {
                 var downMeta = world.getBlockMetadata(x, y - 1, z)
-                ret.add(ItemStack(ShadowFoxBlocks.irisGrass, 2, downMeta))
+                if (downMeta == 1)
+                    ret.add(ItemStack(this, 1, 1))
+                else
+                    ret.add(ItemStack(ShadowFoxBlocks.irisGrass, 2, downMeta))
             }
         } else {
-            ret.add(ItemStack(ShadowFoxBlocks.irisGrass, 2, meta))
+            if (meta == 1)
+                ret.add(ItemStack(this, 1, 1))
+            else
+                ret.add(ItemStack(ShadowFoxBlocks.irisGrass, 2, meta))
         }
         return ret
     }
@@ -132,11 +135,18 @@ public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable {
     }
 
     override fun isShearable(item: ItemStack, world: IBlockAccess, x: Int, y: Int, z: Int): Boolean {
-        var meta = world.getBlockMetadata(x, y, z)
-        return !isTop(meta)
+        return true
     }
 
     override fun getEntry(p0: World?, p1: Int, p2: Int, p3: Int, p4: EntityPlayer?, p5: ItemStack?): LexiconEntry? {
         return LexiconRegistry.pastoralSeeds
+    }
+
+    override fun getBottomIcon(lowerMeta: Int): IIcon? {
+        return if (lowerMeta == 0) bottomIcon else bottomFlowerIcon
+    }
+
+    override fun getTopIcon(lowerMeta: Int): IIcon? {
+        return if (lowerMeta == 0) topIcon else topFlowerIcon
     }
 }
