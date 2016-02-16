@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack
 import net.minecraftforge.common.util.ForgeDirection
 import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
-import ninja.shadowfox.shadowfox_botany.common.network.WispMessage
 import vazkii.botania.common.Botania
 import vazkii.botania.common.block.ModBlocks
 import java.awt.Color
