@@ -36,7 +36,7 @@ public class IridescentSaplingBaseVariant implements IIridescentSaplingVariant {
 
     @Override
     public List<Block> getAcceptableSoils() {
-        List<Block> soils = new ArrayList();
+        List<Block> soils = new ArrayList<>();
         soils.add(this.soil);
         return soils;
     }
