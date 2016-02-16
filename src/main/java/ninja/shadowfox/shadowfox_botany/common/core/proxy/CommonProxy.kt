@@ -4,6 +4,7 @@ import cpw.mods.fml.common.Loader
 import cpw.mods.fml.common.event.FMLInitializationEvent
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
+import net.minecraft.block.BlockDispenser
 import net.minecraft.item.ItemStack
 import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
@@ -11,6 +12,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.brew.ShadowFoxPotions
 import ninja.shadowfox.shadowfox_botany.common.compat.multipart.MultipartHandler
 import ninja.shadowfox.shadowfox_botany.common.compat.thaumcraft.ThaumcraftAspects
+import ninja.shadowfox.shadowfox_botany.common.core.handler.BifrostFlowerDispenserBehavior
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 import ninja.shadowfox.shadowfox_botany.common.core.handler.HilarityHandler
 import ninja.shadowfox.shadowfox_botany.common.crafting.ModRecipes
@@ -36,6 +38,8 @@ public open class CommonProxy {
         ShadowFoxThrowables
 
         HilarityHandler.register()
+
+        BlockDispenser.dispenseBehaviorRegistry.putObject(ShadowFoxItems.resource, BifrostFlowerDispenserBehavior())
 
         if (ShadowfoxBotany.thaumcraftLoaded) ThaumcraftAspects.initAspects()
     }
