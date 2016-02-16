@@ -43,21 +43,21 @@ class HilarityHandler {
     }
 
     val itemsRequiredWire = arrayListOf(
-            ItemStack(ModItems.dice),                                         // Dice of Fate            Chaos
-            ItemStack(ModItems.manaResource, 1, 5),                           // Gaia Spirit             Divinity
-            ItemStack(ShadowFoxItems.resource, 1, 1),                         // Thunderous Splinters    Lightning
-            ModRecipes.skullStack("Tristaric"),                               // Tris's head             Humanity
-            ItemStack(ModItems.rainbowRod, 1, OreDictionary.WILDCARD_VALUE),  // The Rod of the Bifrost  Order
-            ItemStack(ModItems.manaResource, 1, 4)                            // Terrasteel              Earth
+            ItemStack(ModItems.dice), //                                        Dice of Fate            Chaos
+            ItemStack(ModItems.manaResource, 1, 5), //                          Gaia Spirit             Divinity
+            ItemStack(ShadowFoxItems.resource, 1, 1), //                        Thunderous Splinters    Lightning
+            ModRecipes.skullStack("Tristaric"), //                              Tris's head             Humanity
+            ItemStack(ModItems.rainbowRod, 1, OreDictionary.WILDCARD_VALUE), // The Rod of the Bifrost  Order
+            ItemStack(ModItems.manaResource, 1, 4) //                           Terrasteel              Earth
     )
 
     val itemsRequiredTris = arrayListOf(
-            ItemStack(ModItems.dice),                                         // Dice of Fate            Chaos
-            ItemStack(ModItems.manaResource, 1, 5),                           // Gaia Spirit             Divinity
-            ItemStack(ModItems.rune, 1, 13),                                  // Rune of Wrath           Lightning
-            ModRecipes.skullStack("yrsegal"),                                 // Wire's head             Humanity
+            ItemStack(ModItems.dice), //                                         Dice of Fate            Chaos
+            ItemStack(ModItems.manaResource, 1, 5), //                           Gaia Spirit             Divinity
+            ItemStack(ModItems.rune, 1, 13), //                                  Rune of Wrath           Lightning
+            ModRecipes.skullStack("yrsegal"), //                                 Wire's head             Humanity
             ItemStack(ModItems.laputaShard, 1, OreDictionary.WILDCARD_VALUE), // The Shard of Laputa     Order
-            ItemStack(ModItems.dirtRod)                                       // The Rod of the Lands    Earth
+            ItemStack(ModItems.dirtRod) //                                       The Rod of the Lands    Earth
     )
 
     init {
@@ -134,13 +134,13 @@ class HilarityHandler {
 
         private val platformPositions = arrayOf(
                 Pos(2, 0, 2),
-                Pos(-2,0, 2),
-                Pos(-2,0,-2),
-                Pos(2, 0,-2),
+                Pos(-2, 0, 2),
+                Pos(-2, 0, -2),
+                Pos(2, 0, -2),
                 Pos(4, 0, 0),
                 Pos(0, 0, 4),
-                Pos(-4,0, 0),
-                Pos(0, 0,-4)
+                Pos(-4, 0, 0),
+                Pos(0, 0, -4)
         )
 
         private fun getInfusionPlatforms(world: World, x: Int, y: Int, z: Int): MutableList<PosPair> {

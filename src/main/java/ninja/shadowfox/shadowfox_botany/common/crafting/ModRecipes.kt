@@ -560,7 +560,7 @@ public object ModRecipes {
 
         // Todo replace mushroom stew recipe
 
-        addOreDictRecipe(ItemStack(BotaniaItems.flowerBag),"WPW", "W W", " W ", 'P', ShadowFoxOreDict.PETAL, 'W', ItemStack(Blocks.wool, 1, 32767))
+        addOreDictRecipe(ItemStack(BotaniaItems.flowerBag), "WPW", "W W", " W ", 'P', ShadowFoxOreDict.PETAL, 'W', ItemStack(Blocks.wool, 1, 32767))
         CraftingManager.getInstance().recipeList.remove(ModCraftingRecipes.recipeFlowerBag)
         ModCraftingRecipes.recipeFlowerBag = BotaniaAPI.getLatestAddedRecipe()
 

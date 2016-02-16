@@ -1,11 +1,9 @@
 package ninja.shadowfox.shadowfox_botany.api;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.common.util.EnumHelper;
 import ninja.shadowfox.shadowfox_botany.api.item.ThrowableCollidingItem;
 import ninja.shadowfox.shadowfox_botany.api.recipe.RecipeTreeCrafting;
@@ -21,15 +19,12 @@ public class ShadowFoxAPI {
 
     public static Item.ToolMaterial RUNEAXE = EnumHelper.addToolMaterial("RUNEAXE", 4, 1561, 8f, 2f, 50);
 
-    public static List<RecipeTreeCrafting> treeRecipes = new ArrayList();
-    public static List<IIridescentSaplingVariant> treeVariants = new ArrayList();
-    public static Map<String, ThrowableCollidingItem> collidingItemHashMap = new LinkedHashMap();
+    public static List<RecipeTreeCrafting> treeRecipes = new ArrayList<>();
+    public static List<IIridescentSaplingVariant> treeVariants = new ArrayList<>();
+    public static Map<String, ThrowableCollidingItem> collidingItemHashMap = new LinkedHashMap<>();
     public static ThrowableCollidingItem fallbackTcl = new ThrowableCollidingItem("shadowfox_fallback", new ItemStack(Items.blaze_rod),
-            new ThrowableCollidingItem.OnImpactEvent() {
-                @Override
-                public void onImpact(EntityThrowable throwable, MovingObjectPosition movingObject) {
+            (throwable, movingObject) -> {
 
-                }
             });
 
     /**
@@ -150,7 +145,7 @@ public class ShadowFoxAPI {
      * @return A list of all Iridescent Sapling soils.
      */
     public static List<Block> iridescentSoils() {
-        List<Block> soils = new ArrayList<Block>();
+        List<Block> soils = new ArrayList<>();
         for (IIridescentSaplingVariant variant : treeVariants) {
             soils.addAll(variant.getAcceptableSoils());
         }

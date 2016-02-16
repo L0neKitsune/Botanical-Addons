@@ -7,7 +7,6 @@ import net.minecraft.client.gui.ScaledResolution
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.client.render.tile.MultipassRenderer
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockContainerMod
@@ -21,7 +20,7 @@ import vazkii.botania.api.wand.IWandHUD
 import java.util.*
 
 
-open class BlockTreeCrafter(name: String = "treeCrafter") : BlockContainerMod<TileTreeCrafter>(Material.wood), IWandHUD, ILexiconable, IMultipassRenderer {
+open class BlockTreeCrafter(name: String, val block: Block) : BlockContainerMod<TileTreeCrafter>(Material.wood), IWandHUD, ILexiconable, IMultipassRenderer {
     internal var random: Random
     override val registerInCreative: Boolean = false
 
@@ -73,10 +72,5 @@ open class BlockTreeCrafter(name: String = "treeCrafter") : BlockContainerMod<Ti
     override fun getRenderBlockPass(): Int = 1
     override fun getRenderType(): Int = Constants.multipassRenderingID
 
-    override fun innerBlock(meta: Int): Block = ShadowFoxBlocks.coloredPlanks
-    override fun innerBlock(world: IBlockAccess?, x: Int, y: Int, z: Int): Block = innerBlock(0)
-}
-
-public class BlockTreeCrafterRainbow() : BlockTreeCrafter(name = "treeCrafterRB") {
-    override fun innerBlock(meta: Int): Block = ShadowFoxBlocks.rainbowPlanks
+    override fun innerBlock(meta: Int): Block = block
 }

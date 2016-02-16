@@ -173,8 +173,8 @@ public object ShadowFoxBlocks {
         rainbowTallGrass = BlockRainbowDoubleGrass()
         itemDisplay = BlockItemDisplay()
         treeCrafter = TileTreeCrafter.makeMultiblockSet()
-        treeCrafterBlock = BlockTreeCrafter()
-        treeCrafterBlockRB = BlockTreeCrafterRainbow()
+        treeCrafterBlock = BlockTreeCrafter("treeCrafter", coloredPlanks)
+        treeCrafterBlockRB = BlockTreeCrafter("treeCrafterRB", rainbowPlanks)
 
         lightningSapling = BlockLightningSapling()
         lightningWood = BlockLightningWood()

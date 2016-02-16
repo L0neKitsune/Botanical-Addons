@@ -21,7 +21,6 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.IDoublePlant
-import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.BlockRainbowDoubleGrass
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentTallGrassMod0
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentTallGrassMod1

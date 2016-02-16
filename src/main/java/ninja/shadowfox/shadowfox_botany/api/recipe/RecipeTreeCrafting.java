@@ -15,7 +15,7 @@ import java.util.List;
 public class RecipeTreeCrafting extends RecipePetals {
 
     private Block outputBlock;
-    private List inputs;
+    private List<Object> inputs;
     private int meta;
     private int throttle = -1;
     private int mana;
@@ -25,7 +25,7 @@ public class RecipeTreeCrafting extends RecipePetals {
         this.mana = mana;
         this.outputBlock = outputBlock;
         this.meta = meta;
-        this.inputs = new ArrayList(Arrays.asList(inputs));
+        this.inputs = new ArrayList<>(Arrays.asList(inputs));
     }
 
     public RecipeTreeCrafting(int mana, Block outputBlock, int meta, int throttle, Object... inputs) {
@@ -34,7 +34,7 @@ public class RecipeTreeCrafting extends RecipePetals {
     }
 
     public boolean matches(List<ItemStack> items) {
-        List inputsMissing = new ArrayList(inputs);
+        List<Object> inputsMissing = new ArrayList<>(inputs);
 
         for (ItemStack i : items) {
             for (int j = 0; j < inputsMissing.size(); j++) {

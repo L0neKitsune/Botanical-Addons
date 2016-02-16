@@ -12,7 +12,6 @@ import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.stats.StatList
 import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
@@ -28,7 +27,6 @@ import ninja.shadowfox.shadowfox_botany.lib.Constants
 import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
-import kotlin.properties.Delegates
 
 public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable, IDoublePlant {
 

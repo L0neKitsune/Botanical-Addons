@@ -19,8 +19,6 @@ import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.core.ShadowFoxCreativeTab
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentBlockMod
-import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemIridescentGrassMod
 import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemRainbowGrassMod
 import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
@@ -43,8 +41,10 @@ public class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
 
     @SideOnly(Side.CLIENT)
     override fun getBlockColor(): Int = 0xFFFFFF
+
     @SideOnly(Side.CLIENT)
     override fun getRenderColor(meta: Int): Int = 0xFFFFFF
+
     @SideOnly(Side.CLIENT)
     override fun colorMultiplier(world: IBlockAccess?, x: Int, y: Int, z: Int): Int = 0xFFFFFF
 

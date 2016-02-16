@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
 import net.minecraft.util.StatCollector
 import ninja.shadowfox.shadowfox_botany.common.blocks.base.IDoublePlant
-import ninja.shadowfox.shadowfox_botany.common.blocks.rainbow.BlockRainbowDoubleGrass
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import java.awt.Color
 import kotlin.properties.Delegates
