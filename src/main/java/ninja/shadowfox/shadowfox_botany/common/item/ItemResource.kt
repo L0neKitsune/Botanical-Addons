@@ -16,10 +16,13 @@ import net.minecraft.util.IIcon
 import net.minecraft.world.World
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.common.MinecraftForge
+import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 import ninja.shadowfox.shadowfox_botany.common.utils.helper.InterpolatedIconHelper
 import vazkii.botania.api.recipe.IFlowerComponent
+import vazkii.botania.common.Botania
 import vazkii.botania.common.block.ModBlocks
+import java.awt.Color
 
 class ItemResource() : ItemMod("resource"), IFlowerComponent, IFuelHandler {
 
@@ -59,7 +62,8 @@ class ItemResource() : ItemMod("resource"), IFlowerComponent, IFuelHandler {
 
     override fun getParticleColor(stack: ItemStack): Int {
         return when (stack.itemDamage) {
-            4, 7 -> 0x6B2406
+            4 -> 0x6B2406
+            7 -> ItemIridescent.rainbowColor()
             else -> 0xFFFFFF
         }
     }
@@ -79,6 +83,18 @@ class ItemResource() : ItemMod("resource"), IFlowerComponent, IFuelHandler {
     override fun onItemUse(stack: ItemStack, player: EntityPlayer?, world: World, x: Int, y: Int, z: Int, par7: Int, par8: Float, par9: Float, par10: Float): Boolean {
         if (world.getBlock(x, y, z) == ModBlocks.pool && world.getBlockMetadata(x, y, z) == 0 && stack.itemDamage == 6) {
             world.setBlockMetadataWithNotify(x, y, z, 3, 2)
+            stack.stackSize--
+            return true
+        } else if (world.getBlock(x, y, z) == ModBlocks.flower && stack.itemDamage == 6) {
+            world.setBlock(x, y, z, ShadowFoxBlocks.rainbowGrass, 1, 3)
+            for (i in 0..40) {
+                val color = Color.getHSBColor(Math.random().toFloat()+1f/2f, 1f, 1f)
+                Botania.proxy.wispFX(world,
+                        x.toDouble() + Math.random(), y.toDouble() + Math.random(), z.toDouble() + Math.random(),
+                        color.red/255f, color.green/255f, color.blue/255f,
+                        0.5f, 0f, 0.125f, 0f)
+            }
+            world.playSoundEffect(x.toDouble(), y.toDouble(), z.toDouble(), "botania:enchanterEnchant", 1f, 1f)
             stack.stackSize--
             return true
         }
