@@ -28,6 +28,7 @@ object LibOreDict {
     val DYES = Array(COLORS.size, { i -> "dye${COLORS[i]}" })
     val FLORAL_POWDER = "dyeFloralPowder"
     val PETAL = "petalMystic"
+    val MUSHROOM = "mushroomShimmer"
 
     val RAINBOW_PETAL = "petalRainbow"
     val RAINBOW_FLOWER = "mysticFlowerRainbow"

@@ -109,6 +109,8 @@ public object ModRecipes {
 
         GameRegistry.addRecipe(RecipeRingDyes())
         RecipeSorter.register("shadowfox_botany:ringdye", RecipeRingDyes::class.java, Category.SHAPELESS, "")
+        GameRegistry.addRecipe(RecipeRainbowLensDye())
+        RecipeSorter.register("shadowfox_botany:lensdye", RecipeRainbowLensDye::class.java, Category.SHAPELESS, "")
 
         for (i in 0..15)
             addOreDictRecipe(ItemStack(ShadowFoxBlocks.coloredDirtBlock, 8, i),
@@ -544,6 +546,8 @@ public object ModRecipes {
 
         recipesStar = BotaniaAPI.getLatestAddedRecipes(17)
 
+
+
         addShapelessOreDictRecipe(ItemStack(BotaniaItems.fertilizer, if (Botania.gardenOfGlassLoaded) 3 else 1), ItemStack(Items.dye, 1, 15), ShadowFoxOreDict.FLORAL_POWDER, ShadowFoxOreDict.FLORAL_POWDER, ShadowFoxOreDict.FLORAL_POWDER, ShadowFoxOreDict.FLORAL_POWDER)
         CraftingManager.getInstance().recipeList.remove(ModCraftingRecipes.recipeFertilizerPowder)
         ModCraftingRecipes.recipeFertilizerPowder = BotaniaAPI.getLatestAddedRecipe()
@@ -558,7 +562,16 @@ public object ModRecipes {
         CraftingManager.getInstance().recipeList.remove(ModCraftingRecipes.recipeShimmerwoodPlanks)
         ModCraftingRecipes.recipeShimmerwoodPlanks = BotaniaAPI.getLatestAddedRecipe()
 
-        // Todo replace mushroom stew recipe
+        addShapelessOreDictRecipe(ItemStack(Items.mushroom_stew), ShadowFoxOreDict.MUSHROOM, ShadowFoxOreDict.MUSHROOM, ItemStack(Items.bowl))
+
+        addOreDictRecipe(ItemStack(BotaniaBlocks.altar), "SPS", " C ", "CCC", 'S', "slabCobblestone", 'P', ShadowFoxOreDict.RAINBOW_PETAL, 'C', "cobblestone")
+        ModCraftingRecipes.recipesApothecary.add(BotaniaAPI.getLatestAddedRecipe())
+
+        addOreDictRecipe(ItemStack(BotaniaBlocks.spreader), "WWW", "GP ", "WWW", 'W', BotaniaOreDict.LIVING_WOOD, 'P', ShadowFoxOreDict.RAINBOW_PETAL, 'G', if (Botania.gardenOfGlassLoaded) BotaniaOreDict.LIVING_WOOD else "ingotGold")
+        ModCraftingRecipes.recipesSpreader.add(BotaniaAPI.getLatestAddedRecipe())
+
+        addOreDictRecipe(ItemStack(BotaniaBlocks.spreader, 1, 2), "WWW", "EP ", "WWW", 'W', BotaniaOreDict.DREAM_WOOD, 'P', ShadowFoxOreDict.RAINBOW_PETAL, 'E', BotaniaOreDict.ELEMENTIUM)
+        ModCraftingRecipes.recipesDreamwoodSpreader.add(BotaniaAPI.getLatestAddedRecipe())
 
         addOreDictRecipe(ItemStack(BotaniaItems.flowerBag), "WPW", "W W", " W ", 'P', ShadowFoxOreDict.PETAL, 'W', ItemStack(Blocks.wool, 1, 32767))
         CraftingManager.getInstance().recipeList.remove(ModCraftingRecipes.recipeFlowerBag)
@@ -572,7 +585,6 @@ public object ModRecipes {
 
         addShapelessOreDictRecipe(ItemStack(ShadowFoxItems.resource, 4, 7), ShadowFoxOreDict.RAINBOW_DOUBLE_FLOWER)
         recipeRainbowPetal = BotaniaAPI.getLatestAddedRecipe()
-
 
         recipeShimmerQuartz = addQuartzRecipes(ShadowFoxBlocks.shimmerQuartz, ShadowFoxBlocks.shimmerQuartzStairs, ShadowFoxBlocks.shimmerQuartzSlab)
 

@@ -44,7 +44,7 @@ public object ShadowFoxBlocks {
     public var irisLeaves1: Block
     public var rainbowLeaves: Block
     public var irisGrass: Block
-    public var rainbowGrass: Block
+    public var rainbowGrass: BlockRainbowGrass
 
     public var irisWood0: Block
     public var irisWood1: Block
@@ -361,6 +361,9 @@ public object ShadowFoxBlocks {
 
         OreDictionary.registerOre(LibOreDict.RAINBOW_FLOWER, ItemStack(rainbowGrass, 1, 1))
         OreDictionary.registerOre(LibOreDict.RAINBOW_DOUBLE_FLOWER, ItemStack(rainbowTallGrass, 1, 1))
+
+        OreDictionary.registerOre(LibOreDict.MUSHROOM, ItemStack(BotaniaBlocks.mushroom, 1, OreDictionary.WILDCARD_VALUE))
+        OreDictionary.registerOre(LibOreDict.MUSHROOM, ItemStack(rainbowGrass, 1, rainbowGrass.SHROOM))
 
         OreDictionary.registerOre("treeSapling", irisSapling)
 
