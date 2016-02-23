@@ -8,7 +8,7 @@ import ninja.shadowfox.shadowfox_botany.common.blocks.base.BlockLeavesMod
 
 open class ItemBlockMod(block: Block) : ItemBlock(block) {
     override fun setUnlocalizedName(p_77655_1_: String?): ItemBlock? {
-        (this as Item).setUnlocalizedName(p_77655_1_)
+        (this as Item).unlocalizedName = p_77655_1_
         return this
     }
 

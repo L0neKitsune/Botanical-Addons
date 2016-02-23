@@ -17,7 +17,7 @@ object ShadowFoxEntity {
 
         var id = 0
         EntityRegistry.registerModEntity(EntityThrowableItem::class.java, "shadowfox_botany:thrownItem", ++id, ShadowfoxBotany.instance, 256, 10, true)
-        EntityRegistry.registerModEntity(EntityKitsunebi::class.java, "shadowfox_botany:kitsuneArrow", ++id, ShadowfoxBotany.instance, 500, 10, true)
+        EntityRegistry.registerModEntity(EntityKitsunebi::class.java, "shadowfox_botany:kitsunebi", ++id, ShadowfoxBotany.instance, 256, 10, true)
 
         for (i in BiomeGenBase.getBiomeGenArray()) {
             if (i != null && i != BiomeGenBase.hell && i != BiomeGenBase.sky && i != BiomeGenBase.mushroomIsland && i != BiomeGenBase.mushroomIslandShore)

@@ -18,7 +18,7 @@ class EntityKitsunebi : EntityFireball {
         val KITSUNEBI_OFFSETS_X = arrayOf(2.00, 1.53, 0.35, -1.00, -1.88, -1.88, -1.00, 0.35, 1.53)
         val KITSUNEBI_OFFSETS_Y = arrayOf(0.00, 1.29, 1.97, 1.73, 0.68, -0.68, -1.73, -1.97, -1.29)
 
-        class DSKitsuneBolt(bolt: EntityKitsunebi, player: Entity) : EntityDamageSourceIndirect("kitsuneBolt", bolt, player) {
+        class DSKitsuneBolt(bolt: EntityKitsunebi, player: Entity) : EntityDamageSourceIndirect("kitsunebi", bolt, player) {
             init {
                 setDamageBypassesArmor()
                 setProjectile()
@@ -26,7 +26,7 @@ class EntityKitsunebi : EntityFireball {
             }
         }
 
-        val kitsuneAttackDamage = RangedAttribute("shadowfox_botany.kitsuneAttackDamage", 0.0, 0.0, Double.MAX_VALUE)
+        val kitsuneAttackDamage = RangedAttribute("shadowfox_botany.kitsunebiAttackDamage", 0.0, 0.0, Double.MAX_VALUE)
     }
 
     var damage: Double = 0.0
@@ -210,18 +210,16 @@ class EntityKitsunebi : EntityFireball {
     }
 
     public override fun writeEntityToNBT(p_writeEntityToNBT_1_: NBTTagCompound) {
-        p_writeEntityToNBT_1_.setTag("direction", newDoubleNBTList(*doubleArrayOf(motionX, motionY, motionZ)))
+        super.writeEntityToNBT(p_writeEntityToNBT_1_)
+        p_writeEntityToNBT_1_.setDouble("damage", damage)
+        p_writeEntityToNBT_1_.setBoolean("follow", following_shooter)
+
     }
 
     public override fun readEntityFromNBT(p_readEntityFromNBT_1_: NBTTagCompound) {
-        if (p_readEntityFromNBT_1_.hasKey("direction", 9)) {
-            val var2 = p_readEntityFromNBT_1_.getTagList("direction", 6)
-            motionX = var2.func_150309_d(0)
-            motionY = var2.func_150309_d(1)
-            motionZ = var2.func_150309_d(2)
-        } else {
-            setDead()
-        }
+        damage = p_readEntityFromNBT_1_.getDouble("damage")
+        following_shooter = p_readEntityFromNBT_1_.getBoolean("follow")
+        super.readEntityFromNBT(p_readEntityFromNBT_1_)
 
     }
 
@@ -233,49 +231,33 @@ class EntityKitsunebi : EntityFireball {
         return .35f
     }
 
-    fun setFlying(entity: Entity) {
-        following_shooter = false
-
-        this.setBeenAttacked()
-        val var3 = entity.lookVec
-        if (var3 != null) {
-            this.motionX = var3.xCoord
-            this.motionY = var3.yCoord
-            this.motionZ = var3.zCoord
-            this.accelerationX = this.motionX * 0.1
-            this.accelerationY = this.motionY * 0.1
-            this.accelerationZ = this.motionZ * 0.1
-        }
-
-
+    override fun attackEntityFrom(p_attackEntityFrom_1_: DamageSource?, p_attackEntityFrom_2_: Float): Boolean {
+//        if (isEntityInvulnerable) {
+//            return false
+//        } else {
+//            setBeenAttacked()
+//            if (p_attackEntityFrom_1_!!.entity != null) {
+//                val var3 = p_attackEntityFrom_1_.entity.lookVec
+//                if (var3 != null) {
+//                    motionX = var3.xCoord
+//                    motionY = var3.yCoord
+//                    motionZ = var3.zCoord
+//                    accelerationX = motionX * 0.1
+//                    accelerationY = motionY * 0.1
+//                    accelerationZ = motionZ * 0.1
+//                }
+//
+//                if (p_attackEntityFrom_1_.entity is EntityLivingBase) {
+//                    shootingEntity = p_attackEntityFrom_1_.entity as EntityLivingBase
+//                }
+//
+//                return true
+//            } else {
+//                return false
+//            }
+//        }
+        return false
     }
-
-    //    override fun attackEntityFrom(p_attackEntityFrom_1_: DamageSource?, p_attackEntityFrom_2_: Float): Boolean {
-    //        if (isEntityInvulnerable) {
-    //            return false
-    //        } else {
-    //            setBeenAttacked()
-    //            if (p_attackEntityFrom_1_!!.entity != null) {
-    //                val var3 = p_attackEntityFrom_1_.entity.lookVec
-    //                if (var3 != null) {
-    //                    motionX = var3.xCoord
-    //                    motionY = var3.yCoord
-    //                    motionZ = var3.zCoord
-    //                    accelerationX = motionX * 0.1
-    //                    accelerationY = motionY * 0.1
-    //                    accelerationZ = motionZ * 0.1
-    //                }
-    //
-    //                if (p_attackEntityFrom_1_.entity is EntityLivingBase) {
-    //                    shootingEntity = p_attackEntityFrom_1_.entity as EntityLivingBase
-    //                }
-    //
-    //                return true
-    //            } else {
-    //                return false
-    //            }
-    //        }
-    //    }
 
     @SideOnly(Side.CLIENT)
     override fun getShadowSize(): Float {

@@ -1,6 +1,14 @@
 package ninja.shadowfox.shadowfox_botany.common.lexicon
 
+import codechicken.core.CommonUtils
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import net.minecraft.block.Block
+import net.minecraft.block.material.Material
+import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
+import net.minecraft.util.ChunkCoordinates
+import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.compat.thaumcraft.ThaumcraftSuffusionRecipes
@@ -11,9 +19,15 @@ import ninja.shadowfox.shadowfox_botany.common.item.blocks.ItemStarPlacer
 import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.LexiconEntry
 import vazkii.botania.api.lexicon.LexiconRecipeMappings
+import vazkii.botania.api.lexicon.multiblock.Multiblock
+import vazkii.botania.api.lexicon.multiblock.MultiblockSet
+import vazkii.botania.api.lexicon.multiblock.component.MultiblockComponent
 import vazkii.botania.common.Botania
 import vazkii.botania.common.lexicon.LexiconData
 import vazkii.botania.common.lexicon.page.*
+import java.io.File
+import java.io.FilenameFilter
+import java.util.*
 
 public object LexiconRegistry {
 
@@ -27,6 +41,7 @@ public object LexiconRegistry {
     val colorOverride: LexiconEntry
     val treeCrafting: LexiconEntry
     val dendrology: ShadowFoxLexiconCategory
+    val blueprints: ShadowFoxLexiconCategory
     val attribution: LexiconEntry
     val sealCreepers: LexiconEntry
     val kindling: LexiconEntry
@@ -43,12 +58,16 @@ public object LexiconRegistry {
     val specialAxe: LexiconEntry
     val frozenStar: LexiconEntry
     val dagger: LexiconEntry
+    val blueprint: LexiconEntry
+
+    var blueprint_list: MutableList<MultiblockSet> = ArrayList()
 
     lateinit var tctrees: LexiconEntry
 
     init {
 
         dendrology = ShadowFoxLexiconCategory("dendrology", 1)
+        blueprints = ShadowFoxLexiconCategory("blueprints", 1)
 
         coloredDirt = ShadowfoxLexiconEntry("coloredDirt", BotaniaAPI.categoryMisc, ShadowFoxBlocks.rainbowDirtBlock)
         coloredDirt.setLexiconPages(PageText("0"), PageCraftingRecipe("1", ModRecipes.recipesColoredDirt))
@@ -170,7 +189,7 @@ public object LexiconRegistry {
 
         specialAxe = ShadowFoxRelicEntry("andmyaxe", BotaniaAPI.categoryAlfhomancy, ShadowFoxItems.wireAxe).setKnowledgeType(BotaniaAPI.relicKnowledge)
         specialAxe.setLexiconPages(PageText("0"),
-            PageText("1"))
+                PageText("1"))
 
         dagger = ShadowFoxRelicEntry("dagger", BotaniaAPI.categoryAlfhomancy, ShadowFoxItems.trisDagger).setKnowledgeType(BotaniaAPI.relicKnowledge)
         dagger.setLexiconPages(PageText("0"))
@@ -302,5 +321,46 @@ public object LexiconRegistry {
         }
         LexiconRecipeMappings.map(ItemStack(ShadowFoxBlocks.rainbowTallGrass), pastoralSeeds, 0)
 
+        blueprint = ShadowfoxLexiconEntry("irisSapling", blueprints, ShadowFoxBlocks.irisSapling)
+        blueprint.setPriority().setLexiconPages(*loadBlueprints())
     }
+
+    fun loadBlueprints(): Array<PageMultiblock> {
+        var dir = File(CommonUtils.getMinecraftDir(), "botanical_blueprints")
+
+        if (dir.exists()) {
+            var files = dir.listFiles({ p0, p1 -> p1?.endsWith(".json") ?: false })
+
+            return Array (
+                    files.size, { index ->
+
+                var f = files[index]
+
+                var mb = Multiblock()
+                var arr = Gson().fromJson<Blueprint>(f.readText(), Blueprint::class.java)
+
+                for (ele in arr.blocks) {
+                    Block.getBlockFromName(ele.block).let {
+                        for (loc in ele.location) {
+                            mb.addComponent(MultiblockComponent(ChunkCoordinates(
+                                    loc.x, loc.y, loc.z
+                            ), it, loc.meta))
+                        }
+                    }
+                }
+
+                var set = mb.makeSet()
+                blueprint_list.add(set)
+
+                PageMultiblock("0", set)
+            }
+            )
+        }
+
+        return arrayOf()
+    }
+
+    class Blueprint(val name: String, val note: String, val author: String, val blocks: List<BlockElement>)
+    class BlockElement(val block: String, val location: List<LocationElement>)
+    class LocationElement(val x: Int, val y: Int, val z: Int, val meta: Int)
 }
