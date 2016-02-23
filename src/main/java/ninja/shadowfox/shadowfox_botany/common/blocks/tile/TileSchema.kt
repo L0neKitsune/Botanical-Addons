@@ -314,17 +314,17 @@ open class TileSchema() : TileMod() {
         if (ticksAlive - lastDump > 60) {
             lastDump = ticksAlive
             if (pos_x != null && pos_y != null && pos_z != null && mark_x != null && mark_z != null) {
-                dumpFile()
+                dumpFile(p0)
             } else {
                 p0?.addChatMessage(ChatComponentText("Missing Markers"))
             }
         }
     }
 
-    fun dumpFile() {
+    fun dumpFile(p0: EntityPlayer?) {
         try {
             val e = getNewFile()
-            dumpTo(e)
+            dumpTo(e, p0)
 
             NEIClientUtils.printChatMessage(ChatComponentText("Schema dumped to: ${e.path}"))
         } catch (var2: Exception) {
@@ -351,7 +351,7 @@ open class TileSchema() : TileMod() {
     }
 
     @Throws(IOException::class)
-    fun dumpTo(file: File) {
+    fun dumpTo(file: File, p0: EntityPlayer?) {
         class LocationElement(val x: Int, val y: Int, val z: Int, val meta: Int) {
             fun getJson(): JsonObject = JsonObject().apply {
                 addProperty("x", x)
@@ -377,16 +377,23 @@ open class TileSchema() : TileMod() {
             }
         }
 
-        w.print(JsonArray().apply {
-            for (k in map.keys) {
-                if (!k.equals("shadowfox_botany:fillerBlock")) {
-                    add(JsonObject().apply {
-                        addProperty("block", "$k")
-                        add("location", JsonArray().apply { for (v in map[k].orEmpty()) add(v.getJson()) })
-                    })
+        w.print(JsonObject().apply {
+            addProperty("author", "${p0?.displayName}")
+            addProperty("name", "")
+            addProperty("notes", "")
+
+            add("blocks", JsonArray().apply {
+                for (k in map.keys) {
+                    if (!k.equals("shadowfox_botany:fillerBlock")) {
+                        add(JsonObject().apply {
+                            addProperty("block", "$k")
+                            add("location", JsonArray().apply { for (v in map[k].orEmpty()) add(v.getJson()) })
+                        })
+                    }
                 }
-            }
-        })
+            })
+        }
+        )
 
         w.close()
     }

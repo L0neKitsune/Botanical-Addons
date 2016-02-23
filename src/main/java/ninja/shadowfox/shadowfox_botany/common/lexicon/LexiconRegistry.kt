@@ -2,14 +2,10 @@ package ninja.shadowfox.shadowfox_botany.common.lexicon
 
 import codechicken.core.CommonUtils
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
-import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ChunkCoordinates
-import net.minecraft.world.World
-import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.compat.thaumcraft.ThaumcraftSuffusionRecipes
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
@@ -22,11 +18,9 @@ import vazkii.botania.api.lexicon.LexiconRecipeMappings
 import vazkii.botania.api.lexicon.multiblock.Multiblock
 import vazkii.botania.api.lexicon.multiblock.MultiblockSet
 import vazkii.botania.api.lexicon.multiblock.component.MultiblockComponent
-import vazkii.botania.common.Botania
 import vazkii.botania.common.lexicon.LexiconData
 import vazkii.botania.common.lexicon.page.*
 import java.io.File
-import java.io.FilenameFilter
 import java.util.*
 
 public object LexiconRegistry {
@@ -337,14 +331,19 @@ public object LexiconRegistry {
                 var f = files[index]
 
                 var mb = Multiblock()
+
+                //TODO: error handling.
                 var arr = Gson().fromJson<Blueprint>(f.readText(), Blueprint::class.java)
 
                 for (ele in arr.blocks) {
                     Block.getBlockFromName(ele.block).let {
-                        for (loc in ele.location) {
-                            mb.addComponent(MultiblockComponent(ChunkCoordinates(
-                                    loc.x, loc.y, loc.z
-                            ), it, loc.meta))
+                        //TODO: pull request to fix this
+                        if(it.material != Material.water) {
+                            for (loc in ele.location) {
+                                mb.addComponent(MultiblockComponent(ChunkCoordinates(
+                                        loc.x, loc.y, loc.z
+                                ), it, loc.meta))
+                            }
                         }
                     }
                 }
