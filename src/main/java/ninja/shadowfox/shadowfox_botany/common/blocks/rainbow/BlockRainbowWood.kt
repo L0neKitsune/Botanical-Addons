@@ -14,7 +14,7 @@ import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 
 
-public class BlockRainbowWood() : ShadowFoxRotatedPillar(Material.wood), ILexiconable {
+class BlockRainbowWood() : ShadowFoxRotatedPillar(Material.wood), ILexiconable {
 
     private val name = "rainbowWood"
 

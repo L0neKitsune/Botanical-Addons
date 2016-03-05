@@ -39,7 +39,7 @@ import vazkii.botania.common.entity.EntityDoppleganger
 import java.awt.Color
 import java.util.*
 
-public open class ItemLightningRod(name: String = "lightningRod") : ItemMod(name), IManaUsingItem, IAvatarWieldable {
+open class ItemLightningRod(name: String = "lightningRod") : ItemMod(name), IManaUsingItem, IAvatarWieldable {
     private val avatarOverlay = ResourceLocation("shadowfox_botany:textures/model/avatarLightning.png")
     private val COST_AVATAR = 150
 

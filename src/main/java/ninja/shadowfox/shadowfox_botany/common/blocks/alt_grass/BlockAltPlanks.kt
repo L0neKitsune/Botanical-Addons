@@ -31,7 +31,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 
-public class BlockAltPlanks() : BlockMod(MaterialCustomSmeltingWood.instance), ILexiconable, IFuelHandler {
+class BlockAltPlanks() : BlockMod(MaterialCustomSmeltingWood.instance), ILexiconable, IFuelHandler {
 
     private val name = "altPlanks"
     protected var icons: Array<IIcon?> = emptyArray()

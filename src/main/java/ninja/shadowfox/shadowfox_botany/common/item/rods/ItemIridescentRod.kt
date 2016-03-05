@@ -34,7 +34,7 @@ class ItemIridescentRod(name: String = "colorfulSkyDirtRod") : ItemIridescent(na
     val COST = 150
 
     companion object {
-        public fun place(par1ItemStack: ItemStack, par2EntityPlayer: EntityPlayer, par3World: World,
+        fun place(par1ItemStack: ItemStack, par2EntityPlayer: EntityPlayer, par3World: World,
                          par4: Int, par5: Int, par6: Int, par7: Int, par8: Float, par9: Float,
                          par10: Float, toPlace: ItemStack?, cost: Int, r: Float, g: Float, b: Float): Boolean {
 

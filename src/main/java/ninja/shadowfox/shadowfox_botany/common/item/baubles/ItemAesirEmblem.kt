@@ -36,7 +36,7 @@ class ItemAesirEmblem() : ItemBauble("aesirEmblem"), IBaubleRender, IManaUsingIt
 
     init {
         setHasSubtypes(true)
-        setCreativeTab(ShadowFoxCreativeTab)
+        creativeTab = ShadowFoxCreativeTab
     }
 
     override fun addInformation(par1ItemStack: ItemStack?, par2EntityPlayer: EntityPlayer?, par3List: MutableList<Any?>?, par4: Boolean) {

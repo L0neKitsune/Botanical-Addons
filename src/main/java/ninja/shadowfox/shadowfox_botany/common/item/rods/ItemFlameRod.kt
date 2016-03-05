@@ -29,7 +29,7 @@ import java.awt.Color
  * @author WireSegal
  * Created at 9:32 PM on 1/27/16.
  */
-public open class ItemFlameRod(name: String = "flameRod") : ItemMod(name), IManaUsingItem {
+open class ItemFlameRod(name: String = "flameRod") : ItemMod(name), IManaUsingItem {
 
     init {
         setMaxStackSize(1)

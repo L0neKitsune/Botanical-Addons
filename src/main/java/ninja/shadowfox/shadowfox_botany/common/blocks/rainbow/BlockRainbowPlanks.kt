@@ -20,7 +20,7 @@ import vazkii.botania.api.wand.IWandable
 import java.util.*
 
 
-public class BlockRainbowPlanks() : BlockMod(MaterialCustomSmeltingWood.instance), ILexiconable, IFuelHandler, IWandable {
+class BlockRainbowPlanks() : BlockMod(MaterialCustomSmeltingWood.instance), ILexiconable, IFuelHandler, IWandable {
 
     private val name = "rainbowPlanks"
 

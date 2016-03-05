@@ -14,8 +14,8 @@ class TileEntityStar : TileMod() {
 
     private val TAG_COLOR = "color"
     private val TAG_SIZE = "size"
-    public var starColor = -1
-    public var size = 0.05f
+    var starColor = -1
+    var size = 0.05f
 
     override fun writeCustomNBT(nbttagcompound: NBTTagCompound) {
         nbttagcompound.setInteger(TAG_COLOR, this.starColor)

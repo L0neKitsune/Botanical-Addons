@@ -17,7 +17,7 @@ import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
-public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITileEntityProvider, ILexiconable {
+class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITileEntityProvider, ILexiconable {
 
     init {
         setBlockName("lightningWood")
@@ -57,7 +57,7 @@ public class BlockLightningWood() : ShadowFoxRotatedPillar(Material.wood), ITile
         return TileLightningRod()
     }
 
-    public fun isHeartWood(meta: Int): Boolean {
+    fun isHeartWood(meta: Int): Boolean {
         return meta and 3 == 1
     }
 

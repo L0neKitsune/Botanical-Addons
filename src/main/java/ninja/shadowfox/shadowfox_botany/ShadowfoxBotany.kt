@@ -14,8 +14,7 @@ import ninja.shadowfox.shadowfox_botany.common.network.PlayerItemMessage
 import ninja.shadowfox.shadowfox_botany.common.network.PlayerItemMessageHandler
 import ninja.shadowfox.shadowfox_botany.lib.Constants
 
-@Mod(modid = Constants.MODID, version = Constants.VERSION, name = Constants.MODNAME, dependencies = Constants.DEPENDENCIES)
-public class ShadowfoxBotany {
+@Mod(modid = Constants.MODID, version = Constants.VERSION, name = Constants.MODNAME, dependencies = Constants.DEPENDENCIES) class ShadowfoxBotany {
 
     companion object {
         var isDevEnv = false

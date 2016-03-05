@@ -15,7 +15,7 @@ import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
-public class BlockNetherWood() : ShadowFoxRotatedPillar(Material.wood), ILexiconable {
+class BlockNetherWood() : ShadowFoxRotatedPillar(Material.wood), ILexiconable {
 
     init {
         setBlockName("netherWood")

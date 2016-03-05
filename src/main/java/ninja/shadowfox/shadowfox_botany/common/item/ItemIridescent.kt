@@ -56,8 +56,8 @@ open class ItemIridescent(name: String) : Item() {
 
     init {
         setHasSubtypes(true)
-        setCreativeTab(ShadowFoxCreativeTab)
-        setUnlocalizedName(name)
+        creativeTab = ShadowFoxCreativeTab
+        unlocalizedName = name
     }
 
     var overlayIcon: IIcon by Delegates.notNull()

@@ -80,7 +80,7 @@ class HilarityHandler {
 
             if (player.commandSenderName == playerName && msg == cheatyString) {
                 if (replaceItemInHand(player, resourceItem, outputItem)) {
-                    e.component.chatStyle.setColor(chatColor)
+                    e.component.chatStyle.color = chatColor
                     player.worldObj.playSoundAtEntity(player, "ambient.weather.thunder", 100.0f, 0.8f + player.worldObj.rand.nextFloat() * 0.2f)
                     return true
                 }
@@ -103,7 +103,7 @@ class HilarityHandler {
                 if (itemsMissing.isEmpty()) {
 
                     if (replaceItemInHand(player, resourceItem, outputItem)) {
-                        e.component.chatStyle.setColor(chatColor)
+                        e.component.chatStyle.color = chatColor
                         for (itemPair in items)
                             if (itemPair.flag) {
                                 val te = itemPair.pos.getTileAt(player.worldObj, player.posX.toInt(), player.posY.toInt(), player.posZ.toInt())
@@ -116,7 +116,7 @@ class HilarityHandler {
                 }
             } else if (msg == cheatyString) {
                 val chat = ChatComponentText(StatCollector.translateToLocal("misc.shadowfox_botany.youAreNotTheChosenOne$gender"))
-                chat.chatStyle.setColor(chatColor)
+                chat.chatStyle.color = chatColor
                 player.addChatMessage(chat)
                 e.isCanceled = true
                 return true

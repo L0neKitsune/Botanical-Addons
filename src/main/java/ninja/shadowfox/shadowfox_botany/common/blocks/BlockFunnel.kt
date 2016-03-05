@@ -38,9 +38,9 @@ import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
 
 class BlockFunnel() : BlockContainerMod<TileLivingwoodFunnel>(Material.wood), IWandHUD, ILexiconable {
     private val random = Random()
-    public lateinit var top_icon: IIcon
-    public lateinit var inside_icon: IIcon
-    public lateinit var outside_icon: IIcon
+    lateinit var top_icon: IIcon
+    lateinit var inside_icon: IIcon
+    lateinit var outside_icon: IIcon
 
     companion object {
         @SideOnly(Side.CLIENT)
@@ -252,14 +252,14 @@ class BlockFunnel() : BlockContainerMod<TileLivingwoodFunnel>(Material.wood), IW
             return Constants.hopperRenderingID
         }
 
-        public override fun shouldRender3DInInventory(modelId: Int): Boolean {
+        override fun shouldRender3DInInventory(modelId: Int): Boolean {
             return false
         }
 
-        public override fun renderInventoryBlock(block: Block, metadata: Int, modelID: Int, renderer: RenderBlocks) {
+        override fun renderInventoryBlock(block: Block, metadata: Int, modelID: Int, renderer: RenderBlocks) {
         }
 
-        public override fun renderWorldBlock(world: IBlockAccess, x: Int, y: Int, z: Int, block: Block, modelId: Int, renderer: RenderBlocks): Boolean {
+        override fun renderWorldBlock(world: IBlockAccess, x: Int, y: Int, z: Int, block: Block, modelId: Int, renderer: RenderBlocks): Boolean {
             val tessellator = Tessellator.instance
             tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z))
             val l = block.colorMultiplier(world, x, y, z)

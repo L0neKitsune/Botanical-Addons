@@ -7,7 +7,7 @@ import vazkii.botania.api.lexicon.LexiconCategory
 class ShadowFoxLexiconCategory(unlocalizedName: String, priority: Int) : LexiconCategory("shadowfox_botany.category." + unlocalizedName) {
 
     init {
-        setIcon(ResourceLocation("shadowfox_botany:textures/gui/categories/$unlocalizedName.png"))
+        icon = ResourceLocation("shadowfox_botany:textures/gui/categories/$unlocalizedName.png")
         setPriority(priority)
         BotaniaAPI.addCategory(this)
     }

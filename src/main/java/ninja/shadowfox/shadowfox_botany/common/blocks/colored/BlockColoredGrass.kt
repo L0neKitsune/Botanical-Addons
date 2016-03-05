@@ -24,7 +24,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
 import java.util.*
 
-public class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
+class BlockColoredGrass() : BlockTallGrass(), ILexiconable {
 
     val TYPES: Int = 16
 

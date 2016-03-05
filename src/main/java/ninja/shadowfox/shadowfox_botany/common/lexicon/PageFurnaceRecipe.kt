@@ -16,7 +16,7 @@ import vazkii.botania.client.lib.LibResources
 import vazkii.botania.common.lexicon.page.PageRecipe
 import java.util.*
 
-public class PageFurnaceRecipe : PageRecipe {
+class PageFurnaceRecipe : PageRecipe {
 
     private class StackPair(val input: ItemStack, val output: ItemStack) {}
 

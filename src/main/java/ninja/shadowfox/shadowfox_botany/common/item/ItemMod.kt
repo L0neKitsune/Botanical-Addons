@@ -12,8 +12,8 @@ import ninja.shadowfox.shadowfox_botany.common.utils.helper.IconHelper
 
 open class ItemMod(name: String) : Item() {
     init {
-        setCreativeTab(ShadowFoxCreativeTab)
-        setUnlocalizedName(name)
+        creativeTab = ShadowFoxCreativeTab
+        unlocalizedName = name
 
     }
 

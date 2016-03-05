@@ -25,7 +25,7 @@ import vazkii.botania.api.BotaniaAPI
 import vazkii.botania.api.lexicon.multiblock.MultiblockSet
 import vazkii.botania.common.block.ModBlocks as BotaniaBlocks
 
-public object ShadowFoxBlocks {
+object ShadowFoxBlocks {
 
     fun setBurnable(block: Block, encouragement: Int, flammablility: Int) {
         Blocks.fire.setFireInfo(block, encouragement, flammablility)
@@ -37,107 +37,107 @@ public object ShadowFoxBlocks {
                 Blocks.fire.setFireInfo(i, encouragement, flammablility)
     }
 
-    public var coloredDirtBlock: Block
-    public var rainbowDirtBlock: Block
-    public var irisSapling: Block
-    public var irisLeaves0: Block
-    public var irisLeaves1: Block
-    public var rainbowLeaves: Block
-    public var irisGrass: Block
-    public var rainbowGrass: BlockRainbowGrass
+    var coloredDirtBlock: Block
+    var rainbowDirtBlock: Block
+    var irisSapling: Block
+    var irisLeaves0: Block
+    var irisLeaves1: Block
+    var rainbowLeaves: Block
+    var irisGrass: Block
+    var rainbowGrass: BlockRainbowGrass
 
-    public var irisWood0: Block
-    public var irisWood1: Block
-    public var irisWood2: Block
-    public var irisWood3: Block
-    public var rainbowWood: Block
+    var irisWood0: Block
+    var irisWood1: Block
+    var irisWood2: Block
+    var irisWood3: Block
+    var rainbowWood: Block
 
-    public var coloredPlanks: Block
-    public var rainbowPlanks: Block
+    var coloredPlanks: Block
+    var rainbowPlanks: Block
 
-    public var irisTallGrass0: Block
-    public var irisTallGrass1: Block
-    public var rainbowTallGrass: Block
+    var irisTallGrass0: Block
+    var irisTallGrass1: Block
+    var rainbowTallGrass: Block
 
-    public var coloredSlabs: Array<Block>
-    public var rainbowSlabs: Block
+    var coloredSlabs: Array<Block>
+    var rainbowSlabs: Block
 
-    public var coloredSlabsFull: Array<Block>
-    public var rainbowSlabsFull: Block
+    var coloredSlabsFull: Array<Block>
+    var rainbowSlabsFull: Block
 
-    public var coloredStairs: Array<Block>
-    public var rainbowStairs: Block
+    var coloredStairs: Array<Block>
+    var rainbowStairs: Block
 
-    public var itemDisplay: Block
-    public var treeCrafter: MultiblockSet
-    public var treeCrafterBlock: Block
-    public var treeCrafterBlockRB: Block
+    var itemDisplay: Block
+    var treeCrafter: MultiblockSet
+    var treeCrafterBlock: Block
+    var treeCrafterBlockRB: Block
 
-    public var lightningSapling: Block
-    public var lightningWood: Block
-    public var lightningLeaves: Block
-    public var lightningPlanks: Block
+    var lightningSapling: Block
+    var lightningWood: Block
+    var lightningLeaves: Block
+    var lightningPlanks: Block
 
-    public var lightningStairs: Block
-    public var lightningSlabs: Block
-    public var lightningSlabsFull: Block
+    var lightningStairs: Block
+    var lightningSlabs: Block
+    var lightningSlabsFull: Block
 
-    public var invisibleFlame: Block
-    public var rainbowFlame: Block
-    public var livingwoodFunnel: Block
+    var invisibleFlame: Block
+    var rainbowFlame: Block
+    var livingwoodFunnel: Block
 
-    public var netherSapling: Block
-    public var netherWood: Block
-    public var netherLeaves: Block
-    public var netherPlanks: Block
-    public var netherSlabs: Block
-    public var netherSlabsFull: Block
-    public var netherStairs: Block
+    var netherSapling: Block
+    var netherWood: Block
+    var netherLeaves: Block
+    var netherPlanks: Block
+    var netherSlabs: Block
+    var netherSlabsFull: Block
+    var netherStairs: Block
 
-    public var altWood0: Block
-    public var altWood1: Block
-    public var altLeaves: Block
-    public var altPlanks: Block
-    public var altSlabs: Array<Block>
-    public var altSlabsFull: Array<Block>
-    public var altStairs: Array<Block>
+    var altWood0: Block
+    var altWood1: Block
+    var altLeaves: Block
+    var altPlanks: Block
+    var altSlabs: Array<Block>
+    var altSlabsFull: Array<Block>
+    var altStairs: Array<Block>
 
-    public var barrier: Block
+    var barrier: Block
 
-    public var kindling: Block
+    var kindling: Block
 
-    public lateinit var markerBlock: Block
-    public lateinit var schemaBlock: Block
-    public lateinit var schemaGenBlock: Block
-    public lateinit var fillerBlock: Block
-    public lateinit var annihilatorBlock: Block
+    lateinit var markerBlock: Block
+    lateinit var schemaBlock: Block
+    lateinit var schemaGenBlock: Block
+    lateinit var fillerBlock: Block
+    lateinit var annihilatorBlock: Block
 
-    public var irisLamp: Block
+    var irisLamp: Block
 
-    public var sealingSapling: Block
-    public var sealingWood: Block
-    public var sealingLeaves: Block
-    public var sealingPlanks: Block
-    public var sealingSlabs: Block
-    public var sealingSlabsFull: Block
-    public var sealingStairs: Block
+    var sealingSapling: Block
+    var sealingWood: Block
+    var sealingLeaves: Block
+    var sealingPlanks: Block
+    var sealingSlabs: Block
+    var sealingSlabsFull: Block
+    var sealingStairs: Block
 
-    public var amp: Block
+    var amp: Block
 
-    public var star: Block
+    var star: Block
 
-    public var shimmerQuartz: BlockShimmerQuartz
-    public var shimmerQuartzSlab: BlockShimmerQuartzSlab
-    public var shimmerQuartzSlabFull: BlockShimmerQuartzSlab
-    public var shimmerQuartzStairs: Block
+    var shimmerQuartz: BlockShimmerQuartz
+    var shimmerQuartzSlab: BlockShimmerQuartzSlab
+    var shimmerQuartzSlabFull: BlockShimmerQuartzSlab
+    var shimmerQuartzStairs: Block
 
-    public var iridescentTree0: IIridescentSaplingVariant
-    public var iridescentTree1: IIridescentSaplingVariant
-    public var iridescentTree2: IIridescentSaplingVariant
-    public var iridescentTree3: IIridescentSaplingVariant
-    public var bifrostTree: IIridescentSaplingVariant
-    public var altTree0: IIridescentSaplingVariant
-    public var altTree1: IIridescentSaplingVariant
+    var iridescentTree0: IIridescentSaplingVariant
+    var iridescentTree1: IIridescentSaplingVariant
+    var iridescentTree2: IIridescentSaplingVariant
+    var iridescentTree3: IIridescentSaplingVariant
+    var bifrostTree: IIridescentSaplingVariant
+    var altTree0: IIridescentSaplingVariant
+    var altTree1: IIridescentSaplingVariant
 
     init {
         coloredDirtBlock = BlockColoredDirt()

@@ -19,7 +19,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 
-public class BlockNetherPlanks() : BlockMod(MaterialCustomSmeltingWood.instance), ILexiconable {
+class BlockNetherPlanks() : BlockMod(MaterialCustomSmeltingWood.instance), ILexiconable {
 
     private val name = "netherPlanks"
 

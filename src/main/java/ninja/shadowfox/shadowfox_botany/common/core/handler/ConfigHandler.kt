@@ -10,7 +10,7 @@ import java.io.File
 import kotlin.properties.Delegates
 
 
-public class ConfigHandler {
+class ConfigHandler {
 
     class ChangeListener {
         constructor()
@@ -23,7 +23,7 @@ public class ConfigHandler {
         }
     }
 
-    public companion object {
+    companion object {
         var config: Configuration by Delegates.notNull()
 
         var realLightning: Boolean by Delegates.notNull()

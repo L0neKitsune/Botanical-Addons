@@ -29,10 +29,10 @@ import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
-public open class BlockColoredSapling(val name: String = "irisSapling") : BlockSapling(), ILexiconable, IFuelHandler {
+open class BlockColoredSapling(val name: String = "irisSapling") : BlockSapling(), ILexiconable, IFuelHandler {
 
     init {
-        this.setTickRandomly(true)
+        this.tickRandomly = true
         stepSound = Block.soundTypeGrass
         this.setBlockName(name)
 
@@ -112,7 +112,7 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : BlockS
             list.add(ItemStack(this))
     }
 
-    public fun markOrGrowMarked(world: World?, x: Int, y: Int, z: Int, random: Random?) {
+    fun markOrGrowMarked(world: World?, x: Int, y: Int, z: Int, random: Random?) {
         if (world != null) {
             val l = world.getBlockMetadata(x, y, z)
 
@@ -124,7 +124,7 @@ public open class BlockColoredSapling(val name: String = "irisSapling") : BlockS
         }
     }
 
-    public open fun growTree(world: World?, x: Int, y: Int, z: Int, random: Random?) {
+    open fun growTree(world: World?, x: Int, y: Int, z: Int, random: Random?) {
         if (world != null) {
             if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(world, random, x, y, z)) return
 

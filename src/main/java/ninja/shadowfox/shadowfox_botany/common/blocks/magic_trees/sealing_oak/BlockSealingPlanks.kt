@@ -12,7 +12,7 @@ import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 
 
-public class BlockSealingPlanks() : BlockMod(MaterialCustomSmeltingWood.instance), ILexiconable, ISoundSilencer {
+class BlockSealingPlanks() : BlockMod(MaterialCustomSmeltingWood.instance), ILexiconable, ISoundSilencer {
 
     private val name = "sealingPlanks"
 

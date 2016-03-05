@@ -5,7 +5,7 @@ import vazkii.botania.common.Botania
 
 class TileInvisibleManaFlame : TileManaFlame() {
     private val TAG_COLOR = "color"
-    public var flameColor = 0x20FF20
+    var flameColor = 0x20FF20
 
     override fun writeCustomNBT(nbttagcompound: NBTTagCompound) {
         nbttagcompound.setInteger(TAG_COLOR, this.flameColor)

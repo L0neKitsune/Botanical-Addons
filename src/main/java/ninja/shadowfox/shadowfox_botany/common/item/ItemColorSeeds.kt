@@ -102,8 +102,7 @@ class ItemColorSeeds() : ItemIridescent("irisSeeds"), IFlowerComponent/*, IFloat
         return true
     }
 
-    @SubscribeEvent
-    public fun onTickEnd(event: TickEvent.WorldTickEvent) {
+    @SubscribeEvent fun onTickEnd(event: TickEvent.WorldTickEvent) {
         if (event.phase == Phase.END) {
             var dim = event.world.provider.dimensionId
             if (blockSwappers.containsKey(dim)) {

@@ -5,7 +5,7 @@ import ninja.shadowfox.shadowfox_botany.common.brew.potion.PotionManaVoid
 
 
 object ShadowFoxPotions {
-    public val manaVoid: Potion
+    val manaVoid: Potion
 
     init {
         manaVoid = PotionManaVoid()

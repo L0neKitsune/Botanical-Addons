@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation
 import org.lwjgl.opengl.GL11
 
 
-public class RenderGrieferCreeper : RenderCreeper() {
+class RenderGrieferCreeper : RenderCreeper() {
     private val armoredCreeperTextures = ResourceLocation("shadowfox_botany:textures/model/griefer_creeper/creeper_armor.png")
     private val creeperTextures = ResourceLocation("shadowfox_botany:textures/model/griefer_creeper/griefer_creeper.png")
     /** The creeper model.  */

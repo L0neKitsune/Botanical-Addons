@@ -22,7 +22,7 @@ import ninja.shadowfox.shadowfox_botany.common.lexicon.LexiconRegistry
 import ninja.shadowfox.shadowfox_botany.common.throwables.ShadowFoxThrowables
 import vazkii.botania.common.item.ModItems
 
-public open class CommonProxy {
+open class CommonProxy {
     open fun preInit(event: FMLPreInitializationEvent) {
 
         ShadowFoxAPI.RUNEAXE.setRepairItem(ItemStack(ModItems.manaResource, 1, 7)) // Elementium

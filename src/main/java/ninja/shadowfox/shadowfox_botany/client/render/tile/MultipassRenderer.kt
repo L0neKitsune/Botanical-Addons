@@ -15,22 +15,22 @@ class MultipassRenderer : ISimpleBlockRenderingHandler {
         var pass = 0
     }
 
-    public override fun getRenderId(): Int {
+    override fun getRenderId(): Int {
         return Constants.multipassRenderingID
     }
 
-    public override fun shouldRender3DInInventory(modelId: Int): Boolean {
+    override fun shouldRender3DInInventory(modelId: Int): Boolean {
         return true
     }
 
-    public override fun renderInventoryBlock(block: Block, metadata: Int, modelID: Int, renderer: RenderBlocks) {
+    override fun renderInventoryBlock(block: Block, metadata: Int, modelID: Int, renderer: RenderBlocks) {
         if (block is IMultipassRenderer) {
             renderInventoryBlock(block.innerBlock(metadata), metadata, 1.0F, renderer, 0)
             renderInventoryBlock(block, metadata, 1.0F, renderer, 1)
         }
     }
 
-    public override fun renderWorldBlock(world: IBlockAccess, x: Int, y: Int, z: Int, block: Block, modelId: Int, renderer: RenderBlocks): Boolean {
+    override fun renderWorldBlock(world: IBlockAccess, x: Int, y: Int, z: Int, block: Block, modelId: Int, renderer: RenderBlocks): Boolean {
         if (block is IMultipassRenderer) {
             if (pass == 1) renderer.renderStandardBlock(block, x, y, z)
             else renderer.renderStandardBlock(block.innerBlock(world, x, y, z), x, y, z)

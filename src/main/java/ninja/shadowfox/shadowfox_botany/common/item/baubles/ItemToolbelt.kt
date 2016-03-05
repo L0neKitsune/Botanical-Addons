@@ -126,7 +126,7 @@ class ItemToolbelt() : ItemBauble("toolbelt"), IBaubleRender, IBlockProvider, IT
         MinecraftForge.EVENT_BUS.register(handler)
         FMLCommonHandler.instance().bus().register(handler)
         setHasSubtypes(true)
-        setCreativeTab(ShadowFoxCreativeTab)
+        creativeTab = ShadowFoxCreativeTab
     }
 
     override fun registerIcons(par1IconRegister: IIconRegister) {

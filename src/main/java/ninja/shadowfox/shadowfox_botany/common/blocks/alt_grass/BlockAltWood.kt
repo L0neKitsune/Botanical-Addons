@@ -27,7 +27,7 @@ import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
-public class BlockAltWood(val set: Int) : ShadowFoxRotatedPillar(Material.wood), ILexiconable {
+class BlockAltWood(val set: Int) : ShadowFoxRotatedPillar(Material.wood), ILexiconable {
 
     lateinit protected var iconsTop: Array<IIcon?>
     lateinit protected var iconsSide: Array<IIcon?>

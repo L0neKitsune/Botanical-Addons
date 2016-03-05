@@ -40,7 +40,7 @@ class ItemAttributionBauble() : ItemBauble("attributionBauble"), ICosmeticBauble
 
     init {
         setHasSubtypes(true)
-        setCreativeTab(ShadowFoxCreativeTab)
+        creativeTab = ShadowFoxCreativeTab
         if (FMLLaunchHandler.side().isClient) {
             MinecraftForge.EVENT_BUS.register(this)
             potatoTexture = ResourceLocation(if (ClientProxy.dootDoot) LibResources.MODEL_TINY_POTATO_HALLOWEEN else LibResources.MODEL_TINY_POTATO)

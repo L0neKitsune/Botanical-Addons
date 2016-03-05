@@ -4,7 +4,7 @@ import codechicken.nei.api.API
 import codechicken.nei.api.IConfigureNEI
 import ninja.shadowfox.shadowfox_botany.lib.Constants
 
-public class NEIConfig : IConfigureNEI {
+class NEIConfig : IConfigureNEI {
 
     override fun getName(): String = Constants.MODNAME
     override fun getVersion(): String = Constants.VERSION

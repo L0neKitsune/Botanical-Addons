@@ -40,7 +40,7 @@ class ItemCoatOfArms() : ItemBauble("coatOfArms"), ICosmeticBauble, IPriestColor
 
     init {
         setHasSubtypes(true)
-        setCreativeTab(ShadowFoxCreativeTab)
+        creativeTab = ShadowFoxCreativeTab
     }
 
     override fun canFit(stack: ItemStack, inventory: IInventory): Boolean {

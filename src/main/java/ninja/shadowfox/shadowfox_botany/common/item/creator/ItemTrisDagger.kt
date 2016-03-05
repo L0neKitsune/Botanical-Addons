@@ -50,9 +50,9 @@ class ItemTrisDagger(val name: String = "reactionDagger", val toolMaterial: Tool
 
     init {
         setMaxStackSize(1)
-        setMaxDamage(toolMaterial.maxUses)
-        setCreativeTab(ShadowFoxCreativeTab)
-        setUnlocalizedName(name)
+        maxDamage = toolMaterial.maxUses
+        creativeTab = ShadowFoxCreativeTab
+        unlocalizedName = name
         DaggerEventHandler.register()
         if (FMLLaunchHandler.side().isClient)
             MinecraftForge.EVENT_BUS.register(this)

@@ -40,25 +40,25 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
 
     companion object {
         val TYPES = 4
-        public fun getEmblem(meta: Int, player: EntityPlayer?): ItemStack? {
+        fun getEmblem(meta: Int, player: EntityPlayer?): ItemStack? {
             var baubles = PlayerHandler.getPlayerBaubles(player)
             var stack = baubles.getStackInSlot(0)
             return if (stack != null && ((stack.item == ShadowFoxItems.emblem && stack.itemDamage == meta) || stack.item == ShadowFoxItems.aesirEmblem) && isActive(stack)) stack else null
         }
 
-        public fun isActive(stack: ItemStack): Boolean {
+        fun isActive(stack: ItemStack): Boolean {
             return ItemNBTHelper.getByte(stack, "active", 0) == 1.toByte()
         }
 
-        public fun setActive(stack: ItemStack, state: Boolean) {
+        fun setActive(stack: ItemStack, state: Boolean) {
             ItemNBTHelper.setByte(stack, "active", if (state) 1.toByte() else 0.toByte())
         }
 
-        public fun isDangerous(stack: ItemStack): Boolean {
+        fun isDangerous(stack: ItemStack): Boolean {
             return ItemNBTHelper.getByte(stack, "dangerous", 0) == 1.toByte()
         }
 
-        public fun setDangerous(stack: ItemStack, state: Boolean) {
+        fun setDangerous(stack: ItemStack, state: Boolean) {
             ItemNBTHelper.setByte(stack, "dangerous", if (state) 1.toByte() else 0.toByte())
         }
     }
@@ -69,7 +69,7 @@ class ItemPriestEmblem() : ItemBauble("priestEmblem"), IBaubleRender, IManaUsing
 
     init {
         setHasSubtypes(true)
-        setCreativeTab(ShadowFoxCreativeTab)
+        creativeTab = ShadowFoxCreativeTab
     }
 
     override fun getUnlocalizedNameInefficiently(par1ItemStack: ItemStack): String {

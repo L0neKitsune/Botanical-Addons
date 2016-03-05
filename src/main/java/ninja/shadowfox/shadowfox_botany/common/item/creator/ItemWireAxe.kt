@@ -58,9 +58,9 @@ class ItemWireAxe(val name: String = "axeRevelation", val toolMaterial: ToolMate
 
     init {
         setMaxStackSize(1)
-        setMaxDamage(toolMaterial.maxUses)
-        setCreativeTab(ShadowFoxCreativeTab)
-        setUnlocalizedName(name)
+        maxDamage = toolMaterial.maxUses
+        creativeTab = ShadowFoxCreativeTab
+        unlocalizedName = name
     }
 
     override fun setUnlocalizedName(par1Str: String): Item {

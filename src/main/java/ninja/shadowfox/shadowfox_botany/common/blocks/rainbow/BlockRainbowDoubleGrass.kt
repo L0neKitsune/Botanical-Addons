@@ -28,7 +28,7 @@ import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
-public class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable, IDoublePlant {
+class BlockRainbowDoubleGrass() : BlockDoublePlant(), ILexiconable, IDoublePlant {
 
     val name = "rainbowDoubleGrass"
     var topIcon: IIcon? = null

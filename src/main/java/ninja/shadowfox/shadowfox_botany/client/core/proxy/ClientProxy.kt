@@ -21,7 +21,7 @@ import ninja.shadowfox.shadowfox_botany.common.item.ShadowFoxItems
 import ninja.shadowfox.shadowfox_botany.lib.Constants
 import vazkii.botania.client.render.item.RenderLens
 
-public class ClientProxy : CommonProxy() {
+class ClientProxy : CommonProxy() {
     override fun preInit(event: FMLPreInitializationEvent) {
         super.preInit(event)
     }

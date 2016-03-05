@@ -25,7 +25,7 @@ class ItemColorOverride() : ItemBauble("colorOverride"), ICosmeticBauble, IPries
 
     init {
         setHasSubtypes(true)
-        setCreativeTab(ShadowFoxCreativeTab)
+        creativeTab = ShadowFoxCreativeTab
     }
 
     override fun registerIcons(par1IconRegister: IIconRegister) {

@@ -26,7 +26,7 @@ import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
-public class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
+class BlockRainbowGrass() : BlockTallGrass(), ILexiconable {
 
     var flowerIcon: IIcon? = null
     var glowingIcon: IIcon? = null

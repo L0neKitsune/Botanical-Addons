@@ -17,7 +17,7 @@ import vazkii.botania.api.lexicon.ILexiconable
 import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
-public class BlockSealingWood() : ShadowFoxRotatedPillar(Material.wood), ILexiconable, ISoundSilencer {
+class BlockSealingWood() : ShadowFoxRotatedPillar(Material.wood), ILexiconable, ISoundSilencer {
 
     init {
         setBlockName("sealingWood")

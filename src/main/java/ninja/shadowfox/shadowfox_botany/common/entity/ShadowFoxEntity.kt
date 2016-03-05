@@ -5,7 +5,7 @@ import net.minecraft.entity.EnumCreatureType
 import net.minecraft.world.biome.BiomeGenBase
 import ninja.shadowfox.shadowfox_botany.common.core.handler.ConfigHandler
 
-public object ShadowFoxEntity {
+object ShadowFoxEntity {
 
     init {
         if (ConfigHandler.uberCreepers) {

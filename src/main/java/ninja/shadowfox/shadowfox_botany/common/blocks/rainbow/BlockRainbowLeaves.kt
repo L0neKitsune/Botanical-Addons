@@ -16,7 +16,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.util.*
 
 
-public class BlockRainbowLeaves() : BlockLeavesMod() {
+class BlockRainbowLeaves() : BlockLeavesMod() {
 
     init {
         setBlockName("rainbowLeaves")

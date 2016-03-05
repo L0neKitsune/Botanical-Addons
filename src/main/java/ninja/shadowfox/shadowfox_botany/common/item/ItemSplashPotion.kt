@@ -21,7 +21,7 @@ import vazkii.botania.common.core.helper.ItemNBTHelper
 import java.awt.Color
 
 
-public class ItemSplashPotion() : ItemMod("splashPotion"), IBrewItem, IBrewContainer {
+class ItemSplashPotion() : ItemMod("splashPotion"), IBrewItem, IBrewContainer {
 
     lateinit var itemIconFluid: IIcon
 

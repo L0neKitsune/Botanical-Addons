@@ -18,7 +18,7 @@ import vazkii.botania.api.lexicon.LexiconEntry
 import java.awt.Color
 import java.util.*
 
-public class BlockColoredLeaves(val colorSet: Int) : BlockLeavesMod() {
+class BlockColoredLeaves(val colorSet: Int) : BlockLeavesMod() {
 
     val TYPES: Int = 8
 

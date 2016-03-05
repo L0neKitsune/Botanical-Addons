@@ -33,7 +33,7 @@ import java.awt.Color
 import java.util.*
 import kotlin.properties.Delegates
 
-public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IDoublePlant, ILexiconable {
+class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), IDoublePlant, ILexiconable {
 
     val name = "irisDoubleGrass$colorSet"
     val TYPES: Int = 8
@@ -171,19 +171,19 @@ public class BlockColoredDoubleGrass(var colorSet: Int) : BlockDoublePlant(), ID
         return topIcon
     }
 
-    public class ColoredDoublePlantRenderer : ISimpleBlockRenderingHandler {
-        public override fun getRenderId(): Int {
+    class ColoredDoublePlantRenderer : ISimpleBlockRenderingHandler {
+        override fun getRenderId(): Int {
             return Constants.doubleFlowerRenderID
         }
 
-        public override fun shouldRender3DInInventory(modelId: Int): Boolean {
+        override fun shouldRender3DInInventory(modelId: Int): Boolean {
             return false
         }
 
-        public override fun renderInventoryBlock(block: Block, metadata: Int, modelID: Int, renderer: RenderBlocks) {
+        override fun renderInventoryBlock(block: Block, metadata: Int, modelID: Int, renderer: RenderBlocks) {
         }
 
-        public override fun renderWorldBlock(world: IBlockAccess, x: Int, y: Int, z: Int, block: Block, modelId: Int, renderer: RenderBlocks): Boolean {
+        override fun renderWorldBlock(world: IBlockAccess, x: Int, y: Int, z: Int, block: Block, modelId: Int, renderer: RenderBlocks): Boolean {
             val tessellator = Tessellator.instance
             tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z))
             var l: Int

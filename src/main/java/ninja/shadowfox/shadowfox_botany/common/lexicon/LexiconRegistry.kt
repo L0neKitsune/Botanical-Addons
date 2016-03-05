@@ -13,7 +13,7 @@ import vazkii.botania.api.lexicon.LexiconRecipeMappings
 import vazkii.botania.common.lexicon.LexiconData
 import vazkii.botania.common.lexicon.page.*
 
-public object LexiconRegistry {
+object LexiconRegistry {
 
     val coloredDirt: LexiconEntry
     val irisSapling: LexiconEntry

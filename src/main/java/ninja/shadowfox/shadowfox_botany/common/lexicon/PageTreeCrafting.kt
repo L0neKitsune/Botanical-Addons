@@ -12,7 +12,7 @@ import vazkii.botania.api.internal.IGuiLexiconEntry
 import vazkii.botania.client.core.handler.HUDHandler
 import vazkii.botania.common.block.tile.mana.TilePool
 
-public class PageTreeCrafting : PagePetalRecipe<RecipeTreeCrafting> {
+class PageTreeCrafting : PagePetalRecipe<RecipeTreeCrafting> {
     constructor(unlocalizedName: String, recipes: List<RecipeTreeCrafting>) : super(unlocalizedName, recipes) {
     }
 

@@ -5,7 +5,7 @@ import codechicken.microblock.MicroMaterialRegistry
 import net.minecraft.block.Block
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 
-public object MultipartHandler {
+object MultipartHandler {
 
     init {
         registerColoredMultiparts(ShadowFoxBlocks.coloredDirtBlock, 0..15)

@@ -36,7 +36,7 @@ import vazkii.botania.common.block.ModFluffBlocks as BotaniaDecorBlocks
 import vazkii.botania.common.item.ModItems as BotaniaItems
 import vazkii.botania.common.lib.LibOreDict as BotaniaOreDict
 
-public object ModRecipes {
+object ModRecipes {
     val recipesColoredDirt: List<IRecipe>
     val recipesWoodPanel: List<IRecipe>
     val recipesSlabs: List<IRecipe>
