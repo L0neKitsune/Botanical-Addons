@@ -10,6 +10,7 @@ import ninja.shadowfox.shadowfox_botany.ShadowfoxBotany
 import ninja.shadowfox.shadowfox_botany.api.ShadowFoxAPI
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import ninja.shadowfox.shadowfox_botany.common.brew.ShadowFoxPotions
+import ninja.shadowfox.shadowfox_botany.common.compat.etfuturem.ShadowFoxBanners
 import ninja.shadowfox.shadowfox_botany.common.compat.multipart.MultipartHandler
 import ninja.shadowfox.shadowfox_botany.common.compat.thaumcraft.ThaumcraftAspects
 import ninja.shadowfox.shadowfox_botany.common.core.handler.BifrostFlowerDispenserBehavior
@@ -49,6 +50,8 @@ open class CommonProxy {
 
         if (Loader.isModLoaded("ForgeMultipart"))
             MultipartHandler
+        if (Loader.isModLoaded("etfuturem"))
+            ShadowFoxBanners
     }
 
     open fun postInit(event: FMLPostInitializationEvent) {
