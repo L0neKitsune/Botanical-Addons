@@ -41,7 +41,7 @@ open class TileSchema() : TileMod() {
     var pos_xyz: Pos? = null
     var range: Int = 64
 
-    var validDir: MutableList<ForgeDirection> = ForgeDirection.VALID_DIRECTIONS.toArrayList()
+    var validDir: MutableList<ForgeDirection> = ForgeDirection.VALID_DIRECTIONS.toMutableList()
 
     class Pos(val x: Int, val y: Int, val z: Int, val dir: ForgeDirection)
 
