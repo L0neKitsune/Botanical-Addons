@@ -1,0 +1,41 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "shadowfox_botany:cube_all_tinted",
+    "transform": "forge:default-block",
+    "textures": {
+      "all": "shadowfox_botany:blocks/iridescent_dirt"
+    }
+  },
+  "variants": {
+    "color=white": [{}],
+    "color=orange": [{}],
+    "color=magenta": [{}],
+    "color=light_blue": [{}],
+    "color=yellow": [{}],
+    "color=lime": [{}],
+    "color=pink": [{}],
+    "color=gray": [{}],
+    "color=silver": [{}],
+    "color=cyan": [{}],
+    "color=purple": [{}],
+    "color=blue": [{}],
+    "color=brown": [{}],
+    "color=green": [{}],
+    "color=red": [{}],
+    "color=black": [{
+      "model": "minecraft:cube",
+      "transform": "forge:default-block",
+      "textures": {
+        "up": "shadowfox_botany:blocks/iridescent_dirt_black",
+        "down": "shadowfox_botany:blocks/iridescent_dirt_black",
+        "north": "shadowfox_botany:blocks/iridescent_dirt_black",
+        "south": "shadowfox_botany:blocks/iridescent_dirt_black",
+        "east": "shadowfox_botany:blocks/iridescent_dirt_black",
+        "west": "shadowfox_botany:blocks/iridescent_dirt_black"
+      }
+    }],
+    "normal": [{}],
+    "inventory": [{}]
+  }
+}

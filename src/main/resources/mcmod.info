@@ -1,16 +1,16 @@
 [
-{
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
-}
+    {
+        "modid": "botanical_addons",
+        "name": "Botanical Addons",
+        "description": "Rainbows and clerics, to sit among your lovely flowers.",
+        "version": "${version}",
+        "mcversion": "${mcversion}",
+        "url": "",
+        "updateUrl": "",
+        "authorList": ["L0neKitsune", "WireSegal"],
+        "credits": "Vazkii, Azanor, ChickenBones, PowerCrystals, cpw",
+        "logoFile": "",
+        "screenshots": [],
+        "dependencies": []
+    }
 ]
