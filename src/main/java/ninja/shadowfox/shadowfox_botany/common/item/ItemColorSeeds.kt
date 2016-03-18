@@ -8,20 +8,24 @@ import cpw.mods.fml.common.gameevent.TickEvent
 import cpw.mods.fml.common.gameevent.TickEvent.Phase
 import net.minecraft.block.Block
 import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.entity.passive.EntitySheep
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ChunkCoordinates
+import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import ninja.shadowfox.shadowfox_botany.common.blocks.ShadowFoxBlocks
 import vazkii.botania.api.recipe.IFlowerComponent
 import vazkii.botania.common.Botania
+import vazkii.botania.common.block.decor.IFloatingFlower
+import vazkii.botania.common.item.IFloatingFlowerVariant
 import java.awt.Color
 import java.util.*
 
-class ItemColorSeeds() : ItemIridescent("irisSeeds"), IFlowerComponent/*, IFloatingFlowerVariant*/ {
+class ItemColorSeeds() : ItemIridescent("irisSeeds"), IFlowerComponent, IFloatingFlowerVariant {
     private val blockSwappers = HashMap<Int, MutableList<BlockSwapper?>>()
 
 
@@ -29,17 +33,32 @@ class ItemColorSeeds() : ItemIridescent("irisSeeds"), IFlowerComponent/*, IFloat
         FMLCommonHandler.instance().bus().register(this)
     }
 
-    // companion object {
-    //     val islandTypes: Array<IFloatingFlower.IslandType>
-    //
-    //     init {
-    //         islandTypes = Array(TYPES, { i -> IFloatingFlower.IslandType("IRIDESCENT$i", ResourceLocation("shadowfox_botany", "/textures/model/miniIsland$i.png")) })
-    //     }
-    // }
+     companion object {
+         val islandTypes: Array<IFloatingFlower.IslandType>
 
-    // override fun getIslandType(stack: ItemStack): IFloatingFlower.IslandType? {
-    //     return if (stack.itemDamage < TYPES) islandTypes[stack.itemDamage] else null
-    // }
+         init {
+             islandTypes = Array<IFloatingFlower.IslandType>(TYPES + 1, { i ->
+                 IridescentIslandType("IRIDESCENT$i", ResourceLocation("shadowfox_botany", "/textures/model/miniIsland.png"), i)
+             })
+         }
+
+         class IridescentIslandType(name: String, rs: ResourceLocation, val colorIndex: Int): IFloatingFlower.IslandType(name, rs) {
+             override fun getColor(): Int {
+                 if (colorIndex == TYPES) {
+                     return Color(rainbowColor()).darker().rgb
+                 }
+                 if (colorIndex >= EntitySheep.fleeceColorTable.size + 1)
+                     return 0xFFFFFF
+
+                 var color = EntitySheep.fleeceColorTable[colorIndex]
+                 return Color(color[0], color[1], color[2]).darker().rgb
+             }
+         }
+     }
+
+     override fun getIslandType(stack: ItemStack): IFloatingFlower.IslandType? {
+         return islandTypes[stack.itemDamage % (TYPES + 1)]
+     }
 
     override fun canFit(stack: ItemStack, inventory: IInventory): Boolean {
         return stack.itemDamage == TYPES

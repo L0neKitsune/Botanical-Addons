@@ -49,209 +49,209 @@ attribute.name.shadowfox_botany.godSlayingAttackDamage=Cognitive Damage
 
 death.attack.shadowfox_botany.oculus.player=%1$s was slain by %2$s's perfect resolve
 
-misc.shadowfox_botany=temperature.0=Hypothermia Warning
-misc.shadowfox_botany=temperature.1=Painfully Cold
-misc.shadowfox_botany=temperature.2=Frosty
-misc.shadowfox_botany=temperature.3=Frosty
-misc.shadowfox_botany=temperature.4=Wintry
-misc.shadowfox_botany=temperature.5=Wintry
-misc.shadowfox_botany=temperature.6=Chilly
-misc.shadowfox_botany=temperature.7=Chilly
-misc.shadowfox_botany=temperature.8=Temperate
-misc.shadowfox_botany=temperature.9=Warm
-misc.shadowfox_botany=temperature.10=Warm
-misc.shadowfox_botany=temperature.11=Hot
-misc.shadowfox_botany=temperature.12=Hot
-misc.shadowfox_botany=temperature.13=Burning
-misc.shadowfox_botany=temperature.14=Burning
-misc.shadowfox_botany=temperature.15=Scorching Hot
-misc.shadowfox_botany=temperature.16=Hotter than the Nether
+misc.shadowfox_botany:temperature.0=Hypothermia Warning
+misc.shadowfox_botany:temperature.1=Painfully Cold
+misc.shadowfox_botany:temperature.2=Frosty
+misc.shadowfox_botany:temperature.3=Frosty
+misc.shadowfox_botany:temperature.4=Wintry
+misc.shadowfox_botany:temperature.5=Wintry
+misc.shadowfox_botany:temperature.6=Chilly
+misc.shadowfox_botany:temperature.7=Chilly
+misc.shadowfox_botany:temperature.8=Temperate
+misc.shadowfox_botany:temperature.9=Warm
+misc.shadowfox_botany:temperature.10=Warm
+misc.shadowfox_botany:temperature.11=Hot
+misc.shadowfox_botany:temperature.12=Hot
+misc.shadowfox_botany:temperature.13=Burning
+misc.shadowfox_botany:temperature.14=Burning
+misc.shadowfox_botany:temperature.15=Scorching Hot
+misc.shadowfox_botany:temperature.16=Hotter than the Nether
 
-item.shadowfox_botany=wiltedLotus0.name=Wilted Lotus
-item.shadowfox_botany=wiltedLotus1.name=Deathly Lotus
-misc.shadowfox_botany=lotusDesc=It emits discordant magical vibes
+item.shadowfox_botany:wiltedLotus0.name=Wilted Lotus
+item.shadowfox_botany:wiltedLotus1.name=Deathly Lotus
+misc.shadowfox_botany:lotusDesc=It emits discordant magical vibes
 
-item.shadowfox_botany=attributionBauble0.name=Holy Symbol
-item.shadowfox_botany=attributionBauble1.name=Pendant of Headtato Summoning
+item.shadowfox_botany:attributionBauble0.name=Holy Symbol
+item.shadowfox_botany:attributionBauble1.name=Pendant of Headtato Summoning
 
-item.shadowfox_botany=starPlacer.name=Frozen Star
-tile.shadowfox_botany=star.name=Frozen Star
+item.shadowfox_botany:starPlacer.name=Frozen Star
+tile.shadowfox_botany:star.name=Frozen Star
 
-item.shadowfox_botany=colorfulSkyDirtRod.name=Rod of the Vibrant Plains
-item.shadowfox_botany=lightningRod.name=Rod of the Thundering Peaks
-item.shadowfox_botany=interdictionRod.name=Rod of the Stormy Sea
-item.shadowfox_botany=rainbowLightRod.name=Rod of the Prismatic Lake
+item.shadowfox_botany:colorfulSkyDirtRod.name=Rod of the Vibrant Plains
+item.shadowfox_botany:lightningRod.name=Rod of the Thundering Peaks
+item.shadowfox_botany:interdictionRod.name=Rod of the Stormy Sea
+item.shadowfox_botany:rainbowLightRod.name=Rod of the Prismatic Lake
 
-item.shadowfox_botany=priestEmblem0.name=Priestly Emblem: Thor
-item.shadowfox_botany=priestEmblem1.name=Priestly Emblem: Sif
-item.shadowfox_botany=priestEmblem2.name=Priestly Emblem: Njord
-item.shadowfox_botany=priestEmblem3.name=Priestly Emblem: Loki
-item.shadowfox_botany=aesirEmblem.name=Priestly Emblem: &6Aesir&r
+item.shadowfox_botany:priestEmblem0.name=Priestly Emblem: Thor
+item.shadowfox_botany:priestEmblem1.name=Priestly Emblem: Sif
+item.shadowfox_botany:priestEmblem2.name=Priestly Emblem: Njord
+item.shadowfox_botany:priestEmblem3.name=Priestly Emblem: Loki
+item.shadowfox_botany:aesirEmblem.name=Priestly Emblem: &6Aesir&r
 
-item.shadowfox_botany=resource0.name=Thunderous Twig
-item.shadowfox_botany=resource1.name=Thunderous Splinters
-item.shadowfox_botany=resource2.name=Infernal Twig
-item.shadowfox_botany=resource3.name=Infernal Splinters
-item.shadowfox_botany=resource4.name=Flame-Laced Charcoal
-item.shadowfox_botany=resource5.name=Shimmerquartz
-item.shadowfox_botany=resource6.name=Floral Bifrost Powder
-item.shadowfox_botany=resource7.name=Mystical Bifrost Petal
+item.shadowfox_botany:resource0.name=Thunderous Twig
+item.shadowfox_botany:resource1.name=Thunderous Splinters
+item.shadowfox_botany:resource2.name=Infernal Twig
+item.shadowfox_botany:resource3.name=Infernal Splinters
+item.shadowfox_botany:resource4.name=Flame-Laced Charcoal
+item.shadowfox_botany:resource5.name=Shimmerquartz
+item.shadowfox_botany:resource6.name=Floral Bifrost Powder
+item.shadowfox_botany:resource7.name=Mystical Bifrost Petal
 
-item.shadowfox_botany=toolbelt.name=Botanist's Toolbelt
+item.shadowfox_botany:toolbelt.name=Botanist's Toolbelt
 
-entity.shadowfox_botany=voidCreeper.name=Manaseal Creeper
+entity.shadowfox_botany:voidCreeper.name=Manaseal Creeper
 
-tile.shadowfox_botany=barrier.name=Barrier
+tile.shadowfox_botany:barrier.name=Barrier
 
-tile.shadowfox_botany=itemDisplay0.name=Manasteel Item Platform
-tile.shadowfox_botany=itemDisplay1.name=Terrasteel Item Platform
-tile.shadowfox_botany=itemDisplay2.name=Elementium Item Platform
+tile.shadowfox_botany:itemDisplay0.name=Manasteel Item Platform
+tile.shadowfox_botany:itemDisplay1.name=Terrasteel Item Platform
+tile.shadowfox_botany:itemDisplay2.name=Elementium Item Platform
 
-tile.shadowfox_botany=rainbowDirt.name=Iridescent Dirt
-tile.shadowfox_botany=coloredDirt.name=Iridescent Dirt
-tile.shadowfox_botany=rainbowLeaves.name=Iridescent Leaves
-tile.shadowfox_botany=irisLeaves.name=Iridescent Leaves
-tile.shadowfox_botany=rainbowWood.name=Iridescent Log
-tile.shadowfox_botany=irisWood.name=Iridescent Log
-tile.shadowfox_botany=irisSapling.name=Iridescent Sapling
-tile.shadowfox_botany=rainbowPlanks.name=Iridescent Planks
-tile.shadowfox_botany=irisPlanks.name=Iridescent Planks
-tile.shadowfox_botany=rainbowGrass0.name=Iridescent Grass
-tile.shadowfox_botany=rainbowGrass1.name=Mystical Bifrost Flower
-tile.shadowfox_botany=rainbowGrass2.name=Glimmering Bifrost Flower
-tile.shadowfox_botany=rainbowGrass3.name=Bifrost Shimmering Mushroom
-tile.shadowfox_botany=irisGrass.name=Iridescent Grass
-tile.shadowfox_botany=rainbowDoubleGrass0.name=Iridescent Double Grass
-tile.shadowfox_botany=rainbowDoubleGrass1.name=Tall Mystical Bifrost Flower
-tile.shadowfox_botany=irisDoubleGrass.name=Iridescent Double Grass
+tile.shadowfox_botany:rainbowDirt.name=Iridescent Dirt
+tile.shadowfox_botany:coloredDirt.name=Iridescent Dirt
+tile.shadowfox_botany:rainbowLeaves.name=Iridescent Leaves
+tile.shadowfox_botany:irisLeaves.name=Iridescent Leaves
+tile.shadowfox_botany:rainbowWood.name=Iridescent Log
+tile.shadowfox_botany:irisWood.name=Iridescent Log
+tile.shadowfox_botany:irisSapling.name=Iridescent Sapling
+tile.shadowfox_botany:rainbowPlanks.name=Iridescent Planks
+tile.shadowfox_botany:irisPlanks.name=Iridescent Planks
+tile.shadowfox_botany:rainbowGrass0.name=Iridescent Grass
+tile.shadowfox_botany:rainbowGrass1.name=Mystical Bifrost Flower
+tile.shadowfox_botany:rainbowGrass2.name=Glimmering Bifrost Flower
+tile.shadowfox_botany:rainbowGrass3.name=Bifrost Shimmering Mushroom
+tile.shadowfox_botany:irisGrass.name=Iridescent Grass
+tile.shadowfox_botany:rainbowDoubleGrass0.name=Iridescent Double Grass
+tile.shadowfox_botany:rainbowDoubleGrass1.name=Tall Mystical Bifrost Flower
+tile.shadowfox_botany:irisDoubleGrass.name=Iridescent Double Grass
 
 shadowfox_botany.nei.treeCrafter=Dendric Suffuser
-tile.shadowfox_botany=treeCrafter.name=Dendric Suffuser
-tile.shadowfox_botany=treeCrafterRB.name=Dendric Suffuser
+tile.shadowfox_botany:treeCrafter.name=Dendric Suffuser
+tile.shadowfox_botany:treeCrafterRB.name=Dendric Suffuser
 
-item.shadowfox_botany=irisSeeds.name=Iridescent Seeds
+item.shadowfox_botany:irisSeeds.name=Iridescent Seeds
 
-tile.shadowfox_botany=invisibleFlame.name=Phantom Mana Flash
-tile.shadowfox_botany=rainbowFlame.name=Rainbow Mana Flash
-item.botania=lensPhantomLight.short=Phantom Flash
+tile.shadowfox_botany:invisibleFlame.name=Phantom Mana Flash
+tile.shadowfox_botany:rainbowFlame.name=Rainbow Mana Flash
+item.botania:lensPhantomLight.short=Phantom Flash
 
-item.shadowfox_botany=livingwoodFunnel.name=Livingwood Funnel
-tile.shadowfox_botany=livingwoodFunnel.name=Livingwood Funnel
+item.shadowfox_botany:livingwoodFunnel.name=Livingwood Funnel
+tile.shadowfox_botany:livingwoodFunnel.name=Livingwood Funnel
 
-item.shadowfox_botany=coatOfArms0.name=Chilean Shield
-item.shadowfox_botany=coatOfArms1.name=French Shield
-item.shadowfox_botany=coatOfArms2.name=Japanese Shield
-item.shadowfox_botany=coatOfArms3.name=Germanic Shield
-item.shadowfox_botany=coatOfArms4.name=Greek Shield
-item.shadowfox_botany=coatOfArms5.name=Icelandic Shield
-item.shadowfox_botany=coatOfArms6.name=Irish Shield
-item.shadowfox_botany=coatOfArms7.name=Israeli Shield
-item.shadowfox_botany=coatOfArms8.name=Jamaican Shield
-item.shadowfox_botany=coatOfArms9.name=Singaporean Shield
-item.shadowfox_botany=coatOfArms10.name=South African Shield
-item.shadowfox_botany=coatOfArms11.name=Spanish Shield
-item.shadowfox_botany=coatOfArms12.name=Swiss Shield
-item.shadowfox_botany=coatOfArms13.name=Texan Shield
-item.shadowfox_botany=coatOfArms14.name=Ukranian Shield
-item.shadowfox_botany=coatOfArms15.name=American Shield
-item.shadowfox_botany=coatOfArms16.name=Fabulous Shield
-item.shadowfox_botany=coatOfArms17.name=Parisian Shield
+item.shadowfox_botany:coatOfArms0.name=Chilean Shield
+item.shadowfox_botany:coatOfArms1.name=French Shield
+item.shadowfox_botany:coatOfArms2.name=Japanese Shield
+item.shadowfox_botany:coatOfArms3.name=Germanic Shield
+item.shadowfox_botany:coatOfArms4.name=Greek Shield
+item.shadowfox_botany:coatOfArms5.name=Icelandic Shield
+item.shadowfox_botany:coatOfArms6.name=Irish Shield
+item.shadowfox_botany:coatOfArms7.name=Israeli Shield
+item.shadowfox_botany:coatOfArms8.name=Jamaican Shield
+item.shadowfox_botany:coatOfArms9.name=Singaporean Shield
+item.shadowfox_botany:coatOfArms10.name=South African Shield
+item.shadowfox_botany:coatOfArms11.name=Spanish Shield
+item.shadowfox_botany:coatOfArms12.name=Swiss Shield
+item.shadowfox_botany:coatOfArms13.name=Texan Shield
+item.shadowfox_botany:coatOfArms14.name=Ukranian Shield
+item.shadowfox_botany:coatOfArms15.name=American Shield
+item.shadowfox_botany:coatOfArms16.name=Fabulous Shield
+item.shadowfox_botany:coatOfArms17.name=Parisian Shield
 
-item.shadowfox_botany=colorOverride.name=Clerical Colorizer
+item.shadowfox_botany:colorOverride.name=Clerical Colorizer
 
-item.shadowfox_botany=axeRevelation.name=Holy Blade Revelation
-item.shadowfox_botany=reactionDagger.name=Dagger of the Perfect Soul
+item.shadowfox_botany:axeRevelation.name=Holy Blade Revelation
+item.shadowfox_botany:reactionDagger.name=Dagger of the Perfect Soul
 
-tile.shadowfox_botany=kindling.name=Blaze Kindling
+tile.shadowfox_botany:kindling.name=Blaze Kindling
 
-tile.shadowfox_botany=rainbowPlanksSlab.name=Iridescent Slab
-tile.shadowfox_botany=rainbowPlanksSlabFull.name=Iridescent Slab
-tile.shadowfox_botany=irisPlanksSlab.name=Iridescent Slab
-tile.shadowfox_botany=irisPlanksSlabFull.name=Iridescent Slab
-tile.shadowfox_botany=lightningPlanksSlab.name=Thunderous Slab
-tile.shadowfox_botany=lightningPlanksSlabFull.name=Thunderous Slab
-tile.shadowfox_botany=netherPlanksSlab.name=Infernal Slab
-tile.shadowfox_botany=netherPlanksSlabFull.name=Infernal Slab
-tile.shadowfox_botany=sealingPlanksSlab.name=Sealing Slab
-tile.shadowfox_botany=sealingPlanksSlabFull.name=Sealing Slab
+tile.shadowfox_botany:rainbowPlanksSlab.name=Iridescent Slab
+tile.shadowfox_botany:rainbowPlanksSlabFull.name=Iridescent Slab
+tile.shadowfox_botany:irisPlanksSlab.name=Iridescent Slab
+tile.shadowfox_botany:irisPlanksSlabFull.name=Iridescent Slab
+tile.shadowfox_botany:lightningPlanksSlab.name=Thunderous Slab
+tile.shadowfox_botany:lightningPlanksSlabFull.name=Thunderous Slab
+tile.shadowfox_botany:netherPlanksSlab.name=Infernal Slab
+tile.shadowfox_botany:netherPlanksSlabFull.name=Infernal Slab
+tile.shadowfox_botany:sealingPlanksSlab.name=Sealing Slab
+tile.shadowfox_botany:sealingPlanksSlabFull.name=Sealing Slab
 
-tile.shadowfox_botany=amplifier.name=Sonic Amplifier
+tile.shadowfox_botany:amplifier.name=Sonic Amplifier
 
-tile.shadowfox_botany=rainbowPlanksStairs.name=Iridescent Stairs
-tile.shadowfox_botany=irisPlanksStairs.name=Iridescent Stairs
-tile.shadowfox_botany=lightningPlanksStairs.name=Thunderous Stairs
-tile.shadowfox_botany=netherPlanksStairs.name=Infernal Stairs
-tile.shadowfox_botany=sealingPlanksStairs.name=Sealing Stairs
+tile.shadowfox_botany:rainbowPlanksStairs.name=Iridescent Stairs
+tile.shadowfox_botany:irisPlanksStairs.name=Iridescent Stairs
+tile.shadowfox_botany:lightningPlanksStairs.name=Thunderous Stairs
+tile.shadowfox_botany:netherPlanksStairs.name=Infernal Stairs
+tile.shadowfox_botany:sealingPlanksStairs.name=Sealing Stairs
 
-tile.shadowfox_botany=lightningSapling.name=Thunderous Oak Sapling
-tile.shadowfox_botany=lightningWood.name=Thunderous Log
-tile.shadowfox_botany=lightningLeaves.name=Thunderous Leaves
-tile.shadowfox_botany=lightningPlanks.name=Thunderous Planks
+tile.shadowfox_botany:lightningSapling.name=Thunderous Oak Sapling
+tile.shadowfox_botany:lightningWood.name=Thunderous Log
+tile.shadowfox_botany:lightningLeaves.name=Thunderous Leaves
+tile.shadowfox_botany:lightningPlanks.name=Thunderous Planks
 
-tile.shadowfox_botany=netherSapling.name=Infernal Oak Sapling
-tile.shadowfox_botany=netherWood.name=Infernal Log
-tile.shadowfox_botany=netherLeaves.name=Infernal Leaves
-tile.shadowfox_botany=netherPlanks.name=Infernal Planks
+tile.shadowfox_botany:netherSapling.name=Infernal Oak Sapling
+tile.shadowfox_botany:netherWood.name=Infernal Log
+tile.shadowfox_botany:netherLeaves.name=Infernal Leaves
+tile.shadowfox_botany:netherPlanks.name=Infernal Planks
 
-tile.shadowfox_botany=sealingSapling.name=Sealing Oak Sapling
-tile.shadowfox_botany=sealingWood.name=Sealing Log
-tile.shadowfox_botany=sealingLeaves.name=Sealing Leaves
-tile.shadowfox_botany=sealingPlanks.name=Sealing Planks
+tile.shadowfox_botany:sealingSapling.name=Sealing Oak Sapling
+tile.shadowfox_botany:sealingWood.name=Sealing Log
+tile.shadowfox_botany:sealingLeaves.name=Sealing Leaves
+tile.shadowfox_botany:sealingPlanks.name=Sealing Planks
 
-tile.shadowfox_botany=altLeaves0.name=Dry Leaves
-tile.shadowfox_botany=altLeaves1.name=Golden Leaves
-tile.shadowfox_botany=altLeaves2.name=Vivid Leaves
-tile.shadowfox_botany=altLeaves3.name=Scorched Leaves
-tile.shadowfox_botany=altLeaves4.name=Infused Leaves
-tile.shadowfox_botany=altLeaves5.name=Mutated Leaves
+tile.shadowfox_botany:altLeaves0.name=Dry Leaves
+tile.shadowfox_botany:altLeaves1.name=Golden Leaves
+tile.shadowfox_botany:altLeaves2.name=Vivid Leaves
+tile.shadowfox_botany:altLeaves3.name=Scorched Leaves
+tile.shadowfox_botany:altLeaves4.name=Infused Leaves
+tile.shadowfox_botany:altLeaves5.name=Mutated Leaves
 
-tile.shadowfox_botany=altPlanks0.name=Dry Planks
-tile.shadowfox_botany=altPlanks1.name=Golden Planks
-tile.shadowfox_botany=altPlanks2.name=Vivid Planks
-tile.shadowfox_botany=altPlanks3.name=Scorched Planks
-tile.shadowfox_botany=altPlanks4.name=Infused Planks
-tile.shadowfox_botany=altPlanks5.name=Mutated Planks
+tile.shadowfox_botany:altPlanks0.name=Dry Planks
+tile.shadowfox_botany:altPlanks1.name=Golden Planks
+tile.shadowfox_botany:altPlanks2.name=Vivid Planks
+tile.shadowfox_botany:altPlanks3.name=Scorched Planks
+tile.shadowfox_botany:altPlanks4.name=Infused Planks
+tile.shadowfox_botany:altPlanks5.name=Mutated Planks
 
-tile.shadowfox_botany=altWood00.name=Dry Wood
-tile.shadowfox_botany=altWood01.name=Golden Wood
-tile.shadowfox_botany=altWood02.name=Vivid Wood
-tile.shadowfox_botany=altWood03.name=Scorched Wood
-tile.shadowfox_botany=altWood10.name=Infused Wood
-tile.shadowfox_botany=altWood11.name=Mutated Wood
+tile.shadowfox_botany:altWood00.name=Dry Wood
+tile.shadowfox_botany:altWood01.name=Golden Wood
+tile.shadowfox_botany:altWood02.name=Vivid Wood
+tile.shadowfox_botany:altWood03.name=Scorched Wood
+tile.shadowfox_botany:altWood10.name=Infused Wood
+tile.shadowfox_botany:altWood11.name=Mutated Wood
 
-tile.shadowfox_botany=altPlanksSlab0.name=Dry Planks Slab
-tile.shadowfox_botany=altPlanksSlab1.name=Golden Planks Slab
-tile.shadowfox_botany=altPlanksSlab2.name=Vivid Planks Slab
-tile.shadowfox_botany=altPlanksSlab3.name=Scorched Planks Slab
-tile.shadowfox_botany=altPlanksSlab4.name=Infused Planks Slab
-tile.shadowfox_botany=altPlanksSlab5.name=Mutated Planks Slab
+tile.shadowfox_botany:altPlanksSlab0.name=Dry Planks Slab
+tile.shadowfox_botany:altPlanksSlab1.name=Golden Planks Slab
+tile.shadowfox_botany:altPlanksSlab2.name=Vivid Planks Slab
+tile.shadowfox_botany:altPlanksSlab3.name=Scorched Planks Slab
+tile.shadowfox_botany:altPlanksSlab4.name=Infused Planks Slab
+tile.shadowfox_botany:altPlanksSlab5.name=Mutated Planks Slab
 
-tile.shadowfox_botany=altPlanksSlabFull0.name=Dry Planks Slab
-tile.shadowfox_botany=altPlanksSlabFull1.name=Golden Planks Slab
-tile.shadowfox_botany=altPlanksSlabFull2.name=Vivid Planks Slab
-tile.shadowfox_botany=altPlanksSlabFull3.name=Scorched Planks Slab
-tile.shadowfox_botany=altPlanksSlabFull4.name=Infused Planks Slab
-tile.shadowfox_botany=altPlanksSlabFull5.name=Mutated Planks Slab
+tile.shadowfox_botany:altPlanksSlabFull0.name=Dry Planks Slab
+tile.shadowfox_botany:altPlanksSlabFull1.name=Golden Planks Slab
+tile.shadowfox_botany:altPlanksSlabFull2.name=Vivid Planks Slab
+tile.shadowfox_botany:altPlanksSlabFull3.name=Scorched Planks Slab
+tile.shadowfox_botany:altPlanksSlabFull4.name=Infused Planks Slab
+tile.shadowfox_botany:altPlanksSlabFull5.name=Mutated Planks Slab
 
-tile.shadowfox_botany=altPlanksStairs0.name=Dry Planks Stairs
-tile.shadowfox_botany=altPlanksStairs1.name=Golden Planks Stairs
-tile.shadowfox_botany=altPlanksStairs2.name=Vivid Planks Stairs
-tile.shadowfox_botany=altPlanksStairs3.name=Scorched Planks Stairs
-tile.shadowfox_botany=altPlanksStairs4.name=Infused Planks Stairs
-tile.shadowfox_botany=altPlanksStairs5.name=Mutated Planks Stairs
+tile.shadowfox_botany:altPlanksStairs0.name=Dry Planks Stairs
+tile.shadowfox_botany:altPlanksStairs1.name=Golden Planks Stairs
+tile.shadowfox_botany:altPlanksStairs2.name=Vivid Planks Stairs
+tile.shadowfox_botany:altPlanksStairs3.name=Scorched Planks Stairs
+tile.shadowfox_botany:altPlanksStairs4.name=Infused Planks Stairs
+tile.shadowfox_botany:altPlanksStairs5.name=Mutated Planks Stairs
 
-tile.shadowfox_botany=irisLamp.name=Iridescent Lantern
+tile.shadowfox_botany:irisLamp.name=Iridescent Lantern
 
-tile.shadowfox_botany=quartzStairsShimmer.name=Shimmerquartz Stairs
-tile.shadowfox_botany=quartzSlabShimmerHalf.name=Shimmerquartz Slab
-tile.shadowfox_botany=quartzSlabShimmerFull.name=Shimmerquartz Slab
-tile.shadowfox_botany=blockShimmerQuartz.name=Block of Shimmerquartz
-tile.shadowfox_botany=chiseledShimmerQuartz.name=Chiseled Shimmerquartz Block
-tile.shadowfox_botany=pillarShimmerQuartz.name=Pillar Shimmerquartz Block
+tile.shadowfox_botany:quartzStairsShimmer.name=Shimmerquartz Stairs
+tile.shadowfox_botany:quartzSlabShimmerHalf.name=Shimmerquartz Slab
+tile.shadowfox_botany:quartzSlabShimmerFull.name=Shimmerquartz Slab
+tile.shadowfox_botany:blockShimmerQuartz.name=Block of Shimmerquartz
+tile.shadowfox_botany:chiseledShimmerQuartz.name=Chiseled Shimmerquartz Block
+tile.shadowfox_botany:pillarShimmerQuartz.name=Pillar Shimmerquartz Block
 
-tile.shadowfox_botany=crysanthermum.name=Crysanthermum
-tile.botania=flower.crysanthermum.name=Crysanthermum
-tile.shadowfox_botany=crysanthermum.lore=Crank up the thermostat
+tile.shadowfox_botany:crysanthermum.name=Crysanthermum
+tile.botania:flower.crysanthermum.name=Crysanthermum
+tile.shadowfox_botany:crysanthermum.lore=Crank up the thermostat
 
 shadowfox_botany.potion.manaVoid=Manatide Storm
 
@@ -381,7 +381,7 @@ shadowfox_botany.page.lightningSapling4=Stairs
 shadowfox_botany.page.lightningSapling5=Twigs
 shadowfox_botany.page.lightningSapling6=And splinters
 
-shadowfox_botany.page.infernalSapling0=The &1Infernal Oak&0 is a tree so saturated with fire energy, it repulses external flames. Its leaves, logs, and planks are all completely immune to conventional flames. 
+shadowfox_botany.page.infernalSapling0=The &1Infernal Oak&0 is a tree so saturated with fire energy, it repulses external flames. Its leaves, logs, and planks are all completely immune to conventional flames.
 shadowfox_botany.page.infernalSapling1=Just pour more fire on it, it'll work eventually
 shadowfox_botany.page.infernalSapling2=Planks
 shadowfox_botany.page.infernalSapling3=Slabs
@@ -411,7 +411,7 @@ shadowfox_botany.page.silencer3=Slabs
 shadowfox_botany.page.silencer4=Stairs
 
 shadowfox_botany.page.amp0=By dampening the air within &1Note Blocks&0, the &1Sonic Amplifier&0 reverberates sound, making sounds within a block or two sound far louder. The more you have, the louder the sound.
-shadowfox_botany.page.amp1=Soaryn + Amp + Cacophonium = Dire rage
+shadowfox_botany.page.amp1:Soaryn + Amp + Cacophonium = Dire rage
 
 shadowfox_botany.page.crysanthermum0=The &1Crysanthermum&0 is a hardy flower that can survive in any climate. However, its mana generation isn't indifferent to the climate. By feeding it &1Metamorphic Stone&0, you change its temperature. The closer its temperature is to the biome you're in, the more mana it will generate. The hotter or colder the biome the stone comes from, the hotter or colder the flower will be after eating that stone.
 shadowfox_botany.page.crysanthermum1=There are, however, a few caveats.<br>Feeding the flower &1Fungal&0 stone can do anything, from cool the flower rapidly to heat it up immensely.<br>If a flower becomes too cold or too hot, it'll stop working until it gets back to normal temperature.<br>Using a stone that was used within the last eight will give you diminishing returns for the next 8 stones, meaning that you'll occasionally have to course-correct.
